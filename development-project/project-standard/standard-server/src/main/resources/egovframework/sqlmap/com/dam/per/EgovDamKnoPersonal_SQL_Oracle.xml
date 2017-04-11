@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.11   	정진오     	 	테이블 표준화에 따른 수정사항 반영
+  							KNO_ID 를 		KNWLDG_ID 로 변경
+							KNO_NM 를 		KNWLDG_NM 로 변경
+							KNO_CN 를		KNWLDG_CN 로 변경
+							KNO_TYPE_CD 를	KNWLDG_TY_CODE 로 변경
+							KNO_TYPE_NM 를	KNWLDG_TY_NM 로 변경							
+							COL_YMD 를		COLCT_DE 로 변경
+-->
+<sqlMap namespace="KnoPersonal">
+
+	<typeAlias  alias="egovMap"     type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="KnoPersonalVO" 	type="egovframework.com.dam.per.service.KnoPersonalVO"/>
+	<typeAlias  alias="KnoPersonal"   	type="egovframework.com.dam.per.service.KnoPersonal"/>
+	
+	<resultMap id="KnoPersonalList" class="egovframework.com.dam.per.service.KnoPersonalVO">
+		<result property="orgnztNm" column="ORGNZT_NM" columnIndex="1"/>	
+		<result property="knoTypeNm" column="KNWLDG_TY_NM" columnIndex="2"/>
+		<result property="knoId" column="KNWLDG_ID" columnIndex="3"/>
+		<result property="knoNm" column="KNWLDG_NM" columnIndex="4"/>
+		<result property="userNm" column="USER_NM" columnIndex="5"/>
+		<result property="colYmd" column="COLCT_DE" columnIndex="6"/>
+		<result property="othbcAt" column="OTHBC_AT" columnIndex="7"/>
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="8"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="9"/>
+		<result property="lastUpdusrId" column="LAST_UPDUSR_ID" columnIndex="10"/>
+		<result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" columnIndex="11"/>
+	</resultMap>
+	
+	<resultMap id="KnoPersonal" class="egovframework.com.dam.per.service.KnoPersonal">
+		<result property="orgnztNm" column="ORGNZT_NM" columnIndex="1"/>	
+		<result property="orgnztId" column="ORGNZT_ID" columnIndex="2"/>
+		<result property="knoTypeNm" column="KNWLDG_TY_NM" columnIndex="3"/>
+		<result property="knoTypeCd" column="KNWLDG_TY_CODE" columnIndex="4"/>
+		<result property="knoId" column="KNWLDG_ID" columnIndex="5"/>
+		<result property="knoNm" column="KNWLDG_NM" columnIndex="6"/>
+		<result property="knoCn" column="KNWLDG_CN" columnIndex="7"/>
+		<result property="colYmd" column="COLCT_DE" columnIndex="8"/>
+		<result property="othbcAt" column="OTHBC_AT" columnIndex="9"/>
+		<result property="atchFileId" column="ATCH_FILE_ID" columnIndex="10"/>
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="11"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="12"/>
+		<result property="lastUpdusrId" column="LAST_UPDUSR_ID" columnIndex="13"/>
+		<result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" columnIndex="14"/>
+	</resultMap>
+
+	<select id="KnoPersonalDAO.selectKnoPersonalList" parameterClass="KnoPersonalVO" resultMap="KnoPersonalList">
+	<![CDATA[	
+	SELECT *
+	FROM (
+	SELECT T0.*, ROWNUM RNUM
+		FROM (
+	]]>
+		<![CDATA[
+			SELECT C.ORGNZT_NM
+			     ,  B.KNWLDG_TY_NM
+				 ,  A.KNWLDG_ID			     		
+				 ,  A.KNWLDG_NM
+				 ,  D.USER_NM          
+                 ,  A.COLCT_DE
+                 ,  A.OTHBC_AT
+			     ,	A.FRST_REGISTER_ID
+			     ,	A.FRST_REGIST_PNTTM
+			     ,  A.LAST_UPDUSR_ID
+			     ,	A.LAST_UPDT_PNTTM
+			FROM  COMTNDAMKNOIFM A, COMTNDAMMAPKNO B, COMTNDAMMAPTEAM C, COMVNUSERMASTER D
+			WHERE C.ORGNZT_ID = B.ORGNZT_ID
+			AND   A.KNWLDG_TY_CODE = B.KNWLDG_TY_CODE
+			AND   A.FRST_REGISTER_ID = D.ESNTL_ID	
+			AND   A.FRST_REGISTER_ID = #frstRegisterId# 				
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[B.KNWLDG_TY_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[A.KNWLDG_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+	<![CDATA[	
+		) T0
+	) 
+	WHERE RNUM BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+	]]>
+	</select>
+
+	<select id="KnoPersonalDAO.selectKnoPersonalTotCnt" parameterClass="KnoPersonalVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT  COUNT(*) as totcnt 
+			FROM  COMTNDAMKNOIFM A, COMTNDAMMAPKNO B, COMTNDAMMAPTEAM C, COMVNUSERMASTER D
+			WHERE C.ORGNZT_ID = B.ORGNZT_ID
+			AND   A.KNWLDG_TY_CODE = B.KNWLDG_TY_CODE
+			AND   A.FRST_REGISTER_ID = D.ESNTL_ID	
+			AND   A.FRST_REGISTER_ID = #frstRegisterId# 
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[B.KNWLDG_TY_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[A.KNWLDG_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+	</select>
+
+	<select id="KnoPersonalDAO.selectKnoPersonal" parameterClass="KnoPersonal" resultMap="KnoPersonal">
+		<![CDATA[
+			SELECT  C.ORGNZT_NM
+			     ,  C.ORGNZT_ID
+			     ,  B.KNWLDG_TY_NM			     			
+			     ,  B.KNWLDG_TY_CODE
+				 ,  A.KNWLDG_ID			     
+				 ,  A.KNWLDG_NM			     
+			     ,  A.KNWLDG_CN          
+                 ,  A.COLCT_DE
+                 ,  A.OTHBC_AT
+                 ,  A.ATCH_FILE_ID
+			     ,	A.FRST_REGISTER_ID
+			     ,	A.FRST_REGIST_PNTTM
+			     ,  A.LAST_UPDUSR_ID
+			     ,	A.LAST_UPDT_PNTTM			     
+			FROM  COMTNDAMKNOIFM A, COMTNDAMMAPKNO B, COMTNDAMMAPTEAM C
+			WHERE C.ORGNZT_ID = B.ORGNZT_ID
+			AND   A.KNWLDG_TY_CODE = B.KNWLDG_TY_CODE			
+            AND   A.KNWLDG_ID = #knoId#
+		]]>
+	</select>
+
+	<insert id="KnoPersonalDAO.insertKnoPersonal">
+		<![CDATA[
+		    INSERT 
+		      INTO  COMTNDAMKNOIFM
+		         (  KNWLDG_ID
+		         ,  KNWLDG_NM
+		         ,	ORGNZT_ID
+		         ,  KNWLDG_TY_CODE
+		         ,  KNWLDG_CN
+		         ,  COLCT_DE
+		         ,  OTHBC_AT
+		         ,  ATCH_FILE_ID
+			     ,	FRST_REGISTER_ID
+			     ,	FRST_REGIST_PNTTM
+		         ,  LAST_UPDUSR_ID			     	         
+		         ,  LAST_UPDT_PNTTM
+		         ) 
+		    VALUES  
+		         (  #knoId#
+		         ,  #knoNm#
+		         ,  #orgnztId#		         		         
+		         ,  #knoTypeCd#
+		         ,  #knoCn#
+		         ,  #colYmd#
+		         ,  #othbcAt#
+		         ,  #atchFileId#		         		         
+		         ,  #frstRegisterId#
+		         ,  sysdate	         		 
+		         ,  #lastUpdusrId#
+		         ,  sysdate
+		         ) 
+		]]>
+	</insert>
+
+	<update id="KnoPersonalDAO.updateKnoPersonal">
+		<![CDATA[
+            UPDATE  COMTNDAMKNOIFM 
+               SET  ORGNZT_ID         = #orgnztId#      
+                 ,  KNWLDG_TY_CODE		  = #knoTypeCd#
+                 ,  KNWLDG_NM        	  = #knoNm#
+                 ,  KNWLDG_CN			  = #knoCn#
+		         ,  COLCT_DE			  = REPLACE(#colYmd#,'-','')
+		         ,  OTHBC_AT          = #othbcAt#               
+                 ,  ATCH_FILE_ID      = #atchFileId#               
+                 ,  LAST_UPDUSR_ID    = #lastUpdusrId#               
+                 ,  LAST_UPDT_PNTTM = sysdate
+             WHERE  KNWLDG_ID       	  = #knoId# 
+		]]>
+	</update>
+
+	<delete id="KnoPersonalDAO.deleteKnoPersonal">
+		<![CDATA[
+            DELETE  FROM COMTNDAMKNOIFM 
+            WHERE   KNWLDG_ID = #knoId#
+		]]>
+	</delete>
+
+
+</sqlMap>            

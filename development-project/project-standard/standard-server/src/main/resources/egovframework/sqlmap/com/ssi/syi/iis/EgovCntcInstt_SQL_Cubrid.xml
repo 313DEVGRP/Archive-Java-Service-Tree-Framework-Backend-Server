@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.09.14   	서준식     	 	selectCntcServiceList, selectCntcServiceDetail
+  							select 구문에 Alias 추가
+  2011.10.06		이기하     	 	보안 취약점 점검사항 반영 $->#변경
+-->
+<sqlMap namespace="CntcInstt">
+
+    <typeAlias  alias="egovMap"         type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="CntcInstt"       type="egovframework.com.ssi.syi.iis.service.CntcInstt"/>
+    <typeAlias  alias="CntcInsttVO"     type="egovframework.com.ssi.syi.iis.service.CntcInsttVO"/>
+    <typeAlias  alias="CntcSystem"      type="egovframework.com.ssi.syi.iis.service.CntcSystem"/>
+    <typeAlias  alias="CntcSystemVO"    type="egovframework.com.ssi.syi.iis.service.CntcSystemVO"/>
+    <typeAlias  alias="CntcService"     type="egovframework.com.ssi.syi.iis.service.CntcService"/>
+    <typeAlias  alias="CntcServiceVO"   type="egovframework.com.ssi.syi.iis.service.CntcServiceVO"/>
+
+    <select id="CntcInsttDAO.selectCntcInsttList" parameterClass="CntcInsttVO" resultClass="egovMap">
+        <![CDATA[
+            SELECT  *
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.*
+              FROM  (
+        ]]>
+        /* 구현 Sql */
+        <![CDATA[
+            SELECT  INSTT_ID
+                 ,  INSTT_NM
+              FROM  COMTNCNTCINSTT
+             WHERE  USE_AT = 'Y'
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            <![CDATA[INSTT_NM LIKE '%' || #searchKeyword# || '%']]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList">
+            <![CDATA[1 = 1]]>
+        </isEqual>
+        /* 구현 Sql */
+        <![CDATA[
+                    ) ALL_LIST
+                    ) Z
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcInsttListTotCnt" parameterClass="CntcInsttVO" resultClass="int">
+        <![CDATA[
+            SELECT  COUNT(*) totcnt
+              FROM  COMTNCNTCINSTT
+             WHERE  USE_AT = 'Y'
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            <![CDATA[INSTT_NM LIKE '%' || #searchKeyword# || '%']]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList">
+            <![CDATA[1 = 1]]>
+        </isEqual>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcSystemList" parameterClass="CntcSystemVO" resultClass="egovMap">
+        <![CDATA[
+            SELECT  *
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.*
+              FROM  (
+        ]]>
+        /* 구현 Sql */
+        <![CDATA[
+            SELECT  INSTT_ID
+                 ,  SYS_ID
+                 ,  SYS_NM
+                 ,  SYS_IP
+              FROM  COMTNCNTCSYSTEM
+             WHERE  USE_AT = 'Y'
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            <![CDATA[INSTT_ID = #searchKeyword#]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList">
+            <![CDATA[INSTT_ID = #insttId#]]>
+        </isEqual>
+        /* 구현 Sql */
+        <![CDATA[
+                    ) ALL_LIST
+                    ) Z
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcSystemListTotCnt" parameterClass="CntcSystemVO" resultClass="int">
+        <![CDATA[
+            SELECT  COUNT(*) totcnt
+              FROM  COMTNCNTCSYSTEM
+             WHERE  USE_AT = 'Y'
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            <![CDATA[INSTT_ID = #searchKeyword#]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList">
+            <![CDATA[INSTT_ID = #insttId#]]>
+        </isEqual>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcServiceList" parameterClass="CntcServiceVO" resultClass="egovMap">
+        <![CDATA[
+            SELECT  *
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.*
+              FROM  (
+        ]]>
+        /* 구현 Sql */
+        <![CDATA[
+            SELECT  INSTT_ID
+                 ,  SYS_ID
+                 ,  SVC_ID
+                 ,  SVC_NM
+                 ,  REQUST_MSSAGE_ID	REQUEST_MESSAGE_ID
+                 ,  RSPNS_MSSAGE_ID		RSPNS_MESSAGE_ID
+              FROM  COMTNCNTCSERVICE
+             WHERE  USE_AT = 'Y'
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            <![CDATA[SVC_ID = #searchKeyword#]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList">
+            <![CDATA[INSTT_ID = #insttId#]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList">
+            <![CDATA[SYS_ID = #sysId#]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList_InsttId">
+            <![CDATA[INSTT_ID = #insttId#]]>
+        </isEqual>
+        /* 구현 Sql */
+        <![CDATA[
+                    ) ALL_LIST
+                    ) Z
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcServiceListTotCnt" parameterClass="CntcServiceVO" resultClass="int">
+        <![CDATA[
+            SELECT  COUNT(*) totcnt
+              FROM  COMTNCNTCSYSTEM
+             WHERE  USE_AT = 'Y'
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            <![CDATA[SYS_NM LIKE '%' || #searchKeyword# || '%']]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="CodeList">
+            <![CDATA[INSTT_ID = #insttId#]]>
+        </isEqual>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcInsttDetail" parameterClass="CntcInstt" resultClass="CntcInstt">
+        <![CDATA[
+            SELECT  INSTT_ID        insttId
+                 ,  INSTT_NM        insttNm
+              FROM  COMTNCNTCINSTT
+             WHERE  INSTT_ID = #insttId#
+               AND  USE_AT = 'Y'
+        ]]>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcSystemDetail" parameterClass="CntcSystem" resultClass="CntcSystem">
+        <![CDATA[
+            SELECT  INSTT_ID	insttId
+                 ,  SYS_ID	sysId
+                 ,  SYS_NM	sysNm
+                 ,  SYS_IP	sysIp
+              FROM  COMTNCNTCSYSTEM
+             WHERE  INSTT_ID = #insttId#
+               AND  SYS_ID   = #sysId#
+               AND  USE_AT = 'Y'
+        ]]>
+    </select>
+
+    <select id="CntcInsttDAO.selectCntcServiceDetail" parameterClass="CntcService" resultClass="CntcService">
+        <![CDATA[
+            SELECT  INSTT_ID	insttId
+                 ,  SYS_ID	sysId
+                 ,  SVC_ID	svcId
+                 ,  SVC_NM	svcNm
+                 ,  REQUST_MSSAGE_ID 	requestMessageId
+                 ,  RSPNS_MSSAGE_ID   	rspnsMessageId
+              FROM  COMTNCNTCSERVICE
+             WHERE  INSTT_ID = #insttId#
+               AND  SYS_ID   = #sysId#
+               AND  SVC_ID   = #svcId#
+               AND  USE_AT = 'Y'
+        ]]>
+    </select>
+
+    <insert id="CntcInsttDAO.insertCntcInstt">
+        <![CDATA[
+            INSERT
+              INTO  COMTNCNTCINSTT
+                 (  INSTT_ID
+                 ,  INSTT_NM
+                 ,  USE_AT
+                 ,  FRST_REGISTER_ID
+                 ,  FRST_REGIST_PNTTM
+                 ,  LAST_UPDUSR_ID
+                 ,  LAST_UPDT_PNTTM
+                 )
+            VALUES
+                 (  #insttId#
+                 ,  #insttNm#
+                 ,  'Y'
+                 ,  #frstRegisterId#
+                 ,  SYSDATETIME
+                 ,  #frstRegisterId#
+                 ,  SYSDATETIME
+                 )
+        ]]>
+    </insert>
+
+    <insert id="CntcInsttDAO.insertCntcSystem">
+        <![CDATA[
+            INSERT
+              INTO  COMTNCNTCSYSTEM
+                 (  INSTT_ID
+                 ,  SYS_ID
+                 ,  SYS_NM
+                 ,  SYS_IP
+                 ,  USE_AT
+                 ,  FRST_REGISTER_ID
+                 ,  FRST_REGIST_PNTTM
+                 ,  LAST_UPDUSR_ID
+                 ,  LAST_UPDT_PNTTM
+                 )
+            VALUES
+                 (  #insttId#
+                 ,  #sysId#
+                 ,  #sysNm#
+                 ,  #sysIp#
+                 ,  'Y'
+                 ,  #frstRegisterId#
+                 ,  SYSDATETIME
+                 ,  #frstRegisterId#
+                 ,  SYSDATETIME
+                 )
+        ]]>
+    </insert>
+
+    <insert id="CntcInsttDAO.insertCntcService">
+        <![CDATA[
+            INSERT
+              INTO  COMTNCNTCSERVICE
+                 (  INSTT_ID
+                 ,  SYS_ID
+                 ,  SVC_ID
+                 ,  SVC_NM
+                 ,  REQUST_MSSAGE_ID
+                 ,  RSPNS_MSSAGE_ID
+                 ,  USE_AT
+                 ,  FRST_REGISTER_ID
+                 ,  FRST_REGIST_PNTTM
+                 ,  LAST_UPDUSR_ID
+                 ,  LAST_UPDT_PNTTM
+                 )
+            VALUES
+                 (  #insttId#
+                 ,  #sysId#
+                 ,  #svcId#
+                 ,  #svcNm#
+                 ,  #requestMessageId#
+                 ,  #rspnsMessageId#
+                 ,  'Y'
+                 ,  #frstRegisterId#
+                 ,  SYSDATETIME
+                 ,  #frstRegisterId#
+                 ,  SYSDATETIME
+                 )
+        ]]>
+    </insert>
+
+    <update id="CntcInsttDAO.updateCntcInstt">
+        <![CDATA[
+            UPDATE  COMTNCNTCINSTT
+               SET  INSTT_NM           = #insttNm#
+                 ,  LAST_UPDUSR_ID     = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM  = SYSDATETIME
+             WHERE  INSTT_ID           = #insttId#
+        ]]>
+    </update>
+
+    <update id="CntcInsttDAO.updateCntcSystem">
+        <![CDATA[
+            UPDATE  COMTNCNTCSYSTEM
+               SET  SYS_NM             = #sysNm#
+                 ,  SYS_IP             = #sysIp#
+                 ,  LAST_UPDUSR_ID     = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM  = SYSDATETIME
+             WHERE  INSTT_ID           = #insttId#
+               AND  SYS_ID             = #sysId#
+        ]]>
+    </update>
+
+    <update id="CntcInsttDAO.updateCntcService">
+        <![CDATA[
+            UPDATE  COMTNCNTCSERVICE
+               SET  SVC_NM             = #svcNm#
+                 ,  REQUST_MSSAGE_ID = #requestMessageId#
+                 ,  RSPNS_MSSAGE_ID   = #rspnsMessageId#
+                 ,  LAST_UPDUSR_ID     = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM  = SYSDATETIME
+             WHERE  INSTT_ID           = #insttId#
+               AND  SYS_ID             = #sysId#
+               AND  SVC_ID             = #svcId#
+        ]]>
+    </update>
+
+    <delete id="CntcInsttDAO.deleteCntcInstt">
+        <![CDATA[
+            UPDATE  COMTNCNTCINSTT
+               SET  USE_AT             = 'N'
+                 ,  LAST_UPDUSR_ID     = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM  = SYSDATETIME
+             WHERE  INSTT_ID           = #insttId#
+        ]]>
+    </delete>
+
+    <delete id="CntcInsttDAO.deleteCntcSystem">
+        <![CDATA[
+            UPDATE  COMTNCNTCSYSTEM
+               SET  USE_AT             = 'N'
+                 ,  LAST_UPDUSR_ID     = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM  = SYSDATETIME
+             WHERE  INSTT_ID           = #insttId#
+               AND  SYS_ID             = #sysId#
+        ]]>
+    </delete>
+
+    <delete id="CntcInsttDAO.deleteCntcService">
+        <![CDATA[
+            UPDATE  COMTNCNTCSERVICE
+               SET  USE_AT             = 'N'
+                 ,  LAST_UPDUSR_ID     = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM  = SYSDATETIME
+             WHERE  INSTT_ID           = #insttId#
+               AND  SYS_ID             = #sysId#
+               AND  SVC_ID             = #svcId#
+        ]]>
+    </delete>
+
+</sqlMap>

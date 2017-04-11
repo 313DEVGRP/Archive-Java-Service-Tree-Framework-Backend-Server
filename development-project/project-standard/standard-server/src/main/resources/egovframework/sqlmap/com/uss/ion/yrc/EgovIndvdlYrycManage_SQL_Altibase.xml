@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="IndvdlYrycManage">
+
+    <typeAlias alias="IndvdlYrycManageVO" type="egovframework.com.uss.ion.yrc.service.IndvdlYrycManage"/>
+
+    <select id="indvdlYrycDAO.selectIndvdlYrycManageList" parameterClass="IndvdlYrycManageVO" resultClass="IndvdlYrycManageVO">
+        <![CDATA[
+            SELECT   OCCRRNC_YEAR    AS occrrncYear,
+                     USER_ID         AS mberId,
+                     YRYC_OCCRRNC_CO AS occrncYrycCo,
+                     USE_YRYC_CO     AS useYrycCo,
+                     REMNDR_YRYC_CO  AS remndrYrycCo,
+                     (SELECT MBER_NM FROM COMTNGNRLMBER A WHERE A.ESNTL_ID = USER_ID) AS mberNm
+            FROM     COMTNINDVDLYRYCMANAGE
+            WHERE    USER_ID = #mberId#
+        ]]>
+    </select>
+    
+    <select id="indvdlYrycDAO.selectIndvdlYrycManageListTotCnt" parameterClass="IndvdlYrycManageVO" resultClass="int">
+        <![CDATA[
+            SELECT  COUNT(*) totcnt
+            FROM    COMTNINDVDLYRYCMANAGE
+            WHERE   USER_ID = #mberId#
+        ]]>
+    </select>
+
+    <insert id="indvdlYrycDAO.insertIndvdlYrycManage" parameterClass="IndvdlYrycManageVO">
+        <![CDATA[
+            INSERT INTO COMTNINDVDLYRYCMANAGE
+              ( OCCRRNC_YEAR,
+                USER_ID,
+                YRYC_OCCRRNC_CO,
+                USE_YRYC_CO,
+                REMNDR_YRYC_CO,
+                FRST_REGISTER_ID,
+                FRST_REGIST_PNTTM)
+            VALUE(#occrrncYear#,
+                  #mberId#,
+                  #occrncYrycCo#,
+                  #useYrycCo#,
+                  #remndrYrycCo#,
+                  #mberId#,
+                  now() )
+        ]]>
+    </insert>
+      
+    <update id="indvdlYrycDAO.updateIndvdlYrycManage" parameterClass="IndvdlYrycManageVO">
+        <![CDATA[
+            UPDATE COMTNINDVDLYRYCMANAGE
+               SET  OCCRRNC_YEAR    = #occrrncYear#,
+                    YRYC_OCCRRNC_CO = #occrncYrycCo#,
+                    USE_YRYC_CO     = #useYrycCo#,
+                    REMNDR_YRYC_CO  = #remndrYrycCo#,
+                    LAST_UPDUSR_ID  = #lastUpdusrId#,
+                    LAST_UPDT_PNTTM = now()
+            WHERE   USER_ID         = #mberId#
+        ]]>
+    </update>
+    
+        <delete id="indvdlYrycDAO.deleteIndvdlYrycManage" parameterClass="IndvdlYrycManageVO">
+        <![CDATA[
+             DELETE FROM COMTNINDVDLYRYCMANAGE
+             WHERE USER_ID         = #mberId#
+             AND   OCCRRNC_YEAR    = #occrrncYear# 
+        ]]>
+    </delete> 
+
+</sqlMap>

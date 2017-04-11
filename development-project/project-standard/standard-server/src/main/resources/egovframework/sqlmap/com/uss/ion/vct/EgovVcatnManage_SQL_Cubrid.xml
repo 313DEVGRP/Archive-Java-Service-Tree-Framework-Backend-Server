@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.12   	안민정     	 	테이블 표준화에 따른 수정사항 반영
+							OCCRNC_YRYC_CO	->	YRYC_OCCRRNC_CO
+							USID			->	USER_ID
+-->
+<sqlMap namespace="VcatnManage">
+
+	<typeAlias  alias="VcatnManage" type="egovframework.com.uss.ion.vct.service.VcatnManage"/>
+	<typeAlias  alias="IndvdlYrycManage" type="egovframework.com.uss.ion.vct.service.IndvdlYrycManage"/>
+	<typeAlias  alias="VcatnManageVO" type="egovframework.com.uss.ion.vct.service.VcatnManageVO"/>
+
+    <select id="vcatnManageDAO.selectVcatnManageList" parameterClass="VcatnManageVO" resultClass="VcatnManageVO">
+        <![CDATA[
+            SELECT  * 
+              FROM  (
+            SELECT ROWNUM AS rowCount, ALL_LIST.* 
+              FROM  (
+			 SELECT  APPLCNT_ID          AS applcntId        ,
+                     VCATN_SE            AS vcatnSe          ,
+                     REQST_DE            AS reqstDe          ,
+                     VCATN_RESN          AS vcatnResn        ,
+                     SANCTNER_ID         AS sanctnerId       ,
+					(select mst.USER_NM from COMVNUSERMASTER mst where  mst.ESNTL_ID = SANCTNER_ID)  AS sanctnerNm,
+                     CONFM_AT            AS confmAt          ,
+                     SANCTN_DT           AS sanctnDt         ,
+                     RETURN_RESN         AS returnResn       ,
+                     BGNDE               AS bgnde            ,
+                     ENDDE               AS endde            ,
+	                 NOON_SE             AS noonSe           ,
+			       (select code_nm from COMTCCMMNDETAILCODE where code_id ='COM056' and code = A.VCATN_SE) as vcatnSeNm
+			   FROM     COMTNVCATNMANAGE A  
+			   WHERE    1=1   
+			   AND      BGNDE like  '%'||#searchKeyword#||'%'
+			   AND      APPLCNT_ID = #applcntId#
+			   ORDER BY FRST_REGIST_PNTTM DESC
+                       ) ALL_LIST
+                    ) Z
+          WHERE  rowCount  > #firstIndex#
+            AND  rowCount <= #firstIndex# + #recordCountPerPage#   
+        ]]>
+    </select> 
+
+    <select id="vcatnManageDAO.selectVcatnManageListTotCnt" parameterClass="VcatnManageVO" resultClass="int">
+        <![CDATA[
+            SELECT  COUNT(*) totcnt
+            FROM    COMTNVCATNMANAGE
+            WHERE   1=1
+			AND     BGNDE like  '%'||#searchKeyword#||'%'
+			AND     APPLCNT_ID = #applcntId#
+        ]]>
+    </select>
+
+    <select id="vcatnManageDAO.selectVcatnManage" resultClass="VcatnManageVO">
+        <![CDATA[
+			SELECT APPLCNT_ID          AS applcntId        ,
+                   VCATN_SE            AS vcatnSe          ,
+                   BGNDE               AS bgnde            ,
+                   ENDDE               AS endde            ,
+                   REQST_DE            AS reqstDe          ,
+                   OCCRRNC_YEAR        AS occrrncYear      ,
+                   VCATN_RESN          AS vcatnResn		   ,
+                   SANCTNER_ID         AS sanctnerId       ,
+                   CONFM_AT            AS confmAt          ,
+                   SANCTN_DT           AS sanctnDt         ,
+                   RETURN_RESN         AS returnResn       ,
+			       INFRML_SANCTN_ID    AS infrmlSanctnId   ,
+			       mst.user_nm         AS applcntNm        ,
+			       org.orgnzt_nm       AS orgnztNm         ,
+	               NOON_SE             AS noonSe           ,
+			       (select code_nm from COMTCCMMNDETAILCODE where code_id ='COM056' and code = vct.VCATN_SE) as vcatnSeNm,
+			       (select mst_a.USER_NM from COMVNUSERMASTER mst_a where  mst_a.ESNTL_ID = vct.SANCTNER_ID)  AS sanctnerNm,
+                   (select info.ORGNZT_NM from COMVNUSERMASTER mst_b, COMTNORGNZTINFO info 
+                     where info.ORGNZT_ID = mst_b.ORGNZT_ID and mst_b.esntl_id= vct.SANCTNER_ID) AS sanctnerOrgnztNm
+			FROM   COMTNVCATNMANAGE vct, COMVNUSERMASTER mst,
+				   COMTNORGNZTINFO org 
+			WHERE  vct.APPLCNT_ID = mst.esntl_id
+			AND    mst.orgnzt_id  = org.orgnzt_id
+		    AND    APPLCNT_ID     = #applcntId#
+			AND    VCATN_SE       = #vcatnSe#
+			AND    BGNDE		  = #bgnde#
+			AND    ENDDE		  = #endde#
+        ]]>
+    </select>
+
+    <insert id="vcatnManageDAO.insertVcatnManage" parameterClass="VcatnManage">
+        <![CDATA[
+
+            INSERT INTO COMTNVCATNMANAGE
+                   (APPLCNT_ID         ,
+                    VCATN_SE           ,
+                    BGNDE              ,
+                    ENDDE              ,
+                    VCATN_RESN         ,
+                    REQST_DE           ,
+                    OCCRRNC_YEAR       ,
+                    NOON_SE            ,
+                    SANCTNER_ID        ,
+                    CONFM_AT           , 
+                    INFRML_SANCTN_ID   ,    
+                    FRST_REGISTER_ID   ,
+                    FRST_REGIST_PNTTM) 
+            VALUES (#applcntId#,   
+                    #vcatnSe#,     
+                    #bgnde#,     
+                    #endde#, 
+                    #vcatnResn#,
+                    #reqstDe#,
+                    #occrrncYear#,
+                    #noonSe#,     
+                    #sanctnerId#,  
+                    #confmAt#, 
+                    #infrmlSanctnId#,    
+                    #frstRegisterId#,  
+                    SYSDATETIME)
+
+        ]]>
+    </insert>     
+
+    <update id="vcatnManageDAO.updateVcatnManage" parameterClass="VcatnManage">
+        <![CDATA[
+
+            UPDATE COMTNVCATNMANAGE
+               SET  VCATN_RESN         = #vcatnResn#,   
+					LAST_UPDUSR_ID     = #lastUpdusrId#,
+                    LAST_UPDT_PNTTM  = SYSDATETIME    
+             WHERE  APPLCNT_ID         = #applcntId#
+			 AND    VCATN_SE           = #vcatnSe#
+			 AND    BGNDE			   = #bgnde#
+			 AND    ENDDE			   = #endde#
+
+        ]]>
+    </update>    
+    
+    <delete id="vcatnManageDAO.deleteVcatnManage" parameterClass="VcatnManage">
+        <![CDATA[
+
+             DELETE FROM COMTNVCATNMANAGE
+             WHERE APPLCNT_ID     = #applcntId#
+			 AND   VCATN_SE       = #vcatnSe#
+			 AND   BGNDE		  = #bgnde#
+			 AND   ENDDE		  = #endde#
+
+        ]]>
+    </delete>  
+
+<!-- 휴가일자 중복여부 체크 -->
+    <select id="vcatnManageDAO.selectVcatnManageDplctAt" parameterClass="VcatnManageVO" resultClass="int">
+        <![CDATA[
+            SELECT  COUNT(*) totcnt
+              FROM  COMTNVCATNMANAGE
+             WHERE  CONFM_AT !='R'
+               AND  APPLCNT_ID = #applcntId#
+               AND  #searchKeyword# BETWEEN BGNDE and ENDDE
+        ]]>
+    </select>
+
+<!-- 휴가 승인관련  -->
+    <select id="vcatnManageDAO.selectVcatnManageConfmList" parameterClass="VcatnManageVO" resultClass="VcatnManageVO">
+        <![CDATA[
+            SELECT  * 
+              FROM  (
+            SELECT ROWNUM AS rowCount, ALL_LIST.* 
+              FROM  (
+			 SELECT  A.APPLCNT_ID          AS applcntId        ,
+                     mst.USER_NM           AS applcntNm        ,
+			        (select info.ORGNZT_NM from COMTNORGNZTINFO info where  info.ORGNZT_ID = mst.ORGNZT_ID ) AS orgnztNm,
+                     A.VCATN_SE            AS vcatnSe          ,
+			        (select code_nm from COMTCCMMNDETAILCODE where code_id ='COM056' and code = A.VCATN_SE) as vcatnSeNm,
+                     A.REQST_DE            AS reqstDe          ,
+                     A.SANCTNER_ID         AS sanctnerId       ,
+                     A.CONFM_AT            AS confmAt          ,
+                     A.SANCTN_DT           AS sanctnDt         ,
+                     A.RETURN_RESN         AS returnResn       ,
+                     A.BGNDE               AS bgnde            ,
+                     A.ENDDE               AS endde            ,
+                     A.OCCRRNC_YEAR        AS occrrncYear      ,
+                     A.VCATN_RESN          AS vcatnResn		   ,
+			         A.INFRML_SANCTN_ID    AS infrmlSanctnId   ,
+			         A.NOON_SE             AS noonSe           
+		    FROM    COMTNVCATNMANAGE A, COMVNUSERMASTER mst
+			WHERE    1=1 
+			  AND    mst.ESNTL_ID   = A.APPLCNT_ID 
+			  AND    A.SANCTNER_ID = #sanctnerId#
+        ]]>
+			 <isNotEmpty prepend="AND" property="searchNm">
+					 mst.USER_NM like '%'||#searchNm#||'%'
+			 </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="searchConfmAt">
+					 A.CONFM_AT = #searchConfmAt#
+			 </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="searchMonth">
+					 #searchKeyword# BETWEEN SUBSTR(A.BGNDE,0,6) AND SUBSTR(A.ENDDE,0,6)
+			 </isNotEmpty>
+			 <isEmpty  property="searchMonth">
+			    <isNotEmpty prepend="AND" property="searchYear">
+			         A.BGNDE like '%'||#searchKeyword#||'%'
+			    </isNotEmpty>
+			 </isEmpty>
+        <![CDATA[
+			   ORDER BY A.FRST_REGIST_PNTTM DESC
+                       ) ALL_LIST
+                    ) Z
+          WHERE  rowCount  > #firstIndex#
+            AND  rowCount <= #firstIndex# + #recordCountPerPage#  
+       ]]>
+    </select> 
+
+    <select id="vcatnManageDAO.selectVcatnManageConfmListTotCnt" parameterClass="VcatnManageVO" resultClass="int">
+        <![CDATA[
+               SELECT  COUNT(*) totcnt
+			   FROM    COMTNVCATNMANAGE A, COMVNUSERMASTER mst
+			   WHERE   1=1 
+			   AND     mst.ESNTL_ID   = A.APPLCNT_ID 
+			   AND     A.SANCTNER_ID = #sanctnerId#
+        ]]>
+			 <isNotEmpty prepend="AND" property="searchNm">
+					 mst.USER_NM like '%'||#searchNm#||'%'
+			 </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="searchConfmAt">
+					 A.CONFM_AT = #searchConfmAt#
+			 </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="searchMonth">
+					 #searchKeyword# BETWEEN SUBSTR(A.BGNDE,0,6) AND SUBSTR(A.ENDDE,0,6)
+			 </isNotEmpty>
+			 <isEmpty  property="searchMonth">
+			    <isNotEmpty prepend="AND" property="searchYear">
+			         A.BGNDE like '%'||#searchKeyword#||'%'
+			    </isNotEmpty>
+			 </isEmpty>
+    </select>
+
+    <update id="vcatnManageDAO.updateVcatnManageConfm" parameterClass="VcatnManage">
+        <![CDATA[
+            UPDATE COMTNVCATNMANAGE
+               SET  CONFM_AT           = #confmAt#,   
+                    SANCTN_DT          = TO_DATE(#sanctnDt#, 'yyyy-mm-dd hh24:mi:ss'),
+                    RETURN_RESN        = #returnResn#,  
+					LAST_UPDUSR_ID     = #lastUpdusrId#,
+                    LAST_UPDT_PNTTM  = SYSDATETIME    
+             WHERE  APPLCNT_ID         = #applcntId#
+			 AND    VCATN_SE           = #vcatnSe#
+			 AND    BGNDE			   = #bgnde#
+			 AND    ENDDE			   = #endde#
+        ]]>
+    </update>  
+
+ 
+
+<!-- 휴가 연차테이블 관련  -->
+
+    <select id="vcatnManageDAO.selectIndvdlYrycManage" parameterClass="VcatnManageVO" resultClass="VcatnManageVO">
+        <![CDATA[
+			SELECT   OCCRRNC_YEAR    AS occrrncYear ,
+			         USER_ID            AS usid        ,
+			         YRYC_OCCRRNC_CO  AS occrncYrycCo,
+			         USE_YRYC_CO     AS useYrycCo   ,
+			         REMNDR_YRYC_CO  AS remndrYrycCo
+			FROM     COMTNINDVDLYRYCMANAGE
+			WHERE    OCCRRNC_YEAR = #occrrncYear#
+			AND      USER_ID         = #usid#
+        ]]>
+    </select>
+
+    <update id="vcatnManageDAO.updateIndvdlYrycManage" parameterClass="IndvdlYrycManage">
+        <![CDATA[
+            UPDATE COMTNINDVDLYRYCMANAGE
+               SET  USE_YRYC_CO        = #useYrycCo#,  
+                    REMNDR_YRYC_CO     = #remndrYrycCo#,  
+					LAST_UPDUSR_ID     = #lastUpdusrId#,
+                    LAST_UPDT_PNTTM  = SYSDATETIME    
+			WHERE   OCCRRNC_YEAR = #occrrncYear#
+			AND     USER_ID         = #usid#
+        ]]>
+    </update>  
+
+</sqlMap>

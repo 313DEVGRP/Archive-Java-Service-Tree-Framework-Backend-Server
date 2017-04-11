@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/html/**" location="/html/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
+    
+    <!-- OAuth 컴포넌트 -->
+     <bean id="disconnectController" class="org.springframework.social.facebook.web.DisconnectController" 
+        c:_0-ref="usersConnectionRepository" c:_1="${facebook.appSecret}" />
+        
+     <!-- <bean class="org.springframework.social.connect.web.ProviderSignInController" autowire="constructor" /> -->
+
+    <!-- facebook 연동시  -->
+    <!-- <mvc:default-servlet-handler /> -->
+    <bean class="org.springframework.social.connect.web.ProviderSignInController">
+        <constructor-arg ref="connectionFactoryLocator" />
+        <constructor-arg ref="usersConnectionRepository" /> 
+        <constructor-arg>
+            <bean class="egovframework.com.uss.ion.fbk.web.FacebookSimpleSignInAdapter"/>
+        </constructor-arg>
+        <property name="signInUrl" value="/"/>
+        <property name="postSignInUrl" value="/uss/ion/fbk/facebook.do"/>
+    </bean>
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/uss/ion/fbk/*.do" />
+            <bean class="egovframework.com.uss.ion.fbk.web.FacebookUserInterceptor" >
+                <constructor-arg ref="usersConnectionRepository"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
+    <!--
+    <mvc:view-controller path="/uss/ion/fbk/facebook.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookHome" />
+    <mvc:view-controller path="/uss/ion/fbk/facebookSignout.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookHome" />
+    <mvc:view-controller path="/uss/ion/fbk/facebookSignin.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookSignin" />
+    -->
+
+</beans>

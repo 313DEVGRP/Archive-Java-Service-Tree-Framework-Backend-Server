@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CpyrhtPrtcPolicy">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="CpyrhtPrtcPolicySearchVO" type="egovframework.com.uss.sam.cpy.service.CpyrhtPrtcPolicyDefaultVO"/>	
+
+	<resultMap id="CpyrhtPrtcPolicy" class="egovframework.com.uss.sam.cpy.service.CpyrhtPrtcPolicyVO">
+		<result property="cpyrhtId" 			column="CPYRHT_ID" 				columnIndex="1"/>
+		<result property="cpyrhtPrtcPolicyCn" 	column="CPYRHT_PRTC_POLICY_CN" 	columnIndex="2"/>		
+		<result property="frstRegisterPnttm" 	column="FRST_REGIST_PNTTM" 	columnIndex="3"/>
+		<result property="frstRegisterId" 		column="FRST_REGISTER_ID" 		columnIndex="4"/>
+		<result property="lastUpdusrPnttm" 		column="LAST_UPDT_PNTTM" 		columnIndex="5"/>
+		<result property="lastUpdusrId" 		column="LAST_UPDUSR_ID" 		columnIndex="6"/>				
+	</resultMap>
+	
+	<select id="CpyrhtPrtcPolicyDAO.selectCpyrhtPrtcPolicyDetail" resultMap="CpyrhtPrtcPolicy">
+		<![CDATA[		
+			SELECT 	CPYRHT_ID, CPYRHT_PRTC_POLICY_CN,   
+					DATE_FORMAT(FRST_REGIST_PNTTM,'%Y-%m-%d') FRST_REGIST_PNTTM   , FRST_REGISTER_ID, 
+					DATE_FORMAT(LAST_UPDT_PNTTM,'%Y-%m-%d')   LAST_UPDT_PNTTM	  , LAST_UPDUSR_ID			 			  			 			  
+			FROM	COMTNCPYRHTINFO		
+			WHERE	CPYRHT_ID=#cpyrhtId#					
+		]]>
+	</select>
+	
+	<select id="CpyrhtPrtcPolicyDAO.selectCpyrhtPrtcPolicyList" parameterClass="CpyrhtPrtcPolicySearchVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT 	CPYRHT_ID, CPYRHT_PRTC_POLICY_CN,  
+					FRST_REGIST_PNTTM	  , FRST_REGISTER_ID, 
+					LAST_UPDT_PNTTM	  , LAST_UPDUSR_ID			 
+			FROM	COMTNCPYRHTINFO                               			
+			WHERE	1=1   			
+		]]>					
+			<isEqual prepend="AND" property="searchCondition" compareValue="cpyrhtPrtcPolicyCn">
+				<![CDATA[CPYRHT_PRTC_POLICY_CN LIKE CONCAT('%', #searchKeyword#, '%')]]>
+			</isEqual>
+			ORDER BY CPYRHT_ID DESC			
+			LIMIT  #recordCountPerPage# OFFSET #firstIndex#	
+	</select>
+	
+	<select id="CpyrhtPrtcPolicyDAO.selectCpyrhtPrtcPolicyListTotCnt" parameterClass="CpyrhtPrtcPolicySearchVO" resultClass="int">
+		<![CDATA[
+			SELECT 	COUNT(*) totcnt
+			FROM 	COMTNCPYRHTINFO
+			WHERE 	1=1
+		]]>			
+			<isEqual prepend="AND" property="searchCondition" compareValue="cpyrhtPrtcPolicyCn">
+				<![CDATA[CPYRHT_PRTC_POLICY_CN LIKE CONCAT('%', #searchKeyword#, '%')]]>
+			</isEqual>
+	</select>
+	
+	<insert id="CpyrhtPrtcPolicyDAO.insertCpyrhtPrtcPolicyCn">	
+		<![CDATA[	
+			INSERT INTO COMTNCPYRHTINFO
+				   (CPYRHT_ID
+				  , CPYRHT_PRTC_POLICY_CN				   
+				  , FRST_REGIST_PNTTM 
+				  , FRST_REGISTER_ID 
+				  , LAST_UPDT_PNTTM 
+				  , LAST_UPDUSR_ID) 
+			VALUES ( #cpyrhtId#
+				  , #cpyrhtPrtcPolicyCn#			
+				  , sysdate()
+				  , #frstRegisterId#
+				  , sysdate()
+				  , #lastUpdusrId# )
+		]]>
+	</insert>
+	
+	<update id="CpyrhtPrtcPolicyDAO.updateCpyrhtPrtcPolicyCn">
+		<![CDATA[
+			UPDATE	COMTNCPYRHTINFO	SET 
+				   	CPYRHT_PRTC_POLICY_CN=#cpyrhtPrtcPolicyCn#
+				  , LAST_UPDT_PNTTM=sysdate()
+				  , LAST_UPDUSR_ID=#lastUpdusrId#
+ 			WHERE  CPYRHT_ID=#cpyrhtId#
+		]]>
+	</update>
+	
+	<delete id="CpyrhtPrtcPolicyDAO.deleteCpyrhtPrtcPolicyCn">
+		<![CDATA[
+			DELETE FROM COMTNCPYRHTINFO 
+ 			WHERE  CPYRHT_ID=#cpyrhtId#
+		]]>
+	</delete>
+	
+</sqlMap>

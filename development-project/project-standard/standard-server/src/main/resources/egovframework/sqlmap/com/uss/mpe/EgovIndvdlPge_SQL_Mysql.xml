@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="MyPageCNTNTS">
+    <typeAlias  alias="egovMap"      type = "egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="indvdlPgeModel" type = "egovframework.com.uss.mpe.service.IndvdlPge"/>
+    <typeAlias  alias="indvdlPgeCntntsVO"       type = "egovframework.com.uss.mpe.service.IndvdlPgeCntntsVO"/>
+    <typeAlias  alias="indvdlPgeVO"       type = "egovframework.com.uss.mpe.service.IndvdlPgeVO"/>
+    <resultMap id="indvdlpgeCntntsMap" class="egovframework.com.uss.mpe.service.IndvdlPge">
+        <result property="cntntsId" column="CNTNTS_ID" columnIndex="1"/>
+        <result property="cntntsNm" column="CNTNTS_NM" columnIndex="2"/>
+        <result property="cntcUrl" column="CNTC_URL" columnIndex="3"/>
+        <result property="cntntsUseAt" column="CNTNTS_USE_AT" columnIndex="4"/>
+        <result property="cntntsLinkUrl" column="CNTNTS_LINK_URL" columnIndex="5"/>
+        <result property="cntntsDc" column="CNTNTS_DC" columnIndex="6"/>
+    </resultMap>
+    <resultMap id="indvdlpgeMap" class="egovframework.com.uss.mpe.service.IndvdlPgeVO">
+        <result property="userId" column="EMPLYR_ID" columnIndex="1"/>
+         <result property="titleBarColor" column="TITLEBAR_COLOR" columnIndex="2"/>
+        <result property="sortMthd" column="ALGN_MTHD" columnIndex="3"/>
+        <result property="sortCnt" column="ALGN_CO" columnIndex="4"/>
+    </resultMap>
+    <resultMap id="indvdlPgeDetl" class="egovframework.com.uss.mpe.service.IndvdlPgeVO">
+        <result property="rownum" column="ROWNUM" columnIndex="1"/>
+        <result property="userId" column="EMPLYR_ID" columnIndex="2"/>
+        <result property="cntntsId" column="CNTNTS_ID" columnIndex="3"/>
+        <result property="cntntsNm" column="CNTNTS_NM" columnIndex="4"/>
+        <result property="cntcUrl" column="CNTC_URL" columnIndex="5"/>
+        <result property="cntntsUseAt" column="CNTNTS_USE_AT" columnIndex="6"/>
+        <result property="cntntsLinkUrl" column="CNTNTS_LINK_URL" columnIndex="7"/>
+        <result property="cntntsDc" column="CNTNTS_DC" columnIndex="8"/>
+    </resultMap>
+    <!-- 마이페이지 설정정보 조회 -->
+    <select id="IndvdlPgeDAO.selectIndvdlpgeResult" parameterClass="indvdlPgeVO" resultMap="indvdlpgeMap">
+		<![CDATA[
+            SELECT EMPLYR_ID, TITLEBAR_COLOR, ALGN_MTHD, ALGN_CO 
+            FROM COMTNINDVDLPGEESTBS
+            WHERE 1=1 AND EMPLYR_ID=#userId#
+        ]]>
+    </select>
+    <select id="IndvdlPgeDAO.selectIndvdlpgeResultTotCnt" parameterClass="IndvdlPgeVO" resultClass="int">
+            SELECT COUNT(*) AS tot_cnt
+              FROM COMTNINDVDLPGEESTBS
+             WHERE 1 = 1
+               AND EMPLYR_ID = #userId#
+    </select>
+
+    <select id="IndvdlPgeDAO.selectIndvdlpgeResultDetail" parameterClass="IndvdlPgeVO" resultMap="indvdlPgeDetl">
+            SELECT @RNUM:=@RNUM+1 AS ROWNUM,
+                   A.EMPLYR_ID,
+                   A.CNTNTS_ID,
+                   B.CNTNTS_NM,
+                   B.CNTC_URL,
+                   B.CNTNTS_USE_AT,
+                   B.CNTNTS_LINK_URL,
+                   B.CNTNTS_DC
+              FROM COMTNCNTNTSLIST A, 
+                   COMTNINDVDLPGECNTNTS B,
+                   (SELECT @RNUM:=0) C
+             WHERE 1 = 1
+               AND A.CNTNTS_ID     = B.CNTNTS_ID
+               AND A.EMPLYR_ID     = #userId#
+               AND B.CNTNTS_USE_AT = 'Y'
+    </select>
+
+    <select id="IndvdlPgeDAO.selectIndvdlpgeResultDetailTotCnt" parameterClass="IndvdlPgeVO" resultClass="int">
+            SELECT COUNT(*) AS tot_cnt
+              FROM COMTNCNTNTSLIST A, 
+                   COMTNINDVDLPGECNTNTS B
+             WHERE 1 = 1
+               AND A.CNTNTS_ID     = B.CNTNTS_ID
+               AND A.EMPLYR_ID     = #userId#
+               AND B.CNTNTS_USE_AT = 'Y'
+    </select>
+	<!-- 마이페이지 콘텐츠 등록 -->
+    <insert id="IndvdlPgeDAO.insertIndvdlpgeCntnts">
+        <![CDATA[
+            INSERT INTO COMTNINDVDLPGECNTNTS 
+                (
+                	CNTNTS_ID, CNTNTS_NM, CNTC_URL, CNTNTS_USE_AT, CNTNTS_LINK_URL, CNTNTS_DC
+                )
+            VALUES 
+            	(
+            		#cntntsId#,#cntntsNm#,#cntcUrl#,#cntntsUseAt#,#cntntsLinkUrl#,#cntntsDc#
+            	)
+        ]]>
+    </insert>
+    <!-- 마이페이지 콘텐츠 상세보기 -->
+	<select id="IndvdlPgeDAO.selectIndvdlpgeCntnts" parameterClass="indvdlPgeModel" resultMap="indvdlpgeCntntsMap">
+        <![CDATA[
+            SELECT CNTNTS_ID, CNTNTS_NM, CNTC_URL, CNTNTS_USE_AT, CNTNTS_LINK_URL, CNTNTS_DC 
+            FROM COMTNINDVDLPGECNTNTS
+            WHERE CNTNTS_ID=#cntntsId#
+        ]]>
+    </select>
+    <!-- 마이페이지 콘텐츠 수정 -->
+	<update id="IndvdlPgeDAO.updateIndvdlpgeCntnts" parameterClass="indvdlPgeModel">
+        <![CDATA[
+            UPDATE COMTNINDVDLPGECNTNTS
+            SET
+	            
+	            CNTNTS_NM = #cntntsNm#, 
+	            CNTC_URL = #cntcUrl#, 
+	            CNTNTS_USE_AT = #cntntsUseAt#, 
+	            CNTNTS_LINK_URL = #cntntsLinkUrl#, 
+	            CNTNTS_DC = #cntntsDc#
+	             
+            WHERE CNTNTS_ID=#cntntsId#
+        ]]>
+    </update>
+    <!-- 마이페이지 콘텐츠 목록 -->
+    <select id="IndvdlPgeDAO.selectIndvdlpgeCntntsList" parameterClass="indvdlPgeCntntsVO" resultMap="indvdlpgeCntntsMap">
+		<![CDATA[
+            SELECT CNTNTS_ID, CNTNTS_NM, CNTC_URL, CNTNTS_USE_AT, CNTNTS_LINK_URL, CNTNTS_DC 
+            FROM COMTNINDVDLPGECNTNTS
+            WHERE 1=1
+        ]]>
+            <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[CNTNTS_NM LIKE CONCAT('%' , #searchKeyword#, '%') ]]>
+            </isEqual>
+            <isEqual prepend="AND" property="searchCondition" compareValue="2">
+                <![CDATA[CNTNTS_USE_AT LIKE CONCAT('%' , #searchKeyword#, '%') ]]>
+            </isEqual>
+            ORDER BY CNTNTS_ID DESC
+            LIMIT #recordCountPerPage# OFFSET #firstIndex#      
+
+    </select>
+        <!-- 마이페이지에 콘텐츠 추가를 위해 콘텐츠 목록 조회 -->
+    <select id="IndvdlPgeDAO.addIndvdlpgeCntntsList" parameterClass="indvdlPgeCntntsVO" resultMap="indvdlpgeCntntsMap">
+		<![CDATA[
+            SELECT CNTNTS_ID, CNTNTS_NM, CNTC_URL, CNTNTS_USE_AT, CNTNTS_LINK_URL, CNTNTS_DC 
+            FROM COMTNINDVDLPGECNTNTS
+            WHERE CNTNTS_USE_AT = 'Y' AND CNTNTS_ID NOT IN (
+				SELECT CNTNTS_ID FROM COMTNCNTNTSLIST WHERE EMPLYR_ID=#userId#
+				)
+        ]]>
+        	<isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[CNTNTS_NM LIKE CONCAT('%' , #searchKeyword#, '%') ]]>
+            </isEqual>
+            ORDER BY CNTNTS_ID DESC
+            LIMIT #recordCountPerPage# OFFSET #firstIndex#      
+		
+    </select>
+    <!-- 마이페이지에 콘텐츠 추가를 위해 콘텐츠 개수조회 -->
+    <select id="IndvdlPgeDAO.selectIndvdlpgeAddListTotCnt" parameterClass="indvdlPgeCntntsVO" resultClass="int">
+		<![CDATA[
+            SELECT count(*) totcnt 
+            FROM COMTNINDVDLPGECNTNTS
+            WHERE CNTNTS_USE_AT = 'Y' AND CNTNTS_ID NOT IN (
+				SELECT CNTNTS_ID FROM COMTNCNTNTSLIST WHERE EMPLYR_ID=#userId#
+				)
+        ]]>
+        	<isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[CNTNTS_NM LIKE CONCAT('%' , #searchKeyword#, '%') ]]>
+            </isEqual>
+    </select>    
+    <!-- 마이페이지에  콘텐츠를 바로 추가 -->
+    <insert id="IndvdlPgeDAO.addIndvdlpgeCntnts" parameterClass="indvdlPgeCntntsVO">
+        <![CDATA[
+            INSERT INTO COMTNCNTNTSLIST 
+                (
+                	CNTNTS_ID, EMPLYR_ID
+                )
+            VALUES 
+            	(
+            		#cntntsId#,#userId#
+            	)
+        ]]>
+    </insert>  
+    <!-- 마이페이지에서  콘텐츠를 바로 삭제 -->
+    <delete id="IndvdlPgeDAO.delIndvdlpgeCntnts" parameterClass="indvdlPgeCntntsVO">
+        <![CDATA[
+            DELETE FROM COMTNCNTNTSLIST WHERE  EMPLYR_ID=#userId# AND CNTNTS_ID=#cntntsId#
+        ]]>
+    </delete>      
+    <!-- 마이페이지 콘텐츠 개수 -->
+    <select id="IndvdlPgeDAO.selectIndvdlpgeListTotCnt" parameterClass="indvdlPgeCntntsVO" resultClass="int">
+        <![CDATA[
+            SELECT COUNT(*) totcnt 
+            FROM COMTNINDVDLPGECNTNTS 
+            WHERE 1=1
+        ]]>
+            <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[CNTNTS_NM LIKE CONCAT('%' , #searchKeyword#, '%')]]>
+            </isEqual> 
+            <isEqual prepend="AND" property="searchCondition" compareValue="2">
+                <![CDATA[CNTNTS_USE_AT LIKE CONCAT('%' , #searchKeyword#, '%') ]]>
+            </isEqual>
+    </select>
+    <!-- 마이페이지 목록에서 콘텐츠 삭제 -->
+	<update id="IndvdlPgeDAO.deleteIndvdlpgeCntnts" parameterClass="indvdlPgeModel">
+        <![CDATA[
+            UPDATE COMTNINDVDLPGECNTNTS
+            SET
+
+	            CNTNTS_USE_AT = 'N' 
+            WHERE CNTNTS_ID=#cntntsId#
+        ]]>
+    </update>
+    <!-- 마이페이지 콘텐츠를 DB에서 완전 삭제 -->
+	<delete id="IndvdlPgeDAO.delIndvdlpgeCntntsDB" parameterClass="indvdlPgeModel">
+        <![CDATA[
+            DELETE FROM COMTNINDVDLPGECNTNTS WHERE CNTNTS_ID=#cntntsId#
+        ]]>
+    </delete>
+    <!-- 마이페이지 설정정보 존재 체크 -->
+    <select id="IndvdlPgeDAO.selectIndvdlpgeConfCnt" parameterClass="indvdlPgeVO" resultClass="int">
+        <![CDATA[
+            SELECT COUNT(*) confcnt 
+            FROM COMTNINDVDLPGEESTBS 
+            WHERE EMPLYR_ID=#userId#
+        ]]>            
+    </select>
+    <!-- 마이페이지 설정정보 수정 -->
+    <update id="IndvdlPgeDAO.updateIndvdlpgeConf" parameterClass="indvdlPgeVO">
+        <![CDATA[
+            UPDATE COMTNINDVDLPGEESTBS
+            SET	            
+	            TITLEBAR_COLOR = #titleBarColor#, 
+	            ALGN_MTHD = #sortMthd#, 
+	            ALGN_CO = #sortCnt#	             
+            WHERE EMPLYR_ID=#userId#
+        ]]>
+    </update>
+    <!-- 마이페이지 설정정보 추가 -->
+    <insert id="IndvdlPgeDAO.insertIndvdlpgeConf" parameterClass="indvdlPgeVO">
+        <![CDATA[
+            INSERT INTO COMTNINDVDLPGEESTBS 
+                (
+                	EMPLYR_ID, TITLEBAR_COLOR, ALGN_MTHD, ALGN_CO
+                )
+            VALUES 
+            	(
+            		#userId#, #titleBarColor#, #sortMthd#, #sortCnt#
+            	)
+        ]]>
+    </insert>
+</sqlMap>

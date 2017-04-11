@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BatchSchdul">
+
+    <typeAlias  alias="BatchSchdul" type="egovframework.com.sym.bat.service.BatchSchdul"/>
+    <resultMap id="batchSchdulResult" class="BatchSchdul">
+        <result property="batchSchdulId" column="BATCH_SCHDUL_ID" />
+        <result property="batchOpertId" column="BATCH_OPERT_ID" />
+        <result property="batchOpertNm" column="BATCH_OPERT_NM" />
+        <result property="batchProgrm" column="BATCH_PROGRM" />
+        <result property="paramtr" column="PARAMTR" />
+        <result property="executCycle" column="EXECUT_CYCLE" />
+        <result property="executCycleNm" column="EXECUT_CYCLE_NM" />
+        <result property="executSchdulDe" column="EXECUT_SCHDUL_DE" />
+        <result property="executSchdulHour" column="EXECUT_SCHDUL_HOUR" />
+        <result property="executSchdulMnt" column="EXECUT_SCHDUL_MNT" />
+        <result property="executSchdulSecnd" column="EXECUT_SCHDUL_SECND" />
+        <result property="frstRegisterId" column="FRST_REGISTER_ID" />
+        <result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" />
+        <result property="lastUpdusrId" column="LAST_UPDUSR_ID" />
+        <result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" />
+    </resultMap>
+    <typeAlias  alias="BatchSchdulDfk" type="egovframework.com.sym.bat.service.BatchSchdulDfk"/>
+    <resultMap id="batchSchdulDfkResult" class="BatchSchdulDfk">
+        <result property="batchSchdulId" column="BATCH_SCHDUL_ID" />
+        <result property="executSchdulDfkSe" column="EXECUT_SCHDUL_DFK_SE" />
+        <result property="executSchdulDfkSeNm" column="EXECUT_SCHDUL_DFK_SE_NM" />
+    </resultMap>
+
+
+    <select id="BatchSchdulDao.selectBatchSchdulList" parameterClass="BatchSchdul" resultMap="batchSchdulResult">
+        <![CDATA[ 
+        SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+            SELECT  A.BATCH_SCHDUL_ID, A.BATCH_OPERT_ID, A.EXECUT_CYCLE, C.CODE_NM EXECUT_CYCLE_NM,
+               A.EXECUT_SCHDUL_DE, A.EXECUT_SCHDUL_HOUR, A.EXECUT_SCHDUL_MNT, A.EXECUT_SCHDUL_SECND,
+               B.BATCH_OPERT_NM, B.BATCH_PROGRM, B.PARAMTR,
+               TO_CHAR(A.LAST_UPDT_PNTTM, 'YYYY-MM-DD HH24:MI:SS') AS LAST_UPDT_PNTTM, A.LAST_UPDUSR_ID,
+               A.FRST_REGISTER_ID, TO_CHAR(A.FRST_REGIST_PNTTM, 'YYYY-MM-DD HH24:MI:SS') AS FRST_REGIST_PNTTM
+            FROM COMTNBATCHSCHDUL A, COMTNBATCHOPERT B, COMTCCMMNDETAILCODE C
+            WHERE A.BATCH_OPERT_ID = B.BATCH_OPERT_ID
+              AND A.EXECUT_CYCLE = C.CODE
+              AND C.CODE_ID = 'COM047'
+        ]]>
+            <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                <![CDATA[   B.BATCH_OPERT_NM LIKE '%' || #searchKeyword# || '%'        ]]>
+            </isEqual>
+            <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[   B.BATCH_PROGRM LIKE '%' || #searchKeyword# || '%'        ]]>
+            </isEqual>
+        <![CDATA[
+            ORDER BY A.BATCH_SCHDUL_ID ASC
+            ) TB ) Z WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+        ]]>             
+    </select>
+
+    <select id="BatchSchdulDao.selectBatchSchdulListCnt" parameterClass="BatchSchdul" resultClass="java.lang.Integer" >
+        <![CDATA[
+            SELECT COUNT(*) totcnt
+            FROM COMTNBATCHSCHDUL A, COMTNBATCHOPERT B, COMTCCMMNDETAILCODE C
+            WHERE A.BATCH_OPERT_ID = B.BATCH_OPERT_ID
+              AND A.EXECUT_CYCLE = C.CODE
+              AND C.CODE_ID = 'COM047'
+        ]]>
+            <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                <![CDATA[   B.BATCH_OPERT_NM LIKE '%' || #searchKeyword# || '%'        ]]>
+            </isEqual>
+            <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[   B.BATCH_PROGRM LIKE '%' || #searchKeyword# || '%'        ]]>
+            </isEqual>
+    </select>
+
+    
+    <select id="BatchSchdulDao.selectBatchSchdul" parameterClass="BatchSchdul" resultMap="batchSchdulResult">
+        <![CDATA[
+            SELECT  A.BATCH_SCHDUL_ID, A.BATCH_OPERT_ID, A.EXECUT_CYCLE, C.CODE_NM EXECUT_CYCLE_NM,
+               A.EXECUT_SCHDUL_DE, A.EXECUT_SCHDUL_HOUR, A.EXECUT_SCHDUL_MNT, A.EXECUT_SCHDUL_SECND,
+               B.BATCH_OPERT_NM, B.BATCH_PROGRM, B.PARAMTR,
+               TO_CHAR(A.LAST_UPDT_PNTTM, 'YYYY-MM-DD HH24:MI:SS') AS LAST_UPDT_PNTTM, A.LAST_UPDUSR_ID,
+               A.FRST_REGISTER_ID, TO_CHAR(A.FRST_REGIST_PNTTM, 'YYYY-MM-DD HH24:MI:SS') AS FRST_REGIST_PNTTM
+            FROM COMTNBATCHSCHDUL A, COMTNBATCHOPERT B, COMTCCMMNDETAILCODE C
+            WHERE A.BATCH_OPERT_ID = B.BATCH_OPERT_ID
+              AND A.EXECUT_CYCLE = C.CODE
+              AND C.CODE_ID = 'COM047'
+              AND A.BATCH_SCHDUL_ID = #batchSchdulId#
+        ]]>
+    </select>
+
+    <insert id="BatchSchdulDao.insertBatchSchdul" parameterClass="BatchSchdul">
+        <![CDATA[
+            INSERT INTO COMTNBATCHSCHDUL (
+                BATCH_SCHDUL_ID, BATCH_OPERT_ID, EXECUT_CYCLE,
+                EXECUT_SCHDUL_DE, EXECUT_SCHDUL_HOUR, EXECUT_SCHDUL_MNT, EXECUT_SCHDUL_SECND,
+                LAST_UPDUSR_ID, LAST_UPDT_PNTTM,FRST_REGISTER_ID, FRST_REGIST_PNTTM
+                ) 
+            VALUES (
+                    #batchSchdulId#,  
+                    #batchOpertId#,  
+                    #executCycle#,
+                    #executSchdulDe#,
+                    #executSchdulHour#,
+                    #executSchdulMnt#,
+                    #executSchdulSecnd#,
+                    #lastUpdusrId#,
+                    SYSDATETIME,
+                    #frstRegisterId#,
+                    SYSDATETIME
+                 ) 
+        ]]>
+    </insert>
+
+     <update id="BatchSchdulDao.updateBatchSchdul" parameterClass="BatchSchdul">
+        <![CDATA[
+            UPDATE COMTNBATCHSCHDUL SET 
+                BATCH_OPERT_ID = #batchOpertId#,
+                EXECUT_CYCLE = #executCycle#,
+                EXECUT_SCHDUL_DE = #executSchdulDe#,
+                EXECUT_SCHDUL_HOUR = #executSchdulHour#,
+                EXECUT_SCHDUL_MNT = #executSchdulMnt#,
+                EXECUT_SCHDUL_SECND = #executSchdulSecnd#,
+                LAST_UPDUSR_ID = #lastUpdusrId#,
+                LAST_UPDT_PNTTM = SYSDATETIME
+            WHERE BATCH_SCHDUL_ID = #batchSchdulId# 
+        ]]>
+    </update>
+    
+
+    <delete id="BatchSchdulDao.deleteBatchSchdul" parameterClass="BatchSchdul">
+        <![CDATA[
+            DELETE FROM COMTNBATCHSCHDUL
+            WHERE  BATCH_SCHDUL_ID = #batchSchdulId# 
+        ]]>
+    </delete>
+    
+    <select id="BatchSchdulDao.selectBatchSchdulDfkList" parameterClass="String" resultMap="batchSchdulDfkResult">
+        <![CDATA[
+            SELECT  A.BATCH_SCHDUL_ID, A.EXECUT_SCHDUL_DFK_SE, B.CODE_NM EXECUT_SCHDUL_DFK_SE_NM
+            FROM COMTNBATCHSCHDULDFK A, COMTCCMMNDETAILCODE B
+            WHERE A.BATCH_SCHDUL_ID = #batchSchdulId#
+              AND A.EXECUT_SCHDUL_DFK_SE = B.CODE
+              AND B.CODE_ID = 'COM074'
+        ]]>
+    </select>
+
+    <insert id="BatchSchdulDao.insertBatchSchdulDfk" parameterClass="BatchSchdulDfk">
+        <![CDATA[
+            INSERT INTO COMTNBATCHSCHDULDFK (
+                BATCH_SCHDUL_ID, EXECUT_SCHDUL_DFK_SE
+                ) 
+            VALUES (
+                    #batchSchdulId#,  
+                    #executSchdulDfkSe#
+                 ) 
+        ]]>
+    </insert>
+
+    <delete id="BatchSchdulDao.deleteBatchSchdulDfk" parameterClass="String">
+        <![CDATA[
+            DELETE FROM COMTNBATCHSCHDULDFK
+            WHERE  BATCH_SCHDUL_ID = #batchSchdulId# 
+        ]]>
+    </delete>
+    
+    <!-- 
+ -->
+</sqlMap>            

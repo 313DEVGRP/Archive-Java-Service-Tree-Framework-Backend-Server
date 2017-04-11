@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MainMenu">
+
+	<typeAlias  alias="bkmkmenuManage" type="egovframework.com.sym.mnu.bmm.service.BkmkMenuManage"/>
+    <typeAlias  alias="bkmkmenuManageVO" type="egovframework.com.sym.mnu.bmm.service.BkmkMenuManageVO"/>
+    <typeAlias  alias="menuManage" type="egovframework.com.sym.mnu.mpm.service.MenuManageVO"/>
+    
+    <resultMap id="BkmkInfs" class="egovframework.com.sym.mnu.bmm.service.BkmkMenuManageVO">
+		<result property="menuId" column="MENU_ID" columnIndex="1"/>
+		<result property="userId" column="EMPLYR_ID" columnIndex="2"/>
+		<result property="menuNm" column="MENU_NM" columnIndex="3"/>
+		<result property="progrmStrePath" column="PROGRM_STRE_PATH" columnIndex="4"/>	
+	</resultMap>
+	
+	<resultMap id="MenuInfs" class="egovframework.com.sym.mnu.bmm.service.BkmkMenuManageVO">
+		<result property="menuId" column="MENU_NO" columnIndex="1"/>
+		<result property="menuNm" column="MENU_NM" columnIndex="2"/>
+		<result property="menuDc" column="MENU_DC" columnIndex="3"/>
+	</resultMap>
+	
+	<resultMap id="menuManage" class="egovframework.com.sym.mnu.mpm.service.MenuManageVO">
+		<result property="menuNo" column="MENU_NO" columnIndex="1"/>
+		<result property="menuOrdr" column="MENU_ORDR" columnIndex="2"/>
+		<result property="menuNm" column="MENU_NM" columnIndex="3"/>
+		<result property="upperMenuId" column="UPPER_MENU_NO" columnIndex="4"/>
+		<result property="menuDc" column="MENU_DC" columnIndex="5"/>
+		<result property="relateImagePath" column="RELATE_IMAGE_PATH" columnIndex="6"/>
+		<result property="relateImageNm" column="RELATE_IMAGE_NM" columnIndex="7"/>
+		<result property="progrmFileNm" column="PROGRM_FILE_NM" columnIndex="8"/>
+	</resultMap>
+	
+	<select id="BkmkMenuManageDAO.selectBkmkPreview" parameterClass="bkmkmenuManageVO" resultMap="menuManage">
+		<![CDATA[ 
+			SELECT 
+			 	 MENU_NO, MENU_ORDR, MENU_NM, UPPER_MENU_NO,MENU_DC, RELATE_IMAGE_PATH, RELATE_IMAGE_NM, 
+			 	 PROGRM_FILE_NM
+			 FROM 
+			 	COMTNMENUINFO  , (SELECT  MENU_ID 
+                                                  FROM COMTNBKMKMENUMANAGERESULT  WHERE EMPLYR_ID = #userId# )b
+			 WHERE
+			 	MENU_NO = b.MENU_ID
+		]]> 
+	</select>
+	
+	<select id="BkmkMenuManageDAO.selectBkmkMenuManage" parameterClass="bkmkmenuManageVO" resultClass="bkmkmenuManageVO">
+		<![CDATA[ 
+			 SELECT 
+			 	MENU_ID , EMPLYR_ID, MENU_NM, PROGRM_STRE_PATH 
+			 FROM 
+			 	COMTNBKMKMENUMANAGERESULT
+			 WHERE
+			 	MENU_ID = #menuId# AND EMPLYR_ID = #userId#
+		]]> 
+	</select>		
+
+	<insert id="BkmkMenuManageDAO.insertBkmkMenuManage" parameterClass="bkmkmenuManage">
+		<![CDATA[
+			INSERT INTO COMTNBKMKMENUMANAGERESULT
+			( MENU_ID , EMPLYR_ID, MENU_NM, PROGRM_STRE_PATH
+			)
+			VALUES
+			( #menuId#, #userId#, #menuNm#, #progrmStrePath#
+			)		
+		]]>
+	</insert>
+	
+	<delete id="BkmkMenuManageDAO.deleteBkmkMenuManage" parameterClass="bkmkmenuManage">
+		<![CDATA[
+			DELETE FROM COMTNBKMKMENUMANAGERESULT 
+			WHERE 
+				MENU_ID = #menuId# AND EMPLYR_ID = #userId#			
+		]]>
+	</delete>
+	
+	<select id="BkmkMenuManageDAO.selectBkmkMenuManageList" parameterClass="bkmkmenuManageVO" resultMap="BkmkInfs">
+		 <![CDATA[
+            SELECT  *
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.*
+              FROM  (
+        ]]>
+       <![CDATA[
+			SELECT 
+			 	MENU_ID , EMPLYR_ID, MENU_NM, PROGRM_STRE_PATH 
+			 FROM 
+			 	COMTNBKMKMENUMANAGERESULT
+			 WHERE
+			 	EMPLYR_ID = #userId#				 						
+		]]>	
+		
+			<isEqual prepend="AND" property="searchCnd" compareValue="0" >
+				<![CDATA[	MENU_NM LIKE '%'|| #searchWrd#||'%' 		]]>
+			</isEqual>
+			
+		<![CDATA[			
+			ORDER BY MENU_NM 
+		]]>				
+        <![CDATA[
+                    ) ALL_LIST
+                    )
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>
+	</select>	
+
+	<select id="BkmkMenuManageDAO.selectBkmkMenuManageListCnt" parameterClass="bkmkmenuManageVO" resultClass="java.lang.Integer">
+		<![CDATA[ 
+			select count(MENU_ID) 
+			from   COMTNBKMKMENUMANAGERESULT
+			WHERE
+			 	EMPLYR_ID = #userId#					
+		]]>		
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	MENU_NM LIKE '%'|| #searchWrd#||'%' 		]]>
+			</isEqual>
+		
+	</select>
+	
+	<select id="BkmkMenuManageDAO.selectBkmkMenuList" parameterClass="bkmkmenuManageVO" resultMap="MenuInfs">
+		 <![CDATA[
+             SELECT  *
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.*
+              FROM  (
+        ]]>
+      <![CDATA[
+			SELECT 
+			 	d.MENU_NO, d.MENU_NM, d.MENU_DC
+			FROM 
+				COMTNMENUINFO d, (SELECT a.MENU_NO  FROM COMTNMENUCREATDTLS a, COMTNEMPLYRSCRTYESTBS b , COMVNUSERMASTER c 
+								WHERE a.AUTHOR_CODE = b.AUTHOR_CODE AND b.SCRTY_DTRMN_TRGET_ID = c.ESNTL_ID AND c.USER_ID =  #userId#)temp
+			 WHERE
+ 				d.PROGRM_FILE_NM != 'dir' 
+				AND d.MENU_NO = temp.MENU_NO
+				AND d.menu_no not in (SELECT MENU_ID FROM COMTNBKMKMENUMANAGERESULT WHERE EMPLYR_ID =  #userId#)	
+		]]>		
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	d.MENU_NM LIKE '%'|| #searchWrd#||'%' 		]]>
+			</isEqual>
+			
+		<![CDATA[			
+			ORDER BY MENU_NM 
+		]]>						
+        <![CDATA[
+               ) ALL_LIST
+               )
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>
+	</select>	
+
+	<select id="BkmkMenuManageDAO.selectBkmkMenuListCnt" parameterClass="bkmkmenuManageVO" resultClass="java.lang.Integer">
+		<![CDATA[ 
+			select count(d.MENU_NM) 
+			 FROM 
+			 	COMTNMENUINFO d, (SELECT a.MENU_NO  FROM COMTNMENUCREATDTLS a, COMTNEMPLYRSCRTYESTBS b , COMVNUSERMASTER c 
+						WHERE a.AUTHOR_CODE = b.AUTHOR_CODE AND b.SCRTY_DTRMN_TRGET_ID = c.ESNTL_ID AND c.USER_ID = #userId#)temp
+			 WHERE
+			 	d.PROGRM_FILE_NM != 'dir' 
+				AND d.MENU_NO = temp.MENU_NO
+				AND d.menu_no not in (SELECT MENU_ID FROM COMTNBKMKMENUMANAGERESULT WHERE EMPLYR_ID = #userId#)						
+		]]>		
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	d.MENU_NM LIKE '%'|| #searchWrd#||'%' 		]]>
+			</isEqual>
+		
+	</select>
+	
+	<select id="BkmkMenuManageDAO.selectUrl" parameterClass="bkmkmenuManage" resultClass="java.lang.String">
+		<![CDATA[ 
+			SELECT a.URL
+			FROM   COMTNPROGRMLIST a, (SELECT  MENU_NO , PROGRM_FILE_NM 
+                                                  FROM COMTNMENUINFO  WHERE MENU_NO = #menuId# )b
+			WHERE
+			 	   a.PROGRM_FILE_NM = b.PROGRM_FILE_NM			
+		]]>		
+			
+		
+	</select>
+</sqlMap>                            

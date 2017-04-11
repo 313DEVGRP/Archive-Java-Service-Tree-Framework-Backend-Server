@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Entrprs">
+
+    <typeAlias  alias="egovMap"      type = "egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="userSearchVO" type = "egovframework.com.uss.umt.service.UserDefaultVO"/>
+    <typeAlias  alias="entrprsVO"       type = "egovframework.com.uss.umt.service.EntrprsManageVO"/>
+
+    <resultMap id="stplatMap" class="egovframework.com.uss.umt.service.StplatVO">
+        <result property="useStplatId"         column="USE_STPLAT_ID"          columnIndex="1"/>
+        <result property="useStplatCn"         column="USE_STPLAT_CN"          columnIndex="2"/>
+        <result property="infoProvdAgeCn"      column="INFO_PROVD_AGRE_CN"     columnIndex="3"/>
+    </resultMap>
+       
+    <insert id="entrprsManageDAO.insertEntrprs_S">
+        <![CDATA[
+            INSERT INTO COMTNENTRPRSMBER 
+                (   ESNTL_ID                      ,
+                    ENTRPRS_MBER_ID               ,
+                    ENTRPRS_SE_CODE              ,
+                    BIZRNO                       ,
+                    JURIRNO                      ,
+                    CMPNY_NM                     ,
+                    CXFC                         ,
+                    ZIP                          ,
+                    ADRES                        ,
+                    ENTRPRS_MIDDLE_TELNO         ,
+                    FXNUM                        ,
+                    INDUTY_CODE                  ,
+                    APPLCNT_NM                   ,
+                    SBSCRB_DE                    ,
+                    ENTRPRS_MBER_STTUS           ,
+                    ENTRPRS_MBER_PASSWORD        ,
+                    ENTRPRS_MBER_PASSWORD_HINT   ,
+                    ENTRPRS_MBER_PASSWORD_CNSR   ,
+                    GROUP_ID                     ,
+                    DETAIL_ADRES                 ,
+                    ENTRPRS_END_TELNO            ,
+                    AREA_NO                      ,
+                    APPLCNT_EMAIL_ADRES          ,
+                    APPLCNT_IHIDNUM              )
+            VALUES (
+                    #uniqId#,
+                    #entrprsmberId#,
+                    #entrprsSeCode#,
+                    #bizrno#,
+                    #jurirno#,
+	                #cmpnyNm#,
+	                #cxfc#,
+	                #zip#,
+	                #adres#,
+	                #entrprsMiddleTelno#,
+	                #fxnum#,
+	                #indutyCode#,
+	                #applcntNm#,
+	                sysdate,
+	                #entrprsMberSttus#,
+	                #entrprsMberPassword#,
+	                #entrprsMberPasswordHint#,
+	                #entrprsMberPasswordCnsr#,
+	                #groupId#,
+	                #detailAdres#,
+	                #entrprsEndTelno#,
+	                #areaNo#,
+	                #applcntEmailAdres#,
+	                #applcntIhidnum#        )
+        ]]>
+    </insert>
+    
+    <delete id="entrprsManageDAO.deleteEntrprs_S">
+        <![CDATA[
+            DELETE FROM COMTNENTRPRSMBER 
+            WHERE ESNTL_ID=#delId#
+        ]]>
+    </delete>
+    
+    <select id="entrprsManageDAO.selectEntrprs_S" resultClass="entrprsVO">
+        <![CDATA[
+            SELECT
+                ESNTL_ID                      as "uniqId,
+                'USR02'                      as "userTy,
+                ENTRPRS_MBER_ID               as "entrprsmberId,
+                ENTRPRS_SE_CODE              as "entrprsSeCode,
+                BIZRNO                       as "bizrno,
+                JURIRNO                      as "jurirno,
+                CMPNY_NM                     as "cmpnyNm,
+                CXFC                         as "cxfc,
+                ZIP                          as "zip,
+                ADRES                        as "adres,
+                ENTRPRS_MIDDLE_TELNO         as "entrprsMiddleTelno,
+                FXNUM                        as "fxnum,
+                INDUTY_CODE                  as "indutyCode,
+                APPLCNT_NM                   as "applcntNm,
+                SBSCRB_DE                    as "sbscrbDe,
+                ENTRPRS_MBER_STTUS           as "entrprsMberSttus,
+                ENTRPRS_MBER_PASSWORD        as "entrprsMberPassword,
+                ENTRPRS_MBER_PASSWORD_HINT   as "entrprsMberPasswordHint,
+                ENTRPRS_MBER_PASSWORD_CNSR   as "entrprsMberPasswordCnsr,
+                GROUP_ID                     as "groupId,
+                DETAIL_ADRES                 as "detailAdres,
+                ENTRPRS_END_TELNO            as "entrprsEndTelno,
+                AREA_NO                      as "areaNo,
+                APPLCNT_IHIDNUM              as "applcntIhidnum,
+                APPLCNT_EMAIL_ADRES          as "applcntEmailAdres
+            FROM COMTNENTRPRSMBER
+            WHERE ESNTL_ID=#uniqId#
+        ]]>
+    </select>
+
+    <update id="entrprsManageDAO.updateEntrprs_S">
+        <![CDATA[
+            UPDATE COMTNENTRPRSMBER 
+            SET 
+                ENTRPRS_MBER_ID               = #entrprsmberId#,
+                ENTRPRS_SE_CODE              = #entrprsSeCode#,
+                BIZRNO                       = #bizrno#,
+                JURIRNO                      = #jurirno#,
+                CMPNY_NM                     = #cmpnyNm#,
+                CXFC                         = #cxfc#,
+                ZIP                          = #zip#,
+                ADRES                        = #adres#,
+                ENTRPRS_MIDDLE_TELNO         = #entrprsMiddleTelno#,
+                FXNUM                        = #fxnum#,
+                INDUTY_CODE                  = #indutyCode#,
+                APPLCNT_NM                   = #applcntNm#,
+                ENTRPRS_MBER_STTUS           = #entrprsMberSttus#,
+                ENTRPRS_MBER_PASSWORD_HINT   = #entrprsMberPasswordHint#,
+                ENTRPRS_MBER_PASSWORD_CNSR   = #entrprsMberPasswordCnsr#,
+                GROUP_ID                     = #groupId#,
+                DETAIL_ADRES                 = #detailAdres#,
+                ENTRPRS_END_TELNO            = #entrprsEndTelno#,
+                AREA_NO                      = #areaNo#,
+                APPLCNT_EMAIL_ADRES          = #applcntEmailAdres#
+            WHERE ESNTL_ID=#uniqId#
+        ]]>
+    </update>
+    
+    <select id="entrprsManageDAO.selectStplat_S" resultMap="stplatMap">
+        <![CDATA[
+            SELECT
+                USE_STPLAT_ID           ,
+                USE_STPLAT_CN           ,
+                INFO_PROVD_AGRE_CN      
+            FROM COMTNSTPLATINFO
+            WHERE USE_STPLAT_ID=#stplatId#
+        ]]>
+    </select>
+    
+    <update id="entrprsManageDAO.updatePassword_S" parameterClass="entrprsVO">
+        <![CDATA[
+            UPDATE COMTNENTRPRSMBER 
+            SET 
+                   ENTRPRS_MBER_PASSWORD   =  #entrprsMberPassword#
+            WHERE  ESNTL_ID  = #uniqId#
+        ]]>
+    </update>
+    
+    <select id="entrprsManageDAO.selectPassword_S" resultClass="entrprsVO">
+        <![CDATA[
+            SELECT
+                    ENTRPRS_MBER_PASSWORD          entrprsMberPassword 
+            FROM    COMTNENTRPRSMBER
+            WHERE   ESNTL_ID=#uniqId#
+        ]]>
+    </select>
+    
+    <select id="entrprsManageDAO.selectEntrprsMberList" parameterClass="userSearchVO" resultClass="egovMap">
+        SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+            SELECT 
+                ESNTL_ID               as "uniqId",
+                'USR02'               as "userTy",
+                ENTRPRS_MBER_ID        as "userId",
+                CMPNY_NM              as "cmpnyNm",
+                APPLCNT_NM            as "userNm",
+                APPLCNT_EMAIL_ADRES   as "emailAdres",
+                AREA_NO               as "areaNo",
+                ENTRPRS_MIDDLE_TELNO  as "middleTelno",
+                ENTRPRS_END_TELNO     as "endTelno",
+                ''                    as "moblphonNo",
+                GROUP_ID              as "groupId",
+                ENTRPRS_MBER_STTUS    as "sttus",
+                SBSCRB_DE             as "sbscrbDe"
+            FROM    COMTNENTRPRSMBER
+            WHERE 1=1
+        <isNotEqual prepend="AND" property="sbscrbSttus" compareValue="0">
+            ENTRPRS_MBER_STTUS LIKE  #sbscrbSttus#
+        </isNotEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="0">
+            ENTRPRS_MBER_ID LIKE #searchKeyword#
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            APPLCNT_NM LIKE '%' ||#searchKeyword#|| '%'
+        </isEqual>
+        ORDER BY 13 DESC
+        ) TB ) WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+    </select>
+    
+    
+        <select id="entrprsManageDAO.selectEntrprsMberListTotCnt" parameterClass="userSearchVO" resultClass="int">
+            SELECT COUNT(1) totcnt
+            FROM    COMTNENTRPRSMBER
+	        WHERE 1=1
+        <isNotEqual prepend="AND" property="sbscrbSttus" compareValue="0">
+            ENTRPRS_MBER_STTUS LIKE  #sbscrbSttus#
+        </isNotEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="0">
+            ENTRPRS_MBER_ID LIKE #searchKeyword#
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            APPLCNT_NM LIKE '%' ||#searchKeyword#|| '%'
+        </isEqual>
+    </select>
+</sqlMap>

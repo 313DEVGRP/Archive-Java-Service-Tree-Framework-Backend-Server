@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ScrinStats">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="statsVO" type="egovframework.com.sts.com.StatsVO"/>
+	
+	<!-- 화면통계 조회 -->
+	<select id="ScrinStatsDAO.selectScrinStats" parameterClass="statsVO" resultClass="statsVO">
+		SELECT NVL(SUM(a.RDCNT),0) AS statsCo
+			 <!-- 기간검색(년) -->
+			 <isEqual property="pdKind" compareValue="Y">
+		     , SUBSTR(OCCRRNC_DE, 1, 4) AS statsDate
+		     </isEqual>
+		     <!-- 기간검색(월) -->
+		     <isEqual property="pdKind" compareValue="M">
+		     , SUBSTR(OCCRRNC_DE, 1, 4) || '-' || SUBSTR(OCCRRNC_DE, 5, 2) AS statsDate
+		     </isEqual>
+		     <!-- 기간검색(일) -->
+		     <isEqual property="pdKind" compareValue="D">
+		     , SUBSTR(OCCRRNC_DE, 1, 4) || '-' || SUBSTR(OCCRRNC_DE, 5, 2) || '-' || SUBSTR(OCCRRNC_DE, 7, 2) AS statsDate
+		     </isEqual>
+		  FROM COMTSWEBLOGSUMMARY a,
+		       (SELECT PROGRM_STRE_PATH AS URL
+			  	  FROM COMTNPROGRMLIST 
+			 	 WHERE PROGRM_FILE_NM = #detailStatsKind#) b
+		 WHERE 1 = 1
+		   <!-- 시작일자~종료일자 기간제한 -->
+		   AND a.OCCRRNC_DE BETWEEN #fromDate# AND #toDate# 
+		   AND a.URL LIKE CONCAT(b.URL,'%')
+		 <isEqual property="pdKind" compareValue="Y">
+		 GROUP BY SUBSTR(OCCRRNC_DE, 1, 4)
+		 ORDER BY SUBSTR(OCCRRNC_DE, 1, 4)
+		 </isEqual>
+		 <isEqual property="pdKind" compareValue="M">
+		 GROUP BY SUBSTR(OCCRRNC_DE, 1, 4) || '-' || SUBSTR(OCCRRNC_DE, 5, 2)
+		 ORDER BY SUBSTR(OCCRRNC_DE, 1, 4) || '-' || SUBSTR(OCCRRNC_DE, 5, 2)
+		 </isEqual>
+		 <isEqual property="pdKind" compareValue="D">
+		 GROUP BY SUBSTR(OCCRRNC_DE, 1, 4) || '-' || SUBSTR(OCCRRNC_DE, 5, 2) || '-' || SUBSTR(OCCRRNC_DE, 7, 2)
+		 ORDER BY SUBSTR(OCCRRNC_DE, 1, 4) || '-' || SUBSTR(OCCRRNC_DE, 5, 2) || '-' || SUBSTR(OCCRRNC_DE, 7, 2)
+		 </isEqual>
+	</select>
+	
+</sqlMap>

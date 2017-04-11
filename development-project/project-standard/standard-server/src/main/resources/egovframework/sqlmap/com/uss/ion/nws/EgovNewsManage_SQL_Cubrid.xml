@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="NewsManage">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="NewsManageSearchVO" type="egovframework.com.uss.ion.nws.service.NewsManageDefaultVO"/>	
+
+	<resultMap id="NewsManage" class="egovframework.com.uss.ion.nws.service.NewsManageVO">
+		<result property="newsId" 		column="NEWS_ID" 		columnIndex="1"/>
+		<result property="newsSj" 		column="NEWS_SJ" 		columnIndex="2"/>
+		<result property="newsCn" 		column="NEWS_CN" 		columnIndex="3"/>
+		<result property="newsOrigin" 	column="NEWS_ORIGIN" 	columnIndex="4"/>
+		<result property="ntceDe" 		column="NTCE_DE" 		columnIndex="5"/>
+		<result property="atchFileId" 	column="ATCH_FILE_ID" 	columnIndex="6"/>		
+		<result property="frstRegisterPnttm" 	column="FRST_REGIST_PNTTM" 	columnIndex="7"/>
+		<result property="frstRegisterId" 		column="FRST_REGISTER_ID" 		columnIndex="8"/>
+		<result property="lastUpdusrPnttm" 		column="LAST_UPDT_PNTTM" 		columnIndex="9"/>
+		<result property="lastUpdusrId" 		column="LAST_UPDUSR_ID" 		columnIndex="10"/>				
+	</resultMap>
+	
+	<select id="NewsManageDAO.selectNewsDetail" resultMap="NewsManage">
+		<![CDATA[		
+			SELECT  NEWS_ID, NEWS_SJ, NEWS_CN, NEWS_ORIGIN, NTCE_DE,  ATCH_FILE_ID ,
+					TO_CHAR(FRST_REGIST_PNTTM,'YYYY-MM-DD') FRST_REGIST_PNTTM   , FRST_REGISTER_ID, 
+					TO_CHAR(LAST_UPDT_PNTTM,'YYYY-MM-DD')   LAST_UPDT_PNTTM	  , LAST_UPDUSR_ID			 			  			 			  
+			FROM	COMTNNEWSINFO					
+			WHERE	NEWS_ID=#newsId#					
+		]]>
+	</select>
+	
+	<select id="NewsManageDAO.selectNewsList" parameterClass="NewsManageSearchVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT NEWS_ID, 
+				NEWS_SJ, 
+				NEWS_CN, 
+				NEWS_ORIGIN, 
+				NTCE_DE, 
+				ATCH_FILE_ID,  
+				FRST_REGIST_PNTTM	FRST_REGISTER_PNTTM	  , 
+				FRST_REGISTER_ID, 
+				LAST_UPDT_PNTTM	  	LAST_UPDUSR_PNTTM, 
+				LAST_UPDUSR_ID
+			FROM
+				   (
+				   SELECT  ROWNUM RNUM, NEWS.*
+				   FROM
+				   	   	  (
+				   		   SELECT  NEWS_ID, NEWS_SJ, NEWS_CN, NEWS_ORIGIN, NTCE_DE, ATCH_FILE_ID,  
+								   FRST_REGIST_PNTTM	  , FRST_REGISTER_ID, 
+								   LAST_UPDT_PNTTM	  , LAST_UPDUSR_ID
+						   FROM	   COMTNNEWSINFO
+						   WHERE   1=1
+		]]>						   
+			<isEqual prepend="AND" property="searchCondition" compareValue="newsSj">
+				<![CDATA[NEWS_SJ LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="newsOrigin">
+				<![CDATA[NEWS_ORIGIN  LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+		<![CDATA[			
+						   ORDER BY NEWS_ID DESC								   
+						  ) NEWS
+				   ) Z
+			WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex#	
+		]]>					
+	</select>
+	
+	<select id="NewsManageDAO.selectNewsListTotCnt" parameterClass="NewsManageSearchVO" resultClass="int">
+		<![CDATA[
+			SELECT 	COUNT(*) totcnt
+			FROM 	COMTNNEWSINFO
+			WHERE 	1=1
+		]]>			
+			<isEqual prepend="AND" property="searchCondition" compareValue="newsSj">
+				<![CDATA[NEWS_SJ LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="newsOrigin">
+				<![CDATA[NEWS_ORIGIN  LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+	</select>
+	
+	<insert id="NewsManageDAO.insertNewsInfo">	
+		<![CDATA[	
+			INSERT INTO COMTNNEWSINFO
+				   (NEWS_ID
+				  , NEWS_SJ
+				  , NEWS_CN
+				  , NEWS_ORIGIN
+				  , NTCE_DE
+				  , ATCH_FILE_ID				  
+				  , FRST_REGIST_PNTTM 
+				  , FRST_REGISTER_ID 
+				  , LAST_UPDT_PNTTM 
+				  , LAST_UPDUSR_ID) 
+			VALUES ( #newsId#
+				  , #newsSj#
+				  , #newsCn#
+				  , #newsOrigin#
+				  , #ntceDe#
+				  , #atchFileId#
+				  , SYSDATETIME
+				  , #frstRegisterId#
+				  , SYSDATETIME
+				  , #lastUpdusrId# )
+		]]>
+	</insert>
+
+	<update id="NewsManageDAO.updateNewsInfo">
+		<![CDATA[
+			UPDATE	COMTNNEWSINFO	SET
+					NEWS_ID=#newsId# 
+				  , NEWS_SJ=#newsSj#
+				  , NEWS_CN=#newsCn#
+				  , NEWS_ORIGIN=#newsOrigin#
+				  , NTCE_DE=#ntceDe#
+				  , ATCH_FILE_ID=#atchFileId#				  			
+				  , LAST_UPDT_PNTTM=SYSDATETIME
+				  , LAST_UPDUSR_ID=#lastUpdusrId#
+ 			WHERE  NEWS_ID=#newsId#
+		]]>
+	</update>
+	
+	<delete id="NewsManageDAO.deleteNewsInfo">
+		<![CDATA[
+			DELETE FROM COMTNNEWSINFO 
+			WHERE  NEWS_ID=#newsId#
+		]]>
+	</delete>
+	
+</sqlMap>

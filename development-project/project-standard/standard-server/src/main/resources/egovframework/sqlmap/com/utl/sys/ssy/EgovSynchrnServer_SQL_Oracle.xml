@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SynchrnServer">
+
+        <typeAlias  alias="SynchrnServer" type="egovframework.com.utl.sys.ssy.service.SynchrnServer"/>
+        <typeAlias  alias="SynchrnServerVO" type="egovframework.com.utl.sys.ssy.service.SynchrnServerVO"/>
+
+    <resultMap id="synchrnServer" class="egovframework.com.utl.sys.ssy.service.SynchrnServerVO">
+        <result property="serverId" column="SERVER_ID" columnIndex="1"/>
+        <result property="serverNm" column="SERVER_NM" columnIndex="2"/>
+        <result property="serverIp" column="SERVER_IP" columnIndex="3"/>
+        <result property="serverPort" column="SERVER_PORT" columnIndex="4"/>
+        <result property="ftpId" column="FTP_ID" columnIndex="5"/>
+        <result property="ftpPassword" column="FTP_PASSWORD" columnIndex="6"/>
+        <result property="synchrnLc" column="SYNCHRN_LC" columnIndex="7"/>
+        <result property="reflctAt" column="REFLCT_AT" columnIndex="8"/>        
+        <result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="9"/>
+        <result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="10"/>        
+        <result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" columnIndex="11"/>
+        <result property="lastUpdusrId" column="LAST_UPDUSR_ID" columnIndex="12"/>
+    </resultMap>
+
+    <select id="synchrnServerDAO.selectSynchrnServerList" parameterClass="SynchrnServerVO" resultMap="synchrnServer">
+        <![CDATA[    
+            SELECT  * 
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.* 
+              FROM  (               
+             SELECT SERVER_ID,
+                    SERVER_NM,
+                    SERVER_IP,
+                    SERVER_PORT,
+                    FTP_ID,
+                    FTP_PASSWORD,
+                    SYNCHRN_LC,
+                    REFLCT_AT,
+                    FRST_REGIST_PNTTM,
+                    FRST_REGISTER_ID,
+                    LAST_UPDT_PNTTM,
+                    LAST_UPDUSR_ID
+               FROM COMTNSYNCHRNSERVERINFO
+              WHERE 1 = 1
+        ]]>                
+            <isNotNull prepend="AND" property="strSynchrnServerNm">
+                    SERVER_NM LIKE '%'||#strSynchrnServerNm#||'%'
+            </isNotNull>           
+        <![CDATA[                
+              ORDER BY SERVER_ID DESC
+                    ) ALL_LIST
+                    )
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>           
+    </select>
+
+    <select id="synchrnServerDAO.selectSynchrnServerListTotCnt" parameterClass="SynchrnServerVO" resultClass="int">
+
+             SELECT COUNT(*) totcnt
+               FROM COMTNSYNCHRNSERVERINFO
+              WHERE 1 = 1
+            <isNotNull prepend="AND" property="strSynchrnServerNm">
+                    SERVER_NM LIKE '%'||#strSynchrnServerNm#||'%'
+            </isNotNull>
+    </select>
+
+    <select id="synchrnServerDAO.selectSynchrnServer" resultMap="synchrnServer">
+        <![CDATA[
+             SELECT SERVER_ID,
+                    SERVER_NM,
+                    SERVER_IP,
+                    SERVER_PORT,
+                    FTP_ID,
+                    FTP_PASSWORD,
+                    SYNCHRN_LC,
+                    REFLCT_AT,
+                    FRST_REGIST_PNTTM,
+                    FRST_REGISTER_ID,
+                    LAST_UPDT_PNTTM,
+                    LAST_UPDUSR_ID
+               FROM COMTNSYNCHRNSERVERINFO
+             WHERE 1 = 1
+               AND SERVER_ID = #serverId#    
+        ]]>
+    </select>
+
+    <insert id="synchrnServerDAO.insertSynchrnServer" parameterClass="SynchrnServer">
+        <![CDATA[
+             INSERT INTO COMTNSYNCHRNSERVERINFO
+                    (SERVER_ID,
+                     SERVER_NM,
+                     SERVER_IP,
+                     SERVER_PORT,
+                     FTP_ID,
+                     FTP_PASSWORD,
+                     SYNCHRN_LC,
+                     REFLCT_AT,
+                     FRST_REGIST_PNTTM,
+                     FRST_REGISTER_ID,
+                     LAST_UPDT_PNTTM,
+                     LAST_UPDUSR_ID)
+             VALUES (#serverId#,
+                     #serverNm#,
+                     #serverIp#,
+                     #serverPort#,
+                     #ftpId#,
+                     #ftpPassword#,
+                     #synchrnLc#,
+                     #reflctAt#,
+                     SYSDATE,
+                     #frstRegisterId#,
+                     SYSDATE,
+                     #lastUpdusrId#)
+        ]]>
+    </insert>
+
+    <update id="synchrnServerDAO.updateSynchrnServer" parameterClass="SynchrnServer">
+            UPDATE COMTNSYNCHRNSERVERINFO
+               SET SERVER_NM = #serverNm#,
+                   SERVER_IP = #serverIp#,
+                   SERVER_PORT = #serverPort#,
+                   FTP_ID = #ftpId#,
+                   FTP_PASSWORD = #ftpPassword#,
+                   SYNCHRN_LC = #synchrnLc#,
+                   LAST_UPDT_PNTTM = SYSDATE,
+                   LAST_UPDUSR_ID = #lastUpdusrId#
+             WHERE SERVER_ID = #serverId#
+    </update>    
+
+    <delete id="synchrnServerDAO.deleteSynchrnServer" parameterClass="SynchrnServer">
+        <![CDATA[
+            DELETE FROM COMTNSYNCHRNSERVERINFO
+             WHERE SERVER_ID = #serverId#
+        ]]>
+    </delete>  
+
+    <update id="synchrnServerDAO.processSynchrn" parameterClass="SynchrnServer">
+            UPDATE COMTNSYNCHRNSERVERINFO
+               SET REFLCT_AT = #reflctAt#
+             WHERE SERVER_ID = #serverId#
+    </update>
+
+    <select id="synchrnServerDAO.processSynchrnServerList" parameterClass="SynchrnServerVO" resultMap="synchrnServer">
+             SELECT SERVER_ID,
+                    SERVER_NM,
+                    SERVER_IP,
+                    SERVER_PORT,
+                    FTP_ID,
+                    FTP_PASSWORD,
+                    SYNCHRN_LC,
+                    REFLCT_AT,
+                    FRST_REGIST_PNTTM,
+                    FRST_REGISTER_ID,
+                    LAST_UPDT_PNTTM,
+                    LAST_UPDUSR_ID
+               FROM COMTNSYNCHRNSERVERINFO
+              WHERE 1 = 1
+              <isNotNull prepend="AND" property="strReflctAt">
+                AND REFLCT_AT = #reflctAt#
+              </isNotNull>
+    </select>    
+</sqlMap>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sms">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="smsVO" type="egovframework.com.cop.sms.service.SmsVO"/>
+	<typeAlias  alias="sms" type="egovframework.com.cop.sms.service.Sms"/>
+	<typeAlias  alias="smsRecptn" type="egovframework.com.cop.sms.service.SmsRecptn"/>
+
+	<resultMap id="smsList" class="egovframework.com.cop.sms.service.SmsVO">
+		<result property="smsId" column="SMS_ID" columnIndex="1"/>
+		<result property="trnsmitTelno" column="TRNSMIS_TELNO" columnIndex="2"/>
+		<result property="recptnCnt" column="RECPTN_CNT" columnIndex="3"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="4"/>
+	</resultMap>
+
+	<resultMap id="smsDetail" class="egovframework.com.cop.sms.service.SmsVO">
+		<result property="smsId" column="SMS_ID" columnIndex="1"/>
+		<result property="trnsmitTelno" column="TRNSMIS_TELNO" columnIndex="2"/>
+		<result property="trnsmitCn" column="TRNSMIS_CN" columnIndex="3"/>
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="4"/>
+		<result property="frstRegisterNm" column="FRST_REGISTER_NM" columnIndex="5"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="6"/>
+	</resultMap>
+	
+	<resultMap id="smsRecptnList" class="egovframework.com.cop.sms.service.SmsRecptn">
+		<result property="smsId" column="SMS_ID" columnIndex="1"/>
+		<result property="recptnTelno" column="RECPTN_TELNO" columnIndex="2"/>
+		<result property="resultCode" column="RESULT_CODE" columnIndex="3"/>
+		<result property="resultMssage" column="RESULT_MSSAGE" columnIndex="4"/>
+	</resultMap>
+
+	<select id="SmsDAO.selectSmsInfs" parameterClass="smsVO" resultMap="smsList" >
+		<![CDATA[
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				a.SMS_ID, a.TRNSMIS_TELNO, a.TRNSMIS_CN,
+				(SELECT COUNT(*) FROM COMTNSMSRECPTN s WHERE s.SMS_ID = a.SMS_ID) as RECPTN_CNT,
+				TO_CHAR(a.FRST_REGIST_PNTTM, 'YYYY-MM-DD HH24:MI:SS') as FRST_REGIST_PNTTM
+			FROM
+				COMTNSMS a
+			WHERE 1=1	
+		]]>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<isNotEqual property="searchWrd" compareValue="">
+				<![CDATA[
+				a.SMS_ID in (SELECT SMS_ID FROM COMTNSMSRECPTN WHERE RECPTN_TELNO LIKE '%' || #searchWrd# || '%')
+		 		]]>
+		 		</isNotEqual>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCnd" compareValue="1">
+				<![CDATA[	a.TRNSMIS_CN LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>	
+		<![CDATA[			
+			ORDER BY a.FRST_REGIST_PNTTM DESC 
+			) TB ) WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+		]]>				
+	</select>	
+	
+	<select id="SmsDAO.selectSmsInfsCnt" parameterClass="smsVO" resultClass="java.lang.Integer" >
+		<![CDATA[
+			SELECT 
+				COUNT(a.SMS_ID)
+			FROM
+				COMTNSMS a
+			WHERE 1=1 
+		]]>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<isNotEqual property="searchWrd" compareValue="">
+				<![CDATA[
+				a.SMS_ID in (SELECT SMS_ID FROM COMTNSMSRECPTN WHERE RECPTN_TELNO LIKE '%' || #searchWrd# || '%')
+		 		]]>
+		 		</isNotEqual>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCnd" compareValue="1">
+				<![CDATA[	a.TRNSMIS_CN LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>		
+	</select>
+	
+	<insert id="SmsDAO.insertSmsInf" parameterClass="sms" >
+		<![CDATA[
+			INSERT INTO COMTNSMS
+			(SMS_ID, TRNSMIS_TELNO, TRNSMIS_CN,
+			 FRST_REGISTER_ID, FRST_REGIST_PNTTM )
+			VALUES
+			( #smsId#, #trnsmitTelno#, #trnsmitCn#,
+			  #frstRegisterId#, SYSDATE
+			 )			
+		]]>
+	</insert>
+	
+	<insert id="SmsDAO.insertSmsRecptnInf" parameterClass="smsRecptn" >
+		<![CDATA[
+			INSERT INTO COMTNSMSRECPTN
+			(SMS_ID, RECPTN_TELNO,
+			 RESULT_CODE, RESULT_MSSAGE )
+			VALUES
+			( #smsId#, #recptnTelno#, #resultCode#, #resultMssage# )		
+		]]>
+	</insert>
+	
+	<select id="SmsDAO.selectSmsInf" parameterClass="smsVO" resultMap="smsDetail" >
+		<![CDATA[
+			SELECT 
+				a.SMS_ID, a.TRNSMIS_TELNO, a.TRNSMIS_CN,
+				a.FRST_REGISTER_ID, b.USER_NM as FRST_REGISTER_NM,
+				TO_CHAR(a.FRST_REGIST_PNTTM, 'YYYY-MM-DD') as FRST_REGIST_PNTTM
+			FROM
+				COMTNSMS a				
+			LEFT OUTER JOIN COMVNUSERMASTER b
+				ON a.FRST_REGISTER_ID = b.ESNTL_ID		
+			WHERE a.SMS_ID = #smsId#
+		]]>				
+	</select>
+	
+	<select id="SmsDAO.selectSmsRecptnInfs" parameterClass="smsRecptn" resultMap="smsRecptnList" >
+		<![CDATA[
+			SELECT 
+				a.SMS_ID, a.RECPTN_TELNO, a.RESULT_CODE, a.RESULT_MSSAGE
+			FROM
+				COMTNSMSRECPTN a
+			WHERE a.SMS_ID = #smsId#
+		]]>				
+	</select> 
+	
+		<insert id="SmsDAO.updateSmsRecptnInf" parameterClass="smsRecptn" >
+		<![CDATA[
+			UPDATE COMTNSMSRECPTN SET
+				RESULT_CODE = #resultCode#,
+				RESULT_MSSAGE = #resultMssage#
+			WHERE 
+				SMS_ID = #smsId# AND
+				RECPTN_TELNO = #recptnTelno#
+		]]>
+	</insert>
+
+</sqlMap>

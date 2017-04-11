@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.11   	정진오     	 	테이블 표준화에 따른 수정사항 반영
+							KNO_URL 를		KNWLDG_URL 로 변경
+							KNO_TYPE_CD 를	KNWLDG_TY_CODE 로 변경
+							KNO_TYPE_NM 를	KNWLDG_TY_NM 로 변경							
+							CL_YMD 를		CL_DE 로 변경
+							SPE_ID 를 		EXPERT_ID 로 변경
+-->
+<sqlMap namespace="MapMaterial">
+
+	<typeAlias  alias="egovMap"     type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="MapMaterialVO" 	type="egovframework.com.dam.map.mat.service.MapMaterialVO"/>
+	<typeAlias  alias="MapMaterial"   	type="egovframework.com.dam.map.mat.service.MapMaterial"/>
+	
+	<resultMap id="MapMaterialList" class="egovframework.com.dam.map.mat.service.MapMaterialVO">
+		<result property="orgnztNm" column="ORGNZT_NM" columnIndex="1"/>	
+		<result property="knoTypeCd" column="KNWLDG_TY_CODE" columnIndex="2"/>
+		<result property="speId" column="EXPERT_ID" columnIndex="3"/>
+		<result property="knoTypeNm" column="KNWLDG_TY_NM" columnIndex="4"/>
+		<result property="clYmd" column="CL_DE" columnIndex="5"/>
+		<result property="knoUrl" column="KNWLDG_URL" columnIndex="6"/>
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="7"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="8"/>
+		<result property="lastUpdusrId" column="LAST_UPDUSR_ID" columnIndex="9"/>
+		<result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" columnIndex="10"/>
+	</resultMap>
+	
+	<resultMap id="MapMaterial" class="egovframework.com.dam.map.mat.service.MapMaterial">
+		<result property="knoTypeCd" column="KNWLDG_TY_CODE" columnIndex="1"/>	
+		<result property="orgnztId" column="ORGNZT_ID" columnIndex="2"/>
+		<result property="orgnztNm" column="ORGNZT_NM" columnIndex="3"/>
+		<result property="speId" column="EXPERT_ID" columnIndex="4"/>
+		<result property="knoTypeNm" column="KNWLDG_TY_NM" columnIndex="5"/>
+		<result property="clYmd" column="CL_DE" columnIndex="6"/>
+		<result property="knoUrl" column="KNWLDG_URL" columnIndex="7"/>
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="8"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="9"/>
+		<result property="lastUpdusrId" column="LAST_UPDUSR_ID" columnIndex="10"/>
+		<result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" columnIndex="11"/>
+	</resultMap>
+
+	<select id="MapMaterialDAO.selectMapMaterialList" parameterClass="MapMaterialVO" resultMap="MapMaterialList">
+	<![CDATA[	
+	SELECT *
+	FROM (
+	SELECT T0.*, ROWNUM RNUM
+		FROM (
+	]]>
+		<![CDATA[
+			SELECT  B.ORGNZT_NM
+				 ,	A.KNWLDG_TY_CODE
+			     ,  A.EXPERT_ID
+			     ,  A.KNWLDG_TY_NM			     
+                 ,  A.CL_DE
+			     ,  A.KNWLDG_URL
+			     ,	A.FRST_REGISTER_ID
+			     ,	A.FRST_REGIST_PNTTM
+			     ,  A.LAST_UPDUSR_ID
+			     ,	A.LAST_UPDT_PNTTM
+			FROM COMTNDAMMAPKNO A, COMTNDAMMAPTEAM B
+			WHERE A.ORGNZT_ID = B.ORGNZT_ID
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[B.ORGNZT_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[A.KNWLDG_TY_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>		
+	<![CDATA[	
+		) T0
+	) 
+	WHERE RNUM BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+	]]>
+	</select>
+
+	<select id="MapMaterialDAO.selectMapMaterialTotCnt" parameterClass="MapMaterialVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT  COUNT(*) as totcnt 
+			FROM COMTNDAMMAPKNO A, COMTNDAMMAPTEAM B
+			WHERE A.ORGNZT_ID = B.ORGNZT_ID
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[B.ORGNZT_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[A.KNWLDG_TY_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+	</select>
+
+	<select id="MapMaterialDAO.selectMapMaterial" parameterClass="MapMaterial" resultMap="MapMaterial">
+		<![CDATA[
+            SELECT  A.KNWLDG_TY_CODE
+				 ,	A.ORGNZT_ID
+				 ,  B.ORGNZT_NM
+			     ,  A.EXPERT_ID
+			     ,  A.KNWLDG_TY_NM
+                 ,  A.CL_DE
+                 ,  A.KNWLDG_URL
+			     ,	A.FRST_REGISTER_ID
+			     ,	A.FRST_REGIST_PNTTM
+			     ,  A.LAST_UPDUSR_ID
+			     ,	A.LAST_UPDT_PNTTM
+			FROM COMTNDAMMAPKNO A, COMTNDAMMAPTEAM B
+			WHERE A.ORGNZT_ID = B.ORGNZT_ID
+            AND   A.KNWLDG_TY_CODE = #knoTypeCd#
+		]]>
+	</select>
+
+	<insert id="MapMaterialDAO.insertMapMaterial">
+		<![CDATA[
+		    INSERT 
+		      INTO  COMTNDAMMAPKNO
+		         (  KNWLDG_TY_CODE
+		         ,  ORGNZT_ID
+		         ,	EXPERT_ID
+		         ,	KNWLDG_TY_NM
+		         ,  CL_DE
+		         ,  KNWLDG_URL
+			     ,	FRST_REGISTER_ID
+			     ,	FRST_REGIST_PNTTM
+		         ,  LAST_UPDUSR_ID			     	         
+		         ,  LAST_UPDT_PNTTM
+		         ) 
+		    VALUES  
+		         (  #knoTypeCd#
+		         ,  #orgnztId#
+		         ,  #speId#
+		         ,  #knoTypeNm#		         		         
+		         ,  #clYmd#
+		         ,  #knoUrl#
+		         ,  #frstRegisterId#
+		         ,  sysdate	         		         
+		         ,  #lastUpdusrId#
+		         ,  sysdate
+		         ) 
+		]]>
+	</insert>
+
+	<update id="MapMaterialDAO.updateMapMaterial">
+		<![CDATA[
+            UPDATE  COMTNDAMMAPKNO 
+               SET  ORGNZT_ID         = #orgnztId#
+                 ,  EXPERT_ID        	  = #speId#
+                 ,  KNWLDG_TY_NM		  = #knoTypeNm#
+                 ,  CL_DE  		  = #clYmd#
+                 ,  KNWLDG_URL           = #knoUrl#               
+                 ,  LAST_UPDUSR_ID    = #lastUpdusrId#                 
+                 ,  LAST_UPDT_PNTTM = sysdate
+             WHERE  KNWLDG_TY_CODE       = #knoTypeCd# 
+		]]>
+	</update>
+
+	<delete id="MapMaterialDAO.deleteMapMaterial">
+		<![CDATA[
+            DELETE  FROM COMTNDAMMAPKNO 
+            WHERE   KNWLDG_TY_CODE = #knoTypeCd#
+		]]>
+	</delete>
+
+
+</sqlMap>            

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.12   	정진오     	 	테이블 표준화에 따른 수정사항 반영
+  							KNO_ID 를 		KNWLDG_ID 로 변경
+							KNO_NM 를 		KNWLDG_NM 로 변경
+							KNO_CN 를		KNWLDG_CN 로 변경
+							KNO_TYPE_CD 를	KNWLDG_TY_CODE 로 변경
+							KNO_TYPE_NM 를	KNWLDG_TY_NM 로 변경
+							KNO_APS 를		KNWLDG_EVL 로 변경
+							APP_YMD 를		EVL_DE 로 변경
+							SPE_ID 를		EXPERT_ID 로 변경
+							JUNK_YMD 를		DSUSE_DE 로 변경
+-->
+<sqlMap namespace="KnoManagement">
+
+	<typeAlias  alias="egovMap"     type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="KnoManagementVO" 	type="egovframework.com.dam.mgm.service.KnoManagementVO"/>
+	<typeAlias  alias="KnoManagement"   	type="egovframework.com.dam.mgm.service.KnoManagement"/>
+
+	<select id="KnoManagementDAO.selectKnoManagementList" parameterClass="KnoManagementVO" resultClass="egovMap">
+	<![CDATA[	
+	SELECT *
+	FROM (
+	SELECT T0.*, ROWNUM RNUM
+		FROM (
+	]]>
+		<![CDATA[
+			SELECT	A.KNWLDG_ID				knoId		     		
+				 ,  A.KNWLDG_NM				knoNm
+				 ,  C.ORGNZT_NM				orgnztNm
+				 ,  B.KNWLDG_TY_NM			knoTypeNm			 
+			     ,  D.USER_NM				userNm
+			     ,  A.EVL_DE				appYmd
+			     ,	A.FRST_REGISTER_ID		frstRegisterId
+			     ,	A.FRST_REGIST_PNTTM		frstRegistPnttm
+			     ,  A.LAST_UPDUSR_ID		lastUpdusrId
+			     ,	A.LAST_UPDT_PNTTM		lastUpdtPnttm
+			FROM  COMTNDAMKNOIFM A, COMTNDAMMAPKNO B, COMTNDAMMAPTEAM C, COMVNUSERMASTER D
+			WHERE C.ORGNZT_ID = B.ORGNZT_ID
+			AND   A.KNWLDG_TY_CODE = B.KNWLDG_TY_CODE
+			AND   A.FRST_REGISTER_ID = D.ESNTL_ID
+			AND   A.OTHBC_AT = 'Y'
+			AND   A.KNWLDG_EVL = '1'
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[A.KNWLDG_NM  LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[D.USER_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+	<![CDATA[	
+		) T0
+	) Z
+	WHERE RNUM BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+	]]>
+	</select>
+
+	<select id="KnoManagementDAO.selectKnoManagementTotCnt" parameterClass="KnoManagementVO" resultClass="int">
+		<![CDATA[
+			SELECT  COUNT(*) as totcnt 
+			FROM  COMTNDAMKNOIFM A, COMTNDAMMAPKNO B, COMTNDAMMAPTEAM C, COMVNUSERMASTER D
+			WHERE C.ORGNZT_ID = B.ORGNZT_ID
+			AND   A.KNWLDG_TY_CODE = B.KNWLDG_TY_CODE
+			AND   A.FRST_REGISTER_ID = D.ESNTL_ID
+			AND   A.OTHBC_AT = 'Y'
+			AND   A.KNWLDG_EVL = '1'
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[A.KNWLDG_NM  LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[D.USER_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+	</select>
+
+	<select id="KnoManagementDAO.selectKnoManagement" parameterClass="KnoManagement" resultClass="KnoManagement">
+		<![CDATA[
+			SELECT  C.ORGNZT_NM										orgnztNm
+			     ,  C.ORGNZT_ID										orgnztId
+			     ,  B.KNWLDG_TY_NM									knoTypeNm			     			
+			     ,  B.KNWLDG_TY_CODE									knoTypeCd
+				 ,  A.KNWLDG_ID										knoId			     
+				 ,  A.KNWLDG_NM										knoNm			     
+			     ,  A.KNWLDG_CN										knoCn
+			     ,  E.USER_NM    									userNm
+                 ,  A.OTHBC_AT										othbcAt              
+                 ,  A.ATCH_FILE_ID									atchFileId
+                 ,  A.EVL_DE										appYmd
+                 ,	(select a.user_nm from COMVNUSERMASTER a, COMTNDAMKNOIFM b where  a.ESNTL_ID = b.EXPERT_ID and b.KNWLDG_ID = #knoId#) speNm
+				 ,  A.DSUSE_DE										junkYmd
+			     ,  A.KNWLDG_EVL										knoAps
+				 ,  D.AUTHOR_CODE         							authorCode
+			     ,	A.FRST_REGISTER_ID								frstRegisterId
+			     ,	A.FRST_REGIST_PNTTM						     FRST_REGISTER_PNTTM
+			     ,  A.LAST_UPDUSR_ID								lastUpdusrId
+			     ,	A.LAST_UPDT_PNTTM								lastUpdusrPnttm			     
+			FROM  COMTNDAMKNOIFM A, COMTNDAMMAPKNO B, COMTNDAMMAPTEAM C, COMTNEMPLYRSCRTYESTBS D, COMVNUSERMASTER E
+			WHERE A.ORGNZT_ID = B.ORGNZT_ID
+			AND   B.ORGNZT_ID = C.ORGNZT_ID
+			AND   A.KNWLDG_TY_CODE = B.KNWLDG_TY_CODE
+			AND   A.FRST_REGISTER_ID = E.ESNTL_ID
+			AND   A.OTHBC_AT = 'Y'				
+     		AND   A.KNWLDG_ID = #knoId#		
+			AND   D.SCRTY_DTRMN_TRGET_ID = #emplyrId#
+		]]>
+	</select>
+
+	<update id="KnoManagementDAO.updateKnoManagement">
+		<![CDATA[
+            UPDATE  COMTNDAMKNOIFM 
+               SET  DSUSE_DE          = #junkYmd#
+                 ,  KNWLDG_EVL           = #knoAps#            
+                 ,  LAST_UPDUSR_ID    = #lastUpdusrId#               
+                 ,  LAST_UPDT_PNTTM = SYSDATETIME
+             WHERE  OTHBC_AT 		  = 'Y'	
+             AND    KNWLDG_ID       	  = #knoId# 
+		]]>
+	</update>
+
+</sqlMap>            

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<!--
+    수정일          수성자                          수정내용
+   ==========      ========      =================================================
+   2011.9.19        이기하         filter 정리
+   2013.5.31        이기하         미사용 filter 정리(.mdo, .action)
+
+  ************************************************************************************************
+    0. 로그인 정책 컴포넌트용 필터 : 주석
+    1. 스프링 시큐리티 설정 : 설정
+    2. EgovSSO 로그인/로그아웃 설정을 위한 필터 설정 : 주석
+    3. Spring Security 로그인/로그아웃 설정을 위한 필터 설정 : 설정
+  ************************************************************************************************
+-->
+    <display-name>Default</display-name>
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
+    <!--
+    HTMLTagFilter의 경우는 파라미터에 대하여 XSS 오류 방지를 위한 변환을 처리합니다.
+   우선 HTMLTagFIlter의 경우는 JSP의 <c:out /> 등을 사용하지 못하는 특수한 상황에서 사용하시면 됩니다.
+   (<c:out />의 경우 뷰단에서 데이터 출력시 XSS 방지 처리가 됨)
+   부득히 HTMLTagFilter를 사용하셔야 하는 경우는 web.xml 상에
+   다음과 같이 CertProcessFilter(GPKI 인증 처리 오류 해결) 등록해 주시면 됩니다.
+    -->
+<!-- 
+    <filter>
+        <filter-name>HTMLTagFilter</filter-name>
+        <filter-class>egovframework.com.cmm.filter.HTMLTagFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HTMLTagFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+     -->
+    <!--  for CKEditor Image Upload -->
+    <filter>
+        <filter-name>CKFilter</filter-name>
+        <filter-class>egovframework.com.utl.wed.filter.CkFilter</filter-class>
+        <init-param>
+            <param-name>properties</param-name>
+            <param-value>egovframework/egovProps/ck.properties</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CKFilter</filter-name>
+        <url-pattern>/ckupload</url-pattern>
+    </filter-mapping>
+    
+    <!-- OAuth 및 facebook 연동-->
+    <filter>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- UrlRewriteFilter -->
+    <!-- <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>egovframework.com.cmm.util.EgovUrlRewriteFilter</filter-class>
+        <init-param>
+            <param-name>targetURI</param-name>
+            <param-value>/sample1/, /sample/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>httpPort</param-name>
+            <param-value>8080</param-value>
+        </init-param>
+        <init-param>
+            <param-name>httpsPort</param-name>
+            <param-value>443</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+
+    <!-- Restoration from HTMLTagFilter's action (certification login) -->
+    <!--
+    <filter>
+        <filter-name>CertProcessFilter</filter-name>
+        <filter-class>egovframework.com.utl.sec.filter.CertProcessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CertProcessFilter</filter-name>
+        <url-pattern>/utl/sec/certLogin.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CertProcessFilter</filter-name>
+        <url-pattern>/utl/sec/certInfoPopup.do</url-pattern>
+    </filter-mapping>
+    -->
+
+    <!-- 0. 로그인 정책 컴포넌트용 필터 -->
+    <!--
+    <filter>
+        <filter-name>LoginPolicyFilter</filter-name>
+        <filter-class>egovframework.com.uat.uap.filter.EgovLoginPolicyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginPolicyFilter</filter-name>
+        <url-pattern>/uat/uia/actionLogin.do</url-pattern>
+    </filter-mapping>
+    -->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:egovframework/spring/com/**/context-*.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/egovframework/springmvc/egov-com-*.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <!-- <url-pattern>*.do</url-pattern> -->
+        <!-- OAuth 및 facebook 연동 사용시 / 로 변경 -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- 1. 스프링 시큐리티 설정-->
+    <!-- 
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+    -->
+    <!-- 2. EgovSSO 로그아웃 설정을 위한 필터 설정 -->
+    <!--
+    <filter>
+        <filter-name>EgovSSOLogoutFilter</filter-name>
+        <filter-class>egovframework.com.uat.sso.filter.EgovSSOLogoutFilter</filter-class>
+        <init-param>
+            <description>SSO Global Logout 처리후 반환되는 페이지 설정</description>
+            <param-name>returnURL</param-name>
+            <param-value>/j_spring_security_logout</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EgovSSOLogoutFilter</filter-name>
+        <url-pattern>/uat/uia/actionLogout.do</url-pattern>
+    </filter-mapping>
+    -->
+
+    <!-- 2. EgovSSO 로그인 설정을 위한 필터 설정 -->
+    <!--
+    <filter>
+        <filter-name>EgovSSOLoginFilter</filter-name>
+        <filter-class>egovframework.com.uat.sso.filter.EgovSSOLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EgovSSOLoginFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    -->
+
+    <!-- 3. Spring Security 로그아웃 설정을 위한 필터 설정 -->
+    <!-- 
+    <filter>
+        <filter-name>EgovSpringSecurityLogoutFilter</filter-name>
+        <filter-class>egovframework.com.sec.security.filter.EgovSpringSecurityLogoutFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EgovSpringSecurityLogoutFilter</filter-name>
+        <url-pattern>/uat/uia/actionLogout.do</url-pattern>
+    </filter-mapping>
+    -->
+    <!-- 3. Spring Security 로그인 설정을 위한 필터 설정 -->
+    <!-- 
+    <filter>
+        <filter-name>EgovSpringSecurityLoginFilter</filter-name>
+        <filter-class>egovframework.com.sec.security.filter.EgovSpringSecurityLoginFilter</filter-class>
+        <init-param>
+            <description>로그인 실패시 반활 될 URL설정</description>
+            <param-name>loginURL</param-name>
+            <param-value>/uat/uia/egovLoginUsr.do</param-value>
+        </init-param>
+        <init-param>
+            <description>로그인 처리 URL설정</description>
+            <param-name>loginProcessURL</param-name>
+            <param-value>/uat/uia/actionLogin</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EgovSpringSecurityLoginFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+     -->
+    <!-- 서비스 부분에서 HttpServletRequest 정보 얻기 -->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!-- AjaxTags configuration START-->
+    <servlet>
+        <servlet-name>ajaxServlet</servlet-name>
+        <servlet-class>net.sourceforge.ajaxtags.servlets.SourceLoader</servlet-class>
+        <init-param>
+            <param-name>prefix</param-name>
+            <param-value>/ajaxtags</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ajaxServlet</servlet-name>
+        <url-pattern>/ajaxtags/js/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ajaxServlet</servlet-name>
+        <url-pattern>/ajaxtags/img/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ajaxServlet</servlet-name>
+        <url-pattern>/ajaxtags/css/*</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>egovDevIndex.jsp</welcome-file>
+    </welcome-file-list>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+
+    <session-config>
+        <session-timeout>600</session-timeout>
+    </session-config>
+
+    <error-page>
+      <error-code>404</error-code>
+      <location>/code404.jsp</location>
+    </error-page>
+    <error-page>
+      <error-code>500</error-code>
+      <location>/code500.jsp</location>
+    </error-page>
+
+</web-app>

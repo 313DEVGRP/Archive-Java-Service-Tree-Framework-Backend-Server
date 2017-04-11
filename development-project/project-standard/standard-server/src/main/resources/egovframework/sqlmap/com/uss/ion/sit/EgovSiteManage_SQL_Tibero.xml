@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SiteManage">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="SiteManageSearchVO" type="egovframework.com.uss.ion.sit.service.SiteManageDefaultVO"/>	
+
+	<resultMap id="SiteManage" class="egovframework.com.uss.ion.sit.service.SiteManageVO">
+		<result property="siteId" 	column="SITE_ID" 	columnIndex="1"/>
+		<result property="siteUrl" 	column="SITE_URL" 	columnIndex="2"/>
+		<result property="siteNm" 	column="SITE_NM" 	columnIndex="3"/>
+		<result property="siteDc" 	column="SITE_DC" 	columnIndex="4"/>
+		<result property="siteThemaClCode" 	column="SITE_THEMA_CL_CODE" 	columnIndex="5"/>
+		<result property="siteThemaClNm" 	column="SITE_THEMA_CL_NM" 		columnIndex="6"/>				
+		<result property="actvtyAt" 		column="ACTVTY_AT" 				columnIndex="7"/>
+		<result property="actvtyAtNm" 		column="ACTVTY_AT_NM" 			columnIndex="8"/>		
+		<result property="useAt" 			column="USE_AT" 				columnIndex="9"/>
+		<result property="useAtNm" 			column="USE_AT_NM" 				columnIndex="10"/>	
+		<result property="emplyrNm" 		column="USER_NM" 	columnIndex="11"/>					
+		<result property="frstRegisterPnttm" 	column="FRST_REGIST_PNTTM" 	columnIndex="12"/>
+		<result property="frstRegisterId" 		column="FRST_REGISTER_ID" 		columnIndex="13"/>
+		<result property="lastUpdusrPnttm" 		column="LAST_UPDT_PNTTM" 		columnIndex="14"/>
+		<result property="lastUpdusrId" 		column="LAST_UPDUSR_ID" 		columnIndex="15"/>				
+	</resultMap>
+	
+	<select id="SiteManageDAO.selectSiteDetail" resultMap="SiteManage">
+		<![CDATA[				
+			SELECT 	SITE_URL, SITE_ID, SITE_NM, SITE_DC, SITE_THEMA_CL_CODE, B.CODE_NM  SITE_THEMA_CL_NM,
+					A.ACTVTY_AT,
+					DECODE(A.ACTVTY_AT,'Y','활성','N','비활성','비활성') ACTVTY_AT_NM,
+					A.USE_AT,	
+					DECODE(A.USE_AT,'Y','사용','N','미사용','미사용') USE_AT_NM,	USER_NM,											
+					TO_CHAR(A.FRST_REGIST_PNTTM,'YYYY-MM-DD') FRST_REGIST_PNTTM   , A.FRST_REGISTER_ID, 
+					TO_CHAR(A.LAST_UPDT_PNTTM,'YYYY-MM-DD')   LAST_UPDT_PNTTM, A.LAST_UPDUSR_ID			 			  			 			 
+			FROM 	COMTNSITELIST A
+			LEFT 	OUTER JOIN COMTCCMMNDETAILCODE B	 ON		B.CODE_ID ='COM023' AND A.SITE_THEMA_CL_CODE = B.CODE                               			
+			LEFT 	OUTER JOIN COMTNEMPLYRINFO C     	 ON		C.ESNTL_ID= A.LAST_UPDUSR_ID 	 		
+			WHERE	SITE_ID=#siteId#								
+		]]>
+	</select>
+	
+	<select id="SiteManageDAO.selectSiteList" parameterClass="SiteManageSearchVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT  SITE_URL, SITE_ID, SITE_NM, SITE_DC, SITE_THEMA_CL_CODE, SITE_THEMA_CL_NM,
+					ACTVTY_AT, ACTVTY_AT_NM,USE_AT,	USE_AT_NM,	USER_NM EMPLYR_NM,															
+					FRST_REGIST_PNTTM FRST_REGISTER_PNTTM, FRST_REGISTER_ID, 
+					LAST_UPDT_PNTTM   LAST_UPDUSR_PNTTM, LAST_UPDUSR_ID	
+			FROM
+				   (
+				   SELECT  ROWNUM RNUM,SITE.*
+				   FROM
+				   	   	  (
+				   		   SELECT  SITE_URL, SITE_ID, SITE_NM, SITE_DC, SITE_THEMA_CL_CODE, B.CODE_NM  SITE_THEMA_CL_NM,
+						   		   A.ACTVTY_AT,
+								   DECODE(A.ACTVTY_AT,'Y','활성','N','비활성','비활성') ACTVTY_AT_NM,
+								   A.USE_AT,	
+								   DECODE(A.USE_AT,'Y','사용','N','미사용','미사용') USE_AT_NM,	USER_NM,											
+								   A.FRST_REGIST_PNTTM , A.FRST_REGISTER_ID, 
+								   A.LAST_UPDT_PNTTM   , A.LAST_UPDUSR_ID		
+						   FROM 	COMTNSITELIST A
+						   LEFT 	OUTER JOIN COMTCCMMNDETAILCODE B	 ON		B.CODE_ID ='COM023' AND A.SITE_THEMA_CL_CODE = B.CODE                               			
+						   LEFT 	OUTER JOIN COMTNEMPLYRINFO C     ON		C.ESNTL_ID= A.LAST_UPDUSR_ID 									   
+						   WHERE   1=1 								
+		]]>					
+			<isEqual prepend="AND" property="searchCondition" compareValue="siteNm">
+				<![CDATA[SITE_NM   LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="siteUrl">
+				<![CDATA[SITE_URL  LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+		<![CDATA[				
+							ORDER BY SITE_NM DESC								   
+						  ) SITE
+				   ) 
+			WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex#	
+		]]>				
+	</select>
+	
+	<select id="SiteManageDAO.selectSiteListTotCnt" parameterClass="SiteManageSearchVO" resultClass="int">
+		<![CDATA[
+			SELECT 	COUNT(*) totcnt
+			FROM 	COMTNSITELIST A
+			LEFT 	OUTER JOIN COMTNEMPLYRINFO B     ON		B.ESNTL_ID= A.LAST_UPDUSR_ID
+			WHERE	1=1
+		]]>			
+			<isEqual prepend="AND" property="searchCondition" compareValue="siteNm">
+				<![CDATA[SITE_NM   LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="siteUrl">
+				<![CDATA[SITE_URL  LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+	</select>
+	
+	<insert id="SiteManageDAO.insertSiteInfo">	
+		<![CDATA[		
+			INSERT INTO COMTNSITELIST
+				  (SITE_ID
+				  , SITE_URL 
+ 				  , SITE_NM 
+				  , SITE_DC
+				  , SITE_THEMA_CL_CODE 
+				  , ACTVTY_AT 
+				  , USE_AT
+				  , FRST_REGIST_PNTTM 
+				  , FRST_REGISTER_ID 
+				  , LAST_UPDT_PNTTM 
+				  , LAST_UPDUSR_ID) 
+			VALUES ( #siteId#
+				  , #siteUrl#
+				  , #siteNm#
+				  , #siteDc#
+				  , #siteThemaClCode#
+				  , #actvtyAt#
+				  , #useAt# 
+				  , sysdate
+				  , #frstRegisterId#
+				  , sysdate
+				  , #lastUpdusrId# )
+		]]>
+	</insert>
+	
+	<update id="SiteManageDAO.updateSiteInfo">
+		<![CDATA[
+			UPDATE	COMTNSITELIST	SET
+				    SITE_ID=#siteId#
+				  , SITE_URL=#siteUrl# 
+ 				  , SITE_NM=#siteNm#
+				  , SITE_DC=#siteDc#
+				  , SITE_THEMA_CL_CODE=#siteThemaClCode# 
+				  , ACTVTY_AT=#actvtyAt#
+				  , USE_AT=#useAt#
+				  , LAST_UPDT_PNTTM=sysdate
+				  , LAST_UPDUSR_ID=#lastUpdusrId#
+ 			WHERE  SITE_ID=#siteId#
+		]]>
+	</update>
+	
+	<delete id="SiteManageDAO.deleteSiteInfo">
+		<![CDATA[
+			DELETE FROM COMTNSITELIST 
+			WHERE  SITE_ID=#siteId#
+		]]>
+	</delete>
+	
+
+</sqlMap>

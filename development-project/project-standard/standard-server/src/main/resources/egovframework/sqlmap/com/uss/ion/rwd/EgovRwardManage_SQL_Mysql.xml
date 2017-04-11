@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                    수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.10   	정진오     	 	테이블 표준화에 따른 수정사항 반영
+							RWARD_MAN_ID를 RWARDWNR_ID로 변경함
+							RWARD_CD를 RWARD_CODE로 변경함
+ -->
+<sqlMap namespace="RwardManage">
+
+	<typeAlias  alias="RwardManage" type="egovframework.com.uss.ion.rwd.service.RwardManage"/>
+	<typeAlias  alias="RwardManageVO" type="egovframework.com.uss.ion.rwd.service.RwardManageVO"/>
+
+    <resultMap id="rwardManage" class="egovframework.com.uss.ion.rwd.service.RwardManageVO">
+        <result property="rwardManId"        column="RWARDWNR_ID"        columnIndex="1"/> 
+        <result property="rwardCd"           column="RWARD_CODE"            columnIndex="2"/> 
+        <result property="rwardDe"           column="RWARD_DE"            columnIndex="3"/> 
+        <result property="rwardNm"           column="RWARD_NM"            columnIndex="4"/> 
+        <result property="pblenCn"           column="PBLEN_CN"            columnIndex="5"/> 
+        <result property="sanctnerId"        column="SANCTNER_ID"         columnIndex="6"/> 
+        <result property="confmAt"           column="CONFM_AT"            columnIndex="7"/> 
+        <result property="sanctnDt"          column="SANCTN_DT"           columnIndex="8"/> 
+        <result property="returnResn"        column="RETURN_RESN"         columnIndex="9"/> 
+        <result property="atchFileId"        column="ATCH_FILE_ID"        columnIndex="10"/> 
+        <result property="infrmlSanctnId"    column="INFRML_SANCTN_ID"    columnIndex="11"/> 
+        <result property="frstRegisterId"    column="FRST_REGISTER_ID"    columnIndex="12"/> 
+        <result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="13"/>
+        <result property="lastUpdusrId"      column="LAST_UPDUSR_ID"      columnIndex="14"/>
+        <result property="lastUpdusrPnttm"   column="LAST_UPDT_PNTTM"   columnIndex="15"/>
+    </resultMap>
+         
+    <select id="rwardManageDAO.selectRwardManageList" parameterClass="RwardManageVO" resultClass="RwardManageVO">
+        <![CDATA[
+         SELECT   @RNUM:=@RNUM+1        AS rowCount         ,
+                  A.RWARD_ID            AS rwardId          ,
+                  A.RWARDWNR_ID         AS rwardManId       ,
+                  A.RWARD_CODE            AS rwardCd          ,
+                  A.RWARD_DE            AS rwardDe          ,
+                  A.RWARD_NM            AS rwardNm          ,
+                  A.PBLEN_CN            AS pblenCn          ,
+                  A.SANCTNER_ID         AS sanctnerId       ,
+                  A.CONFM_AT            AS confmAt          ,
+                  A.SANCTN_DT           AS sanctnDt         , 
+                  A.RETURN_RESN         AS returnResn       ,
+                  A.ATCH_FILE_ID        AS atchFileId       , 
+                  A.INFRML_SANCTN_ID    AS infrmlSanctnId   ,
+                  C.USER_NM             AS rwardManNm       ,
+                 (select mst.USER_NM from COMVNUSERMASTER mst where  mst.ESNTL_ID = SANCTNER_ID)          AS sanctnerNm  ,
+                 (select code_nm from COMTCCMMNDETAILCODE where code_id ='COM055' and code = A.RWARD_CODE) AS rwardCdNm   ,
+                 (select info.ORGNZT_NM from COMTNORGNZTINFO info where  info.ORGNZT_ID = C.ORGNZT_ID )  AS orgnztNm
+         FROM    (select @RNUM:=0) R, COMTNRWARDMANAGE A, COMVNUSERMASTER C
+         WHERE    1=1 
+         AND      A.RWARDWNR_ID = C.ESNTL_ID  ]]>
+               <isNotEmpty prepend="AND" property="searchKeyword">
+         <![CDATA[ A.RWARD_CODE = #searchKeyword# ]]>
+               </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchFromDate">
+         <![CDATA[ A.RWARD_DE BETWEEN CAST( DATE_FORMAT(#searchFromDate#,'%Y%m%d' ) AS CHAR(8) ) AND CAST( DATE_FORMAT(#searchToDate#,'%Y%m%d' ) AS CHAR(8) ) ]]>
+               </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchNm">
+         <![CDATA[ C.USER_NM like CONCAT('%', #searchNm#, '%') ]]>
+               </isNotEmpty>
+         <![CDATA[
+         ORDER BY FRST_REGIST_PNTTM DESC
+         LIMIT #recordCountPerPage# OFFSET #firstIndex# 
+         ]]>
+    </select> 
+
+    <select id="rwardManageDAO.selectRwardManageListTotCnt" parameterClass="RwardManageVO" resultClass="int">
+         <![CDATA[
+            SELECT  COUNT(*) totcnt
+            FROM    COMTNRWARDMANAGE A, COMVNUSERMASTER C
+            WHERE    1=1 
+            AND      A.RWARDWNR_ID = C.ESNTL_ID  ]]>
+               <isNotEmpty prepend="AND" property="searchKeyword">
+         <![CDATA[ A.RWARD_CODE = #searchKeyword# ]]>
+               </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchFromDate">
+         <![CDATA[ A.RWARD_DE BETWEEN CAST( DATE_FORMAT(#searchFromDate#,'%Y%m%d' ) AS CHAR(8) ) AND CAST( DATE_FORMAT(#searchToDate#,'%Y%m%d' ) AS CHAR(8) ) ]]>
+               </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchNm">
+         <![CDATA[ C.USER_NM like CONCAT('%', #searchNm#, '%') ]]>
+               </isNotEmpty>
+    </select>
+
+    <select id="rwardManageDAO.selectRwardManage" resultClass="RwardManageVO">
+
+        <![CDATA[
+         SELECT   rwd.RWARD_ID            AS rwardId          ,
+                  rwd.RWARDWNR_ID         AS rwardManId       ,
+                  rwd.RWARD_CODE            AS rwardCd          ,
+                  rwd.RWARD_DE            AS rwardDe          ,
+                  rwd.RWARD_NM            AS rwardNm          ,
+                  rwd.PBLEN_CN            AS pblenCn          ,
+                  rwd.SANCTNER_ID         AS sanctnerId       ,
+                  rwd.CONFM_AT            AS confmAt          ,
+                  rwd.SANCTN_DT           AS sanctnDt         , 
+                  rwd.RETURN_RESN         AS returnResn       ,
+                  rwd.ATCH_FILE_ID        AS atchFileId       , 
+                  rwd.INFRML_SANCTN_ID    AS infrmlSanctnId   ,
+                  mst.USER_NM             AS rwardManNm       ,
+                 (select info.ORGNZT_NM from COMTNORGNZTINFO info where  info.ORGNZT_ID = mst.ORGNZT_ID )   AS orgnztNm    ,
+                 (select mst1.USER_NM from COMVNUSERMASTER mst1 where  mst1.ESNTL_ID = SANCTNER_ID)          AS sanctnerNm  ,
+                 (select code_nm from COMTCCMMNDETAILCODE where code_id ='COM055' and code = rwd.RWARD_CODE)  AS rwardCdNm   ,
+                 (select info.ORGNZT_NM from COMVNUSERMASTER mst_b, COMTNORGNZTINFO info 
+                  where info.ORGNZT_ID = mst_b.ORGNZT_ID and mst_b.esntl_id= rwd.SANCTNER_ID)  AS sanctnerOrgnztNm
+         FROM     COMTNRWARDMANAGE rwd, COMVNUSERMASTER mst 
+         WHERE    rwd.RWARDWNR_ID = mst.ESNTL_ID  
+	     AND      rwd.RWARD_ID     = #rwardId#
+
+        ]]>
+    </select>
+
+    <insert id="rwardManageDAO.insertRwardManage" parameterClass="RwardManage">
+        <![CDATA[
+            INSERT INTO COMTNRWARDMANAGE
+                   ( RWARD_ID         ,  
+                     RWARDWNR_ID      ,  
+                     RWARD_CODE         ,  
+                     RWARD_DE         , 
+                     RWARD_NM         , 
+                     PBLEN_CN         ,  
+                     SANCTNER_ID      ,  
+                     CONFM_AT         ,  
+                     SANCTN_DT        ,  
+                     ATCH_FILE_ID     , 
+                     INFRML_SANCTN_ID , 
+                     FRST_REGISTER_ID ,  
+                     FRST_REGIST_PNTTM) 
+            VALUES (#rwardId#,        
+                    #rwardManId#,        
+                    #rwardCd#,          
+                    #rwardDe#,           
+                    #rwardNm#,           
+                    #pblenCn#,           
+                    #sanctnerId#,        
+                    #confmAt#,           
+                    #sanctnDt#,              
+                    #atchFileId#,
+                    #infrmlSanctnId#,        
+                    #frstRegisterId#,    
+                    now())
+        ]]>
+    </insert>     
+
+    <update id="rwardManageDAO.updtRwardManage" parameterClass="RwardManage">
+        <![CDATA[
+
+          UPDATE COMTNRWARDMANAGE
+          SET    RWARD_CODE            = #rwardCd#,
+          		 RWARD_DE		     = #rwardDe#,
+                 RWARD_NM            = #rwardNm#,   
+				 PBLEN_CN            = #pblenCn#,   
+				 ATCH_FILE_ID        = #atchFileId#,   
+				 LAST_UPDUSR_ID      = #lastUpdusrId#,
+                 LAST_UPDT_PNTTM   = now()    
+          WHERE  RWARD_ID            = #rwardId#
+        ]]>
+    </update>    
+    
+    <delete id="rwardManageDAO.deleteRwardManage" parameterClass="RwardManage">
+        <![CDATA[
+          DELETE FROM COMTNRWARDMANAGE
+          WHERE  RWARD_ID            = #rwardId#
+        ]]>
+    </delete>  
+<!-- 포상 승인관련  -->
+    <select id="rwardManageDAO.selectRwardManageConfmList" parameterClass="RwardManageVO" resultClass="RwardManageVO">
+        <![CDATA[
+         SELECT   @RNUM:=@RNUM+1        AS rowCount         ,
+                  A.RWARD_ID            AS rwardId          ,
+                  A.RWARDWNR_ID         AS rwardManId       ,
+                  A.RWARD_CODE            AS rwardCd          ,
+                  A.RWARD_DE            AS rwardDe          ,
+                  A.RWARD_NM            AS rwardNm          ,
+                  A.PBLEN_CN            AS pblenCn          ,
+                  A.SANCTNER_ID         AS sanctnerId       ,
+                  A.CONFM_AT            AS confmAt          ,
+                  A.SANCTN_DT           AS sanctnDt         , 
+                  A.RETURN_RESN         AS returnResn       ,
+                  A.ATCH_FILE_ID        AS atchFileId       , 
+                  A.INFRML_SANCTN_ID    AS infrmlSanctnId   ,
+                  C.USER_NM             AS rwardManNm       ,
+                 (select mst.USER_NM from COMVNUSERMASTER mst where  mst.ESNTL_ID = SANCTNER_ID)          AS sanctnerNm  ,
+                 (select code_nm from COMTCCMMNDETAILCODE where code_id ='COM055' and code = A.RWARD_CODE) AS rwardCdNm   ,
+                 (select info.ORGNZT_NM from COMTNORGNZTINFO info where  info.ORGNZT_ID = C.ORGNZT_ID )  AS orgnztNm
+         FROM    (select @RNUM:=0) R, COMTNRWARDMANAGE A, COMVNUSERMASTER C
+         WHERE    1=1 
+         AND      A.SANCTNER_ID = #sanctnerId#
+         AND      A.RWARDWNR_ID = C.ESNTL_ID  ]]>
+               <isNotEmpty prepend="AND" property="searchKeyword">
+         <![CDATA[ A.RWARD_CODE = #searchKeyword# ]]>
+               </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchFromDate">
+         <![CDATA[ A.RWARD_DE BETWEEN CAST( DATE_FORMAT(#searchFromDate#,'%Y%m%d' ) AS CHAR(8) ) AND CAST( DATE_FORMAT(#searchToDate#,'%Y%m%d' ) AS CHAR(8) ) ]]>
+               </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchNm">
+         <![CDATA[ C.USER_NM like CONCAT('%', #searchNm#, '%') ]]>
+               </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchConfmAt">
+        <![CDATA[ A.CONFM_AT like CONCAT('%', #searchConfmAt#, '%') ]]>
+               </isNotEmpty> 
+         <![CDATA[
+         ORDER BY FRST_REGIST_PNTTM DESC
+         LIMIT #recordCountPerPage# OFFSET #firstIndex# 
+         ]]>
+    </select> 
+
+    <select id="rwardManageDAO.selectRwardManageConfmListTotCnt" parameterClass="RwardManageVO" resultClass="int">
+         <![CDATA[
+            SELECT  COUNT(*) totcnt
+            FROM    COMTNRWARDMANAGE A, COMVNUSERMASTER C
+            WHERE   1=1 
+            AND     A.SANCTNER_ID = #sanctnerId#
+            AND     A.RWARDWNR_ID = C.ESNTL_ID  ]]>
+                  <isNotEmpty prepend="AND" property="rwardCd">
+         <![CDATA[ A.RWARD_CODE = #rwardCd# ]]>
+                  </isNotEmpty>
+                  <isNotEmpty prepend="AND" property="rwardDe">
+         <![CDATA[ CAST( DATE_FORMAT(#rwardDe#,'%Y%m%d' ) AS CHAR(8) ) BETWEEN A.RWARD_DE AND A.RWARD_DE ]]>
+                  </isNotEmpty>
+                  <isNotEmpty prepend="AND" property="searchKeyword">
+         <![CDATA[ RWARD_DE like CONCAT('%', #searchKeyword#, '%') ]]>
+                  </isNotEmpty>
+               <isNotEmpty prepend="AND" property="searchConfmAt">
+        <![CDATA[ A.CONFM_AT like CONCAT('%', #searchConfmAt#, '%') ]]>
+               </isNotEmpty> 
+    </select>
+
+
+
+
+
+    <update id="rwardManageDAO.updtRwardManageConfm" parameterClass="RwardManage">
+        <![CDATA[
+         UPDATE COMTNRWARDMANAGE
+            SET  CONFM_AT           = #confmAt#,   
+                 SANCTN_DT          = #sanctnDt#,  
+                 RETURN_RESN        = #returnResn#,  
+				 LAST_UPDUSR_ID     = #lastUpdusrId#,
+                 LAST_UPDT_PNTTM  = now()    
+          WHERE  RWARD_ID            = #rwardId#
+        ]]>
+    </update> 
+
+<!-- 포상 승인관련  
+    <select id="rwardManageDAO.selectRwardManageConfmList" parameterClass="RwardManageVO" resultClass="RwardManageVO">
+        <![CDATA[
+			 SELECT  @RNUM:=@RNUM+1 as rowCount ,
+                     A.APPLCNT_ID          AS applcntId        ,
+                     mst.USER_NM           AS applcntNm        ,
+			        (select info.ORGNZT_NM from COMTNORGNZTINFO info where  info.ORGNZT_ID = mst.ORGNZT_ID ) AS orgnztNm,
+                     A.VCATN_SE            AS vcatnSe          ,
+			        (select code_nm from COMTCCMMNDETAILCODE where code_id ='COM056' and code = A.VCATN_SE) as vcatnSeNm,
+                     A.REQST_DE            AS reqstDe          ,
+                     A.SANCTNER_ID         AS sanctnerId       ,
+                     A.CONFM_AT            AS confmAt          ,
+                     A.SANCTN_DT           AS sanctnDt         ,
+                     A.RETURN_RESN         AS returnResn       ,
+                     A.BGNDE               AS bgnde            ,
+                     A.ENDDE               AS endde            ,
+                     A.OCCRRNC_YEAR        AS occrrncYear      ,
+                     A.VCATN_RESN          AS vcatnResn		   ,
+			         A.INFRML_SANCTN_ID    AS infrmlSanctnId   
+		    FROM    (select @RNUM:=0) R,  COMTNVCATNMANAGE A, COMVNUSERMASTER mst
+			WHERE    1=1 
+			  AND    mst.ESNTL_ID   = A.APPLCNT_ID 
+			  AND    A.SANCTNER_ID = #sanctnerId#
+			  AND    mst.USER_NM  like  CONCAT('%', #searchNm#, '%')
+        ]]>
+			 <isNotEmpty prepend="AND" property="searchConfmAt">
+					 A.CONFM_AT = #searchConfmAt#
+			 </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="searchKeyword">
+					 #searchKeyword# BETWEEN CAST(DATE_FORMAT(A.BGNDE,'%Y%m') AS CHAR(6)) AND CAST(DATE_FORMAT(A.ENDDE ,'%Y%m' ) AS CHAR(6) )
+			 </isNotEmpty>
+        <![CDATA[
+			   ORDER BY A.FRST_REGIST_PNTTM DESC
+			   LIMIT #recordCountPerPage# OFFSET #firstIndex# 
+       ]]>
+    </select> 
+
+    <select id="rwardManageDAO.selectRwardManageConfmListTotCnt" parameterClass="RwardManageVO" resultClass="int">
+        <![CDATA[
+               SELECT  COUNT(*) totcnt
+			   FROM    (select @RNUM:=0) R,  COMTNVCATNMANAGE A, COMVNUSERMASTER mst
+			   WHERE   1=1 
+			   AND     mst.ESNTL_ID   = A.APPLCNT_ID 
+			   AND     mst.USER_NM  like  CONCAT('%', #searchKeyword#, '%')
+			   AND     CAST( DATE_FORMAT(#searchKeyword#,'%Y-%m' ) AS CHAR(7) )                   
+				        BETWEEN CAST( DATE_FORMAT(A.BGNDE,'%Y-%m'   ) AS CHAR(7) )
+				        AND     CAST( DATE_FORMAT(A.ENDDE  ,'%Y-%m' ) AS CHAR(7) )
+        ]]>
+    </select>
+-->
+
+</sqlMap>
