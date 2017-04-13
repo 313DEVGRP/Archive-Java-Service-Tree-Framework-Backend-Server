@@ -17,6 +17,19 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
+      <profile default="false" name="Annotation profile for standard-server" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="standard-server" />
+      </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="development-project" target="1.5" />
+      <module name="project-standard" target="1.5" />
+      <module name="standard-server" target="1.8" />
+      <module name="standard-server-support" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -13,6 +13,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/ext/jfile/org/json/XMLTokener.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/utl/wed/filter/FileSaveManager.java">
+          <value>
+            <set />
+          </value>
+        </entry>
       </map>
     </option>
   </component>
