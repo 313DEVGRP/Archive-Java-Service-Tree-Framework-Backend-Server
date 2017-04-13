@@ -53,7 +53,7 @@ public class EgovConfirmManageServiceImpl extends EgovAbstractServiceImpl implem
     /**
      * 승인(탈퇴)요청에 대한 등록을 처리한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovConfirmManageService#insertConfirmRequest(egovframework.com.cop.cmy.service.ConfirmHistory)
+     * @see EgovConfirmManageService#insertConfirmRequest(ConfirmHistory)
      */
     public void insertConfirmRequest(ConfirmHistory history) throws Exception {
 	confmDAO.insertConfirmRequest(history);
@@ -62,7 +62,7 @@ public class EgovConfirmManageServiceImpl extends EgovAbstractServiceImpl implem
     /**
      * 승인(탈퇴)요청에 대한 목록을 조회한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovConfirmManageService#selectConfirmRequest(egovframework.com.cop.cmy.service.ConfirmHistoryVO)
+     * @see EgovConfirmManageService#selectConfirmRequest(ConfirmHistoryVO)
      */
     public Map<String, Object> selectConfirmRequest(ConfirmHistoryVO historyVO) throws Exception {
 	List<ConfirmHistoryVO> result = confmDAO.selectConfirmRequestList(historyVO);
@@ -79,7 +79,7 @@ public class EgovConfirmManageServiceImpl extends EgovAbstractServiceImpl implem
     /**
      * 승인(탈퇴)요청에 대한 확인을 처리한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovConfirmManageService#updateConfirmRequest(egovframework.com.cop.cmy.service.ConfirmHistory)
+     * @see EgovConfirmManageService#updateConfirmRequest(ConfirmHistory)
      */
     public void updateConfirmRequest(ConfirmHistory history) throws Exception {
 	String sttus = history.getConfmSttusCode();
@@ -169,7 +169,7 @@ public class EgovConfirmManageServiceImpl extends EgovAbstractServiceImpl implem
     /**
      * 승인(탈퇴)요청에 대한 상세내용을 조회한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovConfirmManageService#selectSingleConfirmRequest(egovframework.com.cop.cmy.service.ConfirmHistoryVO)
+     * @see EgovConfirmManageService#selectSingleConfirmRequest(ConfirmHistoryVO)
      */
     public ConfirmHistoryVO selectSingleConfirmRequest(ConfirmHistoryVO historyVO) throws Exception {
 	return confmDAO.selectSingleConfirmRequest(historyVO);
@@ -178,7 +178,7 @@ public class EgovConfirmManageServiceImpl extends EgovAbstractServiceImpl implem
     /**
      * 현재 승인 요청된 건수를 조회한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovConfirmManageService#countConfirmRequest(egovframework.com.cop.cmy.service.ConfirmHistoryVO)
+     * @see EgovConfirmManageService#countConfirmRequest(ConfirmHistoryVO)
      */
     public int countConfirmRequest(ConfirmHistory history) throws Exception {
 	return confmDAO.countConfirmRequest(history);

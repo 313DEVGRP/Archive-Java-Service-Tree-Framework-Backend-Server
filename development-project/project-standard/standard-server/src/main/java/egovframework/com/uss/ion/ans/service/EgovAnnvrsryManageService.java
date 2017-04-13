@@ -84,6 +84,6 @@ public interface EgovAnnvrsryManageService {
 	 * @param annvrsryManageVO     - 기념일관리 VO
 	 * @param String           - 기념일정보
     */
-	public void insertAnnvrsryManageBnde(AnnvrsryManageVO annvrsryManageVO, 
-			                             String checkedAnnvrsryManageForInsert) throws Exception;	
+	public void insertAnnvrsryManageBnde(AnnvrsryManageVO annvrsryManageVO,
+										 String checkedAnnvrsryManageForInsert) throws Exception;
 }

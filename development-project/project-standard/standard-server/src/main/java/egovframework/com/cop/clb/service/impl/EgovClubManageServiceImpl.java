@@ -64,7 +64,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회 정보를 삭제한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#deleteClubInf(egovframework.com.cop.clb.service.Club)
+     * @see EgovClubManageService#deleteClubInf(Club)
      */
     public void deleteClubInf(Club club) throws Exception {
 	clubDAO.deleteClubInf(club);
@@ -89,7 +89,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회 사용자 정보를 삭제한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#deleteClubUserInf(egovframework.com.cop.clb.service.ClubUser)
+     * @see EgovClubManageService#deleteClubUserInf(ClubUser)
      */
     public void deleteClubUserInf(ClubUser clubUser) throws Exception {
 	clubDAO.deleteClubUserInf(clubUser);
@@ -106,7 +106,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회 정보를 등록한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#insertClubInf(egovframework.com.cop.clb.service.Club)
+     * @see EgovClubManageService#insertClubInf(Club)
      */
     public void insertClubInf(Club club) throws Exception {
 	/*
@@ -238,7 +238,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회 사용자 정보를 생성한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#insertClubUserInf(egovframework.com.cop.clb.service.ClubUser)
+     * @see EgovClubManageService#insertClubUserInf(ClubUser)
      */
     public String insertClubUserInf(ClubUser clubUser) throws Exception {
 	String retVal = "";
@@ -278,7 +278,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회 사용자 정보를 확인한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#checkClubUserInf(egovframework.com.cop.clb.service.ClubUser)
+     * @see EgovClubManageService#checkClubUserInf(ClubUser)
      */
     public String checkClubUserInf(ClubUser clubUser) throws Exception {
 	ClubVO vo = new ClubVO();
@@ -295,7 +295,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회에 대한 게시판 정보 및 사용자 정보를 조회한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#selectClubInf(egovframework.com.cop.clb.service.ClubVO)
+     * @see EgovClubManageService#selectClubInf(ClubVO)
      */
     public Map<String, Object> selectClubInf(ClubVO clubVO) throws Exception {
 
@@ -366,7 +366,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회에 대한 목록을 조회한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#selectClubInfs(egovframework.com.cop.clb.service.ClubVO)
+     * @see EgovClubManageService#selectClubInfs(ClubVO)
      */
     public Map<String, Object> selectClubInfs(ClubVO clubVO) throws Exception {
 	List<ClubVO> result = clubDAO.selectClubInfs(clubVO);
@@ -383,7 +383,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회에서 사용하는 게시판 목록을 조회한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#selectClubUseBBSInfs(egovframework.com.cop.clb.service.ClubVO)
+     * @see EgovClubManageService#selectClubUseBBSInfs(ClubVO)
      */
     public List<ClubVO> selectClubUseBBSInfs(ClubVO clubVO) throws Exception {
 	return clubDAO.selectClubUseBBSInfs(clubVO);
@@ -392,7 +392,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회에 대한 사용자 목록을 조회한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#selectClubUserInfs(egovframework.com.cop.clb.service.ClubUserVO)
+     * @see EgovClubManageService#selectClubUserInfs(ClubUserVO)
      */
     public Map<String, Object> selectClubUserInfs(ClubUserVO clubUserVO) throws Exception {
 
@@ -410,7 +410,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회 사용자 정보를 수정한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#updateClubBBSUseInf(egovframework.com.cop.bbs.service.com.service.BoardUseInf)
+     * @see EgovClubManageService#updateClubBBSUseInf(egovframework.com.cop.bbs.service.com.service.BoardUseInf)
      */
     public void updateClubBBSUseInf(BoardUseInf bdUseInf) throws Exception {
 	clubDAO.updateClubBBSUseInf(bdUseInf);
@@ -419,7 +419,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회 내용 및 사용자 정보를 수정한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#updateClubInf(egovframework.com.cop.clb.service.Club)
+     * @see EgovClubManageService#updateClubInf(Club)
      */
     public void updateClubInf(Club club) throws Exception {
 	ClubUser clubUser = new ClubUser();
@@ -436,7 +436,7 @@ public class EgovClubManageServiceImpl extends EgovAbstractServiceImpl implement
     /**
      * 동호회에 대한 사용자 내용을 수정한다.
      *
-     * @see egovframework.com.cop.clb.service.EgovClubManageService#updateClubUserInf(egovframework.com.cop.clb.service.ClubUser)
+     * @see EgovClubManageService#updateClubUserInf(ClubUser)
      */
     public void updateClubUserInf(ClubUser clubUser) throws Exception {
 	clubDAO.updateClubUserInf(clubUser);

@@ -1,4 +1,4 @@
-package  egovframework.com.sym.mnu.stm.service;
+package egovframework.com.sym.mnu.stm.service;
 
 import egovframework.com.cmm.ComDefaultVO;
 

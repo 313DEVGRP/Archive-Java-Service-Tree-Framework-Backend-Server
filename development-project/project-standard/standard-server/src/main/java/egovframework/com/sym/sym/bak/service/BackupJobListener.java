@@ -57,7 +57,7 @@ public class BackupJobListener implements JobListener {
 
 	/**
 	 * Job Listener 이름을 리턴한다.
-	 * @see org.quartz.JobListener#getName()
+	 * @see JobListener#getName()
 	 */
 	public String getName() {
 		return this.getClass().getName();
@@ -67,7 +67,7 @@ public class BackupJobListener implements JobListener {
 	 * 백업 작업을 실행하기전에 백업결과 '수행중'상태로 저장한다.
 	 *
 	 * @param jobContext JobExecutionContext
-	 * @see org.quartz.JobListener#jobToBeExecuted(JobExecutionContext jobContext)
+	 * @see JobListener#jobToBeExecuted(JobExecutionContext jobContext)
 	 */
 	public void jobToBeExecuted(JobExecutionContext jobContext) {
 		LOGGER.debug("job[{}] jobToBeExecuted", jobContext.getJobDetail().getKey().getName());
@@ -109,7 +109,7 @@ public class BackupJobListener implements JobListener {
 	 * 백업 작업을 완료한후 백업결과 '완료'상태로 저장한다.
 	 *
 	 * @param jobContext JobExecutionContext
-	 * @see org.quartz.JobListener#jobWasExecuted(JobExecutionContext jobContext)
+	 * @see JobListener#jobWasExecuted(JobExecutionContext jobContext)
 	 */
 	public void jobWasExecuted(JobExecutionContext jobContext, JobExecutionException jee) {
 		LOGGER.debug("job[{}] jobWasExecuted", jobContext.getJobDetail().getKey().getName());
@@ -168,7 +168,7 @@ public class BackupJobListener implements JobListener {
 	 *
 	 * @param jobContext JobExecutionContext
 	 *
-	 * @see org.quartz.JobListener#jobExecutionVetoed(JobExecutionContext jobContext)
+	 * @see JobListener#jobExecutionVetoed(JobExecutionContext jobContext)
 	 */
 	public void jobExecutionVetoed(JobExecutionContext jobContext) {
 		LOGGER.debug("job[{}] jobExecutionVetoed", jobContext.getJobDetail().getKey().getName());

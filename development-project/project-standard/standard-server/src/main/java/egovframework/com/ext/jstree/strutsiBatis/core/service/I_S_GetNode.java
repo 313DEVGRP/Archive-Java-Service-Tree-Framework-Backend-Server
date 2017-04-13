@@ -41,7 +41,7 @@ public interface I_S_GetNode extends
      * @return node를 추가한 결과값(T_ComprehensiveTree)
      * */
 	public T_ComprehensiveTree getNode(P_ComprehensiveTree p_ComprehensiveTree,
-			String flag);
+									   String flag);
 	
 	/**
      * node가 이동할 곳의 정보를 가져온다.

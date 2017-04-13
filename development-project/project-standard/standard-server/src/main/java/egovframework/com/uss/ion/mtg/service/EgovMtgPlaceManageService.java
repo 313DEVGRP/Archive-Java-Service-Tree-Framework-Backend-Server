@@ -41,7 +41,7 @@ public interface EgovMtgPlaceManageService {
 	 * 회의실관리 정보를 신규로 등록한다.
 	 * @param mtgPlaceManage - 회의실관리 model
 	 */
-	public void insertMtgPlaceManage(MtgPlaceManage mtgPlaceManage,  String checkedMtgPlacesForInsert, MtgPlaceManageVO mtgPlaceManageVO) throws Exception;
+	public void insertMtgPlaceManage(MtgPlaceManage mtgPlaceManage, String checkedMtgPlacesForInsert, MtgPlaceManageVO mtgPlaceManageVO) throws Exception;
 
 	/**
 	 * 기 등록된 회의실관리 정보를 수정한다.

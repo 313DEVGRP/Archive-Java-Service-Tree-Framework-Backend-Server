@@ -42,7 +42,7 @@ public interface I_DB_GetNode extends
 	 * @return T_ComprehensiveTree
 	 * */
 	public T_ComprehensiveTree getNode(P_ComprehensiveTree p_ComprehensiveTree,
-			String determineDBSetting);
+									   String determineDBSetting);
 	
 	/**
 	 * 이동 할곳의 node의 정보를 가져온다.

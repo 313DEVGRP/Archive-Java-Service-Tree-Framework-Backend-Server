@@ -57,7 +57,7 @@ public class BatchJobListener implements JobListener {
 
 	/**
 	 * Job Listener 이름을 리턴한다.
-	 * @see org.quartz.JobListener#getName()
+	 * @see JobListener#getName()
 	 */
 	@Override
 	public String getName() {
@@ -68,7 +68,7 @@ public class BatchJobListener implements JobListener {
 	 * Batch 작업을 실행하기전에 Batch결과 '수행중'상태로 저장한다.
 	 *
 	 * @param jobContext JobExecutionContext
-	 * @see org.quartz.JobListener#jobToBeExecuted(JobExecutionContext jobContext)
+	 * @see JobListener#jobToBeExecuted(JobExecutionContext jobContext)
 	 */
 	@Override
 	public void jobToBeExecuted(JobExecutionContext jobContext) {
@@ -108,7 +108,7 @@ public class BatchJobListener implements JobListener {
 	 * Batch 작업을 완료한후 Batch결과 '완료'상태로 저장한다.
 	 *
 	 * @param jobContext JobExecutionContext
-	 * @see org.quartz.JobListener#jobWasExecuted(JobExecutionContext jobContext)
+	 * @see JobListener#jobWasExecuted(JobExecutionContext jobContext)
 	 */
 	@Override
 	public void jobWasExecuted(JobExecutionContext jobContext, JobExecutionException jee) {
@@ -168,7 +168,7 @@ public class BatchJobListener implements JobListener {
 	 *
 	 * @param jobContext JobExecutionContext
 	 *
-	 * @see org.quartz.JobListener#jobExecutionVetoed(JobExecutionContext jobContext)
+	 * @see JobListener#jobExecutionVetoed(JobExecutionContext jobContext)
 	 */
 	@Override
 	public void jobExecutionVetoed(JobExecutionContext jobContext) {

@@ -38,7 +38,7 @@ public class EgovUserInfManageServiceImpl extends EgovAbstractServiceImpl implem
 	/**
 	 * 동호회 운영자 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cop.com.service.EgovUserInfManageService#selectClubOprtrList(egovframework.com.cop.com.service.UserInfVO)
+	 * @see EgovUserInfManageService#selectClubOprtrList(UserInfVO)
 	 */
 	@Override
 	public Map<String, Object> selectClubOprtrList(UserInfVO userVO) throws Exception {
@@ -56,7 +56,7 @@ public class EgovUserInfManageServiceImpl extends EgovAbstractServiceImpl implem
 	/**
 	 * 동호회 사용자 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cop.com.service.EgovUserInfManageService#selectClubUserList(egovframework.com.cop.com.service.UserInfVO)
+	 * @see EgovUserInfManageService#selectClubUserList(UserInfVO)
 	 */
 	@Override
 	public Map<String, Object> selectClubUserList(UserInfVO userVO) throws Exception {
@@ -74,7 +74,7 @@ public class EgovUserInfManageServiceImpl extends EgovAbstractServiceImpl implem
 	/**
 	 * 커뮤니티 관리자 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cop.com.service.EgovUserInfManageService#selectCmmntyMngrList(egovframework.com.cop.com.service.UserInfVO)
+	 * @see EgovUserInfManageService#selectCmmntyMngrList(UserInfVO)
 	 */
 	@Override
 	public Map<String, Object> selectCmmntyMngrList(UserInfVO userVO) throws Exception {
@@ -92,7 +92,7 @@ public class EgovUserInfManageServiceImpl extends EgovAbstractServiceImpl implem
 	/**
 	 * 커뮤니티 사용자 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cop.com.service.EgovUserInfManageService#selectCmmntyUserList(egovframework.com.cop.com.service.UserInfVO)
+	 * @see EgovUserInfManageService#selectCmmntyUserList(UserInfVO)
 	 */
 	@Override
 	public Map<String, Object> selectCmmntyUserList(UserInfVO userVO) throws Exception {
@@ -110,7 +110,7 @@ public class EgovUserInfManageServiceImpl extends EgovAbstractServiceImpl implem
 	/**
 	 * 사용자 정보에 대한 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cop.com.service.EgovUserInfManageService#selectUserList(egovframework.com.cop.com.service.UserInfVO)
+	 * @see EgovUserInfManageService#selectUserList(UserInfVO)
 	 */
 	@Override
 	public Map<String, Object> selectUserList(UserInfVO userVO) throws Exception {
@@ -128,7 +128,7 @@ public class EgovUserInfManageServiceImpl extends EgovAbstractServiceImpl implem
 	/**
 	 * 동호회에 대한 모든 사용자 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cop.com.service.EgovUserInfManageService#selectAllClubUser(egovframework.com.cop.com.service.UserInfVO)
+	 * @see EgovUserInfManageService#selectAllClubUser(UserInfVO)
 	 */
 	@Override
 	public List<UserInfVO> selectAllClubUser(UserInfVO userVO) throws Exception {
@@ -138,7 +138,7 @@ public class EgovUserInfManageServiceImpl extends EgovAbstractServiceImpl implem
 	/**
 	 * 커뮤니티에 대한 모든 사용자 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cop.com.service.EgovUserInfManageService#selectAllCmmntyUser(egovframework.com.cop.com.service.UserInfVO)
+	 * @see EgovUserInfManageService#selectAllCmmntyUser(UserInfVO)
 	 */
 	@Override
 	public List<UserInfVO> selectAllCmmntyUser(UserInfVO userVO) throws Exception {

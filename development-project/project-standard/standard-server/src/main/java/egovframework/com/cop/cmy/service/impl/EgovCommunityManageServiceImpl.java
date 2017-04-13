@@ -64,7 +64,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티에 대한 정보를 삭제한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#deleteCommunityInf(egovframework.com.cop.cmy.service.Community)
+     * @see EgovCommunityManageService#deleteCommunityInf(Community)
      */
     public void deleteCommunityInf(Community cmmnty) throws Exception {
 	cmmntyDAO.deleteCommunityInf(cmmnty);
@@ -88,7 +88,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 사용정보를 삭제한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#deleteCommunityUserInf(egovframework.com.cop.cmy.service.CommunityUser)
+     * @see EgovCommunityManageService#deleteCommunityUserInf(CommunityUser)
      */
     public void deleteCommunityUserInf(CommunityUser cmmntyUser) throws Exception {
 	cmmntyDAO.deleteCommunityUserInf(cmmntyUser);
@@ -105,7 +105,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티에 대한 게시판 사용정보를 등록한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#insertCommunityBBSUseInf(egovframework.com.cop.bbs.service.com.service.BoardUseInf)
+     * @see EgovCommunityManageService#insertCommunityBBSUseInf(egovframework.com.cop.bbs.service.com.service.BoardUseInf)
      */
     public void insertCommunityBBSUseInf(BoardUseInf bdUseInf) throws Exception {
 	//cmmntyDAO.insertCommunityBBSUseInf(bdUseInf);
@@ -116,7 +116,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티에 대한 정보를 등록한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#insertCommunityInf(egovframework.com.cop.cmy.service.Community)
+     * @see EgovCommunityManageService#insertCommunityInf(Community)
      */
     public void insertCommunityInf(Community cmmnty) throws Exception {
 	/*
@@ -247,7 +247,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 사용자 정보를 등록한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#insertCommunityUserInf(egovframework.com.cop.cmy.service.CommunityUser)
+     * @see EgovCommunityManageService#insertCommunityUserInf(CommunityUser)
      */
     public String insertCommunityUserInf(CommunityUser cmmntyUser) throws Exception {
 	//cmmntyId
@@ -287,7 +287,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
 	/**
      * 커뮤니티 사용자 정보를 확인한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#checkCommunityUserInf(egovframework.com.cop.cmy.service.CommunityUser)
+     * @see EgovCommunityManageService#checkCommunityUserInf(CommunityUser)
      */
     public String checkCommunityUserInf(CommunityUser cmmntyUser) throws Exception {
 	// 회원가입 승인처리 적용시 기존 insertCommunityUserInf 대신 사용자 확인만 확인
@@ -306,7 +306,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 게사판 사용정보 목록을 조회한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#selectCommunityBBSUseInf(egovframework.com.cop.cmy.service.CommunityVO)
+     * @see EgovCommunityManageService#selectCommunityBBSUseInf(CommunityVO)
      */
     public List<CommunityVO> selectCommunityBBSUseInf(CommunityVO cmmntyVO) throws Exception {
 	return cmmntyDAO.selectCommunityBBSUseInf(cmmntyVO);
@@ -315,7 +315,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
 	/**
      * 커뮤니티에 대한 특정 사용자 정보를 조회한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#selectCommunityInf(egovframework.com.cop.cmy.service.CommunityVO)
+     * @see EgovCommunityManageService#selectCommunityInf(CommunityVO)
      */
     public Map<String, Object> selectCommunityInf(CommunityVO cmmntyVO) throws Exception {
 
@@ -387,7 +387,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 정보 목록을 조회한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#selectCommunityInfs(egovframework.com.cop.cmy.service.CommunityVO)
+     * @see EgovCommunityManageService#selectCommunityInfs(CommunityVO)
      */
     public Map<String, Object> selectCommunityInfs(CommunityVO cmmntyVO) throws Exception {
 
@@ -405,7 +405,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 사용자 정보에 대한 목록을 조회한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#selectCommunityUserInfs(egovframework.com.cop.cmy.service.CommunityUserVO)
+     * @see EgovCommunityManageService#selectCommunityUserInfs(CommunityUserVO)
      */
     public Map<String, Object> selectCommunityUserInfs(CommunityUserVO cmmntyUserVO) throws Exception {
 	return null;
@@ -414,7 +414,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 게시판 사용정보를 수정한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#updateCommunityBBSUseInf(egovframework.com.cop.bbs.service.com.service.BoardUseInf)
+     * @see EgovCommunityManageService#updateCommunityBBSUseInf(egovframework.com.cop.bbs.service.com.service.BoardUseInf)
      */
     public void updateCommunityBBSUseInf(BoardUseInf bdUseInf) throws Exception {
 	cmmntyDAO.updateCommunityBBSUseInf(bdUseInf);
@@ -423,7 +423,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 정보를 수정한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#updateCommunityInf(egovframework.com.cop.cmy.service.Community)
+     * @see EgovCommunityManageService#updateCommunityInf(Community)
      */
     public void updateCommunityInf(Community cmmnty) throws Exception {
 	CommunityUser cmmntyUser = new CommunityUser();
@@ -441,7 +441,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티 사용자 정보를 수정한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#updateCommunityUserInf(egovframework.com.cop.cmy.service.CommunityUser)
+     * @see EgovCommunityManageService#updateCommunityUserInf(CommunityUser)
      */
     public void updateCommunityUserInf(CommunityUser cmmntyUser) throws Exception {
 	cmmntyDAO.updateCommunityUserInf(cmmntyUser);
@@ -450,7 +450,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 포트릿을 위한 커뮤니티 정보 목록 정보를 조회한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#selectCmmntyListPortlet(egovframework.com.cop.cmy.service.CommunityVO)
+     * @see EgovCommunityManageService#selectCmmntyListPortlet(CommunityVO)
      */
     public List<CommunityVO> selectCmmntyListPortlet(CommunityVO cmmntyVO) throws Exception {
 	return cmmntyDAO.selectCmmntyListPortlet(cmmntyVO);
@@ -459,7 +459,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 커뮤니티용 템플릿 경로명을 조회한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#selectCmmntyTemplat(egovframework.com.cop.cmy.service.CommunityVO)
+     * @see EgovCommunityManageService#selectCmmntyTemplat(CommunityVO)
      */
     public String selectCmmntyTemplat(CommunityVO cmmntyVO) throws Exception {
 	return cmmntyDAO.selectCmmntyTemplat(cmmntyVO);
@@ -468,7 +468,7 @@ public class EgovCommunityManageServiceImpl extends EgovAbstractServiceImpl impl
     /**
      * 모든 커뮤니티 목록을 조회한다.
      *
-     * @see egovframework.com.cop.cmy.service.EgovCommunityManageService#selectAllCmmnty(egovframework.com.cop.cmy.service.CommunityVO)
+     * @see EgovCommunityManageService#selectAllCmmnty(CommunityVO)
      */
     public List<CommunityVO> selectAllCmmnty(CommunityVO cmmntyVO) throws Exception {
 	return cmmntyDAO.selectAllCmmnty(cmmntyVO);

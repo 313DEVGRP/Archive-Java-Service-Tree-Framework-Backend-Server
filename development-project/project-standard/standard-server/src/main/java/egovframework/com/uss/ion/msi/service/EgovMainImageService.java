@@ -42,7 +42,7 @@ public interface EgovMainImageService {
 	 * @param mainImage - 메인이미지 model
 	 * @param mainImageVO - 메인이미지 VO
 	 */
-	public MainImageVO insertMainImage(MainImage mainImage,MainImageVO mainImageVO) throws Exception;
+	public MainImageVO insertMainImage(MainImage mainImage, MainImageVO mainImageVO) throws Exception;
 
 	/**
 	 * 기 등록된 메인화면이미지정보를 수정한다.

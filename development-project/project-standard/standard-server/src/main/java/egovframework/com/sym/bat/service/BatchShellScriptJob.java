@@ -30,7 +30,7 @@ public class BatchShellScriptJob implements Job {
 
 	/**
 	 * (non-Javadoc)
-	 * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
+	 * @see Job#execute(JobExecutionContext)
 	 */
 	public void execute(JobExecutionContext jobContext) throws JobExecutionException {
 

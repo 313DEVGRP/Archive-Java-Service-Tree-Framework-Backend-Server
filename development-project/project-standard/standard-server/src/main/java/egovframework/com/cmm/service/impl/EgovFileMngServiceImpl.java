@@ -37,7 +37,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 여러 개의 파일을 삭제한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#deleteFileInfs(java.util.List)
+	 * @see EgovFileMngService#deleteFileInfs(java.util.List)
 	 */
 	public void deleteFileInfs(List<?> fvoList) throws Exception {
 		fileMngDAO.deleteFileInfs(fvoList);
@@ -46,7 +46,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 하나의 파일에 대한 정보(속성 및 상세)를 등록한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#insertFileInf(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#insertFileInf(FileVO)
 	 */
 	public String insertFileInf(FileVO fvo) throws Exception {
 		String atchFileId = fvo.getAtchFileId();
@@ -59,7 +59,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 여러 개의 파일에 대한 정보(속성 및 상세)를 등록한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#insertFileInfs(java.util.List)
+	 * @see EgovFileMngService#insertFileInfs(java.util.List)
 	 */
 	public String insertFileInfs(List<?> fvoList) throws Exception {
 		String atchFileId = "";
@@ -76,7 +76,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 파일에 대한 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#selectFileInfs(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#selectFileInfs(FileVO)
 	 */
 	public List<FileVO> selectFileInfs(FileVO fvo) throws Exception {
 		return fileMngDAO.selectFileInfs(fvo);
@@ -85,7 +85,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 여러 개의 파일에 대한 정보(속성 및 상세)를 수정한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#updateFileInfs(java.util.List)
+	 * @see EgovFileMngService#updateFileInfs(java.util.List)
 	 */
 	public void updateFileInfs(List<?> fvoList) throws Exception {
 		//Delete & Insert
@@ -95,7 +95,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 하나의 파일을 삭제한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#deleteFileInf(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#deleteFileInf(FileVO)
 	 */
 	public void deleteFileInf(FileVO fvo) throws Exception {
 		fileMngDAO.deleteFileInf(fvo);
@@ -104,7 +104,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 파일에 대한 상세정보를 조회한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#selectFileInf(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#selectFileInf(FileVO)
 	 */
 	public FileVO selectFileInf(FileVO fvo) throws Exception {
 		return fileMngDAO.selectFileInf(fvo);
@@ -113,7 +113,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 파일 구분자에 대한 최대값을 구한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#getMaxFileSN(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#getMaxFileSN(FileVO)
 	 */
 	public int getMaxFileSN(FileVO fvo) throws Exception {
 		return fileMngDAO.getMaxFileSN(fvo);
@@ -122,7 +122,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 전체 파일을 삭제한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#deleteAllFileInf(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#deleteAllFileInf(FileVO)
 	 */
 	public void deleteAllFileInf(FileVO fvo) throws Exception {
 		fileMngDAO.deleteAllFileInf(fvo);
@@ -131,7 +131,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 파일명 검색에 대한 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#selectFileListByFileNm(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#selectFileListByFileNm(FileVO)
 	 */
 	public Map<String, Object> selectFileListByFileNm(FileVO fvo) throws Exception {
 		List<FileVO> result = fileMngDAO.selectFileListByFileNm(fvo);
@@ -148,7 +148,7 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	/**
 	 * 이미지 파일에 대한 목록을 조회한다.
 	 *
-	 * @see egovframework.com.cmm.service.EgovFileMngService#selectImageFileList(egovframework.com.cmm.service.FileVO)
+	 * @see EgovFileMngService#selectImageFileList(FileVO)
 	 */
 	public List<FileVO> selectImageFileList(FileVO vo) throws Exception {
 		return fileMngDAO.selectImageFileList(vo);

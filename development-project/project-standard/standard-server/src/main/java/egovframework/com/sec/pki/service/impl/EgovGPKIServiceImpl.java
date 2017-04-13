@@ -170,7 +170,7 @@ public class EgovGPKIServiceImpl extends EgovAbstractServiceImpl implements Egov
 	/**
 	 * 데이터 암호화 처리.
 	 *
-	 * @see egovframework.com.sec.pki.service.EgovGPKIService#encrypt(byte[], java.lang.String)
+	 * @see EgovGPKIService#encrypt(byte[], java.lang.String)
 	 */
 	public byte[] encrypt(byte[] message, String target) throws Exception {
 		//-----------------------------------------
@@ -212,7 +212,7 @@ public class EgovGPKIServiceImpl extends EgovAbstractServiceImpl implements Egov
 	/**
 	 * 복호화 처리.
 	 *
-	 * @see egovframework.com.sec.pki.service.EgovGPKIService#decrypt(byte[])
+	 * @see EgovGPKIService#decrypt(byte[])
 	 */
 	public byte[] decrypt(byte[] data) throws Exception {
 		//-----------------------------------------
@@ -274,7 +274,7 @@ public class EgovGPKIServiceImpl extends EgovAbstractServiceImpl implements Egov
 	/**
 	 * 전자서명 처리.
 	 *
-	 * @see egovframework.com.sec.pki.service.EgovGPKIService#sign(byte[])
+	 * @see EgovGPKIService#sign(byte[])
 	 */
 	public byte[] sign(byte[] message) throws Exception {
 		//-----------------------------------------
@@ -335,7 +335,7 @@ public class EgovGPKIServiceImpl extends EgovAbstractServiceImpl implements Egov
 	/**
 	 * 전자서명 검증.
 	 *
-	 * @see egovframework.com.sec.pki.service.EgovGPKIService#verifySign(byte[])
+	 * @see EgovGPKIService#verifySign(byte[])
 	 */
 	public byte[] verifySign(byte[] signedData) throws Exception {
 		//-----------------------------------------
@@ -373,7 +373,7 @@ public class EgovGPKIServiceImpl extends EgovAbstractServiceImpl implements Egov
 	/**
 	 * BASE64 encoding 처리.
 	 *
-	 * @see egovframework.com.sec.pki.service.EgovGPKIService#getBASE64String(byte[])
+	 * @see EgovGPKIService#getBASE64String(byte[])
 	 */
 	public String getBASE64String(byte[] data) throws Exception {
 		return new String(Base64.encodeBase64(data));
@@ -382,7 +382,7 @@ public class EgovGPKIServiceImpl extends EgovAbstractServiceImpl implements Egov
 	/**
 	 * BASE64 decoding 처리.
 	 *
-	 * @see egovframework.com.sec.pki.service.EgovGPKIService#getDataFromBASE64(java.lang.String)
+	 * @see EgovGPKIService#getDataFromBASE64(java.lang.String)
 	 */
 	public byte[] getDataFromBASE64(String base64) throws Exception {
 		return Base64.decodeBase64(base64.getBytes());

@@ -94,7 +94,7 @@ public class EgovCmyBBSUseInfoManageServiceImpl extends EgovAbstractServiceImpl 
     /**
      * 동호회에 사용되는 게시판 사용정보를 삭제한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovCmyBBSUseInfoManageService#deleteBBSUseInfByClub(egovframework.com.cop.bbs.service.BoardUseInf)
+     * @see EgovCmyBBSUseInfoManageService#deleteBBSUseInfByClub(BoardUseInf)
      */
     public void deleteBBSUseInfByClub(BoardUseInfVO bdUseVO) throws Exception {
 	List<BoardUseInf> result = bbsUseDAO.selectBBSUseInfByClub(bdUseVO);
@@ -115,7 +115,7 @@ public class EgovCmyBBSUseInfoManageServiceImpl extends EgovAbstractServiceImpl 
     /**
      * 커뮤니티에 사용되는 게시판 사용정보를 삭제한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovCmyBBSUseInfoManageService#deleteBBSUseInfByCmmnty(egovframework.com.cop.bbs.service.BoardUseInf)
+     * @see EgovCmyBBSUseInfoManageService#deleteBBSUseInfByCmmnty(BoardUseInf)
      */
     public void deleteBBSUseInfByCmmnty(BoardUseInfVO bdUseVO) throws Exception {
 	List<BoardUseInf> result = bbsUseDAO.selectBBSUseInfByCmmnty(bdUseVO);
@@ -137,7 +137,7 @@ public class EgovCmyBBSUseInfoManageServiceImpl extends EgovAbstractServiceImpl 
     /**
      * 동호회에 사용되는 모든 게시판 사용정보를 삭제한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovCmyBBSUseInfoManageService#deleteAllBBSUseInfByClub(egovframework.com.cop.bbs.service.BoardUseInfVO)
+     * @see EgovCmyBBSUseInfoManageService#deleteAllBBSUseInfByClub(BoardUseInfVO)
      */
     public void deleteAllBBSUseInfByClub(BoardUseInfVO bdUseVO) throws Exception {
 	bbsUseDAO.deleteAllBBSUseInfByClub(bdUseVO);
@@ -146,7 +146,7 @@ public class EgovCmyBBSUseInfoManageServiceImpl extends EgovAbstractServiceImpl 
     /**
      * 커뮤니티에 사용되는 모든 게시판 사용정보를 삭제한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovCmyBBSUseInfoManageService#deleteAllBBSUseInfByCmmnty(egovframework.com.cop.bbs.service.BoardUseInfVO)
+     * @see EgovCmyBBSUseInfoManageService#deleteAllBBSUseInfByCmmnty(BoardUseInfVO)
      */
     public void deleteAllBBSUseInfByCmmnty(BoardUseInfVO bdUseVO) throws Exception {
 	bbsUseDAO.deleteAllBBSUseInfByCmmnty(bdUseVO);
@@ -155,7 +155,7 @@ public class EgovCmyBBSUseInfoManageServiceImpl extends EgovAbstractServiceImpl 
     /**
      * 게시판에 대한 사용정보를 삭제한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovCmyBBSUseInfoManageService#deleteBBSUseInfByBoardId(egovframework.com.cop.bbs.service.BoardUseInf)
+     * @see EgovCmyBBSUseInfoManageService#deleteBBSUseInfByBoardId(BoardUseInf)
      */
     public void deleteBBSUseInfByBoardId(BoardUseInf bdUseInf) throws Exception {
 	bbsUseDAO.deleteBBSUseInfByBoardId(bdUseInf);
@@ -164,7 +164,7 @@ public class EgovCmyBBSUseInfoManageServiceImpl extends EgovAbstractServiceImpl 
     /**
      * 커뮤니티, 동호회에 사용되는 게시판 사용정보에 대한 목록을 조회한다.
      * 
-     * @see egovframework.com.cop.cmy.service.EgovCmyBBSUseInfoManageService#selectBBSUseInfsByTrget(egovframework.com.cop.bbs.service.BoardUseInfVO)
+     * @see EgovCmyBBSUseInfoManageService#selectBBSUseInfsByTrget(BoardUseInfVO)
      */
     public Map<String, Object> selectBBSUseInfsByTrget(BoardUseInfVO bdUseVO) throws Exception {
 	List<BoardUseInfVO> result = bbsUseDAO.selectBBSUseInfsByTrget(bdUseVO);

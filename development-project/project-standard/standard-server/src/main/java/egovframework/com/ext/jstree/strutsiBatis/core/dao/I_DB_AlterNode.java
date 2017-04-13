@@ -44,5 +44,5 @@ public interface I_DB_AlterNode extends
 	 * 
 	 * */
 	public int alterNode(P_ComprehensiveTree p_ComprehensiveTree,
-			String determineDBSetting);
+						 String determineDBSetting);
 }

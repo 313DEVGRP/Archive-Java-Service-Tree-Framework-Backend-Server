@@ -43,6 +43,6 @@ public interface I_DB_AlterNodeType extends
 	 * @return node type 수정 처리 결과에 따른 결과값 (int)
 	 * */
 	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree,
-			String determineDBSetting);
+							 String determineDBSetting);
 
 }

@@ -42,6 +42,6 @@ public interface I_DB_RemoveNode extends
 	 * @return node제거 처리 결과에 따른 결과값(int)
 	 * */
 	public int removeNode(P_ComprehensiveTree p_RemoveNode,
-			String determineDBSetting);
+						  String determineDBSetting);
 
 }
