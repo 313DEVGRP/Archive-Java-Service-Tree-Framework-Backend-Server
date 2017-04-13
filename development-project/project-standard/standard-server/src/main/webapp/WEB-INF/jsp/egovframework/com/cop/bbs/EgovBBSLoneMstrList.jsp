@@ -5,6 +5,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovBBSLoneMstrList.jsp
@@ -61,7 +62,7 @@
 </head>
 <body>
 
-<form name="frm" method="post" action="<c:url value='/cop/bbs/selectBoardMasterList.do'/>" >
+<form:form name="frm" method="post" action="<c:url value='/cop/bbs/selectBoardMasterList.do'/>" >
 <input type="hidden" name="bbsId">
 <input type="hidden" name="trgetId">
 
@@ -150,6 +151,6 @@
 	</div>
 	<input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 </div>
-</form>
+</form:form>
 </body>
 </html>

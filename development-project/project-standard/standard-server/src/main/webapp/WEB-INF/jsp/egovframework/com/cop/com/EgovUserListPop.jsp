@@ -4,6 +4,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="ImgUrl" value="${pageContext.request.contextPath}/images/egovframework/com/cmm/"/>
 
 <%
@@ -75,7 +76,7 @@
 
 </head>
 <body>
-<form name="frm" action ="<c:url value='/cop/com/selectUserList.do'/>" method="post">
+<form:form name="frm" action ="<c:url value='/cop/com/selectUserList.do'/>" method="post">
 <input type="hidden" name="targetMethod" value="${targetMethod}" />
 <input type="hidden" name="trgetId" value="${trgetId}" />
 <input type="hidden" name="PopFlag" value="Y" />
@@ -194,6 +195,6 @@
 	</tr>
 	</table>
 	</div>
-</form>
+</form:form>
 </body>
 </html>

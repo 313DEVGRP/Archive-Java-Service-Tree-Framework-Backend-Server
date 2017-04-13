@@ -5,6 +5,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovBoardMstrListPop.jsp
@@ -55,7 +56,7 @@
 
 </head>
 <body>
-<form name="frm" action ="" method="post">
+<form:form name="frm" action ="" method="post">
 <input type="hidden" name="bbsId" value="">
 
 	<table width="100%" cellpadding="8" class="table-search" border="0">
@@ -167,6 +168,6 @@
 	</tr>
 	</table>
 	</div>
-</form>
+</form:form>
 </body>
 </html>

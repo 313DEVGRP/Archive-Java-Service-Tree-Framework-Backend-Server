@@ -6,6 +6,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="ImgUrl" value="/images/egovframework/com/cop/bbs/"/>
 <%
  /**
@@ -95,7 +96,7 @@
 
 <div id="border">
 
-<form name="frm" action ="<c:url value='/cop/bbs${prefix}/selectBoardList.do'/>" method="post">
+<form:form name="frm" action ="<c:url value='/cop/bbs${prefix}/selectBoardList.do'/>" method="post">
 <input type="hidden" name="bbsId" value="<c:out value='${boardVO.bbsId}'/>" />
 <input type="hidden" name="nttId"  value="0" />
 <input type="hidden" name="bbsTyCode" value="<c:out value='${brdMstrVO.bbsTyCode}'/>" />
@@ -134,7 +135,7 @@
   </th>
  </tr>
  </table>
- </form>
+ </form:form>
 
 <table width="100%" cellpadding="8" class="listTable" summary="번호, 제목, 게시시작일, 게시종료일, 작성자, 작성일, 조회수   입니다">
  <thead>
@@ -155,10 +156,10 @@
  </thead>
 
  <tbody>
- 	<form name="submitParam" method="post">
+ 	<form:form name="submitParam" method="post">
 	 	<input type="hidden" name="bbsId"  />
 		<input type="hidden" name="nttId"  />
- 	</form>
+ 	</form:form>
 	 <c:forEach var="result" items="${resultList}" varStatus="status">
 	  <tr>
 	    <!--td class="lt_text3" nowrap><input type="checkbox" name="check1" class="check2"></td-->
@@ -175,7 +176,7 @@
 	    			<c:out value="${result.nttSj}" />
 	    		</c:when>
 	    		<c:otherwise>
-		    		<form name="subForm" method="post" action="<c:url value='/cop/bbs${prefix}/selectBoardArticle.do'/>">
+		    		<form:form name="subForm" method="post" action="<c:url value='/cop/bbs${prefix}/selectBoardArticle.do'/>">
 						<input type="hidden" name="bbsTyCode" value="<c:out value='${brdMstrVO.bbsTyCode}'/>" />
 						<input type="hidden" name="bbsAttrbCode" value="<c:out value='${brdMstrVO.bbsAttrbCode}'/>" />
 						<input type="hidden" name="authFlag" value="<c:out value='${brdMstrVO.authFlag}'/>" />
@@ -189,7 +190,7 @@
 			    		<span class="link">
 			    			<a href="#"  onclick="fn_egov_inqire_notice('${result.nttId}', '${result.bbsId }');"><c:out value="${result.nttSj}"/></a>
 			    		</span>
-			    	</form>
+			    	</form:form>
 	    		</c:otherwise>
 	    	</c:choose>
 	    </td>

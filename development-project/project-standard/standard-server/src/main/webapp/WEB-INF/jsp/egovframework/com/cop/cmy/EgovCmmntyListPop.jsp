@@ -5,6 +5,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovCmmntyList.jsp
@@ -58,7 +59,7 @@
 
 </head>
 <body>
-<form name="frm" method="post" action="<c:url value='/cop/cmy/selectCmmntyInfsByPop.do'/>">
+<form:form name="frm" method="post" action="<c:url value='/cop/cmy/selectCmmntyInfsByPop.do'/>">
 <input type="hidden" name="cmmntyId" />
 
 	<table width="100%" cellpadding="8" class="table-search" border="0">
@@ -154,6 +155,6 @@
 	<div align="center">
 	<span class="button"><input type="button" value="닫기" onclick="fn_egov_close();" alt="닫기"></span>
 	</div>
-</form>
+</form:form>
 </body>
 </html>

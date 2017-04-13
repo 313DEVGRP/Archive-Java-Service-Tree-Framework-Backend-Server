@@ -5,6 +5,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="ImgUrl" value="${pageContext.request.contextPath}/images/egovframework/com/cmm/"/>
 <%
  /**
@@ -67,7 +68,7 @@
 <div id="border" style="width:730px">
 <!-- 자바스크립트 경고 태그  -->
 <noscript class="noScriptTitle">자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</noscript>
-<form name="listForm" id="listForm" action="<c:url value='/cop/cmy/selectCmmntyInfs.do'/>" method="post">
+<form:form name="listForm" id="listForm" action="<c:url value='/cop/cmy/selectCmmntyInfs.do'/>" method="post">
 	<table width="100%" cellpadding="8" class="table-search" border="0">
 	 <tr>
 	  <td width="40%"class="title_left">
@@ -99,7 +100,7 @@
 	</table>
 <input name="qestnrTmplatId" type="hidden" value="">
 <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>">
-</form>
+</form:form>
 	<table width="100%" cellpadding="8" class="table-line"  summary="번호,커뮤니티명,생성자,생성일,사용여부   목록입니다" >
 	 <thead>
 	  <tr>

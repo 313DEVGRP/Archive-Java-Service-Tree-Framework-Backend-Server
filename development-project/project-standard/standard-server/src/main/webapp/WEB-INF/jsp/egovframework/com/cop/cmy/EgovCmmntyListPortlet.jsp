@@ -3,6 +3,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovCmmntyListPortlet.jsp
@@ -23,11 +24,11 @@
 <ul>
 <c:forEach var="result" items="${resultList}" varStatus="status">
    	<li style="padding-top:5px">
-		<form name="cmmntyForm2" method="post"  action="<c:url value='/cop/cmy/CmmntyMainPage.do'/>" >
+		<form:form name="cmmntyForm2" method="post"  action="<c:url value='/cop/cmy/CmmntyMainPage.do'/>" >
 		<input type="hidden" name="cmmntyId" value="<c:out value='${result.cmmntyId}'/>"/>
 		<input type="hidden" name="cmmntyNm" value="<c:out value='${result.cmmntyNm}'/>"/>
 		<input type="submit" value="<c:out value="${result.cmmntyNm}"/>"/>
-		</form>
+		</form:form>
 	</li>
 </c:forEach>
 </ul>

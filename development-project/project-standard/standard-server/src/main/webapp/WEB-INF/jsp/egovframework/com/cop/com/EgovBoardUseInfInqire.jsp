@@ -55,7 +55,7 @@
 
 </head>
 <body>
-<form name="boardUseInf" method="post" action="<c:url value='/cop/com/updateBBSUseInf.do'/>">
+<form:form name="boardUseInf" method="post" action="<c:url value='/cop/com/updateBBSUseInf.do'/>">
 <div style="visibility:hidden;display:none;"><input name="iptSubmit" type="submit" value="전송" title="전송"></div>
 <input type="hidden" name="pageIndex" value="<c:out value='${searchVO.pageIndex}'/>" />
 <input type="hidden" name="bbsId" value="<c:out value='${bdUseVO.bbsId}'/>" />
@@ -138,6 +138,6 @@
 	</table>
 	</div>
 </div>
-</form>
+</form:form>
 </body>
 </html>

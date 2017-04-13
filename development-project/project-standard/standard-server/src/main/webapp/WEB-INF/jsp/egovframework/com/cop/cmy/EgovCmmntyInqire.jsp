@@ -5,6 +5,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovCmmntyInqire.jsp
@@ -49,7 +50,7 @@
 
 </head>
 <body>
-<form name="frm" method="post" action="<c:url value='/cop/cmy/selectCmmntyInfs.do'/>">
+<form:form name="frm" method="post" action="<c:url value='/cop/cmy/selectCmmntyInfs.do'/>">
 <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 <input name="cmmntyId" type="hidden" value="<c:out value='${cmmntyVO.cmmntyId}'/>"/>
 <input name="param_cmmntyId" type="hidden" />
@@ -147,6 +148,6 @@
 	</table>
 	</div>
 </div>
-</form>
+</form:form>
 </body>
 </html>

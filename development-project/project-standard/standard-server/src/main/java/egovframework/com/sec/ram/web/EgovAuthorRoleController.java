@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import egovframework.rte.fdl.security.intercept.EgovReloadableFilterInvocationSecurityMetadataSource;
+
 /**
  * 권한별 롤관리에 관한 controller 클래스를 정의한다.
  * @author 공통서비스 개발팀 이문준
@@ -49,6 +51,9 @@ public class EgovAuthorRoleController {
     /** EgovPropertyService */
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
+
+	@Resource(name="databaseSecurityMetadataSource")
+	EgovReloadableFilterInvocationSecurityMetadataSource databaseSecurityMetadataSource;
 
     /**
 	 * 권한 롤 관계 화면 이동
@@ -128,6 +133,9 @@ public class EgovAuthorRoleController {
     	}
 
         status.setComplete();
+
+		databaseSecurityMetadataSource.reload();
+
         model.addAttribute("message", egovMessageSource.getMessage("success.common.insert"));		
 		return "forward:/sec/ram/EgovAuthorRoleList.do";
 	}    

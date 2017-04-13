@@ -5,6 +5,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovBoardUseInfList.jsp
@@ -68,7 +69,7 @@
 <body>
 <div id="border" style="width:730px">
 
-<form name="frm" method="post" action = "<c:url value='/cop/com/selectBBSUseInf.do'/>">
+<form:form name="frm" method="post" action = "<c:url value='/cop/com/selectBBSUseInf.do'/>">
 <div style="visibility:hidden;display:none;"><input name="iptSubmit" type="submit" value="전송" title="전송"></div>
 <input type="hidden" name="bbsId" >
 <input type="hidden" name="trgetId" >
@@ -197,7 +198,7 @@
 		<ui:pagination paginationInfo = "${paginationInfo}" type="image" jsFunction="fn_egov_select_bbsUseInfs" />
 	</div>
 	<input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
-	</form>
+	</form:form>
 </div>
 
 </body>

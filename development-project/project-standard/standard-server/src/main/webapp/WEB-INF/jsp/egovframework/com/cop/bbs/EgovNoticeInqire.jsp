@@ -5,6 +5,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovNoticeInqire.jsp
@@ -102,7 +103,7 @@
 
 </head>
 <body onload="onloading();">
-<form name="frm" method="post" action="">
+<form:form name="frm" method="post" action="">
 <input type="hidden" name="pageIndex" value="<c:out value='${searchVO.pageIndex}'/>">
 <input type="hidden" name="bbsId" value="<c:out value='${result.bbsId}'/>" >
 <input type="hidden" name="nttId" value="<c:out value='${result.nttId}'/>" >
@@ -271,6 +272,6 @@
 	</table>
 	</div>
 </div>
-</form>
+</form:form>
 </body>
 </html>

@@ -8,6 +8,7 @@ import egovframework.com.sec.ram.service.AuthorManageVO;
 import egovframework.com.sec.ram.service.EgovAuthorManageService;
 
 import egovframework.rte.fdl.property.EgovPropertyService;
+import egovframework.rte.fdl.security.intercept.EgovReloadableFilterInvocationSecurityMetadataSource;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 import javax.annotation.Resource;
@@ -59,6 +60,9 @@ public class EgovAuthorManageController {
     
     @Autowired
 	private DefaultBeanValidator beanValidator;
+
+	@Resource(name="databaseSecurityMetadataSource")
+	EgovReloadableFilterInvocationSecurityMetadataSource databaseSecurityMetadataSource;
     
     /**
 	 * 권한 목록화면 이동
@@ -158,6 +162,7 @@ public class EgovAuthorManageController {
 		} else {
 	    	egovAuthorManageService.insertAuthor(authorManage);
 	        status.setComplete();
+			databaseSecurityMetadataSource.reload();
 	        model.addAttribute("message", egovMessageSource.getMessage("success.common.insert"));
 	        return "forward:/sec/ram/EgovAuthor.do";
 		}
