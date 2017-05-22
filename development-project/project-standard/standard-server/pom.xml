@@ -32,7 +32,6 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
-		<!-- spring security 라이브러리 끝 -->
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

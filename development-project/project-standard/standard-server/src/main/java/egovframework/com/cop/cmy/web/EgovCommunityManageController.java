@@ -41,14 +41,12 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
 
 /**
  * 커뮤니티 정보를 관리하기 위한 컨트롤러 클래스
- * @author 공통서비스개발팀 이삼섭
- * @since 2009.06.01
- * @version 1.0
- * @see
  *
- * <pre>
+ * @author 공통서비스개발팀 이삼섭
+ * @version 1.0
+ * @see <pre>
  * << 개정이력(Modification Information) >>
- *   
+ *
  *   수정일      수정자           수정내용
  *   -------       --------    ---------------------------
  *   2009.4.2	이삼섭          최초 생성
@@ -58,11 +56,12 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
  *   							세션에서 가져온 값(탈퇴신청자)을 탈퇴승인자로 설정하도록 되어 있었음
  *
  * </pre>
+ * @since 2009.06.01
  */
 
 @Controller
 public class EgovCommunityManageController {
-	
+
     @Resource(name = "EgovCommunityManageService")
     private EgovCommunityManageService cmmntyService;
 
@@ -85,47 +84,47 @@ public class EgovCommunityManageController {
     private DefaultBeanValidator beanValidator;
 
     //Logger log = Logger.getLogger(this.getClass());
-	
-	/**
+
+    /**
      * 커뮤니티에 대한 목록을 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
      * @return
      * @throws Exception
      */
-    @IncludedInfo(name="커뮤니티관리", order = 270 ,gid = 40)
+    @IncludedInfo(name = "커뮤니티관리", order = 270, gid = 40)
     @RequestMapping("/cop/cmy/selectCmmntyInfs.do")
     public String selectCmmntyInfs(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
-	cmmntyVO.setPageUnit(propertyService.getInt("pageUnit"));
-	cmmntyVO.setPageSize(propertyService.getInt("pageSize"));
+        cmmntyVO.setPageUnit(propertyService.getInt("pageUnit"));
+        cmmntyVO.setPageSize(propertyService.getInt("pageSize"));
 
-	PaginationInfo paginationInfo = new PaginationInfo();
-	
-	paginationInfo.setCurrentPageNo(cmmntyVO.getPageIndex());
-	paginationInfo.setRecordCountPerPage(cmmntyVO.getPageUnit());
-	paginationInfo.setPageSize(cmmntyVO.getPageSize());
+        PaginationInfo paginationInfo = new PaginationInfo();
 
-	cmmntyVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-	cmmntyVO.setLastIndex(paginationInfo.getLastRecordIndex());
-	cmmntyVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+        paginationInfo.setCurrentPageNo(cmmntyVO.getPageIndex());
+        paginationInfo.setRecordCountPerPage(cmmntyVO.getPageUnit());
+        paginationInfo.setPageSize(cmmntyVO.getPageSize());
 
-	Map<String, Object> map = cmmntyService.selectCommunityInfs(cmmntyVO);
-	int totCnt = Integer.parseInt((String)map.get("resultCnt"));
-	
-	paginationInfo.setTotalRecordCount(totCnt);
+        cmmntyVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+        cmmntyVO.setLastIndex(paginationInfo.getLastRecordIndex());
+        cmmntyVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-	model.addAttribute("resultList", map.get("resultList"));
-	model.addAttribute("resultCnt", map.get("resultCnt"));
-	model.addAttribute("paginationInfo", paginationInfo);
+        Map<String, Object> map = cmmntyService.selectCommunityInfs(cmmntyVO);
+        int totCnt = Integer.parseInt((String) map.get("resultCnt"));
 
-	return "egovframework/com/cop/cmy/EgovCmmntyList";
+        paginationInfo.setTotalRecordCount(totCnt);
+
+        model.addAttribute("resultList", map.get("resultList"));
+        model.addAttribute("resultCnt", map.get("resultCnt"));
+        model.addAttribute("paginationInfo", paginationInfo);
+
+        return "egovframework/com/cop/cmy/EgovCmmntyList";
     }
 
     /**
      * 커뮤니티 등록을 위한 등록페이지로 이동한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -134,12 +133,12 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/addCmmntyInf.do")
     public String addCmmntyInf(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
-	return "egovframework/com/cop/cmy/EgovCmmntyRegist";
+        return "egovframework/com/cop/cmy/EgovCmmntyRegist";
     }
 
     /**
      * 커뮤니티 정보를 등록한다.
-     * 
+     *
      * @param cmmntyVO
      * @param cmmnty
      * @param sessionVO
@@ -150,32 +149,32 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/insertCmmntyInf.do")
     public String insertCmmntyInf(@ModelAttribute("searchVO") CommunityVO cmmntyVO, @ModelAttribute("community") Community community,
-	    BindingResult bindingResult, SessionStatus status, ModelMap model) throws Exception {
+                                  BindingResult bindingResult, SessionStatus status, ModelMap model) throws Exception {
 
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	beanValidator.validate(community, bindingResult);
+        beanValidator.validate(community, bindingResult);
 
-	if (bindingResult.hasErrors()) {
-	    return "egovframework/com/cop/cmy/EgovCmmntyRegist";
-	}
+        if (bindingResult.hasErrors()) {
+            return "egovframework/com/cop/cmy/EgovCmmntyRegist";
+        }
 
-	community.setUseAt("Y");
-	community.setRegistSeCode("REGC02");
-	community.setFrstRegisterId(user.getUniqId());
+        community.setUseAt("Y");
+        community.setRegistSeCode("REGC02");
+        community.setFrstRegisterId(user.getUniqId());
 
-	
-	if (isAuthenticated) {
-	    cmmntyService.insertCommunityInf(community);
-	}
 
-	return "forward:/cop/cmy/selectCmmntyInfs.do";
+        if (isAuthenticated) {
+            cmmntyService.insertCommunityInf(community);
+        }
+
+        return "forward:/cop/cmy/selectCmmntyInfs.do";
     }
 
     /**
      * 커뮤니티에 대한 상세정보를 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -184,24 +183,24 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/selectCmmntyInf.do")
     public String selectCmmntyInf(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model, HttpServletRequest request) throws Exception {
-	Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
-	CommunityVO vo = (CommunityVO)map.get("cmmntyVO");
-	
-	//-----------------------
-	// 제공 URL 
-	//-----------------------
-	vo.setProvdUrl(request.getContextPath()+ "/cop/cmy/CmmntyMainPage.do?cmmntyId=" + vo.getCmmntyId());
-	////---------------------
+        Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
+        CommunityVO vo = (CommunityVO) map.get("cmmntyVO");
 
-	model.addAttribute("cmmntyVO", vo);
-	model.addAttribute("result", map.get("resultList"));
+        //-----------------------
+        // 제공 URL
+        //-----------------------
+        vo.setProvdUrl(request.getContextPath() + "/cop/cmy/CmmntyMainPage.do?cmmntyId=" + vo.getCmmntyId());
+        ////---------------------
 
-	return "egovframework/com/cop/cmy/EgovCmmntyInqire";
+        model.addAttribute("cmmntyVO", vo);
+        model.addAttribute("result", map.get("resultList"));
+
+        return "egovframework/com/cop/cmy/EgovCmmntyInqire";
     }
 
     /**
      * 커뮤니티 정보 수정을 위한 수정페이지로 이동한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -210,23 +209,23 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/forUpdateCmmntyInf.do")
     public String forUpdateCmmntyInf(@ModelAttribute("searchVO") CommunityVO cmmntyVO, @RequestParam Map<String, Object> commandMap, ModelMap model)
-	    throws Exception {
+            throws Exception {
 
-	String cmmntyId = (String)commandMap.get("param_cmmntyId");
-	cmmntyVO.setCmmntyId(cmmntyId);
-	
-	Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
-	
-	model.addAttribute("cmmntyVO", (CommunityVO)map.get("cmmntyVO"));
-	model.addAttribute("cmmntyUser", (CommunityUser)map.get("cmmntyUser"));
-	model.addAttribute("result", map.get("resultList"));
+        String cmmntyId = (String) commandMap.get("param_cmmntyId");
+        cmmntyVO.setCmmntyId(cmmntyId);
 
-	return "egovframework/com/cop/cmy/EgovCmmntyUpdt";
+        Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
+
+        model.addAttribute("cmmntyVO", (CommunityVO) map.get("cmmntyVO"));
+        model.addAttribute("cmmntyUser", (CommunityUser) map.get("cmmntyUser"));
+        model.addAttribute("result", map.get("resultList"));
+
+        return "egovframework/com/cop/cmy/EgovCmmntyUpdt";
     }
 
     /**
      * 커뮤니티 정보를 수정한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param status
@@ -236,40 +235,40 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/updtCmmntyInf.do")
     public String updtCmmntyInf(@ModelAttribute("searchVO") CommunityVO cmmntyVO, @ModelAttribute("community") Community community,
-	    BindingResult bindingResult, SessionStatus status, ModelMap model) throws Exception {
+                                BindingResult bindingResult, SessionStatus status, ModelMap model) throws Exception {
 
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	beanValidator.validate(community, bindingResult);
-	if (bindingResult.hasErrors()) {
+        beanValidator.validate(community, bindingResult);
+        if (bindingResult.hasErrors()) {
 
-	    Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
-	    CommunityVO vo = (CommunityVO)map.get("cmmntyVO");
+            Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
+            CommunityVO vo = (CommunityVO) map.get("cmmntyVO");
 
-	    model.addAttribute("cmmntyVO", vo);
-	    model.addAttribute("result", map.get("resultList"));
+            model.addAttribute("cmmntyVO", vo);
+            model.addAttribute("result", map.get("resultList"));
 
-	    return "egovframework/com/cop/cmy/EgovCmmntyUpdt";
-	}
+            return "egovframework/com/cop/cmy/EgovCmmntyUpdt";
+        }
 
-	community.setLastUpdusrId(user.getUniqId());
-	
-	if (isAuthenticated) {
-	    if ("Y".equals(community.getUseAt())) {
-		cmmntyService.updateCommunityInf(community);
-	    } else {
-		cmmntyService.deleteCommunityInf(community);
-	    }
+        community.setLastUpdusrId(user.getUniqId());
 
-	}
+        if (isAuthenticated) {
+            if ("Y".equals(community.getUseAt())) {
+                cmmntyService.updateCommunityInf(community);
+            } else {
+                cmmntyService.deleteCommunityInf(community);
+            }
 
-	return "forward:/cop/cmy/selectCmmntyInfs.do";
+        }
+
+        return "forward:/cop/cmy/selectCmmntyInfs.do";
     }
 
     /**
      * 포트릿을 위한 커뮤니티 정보 목록 정보를 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -278,16 +277,16 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cus/CmmntyListPortlet.do")
     public String selectCmmntyListPortlet(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
-	List<CommunityVO> result = cmmntyService.selectCmmntyListPortlet(cmmntyVO);
-	
-	model.addAttribute("resultList", result);
+        List<CommunityVO> result = cmmntyService.selectCmmntyListPortlet(cmmntyVO);
 
-	return "egovframework/com/cop/cmy/EgovCmmntyListPortlet";
+        model.addAttribute("resultList", result);
+
+        return "egovframework/com/cop/cmy/EgovCmmntyListPortlet";
     }
 
     /**
      * 커뮤니티 메인페이지를 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -297,57 +296,57 @@ public class EgovCommunityManageController {
     @RequestMapping("/cop/cmy/CmmntyMainPage.do")
     public String selectCmmntyMainPage(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
 
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	cmmntyVO.setEmplyrId(user.getUniqId());
+        cmmntyVO.setEmplyrId(user.getUniqId());
 
-	String tmplatCours = cmmntyService.selectCmmntyTemplat(cmmntyVO);
-	if ("".equals(tmplatCours) || tmplatCours == null) {
-	    tmplatCours = "egovframework/com/cop/tpl/EgovCmmntyBaseTmpl";
-	}
-	Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
+        String tmplatCours = cmmntyService.selectCmmntyTemplat(cmmntyVO);
+        if ("".equals(tmplatCours) || tmplatCours == null) {
+            tmplatCours = "egovframework/com/cop/tpl/EgovCmmntyBaseTmpl";
+        }
+        Map<String, Object> map = cmmntyService.selectCommunityInf(cmmntyVO);
 
-	//model.addAttribute("cmmntyVO", cmmntyVO);
-	model.addAttribute("cmmntyVO", (CommunityVO)map.get("cmmntyVO"));
-	model.addAttribute("cmmntyUser", (CommunityUser)map.get("cmmntyUser"));
-		
-	//--------------------------------
-	// 게시판 목록 정보 처리
-	//--------------------------------
-	BoardMasterVO bbsVo = new BoardMasterVO();
-	
-	bbsVo.setTrgetId(cmmntyVO.getCmmntyId());
-	
-	List<BoardMasterVO> bbsResult = bbsAttrbService.selectAllBdMstrByTrget(bbsVo);
+        //model.addAttribute("cmmntyVO", cmmntyVO);
+        model.addAttribute("cmmntyVO", (CommunityVO) map.get("cmmntyVO"));
+        model.addAttribute("cmmntyUser", (CommunityUser) map.get("cmmntyUser"));
 
-	model.addAttribute("bbsList", bbsResult);
-	////------------------------------
+        //--------------------------------
+        // 게시판 목록 정보 처리
+        //--------------------------------
+        BoardMasterVO bbsVo = new BoardMasterVO();
 
-	//--------------------------------
-	// 동호회 목록 정보
-	//--------------------------------
-	Club clubVo = new Club();
-	
-	clubVo.setCmmntyId(cmmntyVO.getCmmntyId());
-	
-	List<ClubVO> clubResult = clubService.selectClubListPortletByTrget(clubVo);
+        bbsVo.setTrgetId(cmmntyVO.getCmmntyId());
 
-	model.addAttribute("clubList", clubResult);
-	////------------------------------
+        List<BoardMasterVO> bbsResult = bbsAttrbService.selectAllBdMstrByTrget(bbsVo);
 
-	if (isAuthenticated) {
-	    model.addAttribute("isAuthenticated", "Y");
-	} else {
-	    model.addAttribute("isAuthenticated", "N");
-	}
-	
-	return tmplatCours;
+        model.addAttribute("bbsList", bbsResult);
+        ////------------------------------
+
+        //--------------------------------
+        // 동호회 목록 정보
+        //--------------------------------
+        Club clubVo = new Club();
+
+        clubVo.setCmmntyId(cmmntyVO.getCmmntyId());
+
+        List<ClubVO> clubResult = clubService.selectClubListPortletByTrget(clubVo);
+
+        model.addAttribute("clubList", clubResult);
+        ////------------------------------
+
+        if (isAuthenticated) {
+            model.addAttribute("isAuthenticated", "Y");
+        } else {
+            model.addAttribute("isAuthenticated", "N");
+        }
+
+        return tmplatCours;
     }
-	
+
     /**
      * 커뮤니티 메인페이지의 기본 내용(게시판 4개 표시) 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -356,63 +355,63 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/CmmntyMainContents.do")
     public String selectCmmntyMainContents(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	@SuppressWarnings("unused")
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        @SuppressWarnings("unused")
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	cmmntyVO.setEmplyrId(user.getUniqId());
+        cmmntyVO.setEmplyrId(user.getUniqId());
 
-	//--------------------------------
-	// 게시판 목록 정보 처리
-	//--------------------------------
-	BoardMasterVO bbsVo = new BoardMasterVO();
-	
-	bbsVo.setTrgetId(cmmntyVO.getCmmntyId());
-	
-	List<BoardMasterVO> bbsResult = bbsAttrbService.selectAllBdMstrByTrget(bbsVo);
+        //--------------------------------
+        // 게시판 목록 정보 처리
+        //--------------------------------
+        BoardMasterVO bbsVo = new BoardMasterVO();
 
-	// 방명록 제외 처리
-	for (int i = 0; i < bbsResult.size(); i++) {
-	    if ("BBST04".equals(bbsResult.get(i).getBbsTyCode())) {
-		bbsResult.remove(i);
-	    }
-	}
+        bbsVo.setTrgetId(cmmntyVO.getCmmntyId());
 
-	model.addAttribute("bbsList", bbsResult);
+        List<BoardMasterVO> bbsResult = bbsAttrbService.selectAllBdMstrByTrget(bbsVo);
 
-	//--------------------------------
-	// 게시물 목록 정보 처리
-	//--------------------------------
-	BoardVO boardVo = null;
-	BoardMasterVO masterVo = null;
-	
-	ArrayList<Object> target = new ArrayList<Object>();	// Object => List<BoardVO>
-	for (int i = 0; i < bbsResult.size() && i < 4; i++) {
-	    masterVo = bbsResult.get(i);
-	    boardVo = new BoardVO();
+        // 방명록 제외 처리
+        for (int i = 0; i < bbsResult.size(); i++) {
+            if ("BBST04".equals(bbsResult.get(i).getBbsTyCode())) {
+                bbsResult.remove(i);
+            }
+        }
 
-	    boardVo.setBbsId(masterVo.getBbsId());
-	    boardVo.setBbsNm(masterVo.getBbsNm());
+        model.addAttribute("bbsList", bbsResult);
 
-	    boardVo.setPageUnit(4);
-	    boardVo.setPageSize(4);
+        //--------------------------------
+        // 게시물 목록 정보 처리
+        //--------------------------------
+        BoardVO boardVo = null;
+        BoardMasterVO masterVo = null;
 
-	    boardVo.setFirstIndex(0);
-	    boardVo.setRecordCountPerPage(4);
+        ArrayList<Object> target = new ArrayList<Object>();    // Object => List<BoardVO>
+        for (int i = 0; i < bbsResult.size() && i < 4; i++) {
+            masterVo = bbsResult.get(i);
+            boardVo = new BoardVO();
 
-	    Map<String, Object> map = bbsMngService.selectBoardArticles(boardVo, masterVo.getBbsAttrbCode());
+            boardVo.setBbsId(masterVo.getBbsId());
+            boardVo.setBbsNm(masterVo.getBbsNm());
 
-	    target.add(map.get("resultList"));
-	}
+            boardVo.setPageUnit(4);
+            boardVo.setPageSize(4);
 
-	model.addAttribute("articleList", target);
+            boardVo.setFirstIndex(0);
+            boardVo.setRecordCountPerPage(4);
 
-	return "egovframework/com/cop/tpl/EgovCmmntyBaseTmplContents";
+            Map<String, Object> map = bbsMngService.selectBoardArticles(boardVo, masterVo.getBbsAttrbCode());
+
+            target.add(map.get("resultList"));
+        }
+
+        model.addAttribute("articleList", target);
+
+        return "egovframework/com/cop/tpl/EgovCmmntyBaseTmplContents";
     }
 
     /**
      * 커뮤니티 사용신청을 등록한다.
-     * 
+     *
      * @param cmmntyUser
      * @param sessionVO
      * @param model
@@ -421,64 +420,64 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/insertCmmntyUserBySelf.do")
     public String insertCmmntyUserBySelf(@ModelAttribute("cmmntyUser") CommunityUser cmmntyUser, ModelMap model) throws Exception {
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	String retVal = "";
+        String retVal = "";
 
-	if ("".equals(cmmntyUser.getMngrAt())) {
-	    cmmntyUser.setMngrAt("N");
-	}
-	cmmntyUser.setUseAt("Y");
-	cmmntyUser.setFrstRegisterId(user.getUniqId());
-	cmmntyUser.setEmplyrId(user.getUniqId());
+        if ("".equals(cmmntyUser.getMngrAt())) {
+            cmmntyUser.setMngrAt("N");
+        }
+        cmmntyUser.setUseAt("Y");
+        cmmntyUser.setFrstRegisterId(user.getUniqId());
+        cmmntyUser.setEmplyrId(user.getUniqId());
 
-	if (isAuthenticated) {
+        if (isAuthenticated) {
 
-	    //---------------------------------------------
-	    // 승인요청 처리
-	    //---------------------------------------------
-	    //retVal = cmmntyService.insertCommunityUserInf(cmmntyUser);
-	    retVal = cmmntyService.checkCommunityUserInf(cmmntyUser);
+            //---------------------------------------------
+            // 승인요청 처리
+            //---------------------------------------------
+            //retVal = cmmntyService.insertCommunityUserInf(cmmntyUser);
+            retVal = cmmntyService.checkCommunityUserInf(cmmntyUser);
 
-	    if (!retVal.equals("EXIST")) {
-		
-		CommunityVO cmmntyVO = new CommunityVO();
-		
-		cmmntyVO.setCmmntyId(cmmntyUser.getCmmntyId());
-		
-		CommunityUser manager = cmmntyService.selectManager(cmmntyVO);
+            if (!retVal.equals("EXIST")) {
 
-		ConfirmHistory history = new ConfirmHistory();
+                CommunityVO cmmntyVO = new CommunityVO();
 
-		history.setConfmRqesterId(user.getUniqId()); 		// 요청자 ID
-		history.setConfmerId(manager.getEmplyrId()); 		// 관리자
-		history.setConfmTyCode("CF11"); 			// 커뮤니티사용자등록
-		history.setConfmSttusCode("AP01"); 			// 승인요청
-		history.setOpertTyCode("WC01"); 			// 회원가입
-		history.setOpertId(""); 				// 작업자 ID
-		history.setTrgetJobTyCode("CMY"); 			// 대상작업구분
-		history.setTrgetJobId(cmmntyUser.getCmmntyId());	// 대상작업 ID
+                cmmntyVO.setCmmntyId(cmmntyUser.getCmmntyId());
 
-		int cnt = confmService.countConfirmRequest(history);
+                CommunityUser manager = cmmntyService.selectManager(cmmntyVO);
 
-		if (cnt == 0) {
-		    confmService.insertConfirmRequest(history);
-		} else {
-		    retVal = "ING";
-		}
-	    }
-	    ////-------------------------------------------
-	}
+                ConfirmHistory history = new ConfirmHistory();
 
-	model.addAttribute("returnMsg", retVal);
-	
-	return "egovframework/com/cop/cmy/EgovCmmntyMsg";
+                history.setConfmRqesterId(user.getUniqId());        // 요청자 ID
+                history.setConfmerId(manager.getEmplyrId());        // 관리자
+                history.setConfmTyCode("CF11");            // 커뮤니티사용자등록
+                history.setConfmSttusCode("AP01");            // 승인요청
+                history.setOpertTyCode("WC01");            // 회원가입
+                history.setOpertId("");                // 작업자 ID
+                history.setTrgetJobTyCode("CMY");            // 대상작업구분
+                history.setTrgetJobId(cmmntyUser.getCmmntyId());    // 대상작업 ID
+
+                int cnt = confmService.countConfirmRequest(history);
+
+                if (cnt == 0) {
+                    confmService.insertConfirmRequest(history);
+                } else {
+                    retVal = "ING";
+                }
+            }
+            ////-------------------------------------------
+        }
+
+        model.addAttribute("returnMsg", retVal);
+
+        return "egovframework/com/cop/cmy/EgovCmmntyMsg";
     }
 
     /**
      * 팝업을 위한 커뮤니티 목록 정보를 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -487,34 +486,34 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/selectCmmntyInfsByPop.do")
     public String selectCmmntyInfsByPop(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
-	cmmntyVO.setPageUnit(propertyService.getInt("pageUnit"));
-	cmmntyVO.setPageSize(propertyService.getInt("pageSize"));
+        cmmntyVO.setPageUnit(propertyService.getInt("pageUnit"));
+        cmmntyVO.setPageSize(propertyService.getInt("pageSize"));
 
-	PaginationInfo paginationInfo = new PaginationInfo();
-	
-	paginationInfo.setCurrentPageNo(cmmntyVO.getPageIndex());
-	paginationInfo.setRecordCountPerPage(cmmntyVO.getPageUnit());
-	paginationInfo.setPageSize(cmmntyVO.getPageSize());
+        PaginationInfo paginationInfo = new PaginationInfo();
 
-	cmmntyVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-	cmmntyVO.setLastIndex(paginationInfo.getLastRecordIndex());
-	cmmntyVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+        paginationInfo.setCurrentPageNo(cmmntyVO.getPageIndex());
+        paginationInfo.setRecordCountPerPage(cmmntyVO.getPageUnit());
+        paginationInfo.setPageSize(cmmntyVO.getPageSize());
 
-	HashMap<?, ?> _map = (HashMap<?, ?>)cmmntyService.selectCommunityInfs(cmmntyVO);
-	int totCnt = Integer.parseInt((String)_map.get("resultCnt"));
-	
-	paginationInfo.setTotalRecordCount(totCnt);
+        cmmntyVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+        cmmntyVO.setLastIndex(paginationInfo.getLastRecordIndex());
+        cmmntyVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-	model.addAttribute("resultList", _map.get("resultList"));
-	model.addAttribute("resultCnt", _map.get("resultCnt"));
-	model.addAttribute("paginationInfo", paginationInfo);
+        HashMap<?, ?> _map = (HashMap<?, ?>) cmmntyService.selectCommunityInfs(cmmntyVO);
+        int totCnt = Integer.parseInt((String) _map.get("resultCnt"));
 
-	return "egovframework/com/cop/cmy/EgovCmmntyListPop";
+        paginationInfo.setTotalRecordCount(totCnt);
+
+        model.addAttribute("resultList", _map.get("resultList"));
+        model.addAttribute("resultCnt", _map.get("resultCnt"));
+        model.addAttribute("paginationInfo", paginationInfo);
+
+        return "egovframework/com/cop/cmy/EgovCmmntyListPop";
     }
 
     /**
      * 커뮤니티 탈퇴신청을 처리한다.
-     * 
+     *
      * @param cmmntyUser
      * @param model
      * @return
@@ -522,41 +521,41 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/deleteCmmntyUserBySelf.do")
     public String deleteCmmntyUserBySelf(@ModelAttribute("cmmntyUser") CommunityUser cmmntyUser, ModelMap model) throws Exception {
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	String retVal = "DEL_REQ_SUCCESS";
+        String retVal = "DEL_REQ_SUCCESS";
 
-	cmmntyUser.setUseAt("N");
-	cmmntyUser.setLastUpdusrId(user.getUniqId());
-	//cmmntyUser.setEmplyrId(user.getUniqId());		//커뮤니티 탈퇴 요청시 승인자를 선택하므로 탈퇴 승인자가 자신이 될 수 없음(2011.9.7 수정분)
-	cmmntyUser.setSecsnDe(EgovDateUtil.getToday());
+        cmmntyUser.setUseAt("N");
+        cmmntyUser.setLastUpdusrId(user.getUniqId());
+        //cmmntyUser.setEmplyrId(user.getUniqId());		//커뮤니티 탈퇴 요청시 승인자를 선택하므로 탈퇴 승인자가 자신이 될 수 없음(2011.9.7 수정분)
+        cmmntyUser.setSecsnDe(EgovDateUtil.getToday());
 
-	if (isAuthenticated) {
-	    ConfirmHistory history = new ConfirmHistory();
-	    
-	    history.setConfmRqesterId(user.getUniqId());
-	    history.setConfmerId(cmmntyUser.getEmplyrId());
-	    history.setConfmTyCode("CF12"); //006
-	    history.setConfmSttusCode("AP01"); //007
-	    history.setOpertTyCode("WC03");
-	    history.setOpertId("");
-	    history.setTrgetJobTyCode("CMY");
-	    history.setTrgetJobId(cmmntyUser.getCmmntyId());
+        if (isAuthenticated) {
+            ConfirmHistory history = new ConfirmHistory();
 
-	    confmService.insertConfirmRequest(history);
+            history.setConfmRqesterId(user.getUniqId());
+            history.setConfmerId(cmmntyUser.getEmplyrId());
+            history.setConfmTyCode("CF12"); //006
+            history.setConfmSttusCode("AP01"); //007
+            history.setOpertTyCode("WC03");
+            history.setOpertId("");
+            history.setTrgetJobTyCode("CMY");
+            history.setTrgetJobId(cmmntyUser.getCmmntyId());
 
-	    //cmmntyService.deleteCommunityUserInf(cmmntyUser);
-	}
+            confmService.insertConfirmRequest(history);
 
-	model.addAttribute("returnMsg", retVal);
-	
-	return "egovframework/com/cop/cmy/EgovCmmntyMsg";
+            //cmmntyService.deleteCommunityUserInf(cmmntyUser);
+        }
+
+        model.addAttribute("returnMsg", retVal);
+
+        return "egovframework/com/cop/cmy/EgovCmmntyMsg";
     }
-    
+
     /**
      * 미리보기 커뮤니티 메인페이지를 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -566,84 +565,84 @@ public class EgovCommunityManageController {
     @RequestMapping("/cop/cmy/previewCmmntyMainPage.do")
     public String previewCmmntyMainPage(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
 
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	cmmntyVO.setEmplyrId(user.getUniqId());
+        cmmntyVO.setEmplyrId(user.getUniqId());
 
-	String tmplatCours = cmmntyVO.getSearchWrd();
-	
-	CommunityVO vo = new CommunityVO();
-	
-	vo.setCmmntyNm("미리보기 커뮤니티");
-	vo.setCmmntyIntrcn("미리보기를 위한 커뮤니티입니다.");
-	vo.setUseAt("Y");
-	vo.setFrstRegisterId(user.getUniqId());	// 본인
-	
-	CommunityUser cmmntyUser = new CommunityUser();
-	
-	cmmntyUser.setEmplyrId(user.getUniqId());
-	cmmntyUser.setEmplyrNm("관리자");
+        String tmplatCours = cmmntyVO.getSearchWrd();
 
-	model.addAttribute("cmmntyVO", vo);
-	model.addAttribute("cmmntyUser", cmmntyUser);
-		
-	//--------------------------------
-	// 게시판 목록 정보 처리
-	//--------------------------------
-	List<BoardMasterVO> bbsResult = new ArrayList<BoardMasterVO>();
-	
-	BoardMasterVO target = null;
-	
-	target = new BoardMasterVO();
-	target.setBbsNm("방명록");
-	bbsResult.add(target);
-	
-	target = new BoardMasterVO();
-	target.setBbsNm("공지게시판");
-	bbsResult.add(target);
-	
-	target = new BoardMasterVO();
-	target.setBbsNm("갤러리");
-	bbsResult.add(target);
-	
-	target = new BoardMasterVO();
-	target.setBbsNm("자유게시판");
-	bbsResult.add(target);
-	
-	target = new BoardMasterVO();
-	target.setBbsNm("자료실");
-	bbsResult.add(target);
-	
-	model.addAttribute("bbsList", bbsResult);
-	////------------------------------
+        CommunityVO vo = new CommunityVO();
 
-	//--------------------------------
-	// 동호회 목록 정보
-	//--------------------------------
-	List<ClubVO> clubResult = new ArrayList<ClubVO>();
-	
-	ClubVO club = new ClubVO();
-	club.setClbNm("미리보기 동호회");
-	clubResult.add(club);
+        vo.setCmmntyNm("미리보기 커뮤니티");
+        vo.setCmmntyIntrcn("미리보기를 위한 커뮤니티입니다.");
+        vo.setUseAt("Y");
+        vo.setFrstRegisterId(user.getUniqId());    // 본인
 
-	model.addAttribute("clubList", clubResult);
-	////------------------------------
+        CommunityUser cmmntyUser = new CommunityUser();
 
-	if (isAuthenticated) {
-	    model.addAttribute("isAuthenticated", "Y");
-	} else {
-	    model.addAttribute("isAuthenticated", "N");
-	}
-	
-	model.addAttribute("preview", "true");
-	
-	return tmplatCours;
+        cmmntyUser.setEmplyrId(user.getUniqId());
+        cmmntyUser.setEmplyrNm("관리자");
+
+        model.addAttribute("cmmntyVO", vo);
+        model.addAttribute("cmmntyUser", cmmntyUser);
+
+        //--------------------------------
+        // 게시판 목록 정보 처리
+        //--------------------------------
+        List<BoardMasterVO> bbsResult = new ArrayList<BoardMasterVO>();
+
+        BoardMasterVO target = null;
+
+        target = new BoardMasterVO();
+        target.setBbsNm("방명록");
+        bbsResult.add(target);
+
+        target = new BoardMasterVO();
+        target.setBbsNm("공지게시판");
+        bbsResult.add(target);
+
+        target = new BoardMasterVO();
+        target.setBbsNm("갤러리");
+        bbsResult.add(target);
+
+        target = new BoardMasterVO();
+        target.setBbsNm("자유게시판");
+        bbsResult.add(target);
+
+        target = new BoardMasterVO();
+        target.setBbsNm("자료실");
+        bbsResult.add(target);
+
+        model.addAttribute("bbsList", bbsResult);
+        ////------------------------------
+
+        //--------------------------------
+        // 동호회 목록 정보
+        //--------------------------------
+        List<ClubVO> clubResult = new ArrayList<ClubVO>();
+
+        ClubVO club = new ClubVO();
+        club.setClbNm("미리보기 동호회");
+        clubResult.add(club);
+
+        model.addAttribute("clubList", clubResult);
+        ////------------------------------
+
+        if (isAuthenticated) {
+            model.addAttribute("isAuthenticated", "Y");
+        } else {
+            model.addAttribute("isAuthenticated", "N");
+        }
+
+        model.addAttribute("preview", "true");
+
+        return tmplatCours;
     }
-    
+
     /**
      * 커뮤니티 메인페이지의 기본 내용(게시판 4개 표시) 조회한다.
-     * 
+     *
      * @param cmmntyVO
      * @param sessionVO
      * @param model
@@ -652,50 +651,50 @@ public class EgovCommunityManageController {
      */
     @RequestMapping("/cop/cmy/previewCmmntyMainContents.do")
     public String previewCmmntyMainContents(@ModelAttribute("searchVO") CommunityVO cmmntyVO, ModelMap model) throws Exception {
-	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-	@SuppressWarnings("unused")
-	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        @SuppressWarnings("unused")
+        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-	cmmntyVO.setEmplyrId(user.getUniqId());
+        cmmntyVO.setEmplyrId(user.getUniqId());
 
-	//--------------------------------
-	// 게시판 목록 정보 처리
-	//--------------------------------
-	List<BoardMasterVO> bbsResult = new ArrayList<BoardMasterVO>();
+        //--------------------------------
+        // 게시판 목록 정보 처리
+        //--------------------------------
+        List<BoardMasterVO> bbsResult = new ArrayList<BoardMasterVO>();
 
-	BoardMasterVO master = null;
-	
-	master = new BoardMasterVO();
-	master.setBbsNm("공지게시판");
-	bbsResult.add(master);
-	
-	master = new BoardMasterVO();
-	master.setBbsNm("갤러리");
-	bbsResult.add(master);
-	
-	master = new BoardMasterVO();
-	master.setBbsNm("자유게시판");
-	bbsResult.add(master);
-	
-	master = new BoardMasterVO();
-	master.setBbsNm("자료실");
-	bbsResult.add(master);
+        BoardMasterVO master = null;
 
-	model.addAttribute("bbsList", bbsResult);
+        master = new BoardMasterVO();
+        master.setBbsNm("공지게시판");
+        bbsResult.add(master);
 
-	//--------------------------------
-	// 게시물 목록 정보 처리
-	//--------------------------------	
-	ArrayList<Object> target = new ArrayList<Object>();	// Object => List<BoardVO>
-	for (int i = 0; i < bbsResult.size() && i < 4; i++) {
+        master = new BoardMasterVO();
+        master.setBbsNm("갤러리");
+        bbsResult.add(master);
 
-	    target.add(null);
-	}
+        master = new BoardMasterVO();
+        master.setBbsNm("자유게시판");
+        bbsResult.add(master);
 
-	model.addAttribute("articleList", target);
-	
-	model.addAttribute("preview", "true");
+        master = new BoardMasterVO();
+        master.setBbsNm("자료실");
+        bbsResult.add(master);
 
-	return "egovframework/com/cop/tpl/EgovCmmntyBaseTmplContents";
+        model.addAttribute("bbsList", bbsResult);
+
+        //--------------------------------
+        // 게시물 목록 정보 처리
+        //--------------------------------
+        ArrayList<Object> target = new ArrayList<Object>();    // Object => List<BoardVO>
+        for (int i = 0; i < bbsResult.size() && i < 4; i++) {
+
+            target.add(null);
+        }
+
+        model.addAttribute("articleList", target);
+
+        model.addAttribute("preview", "true");
+
+        return "egovframework/com/cop/tpl/EgovCmmntyBaseTmplContents";
     }
 }
