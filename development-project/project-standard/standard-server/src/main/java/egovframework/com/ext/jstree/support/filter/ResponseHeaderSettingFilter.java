@@ -23,7 +23,7 @@ public class ResponseHeaderSettingFilter implements Filter {
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 
-		//response.setHeader("Access-Control-Allow-Origin", "http://313.co.kr");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("X-Frame-Options", "SAMEORIGIN");
 		response.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
 		//response.setHeader("X-Content-Type-Options", "nosniff");
