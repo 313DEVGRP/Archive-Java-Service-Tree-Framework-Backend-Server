@@ -114,14 +114,15 @@ public class EgovFacebookController {
         request.getSession().setAttribute("id", facebookAccount.getId());
         if (StringUtils.equals(resultString, "needTheNickname")) {
             request.getSession().setAttribute("resultString", "needTheNickname");
-            return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+            //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         } else if (StringUtils.equals(resultString, "joinedAccount")) {
             request.getSession().setAttribute("resultString", "joinedAccount");
-            return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+            //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         } else {
             request.getSession().setAttribute("resultString", "insertAccount");
-            return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+            //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         }
+        return "redirect:/";
     }
 
     /**
