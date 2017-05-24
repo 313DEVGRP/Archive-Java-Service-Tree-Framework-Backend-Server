@@ -122,7 +122,7 @@ public class EgovFacebookController {
             request.getSession().setAttribute("resultString", "insertAccount");
             //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         }
-        return "redirect:/";
+        return "redirect:/index.html";
     }
 
     /**
