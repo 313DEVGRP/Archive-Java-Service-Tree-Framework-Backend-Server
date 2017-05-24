@@ -135,7 +135,7 @@ public class EgovFacebookController {
             gid = 3131)
     @RequestMapping(value = "/uss/ion/fbk/facebookSignin.do", method = RequestMethod.GET)
     public String facebookSignin(Model model) {
-        return "egovframework/com/uss/ion/fbk/EgovFacebookSignin";
+        return "egovframework/rivalWar/api/snsLogin/index";
     }
 
 
