@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ProgrmManageDtl">
+
+	<typeAlias  alias="comDefaultVO" type="egovframework.com.cmm.ComDefaultVO"/>
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="progrmManageVO" type="egovframework.let.sym.prm.service.ProgrmManageVO"/>
+	<typeAlias  alias="progrmManageDtlVO" type="egovframework.let.sym.prm.service.ProgrmManageDtlVO"/>
+
+    <!-- 프로그램 변경요청  --> 
+	<resultMap id="progrmManageDtl" class="egovframework.let.sym.prm.service.ProgrmManageDtlVO">
+	  <result property="progrmFileNm"     column="PROGRM_FILE_NM"     columnIndex="1"/>
+      <result property="rqesterNo"        column="REQUST_NO"         columnIndex="2"/>
+      <result property="rqesterPersonId"  column="RQESTER_ID"         columnIndex="3"/>
+      <result property="changerqesterCn"  column="CHANGE_REQUST_CN"   columnIndex="4" jdbcType="CLOB" typeHandler="egovframework.com.cmm.AltibaseClobStringTypeHandler"/>
+      <result property="rqesterProcessCn" column="REQUST_PROCESS_CN" columnIndex="5" jdbcType="CLOB" typeHandler="egovframework.com.cmm.AltibaseClobStringTypeHandler"/>
+      <result property="opetrId"          column="OPETR_ID"           columnIndex="6"/>
+      <result property="processSttus"     column="PROCESS_STTUS_CODE" columnIndex="7"/>
+      <result property="processDe"        column="PROCESS_DE"         columnIndex="8"/>
+      <result property="rqesterDe"        column="REQUST_DE"         columnIndex="9"/>
+      <result property="rqesterSj"        column="REQUST_SJ"         columnIndex="10"/>
+	</resultMap>
+	
+    <!-- 프로그램 변경요청 TMP --> 
+	<resultMap id="progrmManageDtl_Temp" class="egovframework.let.sym.prm.service.ProgrmManageDtlVO">
+      <result property="rqesterNo"        column="REQUST_NO"         columnIndex="1"/>
+	</resultMap>
+
+	<select id="progrmManageDAO.selectProgrmChangeRequstList_D" parameterClass="comDefaultVO" resultMap="progrmManageDtl">
+		<![CDATA[
+           SELECT 
+				  PROGRM_FILE_NM                    AS "PROGRM_FILE_NM" 
+				, REQUST_NO                        AS "REQUST_NO" 
+				, RQESTER_ID                        AS "RQESTER_ID" 
+				, CHANGE_REQUST_CN                  AS "CHANGE_REQUST_CN" 
+				, REQUST_PROCESS_CN                AS "REQUST_PROCESS_CN"
+				, OPETR_ID                          AS "OPETR_ID" 
+				, trim(PROCESS_STTUS_CODE)          AS "PROCESS_STTUS_CODE"
+				, to_char(PROCESS_DE, 'YYYY-MM-DD') AS "PROCESS_DE"   
+				, to_char(REQUST_DE, 'YYYY-MM-DD') AS "REQUST_DE" 
+				, REQUST_SJ                        AS "REQUST_SJ"
+           FROM ( 
+               SELECT rownum rn
+					, TB.PROGRM_FILE_NM    
+					, TB.REQUST_NO        
+					, TB.RQESTER_ID        
+					, TB.CHANGE_REQUST_CN  
+					, TB.REQUST_PROCESS_CN
+					, TB.OPETR_ID          
+					, TB.PROCESS_STTUS_CODE
+					, TB.PROCESS_DE        
+					, TB.REQUST_DE        
+					, TB.REQUST_SJ        
+               FROM (
+                     SELECT
+                            PROGRM_FILE_NM    
+                          , REQUST_NO        
+                          , RQESTER_ID        
+                          , CHANGE_REQUST_CN  
+                          , REQUST_PROCESS_CN
+                          , OPETR_ID          
+                          , PROCESS_STTUS_CODE
+                          , PROCESS_DE        
+                          , REQUST_DE        
+                          , REQUST_SJ        
+					   FROM LETTHPROGRMCHANGEDTLS
+				WHERE PROGRM_FILE_NM like '%'|| #searchKeyword#||'%'
+	       ) TB )  WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+		 ]]>
+	</select>
+
+	<!-- 총건수 조회 -->
+	<select id="progrmManageDAO.selectProgrmChangeRequstListTotCnt_S" parameterClass="comDefaultVO" resultClass="int">
+		<![CDATA[
+		SELECT COUNT(*) AS "totcnt"
+		  FROM LETTHPROGRMCHANGEDTLS
+		WHERE PROGRM_FILE_NM like '%'|| #searchKeyword#||'%'
+		]]>
+	</select>
+
+	<select id="progrmManageDAO.selectProgrmChangeRequstNo_D" parameterClass="progrmManageDtlVO" resultClass="progrmManageDtlVO">
+		<![CDATA[
+			select nvl(max(REQUST_NO),0)+1 AS "rqesterNo"
+			from LETTHPROGRMCHANGEDTLS
+		 ]]>
+	</select>
+
+	<select id="progrmManageDAO.selectProgrmChangeRequst_D" parameterClass="progrmManageDtlVO" resultMap="progrmManageDtl">
+		<![CDATA[
+			SELECT
+				  PROGRM_FILE_NM AS "PROGRM_FILE_NM" 
+				, REQUST_NO AS "REQUST_NO" 
+				, RQESTER_ID AS "RQESTER_ID" 
+				, CHANGE_REQUST_CN AS "CHANGE_REQUST_CN" 
+				, REQUST_PROCESS_CN AS "REQUST_PROCESS_CN"
+				, OPETR_ID AS "OPETR_ID" 
+				, trim(PROCESS_STTUS_CODE) AS "PROCESS_STTUS_CODE" 
+				, to_char(PROCESS_DE, 'YYYY-MM-DD') AS "PROCESS_DE" 
+				, to_char(REQUST_DE, 'YYYY-MM-DD') AS "REQUST_DE" 
+				, REQUST_SJ AS "REQUST_SJ"
+			FROM LETTHPROGRMCHANGEDTLS
+			WHERE PROGRM_FILE_NM=#progrmFileNm#
+			AND   REQUST_NO    =#rqesterNo#
+		]]>
+	</select> 
+
+	<insert id="progrmManageDAO.insertProgrmChangeRequst_S"  parameterClass="progrmManageDtlVO">
+		<![CDATA[
+			INSERT INTO LETTHPROGRMCHANGEDTLS
+				(  PROGRM_FILE_NM
+              , REQUST_NO
+              , RQESTER_ID
+              , CHANGE_REQUST_CN
+              , REQUST_PROCESS_CN
+              , REQUST_DE
+              , REQUST_SJ 
+              ,PROCESS_STTUS_CODE)
+			VALUES (  #progrmFileNm#
+                 , #rqesterNo#
+                 , #rqesterPersonId#
+                 , #changerqesterCn:CLOB#
+                 , #rqesterProcessCn:CLOB#
+                 , TO_DATE(#rqesterDe#,'yyyy-mm-dd')
+                 , #rqesterSj# 
+                 , 'A')
+		]]>
+	</insert>
+
+	<update id="progrmManageDAO.updateProgrmChangeRequst_S" parameterClass="progrmManageDtlVO">
+		<![CDATA[
+			UPDATE LETTHPROGRMCHANGEDTLS
+			SET    RQESTER_ID         = #rqesterPersonId# 
+			     , CHANGE_REQUST_CN   = #changerqesterCn:CLOB#
+			     , REQUST_PROCESS_CN = #rqesterProcessCn:CLOB#
+                 , REQUST_DE         = TO_DATE(#rqesterDe#,'yyyy-mm-dd')       
+                 , REQUST_SJ         = #rqesterSj# 
+			WHERE PROGRM_FILE_NM=#progrmFileNm#
+			AND   REQUST_NO    =#rqesterNo#
+		]]>
+	</update>
+
+	<delete id="progrmManageDAO.deleteProgrmChangeRequst_S" >
+		<![CDATA[
+			DELETE FROM LETTHPROGRMCHANGEDTLS
+			WHERE PROGRM_FILE_NM=#progrmFileNm#
+			AND   REQUST_NO    =#rqesterNo#
+		]]>
+	</delete>  
+
+	<update id="progrmManageDAO.updateProgrmChangeRequstProcess_S" parameterClass="progrmManageDtlVO">
+		<![CDATA[
+			UPDATE LETTHPROGRMCHANGEDTLS
+			SET    CHANGE_REQUST_CN   = #changerqesterCn:CLOB#  
+			     , REQUST_PROCESS_CN = #rqesterProcessCn:CLOB# 
+                 , OPETR_ID           = #opetrId#         
+                 , PROCESS_STTUS_CODE = #processSttus#    
+                 , PROCESS_DE         = TO_DATE(#processDe#,'yyyy-mm-dd')        
+			WHERE  PROGRM_FILE_NM=#progrmFileNm#
+			AND    REQUST_NO    =#rqesterNo#  
+		]]>
+	</update>
+
+	<select id="progrmManageDAO.selectChangeRequstProcessList_D" parameterClass="comDefaultVO" resultMap="progrmManageDtl">
+		<![CDATA[
+           SELECT 
+				  PROGRM_FILE_NM                    AS "PROGRM_FILE_NM" 
+				, REQUST_NO                        AS "REQUST_NO" 
+				, RQESTER_ID                        AS "RQESTER_ID" 
+				, CHANGE_REQUST_CN                  AS "CHANGE_REQUST_CN" 
+				, REQUST_PROCESS_CN                AS "REQUST_PROCESS_CN"
+				, OPETR_ID                          AS "OPETR_ID" 
+				, trim(PROCESS_STTUS_CODE)          AS "PROCESS_STTUS_CODE"
+				, to_char(PROCESS_DE, 'YYYY-MM-DD') AS "PROCESS_DE"   
+				, to_char(REQUST_DE, 'YYYY-MM-DD') AS "REQUST_DE" 
+				, REQUST_SJ                        AS "REQUST_SJ"
+           FROM ( 
+               SELECT rownum rn
+					, TB.PROGRM_FILE_NM    
+					, TB.REQUST_NO        
+					, TB.RQESTER_ID        
+					, TB.CHANGE_REQUST_CN  
+					, TB.REQUST_PROCESS_CN
+					, TB.OPETR_ID          
+					, TB.PROCESS_STTUS_CODE
+					, TB.PROCESS_DE        
+					, TB.REQUST_DE        
+					, TB.REQUST_SJ        
+               FROM (
+                     SELECT
+                            PROGRM_FILE_NM    
+                          , REQUST_NO        
+                          , RQESTER_ID        
+                          , CHANGE_REQUST_CN  
+                          , REQUST_PROCESS_CN
+                          , OPETR_ID          
+                          , PROCESS_STTUS_CODE
+                          , PROCESS_DE        
+                          , REQUST_DE        
+                          , REQUST_SJ        
+					   FROM LETTHPROGRMCHANGEDTLS
+				WHERE 1=1
+		 ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+         <![CDATA[   PROCESS_STTUS_CODE like #searchKeyword#  ]]>
+        </isEqual>        
+        <isEqual prepend="AND" property="searchCondition" compareValue="2">
+         <![CDATA[   PROCESS_STTUS_CODE = #searchKeyword#   ]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="3">
+         <![CDATA[ to_char(REQUST_DE, 'YYYY-MM-DD') between #searchKeywordFrom# and #searchKeywordTo# ]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="4">
+         <![CDATA[  RQESTER_ID like  '%'||#searchKeyword#||'%'   ]]>
+        </isEqual>
+        <![CDATA[   ORDER BY REQUST_NO ASC
+             ) TB )  WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+        ]]>
+	</select>
+
+	<!-- 총건수 조회   binary(PROCESS_DE) >= #searchKeywordFrom#  and  binary(PROCESS_DE) =<  #searchKeywordTo#  -->
+	<select id="progrmManageDAO.selectChangeRequstProcessListTotCnt_S" parameterClass="comDefaultVO" resultClass="int">
+		<![CDATA[
+		SELECT COUNT(REQUST_NO) AS "totcnt"
+		  FROM LETTHPROGRMCHANGEDTLS
+			WHERE 1=1
+		 ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+         <![CDATA[   PROCESS_STTUS_CODE like #searchKeyword#  ]]>
+        </isEqual>        
+        <isEqual prepend="AND" property="searchCondition" compareValue="2">
+         <![CDATA[   PROCESS_STTUS_CODE = #searchKeyword#   ]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="3">
+         <![CDATA[ to_char(REQUST_DE, 'YYYY-MM-DD') between #searchKeywordFrom# and #searchKeywordTo# ]]>
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="4">
+         <![CDATA[  RQESTER_ID like  '%'||#searchKeyword#||'%'   ]]>
+        </isEqual>
+	</select>
+
+	<delete id="progrmManageDAO.deleteAllProgrmDtls">
+		<![CDATA[                          
+			DELETE FROM LETTHPROGRMCHANGEDTLS              
+		]]>                                
+	</delete> 
+
+	<select id="progrmManageDAO.selectRqesterEmail" parameterClass="progrmManageDtlVO" resultClass="progrmManageDtlVO">
+		<![CDATA[
+			select user_email AS "tmp_Email" from COMVNUSERMASTER
+			where user_id = #rqesterPersonId#
+		 ]]>
+	</select>
+
+</sqlMap>                            

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Mber">
+
+    <typeAlias  alias="egovMap"      type = "egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="userSearchVO" type = "egovframework.let.uss.umt.service.UserDefaultVO"/>
+    <typeAlias  alias="mberVO"       type = "egovframework.let.uss.umt.service.MberManageVO"/>
+
+    <resultMap id="stplatMap" class="egovframework.let.uss.umt.service.StplatVO">
+        <result property="useStplatId"         column="USE_STPLAT_ID"          columnIndex="1"/>
+        <result property="useStplatCn"         column="USE_STPLAT_CN"          columnIndex="2"/>
+        <result property="infoProvdAgeCn"      column="INFO_PROVD_AGRE_CN"     columnIndex="3"/>
+    </resultMap>
+    
+ <select id="mberManageDAO.selectMberList" parameterClass="userSearchVO" resultClass="egovMap">
+SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+    SELECT 
+        ESNTL_ID               as "uniqId",
+        'USR01'               as "userTy",
+        MBER_ID               as "userId",
+        MBER_NM               as "userNm",
+        MBER_EMAIL_ADRES      as "emailAdres",
+        AREA_NO               as "areaNo",
+        MIDDLE_TELNO          as "middleTelno",
+        END_TELNO             as "endTelno",
+        MBTLNUM           as "moblphonNo",
+        GROUP_ID              as "groupId",
+        MBER_STTUS            as "sttus",
+        SBSCRB_DE             as "sbscrbDe"
+    FROM    LETTNGNRLMBER
+    WHERE 1=1
+        <isNotEqual prepend="AND" property="sbscrbSttus" compareValue="0">
+            MBER_STTUS LIKE  #sbscrbSttus#
+        </isNotEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="0">
+            MBER_ID LIKE #searchKeyword#
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            MBER_NM LIKE '%' ||#searchKeyword#|| '%'
+        </isEqual>
+        ORDER BY 12 DESC
+        ) TB ) WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+    </select>
+    
+    
+        <select id="mberManageDAO.selectMberListTotCnt" parameterClass="userSearchVO" resultClass="int">
+            SELECT COUNT(1) totcnt
+            FROM   LETTNGNRLMBER
+            WHERE 1=1
+            <isNotEqual prepend="AND" property="sbscrbSttus" compareValue="0">
+                MBER_STTUS LIKE  #sbscrbSttus#
+            </isNotEqual>
+            <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                MBER_ID LIKE #searchKeyword#
+            </isEqual>
+            <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                MBER_NM LIKE '%' ||#searchKeyword#|| '%'
+            </isEqual>
+    </select>
+    
+    <insert id="mberManageDAO.insertMber_S">
+        <![CDATA[
+            INSERT INTO LETTNGNRLMBER 
+                (   
+                    ESNTL_ID          ,
+                    MBER_ID          ,
+                    MBER_NM          ,
+                    PASSWORD         ,
+                    PASSWORD_HINT    ,
+                    PASSWORD_CNSR    ,
+                    IHIDNUM          ,
+                    SEXDSTN_CODE     ,
+                    ZIP              ,
+                    ADRES            ,
+                    AREA_NO          ,
+                    MBER_STTUS       ,
+                    DETAIL_ADRES     ,
+                    END_TELNO        ,
+                    MBTLNUM      ,
+                    GROUP_ID         ,
+                    MBER_FXNUM       ,
+                    MBER_EMAIL_ADRES ,
+                    MIDDLE_TELNO     ,
+                    SBSCRB_DE        )
+              VALUES(
+                    #uniqId#,
+                    #mberId#,
+                    #mberNm#,
+                    #password#,
+                    #passwordHint#,
+                    #passwordCnsr#,
+                    #ihidnum#,
+                    #sexdstnCode#,
+                    #zip#,
+                    #adres#,
+                    #areaNo#,
+                    #mberSttus#,
+                    #detailAdres#,
+                    #endTelno#,
+                    #moblphonNo#,
+                    #groupId#,
+                    #mberFxnum#,
+                    #mberEmailAdres#,
+                    #middleTelno#,
+                    sysdate  )              
+        ]]>
+    </insert>
+    
+    <delete id="mberManageDAO.deleteMber_S">
+        <![CDATA[
+            DELETE FROM LETTNGNRLMBER 
+            WHERE ESNTL_ID=#delId#
+        ]]>
+    </delete>
+    
+    <select id="mberManageDAO.selectMber_S" resultClass="mberVO">
+        <![CDATA[
+            SELECT
+                ESNTL_ID          uniqId,
+                'USR01'          userTy,
+                MBER_ID          mberId,
+                MBER_NM          mberNm,
+                PASSWORD         password,
+                PASSWORD_HINT    passwordHint,
+                PASSWORD_CNSR    passwordCnsr,
+                IHIDNUM          ihidnum,
+                SEXDSTN_CODE     sexdstnCode,
+                ZIP              zip,
+                ADRES            adres,
+                AREA_NO          areaNo,
+                MBER_STTUS       mberSttus,
+                DETAIL_ADRES     detailAdres,
+                END_TELNO        endTelno,
+                MBTLNUM      moblphonNo,
+                GROUP_ID         groupId,
+                MBER_FXNUM       mberFxnum,
+                MBER_EMAIL_ADRES mberEmailAdres,
+                MIDDLE_TELNO     middleTelno,
+                SBSCRB_DE        sbscrbDe
+            FROM LETTNGNRLMBER
+            WHERE ESNTL_ID=#uniqId#
+        ]]>
+    </select>
+    
+    <update id="mberManageDAO.updateMber_S">
+        <![CDATA[
+            UPDATE LETTNGNRLMBER 
+            SET MBER_ID          = #mberId#,
+                MBER_NM          = #mberNm#,
+                PASSWORD_HINT    = #passwordHint#,
+                PASSWORD_CNSR    = #passwordCnsr#,
+                IHIDNUM          = #ihidnum#,
+                SEXDSTN_CODE     = #sexdstnCode#,
+                ZIP              = #zip#,
+                ADRES            = #adres#,
+                AREA_NO          = #areaNo#,
+                MBER_STTUS       = #mberSttus#,
+                DETAIL_ADRES     = #detailAdres#,
+                END_TELNO        = #endTelno#,
+                MBTLNUM      = #moblphonNo#,
+                GROUP_ID         = #groupId#,
+                MBER_FXNUM       = #mberFxnum#,
+                MBER_EMAIL_ADRES = #mberEmailAdres#,
+                MIDDLE_TELNO     = #middleTelno#
+            WHERE ESNTL_ID=#uniqId#
+        ]]>
+    </update>
+    
+    <select id="mberManageDAO.selectStplat_S" resultMap="stplatMap">
+        <![CDATA[
+            SELECT
+                USE_STPLAT_ID           ,
+                USE_STPLAT_CN           ,
+                INFO_PROVD_AGRE_CN      
+            FROM LETTNSTPLATINFO
+            WHERE USE_STPLAT_ID=#stplatId#
+        ]]>
+    </select>
+    
+    <update id="mberManageDAO.updatePassword_S">
+        <![CDATA[
+            UPDATE LETTNGNRLMBER 
+            SET 
+                   PASSWORD   =  #password#
+            WHERE  ESNTL_ID  = #uniqId#
+        ]]>
+    </update>
+    
+    <select id="mberManageDAO.selectPassword_S" resultClass="mberVO">
+        <![CDATA[
+            SELECT
+                    PASSWORD          password 
+            FROM    LETTNGNRLMBER
+            WHERE   ESNTL_ID=#uniqId#
+        ]]>
+    </select>
+    
+</sqlMap>

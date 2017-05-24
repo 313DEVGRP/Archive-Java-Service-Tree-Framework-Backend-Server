@@ -23,7 +23,317 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-business/DATABASE/all_ebt_data_oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-business/DATABASE/all_ebt_ddl_oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-business/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-business/src/main/resources/egovframework/egovProps/globals.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-business/src/main/resources/egovframework/spring/com/context-idgen.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-homepage/DATABASE/all_sht_ddl_oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-homepage/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-homepage/pom2.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-homepage/src/main/resources/egovframework/egovProps/globals.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/DATABASE/all_pst_ddl_oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/egovProps/globals.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/spring/com/context-security.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/cop/bbs/EgovBBSMaster_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/cop/bbs/EgovBoard_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/cop/com/EgovBBSUse_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/cop/com/EgovTemplate_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/uss/olp/qim/EgovQustnrItemManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/uss/olp/qmc/EgovQustnrManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/uss/olp/qqm/EgovQustnrQestnManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/uss/olp/qri/EgovQustnrRespondInfo_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/uss/olp/qrm/EgovQustnrRespondManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/resources/egovframework/sqlmap/let/uss/olp/qtm/EgovQustnrTmplatManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovBoardMstrList.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovBoardMstrListPop.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovBoardMstrRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovBoardMstrUpdt.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovNoticeInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovNoticeList.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovNoticeRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovNoticeReply.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/bbs/EgovNoticeUpdt.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovBdUseInfListByTrget.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovBoardUseInfInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovBoardUseInfList.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovBoardUseInfRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovTemplateInqirePopup.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovTemplateList.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovTemplateRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/cop/com/EgovTemplateUpdt.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/faq/EgovFaqCnRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/faq/EgovFaqCnUpdt.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/faq/EgovFaqDetailInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/faq/EgovFaqListInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaAnswerDetailInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaAnswerListInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaCnAnswerUpdt.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaCnRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaCnUpdt.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaDetailInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaListInqire.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olh/qna/EgovQnaPasswordConfirm.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olp/qim/EgovQustnrItemManageDetail.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olp/qim/EgovQustnrItemManageList.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olp/qim/EgovQustnrItemManageListPopup.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olp/qim/EgovQustnrItemManageModify.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olp/qim/EgovQustnrItemManageRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olp/qmc/EgovQustnrManageDetail.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/cop/cmy/web/EgovCommunityManageController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/ext/jfile/org/json/XMLTokener.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/filter/ResponseHeaderSettingFilter.java">
           <value>
             <set />
           </value>
@@ -38,7 +348,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/uss/ion/fbk/web/EgovFacebookController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/utl/wed/filter/FileSaveManager.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/resources/egovframework/spring/com/context-security.xml">
           <value>
             <set />
           </value>
@@ -138,7 +458,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/WEB-INF/jsp/egovframework/rivalWar/api/snsLogin/index.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/js/egovframework/com/ext/jstree/jquery-1.12.4/.gitignore">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/rivalWarDataService.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/rivalWarLayoutDirective.js">
           <value>
             <set />
           </value>

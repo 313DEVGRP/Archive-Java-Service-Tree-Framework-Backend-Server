@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="QustnrTmplatManage">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="comDefaultVO" type="egovframework.com.cmm.ComDefaultVO"/>
+	<typeAlias  alias="QustnrTmplatManageVO" type="egovframework.let.uss.olp.qtm.service.QustnrTmplatManageVO"/>
+
+ 	<resultMap id="QustnrTmplatManageTmplatImagepathnm" class="java.util.HashMap">
+        <result property="QUSTNR_TMPLAT_IMAGE_INFOPATHNM" column="QUSTNR_TMPLAT_IMAGE_INFOPATHNM" javaType="[B" jdbcType="BLOB"  />
+    </resultMap>
+
+	<select id="QustnrTmplatManage.selectQustnrTmplatManageTmplatImagepathnm" parameterClass="QustnrTmplatManageVO" resultMap="QustnrTmplatManageTmplatImagepathnm">
+		SELECT
+			QUSTNR_TMPLAT_IMAGE_INFO QUSTNR_TMPLAT_IMAGE_INFOPATHNM
+		FROM LETTNQUSTNRTMPLAT
+		WHERE 1=1
+		AND QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</select>
+	<!-- 설문응답자 삭제 -->
+	<delete id="QustnrTmplatManage.deleteQustnrRespondManage">
+	DELETE FROM LETTNQUSTNRRESPONDINFO WHERE QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</delete>
+	<!-- 설문조사(설문결과) 삭제 -->
+	<delete id="QustnrTmplatManage.deleteQustnrRespondInfo">
+	DELETE FROM LETTNQUSTNRRSPNSRESULT WHERE QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</delete>
+	<!-- 설문항목 삭제 -->
+	<delete id="QustnrTmplatManage.deleteQustnrItemManage">
+	DELETE FROM LETTNQUSTNRIEM WHERE QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</delete>
+	<!-- 설문문항 삭제 -->
+	<delete id="QustnrTmplatManage.deleteQustnrQestnManage">
+	DELETE FROM LETTNQUSTNRQESITM WHERE QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</delete>
+	<!-- 설문관리 삭제 -->
+	<delete id="QustnrTmplatManage.deleteQustnrManage">
+	DELETE FROM LETTNQESTNRINFO WHERE QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</delete>
+
+	<delete id="QustnrTmplatManage.deleteQustnrTmplatManage">
+		<![CDATA[
+			DELETE FROM LETTNQUSTNRTMPLAT
+			WHERE QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+		]]>
+	</delete>
+
+	<parameterMap id="QustnrTmplatManageResult" class="egovframework.let.uss.olp.qtm.service.QustnrTmplatManageVO">
+		<parameter property="qestnrTmplatId" />
+		<parameter property="qestnrTmplatTy" />
+		<parameter property="qestnrTmplatImagepathnm" javaType="[B" jdbcType="BLOB" />
+		<parameter property="qestnrTmplatCn" />
+		<parameter property="qestnrTmplatCours" />
+
+		<parameter property="frstRegisterPnttm"/>
+		<parameter property="frstRegisterId" />
+		<parameter property="lastUpdusrPnttm" />
+		<parameter property="lastUpdusrId" />
+	</parameterMap>
+
+
+	<update id="QustnrTmplatManage.updateQustnrTmplatManage" parameterMap="QustnrTmplatManageResult">
+		UPDATE LETTNQUSTNRTMPLAT
+		SET
+		<isNotNull property="qestnrTmplatImagepathnm">
+		QUSTNR_TMPLAT_IMAGE_INFO = #qestnrTmplatImagepathnm#,
+		</isNotNull>
+		QUSTNR_TMPLAT_TY = #qestnrTmplatTy#,
+		QUSTNR_TMPLAT_DC = #qestnrTmplatCn#,
+		QUSTNR_TMPLAT_PATH_NM = #qestnrTmplatCours#,
+		LAST_UPDT_PNTTM = sysdate,
+		LAST_UPDUSR_ID = #lastUpdusrId#
+		WHERE QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</update>
+
+	<select id="QustnrTmplatManage.selectQustnrTmplatManageDetail" parameterClass="QustnrTmplatManageVO" resultClass="egovMap">
+		SELECT
+			QUSTNR_TMPLAT_ID			qestnrTmplatId,
+			QUSTNR_TMPLAT_TY			qestnrTmplatTy,
+			FRST_REGIST_PNTTM			frstRegisterPnttm,
+			FRST_REGISTER_ID,
+			LAST_UPDT_PNTTM,
+			LAST_UPDUSR_ID,
+			QUSTNR_TMPLAT_IMAGE_INFO  	qestnrTmplatImagepathnm,
+			QUSTNR_TMPLAT_DC			qestnrTmplatCn,
+			QUSTNR_TMPLAT_PATH_NM		qestnrTmplatCours
+		FROM LETTNQUSTNRTMPLAT
+		WHERE 1=1
+		AND QUSTNR_TMPLAT_ID = #qestnrTmplatId#
+	</select>
+
+	<select id="QustnrTmplatManage.selectQustnrTmplatManage" parameterClass="comDefaultVO" resultClass="egovMap">
+	<![CDATA[
+	SELECT *
+	FROM (
+	SELECT T0.*, ROWNUM RNUM
+		FROM (
+	]]>
+	 <![CDATA[
+		SELECT
+			A.QUSTNR_TMPLAT_ID			qestnrTmplatId,
+			A.QUSTNR_TMPLAT_TY			qestnrTmplatTy,
+			A.FRST_REGIST_PNTTM			frstRegisterPnttm,
+			(SELECT USER_NM FROM COMVNUSERMASTER WHERE ESNTL_ID = A.FRST_REGISTER_ID) FRST_REGISTER_NM,
+			A.FRST_REGISTER_ID,
+			A.LAST_UPDT_PNTTM,
+			A.LAST_UPDUSR_ID,
+			A.QUSTNR_TMPLAT_IMAGE_INFO	qestnrTmplatImagepathnm,
+			A.QUSTNR_TMPLAT_DC			qestnrTmplatCn,
+			A.QUSTNR_TMPLAT_PATH_NM		qestnrTmplatCours
+			FROM LETTNQUSTNRTMPLAT A
+		WHERE 1=1
+	 ]]>
+	 <isNotEmpty property="searchKeyword">
+	 	<isNotEqual property="searchKeyword" compareValue="">
+	 		<isNotEqual property="searchCondition" compareValue="">
+	 		    <isEqual property="searchCondition" compareValue="QUSTNR_TMPLAT_DC">
+                    AND QUSTNR_TMPLAT_DC LIKE '%' || #searchKeyword# || '%'
+                </isEqual>
+                <isEqual property="searchCondition" compareValue="QUSTNR_TMPLAT_TY">
+                    AND QUSTNR_TMPLAT_TY LIKE '%' || #searchKeyword# || '%'
+                </isEqual>
+	 		</isNotEqual>
+	 	</isNotEqual>
+	 </isNotEmpty>
+
+	<![CDATA[
+		) T0
+	)
+	WHERE RNUM BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+	]]>
+	</select>
+
+	<select id="QustnrTmplatManage.selectQustnrTmplatManageCnt" parameterClass="comDefaultVO" resultClass="int">
+		SELECT
+		COUNT(*) totcnt
+		FROM LETTNQUSTNRTMPLAT
+		WHERE 1=1
+	 <isNotEmpty property="searchKeyword">
+	 	<isNotEqual property="searchKeyword" compareValue="">
+	 		<isNotEqual property="searchCondition" compareValue="">
+	 		    <isEqual property="searchCondition" compareValue="QUSTNR_TMPLAT_DC">
+                    AND QUSTNR_TMPLAT_DC LIKE '%' || #searchKeyword# || '%'
+                </isEqual>
+                <isEqual property="searchCondition" compareValue="QUSTNR_TMPLAT_TY">
+                    AND QUSTNR_TMPLAT_TY LIKE '%' || #searchKeyword# || '%'
+                </isEqual>
+	 		</isNotEqual>
+	 	</isNotEqual>
+	 </isNotEmpty>
+	</select>
+
+	<insert id="QustnrTmplatManage.insertQustnrTmplatManage" parameterMap="QustnrTmplatManageResult">
+	 <![CDATA[
+
+		INSERT INTO LETTNQUSTNRTMPLAT (
+			QUSTNR_TMPLAT_ID
+			,QUSTNR_TMPLAT_TY
+			,QUSTNR_TMPLAT_IMAGE_INFO
+			,QUSTNR_TMPLAT_DC
+			,QUSTNR_TMPLAT_PATH_NM
+			,FRST_REGIST_PNTTM
+			,FRST_REGISTER_ID
+			,LAST_UPDT_PNTTM
+			,LAST_UPDUSR_ID
+		)VALUES(
+			#qestnrTmplatId#
+			,#qestnrTmplatTy#
+			,#qestnrTmplatImagepathnm:BLOB#
+			,#qestnrTmplatCn#
+			,#qestnrTmplatCours#
+			,sysdate
+			,#frstRegisterId#
+			,sysdate
+			,#lastUpdusrId#
+		)
+
+	 ]]>
+	</insert>
+
+
+</sqlMap>

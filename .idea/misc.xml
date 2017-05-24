@@ -4,6 +4,9 @@
     <entry_points version="2.0" />
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-business" />
+    <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-homepage" />
+    <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-portal" />
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-server" />
   </component>
   <component name="MavenProjectsManager">

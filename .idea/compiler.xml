@@ -24,10 +24,32 @@
         <processorPath useClasspath="true" />
         <module name="standard-server" />
       </profile>
+      <profile default="false" name="Annotation profile for standard-business" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for standard-homepage" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for standard-portal" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="standard-portal" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="development-project" target="1.5" />
       <module name="project-standard" target="1.5" />
+      <module name="standard-business" target="1.8" />
+      <module name="standard-homepage" target="1.8" />
+      <module name="standard-portal" target="1.8" />
       <module name="standard-server" target="1.8" />
       <module name="standard-server-support" target="1.5" />
     </bytecodeTargetLevel>
