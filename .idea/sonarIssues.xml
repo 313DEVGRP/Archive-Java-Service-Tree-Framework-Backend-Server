@@ -358,6 +358,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/rivalwar/api/snsLogin/controller/SnsLoginController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/resources/egovframework/spring/com/context-security.xml">
           <value>
             <set />
@@ -454,6 +459,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/com/EgovUserListPop.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/WEB-INF/jsp/egovframework/rivalWar/api/snsLogin/authCheck.jsp">
           <value>
             <set />
           </value>
