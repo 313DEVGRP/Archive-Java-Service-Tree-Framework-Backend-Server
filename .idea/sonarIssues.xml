@@ -478,12 +478,72 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/header/rivalWar/headerController.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/header/rivalWar/signIn.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/requireConfig.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/rivalWarDataService.js">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/rivalWarLayoutController.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/rivalWarLayoutDirective.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/rivalWarLayoutIndex.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/uss/ion/fbk/facebookSignin.do">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/project-standard/standard-server/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/util/ParameterParser.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/util/ScheduleUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/util/StringUtils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/util/Text.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/project-standard/standard-server/src/main/resources/egovframework/egovProps/globals.properties">
           <value>
             <set />
           </value>

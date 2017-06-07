@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="standard-portal:war">
     <output-path>$PROJECT_DIR$/development-project/project-standard/standard-portal/target</output-path>
-    <root id="archive" name="pst_webapp.war">
+    <root id="archive" name="portal.war">
       <element id="artifact" artifact-name="standard-portal:war exploded" />
     </root>
   </artifact>

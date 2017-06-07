@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="standard-portal:war exploded">
-    <output-path>$PROJECT_DIR$/development-project/project-standard/standard-portal/target/pst_webapp</output-path>
+    <output-path>$PROJECT_DIR$/development-project/project-standard/standard-portal/target/portal</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -52,6 +52,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.5.11" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.5.11" />
           <element id="library" level="project" name="Maven: net.sf:log4jdbc3:1.1" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.17" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.3" />
           <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
@@ -67,12 +68,11 @@
           <element id="library" level="project" name="Maven: com.ibm.icu:icu4j:4.8" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Maven: org.jdom:jdom:1.1" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.31" />
           <element id="library" level="project" name="Maven: com.oracle:ojdbc6:11.2.0.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/development-project/project-standard/standard-portal/target/pst_webapp/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/development-project/project-standard/standard-portal/target/portal/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="standard-portal/web/Web" />
     </root>

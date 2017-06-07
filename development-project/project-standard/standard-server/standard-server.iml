@@ -28,7 +28,7 @@
         <option name="httpUsername" />
         <option name="ideModuleStorage">
           <map>
-            <entry key="com.zeroturnaround.jrebel.FormatVersion" value="7.0.0" />
+            <entry key="com.zeroturnaround.jrebel.FormatVersion" value="6.3.2" />
             <entry key="com.zeroturnaround.jrebel.remoting.DeleteUnindexedFiles" value="true" />
             <entry key="com.zeroturnaround.jrebel.remoting.ModuleRemoteServerSelection" value="off" />
           </map>
