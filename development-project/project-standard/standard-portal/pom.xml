@@ -153,33 +153,59 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>portal</finalName>
+		<finalName>standard-portal</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<phase>deploy</phase>
+						<goals>
+							<goal>redeploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<charset>UTF-8</charset>
+					<uriEncoding>UTF-8</uriEncoding>
+					<url>http://ubuntu.313.co.kr:58080/manager/text</url>
+					<server>StandardProject-Snapshot</server>
+					<path>/portal</path>
+					<protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
+					<systemProperties>
+						<JAVA_OPTS>-Xms512m -Xmx1024m -XX:MaxPermSize=256m</JAVA_OPTS>
+					</systemProperties>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifest>
+							<addClasspath>false</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+							<Build-Host>default</Build-Host>
+							<Build-User>${user.name}</Build-User>
+							<Build-Maven>Maven 3.0.5</Build-Maven>
+							<Build-Java>${java.version}</Build-Java>
+							<Build-OS>${os.name}</Build-OS>
+							<Build-Label>${project.version}</Build-Label>
+							<Build-Path>${basedir}</Build-Path>
+							<Build-ETC>Korea Standard Project</Build-ETC>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.2</version>
-					<executions>
-						<execution>
-							<phase>deploy</phase>
-							<goals>
-								<goal>redeploy</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<charset>UTF-8</charset>
-						<uriEncoding>UTF-8</uriEncoding>
-						<url>http://ubuntu.313.co.kr:58080/manager/text</url>
-						<server>StandardProject-Snapshot</server>
-						<path>/portal</path>
-						<protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
-						<systemProperties>
-							<JAVA_OPTS>-Xms512m -Xmx1024m -XX:MaxPermSize=256m</JAVA_OPTS>
-						</systemProperties>
-					</configuration>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
