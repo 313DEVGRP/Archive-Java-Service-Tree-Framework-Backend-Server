@@ -42,11 +42,19 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
       </profile>
+      <profile default="false" name="Annotation profile for standard-config" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="standard-config" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="development-project" target="1.5" />
       <module name="project-standard" target="1.5" />
       <module name="standard-business" target="1.8" />
+      <module name="standard-config" target="1.8" />
       <module name="standard-homepage" target="1.8" />
       <module name="standard-portal" target="1.8" />
       <module name="standard-server" target="1.8" />

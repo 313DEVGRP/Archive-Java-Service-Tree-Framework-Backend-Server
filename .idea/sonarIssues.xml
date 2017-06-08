@@ -53,6 +53,31 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-config/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-config/src/main/java/egovframework/oe1/sms/com/file/EgovOe1SmsFileBackUp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-config/src/main/resources/egovframework/spring/context-datasource.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-config/src/main/resources/egovframework/spring/context-properties.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-config/src/main/resources/egovframework/spring/context-sqlMap.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-homepage/DATABASE/all_sht_ddl_oracle.sql">
           <value>
             <set />
@@ -314,6 +339,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-portal/src/main/webapp/WEB-INF/jsp/uss/olp/qmc/EgovQustnrManageDetail.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server-support/pom.xml">
           <value>
             <set />
           </value>

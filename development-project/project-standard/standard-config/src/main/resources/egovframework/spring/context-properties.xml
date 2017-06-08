@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean name="propertiesService" class="egovframework.rte.fdl.property.impl.EgovPropertyServiceImpl" destroy-method="destroy">
+		   
+		<property name="properties">
+	        <map>
+	        	<entry key="pageUnit" value="10"/>
+	        	<entry key="pageSize" value="10"/>
+	        	<entry key="xmlfileReadPath" value="${sms.xmlfileReadPath}"/>
+	        	<entry key="xmlFileBackupStorePath" value="${sms.xmlFileBackupStorePath}"/>
+	        	<entry key="xmlfileStorePath" value="${sms.xmlfileStorePath}"/>
+	        	<entry key="idGenXmlfileNm" value="${sms.idGenXmlfileNm}"/>
+	        	<entry key="cacheXmlfileNm" value="${sms.cacheXmlfileNm}"/>
+	        	<entry key="scheduleXmlfileNm" value="${sms.scheduleXmlfileNm}"/>
+	        	<entry key="propertiesXmlfileNm" value="${sms.propertiesXmlfileNm}"/>	        	
+	        	<entry key="datasourceXmlfileNm" value="${sms.datasourceXmlfileNm}"/>
+	        	<entry key="ehCacheXmlfileNm" value="${sms.ehCacheXmlfileNm}"/>
+	        </map>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:egovsms.properties</value>
+		</property>
+	</bean>
+	
+</beans>	

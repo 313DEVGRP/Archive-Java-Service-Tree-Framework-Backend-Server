@@ -1,0 +1,60 @@
+################################# MySql #####################################
+
+CREATE TABLE OE1TNSMSSCHELOG (
+  `LOG_ID` char(20) NOT NULL,
+  `LOG_SE` varchar(10) DEFAULT NULL,
+  `JOB_NM` varchar(50) DEFAULT NULL,
+  `JOB_GROUP_NM` varchar(60) DEFAULT NULL,
+  `JOB_EXECUT_TIME` varchar(20) DEFAULT NULL,
+  `LOG_MSSAGE` varchar(4000) DEFAULT NULL,
+  PRIMARY KEY (`LOG_ID`)
+);
+
+CREATE TABLE `OE1TNSMSIDS` (
+  `TABLE_NAME` varchar(16) NOT NULL,
+  `NEXT_ID` decimal(30,0) NOT NULL,
+  PRIMARY KEY (`TABLE_NAME`)
+);
+
+INSERT INTO OE1TNSMSIDS VALUES('LOG_ID',1);
+
+################################# ORACLE #####################################
+
+CREATE TABLE OE1TNSMSSCHELOG (
+  LOG_ID char(20) NOT NULL,
+  LOG_SE varchar(10) DEFAULT NULL,
+  JOB_NM varchar(50) DEFAULT NULL,
+  JOB_GROUP_NM varchar(60) DEFAULT NULL,
+  JOB_EXECUT_TIME varchar(20) DEFAULT NULL,
+  LOG_MSSAGE varchar(4000) DEFAULT NULL,
+  PRIMARY KEY (LOG_ID)
+);
+
+CREATE TABLE OE1TNSMSIDS (
+  TABLE_NAME varchar(16) NOT NULL,
+  NEXT_ID decimal(30,0) NOT NULL,
+  PRIMARY KEY (TABLE_NAME)
+);
+
+INSERT INTO OE1TNSMSIDS VALUES('LOG_ID',1);
+
+
+################################# ALTIBASE #####################################
+
+CREATE TABLE OE1TNSMSSCHELOG (
+  LOG_ID char(20) NOT NULL,
+  LOG_SE varchar(10) DEFAULT NULL,
+  JOB_NM varchar(50) DEFAULT NULL,
+  JOB_GROUP_NM varchar(60) DEFAULT NULL,
+  JOB_EXECUT_TIME varchar(20) DEFAULT NULL,
+  LOG_MSSAGE varchar(4000) DEFAULT NULL,
+  PRIMARY KEY (LOG_ID)
+);
+
+CREATE TABLE OE1TNSMSIDS (
+  TABLE_NAME varchar(16) NOT NULL,
+  NEXT_ID decimal(30,0) NOT NULL,
+  PRIMARY KEY (TABLE_NAME)
+);
+
+INSERT INTO OE1TNSMSIDS VALUES('LOG_ID',1);

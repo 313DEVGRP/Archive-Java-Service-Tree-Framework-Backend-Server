@@ -19,6 +19,7 @@
 	
 	<modules>
 		<module>standard-portal</module>
+		<module>standard-config</module>
 		<module>standard-server-support</module>
 		<module>standard-server</module>
 	</modules>
