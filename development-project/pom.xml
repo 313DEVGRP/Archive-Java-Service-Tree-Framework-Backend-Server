@@ -23,7 +23,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.version>1.3.4</project.version>
+		<project.version>1.6.2</project.version>
 		<maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
 		<build.time>${maven.build.timestamp}</build.time>
 	</properties>
