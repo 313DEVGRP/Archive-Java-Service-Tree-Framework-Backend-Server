@@ -60,8 +60,8 @@
 	</ciManagement>
 	<scm>
 		<connection>https://github.com/jstree/jsTree-Service-Framework-Frontend-App.git</connection>
-		<url>https://github.com/jstree</url>
-		<developerConnection>https://github.com/jstree/jsTree-Service-Framework-Backend-App.git</developerConnection>
+		<url>scm:git:https://github.com/jstree</url>
+		<developerConnection>scm:git:https://github.com/jstree/jsTree-Service-Framework-Backend-App.git</developerConnection>
 	</scm>
 
 	<!-- 프로젝트 메일링 리스트 -->
