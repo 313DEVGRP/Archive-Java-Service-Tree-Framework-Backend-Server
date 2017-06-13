@@ -413,6 +413,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/resources/egovframework/spring/com/context-social.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovBBSListByTrget.jsp">
           <value>
             <set />
