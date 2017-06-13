@@ -118,27 +118,14 @@ public class EgovFacebookController {
         if (StringUtils.equals(resultString, "needTheNickname")) {
             request.getSession().setAttribute("resultString", "needTheNickname");
             //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
-
-            springSecurityProcess(connection);
-
         } else if (StringUtils.equals(resultString, "joinedAccount")) {
             request.getSession().setAttribute("resultString", "joinedAccount");
-
-            springSecurityProcess(connection);
-
             //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         } else {
             request.getSession().setAttribute("resultString", "insertAccount");
             //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         }
         return "redirect:/index.html";
-    }
-
-    private void springSecurityProcess(Connection<Facebook> connection) {
-        SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(
-                        connection.getDisplayName(), null,
-                        Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))));
     }
 
     /**
