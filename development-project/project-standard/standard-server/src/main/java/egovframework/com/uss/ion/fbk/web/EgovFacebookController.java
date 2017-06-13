@@ -26,6 +26,9 @@ import egovframework.com.sec.rgm.service.AuthorGroup;
 import egovframework.rivalwar.api.snsLogin.service.FacebookLoginService;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
@@ -41,7 +44,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
+import java.util.Arrays;
 
 /**
  * Facebook을 처리하는 Controller Class 구현
@@ -115,14 +118,27 @@ public class EgovFacebookController {
         if (StringUtils.equals(resultString, "needTheNickname")) {
             request.getSession().setAttribute("resultString", "needTheNickname");
             //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+
+            springSecurityProcess(connection);
+
         } else if (StringUtils.equals(resultString, "joinedAccount")) {
             request.getSession().setAttribute("resultString", "joinedAccount");
+
+            springSecurityProcess(connection);
+
             //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         } else {
             request.getSession().setAttribute("resultString", "insertAccount");
             //return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         }
         return "redirect:/index.html";
+    }
+
+    private void springSecurityProcess(Connection<Facebook> connection) {
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(
+                        connection.getDisplayName(), null,
+                        Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))));
     }
 
     /**

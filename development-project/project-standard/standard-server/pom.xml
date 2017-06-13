@@ -1,184 +1,178 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>development</groupId>
-		<artifactId>project-standard</artifactId>
-		<version>${project.version}</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>development</groupId>
+        <artifactId>project-standard</artifactId>
+        <version>${project.version}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
-	<artifactId>standard-server</artifactId>
-	<packaging>war</packaging>
-	<name>standard-server</name>
-	<description>
-		server by 313 DEV GRP
-	</description>
+    <artifactId>standard-server</artifactId>
+    <packaging>war</packaging>
+    <name>standard-server</name>
+    <description>server by 313 DEV GRP</description>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
+    <dependencies>
+        <!-- 실행환경 라이브러리 -->
+        <dependency>
+            <groupId>development</groupId>
+            <artifactId>standard-server-support</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <!-- WebSocket Messenger -->
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>1.1</version>
+        </dependency>
 
-	<dependencies>
+        <!-- M-Gov (SMS Service API) -->
+        <dependency>
+            <groupId>kr.go.mgov</groupId>
+            <artifactId>smeapi</artifactId>
+            <version>2.7</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/smeapi_2_7.jar</systemPath>
+        </dependency>
+        <!-- GPKI인증서 로그인처리 라이브러리 -->
+        <dependency>
+            <groupId>kr.go.gpki</groupId>
+            <artifactId>gpkisecureweb</artifactId>
+            <version>1.0.4.9</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gpkisecureweb-1.0.4.9.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>kr.go.gpki</groupId>
+            <artifactId>libgpkiapi_jni</artifactId>
+            <version>1.4.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/libgpkiapi_jni-1.4.0.0.jar</systemPath>
+        </dependency>
+        <!-- 3rd party 라이브러리로 별도의 설치 필요 끝 -->
 
-		<!-- 실행환경 라이브러리 -->
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>standard-server-support</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
+    </dependencies>
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <directory>${basedir}/target</directory>
+        <finalName>standard-server</finalName>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>jsr250-api</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp.jstl</groupId>
-			<artifactId>jstl-api</artifactId>
-			<version>1.2</version>
-		</dependency>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>redeploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <url>http://ubuntu.313.co.kr:58080/manager/text</url>
+                    <server>StandardProject-Snapshot</server>
+                    <path>/</path>
+                    <protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                            <Build-Host>default</Build-Host>
+                            <Build-User>${user.name}</Build-User>
+                            <Build-Maven>Maven 3.0.5</Build-Maven>
+                            <Build-Java>${java.version}</Build-Java>
+                            <Build-OS>${os.name}</Build-OS>
+                            <Build-Label>${project.version}</Build-Label>
+                            <Build-Path>${basedir}</Build-Path>
+                            <Build-ETC>Korea Standard Project</Build-ETC>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
 
-		<!-- WebSocket Messenger -->
-		<dependency>
-			<groupId>javax.websocket</groupId>
-			<artifactId>javax.websocket-api</artifactId>
-			<version>1.1</version>
-		</dependency>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>hibernate3-maven-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <components>
+                            <component>
+                                <name>hbm2ddl</name>
+                                <implementation>annotationconfiguration</implementation>
+                            </component>
+                        </components>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.hsqldb</groupId>
+                            <artifactId>hsqldb</artifactId>
+                            <version>2.3.2</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
 
-		<!-- M-Gov (SMS Service API) -->
-		<dependency>
-			<groupId>kr.go.mgov</groupId>
-			<artifactId>smeapi</artifactId>
-			<version>2.7</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/smeapi_2_7.jar</systemPath>
-		</dependency>
-		<!-- GPKI인증서 로그인처리 라이브러리 -->
-		<dependency>
-			<groupId>kr.go.gpki</groupId>
-			<artifactId>gpkisecureweb</artifactId>
-			<version>1.0.4.9</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gpkisecureweb-1.0.4.9.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>kr.go.gpki</groupId>
-			<artifactId>libgpkiapi_jni</artifactId>
-			<version>1.4.0.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/libgpkiapi_jni-1.4.0.0.jar</systemPath>
-		</dependency>
-		<!-- 3rd party 라이브러리로 별도의 설치 필요 끝 -->
+            </plugins>
+        </pluginManagement>
 
-	</dependencies>
-	<build>
-		<defaultGoal>install</defaultGoal>
-		<directory>${basedir}/target</directory>
-		<finalName>standard-server</finalName>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<phase>deploy</phase>
-						<goals>
-							<goal>redeploy</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<charset>UTF-8</charset>
-					<uriEncoding>UTF-8</uriEncoding>
-					<url>http://ubuntu.313.co.kr:58080/manager/text</url>
-					<server>StandardProject-Snapshot</server>
-					<path>/</path>
-					<protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<archive>
-						<manifest>
-							<addClasspath>false</addClasspath>
-						</manifest>
-						<manifestEntries>
-							<Build-Time>${maven.build.timestamp}</Build-Time>
-							<Build-Host>default</Build-Host>
-							<Build-User>${user.name}</Build-User>
-							<Build-Maven>Maven 3.0.5</Build-Maven>
-							<Build-Java>${java.version}</Build-Java>
-							<Build-OS>${os.name}</Build-OS>
-							<Build-Label>${project.version}</Build-Label>
-							<Build-Path>${basedir}</Build-Path>
-							<Build-ETC>Korea Standard Project</Build-ETC>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
-
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>hibernate3-maven-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-						<components>
-							<component>
-								<name>hbm2ddl</name>
-								<implementation>annotationconfiguration</implementation>
-							</component>
-						</components>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.hsqldb</groupId>
-							<artifactId>hsqldb</artifactId>
-							<version>2.3.2</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-
-			</plugins>
-		</pluginManagement>
-
-	</build>
+    </build>
 </project>

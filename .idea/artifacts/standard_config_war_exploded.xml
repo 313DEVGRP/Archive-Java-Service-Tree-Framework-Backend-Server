@@ -9,7 +9,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz:1.8.6" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.0" />
-          <element id="archive" name="standard-server-support-1.3.4.pom">
+          <element id="archive" name="standard-server-support-1.6.2.pom">
             <element id="module-output" name="standard-server-support" />
           </element>
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.idgnr:3.5.0" />

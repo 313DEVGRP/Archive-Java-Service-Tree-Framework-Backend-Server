@@ -59,9 +59,9 @@
 		<url>http://www.313.co.kr/bamboo</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:http://www.313.co.kr/steady/trunk</connection>
-		<url>http://www.313.co.kr/steady/trunk</url>
-		<developerConnection>scm:svn:http://www.313.co.kr/steady/trunk</developerConnection>
+		<connection>https://github.com/jstree/jsTree-Service-Framework-Frontend-App.git</connection>
+		<url>https://github.com/jstree</url>
+		<developerConnection>https://github.com/jstree/jsTree-Service-Framework-Backend-App.git</developerConnection>
 	</scm>
 
 	<!-- 프로젝트 메일링 리스트 -->

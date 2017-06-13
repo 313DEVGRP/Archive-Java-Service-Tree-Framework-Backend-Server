@@ -243,6 +243,7 @@
     <orderEntry type="library" name="Maven: javax.servlet.jsp.jstl:jstl-api:1.2" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp:jsp-api:2.1" level="project" />
+    <orderEntry type="library" name="Maven: taglibs:standard:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: javax.websocket:javax.websocket-api:1.1" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: kr.go.mgov:smeapi:2.7">

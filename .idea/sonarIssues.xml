@@ -23,6 +23,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/pom.xml">
           <value>
             <set />
@@ -74,6 +79,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-config/src/main/resources/egovframework/spring/context-sqlMap.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-config/src/main/resources/egovframework/sqlmap/rte/sql-map-config.xml">
           <value>
             <set />
           </value>
@@ -364,6 +374,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/filter/ResponseHeaderSettingFilter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/security/JstreeUserDetails.java">
           <value>
             <set />
           </value>
