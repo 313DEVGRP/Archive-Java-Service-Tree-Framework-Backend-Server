@@ -408,6 +408,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/resources/egovframework/egovProps/globals.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/resources/egovframework/spring/com/context-security.xml">
           <value>
             <set />
