@@ -138,6 +138,8 @@
         <url-pattern>*.do</url-pattern>
         <url-pattern>/connect/facebook</url-pattern>
         <url-pattern>/signin/facebook</url-pattern>
+        <url-pattern>/auth/**</url-pattern>
+        <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

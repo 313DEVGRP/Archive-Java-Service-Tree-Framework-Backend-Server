@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.security</artifactId>
-			<version>3.5.7</version>
+			<version>3.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>
