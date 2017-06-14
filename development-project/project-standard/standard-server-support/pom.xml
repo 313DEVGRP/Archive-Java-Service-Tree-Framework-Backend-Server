@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.security</artifactId>
-			<version>3.5.4</version>
+			<version>3.5.5</version>
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>
@@ -524,6 +524,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<version>${spring.maven.artifact.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.11.4.RELEASE</version>
 		</dependency>
 
 		<dependency>

@@ -9,6 +9,6 @@ create table UserConnection (
 	accessToken varchar(255) not null,
 	secret varchar(255),
 	refreshToken varchar(255),
-	expireTime bigint,
+	expireTime number,
 	primary key (userId, providerId, providerUserId));
 create unique index UserConnectionRank on UserConnection(userId, providerId, rank);

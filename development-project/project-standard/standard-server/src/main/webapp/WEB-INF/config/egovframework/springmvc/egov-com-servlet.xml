@@ -51,10 +51,18 @@
 		<property name="defaultErrorView" value="egovframework/com/cmm/error/egovError" />
 		<property name="exceptionMappings">
 			<props>
+				<!--prop key="java.lang.Exception"--><!--/prop-->
+				<!--prop key="java.lang.RuntimeException"--><!--/prop-->
 				<prop key="org.springframework.dao.DataAccessException">egovframework/com/cmm/error/dataAccessFailure</prop>
 				<prop key="org.springframework.transaction.TransactionException">egovframework/com/cmm/error/dataAccessFailure</prop>
 				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">egovframework/com/cmm/error/egovBizException</prop>
 				<prop key="org.springframework.web.HttpSessionRequiredException">egovframework/com/uat/uia/EgovLoginUsr</prop>
+			</props>
+		</property>
+		<property name="statusCodes">
+			<props>
+				<prop key="error/404">404</prop>
+				<prop key="error/error">500</prop>
 			</props>
 		</property>
 	</bean>
