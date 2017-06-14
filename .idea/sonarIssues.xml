@@ -378,6 +378,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/mvc/SimpleSocialUserDetailsService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/java/egovframework/com/ext/jstree/support/security/JstreeUserDetails.java">
           <value>
             <set />

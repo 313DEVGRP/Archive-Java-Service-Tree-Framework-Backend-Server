@@ -27,4 +27,5 @@
         <jdbc:script location="classpath:/social.sql" />
     </jdbc:embedded-database>
     -->
+
 </beans>

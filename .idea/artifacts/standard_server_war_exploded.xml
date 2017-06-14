@@ -20,7 +20,7 @@
           <element id="library" level="project" name="Maven: commons-digester:commons-digester:1.8" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.property:3.5.0" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
-          <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.security:3.5.5" />
+          <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.security:3.5.7" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.excel:3.5.0" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.filehandling:3.5.0" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.string:3.5.0" />
