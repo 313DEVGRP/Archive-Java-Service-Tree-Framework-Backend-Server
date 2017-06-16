@@ -1,13 +1,13 @@
 package egovframework.com.utl.sys.fsm.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import egovframework.com.utl.fcc.service.EgovDateUtil;
 import egovframework.com.utl.fcc.service.EgovStringUtil;
-
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
 import javax.annotation.Resource;
@@ -28,6 +28,8 @@ import org.springframework.stereotype.Service;
  * @author 장철호
  * @version 1.0
  * @created 28-6-2010 오전 11:33:43
+ * 
+ * 2017.03.03 	조성원 	시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
  */
 
 @Service("egovFileSysMntrngScheduling")
@@ -58,14 +60,19 @@ public class EgovFileSystemMntrngScheduling extends EgovAbstractServiceImpl {
 	public void monitorFileSys() throws Exception {
 		// 모니터링 대상 정보 읽어들이기
 		Map<String, Object> map = null;
-		List<FileSysMntrng> targetList = null;
+		//2017.03.03 	조성원 	시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
+		List<FileSysMntrng> targetList = new ArrayList<FileSysMntrng>();
 		FileSysMntrngVO searchVO = new FileSysMntrngVO();
 		// 모니터링 대상 검색 조건 초기화
 		searchVO.setPageIndex(1);
 		searchVO.setFirstIndex(0);
 		searchVO.setRecordCountPerPage(RECORD_COUNT_PER_PAGE);
 		map = ntwrkSvcMntrngService.selectFileSysMntrngList(searchVO);
-		targetList = (List<FileSysMntrng>)map.get("resultList");
+		//2017.03.03 	조성원 	시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
+		if(map != null){
+			targetList = (List<FileSysMntrng>)map.get("resultList");
+		}
+		
 		LOGGER.debug("조회조건 {}", searchVO);
 		LOGGER.debug("Result 건수 : {}", targetList.size());
 		// 서비스체크 함수 호출.

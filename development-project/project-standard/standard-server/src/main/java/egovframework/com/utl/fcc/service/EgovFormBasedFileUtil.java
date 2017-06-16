@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
  *     수정일         수정자                   수정내용
  *     -------          --------        ---------------------------
  *   2009.08.26       한성곤                  최초 생성
+ *   2017-02-13		    이정은		   시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  * @author 공통컴포넌트 개발팀 한성곤
  * @since 2009.08.26
@@ -89,7 +90,13 @@ public class EgovFormBasedFileUtil {
 	public static long saveFile(InputStream is, File file) throws IOException {
 		// 디렉토리 생성
 		if (!file.getParentFile().exists()) {
-			file.getParentFile().mkdirs();
+			//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			if(file.getParentFile().mkdirs()){
+				LOGGER.debug("[file.mkdirs] file : Directory Creation Success");
+			}
+			else{				
+				LOGGER.error("[file.mkdirs] file : Directory Creation Fail");
+			}
 		}
 
 		OutputStream os = null;

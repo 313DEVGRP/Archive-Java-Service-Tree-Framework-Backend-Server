@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
  *   수정일       수정자           수정내용
  *  -------     --------    ---------------------------
  *  2010.09.06   김진만     최초 생성
+ *  2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  * </pre>
  */
 
@@ -99,8 +100,9 @@ public class BackupJobListener implements JobListener {
 			// 저장이 이상없이 완료되면  datamap에 배치결과ID를 저장한다.
 			dataMap.put("backupResultId", backupResult.getBackupResultId());
 		} catch (Exception e) {
-			LOGGER.error("백업작업ID : {}, 배치결과저장(insert) 에러 : {}", backupResult.getBackupOpertId(), e.getMessage());
-			LOGGER.debug(e.getMessage(), e);
+			//2017.02.13 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("(Ko)백업작업ID : {}, 배치결과저장(insert) 에러 : {}", backupResult.getBackupOpertId(), e.getMessage());
+			LOGGER.error("(En)["+ e.getClass() + "] BackupJobID : {}, BatchResult(insert) Error : {}", backupResult.getBackupOpertId(), e.getMessage());
 		}
 
 	}
@@ -158,8 +160,9 @@ public class BackupJobListener implements JobListener {
 			// 저장이 이상없이 완료되면  datamap에 배치결과ID를 저장한다.
 			dataMap.put("backupResultId", backupResult.getBackupResultId());
 		} catch (Exception e) {
-			LOGGER.error("백업결과ID : {}, 백업작업ID : {}, 배치결과저장(update) 에러 : {}", backupResult.getBackupResultId(), backupResult.getBackupOpertId(), e.getMessage());
-			LOGGER.debug(e.getMessage(), e);
+			//2017.02.13 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("(Ko)백업결과ID : {}, 백업작업ID : {}, 배치결과저장(update) 에러 : {}", backupResult.getBackupResultId(), backupResult.getBackupOpertId(), e.getMessage());
+			LOGGER.error("(En) ["+ e.getClass() + "] BackupResultID : {}, BackupJobID : {}, BatchResult(update) Error : {}", backupResult.getBackupResultId(), backupResult.getBackupOpertId(), e.getMessage());
 		}
 	}
 
@@ -197,8 +200,9 @@ public class BackupJobListener implements JobListener {
 			// 저장이 이상없이 완료되면  datamap에 배치결과ID를 저장한다.
 			dataMap.put("backupResultId", backupResult.getBackupResultId());
 		} catch (Exception e) {
-			LOGGER.error("백업결과ID : {}, 백업작업ID : {}, 배치결과저장(update) 에러 : {}", backupResult.getBackupResultId(), backupResult.getBackupOpertId(), e.getMessage());
-			LOGGER.debug(e.getMessage(), e);
+			//2017.02.13 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("(Ko) 백업결과ID : {}, 백업작업ID : {}, 배치결과저장(update) 에러 : {}", backupResult.getBackupResultId(), backupResult.getBackupOpertId(), e.getMessage());
+			LOGGER.error("(En) ["+ e.getClass() + "] BackupResultID : {}, BackupJobID : {}, BatchResult(update) Error : {}", backupResult.getBackupResultId(), backupResult.getBackupOpertId(), e.getMessage());
 		}
 
 	}

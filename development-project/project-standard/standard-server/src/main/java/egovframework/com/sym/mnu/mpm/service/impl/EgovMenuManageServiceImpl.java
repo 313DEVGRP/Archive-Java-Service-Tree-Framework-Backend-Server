@@ -38,6 +38,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
  *   2009.03.20  이  용          최초 생성
  *   2011.07.01  서준식			자기 메뉴 정보를 상위메뉴 정보로 참조하는 메뉴정보가 있는지 조회하는
  *   										selectUpperMenuNoByPk() 메서드 추가
+ *   2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  * </pre>
  */
@@ -145,7 +146,7 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 		String[] delMenuNo = checkedMenuNoForDel.split(",");
 
 		if (delMenuNo == null || (delMenuNo.length == 0)) {
-			throw new java.lang.Exception("String Split Error!");
+			throw new Exception("String Split Error!");
 		}
 		for (int i = 0; i < delMenuNo.length; i++) {
 			vo = new MenuManageVO();
@@ -383,8 +384,8 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 			}
 
 		} catch (Exception e) {
-			LOGGER.error("Exception", e);
-
+			//2017.02.13 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());
 			requestValue = "99";
 		}
 		return requestValue;
@@ -439,7 +440,8 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 				success = false;
 			}
 		} catch (Exception e) {
-			LOGGER.error("Exception", e);
+			//2017.02.13 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());
 
 			success = false;
 		}
@@ -509,7 +511,8 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 				success = false;
 			}
 		} catch (Exception e) {
-			LOGGER.error("Exception", e);
+			//2017.02.13 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());
 
 			success = false;
 		}

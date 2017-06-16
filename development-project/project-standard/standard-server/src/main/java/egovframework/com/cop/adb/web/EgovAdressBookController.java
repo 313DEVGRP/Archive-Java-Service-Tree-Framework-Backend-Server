@@ -2,18 +2,6 @@ package egovframework.com.cop.adb.web;
 
 import java.util.Map;
 
-import egovframework.com.cmm.LoginVO;
-import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.cmm.util.EgovUserDetailsHelper;
-import egovframework.com.cop.adb.service.AdressBook;
-import egovframework.com.cop.adb.service.AdressBookUser;
-import egovframework.com.cop.adb.service.AdressBookUserVO;
-import egovframework.com.cop.adb.service.AdressBookVO;
-import egovframework.com.cop.adb.service.EgovAdressBookService;
-
-import egovframework.rte.fdl.property.EgovPropertyService;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import egovframework.com.cmm.LoginVO;
+import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.cmm.util.EgovUserDetailsHelper;
+import egovframework.com.cop.adb.service.AdressBook;
+import egovframework.com.cop.adb.service.AdressBookUser;
+import egovframework.com.cop.adb.service.AdressBookUserVO;
+import egovframework.com.cop.adb.service.AdressBookVO;
+import egovframework.com.cop.adb.service.EgovAdressBookService;
+import egovframework.com.utl.fcc.service.EgovStringUtil;
+import egovframework.rte.fdl.property.EgovPropertyService;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+
 /**
  * 주소록정보를 관리하기 위한 컨트롤러 클래스
  * @author 공통컴포넌트팀 윤성록
@@ -36,10 +36,11 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
  * <pre>
  * << 개정이력(Modification Information) >>
  *
- *   수정일      수정자           수정내용
+ *   수정일      		수정자           수정내용
  *  -------    --------    ---------------------------
- *   2009.9.25  윤성록          최초 생성
- *   2011.8.26	정진오			IncludedInfo annotation 추가
+ *   2009.9.25  윤성록           최초 생성
+ *   2011.8.26	정진오		IncludedInfo annotation 추가
+ *   2017.02.15   이정은 	시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
  *
  * </pre>
  */
@@ -340,11 +341,13 @@ public class EgovAdressBookController {
         int totCnt = 0;
         if(adbkUserVO.getSearchCnd().equals("0")){
             map = adbkService.selectManList(adbkUserVO);
-            totCnt = Integer.parseInt((String)map.get("resultCnt"));
+            //2017.02.15 	이정은 	시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
+            totCnt = Integer.parseInt(EgovStringUtil.nullConvertInt(map.get("resultCnt")));
             paginationInfo.setTotalRecordCount(totCnt);
         }else{
             map = adbkService.selectCardList(adbkUserVO);
-            totCnt = Integer.parseInt((String)map.get("resultCnt"));
+            //2017.02.15 	이정은 	시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
+            totCnt = Integer.parseInt(EgovStringUtil.nullConvertInt(map.get("resultCnt")));
             paginationInfo.setTotalRecordCount(totCnt);
         }
 

@@ -26,6 +26,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by guava on 1/20/14.
@@ -41,9 +43,12 @@ import org.apache.commons.lang3.StringUtils;
  *   수정일        수정자       수정내용
  *  -------       --------    ---------------------------
  *   2014.12.04	표준프레임워크	최초 적용 (패키지 변경 및 소스 정리)
+ *   2017-02-08	이정은		시큐어코딩(ES) - 시큐어코딩 오류 메시지를 통한 정보노출[CWE-212]	
  * </pre>
  */
 public class DefaultFileSaveManager implements FileSaveManager {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultFileSaveManager.class);
 
 	@Override
 	public String saveFile(FileItem fileItem, String imageBaseDir, String imageDomain) {
@@ -58,8 +63,12 @@ public class DefaultFileSaveManager implements FileSaveManager {
 
 		try {
 			FileUtils.writeByteArrayToFile(fileToSave, fileItem.get());
+			
+		//2017.02.07 	이정은 	시큐어코딩(ES)-오류 메시지를 통한 정보노출[CWE-212]
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.error("[IOException] : WriteByteArrayToFile Fail");
+		} catch (Exception e) {
+			LOGGER.error("[" + e.getClass() + "] WriteByteArrayToFile Fail : " + e.getMessage());
 		}
 
 		String savedFileName = FilenameUtils.getName(fileToSave.getAbsolutePath());

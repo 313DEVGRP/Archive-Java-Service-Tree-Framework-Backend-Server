@@ -48,6 +48,7 @@ import org.springframework.util.FileCopyUtils;
  *  -------       --------    ---------------------------
  *   2010.10.17   정호열       최초 생성
  *   2013.12.19	표준프레임워크	공통컴포넌트 추가 적용 (패키지 변경)
+ *   2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  * </pre>
  */
 public class SampleFileUploadCluster implements FileUploadCompletedEventListener {
@@ -79,8 +80,11 @@ public class SampleFileUploadCluster implements FileUploadCompletedEventListener
 			} else {
 				ftp.disconnect();
 			}
+		//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+		} catch (IOException e) {
+			LOGGER.error("[IOException] : Connection Close");
 		} catch (Exception e) {
-			LOGGER.debug(e.getMessage());
+			LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());
 		} finally {
 			EgovResourceCloseHelper.close(out, bin);
 			try {

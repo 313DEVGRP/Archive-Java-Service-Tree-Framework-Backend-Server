@@ -22,6 +22,7 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 
 import egovframework.com.ext.ldapumt.service.LdapObject;
 
@@ -46,6 +47,7 @@ import org.springframework.ldap.core.DirContextAdapter;
 *   수정일      수정자           수정내용
 *  -------    --------    ---------------------------
 *   2014.10.12  전우성          최초 생성
+*   2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
 *
 * </pre>
 */
@@ -68,7 +70,12 @@ public class ObjectMapper<T> implements ContextMapper<Object> {
 		
 		try {
 			vo = (LdapObject) type.newInstance();
-		} catch (Exception e2) {
+		//2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+		} catch (InstantiationException e2) {
+			throw new RuntimeException(e2);
+		} catch (IllegalAccessException e2) {
+			throw new RuntimeException(e2);
+		} catch (Exception  e2) {
 			throw new RuntimeException(e2);
 		}
 
@@ -95,10 +102,18 @@ public class ObjectMapper<T> implements ContextMapper<Object> {
 					if (o == Boolean.class)
 						PropertyUtils.setProperty(vo, descriptor.getName(),
 								((String) attrs.get(descriptor.getName()).get()).equals("Y"));
-
+	
+				//2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]	
+				} catch (IllegalAccessException e) {
+					throw new RuntimeException(e);
+				} catch (InvocationTargetException e) {
+					throw new RuntimeException(e);
+				} catch (NoSuchMethodException e) {
+					throw new RuntimeException(e);
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
+			
 		}
 
 

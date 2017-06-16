@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
  *    수정일         수정자         수정내용
  *    -------        -------     -------------------
  *    2014.09.11	표준프레임워크		최초생성
+ *    2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
 * @author Vincent Han
  * @since 2014.09.11
  * @version 3.5
@@ -123,6 +124,8 @@ public class EgovPrivacyLogAspect {
 					list.add(target.get(key));
 				}
 			} catch (Exception ignore) {
+				//2017.02.13 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				LOGGER.error("["+ ignore.getClass() +"] : ", ignore.getMessage());
 				continue;
 			}
 			

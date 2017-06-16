@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import egovframework.com.cmm.service.Globals;
 import egovframework.com.cmm.util.EgovResourceCloseHelper;
 
@@ -23,8 +26,15 @@ import egovframework.com.cmm.util.EgovResourceCloseHelper;
  * @author 장철호
  * @version 1.0
  * @created 28-6-2010 오전 11:33:43
+ * 
+ *     수정일         수정자                   수정내용
+ *   -------    --------    ---------------------------
+ *   2017-02-08    이정은        시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  */
 public class FileSystemChecker {
+	
+	// LOGGER
+	private static final Logger LOGGER = LoggerFactory.getLogger(FileSystemChecker.class);
 
 	private static final FileSystemChecker INSTANCE = new FileSystemChecker();
 
@@ -88,7 +98,12 @@ public class FileSystemChecker {
 
 		File folder = new File("C:\\temp\\");
 		if (!folder.isDirectory()) {
-			folder.mkdirs();
+			//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			if(folder.mkdirs()){
+				LOGGER.debug("[file.mkdirs] folder : Directory Creation Success");
+			}else{				
+				LOGGER.error("[file.mkdirs] folder : Directory Creation Fail");
+			}
 		}
 
 		FileWriter fileWriter = null;

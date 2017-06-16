@@ -8,6 +8,9 @@
  * @author 이문준
  * @version 1.0
  * @created 03-8-2009 오후 2:08:58
+ * 
+ * 수정
+ * 2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  */
 
 package egovframework.com.uss.ion.msi.service.impl;
@@ -19,15 +22,17 @@ import egovframework.com.cmm.service.FileVO;
 import egovframework.com.uss.ion.msi.service.EgovMainImageService;
 import egovframework.com.uss.ion.msi.service.MainImage;
 import egovframework.com.uss.ion.msi.service.MainImageVO;
-
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service("egovMainImageService")
 public class EgovMainImageServiceImpl extends EgovAbstractServiceImpl implements EgovMainImageService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovMainImageServiceImpl.class);
 
 	@Resource(name="mainImageDAO")
     private MainImageDAO mainImageDAO;
@@ -94,7 +99,12 @@ public class EgovMainImageServiceImpl extends EgovAbstractServiceImpl implements
 	public void deleteMainImageFile(MainImage mainImage) throws Exception {
 		FileVO fileVO = (FileVO)mainImageDAO.selectMainImageFile(mainImage);
 		File file = new File(fileVO.getFileStreCours()+fileVO.getStreFileNm());
-		file.delete();
+		//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+		if(file.delete()){
+			LOGGER.debug("[file.delete] file : File Deletion Success");
+		}else{
+			LOGGER.error("[file.delete] file : File Deletion Fail");
+		}
 	}
 
 	/**

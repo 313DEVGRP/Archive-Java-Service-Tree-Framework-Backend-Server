@@ -6,6 +6,7 @@
  *     수정일         수정자                   수정내용
  *   -------    --------    ---------------------------
  *   2009.02.04    박지욱          최초 생성
+ *   2017.02.08          이정은 	      시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  *  @author 공통 서비스 개발팀 박지욱
  *  @since 2009. 02. 04
@@ -27,9 +28,14 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import egovframework.com.cmm.util.EgovResourceCloseHelper;
 
 public class EgovFileCmprs {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovFileCmprs.class);
 
 	final static  int COMPRESSION_LEVEL = 8;
 	final static  int BUFFER_SIZE = 64 * 1024;
@@ -83,8 +89,14 @@ public class EgovFileCmprs {
 					}
 					zoutput.closeEntry();
 					result = true;
+					
 				} catch (IOException e) {
-					tarFile.delete();
+					//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+					if(tarFile.delete()){
+						LOGGER.debug("[file.delete] tarFile : File Deletion Success");
+					}else{						
+						LOGGER.error("[file.delete] tarFile : File Deletion Fail");
+					}
 					throw e;
 				} finally {
 					EgovResourceCloseHelper.close(finput, zoutput, foutput);

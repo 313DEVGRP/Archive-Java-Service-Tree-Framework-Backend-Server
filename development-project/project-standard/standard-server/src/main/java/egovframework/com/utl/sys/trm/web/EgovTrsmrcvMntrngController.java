@@ -43,6 +43,7 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
  *  -------     --------    ---------------------------
  *  2010.06.21   김진만     최초 생성
  *  2011.8.26	정진오			IncludedInfo annotation 추가
+ *  2017-02-14  이정은       시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  * </pre>
  */
 

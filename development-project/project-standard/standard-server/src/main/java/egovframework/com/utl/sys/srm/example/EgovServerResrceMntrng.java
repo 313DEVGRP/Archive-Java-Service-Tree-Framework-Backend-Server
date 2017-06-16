@@ -1,20 +1,37 @@
 package egovframework.com.utl.sys.srm.example;
 
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
 import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
 import javax.management.remote.JMXConnectorServer;
 import javax.management.remote.JMXConnectorServerFactory;
 import javax.management.remote.JMXServiceURL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/*
+ *       수정일         수정자                   수정내용
+ *   -------    --------    ---------------------------
+ * 2017.02.07 	이정은 	시큐어코딩(ES)-오류 메시지를 통한 정보노출[CWE-210]
+ */
+
 public class EgovServerResrceMntrng implements EgovServerResrceMntrngMBean {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovServerResrceMntrng.class);
 	
 	private Object getOSInfo(String getMethod) {
 		
@@ -90,8 +107,22 @@ public class EgovServerResrceMntrng implements EgovServerResrceMntrngMBean {
 			JMXConnectorServer cs = JMXConnectorServerFactory.newJMXConnectorServer(url, null, mbeanServer); 
 			
 			cs.start(); 
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			
+		//2017.02.08 	이정은 	시큐어코딩(ES)-오류 메시지를 통한 정보노출[CWE-210]
+		} catch (MalformedObjectNameException e) {
+			LOGGER.error("[MalformedObjectNameException] : server connection");
+		} catch (InstanceAlreadyExistsException e) {
+			LOGGER.error("[InstanceAlreadyExistsException] : server connection ");
+		} catch (MBeanRegistrationException e) {
+			LOGGER.error("[MBeanRegistrationException] : server connection");
+		} catch (NotCompliantMBeanException e) {
+			LOGGER.error("[NotCompliantMBeanException] : server connection");
+		} catch (MalformedURLException e) {
+			LOGGER.error("[MalformedURLException] : server connection");
+		} catch (IOException e) {
+			LOGGER.error("[IOException] : server connection");
+		} catch (Exception e) {
+			LOGGER.error("["+ e.getClass() +" ] server connection : " + e.getMessage());
 		}
 	}
 	

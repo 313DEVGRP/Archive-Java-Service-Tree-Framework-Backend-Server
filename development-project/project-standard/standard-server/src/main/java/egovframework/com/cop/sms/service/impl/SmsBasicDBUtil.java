@@ -3,6 +3,7 @@ package egovframework.com.cop.sms.service.impl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -29,6 +30,7 @@ import org.slf4j.LoggerFactory;
  *   수정일      수정자           수정내용
  *  -------    --------    ---------------------------
  *   2009.11.24  한성곤          최초 생성
+ *   2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  * </pre>
  */
@@ -122,20 +124,29 @@ public class SmsBasicDBUtil {
 		if (rs != null)
 			try {
 				rs.close();
+			//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			} catch (SQLException ignore) {
+				LOGGER.error("[SQLExceptionException] : database access error occurs");
 			} catch (Exception ignore) {
-				LOGGER.debug("IGNORED: {}", ignore.getMessage());
+				LOGGER.error("["+ ignore.getClass() +"] : ", ignore.getMessage());
 			}
 		if (stmt != null)
 			try {
 				stmt.close();
+			//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			} catch (SQLException ignore) {
+				LOGGER.error("[SQLExceptionException] : database access error occurs");
 			} catch (Exception ignore) {
-				LOGGER.debug("IGNORED: {}", ignore.getMessage());
+				LOGGER.error("["+ ignore.getClass() +"] : ", ignore.getMessage());
 			}
 		if (conn != null)
 			try {
 				conn.close();
+			//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			} catch (SQLException ignore) {
+				LOGGER.error("[SQLExceptionException] : database access error occurs");
 			} catch (Exception ignore) {
-				LOGGER.debug("IGNORED: {}", ignore.getMessage());
+				LOGGER.error("["+ ignore.getClass() +"] : ", ignore.getMessage());
 			}
 	}
 }

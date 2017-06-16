@@ -8,6 +8,9 @@
  * @author 이문준
  * @version 1.0
  * @created 05-8-2009 오후 2:08:56
+ * 
+ * 수정
+ * 2017.02.07 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  */
 
 package egovframework.com.uss.ion.lsi.service.impl;
@@ -19,15 +22,18 @@ import egovframework.com.cmm.service.FileVO;
 import egovframework.com.uss.ion.lsi.service.EgovLoginScrinImageService;
 import egovframework.com.uss.ion.lsi.service.LoginScrinImage;
 import egovframework.com.uss.ion.lsi.service.LoginScrinImageVO;
-
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service("egovLoginScrinImageService")
 public class EgovLoginScrinImageServiceImpl extends EgovAbstractServiceImpl implements EgovLoginScrinImageService {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovLoginScrinImageServiceImpl.class);
 
 	@Resource(name="loginScrinImageDAO")
     private LoginScrinImageDAO loginScrinImageDAO;
@@ -93,7 +99,12 @@ public class EgovLoginScrinImageServiceImpl extends EgovAbstractServiceImpl impl
 	public void deleteLoginScrinImageFile(LoginScrinImage loginScrinImage) throws Exception {
 		FileVO fileVO = (FileVO)loginScrinImageDAO.selectLoginScrinImageFile(loginScrinImage);
 		File file = new File(fileVO.getFileStreCours()+fileVO.getStreFileNm());
-		file.delete();
+		//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+		if(file.delete()){
+			LOGGER.debug("[file.delete] file : File Deletion Success");
+		}else{
+			LOGGER.error("[file.delete] file : File Deletion Fail");
+		}
 	}
 
 	/**

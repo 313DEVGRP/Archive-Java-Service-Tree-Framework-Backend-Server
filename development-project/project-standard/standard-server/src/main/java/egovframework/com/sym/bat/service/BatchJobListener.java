@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import egovframework.rte.fdl.cmmn.exception.FdlException;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 
 import org.quartz.JobDataMap;
@@ -23,7 +24,8 @@ import org.slf4j.LoggerFactory;
  *
  *   수정일       수정자           수정내용
  *  -------     --------    ---------------------------
- *  2010.08.30   김진만     최초 생성
+ *  2010-08-30   김진만     최초 생성
+ *  2017-02-06   이정은     시큐어코딩(ES) - 시큐어코딩  부적절한 예외 처리[CWE-253, CWE-440, CWE-756]
  * </pre>
  */
 
@@ -97,9 +99,12 @@ public class BatchJobListener implements JobListener {
 
 			// 저장이 이상없이 완료되면  datamap에 배치결과ID를 저장한다.
 			dataMap.put("batchResultId", batchResult.getBatchResultId());
+		//2017.02.06 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+		} catch (FdlException e) {
+			LOGGER.error("[FdlException] 배치스케줄ID : {}, 배치작업ID : {}, 배치결과저장(insert) 에러 : {}", batchResult.getBatchSchdulId(), batchResult.getBatchOpertId(), e.getMessage());
 		} catch (Exception e) {
-			LOGGER.error("배치스케줄ID : {}, 배치작업ID : {}, 배치결과저장(insert) 에러 : {}", batchResult.getBatchSchdulId(), batchResult.getBatchOpertId(), e.getMessage());
-			LOGGER.debug(e.getMessage(), e);
+			LOGGER.error("(Ko) 배치스케줄ID : {}, 배치작업ID : {}, 배치결과저장(insert) 에러 : {}", batchResult.getBatchSchdulId(), batchResult.getBatchOpertId(), e.getMessage());
+			LOGGER.error("(En) [" + e.getClass() + "] BatchScheduleID : {}, BatchJobID : {}, BatchResult(insert) Error : {}", batchResult.getBatchSchdulId(), batchResult.getBatchOpertId(), e.getMessage());
 		}
 
 	}
@@ -157,9 +162,11 @@ public class BatchJobListener implements JobListener {
 			// 저장이 이상없이 완료되면  datamap에 배치결과ID를 저장한다.
 			dataMap.put("batchResultId", batchResult.getBatchResultId());
 		} catch (Exception e) {
-			LOGGER.error("배치결과ID : {}, 배치스케줄ID : {}, 배치작업ID : {}, 배치결과저장(update) 에러 : {}", batchResult.getBatchResultId(), batchResult.getBatchSchdulId(),
+			//2017.02.06 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("(Ko) 배치결과ID : {}, 배치스케줄ID : {}, 배치작업ID : {}, 배치결과저장(update) 에러 : {}", batchResult.getBatchResultId(), batchResult.getBatchSchdulId(),
 					batchResult.getBatchOpertId(), e.getMessage());
-			LOGGER.debug(e.getMessage(), e);
+			LOGGER.error("(En) ["+ e.getClass() + "] BatchResultID : {}, BatchScheduleID : {}, BatchJobID : {}, BatchResult(update) Error : {}", batchResult.getBatchResultId(), batchResult.getBatchSchdulId(),
+					batchResult.getBatchOpertId(), e.getMessage());
 		}
 	}
 
@@ -199,9 +206,11 @@ public class BatchJobListener implements JobListener {
 			// 저장이 이상없이 완료되면  datamap에 배치결과ID를 저장한다.
 			dataMap.put("batchResultId", batchResult.getBatchResultId());
 		} catch (Exception e) {
-			LOGGER.error("배치결과ID : {}, 배치스케줄ID : {}, 배치작업ID : {}, 배치결과저장(update) 에러 : {}", batchResult.getBatchResultId(), batchResult.getBatchSchdulId(),
+			//2017.02.06 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("(Ko) 배치결과ID : {}, 배치스케줄ID : {}, 배치작업ID : {}, 배치결과저장(update) 에러 : {}", batchResult.getBatchResultId(), batchResult.getBatchSchdulId(),
 					batchResult.getBatchOpertId(), e.getMessage());
-			LOGGER.debug(e.getMessage(), e);
+			LOGGER.error("(En) ["+ e.getClass() +"] BachResultID : {}, BatchScheduleID : {}, 배치작업ID : {}, 배치결과저장(update) 에러 : {}", batchResult.getBatchResultId(), batchResult.getBatchSchdulId(),
+					batchResult.getBatchOpertId(), e.getMessage());
 		}
 
 	}

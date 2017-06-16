@@ -17,13 +17,14 @@ import egovframework.com.cmm.util.EgovResourceCloseHelper;
 import egovframework.com.utl.sys.ssy.service.EgovSynchrnServerService;
 import egovframework.com.utl.sys.ssy.service.SynchrnServer;
 import egovframework.com.utl.sys.ssy.service.SynchrnServerVO;
-
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,9 +39,17 @@ import org.springframework.web.multipart.MultipartFile;
  * @author lee.m.j
  * @version 1.0
  * @created 28-6-2010 오전 10:44:34
+ * 
+ *      수정일         수정자                   수정내용
+ *   -------    --------    ---------------------------
+ *   2017-02-08    이정은        시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+ * 
  */
 @Service("egovSynchrnServerService")
 public class EgovSynchrnServerServiceImpl extends EgovAbstractServiceImpl implements EgovSynchrnServerService {
+	
+	// LOGGER
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovSynchrnServerServiceImpl.class);
 
 	@Resource(name = "synchrnServerDAO")
 	private SynchrnServerDAO synchrnServerDAO;
@@ -401,9 +410,14 @@ public class EgovSynchrnServerServiceImpl extends EgovAbstractServiceImpl implem
 		File uploadFile = new File(EgovWebUtil.filePathBlackList(filePath));
 		
 		if(!uploadFile.exists()){
-			uploadFile.mkdirs();
+			//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			if(uploadFile.mkdirs()){
+				LOGGER.debug("[file.mkdirs] uploadFile : Directory Creation Success");
+			}else{
+				LOGGER.error("[file.mkdirs] uploadFile : Directory Creation Fail");
+			}
 		}
-		
+				
 		File[] fileList = uploadFile.listFiles();
 		List<String> fileArray = new ArrayList<String>();
 
@@ -436,7 +450,12 @@ public class EgovSynchrnServerServiceImpl extends EgovAbstractServiceImpl implem
 			File cFile = new File(EgovWebUtil.filePathBlackList(stordFilePath));
 
 			if (!cFile.isDirectory())
-				cFile.mkdir();
+				//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				if(cFile.mkdir()){
+					LOGGER.debug("[file.mkdirs] cFile : Directory Creation Success");
+				}else{
+					LOGGER.error("[file.mkdirs] cFile : Directory Creation Fail");
+				}
 
 			bos = new FileOutputStream(EgovWebUtil.filePathBlackList(stordFilePath + File.separator + newName));
 
@@ -473,7 +492,12 @@ public class EgovSynchrnServerServiceImpl extends EgovAbstractServiceImpl implem
 
 		for (int i = 0; i < strDeleteFiles.length; i++) {
 			File uploadFile = new File(EgovWebUtil.filePathBlackList(stordFilePath + strDeleteFiles[i]));
-			uploadFile.delete();
+			//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			if(uploadFile.delete()){
+				LOGGER.debug("[file.delete] uploadFile : File Deletion Success");
+			}else{
+				LOGGER.error("[file.delete] uploadFile : File Deletion Fail");
+			}			
 		}
 
 		while (iterator.hasNext()) {

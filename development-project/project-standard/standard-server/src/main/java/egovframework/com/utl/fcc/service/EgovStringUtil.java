@@ -370,7 +370,7 @@ public class EgovStringUtil {
 	 */
 	public static String nullConvert(Object src) {
 		//if (src != null && src.getClass().getName().equals("java.math.BigDecimal")) {
-		if (src != null && src instanceof java.math.BigDecimal) {
+		if (src != null && src instanceof BigDecimal) {
 			return ((BigDecimal) src).toString();
 		}
 
@@ -381,6 +381,26 @@ public class EgovStringUtil {
 		}
 	}
 
+	/**
+	 *<pre>
+	 * 인자로 받은 String이 null일 경우 &quot;&quot;로 리턴한다.
+	 * &#064;param src null값일 가능성이 있는 String 값.
+	 * &#064;return 만약 String이 null 값일 경우 &quot;&quot;로 바꾼 String 값.
+	 *</pre>
+	 */
+	public static String nullConvertInt(Object src) {
+		//if (src != null && src.getClass().getName().equals("java.math.BigDecimal")) {
+		if (src != null && src instanceof BigDecimal) {
+			return ((BigDecimal) src).toString();
+		}
+
+		if (src == null || src.equals("null")) {
+			return "0";
+		} else {
+			return ((String) src).trim();
+		}
+	}
+	
 	/**
 	 *<pre>
 	 * 인자로 받은 String이 null일 경우 &quot;&quot;로 리턴한다.

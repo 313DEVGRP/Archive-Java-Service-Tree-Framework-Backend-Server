@@ -3,6 +3,7 @@ package egovframework.com.cop.ems.web;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import egovframework.com.cmm.EgovWebUtil;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *  2009.03.12  박지욱          최초 생성
  *  2011.10.10	이기하			보안점검 후속조치(교차접속 스크립트 공격 취약성 방지(파라미터 문자열 교체),
  *  											  HTTP 응답분할 방지)
+ *  2017-02-08  이정은         시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  *  </pre>
  */
@@ -136,10 +138,12 @@ public class EgovSndngMailDetailController {
 				if (in != null) {
 					try {
 						in.close();
-					} catch (Exception ignore) {
-						LOGGER.debug("IGNORED: {}", ignore.getMessage());
-
-					}
+					 //2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			         }catch (IOException ignore){
+			        	 LOGGER.error("[IOException] : Connection Close");
+			         } catch (Exception ignore) {
+						LOGGER.error("["+ ignore.getClass() +"] : Connection Close ", ignore.getMessage());
+					 }
 				}
 			}
 			response.getOutputStream().flush();

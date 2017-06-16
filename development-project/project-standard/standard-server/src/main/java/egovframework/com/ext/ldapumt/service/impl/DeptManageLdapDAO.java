@@ -54,6 +54,7 @@ import org.springframework.stereotype.Repository;
 *   수정일      수정자           수정내용
 *  -------    --------    ---------------------------
 *   2014.10.12  전우성          최초 생성
+*   2017-02-13  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
 *
 * </pre>
 */
@@ -120,8 +121,11 @@ public class DeptManageLdapDAO extends OrgManageLdapDAO {
 		List<Object> list = null;
 		try {
 			list = ldapTemplate.search(criteria, new ObjectMapper<UcorgVO>(UcorgVO.class));
+		//2017.02.07 	이정은 	시큐어코딩(ES)-오류 메시지를 통한 정보노출[CWE-209]
+		} catch (NullPointerException e) {
+			logger.error("[NullPointerException] : search fail");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("[" + e.getClass() +"] search fail : " + e.getMessage());
 		}
 
 		return (UcorgVO) list.get(0);

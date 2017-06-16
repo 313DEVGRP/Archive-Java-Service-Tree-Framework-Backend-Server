@@ -3,6 +3,9 @@ package egovframework.com.utl.sys.nsm.service;
 import java.io.IOException;
 import java.net.Socket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 개요
  * - 네트워크서비스 모니터링을 위한 Check 클래스
@@ -12,9 +15,17 @@ import java.net.Socket;
  * @author 장철호
  * @version 1.0
  * @created 28-6-2010 오전 11:33:43
+ * 
+ *     수정일         수정자                   수정내용
+ *   -------    --------    ---------------------------
+ *   2017-03-03   조성원      시큐어코딩(ES) - 부적절한 예외 처리[CWE-253, CWE-440, CWE-756]
  */
 
+
+
 public class NtwrkSvcMntrngChecker {
+	
+
 
 	/**
 	 * 네트워크서비스 모니터링을 수행한다.
@@ -25,6 +36,9 @@ public class NtwrkSvcMntrngChecker {
 	 * @param sysIp 
 	 * @param sysPort 
 	 */
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(NtwrkSvcMntrngChecker.class);
+	
 	public static NtwrkSvcMntrngResult check(String sysIp, int sysPort) {
 		
 		Socket clientSocket = null;
@@ -44,7 +58,14 @@ public class NtwrkSvcMntrngChecker {
 			return new NtwrkSvcMntrngResult(false, e);
 		} finally {
 			if(clientSocket != null){
-				try{clientSocket.close();}catch(Exception e){return new NtwrkSvcMntrngResult(false, e);}
+				try{clientSocket.close();
+				// 2017-03-03   조성원      시큐어코딩(ES) - 부적절한 예외 처리[CWE-253, CWE-440, CWE-756]
+				}catch(Exception e){
+					
+					LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());
+					return new NtwrkSvcMntrngResult(false, e);
+					
+				}
 			}
 		}
 		

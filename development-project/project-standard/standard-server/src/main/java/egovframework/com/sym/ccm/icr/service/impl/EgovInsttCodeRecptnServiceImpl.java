@@ -43,6 +43,7 @@ import org.springframework.stereotype.Service;
  *   2009.04.01  이중호          최초 생성
  *   2011.09.05	 서준식          파일 읽기 무한 루프 오류 수정
  *   2011.10.07  이기하          finally문을 추가하여 에러시 자원반환할 수 있도록 추가
+ *   2017-02-08	  이정은	  시큐어코딩(ES) - 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  * Copyright (C) 2009 by MOPAS  All right reserved.
  * </pre>
  */
@@ -181,7 +182,12 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 				recvOldFile = new File(rcvOldDir + listFile.getName());
 				if (listFile.isFile()) {
 					if (recvOldFile.getParentFile().isDirectory()) {
-						listFile.renameTo(recvOldFile);
+						//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+						if(listFile.renameTo(recvOldFile)){
+							LOGGER.debug("[file.renameTo] listFile : File Rename Successs ");
+						}else{							
+							LOGGER.error("[file.renameTo] listFile : File Rename Fail ");
+						}
 					}
 				} else {
 					// 진행종료

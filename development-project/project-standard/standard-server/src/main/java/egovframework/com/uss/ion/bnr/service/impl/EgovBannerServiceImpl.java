@@ -19,15 +19,19 @@ import egovframework.com.cmm.service.FileVO;
 import egovframework.com.uss.ion.bnr.service.Banner;
 import egovframework.com.uss.ion.bnr.service.BannerVO;
 import egovframework.com.uss.ion.bnr.service.EgovBannerService;
-
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service("egovBannerService")
 public class EgovBannerServiceImpl extends EgovAbstractServiceImpl implements EgovBannerService {
+	
+	/** logger */
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovBannerServiceImpl.class);
 
 	@Resource(name="bannerDAO")
     private BannerDAO bannerDAO;
@@ -93,7 +97,12 @@ public class EgovBannerServiceImpl extends EgovAbstractServiceImpl implements Eg
 	public void deleteBannerFile(Banner banner) throws Exception{
 		FileVO fileVO = (FileVO)bannerDAO.selectBannerFile(banner);
 		File file = new File(fileVO.getFileStreCours()+fileVO.getStreFileNm());
-		file.delete();
+		//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+		if(file.delete()){
+			LOGGER.debug("[file.delete] file : File Deletion Success");
+		}else{
+			LOGGER.error("[file.delete] file : File Deletion Fail");
+		}
 	}
 
 	/**

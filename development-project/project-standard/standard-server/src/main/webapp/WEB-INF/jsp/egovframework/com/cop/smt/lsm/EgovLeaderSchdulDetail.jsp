@@ -7,12 +7,14 @@
     -------    --------    ---------------------------
      2010.06.29    장철호          최초 생성
      2010.09.01    장철호          수정 (보안관련 분리)
+     2017-02-07    이정은          시큐어코딩(ES) - 크로스사이트 스크립트[CWE-374, CWE-79]
  
     author   : 공통서비스 개발팀 장철호
     since    : 2010.06.29
    
 --%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="egovframework.com.cmm.EgovWebUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -21,9 +23,9 @@
 <%
 String sLinkType = request.getParameter("linkType") == null ? "" : (String)request.getParameter("linkType");
 %>
-<c:set var="ImgUrl" value="${pageContext.request.contextPath}/images/egovframework/com/cop/smt/lsm/"/>
+<c:set var="ImgUrl" value="${pageContext.request.contextPath}/images/egovframework/com/cmm/"/>
 <c:set var="CssUrl" value="${pageContext.request.contextPath}/css/egovframework/com/cop/smt/lsm/"/> 
-<c:set var="sLinkType" value="<%=sLinkType %>"/>
+<c:set var="sLinkType" value="<%=EgovWebUtil.clearXSSMaximum(sLinkType)%>"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>

@@ -7,12 +7,14 @@
       수정일         수정자                   수정내용
     -------    --------    ---------------------------
      2008.03.09    장동한          최초 생성
+     2017-02-07    이정은          시큐어코딩(ES) - 크로스사이트 스크립트[CWE-374, CWE-79]
 
     author   : 공통서비스 개발팀 장동한
     since    : 2009.03.09
 
 --%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="egovframework.com.cmm.EgovWebUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -23,7 +25,7 @@ String sLinkType = request.getParameter("linkType") == null ? "" : (String)reque
 %>
 <c:set var="ImgUrl" value="/images/egovframework/com/cop/smt/sdm/"/>
 <c:set var="CssUrl" value="/css/egovframework/com/cop/smt/sdm/"/>
-<c:set var="sLinkType" value="<%=sLinkType %>"/>
+<c:set var="sLinkType" value="<%=EgovWebUtil.clearXSSMaximum(sLinkType)%>"/>
 <html lang="ko">
 <head>
 <title>부서일정관리</title>

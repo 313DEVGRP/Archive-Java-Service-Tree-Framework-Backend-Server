@@ -3,7 +3,6 @@ package egovframework.com.cop.sms.service.impl;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.cmm.util.EgovBasicLogger;
 import egovframework.com.cop.sms.service.SmsRecptn;
-
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
 import javax.annotation.Resource;
@@ -38,7 +37,7 @@ import x3.client.smeapi.impl.SMELogger;
  *  -------    --------    ---------------------------
  *   2009.08.05  한성곤          최초 생성
  *   2011.10.10	 이기하			 보안점검 후속초치(디버거코드 주석처리)
- *
+ *	 2016-02-13   이정은 	  시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  * </pre>
  */
 @Service("EgovSmsInfoReceiver")
@@ -272,9 +271,11 @@ public class EgovSmsInfoReceiver extends EgovAbstractServiceImpl implements SMEL
 
 					try {
 						smsDao.updateSmsRecptnInf(recptn);
+					//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+					} catch (IllegalArgumentException ex) {
+						LOGGER.error("[IllegalArgumentException] : Connection Close");
 					} catch (Exception ex) {
-						LOGGER.error("Exception: {}", ex.getClass().getName());
-						LOGGER.error("Exception  Message: {}", ex.getMessage());
+						LOGGER.error("["+ ex.getClass() +"] Connection Close : ", ex.getMessage());
 					}
 				}
 			} else {
@@ -306,7 +307,7 @@ public class EgovSmsInfoReceiver extends EgovAbstractServiceImpl implements SMEL
 				receiver.readPropertyFile();
 
 			} catch (Exception ex) {
-				LOGGER.error("DEBUG: {}", ex.getMessage());
+				LOGGER.error("["+ ex.getClass() +"] : ", ex.getMessage());
 				return;
 			}
 
@@ -354,8 +355,7 @@ public class EgovSmsInfoReceiver extends EgovAbstractServiceImpl implements SMEL
 				readPropertyFile();
 
 			} catch (Exception ex) {
-				LOGGER.error("Exception: {}", ex.getClass().getName());
-				LOGGER.error("Exception  Message: {}", ex.getMessage());
+				LOGGER.error("["+ ex.getClass() +"] : ", ex.getMessage());
 				return;
 			}
 

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  *   수정일      수정자           수정내용
  *  -------    	--------    ---------------------------
  *   2011.10.10  한성곤          최초 생성
- *
+ *	 2017-02-07  이정은          시큐어코딩(ES) - 시큐어코딩 경로 조작 및 자원 삽입[CWE-22, CWE-23, CWE-95, CWE-99]
  * </pre>
  */
 
@@ -83,6 +83,21 @@ public class EgovWebUtil {
 
 		return returnValue;
 	}
+	
+	public static String fileInjectPathReplaceAll(String value) {
+		String returnValue = value;
+		if (returnValue == null || returnValue.trim().equals("")) {
+			return "";
+		}
+
+		
+		returnValue = returnValue.replaceAll("/", "");
+		returnValue = returnValue.replaceAll("\\..", ""); // ..
+		returnValue = returnValue.replaceAll("\\\\", "");// \
+		returnValue = returnValue.replaceAll("&", "");
+
+		return returnValue;
+	}	
 
 	public static String filePathWhiteList(String value) {
 		return value;

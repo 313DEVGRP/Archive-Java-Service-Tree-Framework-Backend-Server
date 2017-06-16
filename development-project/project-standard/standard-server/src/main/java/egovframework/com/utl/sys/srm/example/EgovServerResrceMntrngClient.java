@@ -10,7 +10,22 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import egovframework.rte.fdl.cmmn.exception.EgovBizException;
+
+/*
+ *       수정일         수정자                   수정내용
+ *   -------    --------    ---------------------------
+ * 2017.02.07 	이정은 	시큐어코딩(ES)-오류 메시지를 통한 정보노출[CWE-211]
+ */
+
+
 public class EgovServerResrceMntrngClient {
+			
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovServerResrceMntrngClient.class);
+		
 	private JMXServiceURL address = null;
     private JMXConnector connector = null;
     private MBeanServerConnection mbs = null;
@@ -18,7 +33,7 @@ public class EgovServerResrceMntrngClient {
     private MBeanInfo mBeanInfo = null;
     private MBeanAttributeInfo[] attrInfos = null;
     
-	public void connect() {
+	public void connect() throws Exception {
 		try {
     		address = new JMXServiceURL("service:jmx:rmi://127.0.0.1:9999/jndi/rmi://127.0.0.1:9999/server");
     		connector = JMXConnectorFactory.connect(address);
@@ -42,22 +57,28 @@ public class EgovServerResrceMntrngClient {
             		System.out.println(attrInfo.getName() + " = " + mbs.getAttribute(name, attrInfo.getName()));
             	}
             }
-            
+        
+        //2017.02.07 	이정은 	시큐어코딩(ES)-오류 메시지를 통한 정보노출[CWE-211]
     	} catch (Exception ex) {
-    		ex.printStackTrace();
+    		LOGGER.error("["+ex.getClass()+"] server connection : " + ex.getMessage());
+    		//throw new RuntimeException(ex);
+    		throw new EgovBizException("[server resource monitoring] : connection close fail");
     		
-    		throw new RuntimeException(ex);
     	} finally {
-            if (connector != null)
+
+    		if (connector != null)
             	try { 
             		connector.close();
+            		
             	} catch(IOException ignore) {
-            		// no-op
+            		LOGGER.error("[IOException] : connection close fail");
+//            		throw new RuntimeException(ignore);
+            		throw new EgovBizException("[server resource monitoring] : connection close fail");            		
             	}
         }
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		EgovServerResrceMntrngClient client = new EgovServerResrceMntrngClient();
 		
 		client.connect();

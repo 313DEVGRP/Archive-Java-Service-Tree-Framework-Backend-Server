@@ -37,6 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
  *  -------       --------    ---------------------------
  *   2010.10.17   정호열       최초 생성
  *   2013.12.19	표준프레임워크	공통컴포넌트 추가 적용 (패키지 변경)
+ *   2017-02-13  이정은	 		시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]   	
  * </pre>
  */
 public abstract class JFileUploadModeTemplate extends EgovAbstractServiceImpl {
@@ -214,7 +215,12 @@ public abstract class JFileUploadModeTemplate extends EgovAbstractServiceImpl {
 	 */
 	protected void mkdir(File file) {
 		if (!file.exists())
-			file.mkdirs();
+			//2017.02.07 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			if(file.mkdirs()){
+				LOGGER.debug("[file.mkdirs] file : Creation Success");
+			}else{				
+				LOGGER.error("[file.mkdirs] file : Creation Fail");
+			}
 	}
 
 	/**
@@ -224,7 +230,12 @@ public abstract class JFileUploadModeTemplate extends EgovAbstractServiceImpl {
 	protected void mkdir(String fullpath) {
 		File file = new File(fullpath);
 		if (!file.exists())
-			file.mkdirs();
+			//2017.02.07 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			if(file.mkdirs()){
+				LOGGER.debug("[file.mkdirs] file : Creation Success");
+			}else{				
+				LOGGER.error("[file.mkdirs] file : Creation Fail");
+			}
 	}
 
 	/**
@@ -235,7 +246,12 @@ public abstract class JFileUploadModeTemplate extends EgovAbstractServiceImpl {
 		File f = null;
 		f = new File(fullPath);
 		if (f.exists()) {
-			f.delete();
+			//2017.02.07 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			if(f.delete()){
+				LOGGER.debug("[file.delete] file : File Path Deletion Success");
+			}else{				
+				LOGGER.error("[file.delete] file : File Path Deletion Fail");
+			}
 		}
 	}
 

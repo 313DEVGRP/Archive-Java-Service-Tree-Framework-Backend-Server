@@ -1,5 +1,7 @@
 package egovframework.com.cop.sms.service.impl;
 
+import java.io.IOException;
+
 import egovframework.com.cmm.util.EgovBasicLogger;
 import egovframework.com.cop.sms.service.SmsRecptn;
 
@@ -32,6 +34,7 @@ import x3.client.smeapi.impl.SMELogger;
  *  -------    --------    ---------------------------
  *   2009.11.24  한성곤          최초 생성
  *   2011.10.10	 이기하			 보안점검 후속초치(디버거코드 주석처리)
+ *   2017.03.07    조성원 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  * </pre>
  */
@@ -262,9 +265,13 @@ public class EgovSmsBasicReceiver implements SMEListener {
 
 					try {
 						smsDao.updateSmsRecptnInf(recptn);
+					//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+					} catch (IOException ex) {
+//						LOGGER.error("Exception: {}", ex.getClass().getName());
+//						LOGGER.error("Exception  Message: {}", ex.getMessage());
+						LOGGER.error("[IOException] : Connection Close");
 					} catch (Exception ex) {
-						LOGGER.error("Exception: {}", ex.getClass().getName());
-						LOGGER.error("Exception  Message: {}", ex.getMessage());
+						LOGGER.error("["+ ex.getClass() +"] Connection Close : ", ex.getMessage());
 					}
 				}
 			} else {
@@ -292,9 +299,11 @@ public class EgovSmsBasicReceiver implements SMEListener {
 			try {
 				SMEConfig.configSet(args[0]);
 				receiver.readPropertyFile();
-
+				
 			} catch (Exception ex) {
-				LOGGER.error("DEBUG: {}", ex.getMessage());
+//				LOGGER.error("DEBUG: {}", ex.getMessage());
+				//2017.03.07 	조성원 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				LOGGER.error("["+ ex.getClass() +"] : Connection Close ", ex.getMessage());
 				return;
 			}
 

@@ -6,6 +6,7 @@
  *     수정일         수정자                   수정내용
  *   -------    --------    ---------------------------
  *   2009.02.04    박지욱          최초 생성
+ *   2017.02.07	       이정은 	      시큐어코딩(ES)-솔트 없이 일방향 해쉬함수 사용[CWE-759]
  *
  *  @author 공통 서비스 개발팀 박지욱
  *  @since 2009. 02. 04
@@ -24,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 import egovframework.com.cmm.util.EgovResourceCloseHelper;
 
@@ -195,8 +197,8 @@ public class EgovFileScrty {
 	
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		
+		//2017.02.07 	이정은 	시큐어코딩(ES)-솔트 없이 일방향 해쉬함수 사용[CWE-759]
 		// 변경 시 기존 hash 값에 검증 불가.. => deprecated 시키고 유지
-		/*	
 	    // Random 방식의 salt 추가
 	    SecureRandom ng = new SecureRandom();
 	    byte[] randomBytes = new byte[16];
@@ -205,7 +207,7 @@ public class EgovFileScrty {
 	    md.reset();
 	    md.update(randomBytes);
 	    
-		*/		
+				
 		hashValue = md.digest(plainText);
 		
 		/*

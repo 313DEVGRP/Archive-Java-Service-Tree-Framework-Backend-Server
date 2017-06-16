@@ -6,6 +6,8 @@
  *     수정일         수정자                   수정내용
  *   -------    --------    ---------------------------
  *   2009.01.13    조재영          최초 생성
+ *   2017-02-08    이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+ *   2017.03.03    조성원          시큐어코딩(ES) - Null Pointer 역참조[CWE-476]
  *
  *  @author 공통 서비스 개발팀 조재영,박지욱
  *  @since 2009. 01. 13
@@ -31,6 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import egovframework.com.cmm.EgovWebUtil;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.cmm.service.Globals;
@@ -50,8 +55,8 @@ public class EgovFileTool {
 	// 최대 문자길이
 	static final int MAX_STR_LEN = 1024;
 
-	// Log
-	//protected static final Log log = LogFactory.getLog(EgovFileTool.class);
+	// LOGGER
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovFileTool.class);
 
 	/**
 	 * <pre>
@@ -419,7 +424,7 @@ public class EgovFileTool {
 	 * </pre>
 	 *
 	 * @param dirPath 생성하고자 하는 절대경로
-	 * @return 성공하면 새성된 절대경로, 아니면 블랭크
+	 * @return 성공하면 생성된 절대경로, 아니면 블랭크
 	 */
 
 	public static String createDirectory(String dirPath) {
@@ -427,7 +432,12 @@ public class EgovFileTool {
 		String result = "";
 		try {
 			if (!file.exists()) {
-				file.createNewFile();
+				//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				if(file.createNewFile()){
+					LOGGER.debug("[file.createNewFile] file : Path Creation Success");
+				}else{
+					LOGGER.error("[file.createNewFile] file : Path Creation Fail");
+				}
 				file.getAbsolutePath();
 			}
 
@@ -698,7 +708,7 @@ public class EgovFileTool {
 			} else {
 				// 파일의 최종수정일자 조회
 				long date = fileArray[i].lastModified();
-				java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
 				String lastUpdtDate = dateFormat.format(new java.util.Date(date));
 				// 수정기간 내에 존재하는지 확인
 				if (Integer.parseInt(lastUpdtDate) >= Integer.parseInt(updtFrom) && Integer.parseInt(lastUpdtDate) <= Integer.parseInt(updtTo)) {
@@ -793,12 +803,15 @@ public class EgovFileTool {
 				else {
 					BufferedReader b_out = null;
 					try {
-						b_out = new BufferedReader(new InputStreamReader(p.getInputStream()));
-						while (b_out.ready()) {
-							// 결과문자가 있으면 생성자가 일치하는 파일이 존재한다는 의미
-							String tmpStr = b_out.readLine();
-							if (tmpStr != null && "".equals(tmpStr) && tmpStr.length() <= MAX_STR_LEN) {
-								list.add(fileArray[i].getAbsolutePath());
+						//2017.03.03 조성원 시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
+						if(p != null){
+							b_out = new BufferedReader(new InputStreamReader(p.getInputStream()));
+							while (b_out.ready()) {
+								// 결과문자가 있으면 생성자가 일치하는 파일이 존재한다는 의미
+								String tmpStr = b_out.readLine();
+								if (tmpStr != null && "".equals(tmpStr) && tmpStr.length() <= MAX_STR_LEN) {
+									list.add(fileArray[i].getAbsolutePath());
+								}
 							}
 						}
 					} finally {
@@ -873,7 +886,13 @@ public class EgovFileTool {
 				result = filePath;
 			} else {
 				// 존재하지 않으면 생성함
-				new File(file.getParent()).mkdirs();
+				//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				if(new File(file.getParent()).mkdirs()){
+					LOGGER.debug("[file.mkdirs] file : File Creation Success");
+				}else{
+					LOGGER.error("[file.mkdirs] file : File Creation Fail");
+				}
+								
 				if (file.createNewFile()) {
 					result = file.getAbsolutePath();
 				}
@@ -911,7 +930,12 @@ public class EgovFileTool {
 				File f = new File(EgovWebUtil.filePathBlackList(dirDeletePath) + "/" + fileList[i]);
 				if (f.isFile()) {
 					//디렉토리에 속한 파일들을 모두 삭제한다.
-					f.delete();
+					//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+					if(f.delete()){
+						LOGGER.debug("[file.delete] f : File Deletion Success");
+					}else{
+						LOGGER.error("[file.delete] f : File Deletion Fail");
+					}
 				} else {
 					//디렉토리에 속한 하위 디렉토리들에 대한 삭제 명령을 재귀적으로 호출시킨다.
 					deleteDirectory(dirDeletePath + "/" + fileList[i]);
@@ -1076,7 +1100,7 @@ public class EgovFileTool {
 			} else {
 				// 파일의 최종수정일자 조회
 				long date = fileArray[i].lastModified();
-				java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
 				String lastUpdtDate = dateFormat.format(new java.util.Date(date));
 				if (Integer.parseInt(lastUpdtDate) == Integer.parseInt(updtDate)) {
 					list.add(fileArray[i].getAbsolutePath());
@@ -1291,12 +1315,12 @@ public class EgovFileTool {
 
 			// 파일1 수정일자
 			long date1 = file1.lastModified();
-			java.text.SimpleDateFormat dateFormat1 = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
 			String lastUpdtDate1 = dateFormat1.format(new java.util.Date(date1));
 
 			// 파일2 수정일자
 			long date2 = file2.lastModified();
-			java.text.SimpleDateFormat dateFormat2 = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
+			SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
 			String lastUpdtDate2 = dateFormat2.format(new java.util.Date(date2));
 
 			// 수정일자 비교
@@ -1933,7 +1957,7 @@ public class EgovFileTool {
 		File srcFile = new File(EgovWebUtil.filePathBlackList(src));
 		if (srcFile.exists()) {
 			long date = srcFile.lastModified();
-			java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", java.util.Locale.KOREA);
 			updtDate = dateFormat.format(new java.util.Date(date));
 		}
 
@@ -2205,7 +2229,13 @@ public class EgovFileTool {
 				result = false;
 			} else {
 				File targetDir = new File(EgovWebUtil.filePathBlackList(targetDirPath1));
-				targetDir.mkdirs();
+				//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				if(targetDir.mkdirs()){
+					LOGGER.debug("[file.mkdirs] targetDir : Directory Creation Success");
+				}else{					
+					LOGGER.error("[file.mkdirs] targetDir : Directory Creation Fail");
+				}
+				
 				// 디렉토리에 속한 파일들을 복사한다.
 				String[] originalFileList = f.list();
 				if (originalFileList.length > 0) {
@@ -2268,7 +2298,13 @@ public class EgovFileTool {
 				result = false;
 			} else {
 				File targetDir = new File(EgovWebUtil.filePathBlackList(targetDirPath1));
-				targetDir.mkdirs();
+				//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				if(targetDir.mkdirs()){
+					LOGGER.debug("[file.mkdirs] targetDir : Directory Creation Success");
+				}else{					
+					LOGGER.error("[file.mkdirs] targetDir : Directory Creation Fail");
+				}
+				
 				// 디렉토리에 속한 파일들을 복사한다.
 				String[] originalFileList = f.list();
 				if (originalFileList.length > 0) {
@@ -2331,7 +2367,14 @@ public class EgovFileTool {
 				result = false;
 			} else {
 				File targetDir = new File(EgovWebUtil.filePathBlackList(targetDirPath1));
-				targetDir.mkdirs();
+				
+				//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				if(targetDir.mkdirs()){
+					LOGGER.debug("[file.mkdirs] targetDir : Directory Creation Success");
+				}else{					
+					LOGGER.error("[file.mkdirs] targetDir : Directory Creation Fail");
+				}
+				
 				// 디렉토리에 속한 파일들을 복사한다.
 				String[] originalFileList = f.list();
 				if (originalFileList.length > 0) {

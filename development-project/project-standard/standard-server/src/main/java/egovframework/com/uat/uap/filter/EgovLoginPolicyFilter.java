@@ -34,6 +34,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  *   수정일      수정자          수정내용
  *  -------    --------    ---------------------------
  *  2011.07.01  서준식          최초 생성
+ *  2017-02-14  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  *  </pre>
  */
@@ -102,8 +103,11 @@ public class EgovLoginPolicyFilter implements Filter {
 			}
 
 		} catch (Exception e) {
-			LOGGER.error("Exception: {}", e.getClass().getName());
-			LOGGER.error("Exception  Message: {}", e.getMessage());
+//			LOGGER.error("Exception: {}", e.getClass().getName());
+//			LOGGER.error("Exception  Message: {}", e.getMessage());
+			// 2017-02-14  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());
+			
 			((HttpServletResponse) response).sendRedirect(httpRequest.getContextPath() + "/uat/uia/egovLoginUsr.do?login_error=1");
 		}
 	}

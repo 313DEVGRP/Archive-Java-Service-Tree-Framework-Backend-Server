@@ -6,6 +6,7 @@
  *     수정일         수정자                   수정내용
  *   -------    --------    ---------------------------
  *   2009.02.02    이 용          최초 생성
+ *   2017-02-08    이정은        시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  *  @author 공통 서비스 개발팀 이 용
  *  @since 2009. 02. 02
@@ -33,6 +34,8 @@ import egovframework.com.utl.fcc.service.EgovStringUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -41,6 +44,10 @@ import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConne
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
 public class EgovPdfCnvr {
+	
+	// LOGGER
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovPdfCnvr.class);
+	
 	public static String addrIP = "";
 	static final char FILE_SEPARATOR = File.separatorChar;
 	// 최대 문자길이
@@ -134,7 +141,12 @@ public class EgovPdfCnvr {
 			File cFile = new File(EgovWebUtil.filePathBlackList(stordFilePath));
 
 			if (!cFile.isDirectory())
-				cFile.mkdir();
+				//2017.02.08 	이정은 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+				if(cFile.mkdir()){
+					LOGGER.debug("[file.mkdir] cFile : Directory Creation Success");
+				}else{
+					LOGGER.error("[file.mkdir] cFile : Directory Creation Fail");
+				}
 
 			bos = new FileOutputStream(EgovWebUtil.filePathBlackList(stordFilePath + File.separator + newName));
 

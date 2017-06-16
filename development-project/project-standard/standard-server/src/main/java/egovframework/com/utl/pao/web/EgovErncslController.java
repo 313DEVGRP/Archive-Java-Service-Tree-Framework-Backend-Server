@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *   수정일      수정자           수정내용
  *  -------    --------    ---------------------------
  *   2009.04.01  이중호          최초 생성
+ *   2017-02-14  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
  *
  * </pre>
  */
@@ -81,7 +82,9 @@ public class EgovErncslController extends HttpServlet {
 		try {
 			res = prntngOutpt.selectErncsl(req);
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+//			LOGGER.error(e.getMessage());
+			// 2017-02-14  이정은          시큐어코딩(ES) - 시큐어코딩 부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
+			LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());
 			throw new RuntimeException("Service call error", e);
 		}
 
