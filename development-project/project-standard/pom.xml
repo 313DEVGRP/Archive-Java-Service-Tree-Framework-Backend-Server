@@ -21,6 +21,7 @@
 		<module>standard-portal</module>
 		<module>standard-config</module>
 		<module>standard-server-support</module>
+		<module>standard-api-server</module>
 		<module>standard-server</module>
 	</modules>
 

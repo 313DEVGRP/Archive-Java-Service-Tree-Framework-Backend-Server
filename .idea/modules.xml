@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/development-project/development-project.iml" filepath="$PROJECT_DIR$/development-project/development-project.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/github.iml" filepath="$PROJECT_DIR$/.idea/github.iml" />
       <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/project-standard.iml" filepath="$PROJECT_DIR$/development-project/project-standard/project-standard.iml" group="project-standard and modules" />
+      <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/standard-api-server/standard-api-server.iml" filepath="$PROJECT_DIR$/development-project/project-standard/standard-api-server/standard-api-server.iml" group="project-standard and modules" />
       <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/standard-config/standard-config.iml" filepath="$PROJECT_DIR$/development-project/project-standard/standard-config/standard-config.iml" group="project-standard and modules" />
       <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/standard-portal/standard-portal.iml" filepath="$PROJECT_DIR$/development-project/project-standard/standard-portal/standard-portal.iml" group="project-standard and modules" />
       <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/standard-server/standard-server.iml" filepath="$PROJECT_DIR$/development-project/project-standard/standard-server/standard-server.iml" group="project-standard and modules" />

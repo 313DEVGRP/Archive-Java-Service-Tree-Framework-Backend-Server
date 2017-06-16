@@ -172,12 +172,14 @@
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-core:1.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-config:1.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-security:1.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.social:spring-social-web:1.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-facebook-web:3.0.0.M1" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-facebook:3.0.0.M1" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-twitter:1.1.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-crypto:3.2.8.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework.social:spring-social-web:1.1.4.RELEASE" />
-          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+          <element id="library" level="project" name="Maven: org.springframework.social:spring-social-linkedin:1.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.social:spring-social-google:1.0.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.3.4" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.3.2" />
           <element id="library" level="project" name="Maven: com.h2database:h2:1.4.180" />

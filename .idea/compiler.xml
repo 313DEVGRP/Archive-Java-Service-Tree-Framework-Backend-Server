@@ -49,16 +49,31 @@
         <processorPath useClasspath="true" />
         <module name="standard-config" />
       </profile>
+      <profile default="false" name="Annotation profile for test" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for standard-api-server" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="standard-api-server" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="development-project" target="1.5" />
       <module name="project-standard" target="1.5" />
+      <module name="standard-api-server" target="1.8" />
       <module name="standard-business" target="1.8" />
       <module name="standard-config" target="1.8" />
       <module name="standard-homepage" target="1.8" />
       <module name="standard-portal" target="1.8" />
       <module name="standard-server" target="1.8" />
       <module name="standard-server-support" target="1.5" />
+      <module name="test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
