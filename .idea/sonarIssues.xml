@@ -43,6 +43,96 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/profiles/dev/database.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/controller/RegistrationController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/RoleDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/UserDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/database/model/Role.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/database/model/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/dto/UserRegistrationForm.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/registry/AppConnectionSignUp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/service/LocalUserDetailService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/service/RegistrationUserDetailService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/service/SocialUserDetailService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/service/UserService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/util/SecurityUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/webapp/WEB-INF/spring-persistent-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/webapp/WEB-INF/spring-social-login-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/webapp/WEB-INF/web.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/test/java/database/demo/SampleUsersDemo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-business/DATABASE/all_ebt_data_oracle.sql">
           <value>
             <set />
@@ -438,6 +528,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/resources/egovframework/spring/com/context-hibernate.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/resources/egovframework/spring/com/context-security.xml">
           <value>
             <set />
@@ -564,6 +659,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/WEB-INF/jsp/egovframework/rivalWar/api/snsLogin/index.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/src/main/webapp/WEB-INF/jsp/login.jsp">
           <value>
             <set />
           </value>

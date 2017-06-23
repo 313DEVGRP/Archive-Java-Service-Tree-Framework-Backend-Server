@@ -32,6 +32,7 @@
 		<property name="packagesToScan">
 			<list>
 				<value>egovframework.com.ext.jstree.springHibernate.core</value>
+				<value>egovframework.com.ext.jstree.support.security</value>
 				<value>egovframework.rivalwar.api</value>
 			</list>
 		</property>
@@ -41,5 +42,7 @@
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 </beans>

@@ -8,8 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.spring.security.social.login.example.database.model.Role;
-import com.spring.security.social.login.example.database.model.User;
+import egovframework.com.ext.jstree.support.security.database.model.Role;
+import egovframework.com.ext.jstree.support.security.database.model.User;
 
 
 /**
