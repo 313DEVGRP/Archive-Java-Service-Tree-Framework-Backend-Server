@@ -78,6 +78,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/handler/AppSuccessHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/java/egovframework/com/ext/jstree/support/security/registry/AppConnectionSignUp.java">
           <value>
             <set />
