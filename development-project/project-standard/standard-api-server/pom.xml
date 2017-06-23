@@ -74,6 +74,15 @@
                 <build.profile.id>dev</build.profile.id>
             </properties>
         </profile>
+        <profile>
+            <id>operation</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <build.profile.id>operation</build.profile.id>
+            </properties>
+        </profile>
     </profiles>
 
     <build>
