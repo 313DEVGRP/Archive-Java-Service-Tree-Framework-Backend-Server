@@ -111,7 +111,7 @@
                     <uriEncoding>UTF-8</uriEncoding>
                     <url>http://ubuntu.313.co.kr:58080/manager/text</url>
                     <server>StandardProject-Snapshot</server>
-                    <path>/api</path>
+                    <path>/</path>
                     <protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
                 </configuration>
             </plugin>
