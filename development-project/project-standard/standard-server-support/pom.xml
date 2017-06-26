@@ -23,8 +23,8 @@
 	</licenses>
 
 	<properties>
-		<spring.maven.artifact.version>4.1.2.RELEASE</spring.maven.artifact.version>
-		<egovframework.rte.version>3.6.0</egovframework.rte.version>
+		<spring.maven.artifact.version>4.0.9.RELEASE</spring.maven.artifact.version>
+		<egovframework.rte.version>3.5.0</egovframework.rte.version>
 		<spring.security.version>3.2.9.RELEASE</spring.security.version>
 		<struts.maven.artifact.version>2.3.32</struts.maven.artifact.version>
 		<org.hibernate.hibernate_version>4.3.11.Final</org.hibernate.hibernate_version>
@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.security</artifactId>
-			<version>${egovframework.rte.version}</version>
+			<version>3.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>
