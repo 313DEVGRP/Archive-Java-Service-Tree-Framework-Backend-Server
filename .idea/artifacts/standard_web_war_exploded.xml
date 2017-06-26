@@ -137,7 +137,6 @@
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:1.6.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.2" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.2" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.31" />
         </element>
       </element>
       <element id="directory" name="META-INF">

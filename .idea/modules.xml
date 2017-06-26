@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/project-standard.iml" filepath="$PROJECT_DIR$/development-project/project-standard/project-standard.iml" group="project-standard and modules" />
       <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/standard-server/standard-server.iml" filepath="$PROJECT_DIR$/development-project/project-standard/standard-server/standard-server.iml" group="project-standard and modules" />
       <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/standard-server-support/standard-server-support.iml" filepath="$PROJECT_DIR$/development-project/project-standard/standard-server-support/standard-server-support.iml" group="project-standard and modules" />
-      <module fileurl="file://$PROJECT_DIR$/development-project/project-standard/standard-web/standard-web.iml" filepath="$PROJECT_DIR$/development-project/project-standard/standard-web/standard-web.iml" group="project-standard and modules" />
     </modules>
   </component>
 </project>
