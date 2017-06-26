@@ -47,7 +47,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="standard-config" />
       </profile>
       <profile default="false" name="Annotation profile for test" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -60,7 +59,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="standard-api-server" />
+      </profile>
+      <profile default="false" name="Annotation profile for standard-server (1)" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for standard-web" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="standard-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -72,7 +83,9 @@
       <module name="standard-homepage" target="1.8" />
       <module name="standard-portal" target="1.8" />
       <module name="standard-server" target="1.8" />
+      <module name="standard-server (1)" target="1.7" />
       <module name="standard-server-support" target="1.5" />
+      <module name="standard-web" target="1.7" />
       <module name="test" target="1.8" />
     </bytecodeTargetLevel>
   </component>

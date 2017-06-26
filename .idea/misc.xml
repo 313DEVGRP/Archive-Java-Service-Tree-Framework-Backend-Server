@@ -10,6 +10,7 @@
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-homepage" />
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-portal" />
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-server" />
+    <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-web" />
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/test" />
   </component>
   <component name="MavenProjectsManager">

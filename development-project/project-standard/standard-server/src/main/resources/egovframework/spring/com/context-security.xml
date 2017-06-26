@@ -1,78 +1,127 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:egov-security="http://www.egovframe.go.kr/schema/egov-security"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
-		http://www.egovframe.go.kr/schema/egov-security http://www.egovframe.go.kr/schema/egov-security/egov-security-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/security
+                    http://www.springframework.org/schema/security/spring-security.xsd">
 
-<!--
-수정일      			수정자				수정내용
-=========	======= 		=================================================
-2011.09.07		서준식				일반, 업무사용자의 경우 조직아이디가 없어 로그인이 안되던 문제 수정(SQL 수정)
-2011.09.25		서준식				usersByUsernameQuery 쿼리의 조직 아이디 비교 부분  오류 수정 > alias 추가
-2014.06.13		Vincent Han		표준프레임워크 3.0 적용 (간소화 설정 사용)
--->
+    <!--  authentication manager and its provider( social provider deals with social login & local user provider deals with form login ) -->
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="socialAuthenticationProvider"/>
+        <security:authentication-provider user-service-ref="localUserDetailService"/>
+    </security:authentication-manager>
 
-	<security:http pattern="/css/**" security="none"/>
-	<security:http pattern="/html/**" security="none"/>
+    <bean id="socialAuthenticationProvider" class="org.springframework.social.security.SocialAuthenticationProvider">
+        <constructor-arg ref="inMemoryUsersConnectionRepository"/>
+        <constructor-arg ref="socialUserDetailService"/>
+    </bean>
+
+    <!-- form login beans -->
+    <bean id="appAuthenticationEntryPoint" class="egovframework.com.ext.jstree.support.security.entrypoint.AppAuthenticationEntryPoint">
+        <constructor-arg name="loginFormUrl" value="/services/login"/>
+    </bean>
+    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.NullRememberMeServices"/>
+    <bean id="successHandler" class="egovframework.com.ext.jstree.support.security.handler.AppSuccessHandler"/>
+    <bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <constructor-arg name="defaultFailureUrl" value="/services/accessdenied"/>
+    </bean>
+    <bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <constructor-arg name="logoutSuccessHandler" ref="logoutSuccessHandler"/>
+        <constructor-arg name="handlers">
+            <list>
+                <bean name="securityContextLogoutHandler" class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="logoutSuccessHandler" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler"/>
+    <bean class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" id="SecurityAuthFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationSuccessHandler" ref="successHandler"/>
+        <property name="authenticationFailureHandler" ref="failureHandler"/>
+        <property name="filterProcessesUrl" value="/j_spring_security_check"/>
+        <property name="rememberMeServices" ref="rememberMeServices"/>
+    </bean>
+
+
+    <!-- Anyone can access these urls -->
     <security:http pattern="/images/**" security="none"/>
- 	<security:http pattern="/js/**" security="none"/>
- 	<security:http pattern="/resource/**" security="none"/>
- 	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>
+    <security:http pattern="/services/login" security="none"/>
+    <security:http pattern="/services/accessdenied" security="none"/>
+    <security:http pattern="/services/signup" security="none"/>
+    <security:http pattern="/services/user/register" security="none"/>
 
-    <egov-security:config id="securityConfig"
-		loginUrl="/uat/uia/egovLoginUsr.do"
-		logoutSuccessUrl="/uat/uia/actionLogout.do"
-		loginFailureUrl="/uat/uia/egovLoginUsr.do?login_error=1"
-		accessDeniedUrl="/sec/ram/accessDenied.do"
+    <security:http use-expressions="true" entry-point-ref="appAuthenticationEntryPoint">
 
-		dataSource="egov.dataSource"
-		jdbcUsersByUsernameQuery="SELECT USER_ID, ESNTL_ID AS PASSWORD, 1 ENABLED, USER_NM, USER_ZIP,
-                                                              USER_ADRES, USER_EMAIL, USER_SE, ORGNZT_ID, ESNTL_ID,
-                                                              (select a.ORGNZT_NM from COMTNORGNZTINFO a where a.ORGNZT_ID = m.ORGNZT_ID) ORGNZT_NM
-                                                       FROM COMVNUSERMASTER m WHERE CONCAT(USER_SE, USER_ID) = ?"
-		jdbcAuthoritiesByUsernameQuery="SELECT A.SCRTY_DTRMN_TRGET_ID USER_ID, A.AUTHOR_CODE AUTHORITY
-                                                             FROM COMTNEMPLYRSCRTYESTBS A, COMVNUSERMASTER B
-                                                             WHERE A.SCRTY_DTRMN_TRGET_ID = B.ESNTL_ID AND B.USER_ID = ?"
-		jdbcMapClass="egovframework.com.sec.security.common.EgovSessionMapping"
+        <security:intercept-url pattern="/auth/**" access="permitAll"/>
+        <security:intercept-url pattern="/j_spring_security_check" access="permitAll"/>
 
-		requestMatcherType="regex"
-		hash="plaintext"
-		hashBase64="false"
+        <security:intercept-url pattern="/" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
 
-		concurrentMaxSessons="1"
-		concurrentExpiredUrl="/EgovContent.do"
+        <!-- Adds social authentication filter to the Spring Security filter chain. -->
+        <security:custom-filter before="PRE_AUTH_FILTER" ref="socialAuthenticationFilter"/>
+        <security:custom-filter position="FORM_LOGIN_FILTER" ref="SecurityAuthFilter"/>
+        <security:custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/>
+    </security:http>
 
-		defaultTargetUrl="/egovIndex.do"
-	/>
+    <!-- social login filter which is a pre authentication filter and works for /auth service url -->
+    <bean id="socialAuthenticationFilter" class="org.springframework.social.security.SocialAuthenticationFilter">
+        <constructor-arg name="authManager" ref="authenticationManager"/>
+        <constructor-arg name="userIdSource" ref="userIdSource"/>
+        <constructor-arg name="usersConnectionRepository" ref="inMemoryUsersConnectionRepository"/>
+        <constructor-arg name="authServiceLocator" ref="appSocialAuthenticationServiceRegistry"/>
+        <property name="authenticationSuccessHandler" ref="successHandler"/>
+    </bean>
 
-	<egov-security:secured-object-config id="securedObjectConfig"
-		sqlHierarchicalRoles="
-			SELECT a.CHLDRN_ROLE child, a.PARNTS_ROLE parent
-			FROM COMTNROLES_HIERARCHY a LEFT JOIN COMTNROLES_HIERARCHY b on (a.CHLDRN_ROLE = b.PARNTS_ROLE)"
-		sqlRolesAndUrl="
-			SELECT a.ROLE_PTTRN url, b.AUTHOR_CODE authority
-			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
-			WHERE a.ROLE_CODE = b.ROLE_CODE
-				AND a.ROLE_TY = 'url'  ORDER BY a.ROLE_SORT"
-		sqlRolesAndMethod="
-			SELECT a.ROLE_PTTRN method, b.AUTHOR_CODE authority
-			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
-			WHERE a.ROLE_CODE = b.ROLE_CODE
-				AND a.ROLE_TY = 'method'  ORDER BY a.ROLE_SORT"
-		sqlRolesAndPointcut="
-			SELECT a.ROLE_PTTRN pointcut, b.AUTHOR_CODE authority
-			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
-			WHERE a.ROLE_CODE = b.ROLE_CODE
-				AND a.ROLE_TY = 'pointcut'  ORDER BY a.ROLE_SORT"
-		sqlRegexMatchedRequestMapping="
-			SELECT a.resource_pattern uri, b.authority authority
-			FROM COMTNSECURED_RESOURCES a, COMTNSECURED_RESOURCES_ROLE b
-			WHERE a.resource_id = b.resource_id
-				AND a.resource_type = 'url'"
-	/>
 
-	<egov-security:initializer id="initializer" supportMethod="true" supportPointcut="false" />
+    <!-- inmemory connection repository which holds connection repository per local user -->
+    <bean id="inMemoryUsersConnectionRepository"
+          class="org.springframework.social.connect.mem.InMemoryUsersConnectionRepository">
+        <constructor-arg name="connectionFactoryLocator" ref="appSocialAuthenticationServiceRegistry"/>
+        <property name="connectionSignUp" ref="connectionSignUp"/>
+    </bean>
 
+    <!-- service registry will holds connection factory of each social provider -->
+    <bean id="appSocialAuthenticationServiceRegistry"
+          class="egovframework.com.ext.jstree.support.security.registry.AppSocialAuthenticationServiceRegistry">
+        <constructor-arg>
+            <list>
+                <ref bean="facebookAuthenticationService"/>
+                <ref bean="twitterAuthenticationService"/>
+                <ref bean="linkedInAuthenticationService"/>
+                <ref bean="googleAuthenticationService"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="facebookAuthenticationService"
+          class="org.springframework.social.facebook.security.FacebookAuthenticationService">
+        <constructor-arg name="apiKey" value="${facebook.api.key}"/>
+        <constructor-arg name="appSecret" value="${facebook.api.secret}"/>
+    </bean>
+
+    <bean id="twitterAuthenticationService"
+          class="org.springframework.social.twitter.security.TwitterAuthenticationService">
+        <constructor-arg name="apiKey" value="${twitter.api.key}"/>
+        <constructor-arg name="appSecret" value="${twitter.api.secret}"/>
+    </bean>
+
+    <bean id="linkedInAuthenticationService"
+          class="org.springframework.social.linkedin.security.LinkedInAuthenticationService">
+        <constructor-arg name="apiKey" value="${linkedin.api.key}"/>
+        <constructor-arg name="appSecret" value="${linkedin.api.secret}"/>
+    </bean>
+
+    <bean id="googleAuthenticationService"
+          class="org.springframework.social.google.security.GoogleAuthenticationService">
+        <constructor-arg name="apiKey" value="${google.api.key}"/>
+        <constructor-arg name="appSecret" value="${google.api.secret}"/>
+    </bean>
+
+    <bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource"/>
+
+    <!-- If no local user is associated to a social connection then connection sign up will create a new local user and map it to social user -->
+    <bean id="connectionSignUp" class="egovframework.com.ext.jstree.support.security.registry.AppConnectionSignUp"/>
 </beans>

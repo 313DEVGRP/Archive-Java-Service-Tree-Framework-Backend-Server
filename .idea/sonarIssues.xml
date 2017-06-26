@@ -123,12 +123,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/resources/egovframework/spring/com/context-common.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/resources/egovframework/spring/com/context-security.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/webapp/WEB-INF/spring-persistent-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-api-server/src/main/webapp/WEB-INF/spring-servlet.xml">
           <value>
             <set />
           </value>
@@ -694,6 +709,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-server/standard-server.iml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/pom.xml">
           <value>
             <set />
           </value>

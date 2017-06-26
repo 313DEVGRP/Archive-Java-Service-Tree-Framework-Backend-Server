@@ -18,11 +18,9 @@
 	<description>ROOT Project Repository by 313 DEV GRP</description>
 	
 	<modules>
-		<module>standard-portal</module>
-		<module>standard-config</module>
 		<module>standard-server-support</module>
-		<module>standard-api-server</module>
 		<module>standard-server</module>
+		<module>standard-web</module>
 	</modules>
 
 	<properties>
