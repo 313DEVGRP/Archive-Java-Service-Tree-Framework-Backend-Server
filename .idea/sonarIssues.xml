@@ -723,6 +723,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/egovframework/egovProps/globals.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/test/pom.xml">
           <value>
             <set />
