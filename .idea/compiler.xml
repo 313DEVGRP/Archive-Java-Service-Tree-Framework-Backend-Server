@@ -84,7 +84,7 @@
       <module name="standard-server" target="1.8" />
       <module name="standard-server (1)" target="1.7" />
       <module name="standard-server-support" target="1.5" />
-      <module name="standard-web" target="1.7" />
+      <module name="standard-web" target="1.8" />
       <module name="test" target="1.8" />
     </bytecodeTargetLevel>
   </component>

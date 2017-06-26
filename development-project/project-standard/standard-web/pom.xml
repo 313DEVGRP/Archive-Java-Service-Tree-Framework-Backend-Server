@@ -74,7 +74,7 @@
                         <port>80</port>
                         <path>/</path>
                         <systemProperties>
-                            <JAVA_OPTS>-Xms256m -Xmx768m -XX:MaxPermSize=256m</JAVA_OPTS>
+                            <JAVA_OPTS>-Xms512m -Xmx768m -XX:MaxPermSize=256m</JAVA_OPTS>
                         </systemProperties>
                     </configuration>
                 </plugin>
@@ -82,8 +82,8 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>1.8</source>
+                        <target>1.8</target>
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
@@ -101,42 +101,37 @@
                     </configuration>
                     <dependencies>
                         <dependency>
-                            <groupId>hsqldb</groupId>
+                            <groupId>org.hsqldb</groupId>
                             <artifactId>hsqldb</artifactId>
                             <version>2.3.2</version>
                         </dependency>
                     </dependencies>
                 </plugin>
-                <!-- EMMA   -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>emma-maven-plugin</artifactId>
-                    <version>1.0-alpha-3</version>
-                </plugin>
-                <!-- PMD manven plugin -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.1</version>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
-            <!-- EMMA -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
                 <configuration>
-                    <skipTests>false</skipTests>
-                    <forkMode>once</forkMode>
-                    <reportFormat>xml</reportFormat>
-                    <excludes>
-                        <exclude>**/Abstract*.java</exclude>
-                        <exclude>**/*Suite.java</exclude>
-                    </excludes>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                            <Build-Host>default</Build-Host>
+                            <Build-User>${user.name}</Build-User>
+                            <Build-Maven>Maven 3.0.5</Build-Maven>
+                            <Build-Java>${java.version}</Build-Java>
+                            <Build-OS>${os.name}</Build-OS>
+                            <Build-Label>${project.version}</Build-Label>
+                            <Build-Path>${basedir}</Build-Path>
+                            <Build-ETC>Korea Standard Project</Build-ETC>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <!-- docker server 배포 -->
@@ -144,89 +139,28 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>redeploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <url>http://192.168.100.251:8086/manager/text</url>
-                    <username>tomcat</username>
-                    <password>tomcat</password>
-                    <path>/</path>
-                    <warFile>target\standard-web.war</warFile>
+                    <!--username--><!--/username-->
+                    <!--password--><!--/password-->
+                    <!--warFile--><!--/warFile-->
+                    <charset>UTF-8</charset>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <url>http://ubuntu.313.co.kr:58080/manager/text</url>
+                    <server>StandardProject-Snapshot</server>
+                    <path>/test</path>
+                    <protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
                     <update>true</update>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>emma-maven-plugin</artifactId>
-                <inherited>true</inherited>
-            </plugin>
-            <!--  JavaDoc -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-            </plugin>
         </plugins>
     </build>
-    <reporting>
-        <outputDirectory>${basedir}/target/site</outputDirectory>
-        <plugins>
-            <plugin>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.7</version>
-                <reportSets>
-                    <reportSet>
-                        <id>sunlink</id>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                        <inherited>true</inherited>
-                        <configuration>
-                            <links>
-                                <link>http://docs.oracle.com/javase/6/docs/api/</link>
-                            </links>
-                        </configuration>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <!-- JUnit Test Results & EMMA Coverage Reporting -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>emma-maven-plugin</artifactId>
-                <inherited>true</inherited>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>surefire-report-maven-plugin</artifactId>
-                <inherited>true</inherited>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>report-only</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <!-- Generating JavaDoc Report -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <minmemory>128m</minmemory>
-                    <maxmemory>512m</maxmemory>
-                    <encoding>${encoding}</encoding>
-                    <docencoding>${encoding}</docencoding>
-                    <charset>${encoding}</charset>
-                </configuration>
-            </plugin>
-            <!-- Generating Java Source in HTML -->
-            <plugin>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <configuration>
-                    <inputEncoding>${encoding}</inputEncoding>
-                    <outputEncoding>${encoding}</outputEncoding>
-                    <linkJavadoc>true</linkJavadoc>
-                    <javadocDir>apidocs</javadocDir>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+
 </project>
