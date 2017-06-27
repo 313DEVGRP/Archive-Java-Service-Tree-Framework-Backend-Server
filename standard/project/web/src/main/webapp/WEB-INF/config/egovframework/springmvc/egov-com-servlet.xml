@@ -23,8 +23,7 @@
 
 	<!-- for jsTree -->
 	<bean id="jsonMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
-	<bean id="jsonView"
-		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="extractValueFromSingleKeyModel" value="true"/>
 		<property name="modelKey" value="result"/>
 		<property name="prettyPrint" value="true"/>
@@ -42,5 +41,4 @@
 		</property>
 	</bean>
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
-
 </beans>

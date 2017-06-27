@@ -23,7 +23,7 @@
 	</licenses>
 
 	<properties>
-		<spring.maven.artifact.version>4.0.9.RELEASE</spring.maven.artifact.version>
+		<spring.maven.artifact.version>4.3.9.RELEASE</spring.maven.artifact.version>
 		<egovframework.rte.version>3.5.0</egovframework.rte.version>
 		<spring.security.version>3.2.9.RELEASE</spring.security.version>
 		<struts.maven.artifact.version>2.3.32</struts.maven.artifact.version>
