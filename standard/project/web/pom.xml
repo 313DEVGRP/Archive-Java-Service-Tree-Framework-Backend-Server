@@ -88,7 +88,7 @@
     <build>
         <defaultGoal>install</defaultGoal>
         <directory>${basedir}/target</directory>
-        <finalName>standard-web</finalName>
+        <finalName>web</finalName>
 
         <filters>
             <filter>${basedir}/profiles/${build.profile.id}/database.properties</filter>
