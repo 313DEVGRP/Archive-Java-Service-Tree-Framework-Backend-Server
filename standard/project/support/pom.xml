@@ -3,14 +3,14 @@
 
 	<parent>
 		<groupId>development</groupId>
-		<artifactId>project-standard</artifactId>
+		<artifactId>project</artifactId>
 		<version>${project.version}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>standard-server-support</artifactId>
+	<artifactId>support</artifactId>
 	<packaging>pom</packaging>
-	<name>standard-server-support</name>
+	<name>support</name>
 	<description>
 		server by 313 DEV GRP
 	</description>

@@ -6,21 +6,21 @@
 
     <parent>
         <groupId>development</groupId>
-        <artifactId>project-standard</artifactId>
+        <artifactId>project</artifactId>
         <version>${project.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>standard-web</artifactId>
+    <artifactId>web</artifactId>
     <packaging>war</packaging>
-    <name>standard-web</name>
-    <description>standard-api-server by 313 DEV GRP</description>
+    <name>web</name>
+    <description>web by 313 DEV GRP</description>
 
     <dependencies>
         <!-- 실행환경 라이브러리 -->
         <dependency>
             <groupId>development</groupId>
-            <artifactId>standard-server-support</artifactId>
+            <artifactId>support</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
         </dependency>

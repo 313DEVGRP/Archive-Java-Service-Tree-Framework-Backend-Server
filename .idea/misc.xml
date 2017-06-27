@@ -12,11 +12,13 @@
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-server" />
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/standard-web" />
     <file type="web" url="file://$PROJECT_DIR$/development-project/project-standard/test" />
+    <file type="web" url="file://$PROJECT_DIR$/standard/project/web" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/development-project/pom.xml" />
+        <option value="$PROJECT_DIR$/standard/pom.xml" />
       </list>
     </option>
   </component>

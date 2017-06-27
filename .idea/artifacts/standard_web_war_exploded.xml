@@ -7,8 +7,8 @@
           <element id="module-output" name="standard-web" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="standard-server-support-1.6.2.pom">
-            <element id="module-output" name="standard-server-support" />
+          <element id="archive" name="standard-support-1.6.2.pom">
+            <element id="module-output" name="standard-support" />
           </element>
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.idgnr:3.5.0" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.cmmn:3.5.0" />

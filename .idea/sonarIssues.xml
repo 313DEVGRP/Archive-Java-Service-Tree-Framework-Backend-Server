@@ -713,6 +713,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-support/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/README.md">
           <value>
             <set />
@@ -864,6 +869,56 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/test/src/main/webapp/WEB-INF/web.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/support/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/dto/LocalUser.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/dto/SocialProvider.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/dto/SocialUser.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/dto/UserRegistrationForm.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/handler/AppSuccessHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/util/SecurityUtil.java">
           <value>
             <set />
           </value>

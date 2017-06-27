@@ -8,7 +8,7 @@
 	<!-- 기본적인 pom Setting -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>development</groupId>
-	<artifactId>development-project</artifactId>
+	<artifactId>standard</artifactId>
 	<version>${project.version}</version>
 	<packaging>pom</packaging>
 
@@ -30,7 +30,7 @@
 
 	<!-- 모듈 셋팅 -->
 	<modules>
-		<module>project-standard</module>
+		<module>project</module>
 	</modules>
 
 	<!-- 개발자 정보 -->
