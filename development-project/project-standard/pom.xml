@@ -19,7 +19,6 @@
 	
 	<modules>
 		<module>standard-server-support</module>
-		<module>standard-server</module>
 		<module>standard-web</module>
 	</modules>
 
