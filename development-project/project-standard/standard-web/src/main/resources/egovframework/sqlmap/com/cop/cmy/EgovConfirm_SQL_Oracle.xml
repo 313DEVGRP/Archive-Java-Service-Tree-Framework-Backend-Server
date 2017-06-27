@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ConfirmManageDAO">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="CnfmHist" type="egovframework.com.cop.cmy.service.ConfirmHistory"/>
+	<typeAlias  alias="CnfmHistVO" type="egovframework.com.cop.cmy.service.ConfirmHistoryVO"/>
+
+	<resultMap id="confirmList" class="egovframework.com.cop.cmy.service.ConfirmHistoryVO">
+		<result property="confmNumber" column="CONFM_NO" columnIndex="1"/>
+		<result property="confmRqesterId" column="CONFM_RQESTER_ID" columnIndex="2"/>
+		<result property="confmRqesterNm" column="CONFM_RQESTER_NM" columnIndex="3"/>
+		<result property="confmTyCode" column="CONFM_TY_CODE" columnIndex="4"/>
+		<result property="confmTyCodeNm" column="CONFM_TY_CODE_NM" columnIndex="5"/>
+		<result property="confmSttusCode" column="CONFM_STTUS_CODE" columnIndex="6"/>
+		<result property="confmSttusCodeNm" column="CONFM_STTUS_CODE_NM" columnIndex="7"/>		
+		<result property="opertTyCode" column="OPERT_TY_CODE" columnIndex="8"/>
+		<result property="opertTyCodeNm" column="OPERT_TY_CODE_NM" columnIndex="9"/>				
+		<result property="trgetJobTyCode" column="TRGET_JOB_TY_CODE" columnIndex="10"/>
+		<result property="trgetJobId" column="TRGET_JOB_ID" columnIndex="11"/>
+		<result property="confmDe" column="CONFM_DE" columnIndex="12"/>
+		<result property="trgetJobTyNm" column="TRGET_JOB_TY_NM" columnIndex="13"/>
+		<result property="opertId" column="OPERT_ID" columnIndex="14"/>
+	</resultMap>
+
+
+	<insert id="ConfirmManageDAO.insertConfirmRequest" parameterClass="CnfmHist" >
+		<selectKey resultClass="java.lang.Integer" keyProperty="confmNumber">
+				SELECT  NVL(MAX(CONFM_NO),0)+1 AS CONFM_NO  FROM COMTHCONFMHISTORY
+	    </selectKey>
+		<![CDATA[
+			INSERT INTO COMTHCONFMHISTORY 
+			(CONFM_NO, CONFM_RQESTER_ID, CONFMER_ID, CONFM_TY_CODE, 
+			 CONFM_STTUS_CODE, OPERT_TY_CODE, OPERT_ID, TRGET_JOB_TY_CODE, TRGET_JOB_ID )
+			VALUES
+			( #confmNumber#, #confmRqesterId#, #confmerId#, #confmTyCode#, 
+			  #confmSttusCode#, #opertTyCode#, #opertId#, #trgetJobTyCode#, #trgetJobId# )
+		]]>
+	</insert>
+	
+	<select id="ConfirmManageDAO.selectConfirmRequestList" parameterClass="CnfmHistVO" resultMap="confirmList" >
+		<![CDATA[
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				a.CONFM_NO, a.CONFM_RQESTER_ID, b.USER_NM AS CONFM_RQESTER_NM, 
+				a.CONFM_DE, a.CONFM_TY_CODE, d.CODE_NM AS CONFM_TY_CODE_NM, 
+			    a.CONFM_STTUS_CODE, e.CODE_NM AS CONFM_STTUS_CODE_NM, 
+				a.OPERT_TY_CODE, g.CODE_NM as OPERT_TY_CODE_NM,
+				a.TRGET_JOB_TY_CODE, f.CODE_NM as TRGET_JOB_TY_NM, a.TRGET_JOB_ID, a.OPERT_ID
+			FROM COMTHCONFMHISTORY a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON rtrim(a.CONFM_RQESTER_ID) = b.ESNTL_ID
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM006' AND USE_AT='Y') d
+			ON rtrim(a.CONFM_TY_CODE) = d.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM007' AND USE_AT='Y') e
+			ON rtrim(a.CONFM_STTUS_CODE) = e.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM003' AND USE_AT='Y') f
+			ON rtrim(a.TRGET_JOB_TY_CODE) = f.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM032' AND USE_AT='Y') g
+			ON rtrim(a.OPERT_TY_CODE) = g.CODE			
+			WHERE a.CONFMER_ID = #confmerId#
+		]]>
+			<isNotEqual prepend="AND" property="trgetId" compareValue="">
+				<![CDATA[	a.TRGET_JOB_ID = #trgetId# 		]]>
+			</isNotEqual>	
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	d.CODE_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>	
+			<isEqual prepend="AND" property="searchCnd" compareValue="1">
+				<![CDATA[	e.CODE_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>				
+		<![CDATA[
+			ORDER BY a.CONFM_NO DESC
+			) TB ) WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+		]]>				
+	</select>	
+	
+	<select id="ConfirmManageDAO.selectConfirmRequestListCnt" parameterClass="CnfmHistVO" resultClass="java.lang.Integer" >
+		<![CDATA[
+			SELECT 
+				COUNT(a.CONFM_NO)
+			FROM COMTHCONFMHISTORY a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.CONFM_RQESTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM006' AND USE_AT='Y') d
+			ON a.CONFM_TY_CODE = d.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM007' AND USE_AT='Y') e
+			ON a.CONFM_STTUS_CODE = e.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM003' AND USE_AT='Y') f
+			ON a.TRGET_JOB_TY_CODE = f.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM032' AND USE_AT='Y') g
+			ON a.OPERT_TY_CODE = g.CODE			
+			WHERE a.CONFMER_ID = #confmerId#
+		]]>
+			<isNotEqual prepend="AND" property="trgetId" compareValue="">
+				<![CDATA[	a.TRGET_JOB_ID = #trgetId# 		]]>
+			</isNotEqual>	
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	d.CODE_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>	
+			<isEqual prepend="AND" property="searchCnd" compareValue="1">
+				<![CDATA[	e.CODE_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>			
+	</select>	
+ 
+ 	<update id="ConfirmManageDAO.updateConfirmRequest" parameterClass="CnfmHist">
+ 		<![CDATA[
+			UPDATE COMTHCONFMHISTORY SET 
+				CONFM_DE = #confmDe#,
+				CONFM_STTUS_CODE = #confmSttusCode#
+			WHERE CONFM_NO = #confmNumber#
+ 		]]>
+ 	</update>
+
+	<select id="ConfirmManageDAO.selectSingleConfirmRequest" parameterClass="CnfmHistVO" resultMap="confirmList" >
+		<![CDATA[
+			SELECT 
+				a.CONFM_NO, a.CONFM_RQESTER_ID, b.USER_NM AS CONFM_RQESTER_NM, 
+				a.CONFM_DE, a.CONFM_TY_CODE, d.CODE_NM AS CONFM_TY_CODE_NM, 
+			    a.CONFM_STTUS_CODE, e.CODE_NM AS CONFM_STTUS_CODE_NM, 
+				a.OPERT_TY_CODE, g.CODE_NM as OPERT_TY_CODE_NM,
+				a.TRGET_JOB_TY_CODE, f.CODE_NM as TRGET_JOB_TY_NM, a.TRGET_JOB_ID, a.OPERT_ID
+			FROM COMTHCONFMHISTORY a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.CONFM_RQESTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM006' AND USE_AT='Y') d
+			ON a.CONFM_TY_CODE = d.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM006' AND USE_AT='Y') e
+			ON a.CONFM_STTUS_CODE = e.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM006' AND USE_AT='Y') f
+			ON a.TRGET_JOB_TY_CODE = f.CODE
+			LEFT OUTER JOIN 
+				( SELECT CODE_ID, CODE, CODE_NM FROM 	
+				 COMTCCMMNDETAILCODE WHERE CODE_ID = 'COM032' AND USE_AT='Y') g
+			ON a.OPERT_TY_CODE = g.CODE
+			WHERE a.CONFMER_ID = #confmerId#
+			AND a.CONFM_NO = #confmNumber#
+		]]>
+	</select>
+	
+		<select id="ConfirmManageDAO.countConfirmRequest" parameterClass="CnfmHist" resultClass="java.lang.Integer" >
+		<![CDATA[
+			SELECT 
+				COUNT(a.CONFM_NO)
+			FROM COMTHCONFMHISTORY a	
+			WHERE a.CONFM_RQESTER_ID = #confmRqesterId#
+			  AND a.CONFM_TY_CODE = #confmTyCode#
+			  AND a.CONFM_STTUS_CODE = #confmSttusCode#
+			  AND a.OPERT_TY_CODE = #opertTyCode#
+			  AND a.TRGET_JOB_TY_CODE = #trgetJobTyCode#
+			  AND a.TRGET_JOB_ID = #trgetJobId#
+		]]>		
+	</select>	
+
+</sqlMap>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ReprtStats">
+
+	<typeAlias  alias="ReprtStats" type="egovframework.com.sts.rst.service.ReprtStats"/>
+	<typeAlias  alias="ReprtStatsVO" type="egovframework.com.sts.rst.service.ReprtStatsVO"/>
+
+    <resultMap id="reprtStatsList" class="egovframework.com.sts.rst.service.ReprtStatsVO">
+        <result property="reprtTy" column="REPRT_TY" columnIndex="1"/>
+        <result property="reprtTyNm" column="REPRT_TY_NM" columnIndex="2"/>
+        <result property="reprtSttus" column="REPRT_STTUS" columnIndex="3"/>
+        <result property="reprtSttusNm" column="REPRT_STTUS_NM" columnIndex="4"/>
+        <result property="cnt" column="CNT" columnIndex="5"/>
+    </resultMap>
+
+    <resultMap id="reprtStats" class="egovframework.com.sts.rst.service.ReprtStatsVO">
+        <result property="reprtId" column="REPRT_ID" columnIndex="1"/>
+        <result property="reprtNm" column="REPRT_NM" columnIndex="2"/>
+        <result property="reprtTy" column="REPRT_TY" columnIndex="3"/>
+        <result property="reprtTyNm" column="REPRT_TY_NM" columnIndex="4"/>
+        <result property="reprtSttus" column="REPRT_STTUS" columnIndex="5"/>
+        <result property="reprtSttusNm" column="REPRT_STTUS_NM" columnIndex="6"/>
+        <result property="userId" column="FRST_REGISTER_ID" columnIndex="7"/>
+        <result property="regDate" column="FRST_REGIST_PNTTM" columnIndex="8"/>
+    </resultMap>
+
+    <resultMap id="reprtStatsBarList" class="egovframework.com.sts.rst.service.ReprtStatsVO">
+        <result property="grpRegDate" column="REG_DATE" columnIndex="1"/>
+        <result property="grpCnt" column="CNT" columnIndex="2"/>
+    </resultMap>
+
+    <resultMap id="reprtStatsByReprtTyList" class="egovframework.com.sts.rst.service.ReprtStatsVO">
+        <result property="grpReprtTy" column="REPRT_TY" columnIndex="1"/>
+        <result property="grpReprtTyNm" column="REPRT_TY_NM" columnIndex="2"/>
+        <result property="grpReprtTyCnt" column="CNT" columnIndex="3"/>
+    </resultMap>
+
+    <resultMap id="reprtStatsByReprtSttusList" class="egovframework.com.sts.rst.service.ReprtStatsVO">
+        <result property="grpReprtSttus" column="REPRT_STTUS" columnIndex="1"/>
+        <result property="grpReprtSttusNm" column="REPRT_STTUS_NM" columnIndex="2"/>
+        <result property="grpReprtSttusCnt" column="CNT" columnIndex="3"/>
+    </resultMap>
+
+    <select id="reprtStatsDAO.selectReprtStatsList" parameterClass="ReprtStatsVO" resultMap="reprtStatsList">
+            SELECT REPRT_TY,
+                   (SELECT CODE_NM FROM COMTCCMMNDETAILCODE 
+                     WHERE CODE_ID = 'COM040' 
+                       AND CODE = REPRT_TY) AS REPRT_TY_NM,
+                   REPRT_STTUS,
+                   (SELECT CODE_NM FROM COMTCCMMNDETAILCODE 
+                     WHERE CODE_ID = 'COM036' 
+                       AND CODE = REPRT_STTUS) AS REPRT_STTUS_NM,
+                   COUNT(*) AS CNT 
+              FROM COMTNREPRTSTATS
+             WHERE 1 = 1
+            <isNotEqual prepend="AND" property="pmReprtTy" compareValue="00">
+               REPRT_TY = #pmReprtTy#
+            </isNotEqual>
+            <isNotEqual property="pmFromDate" compareValue="">
+                <isNotEqual prepend="AND" property="pmToDate" compareValue="">
+                    DATE_FORMAT(FRST_REGIST_PNTTM,'%Y%m%d') BETWEEN #pmFromDate# AND #pmToDate#
+                </isNotEqual>
+            </isNotEqual>
+             GROUP BY REPRT_TY,
+                      REPRT_STTUS
+             ORDER BY REPRT_TY,
+                      REPRT_STTUS
+            LIMIT #recordCountPerPage# OFFSET #firstIndex#  
+    </select>
+
+    <select id="reprtStatsDAO.selectReprtStatsListTotCnt" parameterClass="ReprtStatsVO" resultClass="int">
+            SELECT COUNT(*) totcnt 
+              FROM (SELECT REPRT_TY,
+                           REPRT_STTUS
+                      FROM COMTNREPRTSTATS
+                     WHERE 1 = 1
+                    <isNotEqual prepend="AND" property="pmReprtTy" compareValue="00">
+                       REPRT_TY = #pmReprtTy#
+                    </isNotEqual>
+		            <isNotEqual property="pmFromDate" compareValue="">
+		                <isNotEqual prepend="AND" property="pmToDate" compareValue="">
+		                    DATE_FORMAT(FRST_REGIST_PNTTM,'%Y%m%d') BETWEEN #pmFromDate# AND #pmToDate#
+		                </isNotEqual>
+		            </isNotEqual>
+                     GROUP BY REPRT_TY,
+                              REPRT_STTUS) A
+    </select>
+
+    <select id="reprtStatsDAO.selectReprtStatsListBarTotCnt" parameterClass="ReprtStatsVO" resultClass="int">
+                    SELECT COUNT(*) totcnt 
+                      FROM COMTNREPRTSTATS
+                     WHERE 1 = 1
+                    <isNotEqual prepend="AND" property="pmReprtTy" compareValue="00">
+                       REPRT_TY = #pmReprtTy#
+                    </isNotEqual>                     
+                    <isNotEqual property="pmFromDate" compareValue="">
+                        <isNotEqual prepend="AND" property="pmToDate" compareValue="">
+                            DATE_FORMAT(FRST_REGIST_PNTTM,'%Y%m%d') BETWEEN #pmFromDate# AND #pmToDate#
+                        </isNotEqual>
+                    </isNotEqual>
+    </select>
+
+    <select id="reprtStatsDAO.selectReprtStatsBarList" parameterClass="ReprtStatsVO" resultMap="reprtStatsBarList">
+            SELECT DATE_FORMAT(FRST_REGIST_PNTTM, #pmDateTy#) AS REG_DATE,
+                   COUNT(*) AS CNT
+              FROM COMTNREPRTSTATS
+             WHERE 1 = 1
+            <isNotEqual prepend="AND" property="pmReprtTy" compareValue="00">
+               REPRT_TY = #pmReprtTy#
+            </isNotEqual>
+            <isNotEqual property="pmFromDate" compareValue="">
+                <isNotEqual prepend="AND" property="pmToDate" compareValue="">
+                    DATE_FORMAT(FRST_REGIST_PNTTM,'%Y%m%d') BETWEEN #pmFromDate# AND #pmToDate#
+                </isNotEqual>
+            </isNotEqual>
+             GROUP BY DATE_FORMAT(FRST_REGIST_PNTTM, #pmDateTy#)  
+             ORDER BY FRST_REGIST_PNTTM DESC
+    </select>
+
+    <select id="reprtStatsDAO.selectReprtStatsByReprtTyList" parameterClass="ReprtStatsVO" resultMap="reprtStatsByReprtTyList">
+            SELECT REPRT_TY,
+                   (SELECT CODE_NM FROM COMTCCMMNDETAILCODE 
+                     WHERE CODE_ID = 'COM040' 
+                       AND CODE = REPRT_TY) AS REPRT_TY_NM,
+                   COUNT(*) AS CNT
+              FROM COMTNREPRTSTATS
+             WHERE 1 = 1
+            <isNotEqual prepend="AND" property="pmReprtTy" compareValue="00">
+               REPRT_TY = #pmReprtTy#
+            </isNotEqual>
+            <isNotEqual property="pmFromDate" compareValue="">
+                <isNotEqual prepend="AND" property="pmToDate" compareValue="">
+                    DATE_FORMAT(FRST_REGIST_PNTTM,'%Y%m%d') BETWEEN #pmFromDate# AND #pmToDate#
+                </isNotEqual>
+            </isNotEqual>
+             GROUP BY REPRT_TY
+             ORDER BY FRST_REGIST_PNTTM DESC
+    </select>
+    
+    <select id="reprtStatsDAO.selectReprtStatsByReprtSttusList" parameterClass="ReprtStatsVO" resultMap="reprtStatsByReprtSttusList">
+            SELECT REPRT_STTUS,
+                   (SELECT CODE_NM FROM COMTCCMMNDETAILCODE 
+                     WHERE CODE_ID = 'COM036' 
+                       AND CODE = REPRT_STTUS) AS REPRT_STTUS_NM,
+                   COUNT(*) AS CNT
+              FROM COMTNREPRTSTATS
+             WHERE 1 = 1
+            <isNotEqual prepend="AND" property="pmReprtTy" compareValue="00">
+               REPRT_TY = #pmReprtTy#
+            </isNotEqual>
+            <isNotEqual property="pmFromDate" compareValue="">
+                <isNotEqual prepend="AND" property="pmToDate" compareValue="">
+                    DATE_FORMAT(FRST_REGIST_PNTTM,'%Y%m%d') BETWEEN #pmFromDate# AND #pmToDate#
+                </isNotEqual>
+            </isNotEqual>
+             GROUP BY REPRT_STTUS
+             ORDER BY FRST_REGIST_PNTTM DESC
+    </select>
+
+
+    <select id="reprtStatsDAO.selectReprtStats" parameterClass="ReprtStatsVO" resultMap="reprtStats">
+            SELECT REPRT_ID,
+                   REPRT_NM,
+                   REPRT_TY,
+                  (SELECT CODE_NM FROM COMTCCMMNDETAILCODE 
+                    WHERE CODE_ID = 'COM040' 
+                      AND CODE = REPRT_TY) AS REPRT_TY_NM,
+                   REPRT_STTUS,
+                  (SELECT CODE_NM FROM COMTCCMMNDETAILCODE 
+                    WHERE CODE_ID = 'COM036' 
+                      AND CODE = REPRT_STTUS) AS REPRT_STTUS_NM,
+                   FRST_REGISTER_ID,
+                   FRST_REGIST_PNTTM                   
+              FROM COMTNREPRTSTATS  
+             WHERE 1 = 1
+               AND REPRT_TY = #reprtTy#
+               AND REPRT_STTUS = #reprtSttus#
+            <isNotEqual property="pmFromDate" compareValue="">
+                <isNotEqual prepend="AND" property="pmToDate" compareValue="">
+                    DATE_FORMAT(FRST_REGIST_PNTTM,'%Y%m%d') BETWEEN #pmFromDate# AND #pmToDate#
+                </isNotEqual>
+            </isNotEqual>
+    </select>
+    
+    <insert id="reprtStatsDAO.insertReprtStats" parameterClass="ReprtStats">
+            INSERT INTO COMTNREPRTSTATS  
+                       (REPRT_ID,
+                        REPRT_NM,
+                        REPRT_TY,
+                        REPRT_STTUS,
+                        FRST_REGISTER_ID,
+                        FRST_REGIST_PNTTM,
+                        LAST_UPDUSR_ID,
+                        LAST_UPDT_PNTTM)
+                VALUES (#reprtId#,
+                        #reprtNm#,
+                        #reprtTy#,
+                        #reprtSttus#,
+                        #userId#,
+                        now(),
+                        #userId#,
+                        now())
+    </insert>    
+    
+    <update id="reprtStatsDAO.updateReprtStats" parameterClass="ReprtStats">
+            UPDATE COMTNREPRTSTATS
+               SET REPRT_NM = #reprtNm#,
+                   REPRT_TY = #reprtTy#,
+                   REPRT_STTUS = #reprtSttus#,
+                   LAST_UPDUSR_ID = #userId#,
+                   LAST_UPDT_PNTTM = now()
+             WHERE REPRT_ID = #reprtId#    
+    </update>   
+    
+    <delete id="reprtStatsDAO.deleteReprtStats" parameterClass="ReprtStats">
+        <![CDATA[
+            DELETE FROM COMTNREPRTSTATS 
+             WHERE REPRT_ID = #reprtId#    
+        ]]>
+    </delete>  
+
+</sqlMap>

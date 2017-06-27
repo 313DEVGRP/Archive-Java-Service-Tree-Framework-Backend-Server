@@ -753,12 +753,57 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/egovframework/spring/com/context-common.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/egovframework/spring/com/context-datasource.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/egovframework/spring/com/context-hibernate.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/egovframework/spring/com/context-security.xml">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/egovframework/spring/com/context-sqlMap.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/egovframework/sqlmap/config/oracle/sql-map-config-oracle-cmm.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/log4j2.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/spring/com/context-hibernate.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/resources/spring/com/context-security.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-security.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/development-project/project-standard/standard-web/src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml">
           <value>
             <set />
           </value>

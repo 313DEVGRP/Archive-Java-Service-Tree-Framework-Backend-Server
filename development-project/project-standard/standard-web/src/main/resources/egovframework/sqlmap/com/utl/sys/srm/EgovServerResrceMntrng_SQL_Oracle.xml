@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.12   	서준식     	 	테이블 표준화에 따른 수정사항 반영
+  							MNGR_EMAIL_ADRES 를 		MNGR_EMAIL_ADRES 로 변경
+
+-->
+<sqlMap namespace="ServerResrceMntrng">
+
+    <typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="ServerResrceMntrng" type="egovframework.com.utl.sys.srm.service.ServerResrceMntrng"/>
+    <typeAlias  alias="ServerResrceMntrngVO" type="egovframework.com.utl.sys.srm.service.ServerResrceMntrngVO"/>
+
+   <resultMap id="serverResrceMntrng" class="egovframework.com.utl.sys.srm.service.ServerResrceMntrngVO">
+        <result property="serverId" column="SERVER_ID" columnIndex="1"/>
+        <result property="serverEqpmnId" column="SERVER_EQPMN_ID" columnIndex="2"/>
+        <result property="logId" column="LOG_ID" columnIndex="3"/>
+        <result property="serverNm" column="SERVER_NM" columnIndex="4"/>
+        <result property="serverEqpmnIp" column="SERVER_EQPMN_IP" columnIndex="5"/>
+        <result property="cpuUseRt" column="CPU_USE_RT" columnIndex="6"/>
+        <result property="moryUseRt" column="MORY_USE_RT" columnIndex="7"/>
+        <result property="svcSttus" column="SVC_STTUS" columnIndex="8"/>
+        <result property="svcSttusNm" column="SVC_STTUS_NM" columnIndex="9"/>
+        <result property="logInfo" column="LOG_INFO" columnIndex="10"/>
+        <result property="mngrEamilAddr" column="MNGR_EMAIL_ADRES" columnIndex="11"/>
+        <result property="creatDt" column="CREAT_DT" columnIndex="12"/>
+        <result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="13"/>
+        <result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="14"/>
+        <result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" columnIndex="15"/>
+        <result property="lastUpdusrId" column="LAST_UPDUSR_ID" columnIndex="16"/>
+    </resultMap>
+
+    <resultMap id="mntrngServer" class="egovframework.com.utl.sys.srm.service.ServerResrceMntrngVO">
+        <result property="serverId" column="SERVER_ID" columnIndex="1"/>
+        <result property="serverEqpmnId" column="SERVER_EQPMN_ID" columnIndex="2"/>
+        <result property="serverNm" column="SERVER_EQPMN_NM" columnIndex="3"/>        
+        <result property="serverEqpmnIp" column="SERVER_EQPMN_IP" columnIndex="4"/>
+        <result property="mngrEamilAddr" column="MNGR_EMAIL_ADRES" columnIndex="5"/>
+    </resultMap>
+
+    <select id="serverResrceMntrngDAO.selectServerResrceMntrngList" parameterClass="ServerResrceMntrngVO" resultClass="egovMap">
+        <![CDATA[    
+            SELECT  * 
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.* 
+              FROM  (          
+             SELECT A.SERVER_ID,
+                    A.SERVER_EQPMN_ID,
+                    A.LOG_ID,
+                    C.SERVER_EQPMN_NM AS SERVER_NM,
+                    C.SERVER_EQPMN_IP,
+                    A.CPU_USE_RT,
+                    A.MORY_USE_RT,
+                    A.SVC_STTUS,
+                    (SELECT CODE_NM 
+                       FROM COMTCCMMNDETAILCODE
+                      WHERE CODE_ID = 'COM072' 
+                        AND CODE = A.SVC_STTUS) AS SVC_STTUS_NM,
+                    A.LOG_INFO,
+                    C.MNGR_EMAIL_ADRES,
+                    TO_CHAR(A.CREAT_DT, 'yyyy-mm-dd HH24:mi:ss') AS CREAT_DT,
+                    TO_CHAR(A.FRST_REGIST_PNTTM, 'yyyy-mm-dd HH24:mi:ss') AS FRST_REGIST_PNTTM,
+                    C.FRST_REGISTER_ID,
+                    TO_CHAR(A.LAST_UPDT_PNTTM, 'yyyy-mm-dd HH24:mi:ss') AS LAST_UPDT_PNTTM,
+                    C.LAST_UPDUSR_ID
+               FROM COMTNSERVERRESRCELOGINFO A,
+                    COMTNSERVERINFO B,
+                    COMTNSERVEREQPMNINFO C
+              WHERE A.SERVER_ID       = B.SERVER_ID
+                AND A.SERVER_EQPMN_ID = C.SERVER_EQPMN_ID
+        ]]>                      
+            <isNotNull prepend="AND" property="strServerNm">
+                    C.SERVER_EQPMN_NM LIKE '%'||#strServerNm#||'%'
+            </isNotNull>                      
+            <isNotNull property="strStartDt">
+                <isNotNull prepend="AND" property="strEndDt">
+                    TO_CHAR(A.CREAT_DT, 'YYYYMMDD') BETWEEN #strStartDt# AND #strEndDt#
+                </isNotNull>
+            </isNotNull>
+        <![CDATA[              
+              ORDER BY A.LOG_ID DESC
+                    ) ALL_LIST
+                    )
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>         
+    </select>
+
+    <select id="serverResrceMntrngDAO.selectServerResrceMntrngListTotCnt" parameterClass="ServerResrceMntrngVO" resultClass="int">
+             SELECT COUNT(*) totcnt
+               FROM COMTNSERVERRESRCELOGINFO A,
+                    COMTNSERVERINFO B,
+                    COMTNSERVEREQPMNINFO C
+              WHERE A.SERVER_ID       = B.SERVER_ID
+                AND A.SERVER_EQPMN_ID = C.SERVER_EQPMN_ID    
+            <isNotNull prepend="AND" property="strServerNm">
+                    C.SERVER_EQPMN_NM LIKE '%'||#strServerNm#||'%'
+            </isNotNull>                      
+            <isNotNull property="strStartDt">
+                <isNotNull prepend="AND" property="strEndDt">
+                    TO_CHAR(A.CREAT_DT, 'YYYYMMDD') BETWEEN #strStartDt# AND #strEndDt#
+                </isNotNull>
+            </isNotNull> 
+    </select>
+
+    <select id="serverResrceMntrngDAO.selectServerResrceMntrng" resultMap="serverResrceMntrng">
+        <![CDATA[
+             SELECT A.SERVER_ID,
+                    A.SERVER_EQPMN_ID,
+                    A.LOG_ID,
+                    C.SERVER_EQPMN_NM AS SERVER_NM,
+                    C.SERVER_EQPMN_IP,
+                    A.CPU_USE_RT,
+                    A.MORY_USE_RT,
+                    A.SVC_STTUS,
+                    (SELECT CODE_NM 
+                       FROM COMTCCMMNDETAILCODE 
+                      WHERE CODE_ID = 'COM072' 
+                        AND CODE = A.SVC_STTUS) AS SVC_STTUS_NM,
+                    A.LOG_INFO,
+                    C.MNGR_EMAIL_ADRES,
+                    TO_CHAR(A.CREAT_DT, 'yyyy-mm-dd HH24:mi:ss') AS CREAT_DT,
+                    TO_CHAR(A.FRST_REGIST_PNTTM, 'yyyy-mm-dd HH24:mi:ss') AS FRST_REGIST_PNTTM,
+                    A.FRST_REGISTER_ID,
+                    TO_CHAR(A.LAST_UPDT_PNTTM, 'yyyy-mm-dd HH24:mi:ss') AS LAST_UPDT_PNTTM,
+                    A.LAST_UPDUSR_ID
+               FROM COMTNSERVERRESRCELOGINFO A,
+                    COMTNSERVERINFO B,
+                    COMTNSERVEREQPMNINFO C
+              WHERE A.SERVER_ID       = B.SERVER_ID
+                AND A.SERVER_EQPMN_ID = C.SERVER_EQPMN_ID
+                AND A.LOG_ID = #logId#    
+        ]]>
+    </select>
+
+    <insert id="serverResrceMntrngDAO.insertServerResrceMntrng" parameterClass="ServerResrceMntrng">
+        <![CDATA[
+             INSERT INTO COMTNSERVERRESRCELOGINFO
+                    (SERVER_ID,
+                     SERVER_EQPMN_ID,
+                     LOG_ID,
+                     CPU_USE_RT,
+                     MORY_USE_RT,
+                     SVC_STTUS,
+                     LOG_INFO,
+                     CREAT_DT,
+                     FRST_REGIST_PNTTM,
+                     FRST_REGISTER_ID,
+                     LAST_UPDT_PNTTM,
+                     LAST_UPDUSR_ID)
+             VALUES (#serverId#,
+                     #serverEqpmnId#,
+                     #logId#,
+                     #cpuUseRt#,
+                     #moryUseRt#,
+                     #svcSttus#,
+                     #logInfo#,
+                     SYSDATE,
+                     SYSDATE,
+                     #frstRegisterId#,
+                     SYSDATE,
+                     #lastUpdusrId#)
+        ]]>
+    </insert>
+
+    <select id="serverResrceMntrngDAO.selectMntrngServerList" resultMap="mntrngServer">
+             SELECT A.SERVER_ID,
+                    A.SERVER_EQPMN_ID, 
+                    B.SERVER_EQPMN_NM, 
+                    B.SERVER_EQPMN_IP,
+                    B.MNGR_EMAIL_ADRES
+               FROM COMTNSERVEREQPMNRELATE A,
+                    COMTNSERVEREQPMNINFO B
+              WHERE A.SERVER_EQPMN_ID = B.SERVER_EQPMN_ID     
+            <isNotNull prepend="AND" property="strServerNm">
+                    B.SERVER_EQPMN_NM LIKE '%'||#strServerNm#||'%'
+            </isNotNull>                   
+    </select>
+
+    <select id="serverResrceMntrngDAO.selectMntrngServerListTotCnt" parameterClass="ServerResrceMntrngVO" resultClass="int">
+             SELECT COUNT(*) totcnt
+               FROM COMTNSERVEREQPMNRELATE A,
+                    COMTNSERVEREQPMNINFO B
+              WHERE A.SERVER_EQPMN_ID = B.SERVER_EQPMN_ID    
+            <isNotNull prepend="AND" property="strServerNm">
+                    B.SERVER_EQPMN_NM LIKE '%'||#strServerNm#||'%'
+            </isNotNull>         
+    </select>
+</sqlMap>

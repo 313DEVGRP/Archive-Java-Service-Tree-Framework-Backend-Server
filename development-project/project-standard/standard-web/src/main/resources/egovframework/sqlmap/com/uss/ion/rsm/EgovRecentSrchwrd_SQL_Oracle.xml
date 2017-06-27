@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--
+	수정일          수정자                          수정내용
+  ===========      ========    =================================================
+  2011.10.06		이기하     	 	보안 취약점 점검사항 반영 $->#변경
+  2011.12.16		이기하     	 	ID : RecentSrchwrd.selectRecentSrchwrdResult
+  									추가 : SRCHWRD_NM, 변경 : FRST_REGIST_PNTTM -> FRST_REGISTER_PNTTM
+-->
+<sqlMap namespace="RecentSrchwrd">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="comDefaultVO" type="egovframework.com.cmm.ComDefaultVO"/>
+	<typeAlias  alias="RecentSrchwrd" type="egovframework.com.uss.ion.rsm.service.RecentSrchwrd" />
+
+	<!-- 최근검색어조회::ResultMap 선언 -->
+	<resultMap id="RecentSrchwrdVO" class="egovframework.com.uss.ion.rsm.service.RecentSrchwrd">
+		<result property="srchwrdManageId" 		column="SRCHWRD_MANAGE_ID" 		columnIndex="1"/>
+		<result property="srchwrdManageNm" 		column="SRCHWRD_MANAGE_NM" 		columnIndex="2"/>
+		<result property="srchwrdManageUrl" 	column="SRCHWRD_CONECT_URL" 	columnIndex="3"/>
+		<result property="srchwrdManageUseYn" 	column="USER_SEARCH_AT" 		columnIndex="4"/>
+		<result property="frstRegisterPnttm" 	column="FRST_REGIST_PNTTM" 		columnIndex="5"/>
+		<result property="frstRegisterId" 		column="FRST_REGISTER_ID" 		columnIndex="6"/>
+		<result property="lastUpdusrPnttm" 		column="LAST_UPDT_PNTTM" 		columnIndex="7"/>
+		<result property="lastUpdusrId" 		column="LAST_UPDUSR_ID" 		columnIndex="8"/>
+	</resultMap>
+
+	<!-- 최근검색어결과조회::검색어등록 -->
+	<insert id="RecentSrchwrd.insertRecentSrchwrdResultInquire">
+		INSERT INTO COMTNRECENTSRCHWRD (
+			SRCHWRD_MANAGE_ID,
+			RECENT_SRCHWRD_ID,
+			RECENT_SRCHWRD_NM,
+			FRST_REGIST_PNTTM,
+			FRST_REGISTER_ID,
+			LAST_UPDT_PNTTM,
+			LAST_UPDUSR_ID
+		)VALUES(
+			#srchwrdManageId#,
+			#srchwrdId#,
+			#srchwrdNm#,
+			sysdate,
+			#frstRegisterId#,
+			sysdate,
+			#lastUpdusrId#
+		)
+	</insert>
+
+
+	<!-- 최근검색어결과조회::목록조회 게시물정보 -->
+	<select id="RecentSrchwrd.selectRecentSrchwrdResultInquire" resultClass="egovMap">
+	 <![CDATA[
+		SELECT
+		A.RECENT_SRCHWRD_NM,
+		COUNT(A.RECENT_SRCHWRD_ID) RECENT_SRCHWRD_CO
+		FROM COMTNRECENTSRCHWRD A
+		WHERE 1=1
+	 ]]>
+	 <![CDATA[
+	 AND A.SRCHWRD_MANAGE_ID = #srchwrdManageId#
+	 AND A.RECENT_SRCHWRD_NM LIKE '%' || #q# || '%'
+	 GROUP BY A.RECENT_SRCHWRD_NM
+	 ORDER BY RECENT_SRCHWRD_CO DESC
+	]]>
+	</select>
+
+	<!-- 최근검색어결과조회::입력  -->
+	<insert id="RecentSrchwrd.insertRecentSrchwrdResult">
+		INSERT INTO COMTNRECENTSRCHWRD (
+		SRCHWRD_MANAGE_ID,
+		RECENT_SRCHWRD_ID,
+		RECENT_SRCHWRD_NM,
+		FRST_REGIST_PNTTM,
+		FRST_REGISTER_ID,
+		LAST_UPDT_PNTTM,
+		LAST_UPDUSR_ID
+		)VALUES(
+		#srchwrdManageId#,
+		#srchwrdId#,
+		#srchwrdNm#,
+		sysdate,
+		#frstRegisterId#,
+		sysdate,
+		#lastUpdusrId#
+		)
+	</insert>
+
+    <!-- 최근검색어결과조회::검색어별 삭제   -->
+	<delete id="RecentSrchwrd.deleteRecentSrchwrdResult">
+		<![CDATA[
+			DELETE FROM COMTNRECENTSRCHWRD
+			WHERE 1=1
+			AND RECENT_SRCHWRD_ID=#srchwrdId#
+			AND SRCHWRD_MANAGE_ID=#srchwrdManageId#
+		]]>
+	</delete>
+
+    <!-- 최근검색어결과조회::관리별 삭제  -->
+	<delete id="RecentSrchwrd.deleteRecentSrchwrdResultAll">
+		<![CDATA[
+			DELETE FROM COMTNRECENTSRCHWRD
+			WHERE SRCHWRD_MANAGE_ID=#srchwrdManageId#
+		]]>
+	</delete>
+
+	<!-- 최근검색어결과조회::목록조회 게시물정보 -->
+	<select id="RecentSrchwrd.selectRecentSrchwrdResult" resultClass="egovMap">
+	<![CDATA[
+	SELECT *
+	FROM (
+	SELECT T0.*, ROWNUM RNUM
+		FROM (
+	]]>
+	 <![CDATA[
+		SELECT
+		A.SRCHWRD_MANAGE_ID,
+		A.RECENT_SRCHWRD_ID,
+		A.RECENT_SRCHWRD_NM		SRCHWRD_NM,
+		A.FRST_REGISTER_ID,
+		TO_CHAR(A.FRST_REGIST_PNTTM,'YYYY-MM-DD') FRST_REGISTER_PNTTM,
+		(SELECT USER_NM FROM COMTNEMPLYRINFO WHERE ESNTL_ID = A.FRST_REGISTER_ID) FRST_REGISTER_NM
+		FROM COMTNRECENTSRCHWRD A
+		WHERE 1=1
+		AND SRCHWRD_MANAGE_ID=#srchwrdManageId#
+	 ]]>
+	 <isNotEmpty property="searchKeyword">
+	 	<isNotEqual property="searchKeyword" compareValue="">
+			<isEqual property="searchCondition" compareValue="RECENT_SRCHWRD_NM">
+				AND RECENT_SRCHWRD_NM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	 	</isNotEqual>
+	 </isNotEmpty>
+
+	 <![CDATA[
+		ORDER BY A.FRST_REGIST_PNTTM DESC
+	]]>
+	<![CDATA[
+		) T0
+	)
+	WHERE RNUM BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+	]]>
+	</select>
+	<!-- 최근검색어결과조회::목록조회_게시물 총갯수  -->
+	<select id="RecentSrchwrd.selectRecentSrchwrdCntResult" resultClass="int">
+		SELECT
+		COUNT(*) totcnt
+		FROM COMTNRECENTSRCHWRD
+		WHERE 1=1
+		AND SRCHWRD_MANAGE_ID=#srchwrdManageId#
+	 <isNotEmpty property="searchKeyword">
+	 	<isNotEqual property="searchKeyword" compareValue="">
+			<isEqual property="searchCondition" compareValue="RECENT_SRCHWRD_NM">
+				AND RECENT_SRCHWRD_NM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	 	</isNotEqual>
+	 </isNotEmpty>
+
+	</select>
+
+	<!-- 최근검색어관리조회::목록조회 게시물정보 -->
+	<select id="RecentSrchwrd.selectRecentSrchwrd" resultClass="egovMap">
+	<![CDATA[
+	SELECT *
+	FROM (
+	SELECT T0.*, ROWNUM RNUM
+		FROM (
+	]]>
+	 <![CDATA[
+		SELECT
+		A.SRCHWRD_MANAGE_ID,
+		A.SRCHWRD_MANAGE_NM,
+		A.SRCHWRD_CONECT_URL			SRCHWRD_MANAGE_URL,
+		A.USER_SEARCH_AT,
+		A.FRST_REGISTER_ID,
+		TO_CHAR(A.FRST_REGIST_PNTTM,'YYYY-MM-DD') FRST_REGISTER_PNTTM,
+		(SELECT USER_NM FROM COMTNEMPLYRINFO WHERE ESNTL_ID = A.FRST_REGISTER_ID) FRST_REGISTER_NM
+		FROM COMTNRECENTSRCHWRDMANAGE A
+		WHERE 1=1
+	 ]]>
+	 <isNotEmpty property="searchKeyword">
+	 	<isNotEqual property="searchKeyword" compareValue="">
+			<isEqual property="searchCondition" compareValue="SRCHWRD_MANAGE_NM">
+				AND SRCHWRD_MANAGE_NM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="SRCHWRD_CONECT_URL">
+				AND SRCHWRD_CONECT_URL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	 	</isNotEqual>
+	 </isNotEmpty>
+
+	 <![CDATA[
+		ORDER BY A.FRST_REGIST_PNTTM DESC
+	]]>
+	<![CDATA[
+		) T0
+	)
+	WHERE RNUM BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+	]]>
+	</select>
+	<!-- 최근검색어관리조회::목록조회_게시물 총갯수  -->
+	<select id="RecentSrchwrd.selectRecentSrchwrdCnt" resultClass="int">
+		SELECT
+		COUNT(*) totcnt
+		FROM COMTNRECENTSRCHWRDMANAGE
+		WHERE 1=1
+	 <isNotEmpty property="searchKeyword">
+	 	<isNotEqual property="searchKeyword" compareValue="">
+			<isEqual property="searchCondition" compareValue="SRCHWRD_MANAGE_NM">
+				AND SRCHWRD_MANAGE_NM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="SRCHWRD_CONECT_URL">
+				AND SRCHWRD_CONECT_URL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	 	</isNotEqual>
+	 </isNotEmpty>
+
+	</select>
+
+    <!-- 최근검색어관리조회::삭제  -->
+	<delete id="RecentSrchwrd.deleteRecentSrchwrd">
+		<![CDATA[
+			DELETE FROM COMTNRECENTSRCHWRDMANAGE
+			WHERE SRCHWRD_MANAGE_ID=#srchwrdManageId#
+		]]>
+	</delete>
+
+	<!-- 최근검색어관리조회::수정  -->
+	<update id="RecentSrchwrd.updateRecentSrchwrd">
+	 <![CDATA[
+		UPDATE COMTNRECENTSRCHWRDMANAGE
+		SET
+			SRCHWRD_MANAGE_ID=#srchwrdManageId#,
+			SRCHWRD_MANAGE_NM=#srchwrdManageNm#,
+			SRCHWRD_CONECT_URL=#srchwrdManageUrl#,
+			USER_SEARCH_AT=#srchwrdManageUseYn#,
+			LAST_UPDT_PNTTM = sysdate,
+			LAST_UPDUSR_ID = #lastUpdusrId#
+		WHERE SRCHWRD_MANAGE_ID=#srchwrdManageId#
+	 ]]>
+	</update>
+
+	<!-- 최근검색어관리조회::상세보기 -->
+	<select id="RecentSrchwrd.selectRecentSrchwrdDetail" resultMap="RecentSrchwrdVO">
+	SELECT
+		A.SRCHWRD_MANAGE_ID,
+		A.SRCHWRD_MANAGE_NM,
+		A.SRCHWRD_CONECT_URL,
+		A.USER_SEARCH_AT,
+		A.FRST_REGIST_PNTTM,
+		A.FRST_REGISTER_ID,
+		A.LAST_UPDT_PNTTM,
+		A.LAST_UPDUSR_ID
+		FROM COMTNRECENTSRCHWRDMANAGE A
+		WHERE 1=1
+		AND A.SRCHWRD_MANAGE_ID=#srchwrdManageId#
+	</select>
+
+	<!-- 최근검색어관리조회::입력  -->
+	<insert id="RecentSrchwrd.insertRecentSrchwrd">
+	 <![CDATA[
+		INSERT INTO COMTNRECENTSRCHWRDMANAGE (
+			SRCHWRD_MANAGE_ID,
+			SRCHWRD_MANAGE_NM,
+			SRCHWRD_CONECT_URL,
+			USER_SEARCH_AT,
+			FRST_REGIST_PNTTM,
+			FRST_REGISTER_ID,
+			LAST_UPDT_PNTTM,
+			LAST_UPDUSR_ID
+		)VALUES(
+			#srchwrdManageId#,
+			#srchwrdManageNm#,
+			#srchwrdManageUrl#,
+			#srchwrdManageUseYn#,
+			sysdate,
+			#frstRegisterId#,
+			sysdate,
+			#lastUpdusrId#
+		)
+	 ]]>
+	</insert>
+
+</sqlMap>

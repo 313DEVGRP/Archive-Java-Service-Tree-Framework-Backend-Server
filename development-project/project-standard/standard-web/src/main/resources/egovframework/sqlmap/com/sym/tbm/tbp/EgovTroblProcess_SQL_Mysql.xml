@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TroblProcess">
+
+    <typeAlias  alias="TroblProcess" type="egovframework.com.sym.tbm.tbp.service.TroblProcess"/>
+    <typeAlias  alias="TroblProcessVO" type="egovframework.com.sym.tbm.tbp.service.TroblProcessVO"/>
+
+    <resultMap id="troblProcess" class="egovframework.com.sym.tbm.tbp.service.TroblProcessVO">
+        <result property="troblId" column="TROBL_ID" columnIndex="1"/>
+        <result property="troblNm" column="TROBL_NM" columnIndex="2"/>
+        <result property="troblKnd" column="TROBL_KND" columnIndex="3"/>
+        <result property="troblKndNm" column="TROBL_KND_NM" columnIndex="4"/>
+        <result property="troblDc" column="TROBL_DC" columnIndex="5"/>
+        <result property="troblOccrrncTime" column="TROBL_OCCRRNC_TIME" columnIndex="6"/>
+        <result property="troblRqesterNm" column="TROBL_RQESTER_NM" columnIndex="7"/>
+        <result property="troblRequstTime" column="TROBL_REQUST_TIME" columnIndex="8"/>
+        <result property="troblProcessResult" column="TROBL_PROCESS_RESULT" columnIndex="9"/>
+        <result property="troblOpetrNm" column="TROBL_OPETR_NM" columnIndex="10"/>
+        <result property="troblProcessTime" column="TROBL_PROCESS_TIME" columnIndex="11"/>
+        <result property="processSttus" column="PROCESS_STTUS" columnIndex="12"/>
+        <result property="processSttusNm" column="PROCESS_STTUS_NM" columnIndex="13"/>
+        <result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="14"/>
+        <result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="15"/>        
+        <result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" columnIndex="16"/>
+        <result property="lastUpdusrId" column="LAST_UPDUSR_ID" columnIndex="17"/>
+    </resultMap>
+
+    <select id="troblProcessDAO.selectTroblProcessList" parameterClass="TroblProcessVO" resultMap="troblProcess">
+             SELECT TROBL_ID,
+                    TROBL_NM,
+                    TROBL_KND,
+                    (SELECT CODE_NM 
+                       FROM COMTCCMMNDETAILCODE
+                      WHERE CODE_ID = 'COM065'
+                        AND USE_AT  = 'Y'
+                        AND CODE = TROBL_KND) AS TROBL_KND_NM,
+                    TROBL_DC,
+                    DATE_FORMAT(TROBL_OCCRRNC_TIME, '%Y-%m-%d %T') AS TROBL_OCCRRNC_TIME,
+                    TROBL_RQESTER_NM,
+                    DATE_FORMAT(TROBL_REQUST_TIME, '%Y-%m-%d %T') AS TROBL_REQUST_TIME,
+                    TROBL_PROCESS_RESULT,
+                    TROBL_OPETR_NM,
+                    DATE_FORMAT(TROBL_PROCESS_TIME, '%Y-%m-%d %T') AS TROBL_PROCESS_TIME,
+                    PROCESS_STTUS,
+                    (SELECT CODE_NM 
+                       FROM COMTCCMMNDETAILCODE
+                      WHERE CODE_ID = 'COM068'
+                        AND USE_AT  = 'Y'
+                        AND CODE = PROCESS_STTUS) AS PROCESS_STTUS_NM,                       
+                    DATE_FORMAT(FRST_REGIST_PNTTM, '%Y-%m-%d %T') AS FRST_REGIST_PNTTM,
+                    FRST_REGISTER_ID,
+                    DATE_FORMAT(LAST_UPDT_PNTTM, '%Y-%m-%d %T') AS LAST_UPDT_PNTTM,
+                    LAST_UPDUSR_ID
+               FROM COMTNTROBLINFO
+              WHERE 1 = 1
+                AND PROCESS_STTUS IN ('R','C')
+            <isNotNull prepend="AND" property="strTroblNm">
+                    TROBL_NM LIKE CONCAT('%' , #strTroblNm#, '%')
+            </isNotNull>
+            <isNotEqual prepend="AND" property="strTroblKnd" compareValue="00">
+                    TROBL_KND = #strTroblKnd#
+            </isNotEqual>
+            <isNotEqual prepend="AND" property="strProcessSttus" compareValue="00">
+                    PROCESS_STTUS = #strProcessSttus#
+            </isNotEqual>
+            
+              ORDER BY TROBL_ID
+              LIMIT #recordCountPerPage# OFFSET #firstIndex#       
+    </select>
+
+    <select id="troblProcessDAO.selectTroblProcessListTotCnt" parameterClass="TroblProcessVO" resultClass="int">
+             SELECT COUNT(*) totcnt
+               FROM COMTNTROBLINFO
+              WHERE 1 = 1
+                AND PROCESS_STTUS IN ('R','C')
+            <isNotNull prepend="AND" property="strTroblNm">
+                    TROBL_NM LIKE CONCAT('%' , #strTroblNm#, '%')
+            </isNotNull>
+            <isNotEqual prepend="AND" property="strTroblKnd" compareValue="00">
+                    TROBL_KND = #strTroblKnd#
+            </isNotEqual>
+            <isNotEqual prepend="AND" property="strProcessSttus" compareValue="00">
+                    PROCESS_STTUS = #strProcessSttus#
+            </isNotEqual>
+            
+    </select>
+
+    <select id="troblProcessDAO.selectTroblProcess" resultMap="troblProcess">
+        <![CDATA[
+             SELECT TROBL_ID,
+                    TROBL_NM,
+                    TROBL_KND,
+                    (SELECT CODE_NM 
+                       FROM COMTCCMMNDETAILCODE
+                      WHERE CODE_ID = 'COM065'
+                        AND USE_AT  = 'Y'
+                        AND CODE = TROBL_KND) AS TROBL_KND_NM,
+                    TROBL_DC,
+                    DATE_FORMAT(TROBL_OCCRRNC_TIME, '%Y-%m-%d %T') AS TROBL_OCCRRNC_TIME,
+                    TROBL_RQESTER_NM,
+                    DATE_FORMAT(TROBL_REQUST_TIME, '%Y-%m-%d %T') AS TROBL_REQUST_TIME,
+                    TROBL_PROCESS_RESULT,
+                    TROBL_OPETR_NM,
+                    DATE_FORMAT(TROBL_PROCESS_TIME, '%Y-%m-%d %T') AS TROBL_PROCESS_TIME,
+                    PROCESS_STTUS,
+                    (SELECT CODE_NM 
+                       FROM COMTCCMMNDETAILCODE
+                      WHERE CODE_ID = 'COM068'
+                        AND USE_AT  = 'Y'
+                        AND CODE = PROCESS_STTUS) AS PROCESS_STTUS_NM,    
+                    DATE_FORMAT(FRST_REGIST_PNTTM, '%Y-%m-%d %T') AS FRST_REGIST_PNTTM,
+                    FRST_REGISTER_ID,                                        
+                    DATE_FORMAT(LAST_UPDT_PNTTM, '%Y-%m-%d %T') AS LAST_UPDT_PNTTM,
+                    LAST_UPDUSR_ID
+               FROM COMTNTROBLINFO
+             WHERE 1 = 1
+               AND TROBL_ID = #troblId#
+        ]]>
+    </select>
+
+    <update id="troblProcessDAO.insertTroblProcess" parameterClass="TroblProcess">
+        <![CDATA[
+             UPDATE COMTNTROBLINFO
+                SET TROBL_PROCESS_RESULT = #troblProcessResult#,
+                    TROBL_OPETR_NM = #troblOpetrNm#,
+                    TROBL_PROCESS_TIME = #troblProcessTime#,
+                    PROCESS_STTUS = #processSttus#,
+                    LAST_UPDT_PNTTM = now(),
+                    LAST_UPDUSR_ID = #lastUpdusrId#
+              WHERE TROBL_ID = #troblId#
+        ]]>
+    </update>     
+
+    <update id="troblProcessDAO.deleteTroblProcess" parameterClass="TroblProcess">
+        <![CDATA[
+             UPDATE COMTNTROBLINFO
+                SET TROBL_PROCESS_RESULT = NULL,
+                    TROBL_OPETR_NM = NULL,
+                    TROBL_PROCESS_TIME = NULL,
+                    PROCESS_STTUS = #processSttus#,
+                    LAST_UPDT_PNTTM = now(),
+                    LAST_UPDUSR_ID = #lastUpdusrId#
+              WHERE TROBL_ID = #troblId#
+        ]]>
+    </update>
+
+
+</sqlMap>

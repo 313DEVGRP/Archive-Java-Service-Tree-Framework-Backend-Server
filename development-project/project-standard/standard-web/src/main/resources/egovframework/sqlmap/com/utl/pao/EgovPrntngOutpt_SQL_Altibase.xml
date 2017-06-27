@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.12   	서준식     	 	테이블 표준화에 따른 수정사항 반영
+  							IMG_INFO 를 		IMAGE_INFO 로 변경
+							IMG_TYPE 를 		IMAGE_TY 로 변경
+							ORG_CODE 를 		ORGNZT_CODE 로 변경
+-->
+<sqlMap namespace="Utl">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="PrntngOutptVO" type="egovframework.com.utl.pao.service.PrntngOutptVO"/>
+
+	<resultMap id="PrntngOutptResult" class="PrntngOutptVO">
+		<result property="imgInfo" column="IMAGE_INFO" />
+		<result property="imgType" column="IMAGE_TY" />
+	</resultMap>
+
+	<select id="PrntngOutptDAO.selectErncsl" parameterClass="PrntngOutptVO" resultMap="PrntngOutptResult">
+		<![CDATA[ 
+			SELECT  IMAGE_INFO
+			     ,  IMAGE_TY
+			  FROM  IMGTEMP
+			 WHERE 	ORGNZT_CODE  = #orgCode#
+			   AND  ERNCSL_SE = #erncslSe#
+		]]>
+	</select>
+
+</sqlMap>            

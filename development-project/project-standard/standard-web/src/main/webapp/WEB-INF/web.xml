@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         version="2.5">
-    <display-name>standard-api-server</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+    <display-name>standard-web</display-name>
 
     <welcome-file-list>
         <welcome-file>index.do</welcome-file>
@@ -22,19 +21,49 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>HTMLTagFilter</filter-name>
+        <filter-class>egovframework.com.cmm.filter.HTMLTagFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HTMLTagFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>xssEscapeServletFilter</filter-name>
+        <filter-class>com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>xssEscapeServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/egovframework/springmvc/egov-com-*.xml</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>*.do</url-pattern>
-        <url-pattern>/api/**</url-pattern>
+        <url-pattern>/api/*</url-pattern>
         <url-pattern>/connect/facebook</url-pattern>
         <url-pattern>/signin/facebook</url-pattern>
-        <url-pattern>/auth/**</url-pattern>
+        <url-pattern>/auth/*</url-pattern>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
@@ -44,7 +73,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring-servlet.xml</param-value>
+        <param-value>classpath:/egovframework/spring/com/context-*.xml</param-value>
     </context-param>
 
     <!-- Enable Spring Security -->

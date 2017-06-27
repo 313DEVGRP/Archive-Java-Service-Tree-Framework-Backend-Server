@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.09.08   	서준식     	 	MANAGT_DE 컬럼 타입 변경으로 TO_CHAR()함수 제거 
+						 	조회수 출력 안되는 문제로 RDCNT  INQIRE_CO (ALIAS 이름 변경)
+-->
+<sqlMap namespace="CnsltManage">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="CnsltManageSearchVO" type="egovframework.com.uss.olp.cns.service.CnsltManageDefaultVO"/>
+
+	<resultMap id="CnsltManage" class="egovframework.com.uss.olp.cns.service.CnsltManageVO">
+		<result property="cnsltId" 				column="CNSLT_ID" 			columnIndex="1"/>
+		<result property="cnsltSj" 				column="CNSLT_SJ" 			columnIndex="2"/>
+		<result property="cnsltCn" 				column="CNSLT_CN" 			columnIndex="3"/>
+		<result property="othbcAt" 				column="OTHBC_AT" 			columnIndex="4"/>
+		<result property="writngPassword" 		column="WRITNG_PASSWORD" 	columnIndex="5"/>
+		<result property="areaNo" 				column="AREA_NO" 			columnIndex="6"/>
+		<result property="middleTelno" 			column="MIDDLE_TELNO" 		columnIndex="7"/>
+		<result property="endTelno" 			column="END_TELNO" 			columnIndex="8"/>
+		<result property="firstMoblphonNo" 		column="FRST_MBTLNUM" 		columnIndex="9"/>
+		<result property="middleMbtlnum" 		column="MIDDLE_MBTLNUM" 	columnIndex="10"/>
+		<result property="endMbtlnum" 			column="END_MBTLNUM" 		columnIndex="11"/>
+
+		<result property="emailAdres" 			column="EMAIL_ADRES" 		columnIndex="12"/>
+		<result property="emailAnswerAt" 	    column="EMAIL_ANSWER_AT" 	columnIndex="13"/>
+		<result property="atchFileId" 			column="ATCH_FILE_ID" 		columnIndex="14"/>
+		<result property="wrterNm" 				column="WRTER_NM" 			columnIndex="15"/>
+		<result property="writngDe" 			column="WRITNG_DE" 			columnIndex="16"/>
+		<result property="inqireCo" 			column="RDCNT" 				columnIndex="17"/>
+		<result property="qnaProcessSttusCode" 	column="QNA_PROCESS_STTUS_CODE" 	columnIndex="18"/>
+		<result property="qnaProcessSttusCodeNm" column="QNA_PROCESS_STTUS_CODE_NM" columnIndex="19"/>
+		<result property="managtCn" 			column="MANAGT_CN" 			columnIndex="20"/>
+		<result property="managtDe" 			column="MANAGT_DE" 			columnIndex="21"/>
+
+		<result property="emplyrNm" 			column="USER_NM" 			columnIndex="22"/>
+		<result property="offmTelno" 			column="OFFM_TELNO" 		columnIndex="23"/>
+		<result property="aemailAdres" 			column="AEMAIL_ADRES" 		columnIndex="24"/>
+		<result property="orgnztNm" 			column="ORGNZT_NM" 			columnIndex="25"/>
+
+
+		<result property="frstRegisterPnttm" 	column="FRST_REGIST_PNTTM" 	columnIndex="26"/>
+		<result property="frstRegisterId" 		column="FRST_REGISTER_ID" 	columnIndex="27"/>
+		<result property="lastUpdusrPnttm" 		column="LAST_UPDT_PNTTM" 	columnIndex="28"/>
+		<result property="lastUpdusrId" 		column="LAST_UPDUSR_ID" 	columnIndex="29"/>
+	</resultMap>
+
+	<select id="CnsltManageDAO.selectCnsltListDetail" resultMap="CnsltManage">
+		<![CDATA[
+			SELECT 	C.CNSLT_ID, C.CNSLT_SJ, C.CNSLT_CN, C.OTHBC_AT, C.WRITNG_PASSWORD,
+					C.AREA_NO, C.MIDDLE_TELNO, C.END_TELNO, C.FRST_MBTLNUM, C.MIDDLE_MBTLNUM, C.END_MBTLNUM,
+					C.EMAIL_ADRES, C.EMAIL_ANSWER_AT,
+					C.WRTER_NM , C.WRITNG_DE, C.RDCNT,
+					C.QNA_PROCESS_STTUS_CODE, D.CODE_NM QNA_PROCESS_STTUS_CODE_NM,
+					C.MANAGT_CN,C.MANAGT_DE , C.ATCH_FILE_ID,
+					A.USER_NM, A.OFFM_TELNO, A.EMAIL_ADRES AEMAIL_ADRES, B.ORGNZT_NM ,
+					TO_CHAR(C.FRST_REGIST_PNTTM,'YYYY-MM-DD') FRST_REGIST_PNTTM   , C.FRST_REGISTER_ID,
+					TO_CHAR(C.LAST_UPDT_PNTTM,'YYYY-MM-DD')   LAST_UPDT_PNTTM	    , C.LAST_UPDUSR_ID
+			FROM 	COMTNCNSLTLIST C
+			LEFT 	OUTER JOIN COMTCCMMNDETAILCODE D ON		D.CODE_ID ='COM028' 		AND C.QNA_PROCESS_STTUS_CODE = D.CODE
+			LEFT 	OUTER JOIN COMTNEMPLYRINFO A     ON		A.ESNTL_ID= C.LAST_UPDUSR_ID
+			LEFT 	OUTER JOIN COMTNORGNZTINFO B     ON		A.ORGNZT_ID = B.ORGNZT_ID
+			WHERE	CNSLT_ID=#cnsltId#
+		]]>
+	</select>
+
+	<select id="CnsltManageDAO.selectCnsltList" parameterClass="CnsltManageSearchVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT CNSLT_ID, CNSLT_SJ, CNSLT_CN, OTHBC_AT, WRITNG_PASSWORD,
+				   AREA_NO, MIDDLE_TELNO, END_TELNO, FRST_MBTLNUM, MIDDLE_MBTLNUM, END_MBTLNUM,
+				   EMAIL_ADRES, EMAIL_ANSWER_AT, WRTER_NM , WRITNG_DE,
+				   RDCNT  INQIRE_CO,
+				   QNA_PROCESS_STTUS_CODE, QNA_PROCESS_STTUS_CODE_NM, MANAGT_CN, MANAGT_DE, ATCH_FILE_ID,
+				   USER_NM, OFFM_TELNO, EMAIL_ADRES AEMAIL_ADRES, ORGNZT_NM ,
+				   FRST_REGIST_PNTTM	, FRST_REGISTER_ID,
+				   LAST_UPDT_PNTTM	    , LAST_UPDUSR_ID
+			FROM
+				   (
+				   SELECT  ROWNUM RNUM,CNS.*
+				   FROM
+				   	   	  (
+				   		   SELECT 	C.CNSLT_ID, C.CNSLT_SJ, C.CNSLT_CN, C.OTHBC_AT, C.WRITNG_PASSWORD,
+						   			C.AREA_NO, C.MIDDLE_TELNO, C.END_TELNO, C.FRST_MBTLNUM, C.MIDDLE_MBTLNUM, C.END_MBTLNUM,
+									C.EMAIL_ADRES, C.EMAIL_ANSWER_AT, C.WRTER_NM , C.WRITNG_DE,
+									C.RDCNT,
+									C.QNA_PROCESS_STTUS_CODE, D.CODE_NM QNA_PROCESS_STTUS_CODE_NM, C.MANAGT_CN, C.MANAGT_DE, C.ATCH_FILE_ID,
+									A.USER_NM, A.OFFM_TELNO, A.EMAIL_ADRES AEMAIL_ADRES, B.ORGNZT_NM ,
+									C.FRST_REGIST_PNTTM	, C.FRST_REGISTER_ID,
+									C.LAST_UPDT_PNTTM	    , C.LAST_UPDUSR_ID
+						   FROM 	COMTNCNSLTLIST C
+						   LEFT 	OUTER JOIN COMTCCMMNDETAILCODE D ON		D.CODE_ID ='COM028' 		AND C.QNA_PROCESS_STTUS_CODE = D.CODE
+						   LEFT 	OUTER JOIN COMTNEMPLYRINFO A     ON		A.ESNTL_ID= C.LAST_UPDUSR_ID
+						   LEFT 	OUTER JOIN COMTNORGNZTINFO B     ON		A.ORGNZT_ID = B.ORGNZT_ID
+						   WHERE	1=1
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="wrterNm">
+				<![CDATA[WRTER_NM LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="cnsltSj">
+				<![CDATA[CNSLT_SJ LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+		<![CDATA[
+							ORDER BY CNSLT_SJ DESC
+						  ) CNS
+				   )
+			WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex#
+		]]>
+	</select>
+
+	<select id="CnsltManageDAO.selectCnsltListTotCnt" parameterClass="CnsltManageSearchVO" resultClass="int">
+		<![CDATA[
+			SELECT 	COUNT(*) totcnt
+			FROM 	COMTNCNSLTLIST
+			WHERE 	1=1
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="wrterNm">
+				<![CDATA[WRTER_NM LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="cnsltSj">
+				<![CDATA[CNSLT_SJ LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+	</select>
+
+	<insert id="CnsltManageDAO.insertCnsltDtls">
+		<![CDATA[
+			INSERT INTO COMTNCNSLTLIST
+				   (CNSLT_ID
+				  , CNSLT_SJ
+				  , CNSLT_CN
+				  , OTHBC_AT
+				  , WRITNG_PASSWORD
+				  , AREA_NO
+				  , MIDDLE_TELNO
+				  , END_TELNO
+				  , FRST_MBTLNUM
+				  , MIDDLE_MBTLNUM
+				  , END_MBTLNUM
+				  , EMAIL_ADRES
+				  , EMAIL_ANSWER_AT
+				  , WRTER_NM
+				  , WRITNG_DE
+				  , RDCNT
+				  , QNA_PROCESS_STTUS_CODE
+				  , ATCH_FILE_ID
+				  , FRST_REGIST_PNTTM
+				  , FRST_REGISTER_ID)
+			VALUES ( #cnsltId#
+				  , #cnsltSj#
+				  , #cnsltCn#
+				  , #othbcAt#
+				  , #writngPassword#
+				  , #areaNo#
+				  , #middleTelno#
+				  , #endTelno#
+				  , #firstMoblphonNo#
+				  , #middleMbtlnum#
+				  , #endMbtlnum#
+				  , #emailAdres#
+				  , #emailAnswerAt#
+				  , #wrterNm#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , 0
+				  , '1'
+				  , #atchFileId#
+				  , sysdate
+				  , #frstRegisterId#)
+		]]>
+	</insert>
+
+	<update id="CnsltManageDAO.updateCnsltInqireCo">
+		<![CDATA[
+			UPDATE	COMTNCNSLTLIST	SET
+				    RDCNT= NVL(RDCNT,0) + 1
+ 			WHERE   CNSLT_ID=#cnsltId#
+		]]>
+	</update>
+
+	<select id="CnsltManageDAO.selectCnsltPasswordConfirmCnt" resultClass="int">
+		<![CDATA[
+			SELECT 	COUNT(*) totcnt
+			FROM 	COMTNCNSLTLIST
+			WHERE	CNSLT_ID=#cnsltId#
+			AND		WRITNG_PASSWORD=#writngPassword#
+		]]>
+	</select>
+
+	<update id="CnsltManageDAO.updateCnsltDtls">
+		<![CDATA[
+			UPDATE	COMTNCNSLTLIST	SET
+				    CNSLT_SJ=#cnsltSj#
+				  , CNSLT_CN=#cnsltCn#
+				  , OTHBC_AT=#othbcAt#
+				  , WRITNG_PASSWORD=#writngPassword#
+				  , AREA_NO=#areaNo#
+				  , MIDDLE_TELNO=#middleTelno#
+				  , END_TELNO=#endTelno#
+				  , FRST_MBTLNUM=#firstMoblphonNo#
+				  , MIDDLE_MBTLNUM=#middleMbtlnum#
+				  , END_MBTLNUM=#endMbtlnum#
+				  , EMAIL_ADRES=#emailAdres#
+				  , EMAIL_ANSWER_AT=NVL(#emailAnswerAt#,'N')
+				  , WRTER_NM=#wrterNm#
+				  , WRITNG_DE=TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , MANAGT_CN=#managtCn#
+				  , MANAGT_DE=#managtDe#
+				  , ATCH_FILE_ID=#atchFileId#
+				  , FRST_REGIST_PNTTM=sysdate
+				  , FRST_REGISTER_ID=#frstRegisterId#
+			WHERE  CNSLT_ID=#cnsltId#
+		]]>
+	</update>
+
+	<delete id="CnsltManageDAO.deleteCnsltDtls">
+		<![CDATA[
+			DELETE FROM COMTNCNSLTLIST
+			WHERE  CNSLT_ID=#cnsltId#
+		]]>
+	</delete>
+
+	<select id="CnsltManageDAO.selectCnsltAnswerDetail" resultMap="CnsltManage">
+		<![CDATA[
+			SELECT 	C.CNSLT_ID, C.CNSLT_SJ, C.CNSLT_CN, C.OTHBC_AT, C.WRITNG_PASSWORD,
+					C.AREA_NO, C.MIDDLE_TELNO, C.END_TELNO, C.FRST_MBTLNUM, C.MIDDLE_MBTLNUM, C.END_MBTLNUM,
+					C.EMAIL_ADRES, C.EMAIL_ANSWER_AT,
+					C.WRTER_NM , C.WRITNG_DE, C.RDCNT,
+					C.QNA_PROCESS_STTUS_CODE, D.CODE_NM QNA_PROCESS_STTUS_CODE_NM,
+					C.MANAGT_CN, C.MANAGT_DE, C.ATCH_FILE_ID,
+					A.USER_NM, A.OFFM_TELNO, A.EMAIL_ADRES AEMAIL_ADRES, B.ORGNZT_NM ,
+					TO_CHAR(C.FRST_REGIST_PNTTM,'YYYY-MM-DD') FRST_REGIST_PNTTM   , C.FRST_REGISTER_ID,
+					TO_CHAR(C.LAST_UPDT_PNTTM,'YYYY-MM-DD')   LAST_UPDT_PNTTM	    , C.LAST_UPDUSR_ID
+			FROM 	COMTNCNSLTLIST C
+			LEFT 	OUTER JOIN COMTCCMMNDETAILCODE D ON		D.CODE_ID ='COM028' 		AND C.QNA_PROCESS_STTUS_CODE = D.CODE
+			LEFT 	OUTER JOIN COMTNEMPLYRINFO A     ON		A.ESNTL_ID= C.LAST_UPDUSR_ID
+			LEFT 	OUTER JOIN COMTNORGNZTINFO B     ON		A.ORGNZT_ID = B.ORGNZT_ID
+			WHERE	CNSLT_ID=#cnsltId#
+		]]>
+	</select>
+
+	<select id="CnsltManageDAO.selectCnsltAnswerList" parameterClass="CnsltManageSearchVO" resultClass="egovMap">
+<![CDATA[
+			SELECT CNSLT_ID, CNSLT_SJ, CNSLT_CN, OTHBC_AT, WRITNG_PASSWORD,
+				   AREA_NO, MIDDLE_TELNO, END_TELNO, FRST_MBTLNUM, MIDDLE_MBTLNUM, END_MBTLNUM,
+				   EMAIL_ADRES, EMAIL_ANSWER_AT, WRTER_NM , WRITNG_DE,
+				   RDCNT  INQIRE_CO,
+				   QNA_PROCESS_STTUS_CODE, QNA_PROCESS_STTUS_CODE_NM, MANAGT_CN, MANAGT_DE, ATCH_FILE_ID,
+				   USER_NM, OFFM_TELNO, EMAIL_ADRES AEMAIL_ADRES, ORGNZT_NM ,
+				   FRST_REGIST_PNTTM	, FRST_REGISTER_ID,
+				   LAST_UPDT_PNTTM	    , LAST_UPDUSR_ID
+			FROM
+				   (
+				   SELECT  ROWNUM RNUM,CNS.*
+				   FROM
+				   	   	  (
+				   		   SELECT 	C.CNSLT_ID, C.CNSLT_SJ, C.CNSLT_CN, C.OTHBC_AT, C.WRITNG_PASSWORD,
+						   			C.AREA_NO, C.MIDDLE_TELNO, C.END_TELNO, C.FRST_MBTLNUM, C.MIDDLE_MBTLNUM, C.END_MBTLNUM,
+									C.EMAIL_ADRES, C.EMAIL_ANSWER_AT, C.WRTER_NM , C.WRITNG_DE,
+									C.RDCNT,
+									C.QNA_PROCESS_STTUS_CODE, D.CODE_NM QNA_PROCESS_STTUS_CODE_NM, C.MANAGT_CN, C.MANAGT_DE, C.ATCH_FILE_ID,
+									A.USER_NM, A.OFFM_TELNO, A.EMAIL_ADRES AEMAIL_ADRES, B.ORGNZT_NM ,
+									C.FRST_REGIST_PNTTM	, C.FRST_REGISTER_ID,
+									C.LAST_UPDT_PNTTM	    , C.LAST_UPDUSR_ID
+						   FROM 	COMTNCNSLTLIST C
+						   LEFT 	OUTER JOIN COMTCCMMNDETAILCODE D ON		D.CODE_ID ='COM028' 		AND C.QNA_PROCESS_STTUS_CODE = D.CODE
+						   LEFT 	OUTER JOIN COMTNEMPLYRINFO A     ON		A.ESNTL_ID= C.LAST_UPDUSR_ID
+						   LEFT 	OUTER JOIN COMTNORGNZTINFO B     ON		A.ORGNZT_ID = B.ORGNZT_ID
+						   WHERE	1=1
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="wrterNm">
+				<![CDATA[WRTER_NM LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="cnsltSj">
+				<![CDATA[CNSLT_SJ LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+		<![CDATA[
+							ORDER BY CNSLT_SJ DESC
+						  ) CNS
+				   )
+			WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex#
+		]]>
+</select>
+
+	<select id="CnsltManageDAO.selectCnsltAnswerListTotCnt" parameterClass="CnsltManageSearchVO" resultClass="int">
+		<![CDATA[
+			SELECT 	COUNT(*) totcnt
+			FROM 	COMTNCNSLTLIST
+			WHERE 	1=1
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="wrterNm">
+				<![CDATA[WRTER_NM LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="qnaProcessSttusCodeNm">
+				<![CDATA[QNA_PROCESS_STTUS_CODE_NM LIKE '%' || #searchKeyword# || '%']]>
+			</isEqual>
+	</select>
+
+	<update id="CnsltManageDAO.updateCnsltDtlsAnswer">
+		<![CDATA[
+			UPDATE	COMTNCNSLTLIST	SET
+				  	QNA_PROCESS_STTUS_CODE=#qnaProcessSttusCode#
+				  , MANAGT_CN=#managtCn#
+				  , MANAGT_DE=TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , LAST_UPDT_PNTTM=sysdate
+				  , LAST_UPDUSR_ID=#lastUpdusrId#
+			WHERE  CNSLT_ID=#cnsltId#
+		]]>
+	</update>
+
+	<delete id="CnsltManageDAO.deleteCnsltDtlsAnswer">
+		<![CDATA[
+			DELETE FROM COMTNQAINFO
+			WHERE  CNSLT_ID=#cnsltId#
+		]]>
+	</delete>
+
+
+</sqlMap>

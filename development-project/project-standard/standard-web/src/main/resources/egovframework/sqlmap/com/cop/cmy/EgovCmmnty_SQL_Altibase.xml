@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.9.7   	정진오     	 	CommunityManageDAO.deleteCommunityUserInf과 CommunityManageDAO.deleteAllCommunityUserInf의 update 문에
+  							MNGR_AT = 'N' 추가(커뮤니티 탈퇴 시 운영자 인 경우 강제로 비운영자로 변경 필요) 
+-->
+<sqlMap namespace="CommunityManageDAO">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="Cmmnty" type="egovframework.com.cop.cmy.service.Community"/>
+	<typeAlias  alias="CmmntyVO" type="egovframework.com.cop.cmy.service.CommunityVO"/>
+	<typeAlias  alias="CmmntyUser" type="egovframework.com.cop.cmy.service.CommunityUser"/>
+	<typeAlias  alias="CmmntyUserVO" type="egovframework.com.cop.cmy.service.CommunityUserVO"/>
+
+	<resultMap id="CmmntyList" class="egovframework.com.cop.cmy.service.CommunityVO">
+		<result property="cmmntyId" column="CMMNTY_ID" columnIndex="1"/>
+		<result property="cmmntyNm" column="CMMNTY_NM" columnIndex="2"/>
+		<result property="registSeCode" column="REGIST_SE_CODE" columnIndex="3"/>
+		<result property="registSeCodeNm" column="REGIST_SE_CODE_NM" columnIndex="4"/>
+		<result property="useAt" column="USE_AT" columnIndex="5"/>
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="6"/>
+		<result property="frstRegisterNm" column="FRST_REGISTER_NM" columnIndex="7"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="8"/>
+	</resultMap>
+
+	<resultMap id="CmmntyDetail" class="egovframework.com.cop.cmy.service.CommunityVO">
+		<result property="cmmntyId" column="CMMNTY_ID" columnIndex="1"/>
+		<result property="cmmntyNm" column="CMMNTY_NM" columnIndex="2"/>
+		<result property="cmmntyIntrcn" column="CMMNTY_INTRCN" columnIndex="3"/>
+		<result property="useAt" column="USE_AT" columnIndex="4"/>		
+		<result property="tmplatId" column="TMPLAT_ID" columnIndex="5"/>
+		<result property="tmplatNm" column="TMPLAT_NM" columnIndex="6"/>		
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="7"/>
+		<result property="frstRegisterNm" column="FRST_REGISTER_NM" columnIndex="8"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="9"/>
+	</resultMap>	
+
+	<resultMap id="CmmntyBBSUseList" class="egovframework.com.cop.cmy.service.CommunityVO">
+		<result property="bbsId" column="BBS_ID" columnIndex="1"/>
+		<result property="bbsNm" column="BBS_NM" columnIndex="2"/>
+	</resultMap>	
+
+	<resultMap id="CmmntyListPortlet" class="egovframework.com.cop.cmy.service.CommunityVO">
+		<result property="cmmntyId" column="CMMNTY_ID" columnIndex="1"/>
+		<result property="cmmntyNm" column="CMMNTY_NM" columnIndex="2"/>
+		<result property="cmmntyIntrcn" column="CMMNTY_INTRCN" columnIndex="3"/>
+		<result property="tmplatId" column="TMPLAT_ID" columnIndex="4"/>
+	</resultMap>
+
+	<resultMap id="CmmntyUserInf" class="egovframework.com.cop.cmy.service.CommunityUser">
+	    <result property="mngrAt" column="MNGR_AT" columnIndex="1"/>
+		<result property="useAt" column="USE_AT" columnIndex="2"/>				
+	</resultMap>
+	
+	<resultMap id="CmmntyManagerInf" class="egovframework.com.cop.cmy.service.CommunityUser">
+	    <result property="emplyrId" column="EMPLYR_ID" columnIndex="1"/>
+		<result property="emplyrNm" column="USER_NM" columnIndex="2"/>				
+	</resultMap>
+
+	<insert id="CommunityManageDAO.insertCommunityInf" parameterClass="Cmmnty">
+		<![CDATA[
+			INSERT INTO COMTNCMMNTY
+			(CMMNTY_ID, CMMNTY_NM, CMMNTY_INTRCN, REGIST_SE_CODE, 
+			 TMPLAT_ID, USE_AT, FRST_REGISTER_ID, FRST_REGIST_PNTTM)
+			VALUES
+			(#cmmntyId#, #cmmntyNm#, #cmmntyIntrcn#, #registSeCode#, 
+			 #tmplatId#, #useAt#, #frstRegisterId#, SYSDATE)
+		]]>
+	</insert>
+
+	<insert id="CommunityManageDAO.insertCommunityUserInf" parameterClass="CmmntyUser">
+		<![CDATA[
+			INSERT INTO COMTNCMMNTYUSER
+			(CMMNTY_ID, EMPLYR_ID, SBSCRB_DE, MNGR_AT, 
+			 USE_AT, FRST_REGISTER_ID, FRST_REGIST_PNTTM)
+			VALUES
+			(#cmmntyId#, #emplyrId#, SYSDATE, #mngrAt#, 
+			 #useAt#, #frstRegisterId#, SYSDATE)		
+		]]>
+	</insert>
+
+	<select id="CommunityManageDAO.selectCommunityInfs" parameterClass="CmmntyVO" resultMap="CmmntyList" >
+		<![CDATA[
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				a.CMMNTY_ID, a.CMMNTY_NM, a.USE_AT, a.REGIST_SE_CODE, 
+				c.CODE_NM as REGIST_SE_CODE_NM, 
+				a.FRST_REGIST_PNTTM, a.FRST_REGISTER_ID, 
+				b.USER_NM as FRST_REGISTER_NM
+			FROM
+				COMTNCMMNTY a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTCCMMNDETAILCODE c
+			ON a.REGIST_SE_CODE = c.CODE
+			WHERE c.CODE_ID = 'COM001'
+		]]>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	a.CMMNTY_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+		<![CDATA[			
+			ORDER BY a.FRST_REGIST_PNTTM DESC 
+			) TB ) WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+		]]>				
+	</select>	
+	
+	<select id="CommunityManageDAO.selectCommunityInfsCnt" parameterClass="CmmntyVO" resultClass="java.lang.Integer" >
+		<![CDATA[
+			SELECT 
+				COUNT(a.CMMNTY_ID) as cnt
+			FROM
+				COMTNCMMNTY a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTCCMMNDETAILCODE c
+			ON a.REGIST_SE_CODE = c.CODE
+			WHERE c.CODE_ID = 'COM001'
+		]]>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	a.CMMNTY_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+	</select>	
+
+	<select id="CommunityManageDAO.selectCommunityInf" parameterClass="CmmntyVO" resultMap="CmmntyDetail">
+		<![CDATA[
+			SELECT 
+				a.CMMNTY_ID, a.CMMNTY_NM, a.CMMNTY_INTRCN, a.USE_AT, 
+				c.TMPLAT_ID, c.TMPLAT_NM,
+				a.FRST_REGIST_PNTTM, a.FRST_REGISTER_ID, 
+				b.USER_NM as FRST_REGISTER_NM, a.FRST_REGIST_PNTTM
+			FROM
+				COMTNCMMNTY a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNTMPLATINFO c
+			ON a.TMPLAT_ID = c.TMPLAT_ID
+			WHERE 
+				a.CMMNTY_ID = #cmmntyId#	
+		]]>	
+	</select>
+	
+	<select id="CommunityManageDAO.selectCommunityBBSUseInf" parameterClass="CmmntyVO" resultMap="CmmntyBBSUseList">
+		<![CDATA[
+			SELECT
+				a.BBS_ID, a.BBS_NM
+			FROM
+				COMTNBBSMASTER a
+		    LEFT OUTER JOIN COMTNBBSUSE b
+			ON a.BBS_ID = b.BBS_ID
+			WHERE b.TRGET_ID = #cmmntyId#
+			AND b.USE_AT = 'Y'	
+		]]>	
+	</select>	
+	
+	<update id="CommunityManageDAO.updateCommunityInf"  parameterClass="Cmmnty">
+		<![CDATA[
+			UPDATE COMTNCMMNTY
+			SET
+				CMMNTY_NM = #cmmntyNm#,
+				CMMNTY_INTRCN = #cmmntyIntrcn#, 
+				TMPLAT_ID = #tmplatId#,
+				USE_AT = #useAt#, 
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CMMNTY_ID = #cmmntyId#
+		]]>
+	</update>
+	
+	<update id="CommunityManageDAO.deleteCommunityInf"  parameterClass="Cmmnty">
+		<![CDATA[
+			UPDATE COMTNCMMNTY
+			SET
+				USE_AT = 'N',
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CMMNTY_ID = #cmmntyId#
+		]]>
+	</update>	
+	
+	<update id="CommunityManageDAO.updateCommunityUserInf" parameterClass="CmmntyUser">
+		<![CDATA[
+			UPDATE COMTNCMMNTYUSER
+			SET
+				MNGR_AT = #mngrAt#, 
+				USE_AT = #useAt#,
+				SECSN_DE = #secsnDe#,
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CMMNTY_ID = #cmmntyId#	
+			AND
+				EMPLYR_ID = #emplyrId#
+		]]>
+	</update>	
+	
+	<update id="CommunityManageDAO.deleteCommunityUserInf" parameterClass="CmmntyUser">
+		<![CDATA[
+			UPDATE COMTNCMMNTYUSER
+			SET
+				USE_AT = 'N',
+				MNGR_AT = 'N',
+				SECSN_DE = #secsnDe#,
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CMMNTY_ID = #cmmntyId#	
+			AND
+				EMPLYR_ID = #emplyrId#
+		]]>
+	</update>	
+		
+	<select id="CommunityManageDAO.selectCmmntyListPortlet"  parameterClass="CmmntyVO" resultMap="CmmntyListPortlet" >
+		<![CDATA[
+			SELECT 
+				CMMNTY_ID, CMMNTY_NM, CMMNTY_INTRCN, TMPLAT_ID
+			FROM
+				COMTNCMMNTY
+			WHERE USE_AT = 'Y' 
+		]]>
+	</select>	
+	<select id="CommunityManageDAO.selectCmmntyTmplat" parameterClass="CmmntyVO"  resultClass="java.lang.String" >
+		<![CDATA[
+			SELECT 
+				a.TMPLAT_COURS 
+			FROM
+				COMTNTMPLATINFO a, COMTNCMMNTY b
+			WHERE 
+				a. TMPLAT_ID = b.TMPLAT_ID
+			AND
+				b.CMMNTY_ID = #cmmntyId#
+		]]>	
+	</select>	
+		
+	<select id="CommunityManageDAO.checkExistUser" parameterClass="CmmntyUser" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(CMMNTY_ID) as cnt
+				FROM
+			COMTNCMMNTYUSER
+				WHERE EMPLYR_ID = #emplyrId# 
+					AND CMMNTY_ID = #cmmntyId#
+		]]>
+	</select>
+		
+	<select id="CommunityManageDAO.selectAllCmmnty" resultMap="CmmntyList" >
+		<![CDATA[
+			SELECT 
+				a.CMMNTY_ID, a.CMMNTY_NM, a.USE_AT, a.REGIST_SE_CODE, 
+				c.CODE_NM as REGIST_SE_CODE_NM, 
+				a.FRST_REGIST_PNTTM, a.FRST_REGISTER_ID, 
+				b.USER_NM as FRST_REGISTER_NM
+			FROM
+				COMTNCMMNTY a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTCCMMNDETAILCODE c
+			ON a.REGIST_SE_CODE = c.CODE
+			WHERE c.CODE_ID = 'COM001'
+			AND a.USE_AT = 'Y' 
+			ORDER BY CMMNTY_NM		
+		]]>
+	</select>	
+
+	<update id="CommunityManageDAO.deleteAllCommunityUserInf" parameterClass="CmmntyUser">
+		<![CDATA[
+			UPDATE COMTNCMMNTYUSER
+			SET
+				USE_AT = 'N',
+				MNGR_AT = 'N',
+				SECSN_DE = #secsnDe#,
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CMMNTY_ID = #cmmntyId#	
+			AND
+				USE_AT = 'Y'
+		]]>
+	</update>	
+	
+	<select id="CommunityManageDAO.selectSingleCommunityUserInf" parameterClass="CmmntyUser"  resultMap="CmmntyUserInf" >
+		<![CDATA[			
+			SELECT MNGR_AT, USE_AT FROM
+			COMTNCMMNTYUSER
+			WHERE EMPLYR_ID = #emplyrId# 
+				AND CMMNTY_ID =  #cmmntyId#
+		]]>
+	</select>	
+	
+	<select id="CommunityManageDAO.selectCommunityManagerInf" parameterClass="CmmntyVO"  resultMap="CmmntyManagerInf" >
+		<![CDATA[			
+			SELECT a.EMPLYR_ID, b.USER_NM as USER_NM 
+			FROM COMTNCMMNTYUSER a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.EMPLYR_ID = b.ESNTL_ID
+			WHERE a.CMMNTY_ID =  #cmmntyId#
+				AND a.USE_AT = 'Y' AND a.MNGR_AT = 'Y'
+			ORDER BY a.FRST_REGIST_PNTTM ASC
+		]]>
+	</select>	
+		
+</sqlMap>
+

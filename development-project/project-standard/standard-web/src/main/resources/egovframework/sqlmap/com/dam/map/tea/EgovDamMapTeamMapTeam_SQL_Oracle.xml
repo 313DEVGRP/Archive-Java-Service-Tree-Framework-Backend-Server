@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.8.11   	정진오     	 	테이블 표준화에 따른 수정사항 반영
+  							CL_YMD 를 		CL_DE 로 변경
+							KNO_URL 를 		KNWLDG_URL 로 변경							
+-->
+<sqlMap namespace="MapTeam">
+
+	<typeAlias  alias="egovMap"     type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="MapTeamVO" 	type="egovframework.com.dam.map.tea.service.MapTeamVO"/>
+	<typeAlias  alias="MapTeam"   	type="egovframework.com.dam.map.tea.service.MapTeam"/>
+	
+	<resultMap id="MapTeamList" class="egovframework.com.dam.map.tea.service.MapTeamVO">
+		<result property="orgnztId" column="ORGNZT_ID" columnIndex="1"/>	
+		<result property="orgnztNm" column="ORGNZT_NM" columnIndex="2"/>
+		<result property="clYmd" column="CL_DE" columnIndex="3"/>
+		<result property="knoUrl" column="KNWLDG_URL" columnIndex="4"/>
+	</resultMap>
+	
+	<resultMap id="MapTeamDetail" class="egovframework.com.dam.map.tea.service.MapTeam">
+		<result property="orgnztId" column="ORGNZT_ID" columnIndex="1"/>	
+		<result property="orgnztNm" column="ORGNZT_NM" columnIndex="2"/>
+		<result property="clYmd" column="CL_DE" columnIndex="3"/>
+		<result property="knoUrl" column="KNWLDG_URL" columnIndex="4"/>
+	</resultMap>
+
+	<select id="MapTeamDAO.selectMapTeamList" parameterClass="MapTeamVO" resultMap="MapTeamList">
+	<![CDATA[	
+	SELECT *
+	FROM (
+	SELECT T0.*, ROWNUM RNUM
+		FROM (
+	]]>
+		<![CDATA[
+			SELECT  ORGNZT_ID
+			     ,  ORGNZT_NM
+                 ,  CL_DE
+			     ,  KNWLDG_URL
+			  FROM  COMTNDAMMAPTEAM
+			 WHERE  1 = 1
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[ORGNZT_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[ORGNZT_ID LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+	<![CDATA[	
+		) T0
+	) 
+	WHERE RNUM BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+	]]>
+	</select>
+
+	<select id="MapTeamDAO.selectMapTeamTotCnt" parameterClass="MapTeamVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT  COUNT(*) as totcnt 
+			  FROM  COMTNDAMMAPTEAM
+			 WHERE  1 = 1
+		]]>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				<![CDATA[ORGNZT_NM LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="2">
+				<![CDATA[ORGNZT_ID LIKE '%'||#searchKeyword#||'%']]>
+			</isEqual>
+	</select>
+
+	<select id="MapTeamDAO.selectMapTeamDetail" parameterClass="MapTeam" resultMap="MapTeamDetail">
+		<![CDATA[
+            SELECT  ORGNZT_ID
+			     ,  ORGNZT_NM
+                 ,  CL_DE
+                 ,  KNWLDG_URL
+              FROM  COMTNDAMMAPTEAM
+             WHERE  ORGNZT_ID = #orgnztId#
+		]]>
+	</select>
+
+	<insert id="MapTeamDAO.insertMapTeam">
+		<![CDATA[
+		    INSERT 
+		      INTO  COMTNDAMMAPTEAM
+		         (  ORGNZT_ID
+		         ,  ORGNZT_NM
+		         ,  CL_DE
+		         ,  KNWLDG_URL
+		         ,  LAST_UPDT_PNTTM
+		         ,  LAST_UPDUSR_ID
+		         ) 
+		    VALUES  
+		         (  #orgnztId#
+		         ,  #orgnztNm#
+		         ,  #clYmd#
+		         ,  #knoUrl#
+		         ,  sysdate
+		         ,  #frstRegisterId#
+		         ) 
+		]]>
+	</insert>
+
+	<update id="MapTeamDAO.updateMapTeam">
+		<![CDATA[
+            UPDATE  COMTNDAMMAPTEAM 
+               SET  ORGNZT_ID         = #orgnztId#
+                 ,  ORGNZT_NM         = #orgnztNm#
+                 ,  CL_DE  		  = #clYmd#
+                 ,  KNWLDG_URL           = #knoUrl#
+                 ,  LAST_UPDT_PNTTM = sysdate
+                 ,  LAST_UPDUSR_ID    = #lastUpdusrId#
+             WHERE  ORGNZT_ID         = #orgnztId# 
+		]]>
+	</update>
+
+	<delete id="MapTeamDAO.deleteMapTeam">
+		<![CDATA[
+            DELETE  FROM COMTNDAMMAPTEAM 
+            WHERE   ORGNZT_ID = #orgnztId#
+		]]>
+	</delete>
+
+
+</sqlMap>            

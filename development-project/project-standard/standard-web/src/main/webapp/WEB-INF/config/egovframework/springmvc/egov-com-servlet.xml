@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<context:component-scan base-package="egovframework">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<!-- for jsTree -->
+	<bean id="jsonMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
+	<bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="extractValueFromSingleKeyModel" value="true"/>
+		<property name="modelKey" value="result"/>
+		<property name="prettyPrint" value="true"/>
+		<property name="contentType" value="application/json;charset=UTF-8"/>
+		<property name="objectMapper" ref="jsonMapper" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="objectMapper" ref="jacksonObjectMapper" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+</beans>

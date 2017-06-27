@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+	수정일          수정자                          수정내용
+  ===========      ========    =================================================
+  2011.10.06		이기하     	 	보안 취약점 점검사항 반영 $->#변경
+-->
+<sqlMap namespace="SystemCntc">
+
+    <typeAlias  alias="egovMap"             type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="SystemCntc"          type="egovframework.com.ssi.syi.sim.service.SystemCntc"/>
+    <typeAlias  alias="SystemCntcVO"        type="egovframework.com.ssi.syi.sim.service.SystemCntcVO"/>
+
+    <select id="SystemCntcDAO.selectSystemCntcList" parameterClass="SystemCntcVO" resultClass="egovMap">
+        <![CDATA[
+            SELECT  *
+              FROM  (
+            SELECT ROWNUM RNUM, ALL_LIST.*
+              FROM  (
+        ]]>
+        /* 구현 Sql */
+        <![CDATA[
+            SELECT  CNTC_ID
+                 ,  CNTC_NM
+                 ,  CNTC_TY
+                 ,  PROVD_INSTT_ID
+                 ,  PROVD_SYS_ID
+                 ,  PROVD_SVC_ID
+                 ,  REQUST_INSTT_ID
+                 ,  REQUST_SYS_ID
+                 ,  CONFM_AT
+                 ,  USE_AT
+                 ,  VALID_BGNDE
+                 ,  VALID_ENDDE
+              FROM  COMTNSYSTEMCNTC
+             WHERE  1 = 1
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+        <![CDATA[
+                    CNTC_NM LIKE '%' || #searchKeyword# || '%'
+        ]]>
+        </isEqual>
+        /* 구현 Sql */
+        <![CDATA[
+                    ) ALL_LIST
+                    )
+             WHERE  RNUM  > #firstIndex#
+               AND  RNUM <= #firstIndex# + #recordCountPerPage#
+        ]]>
+    </select>
+
+    <select id="SystemCntcDAO.selectSystemCntcListTotCnt" parameterClass="SystemCntcVO" resultClass="int">
+        <![CDATA[
+            SELECT  COUNT(*) totcnt
+              FROM  COMTNSYSTEMCNTC
+             WHERE  1 = 1
+        ]]>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+        <![CDATA[
+                    CNTC_NM LIKE '%' || #searchKeyword# || '%'
+        ]]>
+        </isEqual>
+    </select>
+
+    <select id="SystemCntcDAO.selectSystemCntcDetail" parameterClass="SystemCntc" resultClass="SystemCntc">
+        <![CDATA[
+            SELECT  CNTC_ID          cntcId
+                 ,  CNTC_NM          cntcNm
+                 ,  CNTC_TY	         cntcType
+                 ,  PROVD_INSTT_ID   provdInsttId
+                 ,  PROVD_SYS_ID     provdSysId
+                 ,  PROVD_SVC_ID     provdSvcId
+                 ,  REQUST_INSTT_ID  requstInsttId
+                 ,  REQUST_SYS_ID    requstSysId
+                 ,  CONFM_AT         confmAt
+                 ,  USE_AT           useAt
+                 ,  VALID_BGNDE   validBeginDe
+                 ,  VALID_ENDDE     validEndDe
+              FROM  COMTNSYSTEMCNTC
+             WHERE  CNTC_ID = #cntcId#
+        ]]>
+    </select>
+
+    <insert id="SystemCntcDAO.insertSystemCntc">
+        <![CDATA[
+            INSERT
+              INTO  COMTNSYSTEMCNTC
+                 (  CNTC_ID
+                 ,  CNTC_NM
+                 ,  CNTC_TY
+                 ,  PROVD_INSTT_ID
+                 ,  PROVD_SYS_ID
+                 ,  PROVD_SVC_ID
+                 ,  REQUST_INSTT_ID
+                 ,  REQUST_SYS_ID
+                 ,  CONFM_AT
+                 ,  USE_AT
+                 ,  VALID_BGNDE
+                 ,  VALID_ENDDE
+                 ,  FRST_REGISTER_ID
+                 ,  FRST_REGIST_PNTTM
+                 ,  LAST_UPDUSR_ID
+                 ,  LAST_UPDT_PNTTM
+                 )
+            VALUES
+                 (  #cntcId#
+                 ,  #cntcNm#
+                 ,  #cntcType#
+                 ,  #provdInsttId#
+                 ,  #provdSysId#
+                 ,  #provdSvcId#
+                 ,  #requstInsttId#
+                 ,  #requstSysId#
+                 ,  #confmAt#
+                 ,  #useAt#
+                 ,  #validBeginDe#
+                 ,  #validEndDe#
+                 ,  #frstRegisterId#
+                 ,  sysdate
+                 ,  #frstRegisterId#
+                 ,  sysdate
+                 )
+        ]]>
+    </insert>
+
+    <update id="SystemCntcDAO.updateSystemCntc">
+        <![CDATA[
+            UPDATE  COMTNSYSTEMCNTC
+               SET  CNTC_NM           = #cntcNm#
+                 ,  CNTC_TY           = #cntcType#
+                 ,  PROVD_INSTT_ID    = #provdInsttId#
+                 ,  PROVD_SYS_ID      = #provdSysId#
+                 ,  PROVD_SVC_ID      = #provdSvcId#
+                 ,  REQUST_INSTT_ID   = #requstInsttId#
+                 ,  REQUST_SYS_ID     = #requstSysId#
+                 ,  CONFM_AT          = #confmAt#
+                 ,  USE_AT            = #useAt#
+                 ,  VALID_BGNDE    = #validBeginDe#
+                 ,  VALID_ENDDE      = #validEndDe#
+                 ,  LAST_UPDUSR_ID    = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM = sysdate
+             WHERE  CNTC_ID = #cntcId#
+        ]]>
+    </update>
+
+    <update id="SystemCntcDAO.confirmSystemCntc">
+        <![CDATA[
+            UPDATE  COMTNSYSTEMCNTC
+               SET  CONFM_AT          = #confmAt#
+                 ,  LAST_UPDUSR_ID    = #lastUpdusrId#
+                 ,  LAST_UPDT_PNTTM = sysdate
+             WHERE  CNTC_ID = #cntcId#
+        ]]>
+    </update>
+
+    <delete id="SystemCntcDAO.deleteSystemCntc">
+        <![CDATA[
+            DELETE
+              FROM  COMTNSYSTEMCNTC
+             WHERE  CNTC_ID = #cntcId#
+        ]]>
+    </delete>
+
+</sqlMap>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BatchOpert">
+
+    <typeAlias  alias="BatchOpert" type="egovframework.com.sym.bat.service.BatchOpert"/>
+    <resultMap id="batchOpertResult" class="BatchOpert">
+        <result property="batchOpertId" column="BATCH_OPERT_ID" />
+        <result property="batchOpertNm" column="BATCH_OPERT_NM" />
+        <result property="batchProgrm" column="BATCH_PROGRM" />
+        <result property="paramtr" column="PARAMTR" />
+        <result property="frstRegisterId" column="FRST_REGISTER_ID" />
+        <result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" />
+        <result property="lastUpdusrId" column="LAST_UPDUSR_ID" />
+        <result property="lastUpdusrPnttm" column="LAST_UPDT_PNTTM" />
+    </resultMap>
+
+    <select id="BatchOpertDao.selectBatchOpertList" parameterClass="BatchOpert" resultMap="batchOpertResult">
+        <![CDATA[ 
+            SELECT A.BATCH_OPERT_ID, A.BATCH_OPERT_NM, A.BATCH_PROGRM, A.PARAMTR, 
+               DATE_FORMAT(A.LAST_UPDT_PNTTM, '%Y-%m-%d %H:%i:%S') AS LAST_UPDT_PNTTM, A.LAST_UPDUSR_ID,
+               A.FRST_REGISTER_ID, DATE_FORMAT(A.FRST_REGIST_PNTTM, '%Y-%m-%d %H:%i:%S') AS FRST_REGIST_PNTTM
+            FROM COMTNBATCHOPERT A
+            WHERE USE_AT = 'Y'
+        ]]>
+            <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                <![CDATA[   A.BATCH_OPERT_NM LIKE CONCAT ('%', #searchKeyword#,'%')        ]]>
+            </isEqual>
+            <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[   A.BATCH_PROGRM LIKE CONCAT ('%', #searchKeyword#,'%')        ]]>
+            </isEqual>
+        <![CDATA[
+            ORDER BY A.BATCH_OPERT_ID ASC
+            LIMIT #recordCountPerPage# OFFSET #firstIndex#
+        ]]>             
+    </select>
+
+    <select id="BatchOpertDao.selectBatchOpertListCnt" parameterClass="BatchOpert" resultClass="java.lang.Integer" >
+        <![CDATA[
+            SELECT COUNT(*) totcnt
+            FROM COMTNBATCHOPERT A
+            WHERE USE_AT = 'Y'
+        ]]>
+            <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                <![CDATA[   A.BATCH_OPERT_NM LIKE CONCAT ('%', #searchKeyword#,'%')        ]]>
+            </isEqual>
+            <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                <![CDATA[   A.BATCH_PROGRM LIKE CONCAT ('%', #searchKeyword#,'%')        ]]>
+            </isEqual>
+    </select>
+    
+    <select id="BatchOpertDao.selectBatchOpert" parameterClass="BatchOpert" resultMap="batchOpertResult">
+        <![CDATA[
+            SELECT A.BATCH_OPERT_ID, A.BATCH_OPERT_NM, A.BATCH_PROGRM, A.PARAMTR, 
+               DATE_FORMAT(A.LAST_UPDT_PNTTM, '%Y-%m-%d %H:%i:%S') AS LAST_UPDT_PNTTM, A.LAST_UPDUSR_ID,
+               A.FRST_REGISTER_ID, DATE_FORMAT(A.FRST_REGIST_PNTTM, '%Y-%m-%d %H:%i:%S') AS FRST_REGIST_PNTTM
+            FROM COMTNBATCHOPERT A
+            WHERE A.BATCH_OPERT_ID = #batchOpertId#
+        ]]>
+    </select>
+
+    <insert id="BatchOpertDao.insertBatchOpert" parameterClass="BatchOpert">
+        <![CDATA[
+            INSERT INTO COMTNBATCHOPERT (
+                BATCH_OPERT_ID, BATCH_OPERT_NM, BATCH_PROGRM, PARAMTR, USE_AT,
+                LAST_UPDUSR_ID, LAST_UPDT_PNTTM,FRST_REGISTER_ID, FRST_REGIST_PNTTM
+                ) 
+            VALUES (
+                    #batchOpertId#,  
+                    #batchOpertNm#,
+                    #batchProgrm#,
+                    #paramtr#,
+                    'Y',
+                    #lastUpdusrId#,
+                    SYSDATE(),
+                    #frstRegisterId#,
+                    SYSDATE()
+                 ) 
+        ]]>
+    </insert>
+
+     <update id="BatchOpertDao.updateBatchOpert" parameterClass="BatchOpert">
+        <![CDATA[
+            UPDATE COMTNBATCHOPERT SET 
+                BATCH_OPERT_NM = #batchOpertNm#,
+                BATCH_PROGRM = #batchProgrm#,
+                PARAMTR = #paramtr#,
+                LAST_UPDUSR_ID = #lastUpdusrId#,
+                LAST_UPDT_PNTTM = SYSDATE()
+            WHERE BATCH_OPERT_ID = #batchOpertId# 
+        ]]>
+    </update>
+    
+    <delete id="BatchOpertDao.deleteBatchOpert" parameterClass="BatchOpert">
+        <![CDATA[
+            UPDATE COMTNBATCHOPERT SET
+                USE_AT = 'N'
+            WHERE  BATCH_OPERT_ID = #batchOpertId# 
+        ]]>
+    </delete>
+
+</sqlMap>            

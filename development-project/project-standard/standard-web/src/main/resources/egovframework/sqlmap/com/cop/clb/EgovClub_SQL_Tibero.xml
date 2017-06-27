@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+	수정일                 수정자                          수정내용
+  =========     =======    =================================================
+  2011.9.7   	정진오     	 	ClubManageDAO.deleteClubUserInf과 ClubManageDAO.deleteAllClubUserInf의 update 문에
+  							OPRTR_AT = 'N' 추가(클럽 탈퇴 시 운영자 인 경우 강제로 비운영자로 변경 필요) 
+-->
+<sqlMap namespace="ClubManageDAO">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="Club" type="egovframework.com.cop.clb.service.Club"/>
+	<typeAlias  alias="ClubVO" type="egovframework.com.cop.clb.service.ClubVO"/>
+	<typeAlias  alias="ClubUser" type="egovframework.com.cop.clb.service.ClubUser"/>
+	<typeAlias  alias="ClubUserVO" type="egovframework.com.cop.clb.service.ClubUserVO"/>
+
+	<resultMap id="ClubList" class="egovframework.com.cop.clb.service.ClubVO">
+		<result property="clbId" column="CLB_ID" columnIndex="1"/>
+		<result property="clbNm" column="CLB_NM" columnIndex="2"/>
+		<result property="cmmntyId" column="CMMNTY_ID" columnIndex="3"/>
+		<result property="cmmntyNm" column="CMMNTY_NM" columnIndex="4"/>
+		<result property="useAt" column="USE_AT" columnIndex="5"/>
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="6"/>
+		<result property="frstRegisterNm" column="FRST_REGISTER_NM" columnIndex="7"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="8"/>
+		<result property="clbIntrcn" column="CLB_INTRCN" columnIndex="9"/>
+	</resultMap>
+	
+	<resultMap id="ClubDetail" class="egovframework.com.cop.clb.service.ClubVO">
+		<result property="clbId" column="CLB_ID" columnIndex="1"/>
+		<result property="clbNm" column="CLB_NM" columnIndex="2"/>
+		<result property="clbIntrcn" column="CLB_INTRCN" columnIndex="3"/>
+		<result property="cmmntyId" column="CMMNTY_ID" columnIndex="4"/>
+		<result property="cmmntyNm" column="CMMNTY_NM" columnIndex="5"/>				
+		<result property="useAt" column="USE_AT" columnIndex="6"/>		
+		<result property="tmplatId" column="TMPLAT_ID" columnIndex="7"/>
+		<result property="tmplatNm" column="TMPLAT_NM" columnIndex="8"/>		
+		<result property="frstRegisterId" column="FRST_REGISTER_ID" columnIndex="9"/>
+		<result property="frstRegisterNm" column="FRST_REGISTER_NM" columnIndex="10"/>
+		<result property="frstRegisterPnttm" column="FRST_REGIST_PNTTM" columnIndex="11"/>
+	</resultMap>	
+
+	<resultMap id="ClubListPortletByTrget" class="egovframework.com.cop.clb.service.ClubVO">
+		<result property="clbId" column="CLB_ID" columnIndex="1"/>
+		<result property="clbNm" column="CLB_NM" columnIndex="2"/>
+		<result property="cmmntyId" column="CMMNTY_ID" columnIndex="3"/>
+		<result property="tmplatId" column="TMPLAT_ID" columnIndex="4"/>
+		<result property="clbIntrcn" column="CLB_INTRCN" columnIndex="5"/>
+	</resultMap>	
+
+	<resultMap id="ClubListPortlet" class="egovframework.com.cop.clb.service.ClubVO">
+		<result property="clbId" column="CLB_ID" columnIndex="1"/>
+		<result property="clbNm" column="CLB_NM" columnIndex="2"/>
+		<result property="cmmntyId" column="CMMNTY_ID" columnIndex="3"/>
+		<result property="tmplatId" column="TMPLAT_ID" columnIndex="4"/>
+		<result property="clbIntrcn" column="CLB_INTRCN" columnIndex="5"/>
+		<result property="cmmntyNm" column="CMMNTY_NM" columnIndex="6"/>
+	</resultMap>	
+
+	<resultMap id="ClubBBSUseList" class="egovframework.com.cop.clb.service.ClubVO">
+		<result property="bbsId" column="BBS_ID" columnIndex="1"/>
+		<result property="bbsNm" column="BBS_NM" columnIndex="2"/>
+	</resultMap>	
+
+	<resultMap id="CmmntyDetail" class="egovframework.com.cop.clb.service.ClubVO">
+	    <result property="cmmntyId" column="CMMNTY_ID" columnIndex="1"/>
+		<result property="cmmntyNm" column="CMMNTY_NM" columnIndex="2"/>				
+	</resultMap>
+
+	<resultMap id="ClubUserInf" class="egovframework.com.cop.clb.service.ClubUser">
+	    <result property="oprtrAt" column="OPRTR_AT" columnIndex="1"/>
+		<result property="useAt" column="USE_AT" columnIndex="2"/>				
+	</resultMap>
+	
+	<resultMap id="ClubOperatorInf" class="egovframework.com.cop.clb.service.ClubUser">
+	    <result property="emplyrId" column="EMPLYR_ID" columnIndex="1"/>
+		<result property="emplyrNm" column="USER_NM" columnIndex="2"/>				
+	</resultMap>
+	
+	<insert id="ClubManageDAO.insertClubInf" parameterClass="Club">
+		<![CDATA[
+			INSERT INTO COMTNCLUB
+			(CLB_ID, CMMNTY_ID, CLB_NM, CLB_INTRCN, REGIST_SE_CODE, 
+			 TMPLAT_ID, USE_AT, FRST_REGISTER_ID, FRST_REGIST_PNTTM)
+			VALUES
+			(#clbId#, #cmmntyId#, #clbNm#, #clbIntrcn#, #registSeCode#, 
+			 #tmplatId#, #useAt#, #frstRegisterId#, SYSDATE)
+		]]>
+	</insert>
+
+	<insert id="ClubManageDAO.insertClubUserInf" parameterClass="ClubUser">
+		<![CDATA[
+			INSERT INTO COMTNCLUBUSER
+			(CLB_ID, CMMNTY_ID, EMPLYR_ID, SBSCRB_DE, OPRTR_AT, 
+			 USE_AT, FRST_REGISTER_ID, FRST_REGIST_PNTTM)
+			VALUES
+			(#clbId#, #cmmntyId#, #emplyrId#, SYSDATE, #oprtrAt#, 
+			 #useAt#, #frstRegisterId#, SYSDATE)		
+		]]>
+	</insert>
+
+	<select id="ClubManageDAO.selectClubInfs" parameterClass="ClubVO" resultMap="ClubList" >
+		<![CDATA[
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				a.CLB_ID, a.CMMNTY_ID, a.CLB_NM, c.CMMNTY_NM, a.USE_AT, 
+				a.FRST_REGIST_PNTTM, a.FRST_REGISTER_ID, 
+				b.USER_NM as FRST_REGISTER_NM, a.CLB_INTRCN as CLB_INTRCN
+			FROM
+				COMTNCLUB a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNCMMNTY c
+			ON a.CMMNTY_ID = c.CMMNTY_ID
+			WHERE 1=1
+		]]>
+			<isNotEmpty property="useAt">
+				AND a.USE_AT = #useAt#
+			</isNotEmpty>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	a.CLB_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCnd" compareValue="1">
+				<![CDATA[	c.CMMNTY_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+		<![CDATA[			
+			ORDER BY a.FRST_REGIST_PNTTM DESC 
+			) TB ) WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+		]]>				
+	</select>	
+	
+	<select id="ClubManageDAO.selectClubInfsCnt" parameterClass="ClubVO" resultClass="java.lang.Integer" >
+		<![CDATA[
+			SELECT 
+				COUNT(a.CLB_ID)
+			FROM
+				COMTNCLUB a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNCMMNTY c
+			ON a.CMMNTY_ID = c.CMMNTY_ID
+			WHERE 1=1
+		]]>
+			<isNotEmpty property="useAt">
+				AND a.USE_AT = #useAt#
+			</isNotEmpty>		
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	a.CLB_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	c.CMMNTY_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+	</select>	
+
+	<select id="ClubManageDAO.selectClubInf" parameterClass="ClubVO" resultMap="ClubDetail">
+		<![CDATA[
+			SELECT 
+				a.CLB_ID, a.CMMNTY_ID, a.CLB_NM, e.CMMNTY_NM, a.CLB_INTRCN, a.USE_AT, 
+				c.TMPLAT_ID, c.TMPLAT_NM,
+				a.FRST_REGIST_PNTTM, a.FRST_REGISTER_ID, 
+				b.USER_NM as FRST_REGISTER_NM, a.FRST_REGIST_PNTTM
+			FROM
+				COMTNCLUB a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNTMPLATINFO c
+			ON a.TMPLAT_ID = c.TMPLAT_ID
+			LEFT OUTER JOIN COMTNCMMNTY e
+			ON a.CMMNTY_ID = e.CMMNTY_ID
+			WHERE
+				a.CLB_ID = #clbId#	
+		]]>	
+	</select>
+	
+	<select id="ClubManageDAO.selectClubUseBBSInfs" parameterClass="ClubVO" resultMap="ClubBBSUseList">
+		<![CDATA[
+			SELECT
+				a.BBS_ID, a.BBS_NM
+			FROM
+				COMTNBBSMASTER a
+		    LEFT OUTER JOIN COMTNBBSUSE b
+			ON a.BBS_ID = b.BBS_ID
+			WHERE b.TRGET_ID = #clbId#
+			AND b.USE_AT = 'Y'	
+		]]>
+	</select>
+
+	<update id="ClubManageDAO.updateClubInf" parameterClass="Club">
+		<![CDATA[
+			UPDATE COMTNCLUB
+			SET
+				CLB_NM = #clbNm#,
+				CLB_INTRCN = #clbIntrcn#, 
+				TMPLAT_ID = #tmplatId#,				
+				USE_AT = #useAt#, 
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CLB_ID = #clbId#		
+		]]>
+	</update>
+	
+	
+	<update id="ClubManageDAO.deleteClubInf"  parameterClass="Club">
+		<![CDATA[
+			UPDATE COMTNCLUB
+			SET
+				USE_AT = 'N'
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CLB_ID = #clbId#
+		]]>
+	</update>		
+	
+	<update id="ClubManageDAO.updateClubUserInf" parameterClass="ClubUser">
+		<![CDATA[
+			UPDATE COMTNCLUBUSER
+			SET
+				OPRTR_AT = #oprtrAt#, 
+				USE_AT = #useAt#,
+				SECSN_DE = #secsnDe#,
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CLB_ID = #clbId#	
+			AND
+				EMPLYR_ID = #emplyrId#
+		]]>
+	</update>	
+		
+	<select id="ClubManageDAO.selectClubInfsByCmmntyId" parameterClass="ClubVO" resultMap="ClubList" >
+		<![CDATA[
+			SELECT 
+				a.CLB_ID, a.CMMNTY_ID, a.CLB_NM, c.CMMNTY_NM, a.USE_AT, 
+				a.FRST_REGIST_PNTTM, a.FRST_REGISTER_ID, 
+				b.USER_NM as FRST_REGISTER_NM, a.CLB_INTRCN as CLB_INTRCN
+			FROM
+				COMTNCLUB a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNCMMNTY c
+			ON a.CMMNTY_ID = c.CMMNTY_ID
+			WHERE 
+				a.CMMNTY_ID = #cmmntyId#
+			ORDER BY a.FRST_REGIST_PNTTM DESC 
+		]]>				
+	</select>		
+	<select id="ClubManageDAO.selectClubInfsCntByCmmntyId" parameterClass="ClubVO" resultClass="java.lang.Integer" >
+		<![CDATA[
+			SELECT 
+				COUNT(a.CLB_ID)
+			FROM
+				COMTNCLUB a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNCMMNTY c
+			ON a.CMMNTY_ID = c.CMMNTY_ID
+			WHERE 
+				a.CMMNTY_ID = #cmmntyId#
+		]]>
+	</select>
+				
+	<select id="ClubManageDAO.checkExistUser" parameterClass="ClubUser" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(CLB_ID)
+				FROM
+			COMTNCLUBUSER
+				WHERE EMPLYR_ID = #emplyrId# 
+					AND CLB_ID = #clbId#
+		]]>
+	</select>				
+
+	<select id="ClubManageDAO.selectClubListPortletByTrget"  parameterClass="Club" resultMap="ClubListPortletByTrget" >
+		<![CDATA[
+			SELECT 
+				CLB_ID, CLB_NM, TMPLAT_ID, CMMNTY_ID, CLB_INTRCN
+			FROM
+				COMTNCLUB
+			WHERE USE_AT = 'Y' 
+				AND CMMNTY_ID = #cmmntyId#
+		]]>
+	</select>				
+
+	<select id="ClubManageDAO.selectClubListPortlet"  parameterClass="Club" resultMap="ClubListPortlet" >
+		<![CDATA[
+			SELECT 
+				a.CLB_ID, a.CLB_NM, a.TMPLAT_ID, a.CMMNTY_ID, 
+				a.CLB_INTRCN, b.CMMNTY_NM
+			FROM
+				COMTNCLUB a, COMTNCMMNTY b
+			WHERE a.USE_AT = 'Y' 
+				AND a.CMMNTY_ID = b.CMMNTY_ID
+		]]>
+	</select>	
+
+	<select id="ClubManageDAO.selectClubTmplat" parameterClass="ClubVO"  resultClass="java.lang.String" >
+		<![CDATA[
+			SELECT 
+				a.TMPLAT_COURS 
+			FROM
+				COMTNTMPLATINFO a, COMTNCLUB b
+			WHERE 
+				a. TMPLAT_ID = b.TMPLAT_ID
+			AND
+				b.CLB_ID = #clbId#
+		]]>	
+	</select>				
+			
+
+	<select id="ClubManageDAO.selectClubInfsByTrgetId" parameterClass="ClubVO" resultMap="ClubList" >
+		<![CDATA[
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				a.CLB_ID, a.CMMNTY_ID, a.CLB_NM, c.CMMNTY_NM, a.USE_AT, 
+				a.FRST_REGIST_PNTTM, a.FRST_REGISTER_ID, 
+				b.USER_NM as FRST_REGISTER_NM, a.CLB_INTRCN as CLB_INTRCN
+			FROM
+				COMTNCLUB a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNCMMNTY c
+			ON a.CMMNTY_ID = c.CMMNTY_ID
+			WHERE 
+				a.CMMNTY_ID = #trgetId#
+		]]>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	a.CLB_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+		<![CDATA[			
+			ORDER BY a.FRST_REGIST_PNTTM DESC 
+			) TB ) WHERE rn BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
+		]]>				
+	</select>	
+	
+	<select id="ClubManageDAO.selectClubInfsCntByTrgetId" parameterClass="ClubVO" resultClass="java.lang.Integer" >
+		<![CDATA[
+			SELECT 
+				COUNT(a.CLB_ID)
+			FROM
+				COMTNCLUB a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.FRST_REGISTER_ID = b.ESNTL_ID
+			LEFT OUTER JOIN COMTNCMMNTY c
+			ON a.CMMNTY_ID = c.CMMNTY_ID
+			WHERE 
+				a.CMMNTY_ID = #trgetId#
+		]]>
+			<isEqual prepend="AND" property="searchCnd" compareValue="0">
+				<![CDATA[	a.CLB_NM LIKE '%' || #searchWrd# || '%' 		]]>
+			</isEqual>
+	</select>	
+			
+	<select id="ClubManageDAO.selectCmmntyInf" parameterClass="ClubVO"  resultMap="CmmntyDetail" >
+		<![CDATA[
+			SELECT 
+				CMMNTY_ID, CMMNTY_NM
+			FROM
+				COMTNCMMNTY
+			WHERE 
+				CMMNTY_ID = #trgetId#
+		]]>	
+	</select>				
+
+	<update id="ClubManageDAO.deleteClubUserInf" parameterClass="ClubUser">
+		<![CDATA[
+			UPDATE COMTNCLUBUSER
+			SET
+				USE_AT = 'N',
+				OPRTR_AT = 'N', 
+				SECSN_DE = #secsnDe#,
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CLB_ID = #clbId#		
+			AND
+				EMPLYR_ID = #emplyrId#
+		]]>
+	</update>
+
+	<update id="ClubManageDAO.deleteAllClubUserInf" parameterClass="ClubUser">
+		<![CDATA[
+			UPDATE COMTNCLUBUSER
+			SET
+				USE_AT = 'N',
+				OPRTR_AT = 'N', 
+				SECSN_DE = #secsnDe#,
+				LAST_UPDUSR_ID = #lastUpdusrId#,
+				LAST_UPDT_PNTTM = SYSDATE
+			WHERE
+				CLB_ID = #clbId#		
+			AND USE_AT = 'Y'
+		]]>
+	</update>
+
+	<select id="ClubManageDAO.selectSingleClubUserInf" parameterClass="ClubUser"  resultMap="ClubUserInf" >
+		<![CDATA[			
+			SELECT OPRTR_AT, USE_AT FROM
+			COMTNCLUBUSER
+			WHERE EMPLYR_ID = #emplyrId# 
+				AND CLB_ID =  #clbId#
+		]]>
+	</select>
+	
+	<select id="ClubManageDAO.selectClubOperatorInf" parameterClass="ClubVO"  resultMap="ClubOperatorInf" >
+		<![CDATA[			
+			SELECT a.EMPLYR_ID, b.USER_NM as USER_NM 
+			FROM COMTNCLUBUSER a
+			LEFT OUTER JOIN COMVNUSERMASTER b
+			ON a.EMPLYR_ID = b.ESNTL_ID
+			WHERE a.CLB_ID =  #clbId#
+				AND a.USE_AT = 'Y' AND a.OPRTR_AT = 'Y'
+			ORDER BY a.FRST_REGIST_PNTTM ASC
+		]]>
+	</select>	
+</sqlMap>
+
