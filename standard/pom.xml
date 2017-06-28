@@ -12,7 +12,7 @@
 	<version>${project.version}</version>
 	<packaging>pom</packaging>
 
-	<name>The standard defines the development</name>
+	<name>jsTree Service Framework - RivalWar</name>
 	<description>대한민국 IT 의 표준을 정의합니다.</description>
 	<url>http://www.313.co.kr</url>
 
@@ -27,27 +27,6 @@
 		<maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
 		<build.time>${maven.build.timestamp}</build.time>
 	</properties>
-
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<build.profile.id>dev</build.profile.id>
-			</properties>
-		</profile>
-		<profile>
-			<id>operation</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<build.profile.id>operation</build.profile.id>
-			</properties>
-		</profile>
-	</profiles>
 
 	<!-- 모듈 셋팅 -->
 	<modules>
