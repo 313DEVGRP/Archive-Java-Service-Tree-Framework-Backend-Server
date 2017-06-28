@@ -1,66 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-	<Appenders>
-		<Console name="console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d %5p [%c] %m%n" />
-		</Console>
-	</Appenders>
-	<Loggers>
-		<Logger name="java.sql" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<Logger name="egovframework" level="DEBUG" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<!-- log SQL with timing information, post execution -->
-		<Logger name="jdbc.sqltiming" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<logger name="java.sql.Connection" level="DEBUG" additivity="false">
-			<appender-ref ref="console" />
-		</logger>
-		<logger name="java.sql.Statement" level="DEBUG" additivity="false">
-			<appender-ref ref="console" />
-		</logger>
-		<logger name="java.sql.PreparedStatement" level="DEBUG" additivity="false">
-			<appender-ref ref="console" />
-		</logger>
-		<logger name="java.sql.ResultSet" level="DEBUG" additivity="false">
-			<appender-ref ref="console" />
-		</logger>
-
-		<Logger name="org.springframework" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-
-		<Logger name="org.directwebremoting" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<Logger name="org.directwebremoting.log.startup" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<Logger name="org.directwebremoting.log.accessLog" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<Logger name="org.directwebremoting.log.scripts" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<Logger name="org.directwebremoting.log.session" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-
-		<Logger name="org.hibernate" level="INFO" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<Logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-		<Logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
-			<AppenderRef ref="console" />
-		</Logger>
-
-		<Root level="ERROR">
-			<AppenderRef ref="console" />
-		</Root>
-	</Loggers>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %5p [%c] %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="java.sql" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="egovframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+		  <!-- log SQL with timing information, post execution -->
+	    <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+	    <Logger name="org.springframework" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+        <Root level="ERROR">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
 </Configuration>
