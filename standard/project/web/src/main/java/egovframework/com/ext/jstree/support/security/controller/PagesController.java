@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class PagesController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Login Page");
@@ -28,7 +28,7 @@ public class PagesController {
         return model;
     }
 
-    @RequestMapping(value = {"/userpage"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/userpage"}, method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView userPage() {
 
         ModelAndView model = new ModelAndView();
@@ -38,7 +38,7 @@ public class PagesController {
         return model;
     }
 
-    @RequestMapping(value = {"/accessdenied"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/accessdenied"}, method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView accessDeniedPage() {
         ModelAndView model = new ModelAndView();
         model.addObject("message", "Either username or password is incorrect.");

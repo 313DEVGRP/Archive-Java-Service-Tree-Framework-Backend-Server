@@ -1,5 +1,11 @@
-<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -625,7 +631,7 @@ body{
 
 			<div class="login-form">
 		
-				<form class="login_form" name='loginForm' action="<c:url value='../j_spring_security_check' />" method='POST'>
+				<form:form class="login_form" name='loginForm' action="<c:url value='../j_spring_security_check' />" method='POST'>
 					<h1>Login Into Your Account</h1>
 					<ul>
 						<li>
@@ -644,19 +650,19 @@ body{
 						<a href="#">forgot password?</a>
 					</div>	
 					<div class="clear"></div>	
-				</form>
-				<c:url value="../services/signup" var="signupurl" />`
+				</form:form>
+				<c:url value="../services/signup" var="signupurl" />
 			<div class="account">
 				<h2><a href="${signupurl}">Don't have an account? Sign Up!</a></h2>
 				<div class="span">
-					<form name='facebookSocialloginForm'
-            		  action="<c:url value='../auth/facebook?scope=email,user_about_me,user_birthday' />" method='POST'>
-							<img src="../images/facebook.png" alt="">
+					<c:url value="../auth/facebook?scope=email,user_about_me,user_birthday&${_csrf.parameterName}=${_csrf.token}" var="facebookUrl" />
+					<form:form name='facebookSocialloginForm' action="${facebookUrl}" method='POST'>
+						<img src="../images/facebook.png" alt="">
 							<button type="submit">
 								<i>Sign In with Facebook</i>
 							</button>	
 							<div class="clear"></div>
-					</form>		
+					</form:form>
 				</div>	
 				<div class="span1">
 					<form name='TwitterSocialloginForm'
@@ -669,17 +675,17 @@ body{
 					</form>
 				</div>
 				<div class="span2">
-					<form name='LinkedInSocialloginForm'
+					<form:form name='LinkedInSocialloginForm'
             		  action="<c:url value='../auth/linkedin' />" method='POST'>
 						<img src="../images/linkedin.png" alt="">
 						<button type="submit">
 							<i>Sign In with Linkedin</i>
 						</button>	
 						<div class="clear"></div>
-					</form>
+					</form:form>
 				</div>
 				<div class="span3">
-                	<form name='GoogleSocialloginForm'
+                	<form:form name='GoogleSocialloginForm'
                       action="<c:url value='../auth/google' />" method='POST'>
                 		<img src="../images/gmail2.png" alt="">
                 		<button type="submit">
@@ -687,7 +693,7 @@ body{
                 		</button>
                 		<input type="hidden" name="scope" value="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/tasks https://www-opensocial.googleusercontent.com/api/people https://www.googleapis.com/auth/plus.login" />
                 		<div class="clear"></div>
-                	</form>
+                	</form:form>
                 				</div>
 			</div>	
 			<div class="clear"></div>	
