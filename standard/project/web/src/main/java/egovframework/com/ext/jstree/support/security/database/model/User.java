@@ -17,11 +17,11 @@ import javax.persistence.Table;
  * @since 25/12/15
  */
 @Entity
-@Table(name = "TEST_DB.T_USER")
+@Table(name = "T_USER")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
-@SequenceGenerator(name = "UserSequence", sequenceName = "TEST_DB.S_USER_HIBER", allocationSize = 1)
+@SequenceGenerator(name = "UserSequence", sequenceName = "S_USER_HIBER", allocationSize = 1)
 public class User implements Serializable{
 
     @Id
@@ -45,7 +45,7 @@ public class User implements Serializable{
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
-            name = "TEST_DB.T_USER_ROLE",
+            name = "T_USER_ROLE",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID")
     )

@@ -17,11 +17,11 @@ import javax.persistence.*;
  * @since 25/12/15
  */
 @Entity
-@Table(name = "TEST_DB.T_ROLE")
+@Table(name = "T_ROLE")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
-@SequenceGenerator(name = "RoleSequence", sequenceName = "TEST_DB.S_ROLE_HIBER", allocationSize = 1)
+@SequenceGenerator(name = "RoleSequence", sequenceName = "S_ROLE_HIBER", allocationSize = 1)
 public class Role implements Serializable {
 
     @Id
