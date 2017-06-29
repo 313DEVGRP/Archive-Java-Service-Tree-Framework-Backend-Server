@@ -630,8 +630,8 @@ body{
 		<div class="wrap">
 
 			<div class="login-form">
-		
-				<form:form class="login_form" name='loginForm' action="<c:url value='../j_spring_security_check' />" method='POST'>
+				<c:url value="/j_spring_security_check" var="loginUrl" />
+				<form:form class="login_form" name='loginForm' action="${loginUrl}" method='POST'>
 					<h1>Login Into Your Account</h1>
 					<ul>
 						<li>
@@ -655,7 +655,7 @@ body{
 			<div class="account">
 				<h2><a href="${signupurl}">Don't have an account? Sign Up!</a></h2>
 				<div class="span">
-					<c:url value="../auth/facebook?scope=email,user_about_me,user_birthday&${_csrf.parameterName}=${_csrf.token}" var="facebookUrl" />
+					<c:url value="../auth/facebook?scope=email,user_about_me,user_birthday" var="facebookUrl" />
 					<form:form name='facebookSocialloginForm' action="${facebookUrl}" method='POST'>
 						<img src="../images/facebook.png" alt="">
 							<button type="submit">
