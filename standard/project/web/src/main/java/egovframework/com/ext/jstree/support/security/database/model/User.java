@@ -21,7 +21,6 @@ import javax.persistence.Table;
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
-@SequenceGenerator(name = "UserSequence", sequenceName = "S_USER_HIBER", allocationSize = 1)
 public class User implements Serializable{
 
     @Id
