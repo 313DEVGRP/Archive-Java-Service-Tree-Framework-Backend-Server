@@ -6,6 +6,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+	<!-- ************************************* egovFramework ************************************* -->
+	<context:annotation-config />
 	<context:component-scan base-package="egovframework">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
@@ -21,7 +23,46 @@
 		</property>
 	</bean>
 
-	<!-- for jsTree -->
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+		  p:paramName="lang" />
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="localeChangeInterceptor"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- For Pagination Tag -->
+	<bean id="imageRenderer" class="egovframework.com.cmm.ImagePaginationRenderer"/>
+	<bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+		<property name="rendererType">
+			<map>
+				<entry key="image" value-ref="imageRenderer"/>
+			</map>
+		</property>
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="egovframework.com.cmm.web.EgovBindingInitializer"/>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="egovframework/com/cmm/error/egovError"/>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.dao.DataAccessException">egovframework/com/cmm/error/dataAccessFailure</prop>
+				<prop key="org.springframework.transaction.TransactionException">egovframework/com/cmm/error/dataAccessFailure</prop>
+				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">egovframework/com/cmm/error/egovBizException</prop>
+				<prop key="org.springframework.web.HttpSessionRequiredException">egovframework/com/uat/uia/EgovLoginUsr</prop>
+				<prop key="egovframework.com.cmm.exception.EgovXssException">egovframework/com/cmm/error/EgovXssException</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- ************************************* jsTree ************************************* -->
 	<bean id="jsonMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="extractValueFromSingleKeyModel" value="true"/>
@@ -31,6 +72,7 @@
 		<property name="objectMapper" ref="jsonMapper" />
 	</bean>
 
+	<!-- ************************************* socialSecurity ************************************* -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
@@ -41,4 +83,5 @@
 		</property>
 	</bean>
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
 </beans>
