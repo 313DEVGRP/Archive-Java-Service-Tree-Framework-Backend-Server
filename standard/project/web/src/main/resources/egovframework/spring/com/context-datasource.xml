@@ -7,6 +7,7 @@
 	 						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
     <!-- DataSource -->
+    <alias name="dataSource" alias="egov.dataSource"/>
     <!-- data source, sessionfactory, hiberate template & transaction manager -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}"></property>

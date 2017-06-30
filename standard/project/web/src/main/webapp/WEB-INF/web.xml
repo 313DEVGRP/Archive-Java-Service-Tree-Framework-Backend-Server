@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
-    <display-name>standard-web</display-name>
+    <display-name>web</display-name>
 
     <welcome-file-list>
         <welcome-file>index.do</welcome-file>
@@ -73,7 +73,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:/egovframework/spring/com/context-*.xml</param-value>
+        <param-value>classpath:/egovframework/spring/com/**/context-*.xml</param-value>
     </context-param>
 
     <!-- Enable Spring Security -->

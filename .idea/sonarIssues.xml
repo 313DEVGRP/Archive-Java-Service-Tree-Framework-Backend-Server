@@ -998,6 +998,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/web.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/header/rivalWar/headerController.js">
           <value>
             <set />
