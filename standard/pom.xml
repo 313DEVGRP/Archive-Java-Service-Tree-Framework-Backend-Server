@@ -116,7 +116,7 @@
 	<repositories>
 		<repository>
 			<id>central</id>
-			<url>http://maven.egovframe.kr:8080/maven/</url>
+			<url>http://www.egovframe.go.kr/maven</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -160,7 +160,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
-			<url>http://maven.egovframe.kr:8080/maven/</url>
+			<url>http://www.egovframe.go.kr/maven</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
