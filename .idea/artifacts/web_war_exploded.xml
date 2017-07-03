@@ -10,7 +10,7 @@
           <element id="archive" name="support-1.6.2.pom">
             <element id="module-output" name="support" />
           </element>
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis:2.3.5" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.8" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.5" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.idgnr:3.6.0" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.ptl.mvc:3.6.0" />
