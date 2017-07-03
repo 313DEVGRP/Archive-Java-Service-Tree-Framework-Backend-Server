@@ -10,8 +10,9 @@
           <element id="archive" name="support-1.6.2.pom">
             <element id="module-output" name="support" />
           </element>
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.8" />
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.5" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.1.1" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.1.1" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.idgnr:3.6.0" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.ptl.mvc:3.6.0" />
           <element id="library" level="project" name="Maven: egovframework.rte:spring-modules-validation:0.9" />
@@ -92,7 +93,6 @@
           <element id="library" level="project" name="Maven: org.twitter4j:twitter4j-core:4.0.2" />
           <element id="library" level="project" name="Maven: net.sourceforge.ajaxtags:ajaxtags-resources:1.5.7" />
           <element id="library" level="project" name="Maven: net.sourceforge.ajaxtags:ajaxtags:1.5.7" />
-          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.4" />
           <element id="library" level="project" name="Maven: com.ckeditor:ckeditor-java-core:3.5.3" />
           <element id="library" level="project" name="Maven: org.apache.xmlgraphics:batik-ext:1.7" />
           <element id="library" level="project" name="Maven: org.directwebremoting:dwr:3.0.1-RELEASE" />

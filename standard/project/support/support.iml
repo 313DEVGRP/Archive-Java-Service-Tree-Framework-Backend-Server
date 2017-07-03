@@ -8,8 +8,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.2.8" level="project" />
-    <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.5" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="Maven: egovframework.rte:egovframework.rte.fdl.idgnr:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: egovframework.rte:egovframework.rte.ptl.mvc:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: egovframework.rte:spring-modules-validation:0.9" level="project" />
@@ -90,7 +91,6 @@
     <orderEntry type="library" name="Maven: org.twitter4j:twitter4j-core:4.0.2" level="project" />
     <orderEntry type="library" name="Maven: net.sourceforge.ajaxtags:ajaxtags-resources:1.5.7" level="project" />
     <orderEntry type="library" name="Maven: net.sourceforge.ajaxtags:ajaxtags:1.5.7" level="project" />
-    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
     <orderEntry type="library" name="Maven: com.ckeditor:ckeditor-java-core:3.5.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-ext:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.directwebremoting:dwr:3.0.1-RELEASE" level="project" />
