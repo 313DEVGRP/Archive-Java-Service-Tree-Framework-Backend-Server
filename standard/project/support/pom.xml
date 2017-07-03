@@ -37,6 +37,11 @@
 			<version>${egovframework.rte.version}</version> <exclusions> <exclusion> <artifactId>mybatis</artifactId> <groupId>org.mybatis</groupId> </exclusion> </exclusions> </dependency> <dependency> 
 			<groupId>org.mybatis</groupId> <artifactId>mybatis</artifactId> <version>3.1.1</version> </dependency> -->
 		<dependency>
+			<groupId>org.apache.ibatis</groupId>
+			<artifactId>ibatis-sqlmap</artifactId>
+			<version>2.3.4.726</version>
+		</dependency>
+		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.1.1</version>
