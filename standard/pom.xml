@@ -115,16 +115,6 @@
 	<!-- repository Server Setting -->
 	<repositories>
 		<repository>
-			<id>central</id>
-			<url>http://www.egovframe.go.kr/maven</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>StandardProject</id>
 			<releases>
 				<enabled>true</enabled>
@@ -158,16 +148,6 @@
 	</repositories>
 
 	<pluginRepositories>
-		<pluginRepository>
-			<id>central</id>
-			<url>http://www.egovframe.go.kr/maven</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
 		<pluginRepository>
 			<id>StandardProject</id>
 			<releases>
