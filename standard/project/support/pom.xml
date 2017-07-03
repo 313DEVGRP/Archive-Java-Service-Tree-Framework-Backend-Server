@@ -37,6 +37,12 @@
 			<version>${egovframework.rte.version}</version> <exclusions> <exclusion> <artifactId>mybatis</artifactId> <groupId>org.mybatis</groupId> </exclusion> </exclusions> </dependency> <dependency> 
 			<groupId>org.mybatis</groupId> <artifactId>mybatis</artifactId> <version>3.1.1</version> </dependency> -->
 		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>2.3.5</version>
+		</dependency>
+
+		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.idgnr</artifactId>
 			<version>${egovframework.rte.version}</version>
