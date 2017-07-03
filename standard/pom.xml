@@ -115,16 +115,6 @@
 	<!-- repository Server Setting -->
 	<repositories>
 		<repository>
-			<id>central</id>
-			<url>http://maven.egovframe.kr:8080/maven/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>StandardProject</id>
 			<releases>
 				<enabled>true</enabled>
@@ -158,16 +148,6 @@
 	</repositories>
 
 	<pluginRepositories>
-		<pluginRepository>
-			<id>central</id>
-			<url>http://maven.egovframe.kr:8080/maven/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
 		<pluginRepository>
 			<id>StandardProject</id>
 			<releases>
@@ -227,7 +207,6 @@
 				<version>1.0-beta-5-PATCHED-v1</version>
 			</extension>
 		</extensions>
-
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -246,15 +225,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-collections4</artifactId>
-				<version>4.1</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	<reporting>
 		<outputDirectory>${basedir}/target/site</outputDirectory>
 		<plugins>
