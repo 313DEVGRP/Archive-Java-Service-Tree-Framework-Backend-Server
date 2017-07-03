@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.security</artifactId>
-			<version>3.5.4</version>
+			<version>${egovframework.rte.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>
@@ -69,6 +69,31 @@
 		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.bat.core</artifactId>
+			<version>${egovframework.rte.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.cmmn</artifactId>
+			<version>${egovframework.rte.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.filehandling</artifactId>
+			<version>${egovframework.rte.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.logging</artifactId>
+			<version>${egovframework.rte.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.string</artifactId>
+			<version>${egovframework.rte.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.psl.dataaccess</artifactId>
 			<version>${egovframework.rte.version}</version>
 		</dependency>
 		<!-- 실행환경 라이브러리 끝 -->
