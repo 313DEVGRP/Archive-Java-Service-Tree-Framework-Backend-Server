@@ -96,6 +96,11 @@
 			<artifactId>egovframework.rte.psl.dataaccess</artifactId>
 			<version>${egovframework.rte.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springmodules</groupId>
+			<artifactId>spring-modules-validation</artifactId>
+			<version>0.9</version>
+		</dependency>
 		<!-- 실행환경 라이브러리 끝 -->
 
 		<!-- Google 시작. -->
