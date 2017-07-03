@@ -41,6 +41,11 @@
 			<artifactId>mybatis</artifactId>
 			<version>2.3.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.5</version>
+		</dependency>
 
 		<dependency>
 			<groupId>egovframework.rte</groupId>

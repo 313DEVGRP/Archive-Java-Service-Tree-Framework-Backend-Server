@@ -9,6 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:2.3.5" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.5" level="project" />
     <orderEntry type="library" name="Maven: egovframework.rte:egovframework.rte.fdl.idgnr:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: egovframework.rte:egovframework.rte.ptl.mvc:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: egovframework.rte:spring-modules-validation:0.9" level="project" />
@@ -48,7 +49,6 @@
     <orderEntry type="library" name="Maven: egovframework.rte:egovframework.rte.fdl.string:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: egovframework.rte:egovframework.rte.psl.dataaccess:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ibatis:ibatis-sqlmap:2.3.4.726" level="project" />
-    <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: commons-collections4:commons-collections4:4.1" level="project" />
     <orderEntry type="library" name="Maven: org.springmodules:spring-modules-validation:0.9" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.log4jdbc:log4jdbc:1.2" level="project" />
