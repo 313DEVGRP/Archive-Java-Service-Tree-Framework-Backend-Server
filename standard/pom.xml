@@ -233,7 +233,8 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.1</version>
+					<version>3.5.1</version>
+
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -241,10 +242,19 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.5.1</version>
 			</plugin>
 		</plugins>
 	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>4.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<reporting>
 		<outputDirectory>${basedir}/target/site</outputDirectory>
 		<plugins>
