@@ -25,11 +25,6 @@
     <dependencies>
         <!-- 실행환경 라이브러리 -->
         <dependency>
-            <groupId>org.apache.ibatis</groupId>
-            <artifactId>ibatis-sqlmap</artifactId>
-            <version>2.3.4.726</version>
-        </dependency>
-        <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.2.8</version>
@@ -99,6 +94,11 @@
             <groupId>egovframework.rte</groupId>
             <artifactId>egovframework.rte.psl.dataaccess</artifactId>
             <version>${egovframework.rte.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.xml</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.springmodules</groupId>
