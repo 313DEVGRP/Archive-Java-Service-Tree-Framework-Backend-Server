@@ -3,286 +3,288 @@
 	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
 	on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the 
 	License. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<!-- 기본적인 pom Setting -->
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>development</groupId>
-	<artifactId>standard</artifactId>
-	<version>${project.version}</version>
-	<packaging>pom</packaging>
+    <!-- 기본적인 pom Setting -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>development</groupId>
+    <artifactId>standard</artifactId>
+    <version>${project.version}</version>
+    <packaging>pom</packaging>
 
-	<name>jsTree Service Framework - RivalWar</name>
-	<description>대한민국 IT 의 표준을 정의합니다.</description>
-	<url>http://www.313.co.kr</url>
+    <name>jsTree Service Framework - RivalWar</name>
+    <description>대한민국 IT 의 표준을 정의합니다. 최초의 서비스 프레임워크를 공개합니다. by 313 DEV GRP</description>
+    <url>http://www.313.co.kr</url>
 
-	<organization>
-		<name>313 DEV GRP</name>
-		<url>http://www.313.co.kr</url>
-	</organization>
+    <organization>
+        <name>313 DEV GRP</name>
+        <url>http://www.313.co.kr</url>
+    </organization>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.version>1.6.2</project.version>
-		<maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
-		<build.time>${maven.build.timestamp}</build.time>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.version>1.6.2</project.version>
+        <maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
+        <build.time>${maven.build.timestamp}</build.time>
+    </properties>
 
-	<!-- 모듈 셋팅 -->
-	<modules>
-		<module>project</module>
-	</modules>
+    <!-- 모듈 셋팅 -->
+    <modules>
+        <module>project</module>
+    </modules>
 
-	<!-- 개발자 정보 -->
-	<developers>
-		<developer>
-			<name>Lee Dong Min</name>
-			<id>313</id>
-			<email>313@313.co.kr</email>
-			<organization>313 Developer Group</organization>
-			<roles>
-				<role>Project Manager</role>
-				<role>Java Developer</role>
-				<role>Flex Developer</role>
-				<role>System Admin</role>
-				<role>DataBase Admin</role>
-			</roles>
-		</developer>
-	</developers>
+    <!-- 개발자 정보 -->
+    <developers>
+        <developer>
+            <name>Lee Dong Min</name>
+            <id>313</id>
+            <email>313@313.co.kr</email>
+            <organization>313 Developer Group</organization>
+            <roles>
+                <role>Project Manager</role>
+                <role>Java Developer</role>
+                <role>Flex Developer</role>
+                <role>System Admin</role>
+                <role>DataBase Admin</role>
+            </roles>
+        </developer>
+    </developers>
 
-	<issueManagement>
-		<system>Jira</system>
-		<url>http://www.313.co.kr/jira/browse/SP</url>
-	</issueManagement>
-	<ciManagement>
-		<system>Bamboo</system>
-		<url>http://www.313.co.kr/bamboo</url>
-	</ciManagement>
-	<scm>
-		<connection>scm:git:https://github.com/jstree/jsTree-Service-Framework-Backend-App/tree/master/development-project</connection>
-		<url>scm:git:https://github.com/jstree</url>
-		<developerConnection>scm:git:https://github.com/jstree</developerConnection>
-	</scm>
+    <issueManagement>
+        <system>Jira</system>
+        <url>http://www.313.co.kr/jira/browse/SP</url>
+    </issueManagement>
+    <ciManagement>
+        <system>Bamboo</system>
+        <url>http://www.313.co.kr/bamboo</url>
+    </ciManagement>
+    <scm>
+        <connection>
+            scm:git:https://github.com/jstree/jsTree-Service-Framework-Backend-App/tree/master/development-project
+        </connection>
+        <url>scm:git:https://github.com/jstree</url>
+        <developerConnection>scm:git:https://github.com/jstree</developerConnection>
+    </scm>
 
-	<!-- 프로젝트 메일링 리스트 -->
-	<mailingLists>
-		<mailingList>
-			<name>LeeDongMin</name>
-			<subscribe>http://www.313.co.kr</subscribe>
-			<unsubscribe>http://www.313.co.kr</unsubscribe>
-			<post>313@313.co.kr</post>
-			<archive>http://www.313.co.kr</archive>
-		</mailingList>
-	</mailingLists>
+    <!-- 프로젝트 메일링 리스트 -->
+    <mailingLists>
+        <mailingList>
+            <name>LeeDongMin</name>
+            <subscribe>http://www.313.co.kr</subscribe>
+            <unsubscribe>http://www.313.co.kr</unsubscribe>
+            <post>313@313.co.kr</post>
+            <archive>http://www.313.co.kr</archive>
+        </mailingList>
+    </mailingLists>
 
-	<!-- 라이센스 정보 -->
-	<licenses>
-		<license>
-			<name>Apache License Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-		<license>
-			<name>The New BSD License</name>
-			<url>http://www.opensource.org/licenses/bsd-license.html</url>
-		</license>
-		<license>
-			<name>The Academic Free License, v. 2.1</name>
-			<url>http://opensource-definition.org/licenses/afl-2.1.html</url>
-		</license>
-	</licenses>
+    <!-- 라이센스 정보 -->
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+        <license>
+            <name>The New BSD License</name>
+            <url>http://www.opensource.org/licenses/bsd-license.html</url>
+        </license>
+        <license>
+            <name>The Academic Free License, v. 2.1</name>
+            <url>http://opensource-definition.org/licenses/afl-2.1.html</url>
+        </license>
+    </licenses>
 
-	<profiles>
-		<profile>
-			<id>operation</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<build.profile.id>operation</build.profile.id>
-			</properties>
-		</profile>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<build.profile.id>dev</build.profile.id>
-			</properties>
-		</profile>
-	</profiles>
+    <profiles>
+        <profile>
+            <id>operation</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <build.profile.id>operation</build.profile.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <build.profile.id>dev</build.profile.id>
+            </properties>
+        </profile>
+    </profiles>
 
-	<!-- repository Server Setting -->
-	<repositories>
-		<repository>
-			<id>StandardProject</id>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>http://www.313.co.kr/nexus/content/groups/public</url>
-		</repository>
-		<repository>
-			<id>StandardProject-Snapshot</id>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
-		</repository>
-		<repository>
-			<id>atlassian</id>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<url>https://m2proxy.atlassian.com/repository/public</url>
-		</repository>
-	</repositories>
+    <!-- repository Server Setting -->
+    <repositories>
+        <repository>
+            <id>StandardProject</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>http://www.313.co.kr/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>StandardProject-Snapshot</id>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
+        </repository>
+        <repository>
+            <id>atlassian</id>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <url>https://m2proxy.atlassian.com/repository/public</url>
+        </repository>
+    </repositories>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>StandardProject</id>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>http://www.313.co.kr/nexus/content/groups/public</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>StandardProject-Snapshot</id>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>atlassian</id>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<url>https://m2proxy.atlassian.com/repository/public</url>
-		</pluginRepository>
-	</pluginRepositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>StandardProject</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>http://www.313.co.kr/nexus/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>StandardProject-Snapshot</id>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>atlassian</id>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <url>https://m2proxy.atlassian.com/repository/public</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 
-	<distributionManagement>
-		<repository>
-			<id>StandardProject</id>
-			<url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
-		</repository>
-		<snapshotRepository>
-			<id>StandardProject-Snapshot</id>
-			<url>http://www.313.co.kr/nexus/content/repositories/StandardProject-SnapShots</url>
-		</snapshotRepository>
-		<site>
-			<id>StandardProject-Site-Public</id>
-			<url>ftp://www.313.co.kr</url>
-		</site>
-	</distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>StandardProject</id>
+            <url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
+        </repository>
+        <snapshotRepository>
+            <id>StandardProject-Snapshot</id>
+            <url>http://www.313.co.kr/nexus/content/repositories/StandardProject-SnapShots</url>
+        </snapshotRepository>
+        <site>
+            <id>StandardProject-Site-Public</id>
+            <url>ftp://www.313.co.kr</url>
+        </site>
+    </distributionManagement>
 
-	<!-- 공용으로 쓰이는 빌드 이므로 아래에 추가함. 각종 하위 프로젝트를 업데이트 하기 위함임 -->
-	<build>
-		<extensions>
-			<extension>
-				<groupId>org.mod4j.patched</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>1.0-beta-5-PATCHED-v1</version>
-			</extension>
-		</extensions>
+    <!-- 공용으로 쓰이는 빌드 이므로 아래에 추가함. 각종 하위 프로젝트를 업데이트 하기 위함임 -->
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.mod4j.patched</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>1.0-beta-5-PATCHED-v1</version>
+            </extension>
+        </extensions>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.5.1</version>
-
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.5.1</version>
-			</plugin>
-		</plugins>
-	</build>
-	<reporting>
-		<outputDirectory>${basedir}/target/site</outputDirectory>
-		<plugins>
-			<!-- Generating Java Source in HTML -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-					<outputEncoding>${project.build.sourceEncoding}</outputEncoding>
-				</configuration>
-				<reportSets>
-					<reportSet>
-						<id>aggregate</id>
-						<inherited>false</inherited>
-						<reports>
-							<report>aggregate</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.19.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.12</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>3.0.4</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.8.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jdepend-maven-plugin</artifactId>
-				<version>2.0-beta-2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>dashboard-maven-plugin</artifactId>
-				<version>1.0.0-beta-1</version>
-			</plugin>
-		</plugins>
-	</reporting>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.5.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.5.1</version>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <outputDirectory>${basedir}/target/site</outputDirectory>
+        <plugins>
+            <!-- Generating Java Source in HTML -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <inherited>false</inherited>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.19.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.12</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.8.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+                <version>2.0-beta-2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>dashboard-maven-plugin</artifactId>
+                <version>1.0.0-beta-1</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

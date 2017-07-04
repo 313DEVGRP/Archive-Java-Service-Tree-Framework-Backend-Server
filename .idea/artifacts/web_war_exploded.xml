@@ -104,7 +104,6 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.7" />
           <element id="library" level="project" name="Maven: joda-time:joda-time:2.4" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.7" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.31" />
           <element id="library" level="project" name="Maven: com.oracle:ojdbc6:11.2.0.2" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi:3.7" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi-scratchpad:3.7" />
