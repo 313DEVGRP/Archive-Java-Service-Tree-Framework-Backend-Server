@@ -11,7 +11,7 @@
             <element id="module-output" name="support" />
           </element>
           <element id="library" level="project" name="Maven: org.apache.ibatis:ibatis-sqlmap:2.3.4.726" />
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.2" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.8" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.0" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.idgnr:3.6.0" />
