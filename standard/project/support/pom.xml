@@ -24,15 +24,21 @@
 
     <dependencies>
         <!-- 실행환경 라이브러리 -->
+        <!-- iBatis -->
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-sqlmap</artifactId>
+            <version>2.3.4.726</version>
+        </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.2.8</version>
+            <version>3.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.5</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
