@@ -97,7 +97,7 @@
                 <configuration>
                     <charset>UTF-8</charset>
                     <uriEncoding>UTF-8</uriEncoding>
-                    <url>http://ubuntu.313.co.kr:58080/manager</url>
+                    <url>http://ubuntu.313.co.kr:58080/manager/text</url>
                     <server>StandardProject-Snapshot</server>
                     <path>/</path>
                     <protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
