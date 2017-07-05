@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%
  /**
   * @Class Name : EgovBBSMasterRegist.jsp
@@ -16,7 +17,6 @@
   *  
   */
 %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -100,7 +100,7 @@ function fn_egov_regist_bbs(form){
 			<th><label for="bbsNm">${title} <span class="pilsu">*</span></label></th>
 			<td class="left">
 			    <form:input path="bbsNm" title="${title} ${inputTxt}" size="70" maxlength="70" />
-   				<div><form:errors path="bbsNm" cssClass="error" /></div>     
+   				<div><form:errors path="bbsNm" cssClass="error" /></div>
 			</td>
 		</tr>
 		<!-- 게시판 소개내용 -->
@@ -108,8 +108,8 @@ function fn_egov_regist_bbs(form){
 		<tr>
 			<th><label for="bbsIntrcn">${title } <span class="pilsu">*</span></label></th>
 			<td class="nopd">
-				<form:textarea path="bbsIntrcn" title="${title} ${inputTxt}" cols="300" rows="20" />   
-				<div><form:errors path="bbsIntrcn" cssClass="error" /></div>  
+				<form:textarea path="bbsIntrcn" title="${title} ${inputTxt}" cols="300" rows="20" />
+				<div><form:errors path="bbsIntrcn" cssClass="error" /></div>
 			</td>
 		</tr>
 		
@@ -122,7 +122,7 @@ function fn_egov_regist_bbs(form){
 					<form:option value="" label="--선택하세요--" />
 					<form:options items="${bbsTyCode}" itemValue="code" itemLabel="codeNm" />
 				</form:select>
-				<div><form:errors path="bbsTyCode" cssClass="error" /></div>       
+				<div><form:errors path="bbsTyCode" cssClass="error" /></div>
 			</td>
 		</tr>
 		
@@ -136,7 +136,7 @@ function fn_egov_regist_bbs(form){
 					<form:option value="Y"  label="예" />
 	  		   		<form:option value='N'>아니오</form:option>
 				</form:select>
-				<div><form:errors path="replyPosblAt" cssClass="error" /></div>       
+				<div><form:errors path="replyPosblAt" cssClass="error" /></div>
 			</td>
 		</tr>
 		
@@ -150,7 +150,7 @@ function fn_egov_regist_bbs(form){
 					<form:option value="Y"  label="예" />
 	  		   		<form:option value='N'>아니오</form:option>
 				</form:select>
-				<div><form:errors path="fileAtchPosblAt" cssClass="error" /></div>       
+				<div><form:errors path="fileAtchPosblAt" cssClass="error" /></div>
 			</td>
 		</tr>
 		
@@ -165,7 +165,7 @@ function fn_egov_regist_bbs(form){
 	  		   		<form:option value='2'>2</form:option>
 	  		   		<form:option value='3'>3</form:option>
 				</form:select>
-				<div><form:errors path="atchPosblFileNumber" cssClass="error" /></div>       
+				<div><form:errors path="atchPosblFileNumber" cssClass="error" /></div>
 			</td>
 		</tr>
 		
@@ -179,7 +179,7 @@ function fn_egov_regist_bbs(form){
 					<form:option value="Y"  label="예" />
 	  		   		<form:option value='N'>아니오</form:option>
 				</form:select>
-				<div><form:errors path="useAt" cssClass="error" /></div>       
+				<div><form:errors path="useAt" cssClass="error" /></div>
 			</td>
 		</tr>
 		

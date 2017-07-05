@@ -1003,6 +1003,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cmm/EgovUnitMain.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cmm/EgovUnitTop.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovBBSMasterRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/login.jsp">
           <value>
             <set />
