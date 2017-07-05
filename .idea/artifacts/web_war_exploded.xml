@@ -45,9 +45,6 @@
           <element id="library" level="project" name="Maven: org.apache.commons:commons-vfs2:2.0" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.logging:3.6.0" />
-          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.5" />
-          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.5" />
-          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.5" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.18" />
           <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.7.18" />
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.string:3.6.0" />
@@ -56,6 +53,10 @@
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.xml:3.1.0" />
           <element id="library" level="project" name="Maven: org.jdom:jdom2:2.0.5" />
           <element id="library" level="project" name="Maven: org.springmodules:spring-modules-validation:0.9" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.0" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.7" />
           <element id="library" level="project" name="Maven: com.googlecode.log4jdbc:log4jdbc:1.2" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.6.2" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:15.0" />
@@ -156,7 +157,6 @@
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:1.11.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:1.13.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.10" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.9.RELEASE" />
