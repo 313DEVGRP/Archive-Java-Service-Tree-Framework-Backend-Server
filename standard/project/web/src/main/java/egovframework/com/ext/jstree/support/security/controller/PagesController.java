@@ -24,7 +24,7 @@ public class PagesController {
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Login Page");
-        model.setViewName("login");
+        model.setViewName("egovframework/com/ext/jstree/support/security/login");
         return model;
     }
 
@@ -34,7 +34,7 @@ public class PagesController {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring security social login Hello World");
         model.addObject("user", getUser());
-        model.setViewName("user");
+        model.setViewName("egovframework/com/ext/jstree/support/security/user");
         return model;
     }
 
@@ -42,7 +42,7 @@ public class PagesController {
     public ModelAndView accessDeniedPage() {
         ModelAndView model = new ModelAndView();
         model.addObject("message", "Either username or password is incorrect.");
-        model.setViewName("accessdenied");
+        model.setViewName("egovframework/com/ext/jstree/support/security/accessdenied");
         return model;
     }
 

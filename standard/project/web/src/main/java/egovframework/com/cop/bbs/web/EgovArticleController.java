@@ -236,20 +236,20 @@ public class EgovArticleController {
      */
     @RequestMapping("/cop/bbs/insertArticleView.do")
     public String insertArticleView(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		//Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 	
 		BoardMasterVO bdMstr = new BoardMasterVO();
 		BoardVO board = new BoardVO();
 	
-		if (isAuthenticated) {
+		//if (isAuthenticated) {
 	
 		    BoardMasterVO vo = new BoardMasterVO();
 		    vo.setBbsId(boardVO.getBbsId());
-		    vo.setUniqId(user.getUniqId());
+		    //vo.setUniqId(user.getUniqId());
 	
 		    bdMstr = egovBBSMasterService.selectBBSMasterInf(vo);
-		}
+		//}
 	
 		//----------------------------
 		// 기본 BBS template 지정 

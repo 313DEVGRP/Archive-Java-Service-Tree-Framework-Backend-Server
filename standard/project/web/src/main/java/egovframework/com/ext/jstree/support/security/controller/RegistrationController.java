@@ -29,7 +29,7 @@ public class RegistrationController {
     public ModelAndView signup(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "User Registration Form");
-        model.setViewName("registration");
+        model.setViewName("egovframework/com/ext/jstree/support/security/registration");
         return model;
     }
 
