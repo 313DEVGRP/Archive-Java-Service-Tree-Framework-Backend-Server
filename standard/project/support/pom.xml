@@ -119,13 +119,18 @@
             <artifactId>log4j-core</artifactId>
             <version>2.0</version>
         </dependency>
-
         <!-- Log4j2 SLF4J Bridge -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.10</version>
+        </dependency>
+
         <!-- Google 시작. -->
         <dependency>
             <groupId>com.googlecode.log4jdbc</groupId>
