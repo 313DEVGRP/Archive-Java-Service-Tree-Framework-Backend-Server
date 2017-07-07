@@ -117,7 +117,7 @@ public class EgovBBSMasterController {
 	
 		    return "egovframework/com/cop/bbs/EgovBBSMasterRegist";
 		}
-		
+
 		//if (isAuthenticated) {
 		    //boardMaster.setFrstRegisterId(user.getUniqId());
 //		    boardMaster.setUseAt("Y");
