@@ -127,12 +127,13 @@ public class EgovArticleController {
      */
     @RequestMapping("/cop/bbs/selectArticleList.do")
     public String selectArticleList(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	
 		BoardMasterVO vo = new BoardMasterVO();
 		
 		vo.setBbsId(boardVO.getBbsId());
-		vo.setUniqId(user.getUniqId());
+		//vo.setUniqId(user.getUniqId());
+		vo.setUniqId("313");
 		
 		BoardMasterVO master = egovBBSMasterService.selectBBSMasterInf(vo);
 		
@@ -171,9 +172,9 @@ public class EgovArticleController {
 		}
 		////-----------------------------
 	
-		if(user != null) {
-	    	model.addAttribute("sessionUniqId", user.getUniqId());
-	    }
+		//if(user != null) {
+	    //	model.addAttribute("sessionUniqId", user.getUniqId());
+	    //}
 		
 		model.addAttribute("resultList", map.get("resultList"));
 		model.addAttribute("resultCnt", map.get("resultCnt"));

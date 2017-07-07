@@ -998,6 +998,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/spring/com/idgn/context-idgn-bbs.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/config/oracle/sql-map-config-oracle-cop-bbs.xml">
           <value>
             <set />
@@ -1019,6 +1024,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cmm/EgovUnitTop.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovBBSMasterList.jsp">
           <value>
             <set />
           </value>

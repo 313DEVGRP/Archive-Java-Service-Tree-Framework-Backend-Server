@@ -147,23 +147,23 @@
           <element id="library" level="project" name="Maven: org.apache.struts:struts2-spring-plugin:2.3.32" />
           <element id="library" level="project" name="Maven: org.apache.struts:struts2-dojo-plugin:2.3.32" />
           <element id="library" level="project" name="Maven: org.apache.struts:struts2-json-plugin:2.3.32" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.1.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:1.11.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:1.13.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.10" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:3.2.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.1.9.RELEASE" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:3.2.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:3.2.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:3.2.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:3.2.9.RELEASE" />
