@@ -18,6 +18,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
@@ -179,7 +180,7 @@ function fn_egov_select_commentList(pageNo) {
 	<div class="btn">
 		<c:if test="${result.ntcrId != 'anonymous'}">
 		<!-- 익명글 수정/삭제 불가  -->
-		<form name="articleForm" action="<c:url value='/cop/bbs/updateArticleView.do'/>" method="post" style="float:left;">
+		<form:form name="articleForm" action="<c:url value='/cop/bbs/updateArticleView.do'/>" method="post" style="float:left;">
 			<input type="submit" class="s_submit" value="<spring:message code="button.update" />" title="<spring:message code="title.update" /> <spring:message code="input.button" />" />
 			<input type="hidden" name="parnts" value="<c:out value='${result.parnts}'/>" >
 			<input type="hidden" name="sortOrdr" value="<c:out value='${result.sortOrdr}'/>" >
@@ -187,29 +188,29 @@ function fn_egov_select_commentList(pageNo) {
 			<input type="hidden" name="nttSj" value="<c:out value='${result.nttSj}'/>" >
 			<input name="nttId" type="hidden" value="<c:out value="${result.nttId}" />">
 			<input name="bbsId" type="hidden" value="<c:out value="${boardMasterVO.bbsId}" />">
-		</form>
-		<form name="formDelete" action="<c:url value='/cop/bbs/deleteArticle.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
+		</form:form>
+		<form:form name="formDelete" action="<c:url value='/cop/bbs/deleteArticle.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
 			<input type="submit" class="s_submit" value="<spring:message code="button.delete" />" title="<spring:message code="button.delete" /> <spring:message code="input.button" />" onclick="fn_egov_delete_article(this.form); return false;">
 			<input name="nttId" type="hidden" value="<c:out value="${result.nttId}" />">
 			<input name="bbsId" type="hidden" value="<c:out value="${boardMasterVO.bbsId}" />">
-		</form>
+		</form:form>
 		</c:if>
 		<c:if test="${boardMasterVO.replyPosblAt == 'Y' }">
-		<form name="formReply" action="<c:url value='/cop/bbs/replyArticleView.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
+		<form:form name="formReply" action="<c:url value='/cop/bbs/replyArticleView.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
 			<input type="submit" class="s_submit" value="<spring:message code="button.reply" />">
 			<input name="nttId" type="hidden" value="<c:out value="${result.nttId}" />">
 			<input name="bbsId" type="hidden" value="<c:out value="${boardMasterVO.bbsId}" />">
-		</form>
+		</form:form>
 		</c:if>
-		<form name="formList" action="<c:url value='/cop/bbs/selectArticleList.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
+		<form:form name="formList" action="<c:url value='/cop/bbs/selectArticleList.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
 			<input type="submit" class="s_submit" value="<spring:message code="button.list" />">
 			<input name="bbsId" type="hidden" value="<c:out value="${boardMasterVO.bbsId}" />">
-		</form>
-		<form name="formScrap" action="<c:url value='/cop/scp/insertArticleScrapView.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
+		</form:form>
+		<form:form name="formScrap" action="<c:url value='/cop/scp/insertArticleScrapView.do'/>" method="post" style="float:left; margin:0 0 0 3px;">
 			<input type="submit" class="s_submit" value="<spring:message code="button.scrap" />">
 			<input name="nttId" type="hidden" value="<c:out value="${result.nttId}" />">
 			<input name="bbsId" type="hidden" value="<c:out value="${boardMasterVO.bbsId}" />">
-		</form>
+		</form:form>
 		
 	</div><div style="clear:both;"></div>
 	

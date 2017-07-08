@@ -28,6 +28,9 @@
         <logger name="java.sql.ResultSet" level="DEBUG" additivity="false">
             <appender-ref ref="console" />
         </logger>
+        <Logger name="org.mybatis" level="DEBUG" additivity="false">
+            <appender-ref ref="console" />
+        </Logger>
 
 	    <Logger name="org.springframework" level="INFO" additivity="false">
 	        <AppenderRef ref="console" />
@@ -59,7 +62,7 @@
             <AppenderRef ref="console" />
         </Logger>
 
-        <Root level="INFO">
+        <Root level="DEBUG">
             <AppenderRef ref="console" />
         </Root>
     </Loggers>

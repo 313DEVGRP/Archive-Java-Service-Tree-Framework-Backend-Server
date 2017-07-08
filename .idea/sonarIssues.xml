@@ -903,6 +903,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java">
           <value>
             <set />
@@ -1003,6 +1008,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/cop/bbs/EgovBBSMaster_SQL_oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/config/oracle/sql-map-config-oracle-cop-bbs.xml">
           <value>
             <set />
@@ -1028,7 +1038,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleDetail.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovBBSMasterDetail.jsp">
           <value>
             <set />
           </value>
@@ -1039,6 +1064,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovBBSMasterRegist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovGuestArticleList.jsp">
           <value>
             <set />
           </value>

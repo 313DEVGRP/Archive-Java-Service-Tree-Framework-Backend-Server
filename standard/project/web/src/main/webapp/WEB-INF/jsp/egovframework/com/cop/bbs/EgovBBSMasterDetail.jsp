@@ -15,11 +15,12 @@
   *  
   */
 %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%pageContext.setAttribute("crlf", "\r\n"); %>
 <c:set var="pageTitle"><spring:message code="comCopBbs.boardMasterVO.title"/></c:set>
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 
-<form name="BBSMasterForm" action="<c:url value='/cop/bbs/updateBBSMasterView.do'/>" method="post">
+<form:form name="BBSMasterForm" action="<c:url value='/cop/bbs/updateBBSMasterView.do'/>" method="post">
 <div class="wTableFrm">
 	<!-- 타이틀 -->
 	<h2>${pageTitle} <spring:message code="title.detail" /></h2>
@@ -101,7 +102,7 @@
 		<tr>
 			<th class="vtop"><spring:message code="comCopBbs.boardMasterVO.detail.bbsAdres" /></th>
 			<td colspan="5" class="cnt">
-			<a href="<c:url value='/cop/bbs/selectArticleList.do?bbsId=${result.bbsId}' />">/cop/bbs/selectArticleList.do?bbsId=${result.bbsId }</a>	
+			<a href="<c:url value='/cop/bbs/selectArticleList.do?bbsId=${result.bbsId}&_csrf_token=${_csrf.token}&_csrf_headerName=${_csrf.headerName}' />">/cop/bbs/selectArticleList.do?bbsId=${result.bbsId }</a>
 			</td>
 		</tr>
 		</c:if>
@@ -119,7 +120,7 @@
 <input name="cmmntyId" type="hidden" value="<c:out value="${result.cmmntyId}" />">
 <input name="bbsId" type="hidden" value="<c:out value="${result.bbsId}" />">
 <input name="cmd" type="hidden" value="">
-</form>
+</form:form>
 
 </body>
 </html>
