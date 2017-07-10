@@ -223,8 +223,8 @@ public class EgovBBSMasterController {
     public String updateBBSMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @ModelAttribute("boardMaster") BoardMaster boardMaster,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
 
-        LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
-        Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+        //LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+        //Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
         beanValidator.validate(boardMaster, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -240,10 +240,11 @@ public class EgovBBSMasterController {
             return "egovframework/com/cop/bbs/EgovBBSMasterUpdt";
         }
 
-        if (isAuthenticated) {
-            boardMaster.setLastUpdusrId(user.getUniqId());
+        //if (isAuthenticated) {
+            //boardMaster.setLastUpdusrId(user.getUniqId());
+            boardMaster.setLastUpdusrId("313");
             egovBBSMasterService.updateBBSMasterInf(boardMaster);
-        }
+        //}
 
         return "forward:/cop/bbs/selectBBSMasterInfs.do";
     }

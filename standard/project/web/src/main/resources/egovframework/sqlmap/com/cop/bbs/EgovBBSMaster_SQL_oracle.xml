@@ -80,10 +80,10 @@
 			<if test="cmmntyId != null">
 				AND a.CMMNTY_ID = #{cmmntyId}
 			</if>
-			<if test="searchCnd == 0">AND
+			<if test="searchCnd == 0 and searchWrd != null">AND
 					a.BBS_NM LIKE '%' || #{searchWrd} || '%' 		
 			</if>
-			<if test="searchCnd == 1">AND
+			<if test="searchCnd == 1 and searchWrd != null">AND
 					b.CODE_NM LIKE '%' || #{searchWrd} || '%'		
 			</if>	
 					
