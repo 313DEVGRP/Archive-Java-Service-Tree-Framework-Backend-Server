@@ -1148,6 +1148,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/js/egovframework/com/ext/jstree/jquery-1.12.4/.gitignore">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/layout/header/rivalWar/headerController.js">
           <value>
             <set />
