@@ -1053,6 +1053,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleReply.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleUpdt.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovBBSMasterDetail.jsp">
           <value>
             <set />
