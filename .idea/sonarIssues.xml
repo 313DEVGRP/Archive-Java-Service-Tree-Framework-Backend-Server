@@ -1133,6 +1133,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/ext/jstree/springHibernateVersion.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/login.jsp">
           <value>
             <set />

@@ -14,7 +14,8 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 	</context:component-scan>
 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="1">
 		<property name="prefix">
 			<value>/WEB-INF/jsp/</value>
 		</property>
