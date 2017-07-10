@@ -903,6 +903,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/com/ext/jstree/jsTreeSpringHibernate_DDL_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java">
           <value>
             <set />
@@ -914,6 +919,46 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/web/EgovBBSMasterController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/controller/JsTreeHibernateController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/service/JsTreeHibernateServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/util/AopCoreService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/util/AopCoreService.java.bak">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/validation/custom/constraints/Contained.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/validation/custom/validator/ContainedValidator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/vo/JsTreeHibernateDTO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_AlterNodeType.java">
           <value>
             <set />
           </value>
@@ -969,6 +1014,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/egovProps/globals.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/message/com/cmm/message-common_ko.properties">
           <value>
             <set />
           </value>
