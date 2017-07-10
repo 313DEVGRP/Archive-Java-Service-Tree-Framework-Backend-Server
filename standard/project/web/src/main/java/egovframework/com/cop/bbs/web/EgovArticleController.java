@@ -196,16 +196,19 @@ public class EgovArticleController {
      */
     @RequestMapping("/cop/bbs/selectArticleDetail.do")
     public String selectArticleDetail(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	
-		boardVO.setLastUpdusrId(user.getUniqId());
+		//boardVO.setLastUpdusrId(user.getUniqId());
+		boardVO.setLastUpdusrId("313");
 		BoardVO vo = egovArticleService.selectArticleDetail(boardVO);
 	
 		model.addAttribute("result", vo);
-		model.addAttribute("sessionUniqId", user.getUniqId());
+		//model.addAttribute("sessionUniqId", user.getUniqId());
+		model.addAttribute("sessionUniqId", "313");
 		
 		//비밀글은 작성자만 볼수 있음 
-		if(!EgovStringUtil.isEmpty(vo.getSecretAt()) && vo.getSecretAt().equals("Y") && !user.getUniqId().equals(vo.getFrstRegisterId()))
+		//if(!EgovStringUtil.isEmpty(vo.getSecretAt()) && vo.getSecretAt().equals("Y") && !user.getUniqId().equals(vo.getFrstRegisterId()))
+		if(!EgovStringUtil.isEmpty(vo.getSecretAt()) && vo.getSecretAt().equals("Y") && !"313".equals(vo.getFrstRegisterId()))
 			return"forward:/cop/bbs/selectArticleList.do";
 		
 		//----------------------------
@@ -214,7 +217,8 @@ public class EgovArticleController {
 		BoardMasterVO master = new BoardMasterVO();
 		
 		master.setBbsId(boardVO.getBbsId());
-		master.setUniqId(user.getUniqId());
+		//master.setUniqId(user.getUniqId());
+		master.setUniqId("313");
 		
 		BoardMasterVO masterVo = egovBBSMasterService.selectBBSMasterInf(master);
 	
@@ -280,8 +284,8 @@ public class EgovArticleController {
 	    @ModelAttribute("bdMstr") BoardMaster bdMstr, @ModelAttribute("board") BoardVO board, BindingResult bindingResult, 
 	    ModelMap model) throws Exception {
 
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		//Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 	
 		beanValidator.validate(board, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -289,7 +293,8 @@ public class EgovArticleController {
 		    BoardMasterVO master = new BoardMasterVO();
 		    
 		    master.setBbsId(boardVO.getBbsId());
-		    master.setUniqId(user.getUniqId());
+		    //master.setUniqId(user.getUniqId());
+			master.setUniqId("313");
 	
 		    master = egovBBSMasterService.selectBBSMasterInf(master);
 		    
@@ -307,7 +312,7 @@ public class EgovArticleController {
 		    return "egovframework/com/cop/bbs/EgovArticleRegist";
 		}
 	
-		if (isAuthenticated) {
+		//if (isAuthenticated) {
 		    List<FileVO> result = null;
 		    String atchFileId = "";
 		    
@@ -317,7 +322,8 @@ public class EgovArticleController {
 			atchFileId = fileMngService.insertFileInfs(result);
 		    }
 		    board.setAtchFileId(atchFileId);
-		    board.setFrstRegisterId(user.getUniqId());
+		    //board.setFrstRegisterId(user.getUniqId());
+			board.setFrstRegisterId("313");
 		    board.setBbsId(board.getBbsId());
 		    
 		    
@@ -328,15 +334,16 @@ public class EgovArticleController {
 		    	board.setFrstRegisterId("anonymous");
 		    	
 		    } else {
-		    	board.setNtcrId(user.getId()); //게시물 통계 집계를 위해 등록자 ID 저장
-		    	board.setNtcrNm(user.getName()); //게시물 통계 집계를 위해 등록자 Name 저장
-		    	
+		    	//board.setNtcrId(user.getId()); //게시물 통계 집계를 위해 등록자 ID 저장
+		    	//board.setNtcrNm(user.getName()); //게시물 통계 집계를 위해 등록자 Name 저장
+				board.setNtcrId("313"); //게시물 통계 집계를 위해 등록자 ID 저장
+				board.setNtcrNm("313"); //게시물 통계 집계를 위해 등록자 Name 저장
 		    }
 		    
 		    board.setNttCn(unscript(board.getNttCn()));	// XSS 방지
 		    
 		    egovArticleService.insertArticle(board);
-		}
+		//}
 	
 		//status.setComplete();
 		return "forward:/cop/bbs/selectArticleList.do";
@@ -467,10 +474,11 @@ public class EgovArticleController {
     public String updateArticleView(@ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("board") BoardVO vo, ModelMap model)
 	    throws Exception {
 
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-	
-		boardVO.setFrstRegisterId(user.getUniqId());
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		//Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+
+		//boardVO.setFrstRegisterId(user.getUniqId());
+		boardVO.setFrstRegisterId("313");
 		
 		BoardMasterVO bmvo = new BoardMasterVO();
 		BoardVO bdvo = new BoardVO();
@@ -478,12 +486,13 @@ public class EgovArticleController {
 		vo.setBbsId(boardVO.getBbsId());
 		
 		bmvo.setBbsId(boardVO.getBbsId());
-		bmvo.setUniqId(user.getUniqId());
+		//bmvo.setUniqId(user.getUniqId());
+		bmvo.setUniqId("313");
 	
-		if (isAuthenticated) {
+		//if (isAuthenticated) {
 		    bmvo = egovBBSMasterService.selectBBSMasterInf(bmvo);
 		    bdvo = egovArticleService.selectArticleDetail(boardVO);
-		}
+		//}
 	
 		//----------------------------
 		// 기본 BBS template 지정 
@@ -518,8 +527,8 @@ public class EgovArticleController {
     public String updateBoardArticle(final MultipartHttpServletRequest multiRequest, @ModelAttribute("searchVO") BoardVO boardVO,
 	    @ModelAttribute("bdMstr") BoardMaster bdMstr, @ModelAttribute("board") Board board, BindingResult bindingResult, ModelMap model) throws Exception {
 
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		//Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 		
 		//--------------------------------------------------------------------------------------------
     	// @ XSS 대응 권한체크 체크  START
@@ -541,13 +550,15 @@ public class EgovArticleController {
 		beanValidator.validate(board, bindingResult);
 		if (bindingResult.hasErrors()) {
 	
-		    boardVO.setFrstRegisterId(user.getUniqId());
+		    //boardVO.setFrstRegisterId(user.getUniqId());
+			boardVO.setFrstRegisterId("313");
 		    
 		    BoardMasterVO bmvo = new BoardMasterVO();
 		    BoardVO bdvo = new BoardVO();
 		    
 		    bmvo.setBbsId(boardVO.getBbsId());
-		    bmvo.setUniqId(user.getUniqId());
+		    //bmvo.setUniqId(user.getUniqId());
+			bmvo.setUniqId("313");
 	
 		    bmvo = egovBBSMasterService.selectBBSMasterInf(bmvo);
 		    bdvo = egovArticleService.selectArticleDetail(boardVO);
@@ -558,7 +569,7 @@ public class EgovArticleController {
 		    return "egovframework/com/cop/bbs/EgovArticleUpdt";
 		}
 		
-		if (isAuthenticated) {
+		//if (isAuthenticated) {
 		    final Map<String, MultipartFile> files = multiRequest.getFileMap();
 		    if (!files.isEmpty()) {
 				if ("".equals(atchFileId)) {
@@ -574,7 +585,8 @@ public class EgovArticleController {
 				}
 		    }
 	
-		    board.setLastUpdusrId(user.getUniqId());
+		    //board.setLastUpdusrId(user.getUniqId());
+			board.setLastUpdusrId("313");
 		    
 		    board.setNtcrNm("");	// dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
 		    board.setPassword("");	// dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
@@ -582,7 +594,7 @@ public class EgovArticleController {
 		    board.setNttCn(unscript(board.getNttCn()));	// XSS 방지
 		    
 		    egovArticleService.updateArticle(board);
-		}
+		//}
 		
 		return "forward:/cop/bbs/selectArticleList.do";
     }
@@ -600,8 +612,8 @@ public class EgovArticleController {
     public String deleteBoardArticle(HttpServletRequest request, @ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("board") Board board,
 	    @ModelAttribute("bdMstr") BoardMaster bdMstr, ModelMap model) throws Exception {
 	
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		//Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 	
 		//--------------------------------------------------------------------------------------------
     	// @ XSS 대응 권한체크 체크  START
@@ -626,11 +638,12 @@ public class EgovArticleController {
 			return "egovframework/com/cop/bbs/EgovArticleDetail";
 		}
 		
-		if (isAuthenticated) {
-		    board.setLastUpdusrId(user.getUniqId());
+		//if (isAuthenticated) {
+		    //board.setLastUpdusrId(user.getUniqId());
+			board.setLastUpdusrId("313");
 		    
 		    egovArticleService.deleteArticle(board);
-		}
+		//}
 	
 		return "forward:/cop/bbs/selectArticleList.do";
     }

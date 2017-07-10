@@ -47,7 +47,7 @@
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 
-<form:form name="BBSMasterForm" action="/cop/bbs/updateBBSMasterView.do" method="post">
+<form:form name="BBSMasterForm" action="${pageContext.request.contextPath}/cop/bbs/updateBBSMasterView.do" method="post">
 <div class="wTableFrm">
 	<!-- 타이틀 -->
 	<h2>${pageTitle} <spring:message code="title.detail" /></h2>

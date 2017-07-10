@@ -69,7 +69,7 @@ function fn_egov_inquire_articledetail(bbsId, nttId) {
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 
-<form:form name="articleForm" action="<c:url value='/cop/bbs/selectArticleList.do'/>" method="post" onSubmit="fn_egov_search_article(); return false;">
+<form:form name="articleForm" action="${pageContext.request.contextPath}/cop/bbs/selectArticleList.do" method="post" onSubmit="fn_egov_search_article(); return false;">
 <div class="board">
 	<h1>${pageTitle} <spring:message code="title.list" /></h1>
 	<!-- 하단 버튼 -->
@@ -118,13 +118,13 @@ function fn_egov_inquire_articledetail(bbsId, nttId) {
 	<tr>
 		<td><img src="<c:url value='/images/egovframework/com/cop/bbs/icon_notice.png'/>" alt="notice"></td>
 		<td class="bold">
-			<form name="subForm" method="post" action="<c:url value='/cop/bbs/selectArticleDetail.do'/>">
+			<form:form name="subForm" method="post" action="${pageContext.request.contextPath}/cop/bbs/selectArticleDetail.do">
 			    <input name="nttId" type="hidden" value="<c:out value="${noticeInfo.nttId}"/>">
 			    <input name="bbsId" type="hidden" value="<c:out value="${noticeInfo.bbsId}"/>">
 			    <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 			    <span class="link"><input type="submit" value="<c:out value='${fn:substring(noticeInfo.nttSj, 0, 40)}'/><c:if test="${noticeInfo.commentCo != ''}">	<c:out value='[${noticeInfo.commentCo}]'/></c:if>" style="border:0px solid #e0e0e0;">
 			    </span>
-			</form>
+			</form:form>
 		</td>
 		<td><c:out value='${noticeInfo.frstRegisterNm}'/></td>
 		<td><c:out value='${noticeInfo.frstRegisterPnttm}'/></td>
@@ -140,12 +140,12 @@ function fn_egov_inquire_articledetail(bbsId, nttId) {
 		<c:when test="${resultInfo.sjBoldAt == 'Y'}">
 		<!-- 제목 Bold인 경우  -->
 		<td class="bold">
-		<form name="subForm" method="post" action="<c:url value='/cop/bbs/selectArticleDetail.do'/>">
+		<form:form name="subForm" method="post" action="${pageContext.request.contextPath}/cop/bbs/selectArticleDetail.do">
 			    <input name="nttId" type="hidden" value="<c:out value="${resultInfo.nttId}"/>">
 			    <input name="bbsId" type="hidden" value="<c:out value="${resultInfo.bbsId}"/>">
 			    <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 			    <span class="link"><c:if test="${resultInfo.replyLc!=0}"><c:forEach begin="0" end="${resultInfo.replyLc}" step="1">&nbsp;	</c:forEach><img src="<c:url value='/images/egovframework/com/cop/bbs/icon_reply.png'/>" alt="secret"></c:if><input type="submit" value="<c:out value='${fn:substring(resultInfo.nttSj, 0, 40)}'/><c:if test="${resultInfo.commentCo != ''}">	<c:out value='[${resultInfo.commentCo}]'/></c:if>" style="border:0px solid #e0e0e0;"></span>
-		</form>
+		</form:form>
 		</td>
 		</c:when>	
 		<c:when test="${resultInfo.secretAt == 'Y' && sessionUniqId != resultInfo.frstRegisterId}">
@@ -165,12 +165,12 @@ function fn_egov_inquire_articledetail(bbsId, nttId) {
 		<c:otherwise>
 		<!-- 나머지 경우 -->
 		<td class="left">
-    	<form name="subForm" method="post" action="<c:url value='/cop/bbs/selectArticleDetail.do'/>">
+    	<form:form name="subForm" method="post" action="${pageContext.request.contextPath}/cop/bbs/selectArticleDetail.do">
 			    <input name="nttId" type="hidden" value="<c:out value="${resultInfo.nttId}"/>">
 			    <input name="bbsId" type="hidden" value="<c:out value="${resultInfo.bbsId}"/>">
 			    <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 			    <span class="link"><c:if test="${resultInfo.replyLc!=0}"><c:forEach begin="0" end="${resultInfo.replyLc}" step="1">&nbsp;	</c:forEach><img src="<c:url value='/images/egovframework/com/cop/bbs/icon_reply.png'/>" alt="secret"></c:if><input type="submit" value="<c:out value='${fn:substring(resultInfo.nttSj, 0, 40)}'/><c:if test="${resultInfo.commentCo != ''}">	<c:out value='[${resultInfo.commentCo}]'/></c:if>" style="border:0px solid #e0e0e0;"></span>
-		</form>
+		</form:form>
 		</td>
 		</c:otherwise>
 	</c:choose>

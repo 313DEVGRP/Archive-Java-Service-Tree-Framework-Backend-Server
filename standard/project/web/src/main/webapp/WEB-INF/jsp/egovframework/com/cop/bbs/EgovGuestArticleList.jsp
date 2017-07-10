@@ -99,7 +99,7 @@ function fn_egov_select_guestList(pageNo) {
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 
 <!-- 방명록 리스트 출력 -->
-<form:form name="articleForm" action="<c:url value='/cop/bbs/updateGuestArticleView.do'/>" method="post">
+<form:form name="articleForm" action="${pageContext.request.contextPath}/cop/bbs/updateGuestArticleView.do" method="post">
 <div class="board">
 <h2>${pageTitle}</h2>
 <div class="reply">

@@ -68,7 +68,7 @@ function fn_egov_inquire_bbsdetail(bbsId) {
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 
-<form:form name="BBSMasterForm" action="/cop/bbs/selectBBSMasterInfs.do" method="post" onSubmit="fn_egov_search_bbssj(); return false;">
+<form:form name="BBSMasterForm" action="${pageContext.request.contextPath}/cop/bbs/selectBBSMasterInfs.do" method="post" onSubmit="fn_egov_search_bbssj(); return false;">
 <div class="board">
 	<h1>${pageTitle} <spring:message code="title.list" /></h1>
 	<!-- 하단 버튼 -->

@@ -74,16 +74,16 @@
 				(SELECT ESNTL_ID, USER_ID, USER_NM FROM COMVNUSERMASTER) d
 				ON a.FRST_REGISTER_ID = d.ESNTL_ID
 			WHERE 1=1	
-			<if test="cmmntyId == null">
+			<if test="cmmntyId == null or cmmntyId == ''">
 				AND a.CMMNTY_ID IS NULL
 			</if>	
-			<if test="cmmntyId != null">
+			<if test="cmmntyId != null and cmmntyId != ''">
 				AND a.CMMNTY_ID = #{cmmntyId}
 			</if>
-			<if test="searchCnd == 0 and searchWrd != null">AND
+			<if test="searchCnd == 0 and searchWrd != null and searchWrd != ''">AND
 					a.BBS_NM LIKE '%' || #{searchWrd} || '%' 		
 			</if>
-			<if test="searchCnd == 1 and searchWrd != null">AND
+			<if test="searchCnd == 1 and searchWrd != null and searchWrd != ''">AND
 					b.CODE_NM LIKE '%' || #{searchWrd} || '%'		
 			</if>	
 					
@@ -109,10 +109,10 @@
 			<if test="cmmntyId != null">
 				AND a.CMMNTY_ID = #{cmmntyId}
 			</if>
-			<if test="searchCnd == 0">AND
+			<if test="searchCnd == 0 and searchWrd != null">AND
 					a.BBS_NM LIKE '%' || #{searchWrd} || '%' 		
 			</if>
-			<if test="searchCnd == 1">AND
+			<if test="searchCnd == 1 and searchWrd != null">AND
 					b.CODE_NM LIKE '%' || #{searchWrd} || '%' 		
 			</if>	
 	</select>	

@@ -175,7 +175,7 @@ function fn_egov_inqire_articlelist() {
 	<noscript class="noScriptTitle">	<spring:message code="common.noScriptTitle.msg" />	</noscript>
 
 	<!-- 상단타이틀 -->
-	<form:form commandName="articleVO" action="${pageContext.request.contextPath}/cop/bbs/updateArticle.do" method="post" onSubmit="fn_egov_updt_article(document.forms[0]); return false;" enctype="multipart/form-data">
+	<form:form commandName="articleVO" action="${pageContext.request.contextPath}/cop/bbs/updateArticle.do?${_csrf.parameterName}=${_csrf.token}" method="post" onSubmit="fn_egov_updt_article(document.forms[0]); return false;" enctype="multipart/form-data">
 		<div class="wTableFrm">
 			<h2>${pageTitle} <spring:message code="title.update" /></h2>
 

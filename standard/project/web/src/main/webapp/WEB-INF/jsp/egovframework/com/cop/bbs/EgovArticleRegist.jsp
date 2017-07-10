@@ -155,10 +155,7 @@ function fn_egov_regist_article(form){
 			alert("<spring:message code="comCopBbs.articleVO.ntceDeError" />");
 			return;
 		}
-		
-		
-		
-		
+
 		if(confirm("<spring:message code="common.regist.msg" />")){	
 			form.submit();	
 		}
@@ -185,7 +182,7 @@ function makeFileAttachment(){
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 
-<form:form commandName="articleVO" action="${pageContext.request.contextPath}/cop/bbs/insertArticle.do" method="post" onSubmit="fn_egov_regist_article(document.forms[0]); return false;" enctype="multipart/form-data"> 
+<form:form commandName="articleVO" action="${pageContext.request.contextPath}/cop/bbs/insertArticle.do?${_csrf.parameterName}=${_csrf.token}" method="post" onSubmit="fn_egov_regist_article(document.forms[0]); return false;" enctype="multipart/form-data">
 <div class="wTableFrm">
 	<!-- 타이틀 -->
 	<h2>${pageTitle} <spring:message code="title.create" /></h2>
@@ -309,7 +306,6 @@ function makeFileAttachment(){
 <input type="hidden" name="atchPosblFileNumber" value="<c:out value='${boardMasterVO.atchPosblFileNumber}'/>" />
 <input type="hidden" name="atchPosblFileSize" value="<c:out value='${boardMasterVO.atchPosblFileSize}'/>" />
 <input type="hidden" name="tmplatId" value="<c:out value='${boardMasterVO.tmplatId}'/>" />
-
 
 <input name="bbsId" type="hidden" value="${boardMasterVO.bbsId}">
 <input name="cmd" type="hidden" value="<c:out value='save'/>">
