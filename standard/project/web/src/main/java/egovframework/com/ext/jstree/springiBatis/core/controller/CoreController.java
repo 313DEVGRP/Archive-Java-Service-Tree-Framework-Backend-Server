@@ -64,7 +64,7 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionStrutsVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree CSRF json", listUrl = "/com/ext/jstree/springiBatis/core/csrf.do", order = 3300, gid = 313)
+	@IncludedInfo(name = "CSRF json", listUrl = "/com/ext/jstree/springiBatis/core/csrf.do", order = 3300, gid = 313)
 	@RequestMapping("/csrf.do")
 	public String jsTreeCSRFtoJson() {
 		return "egovframework/com/ext/jstree/csrf";
@@ -75,7 +75,7 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionStrutsVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree Struts-iBatis", listUrl = "/com/ext/jstree/strutsiBatis/core/getJsTreeView.action", order = 3310, gid = 313)
+	@IncludedInfo(name = "Struts-iBatis Ver.", listUrl = "/com/ext/jstree/strutsiBatis/core/getJsTreeView.action", order = 3310, gid = 313)
 	@RequestMapping("/strutsiBatis.do")
 	public String jsTreeStrutsiBatis() {
 		return "for struts iBatis annotation instead of controller";
@@ -86,7 +86,7 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree Spring-iBatis", listUrl = "/com/ext/jstree/springiBatis/core/getJsTreeView.do", order = 3320, gid = 313)
+	@IncludedInfo(name = "Spring-iBatis Ver.", listUrl = "/com/ext/jstree/springiBatis/core/getJsTreeView.do", order = 3320, gid = 313)
 	@RequestMapping("/getJsTreeView.do")
 	public String jsTreespringiBatis() {
 		return "egovframework/com/ext/jstree/springiBatisVersion";
@@ -97,7 +97,7 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree DWR-Chat", listUrl = "/html/egovframework/com/ext/jstree/dwr/index.html", order = 3330, gid = 313)
+	@IncludedInfo(name = "DWR-Chat Ver.", listUrl = "/html/egovframework/com/ext/jstree/dwr/index.html", order = 3330, gid = 313)
 	@RequestMapping("/getDWRChat.do")
 	public String jsTreeDWRChat() {
 		return "html page not support";
