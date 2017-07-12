@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd"><!-- 
+	START SNIPPET: xworkSample -->
+<struts>
+
+	<!-- no use properties -->
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.multipart.parser" value="jakarta" />
+	<constant name="struts.multipart.saveDir" value="C:/temp" />
+	<constant name="struts.multipart.maxSize" value="100000000" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+
+	<include file="struts-default" />
+	<include file="json-default" />
+
+	<package name="DefaultPkg" extends="struts-default, json-default"
+		abstract="true">
+	</package>
+
+	<package name="www313cokrDefaultPkg" namespace="/" extends="DefaultPkg">
+
+		<default-action-ref name="index" />
+		<global-results>
+			<result name="error">/jsp/commonUtils/errors/500.jsp</result>
+		</global-results>
+
+	</package>
+
+
+	<!-- www.313.co.kr -->
+	<include file="/egovframework/struts/com/ext/jstree/actionMapping.xml" />
+	<include file="/egovframework/struts/com/ext/jstree/jstreeMonitor.xml" />
+
+</struts>

@@ -1038,7 +1038,47 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_AddNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_AlterNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_AlterNodeType.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_GetChildNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_GetNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_MoveNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_RemoveNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/dao/DB_SearchNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/monitor/dao/DB_ComprehensiveTree.java">
           <value>
             <set />
           </value>
@@ -1159,6 +1199,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/springmyBatis/jstreeMonitorManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeCoreManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeMonitorManage_SQL_Oracle.xml">
           <value>
             <set />
           </value>
