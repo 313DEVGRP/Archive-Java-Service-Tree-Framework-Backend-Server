@@ -25,4 +25,15 @@
 		</property>
 	</bean>
 
+	<!-- SqlMap setup for iBATIS Database Layer -->
+	<bean id="egov.sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations">
+			<list>
+				<value>classpath:/egovframework/sqlmap/config/${Globals.DbType}/*.xml</value>
+			</list>
+		</property>
+		<property name="dataSource" ref="egov.dataSource"/>
+		<property name="lobHandler" ref="egov.lobHandler"/>
+	</bean>
+
 </beans>

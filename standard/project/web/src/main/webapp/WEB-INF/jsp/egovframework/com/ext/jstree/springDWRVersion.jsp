@@ -301,7 +301,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 												<i class="fa fa-paste"></i>
 												paste
 											</button>
-											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('/com/ext/jstree/springmyBatis/core/analyzeNode.do');">
+											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('/com/ext/jstree/springiBatis/core/analyzeNode.do');">
 												<i class="fa fa-search"></i>
 												analyze
 											</button>
@@ -372,7 +372,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                     function jstreeDataTableReload() {
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "/com/ext/jstree/springmyBatis/core/monitor/list.do",
+                          "url": "/com/ext/jstree/springiBatis/core/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,
@@ -401,7 +401,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                     $(function() {
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "/com/ext/jstree/springmyBatis/core/monitor/list.do",
+                          "url": "/com/ext/jstree/springiBatis/core/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,
@@ -431,7 +431,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                       $.ajax({
                         async: false,
                         type: 'GET',
-                        url: "/com/ext/jstree/springmyBatis/core/csrf.do",
+                        url: "/com/ext/jstree/springiBatis/core/csrf.do",
                         success: function(r) {
                           var token = r._csrf_token;
                           var header = r._csrf_headerName;
@@ -564,7 +564,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           // All the options are almost the same as jQuery's AJAX (read the docs)
                           "ajax": {
                             // the URL to fetch the data
-                            "url": "/com/ext/jstree/springmyBatis/core/getChildNode.do",
+                            "url": "/com/ext/jstree/springiBatis/core/getChildNode.do",
                             // the `data` function is executed in the instance's scope
                             // the parameter is the node being loaded 
                             // (may be -1, 0, or undefined when loading the root nodes)
@@ -584,7 +584,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           // As this has been a common question - async search
                           // Same as above - the `ajax` config option is actually jQuery's AJAX object
                           "ajax": {
-                            "url": "/com/ext/jstree/springmyBatis/core/searchNode.do",
+                            "url": "/com/ext/jstree/springiBatis/core/searchNode.do",
                             // You get the search string as a parameter
                             "data": function(str) {
                               return {
@@ -655,7 +655,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           "initially_open": ["node_2", "node_3"]
                         }
                       }).bind("create.jstree", function(e, data) {
-                        $.post("/com/ext/jstree/springmyBatis/core/addNode.do", {
+                        $.post("/com/ext/jstree/springiBatis/core/addNode.do", {
                           "ref": data.rslt.parent.attr("id").replace("node_", "").replace("copy_", ""),
                           "c_position": data.rslt.position,
                           "c_title": data.rslt.name,
@@ -679,7 +679,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           $.ajax({
                             async: false,
                             type: 'POST',
-                            url: "/com/ext/jstree/springmyBatis/core/removeNode.do",
+                            url: "/com/ext/jstree/springiBatis/core/removeNode.do",
                             data: {
                               "c_id": this.id.replace("node_", "").replace("copy_", "")
                             },
@@ -695,7 +695,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           });
                         });
                       }).bind("rename.jstree", function(e, data) {
-                        $.post("/com/ext/jstree/springmyBatis/core/alterNode.do", {
+                        $.post("/com/ext/jstree/springiBatis/core/alterNode.do", {
                           "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
                           "c_title": data.rslt.new_name,
                           "c_type": data.rslt.obj.attr("rel")
@@ -712,7 +712,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           jstreeDataTableReload();
                         });
                       }).bind("set_type.jstree", function(e, data) {
-                        $.post("/com/ext/jstree/springmyBatis/core/alterNodeType.do", {
+                        $.post("/com/ext/jstree/springiBatis/core/alterNodeType.do", {
                           "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
                           "c_title": data.rslt.new_name,
                           "c_type": data.rslt.obj.attr("rel")
@@ -730,7 +730,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           $.ajax({
                             async: false,
                             type: 'POST',
-                            url: "/com/ext/jstree/springmyBatis/core/moveNode.do",
+                            url: "/com/ext/jstree/springiBatis/core/moveNode.do",
                             data: {
                               "c_id": $(this).attr("id").replace("node_", "").replace("copy_", ""),
                               "ref": data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_", "").replace("copy_", ""),

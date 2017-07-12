@@ -285,7 +285,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 												<i class="fa fa-paste"></i>
 												paste
 											</button>
-											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/analyzeNode.do');">
+											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/analyzeNode.do');">
 												<i class="fa fa-search"></i>
 												analyze
 											</button>
@@ -331,7 +331,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                     function jstreeDataTableReload() {
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/monitor/list.do",
+                          "url": "${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,
@@ -361,7 +361,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/monitor/list.do",
+                          "url": "${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,
@@ -386,13 +386,13 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                       });
                     });
                   </script>
-                  <customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/getChildNode.do"
-										searchNode="${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/searchNode.do"
-										addNode="${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/addNode.do"
-										removeNode="${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/removeNode.do"
-										alterNode="${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/alterNode.do"
-										alterNodeType="${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/alterNodeType.do"
-										moveNode="${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/moveNode.do"></customTags:jstree>
+                  <customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/getChildNode.do"
+										searchNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/searchNode.do"
+										addNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/addNode.do"
+										removeNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/removeNode.do"
+										alterNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/alterNode.do"
+										alterNodeType="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/alterNodeType.do"
+										moveNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/moveNode.do"></customTags:jstree>
 								</div>
 							</div>
 						</div>

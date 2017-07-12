@@ -19,7 +19,7 @@
     $.ajax({
       async: false,
       type: 'GET',
-      url: "${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/csrf.do",
+      url: "${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/csrf.do",
       success: function(r) {
         var token = r._csrf_token;
         var header = r._csrf_headerName;

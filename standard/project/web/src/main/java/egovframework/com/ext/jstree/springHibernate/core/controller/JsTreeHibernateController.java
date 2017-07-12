@@ -43,10 +43,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
      *
      * @return String jstreeSolutionSpringVersion 페이지를
      */
-    @IncludedInfo(name = "jsTree Spring-Hibernate",
-            listUrl = "/com/ext/jstree/springHibernate/core/getJsTreeView.do",
-            order = 3360,
-            gid = 313)
+    @IncludedInfo(name = "jsTree Spring-Hibernate", listUrl = "/com/ext/jstree/springHibernate/core/getJsTreeView.do", order = 3360, gid = 313)
     @RequestMapping("/getJsTreeView.do")
     public String jsTreeSpringHibernate() {
         return "egovframework/com/ext/jstree/springHibernateVersion";
