@@ -82,43 +82,35 @@
     <servlet>
         <servlet-name>dwr-invoker</servlet-name>
         <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
-
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
-
         <init-param>
             <param-name>activeReverseAjaxEnabled</param-name>
             <param-value>true</param-value>
         </init-param>
-
         <init-param>
             <param-name>initApplicationScopeCreatorsAtStartup</param-name>
             <param-value>false</param-value>
         </init-param>
-
         <init-param>
             <param-name>maxWaitAfterWrite</param-name>
             <param-value>-1</param-value>
         </init-param>
-
         <init-param>
             <param-name>jsonpEnabled</param-name>
             <param-value>false</param-value>
         </init-param>
-
         <init-param>
             <param-name>org.directwebremoting.extend.ScriptSessionManager</param-name>
             <param-value>egovframework.com.ext.jstree.springDWR.util.ScriptSessionManager</param-value>
         </init-param>
-
         <init-param>
             <param-name>allowScriptTagRemoting</param-name>
             <param-value>true</param-value>
         </init-param>
-
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
@@ -156,5 +148,16 @@
     <listener>
         <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
     </listener>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+        </jsp-property-group>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>utf-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
 
 </web-app>
