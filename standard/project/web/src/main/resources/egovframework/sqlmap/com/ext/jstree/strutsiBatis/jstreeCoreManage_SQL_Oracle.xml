@@ -217,7 +217,7 @@
 		( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE,
 		C_TYPE )
 
-		SELECT S_COMPREHENSIVETREE.NEXTVAL AS C_ID,
+		SELECT S_COMPREHENSIVETREE_STRUTS.NEXTVAL AS C_ID,
 		A.*
 		FROM
 		(
@@ -238,7 +238,7 @@
 		<selectKey resultClass="java.lang.Integer">
 			/* { jsTree - pasteMyselfFromJstree
 			SEQ} */
-			SELECT S_COMPREHENSIVETREE.CURRVAL AS SEQ
+			SELECT S_COMPREHENSIVETREE_STRUTS.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -269,11 +269,11 @@
 		/* { jsTree - addMyselfFromJstree } */
 		INSERT INTO T_COMPREHENSIVETREE_STRUTS (C_ID, C_PARENTID, C_POSITION, C_LEFT,
 		C_RIGHT, C_LEVEL)
-		VALUES (S_COMPREHENSIVETREE.NEXTVAL, #c_parentid#, #c_position#, #c_left#,
+		VALUES (S_COMPREHENSIVETREE_STRUTS.NEXTVAL, #c_parentid#, #c_position#, #c_left#,
 		#c_right#, #c_level#)
 		<selectKey resultClass="java.lang.Integer">
 			/* { jsTree - addMyselfFromJstree SEQ} */
-			SELECT S_COMPREHENSIVETREE.CURRVAL AS SEQ
+			SELECT S_COMPREHENSIVETREE_STRUTS.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
