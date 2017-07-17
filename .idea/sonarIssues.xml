@@ -1133,6 +1133,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/rivalwar/api/directChat/controller/DirectChatController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/rivalwar/api/directChat/vo/DirectChatDTO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/rivalwar/api/menu/controller/MenuController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/rivalwar/api/menu/vo/MenuDTO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/egovProps/globals.properties">
           <value>
             <set />
@@ -1309,6 +1329,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/ext/jstree/springmyBatisVersion.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/rivalWar/api/menu/admin/JsTreeView.jsp">
           <value>
             <set />
           </value>

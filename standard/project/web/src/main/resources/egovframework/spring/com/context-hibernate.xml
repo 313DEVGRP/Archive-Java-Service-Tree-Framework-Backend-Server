@@ -30,8 +30,8 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>egovframework.com.ext.jstree.springHibernate.core</value>
-				<value>egovframework.com.ext.jstree.support.security</value>
+				<value>egovframework.com.ext.jstree</value>
+				<value>egovframework.rivalwar.api</value>
 			</list>
 		</property>
 	</bean>
