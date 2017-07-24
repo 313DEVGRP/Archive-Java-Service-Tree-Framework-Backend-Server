@@ -1,16 +1,14 @@
 package egovframework.com.ext.jstree.strutsiBatis.core.dao;
 
-import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.com.cmm.service.impl.EgovComiBatisAbstractDAO;
 import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Repository;
 
 /**
  * Modification Information
@@ -59,9 +57,9 @@ public class DB_GetChildNode extends EgovComiBatisAbstractDAO implements I_DB_Ge
 			t_ComprehensiveTrees = getSqlMapClientTemplate().getSqlMapClient()
 											.queryForList(determineDBSetting, p_ComprehensiveTree);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
-
+			logger.info("getChildNode Complete");
 		}
 		return t_ComprehensiveTrees;
 	}
@@ -81,9 +79,9 @@ public class DB_GetChildNode extends EgovComiBatisAbstractDAO implements I_DB_Ge
 			t_ComprehensiveTrees = getSqlMapClientTemplate().getSqlMapClient()
 					.queryForList(determineDBSetting, p_ComprehensiveTree);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
-
+			logger.info("getChildNodeByLeftRight complete");
 		}
 		return t_ComprehensiveTrees;
 	}

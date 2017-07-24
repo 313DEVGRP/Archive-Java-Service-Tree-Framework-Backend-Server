@@ -1,13 +1,11 @@
 package egovframework.com.ext.jstree.strutsiBatis.core.dao;
 
-import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.com.cmm.service.impl.EgovComiBatisAbstractDAO;
 import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
-
-import java.sql.SQLException;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+
+import java.sql.SQLException;
 
 /**
  * Modification Information
@@ -72,7 +70,7 @@ public class DB_AlterNodeType extends EgovComiBatisAbstractDAO implements I_DB_A
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            logger.error(e);
         }
         finally
         {
@@ -82,7 +80,7 @@ public class DB_AlterNodeType extends EgovComiBatisAbstractDAO implements I_DB_A
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                logger.error(e);
             }
         }
         return returnInt;

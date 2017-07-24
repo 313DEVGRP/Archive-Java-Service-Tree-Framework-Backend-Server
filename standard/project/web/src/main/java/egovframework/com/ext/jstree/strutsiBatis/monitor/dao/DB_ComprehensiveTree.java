@@ -1,16 +1,14 @@
 package egovframework.com.ext.jstree.strutsiBatis.monitor.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import egovframework.com.cmm.service.impl.EgovComiBatisAbstractDAO;
+import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.P_JqGrid;
+import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.T_JqGridCellData;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
-import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.P_JqGrid;
-import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.T_JqGridCellData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository("DB_ComprehensiveTree")
 public class DB_ComprehensiveTree extends EgovComiBatisAbstractDAO implements
@@ -28,7 +26,7 @@ public class DB_ComprehensiveTree extends EgovComiBatisAbstractDAO implements
 		try {
 			t_JqGridCellDatas = getSqlMapClientTemplate().getSqlMapClient().queryForList("strutsMonitor.getJstreeMonitor", p_JqGrid);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		return t_JqGridCellDatas;

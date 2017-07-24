@@ -1,26 +1,22 @@
 package egovframework.com.ext.jstree.strutsiBatis.core.dao;
 
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import egovframework.com.cmm.service.impl.EgovComiBatisAbstractDAO;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Repository;
-
 import com.opensymphony.xwork2.ActionContext;
-
-import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
+import egovframework.com.cmm.service.impl.EgovComiBatisAbstractDAO;
 import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.core.service.I_S_GetChildNode;
 import egovframework.com.ext.jstree.strutsiBatis.core.service.I_S_GetNode;
 import egovframework.com.ext.jstree.strutsiBatis.core.service.Util_SwapNode;
 import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Modification Information
@@ -193,7 +189,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            logger.error(e);
         }
         finally
         {
@@ -203,7 +199,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+               logger.error(e);;
             }
         }
         return t_ComprehensiveTree;

@@ -47,9 +47,6 @@ public abstract class GenericAbstractController {
 	@ExceptionHandler(Exception.class)
 	public void defenceException(Exception ex, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
-		if (logger.isDebugEnabled()) {
-			ex.printStackTrace();
-		}
 
 		response.setHeader("Expires", "-1");
 		response.setHeader("Cache-Control", "must-revalidate, no-store, no-cache");
@@ -64,51 +61,11 @@ public abstract class GenericAbstractController {
                 out.flush();
                 out.close();
                 return;
-/*		if (StringUtils.equals(request.getHeader("customHeader"), "ajax")) {
-			response.setContentType("application/json; charset=UTF-8");
-
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("result", false);
-			map.put("status", 0);
-			// map.put("message",
-			// egovMessageSource.getMessage(ex.getMessage(),
-			// ex.getStackTrace(), "", request));
-			map.put("message", egovMessageSource.getMessage(ex.getMessage()));
-
-			Gson gson = new GsonBuilder().serializeNulls().create();
-			out.println(gson.toJson(map));
-			out.flush();
-			out.close();
-			return;
-		} else {
-			response.setContentType("text/html; charset=utf-8");
-
-			out.println("<!DOCTYPE html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head><body>");
-			out.println("<script type=\"text/javascript\" src=\"/ajaxpm/string.js\"></script>");
-			out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.js\"></script>");
-			out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.sprintf.js\"></script>");
-			out.println("<script type=\"text/javascript\" src=\"/files/js/underscore.js\"></script>");
-			out.println("<script type=\"text/javascript\">");
-
-			if (null != ex.getStackTrace()) {
-				String message = egovMessageSource.getMessage(ex.getMessage(), ex.getStackTrace(), ex.getMessage(),
-						request);
-				out.println("parent.warning(\"" + message + "\")");
-				out.println("</script></body></html>");
-			} else {
-				out.println("parent.warning(getMessage(\"" + ex.getMessage() + "\"))");
-				out.println("</script></body></html>");
-			}
-		}*/
-
 	}
 
 	@ExceptionHandler(RuntimeException.class)
 	public void defenceRuntimeException(RuntimeException ex, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
-		if (logger.isDebugEnabled()) {
-			ex.printStackTrace();
-		}
 
 		response.setHeader("Expires", "-1");
 		response.setHeader("Cache-Control", "must-revalidate, no-store, no-cache");

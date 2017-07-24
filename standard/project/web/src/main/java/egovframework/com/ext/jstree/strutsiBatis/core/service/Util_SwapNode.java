@@ -2,10 +2,10 @@ package egovframework.com.ext.jstree.strutsiBatis.core.service;
 
 import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
-
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  * Modification Information
@@ -38,6 +38,8 @@ import org.apache.commons.beanutils.BeanUtils;
  * </pre>
  * */
 public class Util_SwapNode {
+
+	static Logger logger = Logger.getLogger(Util_SwapNode.class);
 	
 	/**
 	 * bean을 복사하는 메소드
@@ -53,9 +55,9 @@ public class Util_SwapNode {
 		try {
 			BeanUtils.copyProperties(destNode, originNode);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		return destNode;
@@ -75,9 +77,9 @@ public class Util_SwapNode {
 		try {
 			BeanUtils.copyProperties(destNode, originNode);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		return destNode;
@@ -96,9 +98,9 @@ public class Util_SwapNode {
 		try {
 			BeanUtils.copyProperties(destNode, originNode);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		return destNode;

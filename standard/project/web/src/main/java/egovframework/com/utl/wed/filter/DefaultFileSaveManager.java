@@ -18,14 +18,15 @@
  */
 package egovframework.com.utl.wed.filter;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by guava on 1/20/14.
@@ -45,6 +46,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class DefaultFileSaveManager implements FileSaveManager {
 
+	static Logger logger = Logger.getLogger(DefaultFileSaveManager.class);
+
 	@Override
 	public String saveFile(FileItem fileItem, String imageBaseDir, String imageDomain) {
 		String originalFileName = FilenameUtils.getName(fileItem.getName());
@@ -59,7 +62,7 @@ public class DefaultFileSaveManager implements FileSaveManager {
 		try {
 			FileUtils.writeByteArrayToFile(fileToSave, fileItem.get());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		String savedFileName = FilenameUtils.getName(fileToSave.getAbsolutePath());
