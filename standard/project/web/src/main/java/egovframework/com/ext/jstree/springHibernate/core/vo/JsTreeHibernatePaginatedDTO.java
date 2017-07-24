@@ -1,15 +1,12 @@
 package egovframework.com.ext.jstree.springHibernate.core.vo;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import java.io.Serializable;
 
 @MappedSuperclass
 public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO implements Serializable{
