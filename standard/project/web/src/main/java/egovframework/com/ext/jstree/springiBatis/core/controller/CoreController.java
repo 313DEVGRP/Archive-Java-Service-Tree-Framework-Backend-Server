@@ -64,17 +64,6 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionStrutsVersion 페이지를
 	 */
-	@IncludedInfo(name = "CSRF json", listUrl = "/com/ext/jstree/springiBatis/core/csrf.do", order = 3300, gid = 313)
-	@RequestMapping("/csrf.do")
-	public String jsTreeCSRFtoJson() {
-		return "egovframework/com/ext/jstree/csrf";
-	}
-
-	/**
-	 * jstree Struts + iBatis 버전의 첫페이지를 요청한다.
-	 * 
-	 * @return String jstreeSolutionStrutsVersion 페이지를
-	 */
 	@IncludedInfo(name = "Struts-iBatis Ver.", listUrl = "/com/ext/jstree/strutsiBatis/core/getJsTreeView.action", order = 3310, gid = 313)
 	@RequestMapping("/strutsiBatis.do")
 	public String jsTreeStrutsiBatis() {

@@ -49,11 +49,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
         return "egovframework/com/ext/jstree/springHibernateVersion";
     }
 
-    @RequestMapping("/csrf.do")
-    public String jsTreeCSRFtoJson() {
-        return "egovframework/com/ext/jstree/csrf";
-    }
-
     /**
      * 자식노드를 요청한다.
      *
