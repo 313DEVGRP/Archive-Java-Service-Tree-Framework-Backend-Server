@@ -92,7 +92,7 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
         {
             getSqlMapClientTemplate().getSqlMapClient().startTransaction();
             getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().setAutoCommit(false);
-            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();//autoCommit의 설정 Commit
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
             int spaceOfTargetNode = 2;
             Collection<Integer> c_idsByChildNodeFromNodeById = null;
             
@@ -181,12 +181,11 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
             }
             else
             {
-                logger.debug(">>>>>>>>>>>>>>>==========================<<<<<<<<<<<<<<<<<< 이런경우가 있을까?");
                 throw new RuntimeException("need nodeByID");
             }
             getSqlMapClientTemplate().getSqlMapClient().executeBatch();
-            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();//Transaction Commit!!
-            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit();       //connection Commit!!
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
+            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit();
         }
         catch (SQLException e)
         {

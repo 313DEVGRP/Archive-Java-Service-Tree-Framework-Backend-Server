@@ -55,17 +55,13 @@ public class DB_AlterNode extends EgovComiBatisAbstractDAO implements I_DB_Alter
         {
             getSqlMapClientTemplate().getSqlMapClient().startTransaction();
             getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().setAutoCommit(false);
-            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();// autoCommit의
-                                                                            // 설정
-                                                                            // Commit
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
             
             returnInt = getSqlMapClientTemplate().getSqlMapClient().update(determineDBSetting, p_AlterNode);
             
             getSqlMapClientTemplate().getSqlMapClient().executeBatch();
-            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();// Transaction
-                                                                            // Commit!!
-            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit(); // connection
-                                                                                         // Commit!!
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
+            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit();
         }
         catch (SQLException e)
         {

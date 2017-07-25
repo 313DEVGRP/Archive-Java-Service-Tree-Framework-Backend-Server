@@ -57,9 +57,7 @@ public class DB_RemoveNode extends EgovComiBatisAbstractDAO implements I_DB_Remo
         {
             getSqlMapClientTemplate().getSqlMapClient().startTransaction();
             getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().setAutoCommit(false);
-            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();// autoCommit의
-                                                                            // 설정
-                                                                            // Commit
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
             
             getSqlMapClientTemplate().getSqlMapClient().delete("jstreeStrutsiBatis.removeNode", p_RemoveNode);
             getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.removedAfterLeftFix", p_RemoveNode);
@@ -68,10 +66,8 @@ public class DB_RemoveNode extends EgovComiBatisAbstractDAO implements I_DB_Remo
                                                                p_RemoveNode);
             
             getSqlMapClientTemplate().getSqlMapClient().executeBatch();
-            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();// Transaction
-                                                                            // Commit!!
-            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit(); // connection
-                                                                                         // Commit!!
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
+            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit();
         }
         catch (SQLException e)
         {

@@ -241,7 +241,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 				jsTreeHibernateDao.delete(deleteJsTreeHibernateDTO);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 
@@ -292,7 +291,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
 		T alterTargetNode = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
 		alterTargetNode.setC_title(jsTreeHibernateDTO.getC_title());
-		// TODO : 기타 추가되는 필드 처리는 어떻게 할 것인가?
 		jsTreeHibernateDao.update(alterTargetNode);
 		return 1;
 	}
@@ -447,7 +445,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 			long idif, long ldif, Collection<Long> c_idsByChildNodeFromNodeById, T jsTreeHibernateDTO) throws Exception {
 
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
-		// coreDao.enterMyselfFixPosition(onlyPasteMyselfFromJstree);
 		logger.debug("-----------------------enterMyselfFixPosition-----------------------");
 
 		T childEnterMyselfFixPosition = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
@@ -460,7 +457,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 	@SuppressWarnings("unchecked")
 	private <T extends JsTreeHibernateSearchDTO> void enterMyselfFixLeftRight(long idif, long ldif,
 			Collection<Long> c_idsByChildNodeFromNodeById, T jsTreeHibernateDTO) {
-		// coreDao.enterMyselfFixLeftRight(onlyPasteMyselfFromJstree);
 		logger.debug("-----------------------enterMyselfFixLeftRight-----------------------");
 		DetachedCriteria detachedEnterMyselfFixLeftRightCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO
 				.getClass());
@@ -487,10 +483,8 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
 
-		// T node = ((T) coreDao.getNode(comprehensiveTree));
 		T node = (T) jsTreeHibernateDao.getUnique(insertSeqResult);
 
-		// List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node));
 		logger.debug("-----------------------fixPositionParentIdOfCopyNodes 완료-----------------------");
 		DetachedCriteria getChildNodeByLeftRightCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
 		Criterion whereChildNodeByLeftRight = Restrictions.ge("c_left", node.getC_left());
@@ -517,7 +511,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 
 				node.setC_position(position);
 
-				// coreDao.fixCopyIF(onlyFixCopyFromJstree);
 				jsTreeHibernateDao.update(node);
 				continue;
 			}
@@ -531,7 +524,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 				logger.debug("부모아이디값 = " + parentIds.get(child.getC_left()));
 			}
 
-			// coreDao.fixCopy(child);
 			child.setFixCopyId(parentIds.get(child.getC_left()));
 			child.setC_parentid(parentIds.get(child.getC_left()));
 			jsTreeHibernateDao.update(child);
@@ -560,7 +552,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 		onlyPasteMyselfFromJstree.setIdifRight(idif
 				+ (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
 
-		// coreDao.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
 		DetachedCriteria detachedPasteMyselfFromJstreeCriteria = DetachedCriteria.forClass(nodeById
 				.getClass());
 		if (c_idsByChildNodeFromNodeById != null && c_idsByChildNodeFromNodeById.size() > 0) {
@@ -574,7 +565,6 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 				logger.debug("------pasteMyselfFromJstree------LOOP---" + perPasteMyselfFromJstree.getC_id());
 				T addTarget = newInstance(perPasteMyselfFromJstree);
 				
-				//디폴트 셋팅.
 				addTarget.setC_parentid(onlyPasteMyselfFromJstree.getRef());
 				addTarget.setC_position(perPasteMyselfFromJstree.getC_position());
 				addTarget.setC_left(perPasteMyselfFromJstree.getC_left() - onlyPasteMyselfFromJstree.getIdifLeft());

@@ -88,7 +88,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
             ip = temp[0];
             mask = temp[1];
             
-            // mask 값이 32로 입력된 경우 단일 IP로 처리
             if (StringUtils.equals(mask, "32")) {
                 type = "0";
             }
@@ -127,7 +126,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
             }
         }
         
-        // 이미 존재하는 경우 count 1 증가
         if (null != newMember && newMember.length > 0) {
             for (String string : newMember) {
                 if (oldMap.containsKey(string)) {

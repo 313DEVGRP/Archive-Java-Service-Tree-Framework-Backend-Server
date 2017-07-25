@@ -53,9 +53,6 @@ public class S_AddNode implements I_S_AddNode {
 
 	public S_AddNode() {
 
-		//i_S_GetNode = new S_GetNode();
-		//i_S_GetChildNode = new S_GetChildNode();
-		//i_DB_AddNode = new DB_AddNode();
 	}
 
 	@Override

@@ -45,39 +45,29 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	 */
 	private String c_type;
 
-	/*
-	 * Common Use Field
-	 */
-	/** 참조하고 있는 노드의 id */
 	private long ref;
 
-	/** copy 시 1의 값을 가짐. */
 	private long copy;
 
 	private long multiCounter;
 
 	private long status;
-	/** ajax 처리 결과 메시지 */
 	private String ajaxMessage;
 
 	private String childcount;
 
-	/** 검색시 Keyword */
 	private String searchStr;
 
 	private long idif;
 	private long ldif;
 
-	/** 노드가 차지하는 공간 (right - left + 1) */
 	private long spaceOfTargetNode;
 
-	/** 임의 노드의 자식 노드들의 id만을 저장하는 컬렉션 */
 	private Collection<Long> c_idsByChildNodeFromNodeById;
 
 	private long fixCopyId;
 	private long fixCopyPosition;
 
-	/** 참조 노드의 right */
 	private long rightPositionFromNodeByRef;
 
 	private JsTreeHibernateBaseDTO nodeById;
@@ -85,7 +75,7 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	private long idifLeft;
 	private long idifRight;
 
-	private long id; // moveNode
+	private long id;
 	private final HashMap<String, String> attr;
 
 	public JsTreeHibernateBaseDTO() {

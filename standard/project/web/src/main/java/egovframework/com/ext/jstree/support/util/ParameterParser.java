@@ -459,8 +459,6 @@ public class ParameterParser
         
         if (StringUtils.isEmpty(date1))
         {
-            // return org.apache.commons.lang.time.DateUtils.addHours(new
-            // Date(), addHour);
             return org.apache.commons.lang.time.DateUtils.addMonths(new Date(),
                                                                     addHour);
         }

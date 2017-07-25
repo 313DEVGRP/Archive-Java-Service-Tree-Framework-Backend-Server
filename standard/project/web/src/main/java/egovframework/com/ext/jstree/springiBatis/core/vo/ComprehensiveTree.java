@@ -129,7 +129,7 @@ public class ComprehensiveTree implements Serializable{
 	private int idifLeft;
 	private int idifRight;
 	
-	private int id; // moveNode
+	private int id;
 	private final HashMap<String, String> attr;
 	
 	/** iBatis 사용 시에 쓸 map 지정 필드 */

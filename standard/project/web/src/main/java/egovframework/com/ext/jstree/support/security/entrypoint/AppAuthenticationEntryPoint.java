@@ -35,7 +35,6 @@ public class AppAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoin
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
 
-        // redirect to login page. Use https if forceHttps true
         String redirectUrl = buildRedirectUrlToLoginPage(request, response, authException);
 
         redirectStrategy.sendRedirect(request, response, redirectUrl);

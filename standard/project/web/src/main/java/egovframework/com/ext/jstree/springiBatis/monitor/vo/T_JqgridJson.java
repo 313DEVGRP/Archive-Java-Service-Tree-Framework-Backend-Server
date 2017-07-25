@@ -41,12 +41,4 @@ public class T_JqgridJson {
 		this.rows = rows;
 	}
 
-	public void setRows(int rows) {
-		// this.rows = rows;
-	}
-
-	public void setPage(int page) {
-		// this.rows = rows;
-	}
-
 }

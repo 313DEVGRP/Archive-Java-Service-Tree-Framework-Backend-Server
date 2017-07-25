@@ -43,7 +43,6 @@ public class S_RemoveNode implements I_S_RemoveNode {
 	I_S_GetNode i_s_GetNode;
 
 	public S_RemoveNode() {
-		//i_DB_RemoveNode = new DB_RemoveNode();
 	}
 
 	@Override
@@ -81,7 +80,6 @@ public class S_RemoveNode implements I_S_RemoveNode {
 	}
 
 	public String selectDBSetting() {
-		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/com/ext/jstree/strutsiBatis/core/removeNode.action")) {

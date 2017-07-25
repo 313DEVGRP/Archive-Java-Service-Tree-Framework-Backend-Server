@@ -21,11 +21,6 @@ public class Single_SqlMapClient {
 				throw new RuntimeException(
 						"Load SqlMapConfig.xml Error : " + e, e);
 			} finally {
-				// try {
-				// reader.close();
-				// } catch (IOException x) {
-				// throw new RuntimeException("not Closed reader : " + x, x);
-				// }
 			}
 		}
 		return sqlMapper;

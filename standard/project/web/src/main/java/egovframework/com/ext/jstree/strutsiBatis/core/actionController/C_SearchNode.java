@@ -85,8 +85,6 @@ public class C_SearchNode extends ActionSupport implements Preparable,
 	public void prepare() throws Exception {
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		searchNodeResults = new ArrayList<String>();
-
-		//i_S_SearchNode = new S_SearchNode();
 	}
 
 	@Override

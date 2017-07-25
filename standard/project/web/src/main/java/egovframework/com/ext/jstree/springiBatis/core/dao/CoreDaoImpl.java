@@ -54,7 +54,6 @@ public class CoreDaoImpl extends EgovComiBatisAbstractDAO implements CoreDao{
 	
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree>List<String> searchNodeByPosition(List<T> searchNodeByPositions) throws Exception{
-		//TODO: searchNodeByPositions 는 최소 1개 이상이어야 한다.
 		return (List<String>) list(searchNodeByPositions.get(0).getSqlMapSelector() + "." + "searchNodeByPosition", searchNodeByPositions );
 	}
 	

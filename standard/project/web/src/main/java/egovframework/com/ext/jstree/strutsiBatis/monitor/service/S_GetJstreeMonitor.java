@@ -23,7 +23,6 @@ public class S_GetJstreeMonitor implements I_S_GetJstreeMonitor {
 	HttpServletRequest request;
 
 	public S_GetJstreeMonitor() {
-		//i_DB_ComprehensiveTree = new DB_ComprehensiveTree();
 	}
 
 	@Override
@@ -40,7 +39,6 @@ public class S_GetJstreeMonitor implements I_S_GetJstreeMonitor {
 	}
 
 	public String selectDBSetting() {
-		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request
 				.getRequestURI()

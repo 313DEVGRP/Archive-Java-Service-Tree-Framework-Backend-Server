@@ -54,7 +54,6 @@ public class S_SearchNode implements I_S_SearchNode {
 		t_SearchNodeByStrings = new ArrayList<T_ComprehensiveTree>();
 		p_SearchNodeByPositions = new ArrayList<P_ComprehensiveTree>();
 
-		//i_DB_SearchNode = new DB_SearchNode();
 	}
 
 	@Override
@@ -113,7 +112,6 @@ public class S_SearchNode implements I_S_SearchNode {
 	}
 
 	public String selectDBSetting(String step) {
-		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/com/ext/jstree/strutsiBatis/core/searchNode.action")

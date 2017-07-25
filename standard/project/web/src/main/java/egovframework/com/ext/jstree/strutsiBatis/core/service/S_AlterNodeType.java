@@ -52,9 +52,6 @@ public class S_AlterNodeType implements I_S_AlterNodeType {
 	I_DB_AlterNodeType i_DB_AlterNodeType;
 
 	public S_AlterNodeType() {
-		//i_S_GetChildNode = new S_GetChildNode();
-		//i_S_GetNode = new S_GetNode();
-		//i_DB_AlterNodeType = new DB_AlterNodeType();
 	}
 
 	@Override
@@ -107,7 +104,6 @@ public class S_AlterNodeType implements I_S_AlterNodeType {
 	}
 
 	public String selectDBSetting() {
-		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/com/ext/jstree/strutsiBatis/core/alterNodeType.action")) {

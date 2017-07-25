@@ -42,7 +42,7 @@ public class S_AlterNode implements I_S_AlterNode {
 	HttpServletRequest request;
 
 	public S_AlterNode() {
-		//i_DB_AlterNode = new DB_AlterNode();
+
 	}
 
 	@Override
@@ -59,7 +59,6 @@ public class S_AlterNode implements I_S_AlterNode {
 	}
 
 	public String selectDBSetting() {
-		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/com/ext/jstree/strutsiBatis/core/alterNode.action")) {

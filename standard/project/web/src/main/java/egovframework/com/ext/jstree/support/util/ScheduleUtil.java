@@ -10,10 +10,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class ScheduleUtil {
        
-    // 객체 - 일정 30분 단위 관련 함수
     public static String halfTime(String value) {
-        // minuteUnit = 분주기
-        // Ex) 07:00-08:00;11:00-13:00;14:00-16:05
         int processMinute = 30;
         int useBitsPerHour = 2;
         if(value.equals("0")) value = "00:00-00:00";
@@ -32,7 +29,6 @@ public class ScheduleUtil {
             int endHour = Integer.parseInt(endTime[0]);
             int endMinute = Integer.parseInt(endTime[1]);
             
-            // 00분, 30분 체크
             if (startMinute == processMinute) {
                 startMinute = processMinute;
             } else {
@@ -56,8 +52,6 @@ public class ScheduleUtil {
     }
     
     public static String getHalfTimeTime(String value) {
-        // minuteUnit = 분주기
-        // Ex) 280375480811520
         int processMinute = 30;
         int useBitsPerHour = 2;
         
@@ -98,7 +92,6 @@ public class ScheduleUtil {
         return output;
     }
     
-    // 객체 - 일정 5분 단위 관련 함수
     public static Map<String, Object> extenedTime(String value) {
         int processMinute = 5;
         int timePerArray = 5;
@@ -170,7 +163,6 @@ public class ScheduleUtil {
         return result;
     }
     
-    // 객체 - 일정 시간 표시
     public static String getExtenedTime(String... extend) {
         int processMinute = 5; 
         int useBitsPerHour = 12;

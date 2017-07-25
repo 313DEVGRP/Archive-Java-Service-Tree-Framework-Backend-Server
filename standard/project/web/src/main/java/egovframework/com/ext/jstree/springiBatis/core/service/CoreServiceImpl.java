@@ -100,7 +100,6 @@ public class CoreServiceImpl implements CoreService {
 		if (comprehensiveTree instanceof PaginatedComprehensiveTree) {
 			PaginatedComprehensiveTree paginatedComprehensiveTree = (PaginatedComprehensiveTree) comprehensiveTree;
 
-			// 베이스 노드 하위의 차일드 노드를 페이징 처리하는 것
 			ComprehensiveTree baseLineNode = coreDao.getNode(paginatedComprehensiveTree);
 			paginatedComprehensiveTree.setC_left(baseLineNode.getC_left());
 			paginatedComprehensiveTree.setC_right(baseLineNode.getC_right());
@@ -230,10 +229,6 @@ public class CoreServiceImpl implements CoreService {
 
 		T t_ComprehensiveTree = newInstance(comprehensiveTree);
 
-		// 성능 이슈로 인한 코드 튜닝.
-		// List<T> childNodesFromRef = ((List<T>)
-		// coreDao.getChildNode(nodeByRef));
-		// final int lastPosiotionOfNodeByRef = childNodesFromRef.size();
 		final int lastPosiotionOfNodeByRef = coreDao.getChildCountByParentId(nodeByRef);
 
 		t_ComprehensiveTree.setC_position(lastPosiotionOfNodeByRef);

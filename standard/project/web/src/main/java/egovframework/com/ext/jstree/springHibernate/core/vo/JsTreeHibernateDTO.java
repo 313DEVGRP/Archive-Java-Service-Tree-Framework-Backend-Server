@@ -53,7 +53,6 @@ public class JsTreeHibernateDTO extends JsTreeHibernateSearchDTO implements Seri
 		
 		if( paramInstance instanceof JsTreeHibernateDTO){
 			this.setC_title("copy_" + this.getC_title());
-			//여기에 추가 필드 셋팅할것.
 		}
 	}
 	

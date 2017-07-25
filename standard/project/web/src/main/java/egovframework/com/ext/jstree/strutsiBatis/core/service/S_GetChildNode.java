@@ -46,7 +46,6 @@ public class S_GetChildNode implements I_S_GetChildNode {
 	I_DB_GetChildNode i_DB_GetChildNode;
 
 	public S_GetChildNode() {
-		//i_DB_GetChildNode = new DB_GetChildNode();
 	}
 
 	@Override
@@ -89,7 +88,6 @@ public class S_GetChildNode implements I_S_GetChildNode {
 	}
 
 	public String selectDBSetting(String flag) {
-		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/com/ext/jstree/strutsiBatis/core/getChildNode.action")

@@ -52,9 +52,6 @@ public class S_MoveNode implements I_S_MoveNode {
 	I_S_GetChildNode i_S_GetChildNode;
 
 	public S_MoveNode() {
-		//i_DB_MoveNode = new DB_MoveNode();
-		//i_S_GetNode = new S_GetNode();
-		//i_S_GetChildNode = new S_GetChildNode();
 	}
 
 	@Override

@@ -18,7 +18,6 @@ public class MonitorServiceImpl implements MonitorService {
 	
 	@Override
 	public List<T_JqGridCellData> getJqGridCellData(P_JqGrid p_JqGrid) {
-		// TODO Auto-generated method stub
 		return monitorDAO.getJqGridCellData(p_JqGrid);
 	}
 }

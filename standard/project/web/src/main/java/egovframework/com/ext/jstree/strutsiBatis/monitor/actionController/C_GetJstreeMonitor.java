@@ -68,8 +68,6 @@ public class C_GetJstreeMonitor extends ActionSupport implements Preparable,
 		t_JqgridJson = new T_JqgridJson();
 		p_JqGrid = new P_JqGrid();
 		t_JqGridCellDatas = new ArrayList<T_JqGridCellData>();
-
-//		i_S_GetJstreeMonitor = new S_GetJstreeMonitor();
 	}
 
 	@Override
