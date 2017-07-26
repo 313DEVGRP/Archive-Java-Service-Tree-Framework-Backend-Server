@@ -2,6 +2,7 @@ package egovframework.com.ext.jstree.strutsiBatis.core.service;
 
 import egovframework.com.ext.jstree.strutsiBatis.core.dao.I_DB_RemoveNode;
 import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 public class S_RemoveNode implements I_S_RemoveNode {
 
     HttpServletRequest request;
+    static Logger logger = Logger.getLogger(S_RemoveNode.class);
 
     @Resource(name = "DB_RemoveNode")
     I_DB_RemoveNode i_DB_RemoveNode;

@@ -3,6 +3,7 @@ package egovframework.com.ext.jstree.strutsiBatis.core.service;
 import egovframework.com.ext.jstree.strutsiBatis.core.dao.I_DB_SearchNode;
 import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,6 +38,7 @@ import java.util.List;
 public class S_SearchNode implements I_S_SearchNode {
 
     HttpServletRequest request;
+    static Logger logger = Logger.getLogger(S_SearchNode.class);
 
     P_ComprehensiveTree p_SearchNodeByPosition;
     List<T_ComprehensiveTree> t_SearchNodeByStrings;
