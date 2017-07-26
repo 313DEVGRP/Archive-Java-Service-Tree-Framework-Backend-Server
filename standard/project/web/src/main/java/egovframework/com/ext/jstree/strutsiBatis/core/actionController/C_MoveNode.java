@@ -97,11 +97,11 @@ public class C_MoveNode extends ActionSupport implements Preparable, ModelDriven
         if (request.getParameter("c_id") == null || request.getParameter("c_position") == null || request.getParameter("copy") == null || request.getParameter("multiCounter") == null || request.getParameter("ref") == null) {
             throw new RuntimeException("invalid parameters Null");
         } else {
-            if (request.getParameter("ref").equals("0")) {
+            if ("0".equals(request.getParameter("ref"))) {
                 throw new RuntimeException("moveNode ref value is 0");
             }
 
-            if (request.getParameter("c_id").equals("0") || request.getParameter("c_id").equals("1")) {
+            if ("0".equals(request.getParameter("c_id")) || "1".equals(request.getParameter("c_id"))) {
                 throw new RuntimeException("invalid parameters c_id is 0 or 1");
             }
 
