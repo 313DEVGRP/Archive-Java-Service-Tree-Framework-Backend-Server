@@ -46,7 +46,7 @@ public class C_SearchNode extends ActionSupport implements Preparable,
         ModelDriven, ServletRequestAware, SessionAware, RequestAware {
 
     private static final long serialVersionUID = 4187246952455486758L;
-    static Logger logger = Logger.getLogger(C_SearchNode.class);
+    private static final Logger logger = Logger.getLogger(C_SearchNode.class);
 
     List<String> searchNodeResults;
     P_ComprehensiveTree p_ComprehensiveTree;

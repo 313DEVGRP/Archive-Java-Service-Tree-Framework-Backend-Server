@@ -44,7 +44,7 @@ public class C_RemoveNode extends ActionSupport implements Preparable, ModelDriv
 
     private static final long serialVersionUID = 7795427982040661127L;
 
-    static Logger logger = Logger.getLogger(C_RemoveNode.class);
+    private static final Logger logger = Logger.getLogger(C_RemoveNode.class);
 
     T_ComprehensiveTree t_ComprehensiveTree;
 

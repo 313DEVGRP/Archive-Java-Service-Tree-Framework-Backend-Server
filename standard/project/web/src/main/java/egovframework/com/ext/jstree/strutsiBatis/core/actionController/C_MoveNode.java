@@ -46,7 +46,7 @@ public class C_MoveNode extends ActionSupport implements Preparable, ModelDriven
 
     private static final long serialVersionUID = 4164420298258634557L;
 
-    static Logger logger = Logger.getLogger(C_MoveNode.class);
+    private static final Logger logger = Logger.getLogger(C_MoveNode.class);
 
     P_ComprehensiveTree p_ComprehensiveTree;
     T_ComprehensiveTree t_ComprehensiveTree;

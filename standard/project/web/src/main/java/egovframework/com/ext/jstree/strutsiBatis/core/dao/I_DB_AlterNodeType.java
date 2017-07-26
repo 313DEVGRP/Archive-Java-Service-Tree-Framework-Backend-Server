@@ -34,7 +34,6 @@ import org.apache.log4j.Logger;
 public interface I_DB_AlterNodeType extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 
-	static Logger logger = Logger.getLogger(I_DB_GetChildNode.class);
 	/**
 	 * node type 수정
 	 * 
@@ -42,7 +41,6 @@ public interface I_DB_AlterNodeType extends
 	 * @param String(determineDBSetting)
 	 * @return node type 수정 처리 결과에 따른 결과값 (int)
 	 * */
-	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree,
-							 String determineDBSetting);
+	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
 
 }

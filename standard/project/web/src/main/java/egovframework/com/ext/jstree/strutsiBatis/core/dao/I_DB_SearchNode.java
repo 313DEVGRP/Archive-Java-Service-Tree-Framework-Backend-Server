@@ -34,8 +34,6 @@ import org.apache.log4j.Logger;
 public interface I_DB_SearchNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 
-	static Logger logger = Logger.getLogger(I_DB_GetChildNode.class);
-	
 	/**
 	 * String 단어에 해당하는 node의 정보를 가져온다.
 	 * 
@@ -43,8 +41,7 @@ public interface I_DB_SearchNode extends
 	 * @param String(determineDBSetting)
 	 * @return 조회결과에 따른 node들의 정보 List&lt;T_ComprehensiveTree&gt
 	 * */
-	public List<T_ComprehensiveTree> searchNodeByString(
-			P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
+	public List<T_ComprehensiveTree> searchNodeByString( P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
 	
 	/**
 	 * node의 psition값의 정보를 가져온다.
@@ -53,8 +50,6 @@ public interface I_DB_SearchNode extends
 	 * @param String(determineDBSetting)
 	 * @return 조회결과에 따른 node position값들의 정보 List&lt;String&gt
 	 * */
-	public List<String> searchNodeByPosition(
-			List<P_ComprehensiveTree> p_SearchNodeByPositions,
-			String determineDBSetting);
+	public List<String> searchNodeByPosition( List<P_ComprehensiveTree> p_SearchNodeByPositions, String determineDBSetting);
 
 }

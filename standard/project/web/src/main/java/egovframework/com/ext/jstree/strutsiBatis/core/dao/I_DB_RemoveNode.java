@@ -32,8 +32,6 @@ import org.apache.log4j.Logger;
 public interface I_DB_RemoveNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 
-	static Logger logger = Logger.getLogger(I_DB_RemoveNode.class);
-	
 	/**
 	 * node를 제거한다.
 	 * 
@@ -41,7 +39,6 @@ public interface I_DB_RemoveNode extends
 	 * @param String(determineDBSetting)
 	 * @return node제거 처리 결과에 따른 결과값(int)
 	 * */
-	public int removeNode(P_ComprehensiveTree p_RemoveNode,
-						  String determineDBSetting);
+	public int removeNode(P_ComprehensiveTree p_RemoveNode, String determineDBSetting);
 
 }

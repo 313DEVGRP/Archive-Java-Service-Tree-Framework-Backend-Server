@@ -408,40 +408,99 @@ public class ComprehensiveTree implements Serializable{
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		ComprehensiveTree that = (ComprehensiveTree) o;
 
-		if (c_id != that.c_id) return false;
-		if (c_left != that.c_left) return false;
-		if (c_level != that.c_level) return false;
-		if (c_parentid != that.c_parentid) return false;
-		if (c_position != that.c_position) return false;
-		if (c_right != that.c_right) return false;
-		if (copy != that.copy) return false;
-		if (fixCopyId != that.fixCopyId) return false;
-		if (fixCopyPosition != that.fixCopyPosition) return false;
-		if (hashCode != that.hashCode) return false;
-		if (id != that.id) return false;
-		if (idif != that.idif) return false;
-		if (idifLeft != that.idifLeft) return false;
-		if (idifRight != that.idifRight) return false;
-		if (ldif != that.ldif) return false;
-		if (multiCounter != that.multiCounter) return false;
-		if (ref != that.ref) return false;
-		if (rightPositionFromNodeByRef != that.rightPositionFromNodeByRef) return false;
-		if (spaceOfTargetNode != that.spaceOfTargetNode) return false;
-		if (status != that.status) return false;
-		if (!attr.equals(that.attr)) return false;
-		if (c_idsByChildNodeFromNodeById != null ? !c_idsByChildNodeFromNodeById.equals(that.c_idsByChildNodeFromNodeById) : that.c_idsByChildNodeFromNodeById != null)return false;
-		if (c_title != null ? !c_title.equals(that.c_title) : that.c_title != null) return false;
-		if (c_type != null ? !c_type.equals(that.c_type) : that.c_type != null) return false;
-		if (childcount != null ? !childcount.equals(that.childcount) : that.childcount != null) return false;
-		if (nodeById != null ? !nodeById.equals(that.nodeById) : that.nodeById != null) return false;
-		if (searchStr != null ? !searchStr.equals(that.searchStr) : that.searchStr != null) return false;
-		if (sqlMapSelector != null ? !sqlMapSelector.equals(that.sqlMapSelector) : that.sqlMapSelector != null)
+		if (c_id != that.c_id) {
 			return false;
+		}
+		if (c_left != that.c_left) {
+			return false;
+		}
+		if (c_level != that.c_level) {
+			return false;
+		}
+		if (c_parentid != that.c_parentid) {
+			return false;
+		}
+		if (c_position != that.c_position) {
+			return false;
+		}
+		if (c_right != that.c_right) {
+			return false;
+		}
+		if (copy != that.copy) {
+			return false;
+		}
+		if (fixCopyId != that.fixCopyId) {
+			return false;
+		}
+		if (fixCopyPosition != that.fixCopyPosition) {
+			return false;
+		}
+		if (hashCode != that.hashCode) {
+			return false;
+		}
+		if (id != that.id) {
+			return false;
+		}
+		if (idif != that.idif) {
+			return false;
+		}
+		if (idifLeft != that.idifLeft) {
+			return false;
+		}
+		if (idifRight != that.idifRight) {
+			return false;
+		}
+		if (ldif != that.ldif) {
+			return false;
+		}
+		if (multiCounter != that.multiCounter) {
+			return false;
+		}
+		if (ref != that.ref) {
+			return false;
+		}
+		if (rightPositionFromNodeByRef != that.rightPositionFromNodeByRef) {
+			return false;
+		}
+		if (spaceOfTargetNode != that.spaceOfTargetNode) {
+			return false;
+		}
+		if (status != that.status) {
+			return false;
+		}
+		if (!attr.equals(that.attr)) {
+			return false;
+		}
+		if (c_idsByChildNodeFromNodeById != null ? !c_idsByChildNodeFromNodeById.equals(that.c_idsByChildNodeFromNodeById) : that.c_idsByChildNodeFromNodeById != null) {
+			return false;
+		}
+		if (c_title != null ? !c_title.equals(that.c_title) : that.c_title != null) {
+			return false;
+		}
+		if (c_type != null ? !c_type.equals(that.c_type) : that.c_type != null) {
+			return false;
+		}
+		if (childcount != null ? !childcount.equals(that.childcount) : that.childcount != null) {
+			return false;
+		}
+		if (nodeById != null ? !nodeById.equals(that.nodeById) : that.nodeById != null) {
+			return false;
+		}
+		if (searchStr != null ? !searchStr.equals(that.searchStr) : that.searchStr != null) {
+			return false;
+		}
+		if (sqlMapSelector != null ? !sqlMapSelector.equals(that.sqlMapSelector) : that.sqlMapSelector != null) {
+			return false;
+		}
 
 		return true;
 	}

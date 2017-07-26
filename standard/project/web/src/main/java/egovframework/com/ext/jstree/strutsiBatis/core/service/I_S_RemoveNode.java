@@ -34,8 +34,6 @@ import org.apache.log4j.Logger;
 public interface I_S_RemoveNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 
-	static Logger logger = Logger.getLogger(I_S_SearchNode.class);
-
 	public void setRequest(HttpServletRequest request);
 
 	public int executeRemoveNode(P_ComprehensiveTree p_ComprehensiveTree);

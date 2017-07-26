@@ -34,8 +34,6 @@ import org.apache.log4j.Logger;
 public interface I_DB_GetChildNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 
-	static Logger logger = Logger.getLogger(I_DB_GetChildNode.class);
-	
 	/**
 	 * 하위 node의 정보를 가져오는 메소드
 	 * 
@@ -43,8 +41,7 @@ public interface I_DB_GetChildNode extends
 	 * @param String(determineDBSetting)
 	 * @return List&lt;T_ComprehensiveTree&gt;
 	 * */
-	public List<T_ComprehensiveTree> getChildNode(
-			P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
+	public List<T_ComprehensiveTree> getChildNode( P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
 	/**
 	 * 하위 node의 left와 right값을 가지고 오는 메소드
 	 * 
@@ -52,7 +49,6 @@ public interface I_DB_GetChildNode extends
 	 * @param String(determineDBSetting)
 	 * @return List&lt;T_ComprehensiveTree&gt;
 	 * */
-	public List<T_ComprehensiveTree> getChildNodeByLeftRight(
-			P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
+	public List<T_ComprehensiveTree> getChildNodeByLeftRight( P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
 
 }

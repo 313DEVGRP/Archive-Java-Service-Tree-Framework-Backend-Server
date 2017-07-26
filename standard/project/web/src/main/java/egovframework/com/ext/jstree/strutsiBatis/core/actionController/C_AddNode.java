@@ -46,7 +46,7 @@ public class C_AddNode extends ActionSupport implements Preparable, ModelDriven,
 
     private static final long serialVersionUID = 3831129725610221181L;
 
-    static Logger logger = Logger.getLogger(C_AddNode.class);
+    private static final Logger logger = Logger.getLogger(C_AddNode.class);
 
     P_ComprehensiveTree p_ComprehensiveTree;
     T_ComprehensiveTree t_ComprehensiveTree;

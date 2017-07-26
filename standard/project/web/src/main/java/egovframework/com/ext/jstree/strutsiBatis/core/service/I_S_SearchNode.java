@@ -36,8 +36,6 @@ import org.apache.log4j.Logger;
 public interface I_S_SearchNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 
-	static Logger logger = Logger.getLogger(I_S_SearchNode.class);
-
 	public void setRequest(HttpServletRequest request);
 	
 	/**
@@ -54,8 +52,7 @@ public interface I_S_SearchNode extends
 	 * @param P_ComprehensiveTree(p_SearchNodeByString)
 	 * @return 검색후 조회된 node들 List&lt;T_ComprehensiveTree&gt;
 	 * */
-	public List<T_ComprehensiveTree> searchNodeByString(
-			P_ComprehensiveTree p_SearchNodeByString);
+	public List<T_ComprehensiveTree> searchNodeByString(P_ComprehensiveTree p_SearchNodeByString);
 	
 	/**
 	 * node position 검색 
@@ -63,7 +60,6 @@ public interface I_S_SearchNode extends
 	 * @param P_ComprehensiveTree(p_ComprehensiveTree)
 	 * @return 검색후 조회된 node의 position List&lt;String&gt;
 	 * */
-	public List<String> searchNodeByPosition(
-			List<P_ComprehensiveTree> p_SearchNodeByPositions);
+	public List<String> searchNodeByPosition(List<P_ComprehensiveTree> p_SearchNodeByPositions);
 
 }

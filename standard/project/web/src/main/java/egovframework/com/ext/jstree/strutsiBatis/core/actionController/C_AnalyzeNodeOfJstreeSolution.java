@@ -38,14 +38,11 @@ import com.opensymphony.xwork2.Preparable;
  * </pre>
  * */
 @SuppressWarnings("rawtypes")
-public class C_AnalyzeNodeOfJstreeSolution extends ActionSupport implements
-		Preparable, ModelDriven, ServletRequestAware, SessionAware,
-		RequestAware {
+public class C_AnalyzeNodeOfJstreeSolution extends ActionSupport implements Preparable, ModelDriven, ServletRequestAware, SessionAware, RequestAware {
 
 	private static final long serialVersionUID = -3617970050236026092L;
 
-	static Logger logger = Logger
-			.getLogger(C_AnalyzeNodeOfJstreeSolution.class);
+	private static final Logger logger = Logger.getLogger(C_AnalyzeNodeOfJstreeSolution.class);
 
 	StringBuilder alayzeResult;
 

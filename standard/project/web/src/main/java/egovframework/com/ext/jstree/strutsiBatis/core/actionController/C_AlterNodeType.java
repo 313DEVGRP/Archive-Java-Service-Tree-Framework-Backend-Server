@@ -46,7 +46,7 @@ public class C_AlterNodeType extends ActionSupport implements Preparable,
 
     private static final long serialVersionUID = 432763084094442313L;
 
-    static Logger logger = Logger.getLogger(C_AlterNodeType.class);
+    private static final Logger logger = Logger.getLogger(C_AlterNodeType.class);
 
     P_ComprehensiveTree p_ComprehensiveTree;
     T_ComprehensiveTree t_ComprehensiveTree;

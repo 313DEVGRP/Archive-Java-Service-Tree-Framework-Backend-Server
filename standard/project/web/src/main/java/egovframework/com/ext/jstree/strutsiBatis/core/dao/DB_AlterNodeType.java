@@ -35,8 +35,8 @@ import java.sql.SQLException;
 @Repository("DB_AlterNodeType")
 public class DB_AlterNodeType extends EgovComiBatisAbstractDAO implements I_DB_AlterNodeType
 {
-    
-    static Logger logger = Logger.getLogger(DB_AlterNodeType.class);
+
+    private static final Logger logger = Logger.getLogger(DB_AlterNodeType.class);
     
     /**
      * node type 수정 메소드

@@ -33,8 +33,8 @@ import java.sql.SQLException;
 @Repository("DB_RemoveNode")
 public class DB_RemoveNode extends EgovComiBatisAbstractDAO implements I_DB_RemoveNode
 {
-    
-    static Logger logger = Logger.getLogger(DB_RemoveNode.class);
+
+    private static final Logger logger = Logger.getLogger(DB_RemoveNode.class);
     
     /**
      * node의 제거

@@ -49,7 +49,7 @@ public class C_AlterNode extends ActionSupport implements Preparable, ModelDrive
 
     private static final long serialVersionUID = -4744232049195539543L;
 
-    static Logger logger = Logger.getLogger(C_AlterNode.class);
+    private static final Logger logger = Logger.getLogger(C_AlterNode.class);
 
     P_ComprehensiveTree p_ComprehensiveTree;
     T_ComprehensiveTree t_ComprehensiveTree;

@@ -44,9 +44,8 @@ import java.util.Map;
 @Repository("DB_AddNode")
 public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
 {
-    
-    static Logger logger = Logger.getLogger(DB_AddNode.class);
-    
+
+    private static final Logger logger = Logger.getLogger(DB_AddNode.class);
     HttpServletRequest request;
     
     @Resource(name = "S_GetNode")
@@ -137,8 +136,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
                 
                 targetNodeLevel = nodeById.getC_level() - (nodeByRef.getC_level() + 1);
                 comparePosition = nodeById.getC_left() - rightPositionFromNodeByRef;
-                if (p_ComprehensiveTree.getCopyBooleanValue())
-                {
+                if (p_ComprehensiveTree.getCopyBooleanValue()) {
                     int ind = this.pasteMyselfFromJstree(p_ComprehensiveTree.getRef(), comparePosition,
                                                          spaceOfTargetNode, targetNodeLevel,
                                                          c_idsByChildNodeFromNodeById, rightPositionFromNodeByRef,
@@ -147,8 +145,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
                     this.fixCopy(ind, p_ComprehensiveTree.getC_position());
                     
                 }
-                else
-                {
+                else {
                     this.enterMyselfFromJstree(p_ComprehensiveTree.getRef(), p_ComprehensiveTree.getC_position(),
                                                p_ComprehensiveTree.getC_id(), comparePosition, targetNodeLevel,
                                                c_idsByChildNodeFromNodeById);
@@ -168,18 +165,15 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
                 p_ComprehensiveTree.setC_id(insertSeqResult);
                 int alterCountResult = this.alterNode(p_ComprehensiveTree);
                 
-                if (insertSeqResult > 0 && alterCountResult == 1)
-                {
+                if (insertSeqResult > 0 && alterCountResult == 1) {
                     t_ComprehensiveTree.setStatus(1);
                 }
-                else
-                {
+                else {
                     throw new RuntimeException("심각한 오류 발생 - 삽입 노드");
                 }
             }
             
-            if (p_ComprehensiveTree.getCopyBooleanValue())
-            {
+            if (p_ComprehensiveTree.getCopyBooleanValue()) {
                 this.fixCopy(p_ComprehensiveTree.getC_id(), p_ComprehensiveTree.getC_position());
             }
             
@@ -187,18 +181,14 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
             getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
             getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit();
         }
-        catch (SQLException e)
-        {
+        catch (SQLException e) {
             logger.error(e);
         }
-        finally
-        {
-            try
-            {
+        finally {
+            try {
                 getSqlMapClientTemplate().getSqlMapClient().endTransaction();
             }
-            catch (SQLException e)
-            {
+            catch (SQLException e) {
                logger.error(e);;
             }
         }
@@ -219,7 +209,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
     @SuppressWarnings("deprecation")
     private int alterNode(P_ComprehensiveTree p_ComprehensiveTree) throws SQLException
     {
-        
         return getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.alterNode", p_ComprehensiveTree);
     }
     
@@ -233,8 +222,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
     @SuppressWarnings("deprecation")
     private int addMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree) throws SQLException
     {
-        return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.addMyselfFromJstree",
-                                                                            p_ComprehensiveTree);
+        return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.addMyselfFromJstree", p_ComprehensiveTree);
     }
     
     /**
@@ -256,12 +244,9 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         p_OnlyCutMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
         p_OnlyCutMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
         
-        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfPositionFix",
-                                                           p_OnlyCutMyselfFromJstree);
-        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfLeftFix",
-                                                           p_OnlyCutMyselfFromJstree);
-        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfRightFix",
-                                                           p_OnlyCutMyselfFromJstree);
+        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfPositionFix", p_OnlyCutMyselfFromJstree);
+        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfLeftFix", p_OnlyCutMyselfFromJstree);
+        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfRightFix", p_OnlyCutMyselfFromJstree);
     }
     
     /**
@@ -281,24 +266,20 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
      * 현재의 positon값보다 앞인지/ 뒤인지 / 현재 위치인지
      * </pre>
      * */
-    public void calculatePostion(P_ComprehensiveTree p_ComprehensiveTree, T_ComprehensiveTree nodeById,
-            List<T_ComprehensiveTree> childNodesFromNodeByRef)
+    public void calculatePostion(P_ComprehensiveTree p_ComprehensiveTree, T_ComprehensiveTree nodeById, List<T_ComprehensiveTree> childNodesFromNodeByRef)
     {
         
         ActionContext actionContext = ActionContext.getContext();
         Map<String, Object> session = actionContext.getSession();
         
-        if (p_ComprehensiveTree.getRef() == nodeById.getC_parentid())
-        {
+        if (p_ComprehensiveTree.getRef() == nodeById.getC_parentid()) {
             logger.debug(">>>>>>>>>>>>>>>이동할 노드가 내 부모안에서 움직일때");
             
-            if (p_ComprehensiveTree.getMultiCounter() == 0)
-            {
+            if (p_ComprehensiveTree.getMultiCounter() == 0) {
                 logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 일때");
                 session.put("settedPosition", p_ComprehensiveTree.getC_position());
                 
-                if (p_ComprehensiveTree.getC_position() > nodeById.getC_position())
-                {
+                if (p_ComprehensiveTree.getC_position() > nodeById.getC_position()) {
                     logger.debug(">>>>>>>>>>>>>>>이동 할 노드가 현재보다 뒤일때");
                     logger.debug("노드값=" + nodeById.getC_title());
                     logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
@@ -310,8 +291,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
                 }
                 
             }
-            else
-            {
+            else {
                 logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
                 logger.debug("노드값=" + nodeById.getC_title());
                 logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
@@ -321,13 +301,11 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
                 
                 int increasePosition = 0;
                 
-                if ((Integer) session.get("settedPosition") < nodeById.getC_position())
-                {
+                if ((Integer) session.get("settedPosition") < nodeById.getC_position()) {
                     logger.debug(">>>>>>>>>>>>>>>멀티 노드의 위치가 0번 노드보다 뒤일때");
                     increasePosition = (Integer) session.get("settedPosition") + 1;
                 }
-                else
-                {
+                else {
                     logger.debug(">>>>>>>>>>>>>>>멀티 노드의 위치가 0번 노드보다 앞일때");
                     increasePosition = (Integer) session.get("settedPosition");
                 }
@@ -335,20 +313,17 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
                 
                 p_ComprehensiveTree.setC_position(increasePosition);
                 
-                if (nodeById.getC_position() == p_ComprehensiveTree.getC_position())
-                {
+                if (nodeById.getC_position() == p_ComprehensiveTree.getC_position()) {
                     logger.debug(">>>>>>>>>>>>>>>원래 노드 위치값과 최종 계산된 노드의 위치값이 동일한 경우");
                     session.put("settedPosition", increasePosition - 1);
                 }
                 logger.debug("노드의 최종 위치값=" + p_ComprehensiveTree.getC_position());
             }
         }
-        else
-        {
+        else {
             logger.debug(">>>>>>>>>>>>>>>이동할 노드가 내 부모밖으로 움직일때");
             
-            if (p_ComprehensiveTree.getMultiCounter() == 0)
-            {
+            if (p_ComprehensiveTree.getMultiCounter() == 0) {
                 logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 일때");
                 logger.debug("노드값=" + nodeById.getC_title());
                 logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
@@ -358,8 +333,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
                 logger.debug("노드의 최종 위치값=" + p_ComprehensiveTree.getC_position());
                 session.put("settedPosition", p_ComprehensiveTree.getC_position());
             }
-            else
-            {
+            else {
                 logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
                 logger.debug("노드값=" + nodeById.getC_title());
                 logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
@@ -398,8 +372,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         p_ComprehensiveTree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
         p_ComprehensiveTree.setNodeById(nodeById);
         
-        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.stretchPositionForMyself",
-                                                           p_ComprehensiveTree);
+        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.stretchPositionForMyself", p_ComprehensiveTree);
         
     }
     
@@ -424,10 +397,8 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         p_OnlyStretchLeftRightForMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
         p_OnlyStretchLeftRightForMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
         p_OnlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
-        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.stretchLeftForMyselfFromJstree",
-                                                           p_OnlyStretchLeftRightForMyselfFromJstree);
-        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.stretchRightForMyselfFromJstree",
-                                                           p_OnlyStretchLeftRightForMyselfFromJstree);
+        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.stretchLeftForMyselfFromJstree", p_OnlyStretchLeftRightForMyselfFromJstree);
+        getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.stretchRightForMyselfFromJstree", p_OnlyStretchLeftRightForMyselfFromJstree);
     }
     
     /**
@@ -459,18 +430,14 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         p_OnlyPasteMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
         p_OnlyPasteMyselfFromJstree.setNodeById(nodeById);
         
-        p_OnlyPasteMyselfFromJstree.setIdifLeft(idif
-                + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
-        p_OnlyPasteMyselfFromJstree.setIdifRight(idif
-                + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
+        p_OnlyPasteMyselfFromJstree.setIdifLeft(idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
+        p_OnlyPasteMyselfFromJstree.setIdifRight(idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
         
-        return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.pasteMyselfFromJstree",
-                                                                            p_OnlyPasteMyselfFromJstree);
+        return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
     }
     
     /**
-     * 쿼리가 없다....현재는 사용을 안하는건가;; 내가 못본건가;;
-     * 
+     *
      * @param int(ref)
      * @param int(c_position)
      * @param int(c_id)
@@ -482,8 +449,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
      * 
      * */
     @SuppressWarnings("deprecation")
-    public void enterMyselfFromJstree(int ref, int c_position, int c_id, int idif, int ldif,
-            Collection<Integer> c_idsByChildNodeFromNodeById) throws SQLException
+    public void enterMyselfFromJstree(int ref, int c_position, int c_id, int idif, int ldif, Collection<Integer> c_idsByChildNodeFromNodeById) throws SQLException
     {
         
         P_ComprehensiveTree p_OnlyPasteMyselfFromJstree = new P_ComprehensiveTree();
@@ -494,8 +460,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         p_OnlyPasteMyselfFromJstree.setLdif(ldif);
         p_OnlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
         
-        getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.enterMyselfFromJstree",
-                                                           p_OnlyPasteMyselfFromJstree);
+        getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.enterMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
         
     }
     
@@ -520,19 +485,16 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         List<T_ComprehensiveTree> children = i_S_GetChildNode.getChildNodeByLeftRight(Util_SwapNode.swapTtoP(node));
         
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = node.getC_left() + 1; i < node.getC_right(); i++)
-        {
+        for (int i = node.getC_left() + 1; i < node.getC_right(); i++) {
             map.put(i, ind);
         }
         
         logger.debug(">>>>>>>>>>>>>>>>> 이미 노드는 다 인서트 되 있는 상태이고 그 하위를 잡아라!");
-        for (int i = 0; i < children.size(); i++)
-        {
+        for (int i = 0; i < children.size(); i++) {
             
             T_ComprehensiveTree child = children.get(i);
             
-            if (child.getC_id() == ind)
-            {
+            if (child.getC_id() == ind) {
                 logger.debug(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
                 logger.debug("C_TITLE = " + child.getC_title());
                 logger.debug("C_ID = " + ind);
@@ -551,8 +513,7 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
             logger.debug("부모아이디값 = " + map.get(child.getC_left()));
             child.setFixCopyId(map.get(child.getC_left()));
             getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.fixCopy", child);
-            for (int j = child.getC_left() + 1; j < child.getC_right(); j++)
-            {
+            for (int j = child.getC_left() + 1; j < child.getC_right(); j++) {
                 map.put(j, child.getC_id());
             }
             

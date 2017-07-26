@@ -46,7 +46,7 @@ public class C_GetChildNode extends ActionSupport implements Preparable, ModelDr
 
 	private static final long serialVersionUID = 1135059314438464570L;
 
-	static Logger logger = Logger.getLogger(C_GetChildNode.class);
+	private static final Logger logger = Logger.getLogger(C_GetChildNode.class);
 
 	P_ComprehensiveTree p_ComprehensiveTree;
 	List<T_ComprehensiveTree> t_GetChildNodes;

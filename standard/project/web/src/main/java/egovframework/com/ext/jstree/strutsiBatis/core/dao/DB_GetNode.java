@@ -34,7 +34,7 @@ import java.sql.SQLException;
 @Repository("DB_GetNode")
 public class DB_GetNode extends EgovComiBatisAbstractDAO implements I_DB_GetNode {
 
-	static Logger logger = Logger.getLogger(DB_GetNode.class);
+	private static final Logger logger = Logger.getLogger(DB_GetNode.class);
 	
 	
 	/**

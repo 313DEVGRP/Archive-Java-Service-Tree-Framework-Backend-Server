@@ -38,7 +38,7 @@ import java.util.List;
 @Repository("DB_GetChildNode")
 public class DB_GetChildNode extends EgovComiBatisAbstractDAO implements I_DB_GetChildNode {
 
-	static Logger logger = Logger.getLogger(DB_GetChildNode.class);
+	private static final Logger logger = Logger.getLogger(DB_GetChildNode.class);
 	
 	
 	/**

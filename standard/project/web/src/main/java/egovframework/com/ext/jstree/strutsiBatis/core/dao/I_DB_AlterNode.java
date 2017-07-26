@@ -30,11 +30,8 @@ import org.apache.log4j.Logger;
  *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
  * </pre>
  * */
-public interface I_DB_AlterNode extends
-		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
+public interface I_DB_AlterNode extends I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 
-	static Logger logger = Logger.getLogger(I_DB_AlterNode.class);
-	
 	/**
 	 * node 수정
 	 * 
@@ -43,6 +40,5 @@ public interface I_DB_AlterNode extends
 	 * @return node수정 처리에 따른 결과값 (int)
 	 * 
 	 * */
-	public int alterNode(P_ComprehensiveTree p_ComprehensiveTree,
-						 String determineDBSetting);
+	public int alterNode(P_ComprehensiveTree p_ComprehensiveTree, String determineDBSetting);
 }
