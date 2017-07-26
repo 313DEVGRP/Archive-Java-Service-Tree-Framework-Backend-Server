@@ -43,7 +43,9 @@ public class ContainedValidator implements ConstraintValidator<Contained, String
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if(values.length == 0) return true;
+		if(values.length == 0) {
+			return true;
+		}
 		
 		for(String s: values){
 

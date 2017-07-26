@@ -1063,6 +1063,31 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/actionController/C_AddNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/actionController/C_AlterNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/actionController/C_AlterNodeType.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/actionController/C_GetChildNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/actionController/C_MoveNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/strutsiBatis/core/actionController/C_SearchNode.java">
           <value>
             <set />

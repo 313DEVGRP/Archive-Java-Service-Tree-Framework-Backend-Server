@@ -23,110 +23,101 @@ import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
 
 /**
  * Modification Information
- * 
+ *
  * @author 이동민
- * @since 2014.07.28
  * @version 1.0
  * @see <pre>
- * 
+ *
  * Class Name 	: C_AlterNode.java
  * Description 	: JSTree의 node를 수정하는 actionController 클래스
- * Infomation	: 
+ * Infomation	:
  *
  * node 수정
- * 
+ *
  *  << 개정이력(Modification Information) >>
- *  
+ *
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
- *  2014.07.28    Dongmin.Lee      최초 생성 
- * 
+ *  2014.07.28    Dongmin.Lee      최초 생성
+ *
  *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
  * </pre>
- * */
+ * @since 2014.07.28
+ */
 @SuppressWarnings("rawtypes")
-public class C_AlterNode extends ActionSupport implements Preparable,
-		ModelDriven, ServletRequestAware, SessionAware, RequestAware {
+public class C_AlterNode extends ActionSupport implements Preparable, ModelDriven, ServletRequestAware, SessionAware, RequestAware {
 
-	private static final long serialVersionUID = -4744232049195539543L;
+    private static final long serialVersionUID = -4744232049195539543L;
 
-	static Logger logger = Logger.getLogger(C_AlterNode.class);
+    static Logger logger = Logger.getLogger(C_AlterNode.class);
 
-	P_ComprehensiveTree p_ComprehensiveTree;
-	T_ComprehensiveTree t_ComprehensiveTree;
-	
-	@Resource(name="S_AlterNode")
-	I_S_AlterNode i_S_AlterNode;
+    P_ComprehensiveTree p_ComprehensiveTree;
+    T_ComprehensiveTree t_ComprehensiveTree;
 
-	HttpServletRequest request;
-	Map sessionMap;
-	Map requestMap;
+    @Resource(name = "S_AlterNode")
+    I_S_AlterNode i_S_AlterNode;
 
-	@Override
-	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
+    HttpServletRequest request;
+    Map sessionMap;
+    Map requestMap;
 
-	@Override
-	public void setSession(Map session) {
-		this.sessionMap = session;
-	}
+    @Override
+    public void setServletRequest(HttpServletRequest request) {
+        this.request = request;
+    }
 
-	@Override
-	public void setRequest(Map requestMap) {
-		this.requestMap = requestMap;
-	}
+    @Override
+    public void setSession(Map session) {
+        this.sessionMap = session;
+    }
 
-	@Override
-	public Object getModel() {
-		return t_ComprehensiveTree;
-	}
+    @Override
+    public void setRequest(Map requestMap) {
+        this.requestMap = requestMap;
+    }
 
-	@Override
-	public void prepare() throws Exception {
-		p_ComprehensiveTree = new P_ComprehensiveTree();
-		t_ComprehensiveTree = new T_ComprehensiveTree();
-	}
+    @Override
+    public Object getModel() {
+        return t_ComprehensiveTree;
+    }
 
-	@Override
-	public String execute() {
+    @Override
+    public void prepare() throws Exception {
+        p_ComprehensiveTree = new P_ComprehensiveTree();
+        t_ComprehensiveTree = new T_ComprehensiveTree();
+    }
 
-		t_ComprehensiveTree.setC_title(Util_TitleChecker
-				.StringReplace(t_ComprehensiveTree.getC_title()));
-		i_S_AlterNode.setRequest(request);
-		t_ComprehensiveTree.setStatus(i_S_AlterNode.alterNode(Util_SwapNode
-				.swapTtoP(t_ComprehensiveTree)));
+    @Override
+    public String execute() {
+        t_ComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(t_ComprehensiveTree.getC_title()));
+        i_S_AlterNode.setRequest(request);
+        t_ComprehensiveTree.setStatus(i_S_AlterNode.alterNode(Util_SwapNode.swapTtoP(t_ComprehensiveTree)));
+        return Action.SUCCESS;
+    }
 
-		return Action.SUCCESS;
-	}
+    @Override
+    public void validate() {
 
-	@Override
-	public void validate() {
+        if (request.getParameter("c_id") == null || request.getParameter("c_title") == null || request.getParameter("c_type") == null) {
+            throw new RuntimeException("alterNode parameter null");
+        } else {
+            if ("0".equals(request.getParameter("c_id"))) {
+                throw new RuntimeException("alterNode ref value is 0");
+            }
+            if ("1".equals(request.getParameter("c_id"))) {
+                throw new RuntimeException("alterNode ref value is 1");
+            }
 
-		if (request.getParameter("c_id") == null
-				|| request.getParameter("c_title") == null
-				|| request.getParameter("c_type") == null) {
-			throw new RuntimeException("alterNode parameter null");
-		} else {
-			if (request.getParameter("c_id").equals("0")) {
-				throw new RuntimeException("alterNode ref value is 0");
-			}
-			if (request.getParameter("c_id").equals("1")) {
-				throw new RuntimeException("alterNode ref value is 1");
-			}
+            if ("default".equals(request.getParameter("c_type")) || "folder".equals(request.getParameter("c_type"))) {
+                logger.info("c_type is default or folder");
+            } else {
+                if ("drive".equals(request.getParameter("c_type"))) {
+                    throw new RuntimeException("alterNode c_position value is drive");
+                } else {
+                    throw new RuntimeException("alterNode c_position value is another");
+                }
+            }
+        }
 
-			if (request.getParameter("c_type").equals("default")
-					|| request.getParameter("c_type").equals("folder")) {
-			} else {
-				if (request.getParameter("c_type").equals("drive")) {
-					throw new RuntimeException(
-							"alterNode c_position value is drive");
-				} else {
-					throw new RuntimeException(
-							"alterNode c_position value is another");
-				}
-			}
-		}
-
-	}
+    }
 }

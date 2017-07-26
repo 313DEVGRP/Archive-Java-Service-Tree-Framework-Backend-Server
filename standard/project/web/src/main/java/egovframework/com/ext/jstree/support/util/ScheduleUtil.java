@@ -84,8 +84,9 @@ public class ScheduleUtil {
                     if (i != arrList.size()) {
                         start = last = arrList.get(i);
                     }
-                } else
+                } else {
                     last = arrList.get(i);
+                }
             }
         }
         
