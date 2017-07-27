@@ -1628,7 +1628,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/light-blue/login.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/lightbluetemplate/css/application.css">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/login.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/css/application.min.css">
           <value>
             <set />
           </value>
