@@ -1653,6 +1653,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/callAjax.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/nv.d3.custom.js">
           <value>
             <set />
