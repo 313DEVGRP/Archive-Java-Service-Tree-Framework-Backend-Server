@@ -51,7 +51,7 @@ public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         }
 
         if (isAdmin(roles) || isUser(roles)) {
-            url = "/services/userpage";
+            url = "/index.html?loginResult=success";
         } else {
             url = "/services/accessDenied";
         }

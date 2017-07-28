@@ -1703,6 +1703,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/security/csrf.do">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/uss/ion/fbk/facebookSignin.do">
           <value>
             <set />
