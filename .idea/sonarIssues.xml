@@ -1443,7 +1443,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeCoreManage_SQL_oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeMonitorManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeMonitorManage_SQL_oracle.xml">
           <value>
             <set />
           </value>
@@ -1463,7 +1473,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeCoreManage_SQL_oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeMonitorManage_SQL_Oracle.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/resources/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeMonitorManage_SQL_oracle.xml">
           <value>
             <set />
           </value>
