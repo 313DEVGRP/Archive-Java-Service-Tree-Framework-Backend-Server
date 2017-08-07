@@ -547,7 +547,7 @@ public class EgovArticleController {
 	
 		String atchFileId = boardVO.getAtchFileId();
 	
-		beanValidator.validate(board, bindingResult);
+		//beanValidator.validate(board, bindingResult);
 		if (bindingResult.hasErrors()) {
 	
 		    //boardVO.setFrstRegisterId(user.getUniqId());

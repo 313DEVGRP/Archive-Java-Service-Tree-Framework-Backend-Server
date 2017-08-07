@@ -1,4 +1,3 @@
-
 <%
 	/**
 	 * @Class Name : EgovArticleUpdt.jsp
@@ -98,7 +97,8 @@ function fn_egov_init() {
 	}
 	var multi_selector = new MultiSelector( document.getElementById( 'egovComFileList' ), uploadableFileNum, 'file_label');
 	multi_selector.addElement( document.getElementById( 'egovfile_1' ) );
-	fn_egov_multi_selector_update_setting(multi_selector);
+	multi_selector.update_count = existFileNum;
+
 	//------------------------- 첨부파일 수정 End
 	</c:if>
 	
@@ -302,6 +302,5 @@ function fn_egov_inqire_articlelist() {
 		<input name="nttId" type="hidden" value="${articleVO.nttId}">
 		<input name="bbsId" type="hidden" value="${boardMasterVO.bbsId}">
 	</form:form>
-
 </body>
 </html>
