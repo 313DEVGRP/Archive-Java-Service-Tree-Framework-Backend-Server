@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = {"/security"})
 public class UtilController extends GenericAbstractController {
 
-    @IncludedInfo(name = "CSRF json", listUrl = "/com/ext/jstree/springiBatis/core/csrf.do", order = 3300, gid = 313)
+    @IncludedInfo(name = "CSRF json", listUrl = "/security/csrf.do", order = 3300, gid = 313)
     @RequestMapping("/csrf.do")
     public String jsTreeCSRFtoJson() {
         return "egovframework/com/ext/jstree/csrf";
