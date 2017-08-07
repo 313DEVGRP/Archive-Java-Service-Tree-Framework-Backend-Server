@@ -228,7 +228,7 @@ function fn_egov_inqire_articlelist() {
 						</td>
 					</tr>
 
-					<!-- 비밀글 여부 -->
+					<!-- 비밀글 여부
 					<c:set var="title"><spring:message code="comCopBbs.articleVO.updt.secretAt" /></c:set>
 					<tr>
 						<th><label for="secretAt">${title}</label></th>
@@ -237,6 +237,7 @@ function fn_egov_inqire_articlelist() {
 							<div>	<form:errors path="secretAt" cssClass="error" /></div>
 						</td>
 					</tr>
+					-->
 
 					<!-- 유효기간 설정  -->
 					<c:set var="title"><spring:message code="comCopBbs.articleVO.updt.ntceDe"/> </c:set>

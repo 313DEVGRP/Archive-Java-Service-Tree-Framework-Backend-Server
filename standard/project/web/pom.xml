@@ -68,8 +68,7 @@
         <finalName>web</finalName>
 
         <filters>
-            <filter>${basedir}/profiles/${build.profile.id}/database.properties</filter>
-            <filter>${basedir}/profiles/${build.profile.id}/socialProviders.properties</filter>
+            <filter>${basedir}/profiles/${build.profile.id}/support.properties</filter>
         </filters>
 
         <resources>

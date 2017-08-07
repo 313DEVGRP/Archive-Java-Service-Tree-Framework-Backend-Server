@@ -235,7 +235,7 @@ function makeFileAttachment(){
 			</td>
 		</tr>
 		
-		<!-- 비밀글 여부 -->
+		<!-- 비밀글 여부
 		<c:set var="title"><spring:message code="comCopBbs.articleVO.regist.secretAt"/> </c:set>
 		<tr>
 			<th><label for="secretAt">${title}</label></th>
@@ -244,8 +244,9 @@ function makeFileAttachment(){
 				<div><form:errors path="secretAt" cssClass="error" /></div>       
 			</td>
 		</tr>
+		 -->
 		
-		<!-- 익명등록 여부  -->
+		<!-- 익명등록 여부
 		<c:set var="title"><spring:message code="comCopBbs.articleVO.regist.anonymousAt"/> </c:set>
 		<tr>
 			<th><label for="anonymousAt">${title}</label></th>
@@ -254,6 +255,7 @@ function makeFileAttachment(){
 				<div><form:errors path="anonymousAt" cssClass="error" /></div>       
 			</td>
 		</tr>
+		-->
 		
 		<!-- 유효기간 설정  -->
 		<c:set var="title"><spring:message code="comCopBbs.articleVO.regist.ntceDe"/> </c:set>

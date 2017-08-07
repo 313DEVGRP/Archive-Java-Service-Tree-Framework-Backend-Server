@@ -1,28 +1,20 @@
 package egovframework.com.cmm.web;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
-import java.util.Map;
-
 import egovframework.com.cmm.service.EgovFileMngService;
 import egovframework.com.cmm.service.FileVO;
 import egovframework.com.cmm.util.EgovBasicLogger;
 import egovframework.com.cmm.util.EgovResourceCloseHelper;
-import egovframework.com.cmm.util.EgovUserDetailsHelper;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.Map;
 
 /**
  * 파일 다운로드를 위한 컨트롤러 클래스
@@ -125,9 +117,9 @@ public class EgovFileDownloadController {
 		String atchFileId = (String) commandMap.get("atchFileId");
 		String fileSn = (String) commandMap.get("fileSn");
 
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		//Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
-		if (isAuthenticated) {
+		//if (isAuthenticated) {
 
 			FileVO fileVO = new FileVO();
 			fileVO.setAtchFileId(atchFileId);
@@ -183,6 +175,6 @@ public class EgovFileDownloadController {
 				printwriter.flush();
 				printwriter.close();
 			}
-		}
+		//}
 	}
 }
