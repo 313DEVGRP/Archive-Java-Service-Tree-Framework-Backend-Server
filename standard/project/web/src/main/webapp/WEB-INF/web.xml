@@ -68,6 +68,7 @@
         <url-pattern>/signin/facebook</url-pattern>
         <url-pattern>/auth/*</url-pattern>
         <url-pattern>/services/*</url-pattern>
+        <url-pattern>/userpage</url-pattern>
     </servlet-mapping>
 
     <listener>
