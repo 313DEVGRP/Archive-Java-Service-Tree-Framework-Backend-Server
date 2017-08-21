@@ -332,7 +332,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                       $.ajax({
                         async: false,
                         type: 'GET',
-                        url: "/security/csrf.do",
+                        url: "${pageContext.request.contextPath}/api/jsTreeServiceFramework/security/csrf.do",
                         success: function(r) {
                           var token = r._csrf_token;
                           var header = r._csrf_headerName;

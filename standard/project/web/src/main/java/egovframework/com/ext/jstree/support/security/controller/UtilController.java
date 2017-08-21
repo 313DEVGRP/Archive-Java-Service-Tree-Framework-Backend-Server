@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by Administrator on 2017-07-24.
  */
 @Controller
-@RequestMapping(value = {"/security"})
+@RequestMapping(value = {"/api/jsTreeServiceFramework"})
 public class UtilController extends GenericAbstractController {
 
-    @IncludedInfo(name = "CSRF json", listUrl = "/security/csrf.do", order = 3300, gid = 313)
-    @RequestMapping("/csrf.do")
+    @IncludedInfo(name = "CSRF json", listUrl = "/api/jsTreeServiceFramework/security/csrf.do", order = 3300, gid = 313)
+    @RequestMapping("/security/csrf.do")
     public String jsTreeCSRFtoJson() {
         return "egovframework/com/ext/jstree/csrf";
     }

@@ -1633,6 +1633,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/RivalWar/api/menu/ROLE_USER/getChildNode.do">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/RivalWar/menu/ROLE_ADMIN/getChildNode.do">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/index.bak.html">
           <value>
             <set />
