@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
-import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
@@ -28,49 +27,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = {"/api/rivalWar/menu"})
-public class MenuController extends GenericAbstractController {
+public class AnonymousMenuController extends GenericAbstractController {
 
     @Autowired
     private MenuService menuService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
-    @IncludedInfo(name = "RivalWar Admin Menu", listUrl = "/api/rivalWar/menu/admin/getJsTreeView.do", order = 7000, gid = 7313)
-    @RequestMapping("/admin/getJsTreeView.do")
-    public String jsTreeSpringHibernate() {
-        return "egovframework/rivalWar/api/menu/admin/JsTreeView";
-    }
-
-    /**
-     * 자식노드를 요청한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return String
-     * @throws JsonProcessingException
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getChildMenu.do", method = RequestMethod.GET)
-    public ModelAndView getChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
-
-        ParameterParser parser = new ParameterParser(request);
-
-        logger.info("jrebel reload test");
-
-        if (parser.getInt("c_id") <= 0) {
-            throw new RuntimeException();
-        }
-
-        jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
-        List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
-
-        ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", list);
-        return modelAndView;
-    }
 
     @ResponseBody
     @RequestMapping(value = "/getPaginatedChildMenu.do", method = RequestMethod.GET)
