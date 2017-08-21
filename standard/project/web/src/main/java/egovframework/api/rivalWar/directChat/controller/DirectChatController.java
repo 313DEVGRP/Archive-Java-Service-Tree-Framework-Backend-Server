@@ -1,12 +1,14 @@
-package egovframework.rivalwar.api.menu.controller;
+package egovframework.api.rivalWar.directChat.controller;
 
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.Maps;
+import egovframework.api.rivalWar.directChat.service.DirectChatService;
+import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
+import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
+import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
+import egovframework.com.ext.jstree.support.util.ParameterParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,61 +20,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.collect.Maps;
-
-import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNodeType;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
-import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
-import egovframework.com.ext.jstree.support.util.ParameterParser;
-import egovframework.rivalwar.api.menu.service.MenuService;
-import egovframework.rivalwar.api.menu.vo.MenuDTO;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
-@RequestMapping(value = {"/rivalWar/api/menu"})
-public class MenuController extends GenericAbstractController {
+@RequestMapping(value = {"/api/rivalWar/directChat"})
+public class DirectChatController extends GenericAbstractController {
 
     @Autowired
-    private MenuService menuService;
+    private DirectChatService directChatService;
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
-    @IncludedInfo(name = "RivalWar Admin Menu", listUrl = "/rivalWar/api/menu/admin/getJsTreeView.do", order = 7000, gid = 7313)
+    @IncludedInfo(name = "RivalWar Admin DirectChat", listUrl = "/api/rivalWar/directChat/admin/getJsTreeView.do", order = 7001, gid = 7313)
     @RequestMapping("/admin/getJsTreeView.do")
     public String jsTreeSpringHibernate() {
-        return "egovframework/rivalWar/api/menu/admin/JsTreeView";
+        return "egovframework/rivalWar/api/directChat/admin/JsTreeView";
     }
 
     /**
      * 자식노드를 요청한다.
      *
-     * @param jsTreeHibernateDTO
+     * @param comprehensiveTree
      * @param model
      * @param request
      * @return String
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/getChildMenu.do", method = RequestMethod.GET)
-    public ModelAndView getChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+    @RequestMapping(value = "/getChildDirectChat.do", method = RequestMethod.GET)
+    public ModelAndView getChildDirectChat(DirectChatDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
-
-        logger.info("jrebel reload test");
 
         if (parser.getInt("c_id") <= 0) {
             throw new RuntimeException();
         }
 
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
-        List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
+        List<DirectChatDTO> list = directChatService.getChildDirectChat(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
@@ -81,7 +67,7 @@ public class MenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/getPaginatedChildMenu.do", method = RequestMethod.GET)
-    public ModelAndView getPaginatedChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+    public ModelAndView getPaginatedChildMenu(DirectChatDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
         if (jsTreeHibernateDTO.getC_id() <= 0 || jsTreeHibernateDTO.getPageIndex() <= 0
@@ -90,7 +76,7 @@ public class MenuController extends GenericAbstractController {
         }
 
         jsTreeHibernateDTO.setWhere("c_parentid", jsTreeHibernateDTO.getC_id());
-        List<MenuDTO> list = menuService.getPaginatedChildMenu(jsTreeHibernateDTO);
+        List<DirectChatDTO> list = directChatService.getPaginatedChildDirectChat(jsTreeHibernateDTO);
         jsTreeHibernateDTO.getPaginationInfo().setTotalRecordCount(list.size());
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -102,8 +88,8 @@ public class MenuController extends GenericAbstractController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getMenu.do", method = RequestMethod.GET)
-    public ModelAndView getMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+    @RequestMapping(value = "/getDirectChat.do", method = RequestMethod.GET)
+    public ModelAndView getDirectChat(DirectChatDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
@@ -112,25 +98,25 @@ public class MenuController extends GenericAbstractController {
             throw new RuntimeException();
         }
 
-        MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
+        DirectChatDTO directChatDTO = directChatService.getDirectChat(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuDTO);
+        modelAndView.addObject("result", directChatDTO);
         return modelAndView;
     }
 
     /**
      * 노드를 검색한다.
      *
-     * @param jsTreeHibernateDTO
+     * @param comprehensiveTree
      * @param model
      * @param request
      * @return
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/searchMenu.do", method = RequestMethod.GET)
-    public ModelAndView searchNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+    @RequestMapping(value = "/searchDirectChat.do", method = RequestMethod.GET)
+    public ModelAndView searchNode(DirectChatDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
@@ -141,50 +127,52 @@ public class MenuController extends GenericAbstractController {
 
         jsTreeHibernateDTO.setWhereLike("c_title", parser.get("parser"));
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuService.searchMenu(jsTreeHibernateDTO));
+        modelAndView.addObject("result", directChatService.searchDirectChat(jsTreeHibernateDTO));
         return modelAndView;
     }
 
     /**
      * 노드를 추가한다.
      *
-     * @param jsTreeHibernateDTO
+     * @param comprehensiveTree
      * @param model
-     * @param bindingResult
+     * @param request
      * @return
      * @throws JsonProcessingException
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
     @ResponseBody
-    @RequestMapping(value = "/addMenu.do", method = RequestMethod.POST)
-    public ModelAndView addMenu(@Validated(value = AddNode.class) MenuDTO jsTreeHibernateDTO,
-                                BindingResult bindingResult, ModelMap model) throws Exception {
+    @RequestMapping(value = "/addDirectChat.do", method = RequestMethod.POST)
+    public ModelAndView addDirectChat(@Validated(value = AddNode.class) DirectChatDTO jsTreeHibernateDTO,
+                                      BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
+        jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
+
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuService.addMenu(jsTreeHibernateDTO));
+        modelAndView.addObject("result", directChatService.addDirectChat(jsTreeHibernateDTO));
         return modelAndView;
     }
 
     /**
      * 노드를 삭제한다.
      *
-     * @param jsTreeHibernateDTO
+     * @param comprehensiveTree
      * @param model
-     * @param bindingResult
+     * @param request
      * @return
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/removeMenu.do", method = RequestMethod.POST)
-    public ModelAndView removeNode(@Validated(value = RemoveNode.class) MenuDTO jsTreeHibernateDTO,
+    @RequestMapping(value = "/removeDirectChat.do", method = RequestMethod.POST)
+    public ModelAndView removeNode(@Validated(value = RemoveNode.class) DirectChatDTO jsTreeHibernateDTO,
                                    BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        jsTreeHibernateDTO.setStatus(menuService.removeMenu(jsTreeHibernateDTO));
+        jsTreeHibernateDTO.setStatus(directChatService.removeDirectChat(jsTreeHibernateDTO));
         setJsonDefaultSetting(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -192,7 +180,7 @@ public class MenuController extends GenericAbstractController {
         return modelAndView;
     }
 
-    private void setJsonDefaultSetting(MenuDTO jsTreeHibernateDTO) {
+    private void setJsonDefaultSetting(DirectChatDTO jsTreeHibernateDTO) {
         long defaultSettingValue = 0;
         jsTreeHibernateDTO.setC_parentid(defaultSettingValue);
         jsTreeHibernateDTO.setC_position(defaultSettingValue);
@@ -205,22 +193,22 @@ public class MenuController extends GenericAbstractController {
     /**
      * 노드를 변경한다.
      *
-     * @param jsTreeHibernateDTO
+     * @param comprehensiveTree
      * @param model
-     * @param bindingResult
+     * @param request
      * @return
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/alterMenu.do", method = RequestMethod.POST)
-    public ModelAndView alterNode(@Validated(value = AlterNode.class) MenuDTO jsTreeHibernateDTO,
+    @RequestMapping(value = "/alterDirectChat.do", method = RequestMethod.POST)
+    public ModelAndView alterNode(@Validated(value = AlterNode.class) DirectChatDTO jsTreeHibernateDTO,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
         jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
 
-        jsTreeHibernateDTO.setStatus(menuService.alterMenu(jsTreeHibernateDTO));
+        jsTreeHibernateDTO.setStatus(directChatService.alterDirectChat(jsTreeHibernateDTO));
         setJsonDefaultSetting(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -231,20 +219,20 @@ public class MenuController extends GenericAbstractController {
     /**
      * 노드의 타입을 변경한다.
      *
-     * @param jsTreeHibernateDTO
+     * @param comprehensiveTree
      * @param model
-     * @param bindingResult
+     * @param request
      * @return
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/alterMenuType.do", method = RequestMethod.POST)
-    public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) MenuDTO jsTreeHibernateDTO,
+    @RequestMapping(value = "/alterNodeDirectChat.do", method = RequestMethod.POST)
+    public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) DirectChatDTO jsTreeHibernateDTO,
                                       BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        menuService.alterMenuType(jsTreeHibernateDTO);
+        directChatService.alterDirectChatType(jsTreeHibernateDTO);
         setJsonDefaultSetting(jsTreeHibernateDTO);
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", jsTreeHibernateDTO);
@@ -254,7 +242,7 @@ public class MenuController extends GenericAbstractController {
     /**
      * 노드를 이동한다.
      *
-     * @param jsTreeHibernateDTO
+     * @param comprehensiveTree
      * @param model
      * @param request
      * @return
@@ -264,13 +252,13 @@ public class MenuController extends GenericAbstractController {
      * @throws InstantiationException
      */
     @ResponseBody
-    @RequestMapping(value = "/moveMenu.do", method = RequestMethod.POST)
-    public ModelAndView moveNode(@Validated(value = MoveNode.class) MenuDTO jsTreeHibernateDTO,
+    @RequestMapping(value = "/moveDirectChat.do", method = RequestMethod.POST)
+    public ModelAndView moveNode(@Validated(value = MoveNode.class) DirectChatDTO jsTreeHibernateDTO,
                                  BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        menuService.moveMenu(jsTreeHibernateDTO, request);
+        directChatService.moveDirectChat(jsTreeHibernateDTO, request);
         setJsonDefaultSetting(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -279,7 +267,7 @@ public class MenuController extends GenericAbstractController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/analyzeMenu.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/analyzeDirectChat.do", method = RequestMethod.GET)
     public ModelAndView getChildNode(ModelMap model) {
         model.addAttribute("analyzeResult", "");
 
