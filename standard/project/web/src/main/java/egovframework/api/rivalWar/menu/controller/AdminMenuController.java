@@ -45,6 +45,11 @@ public class AdminMenuController extends GenericAbstractController {
      * @throws JsonProcessingException
      */
     @IncludedInfo(name = "RivalWar Admin Menu", listUrl = "/api/rivalWar/ROLE_ADMIN/menu/getJsTreeView.do", order = 7000, gid = 7313)
+    @RequestMapping("/getJsTreeView.do")
+    public String jsTreeSpringHibernate() {
+        return "egovframework/rivalWar/api/menu/admin/JsTreeView";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/getChildMenu.do", method = RequestMethod.GET)
     public ModelAndView getChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)

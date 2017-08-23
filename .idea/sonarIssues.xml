@@ -1668,6 +1668,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/com/ext/jstree/support/security/registration.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/rivalWar/api/menu/admin/JsTreeView.jsp">
           <value>
             <set />
@@ -1708,7 +1713,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getBranchNode.do">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getChildNode.do">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getChildNode/2/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRecentList.do">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRootNode.do">
           <value>
             <set />
           </value>

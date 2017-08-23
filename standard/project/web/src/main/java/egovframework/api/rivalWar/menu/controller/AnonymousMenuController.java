@@ -34,6 +34,7 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
     @ResponseBody
     @RequestMapping(value = "/getPaginatedChildMenu.do", method = RequestMethod.GET)
     public ModelAndView getPaginatedChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
@@ -73,6 +74,50 @@ public class AnonymousMenuController extends GenericAbstractController {
         modelAndView.addObject("result", menuDTO);
         return modelAndView;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getRootMenuCategories.do", method = RequestMethod.GET)
+    public ModelAndView getRootMenuCategories(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        long rootMenuCid = new Long(1);
+        jsTreeHibernateDTO.setC_id(rootMenuCid);
+        MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", menuDTO);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getRecentList.do", method = RequestMethod.GET)
+    public ModelAndView getRecentList(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        long rootMenuCid = new Long(2);
+        jsTreeHibernateDTO.setC_id(rootMenuCid);
+        MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", menuDTO);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getClassifiedMenu.do", method = RequestMethod.GET)
+    public ModelAndView getClassifiedMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        long rootMenuCid = new Long(3);
+        jsTreeHibernateDTO.setC_id(rootMenuCid);
+        MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", menuDTO);
+        return modelAndView;
+    }
+
+
 
     /**
      * 노드를 검색한다.
@@ -170,8 +215,9 @@ public class AnonymousMenuController extends GenericAbstractController {
     @RequestMapping(value = "/alterMenu.do", method = RequestMethod.POST)
     public ModelAndView alterNode(@Validated(value = AlterNode.class) MenuDTO jsTreeHibernateDTO,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()){
             throw new RuntimeException();
+        }
 
         jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
 

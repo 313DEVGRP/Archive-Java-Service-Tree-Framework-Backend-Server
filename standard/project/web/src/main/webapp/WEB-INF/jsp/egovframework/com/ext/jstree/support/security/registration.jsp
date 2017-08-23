@@ -1,8 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
+
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${title}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
     </script>
@@ -45,6 +51,7 @@
        <TR>
             <th>
                 <input type="hidden" id="socialProvider" name="socialProvider" value="NONE" />
+                <input type="text" id="_csrf" name="_csrf" value="313" />
                 <button type="button" id="doRegister" onclick="proceed()">Submit</button>
             </th>
        </TR>
@@ -53,6 +60,12 @@
 
 
 <script>
+    $(function () {
+        $.getJSON("/api/jsTreeServiceFramework/security/csrf.do", function (json) {
+            var csrfValue = $("input[name=_csrf]:text");
+            csrfValue.val(json._csrf_token);
+        });
+    });
 
        function proceed(){
 
@@ -91,13 +104,14 @@
                         lastName: $("#registrationForm #lastName").val(),
                         phoneno:phonenoVar,
                         password: passwordVar,
+                        _csrf: $("#registrationForm #_csrf").val(),
                         socialProvider:$("#registrationForm #socialProvider").val()
                     }
 
 
             $.ajax({
                           type: "POST",
-                          url: '../services/user/register',
+                          url: '/services/user/register?_csrf='+$("#registrationForm #_csrf").val(),
                           data: JSON.stringify(person),
                           contentType: "application/json",
                           success: function(data) {
