@@ -142,8 +142,7 @@ public class AnonymousMenuController extends GenericAbstractController {
     public ModelAndView getRootMenuCategories(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        long rootMenuCid = new Long(2);
-        jsTreeHibernateDTO.setC_id(new Long(1));
+        jsTreeHibernateDTO.setC_id(new Long(2));
         MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
