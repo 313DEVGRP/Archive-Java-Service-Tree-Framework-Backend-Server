@@ -5,8 +5,6 @@ import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import org.slf4j.Logger;
@@ -15,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -119,8 +115,7 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/getChildMenu.do", method = RequestMethod.GET)
-    public ModelAndView getChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
+    public ModelAndView getChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
 
@@ -130,8 +125,12 @@ public class AnonymousMenuController extends GenericAbstractController {
             throw new RuntimeException();
         }
 
+        logger.info("jrebel reload test #1");
+
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
         List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
+
+        logger.info("jrebel reload test #3");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
@@ -144,7 +143,7 @@ public class AnonymousMenuController extends GenericAbstractController {
             throws Exception {
 
         long rootMenuCid = new Long(1);
-        jsTreeHibernateDTO.setC_id(rootMenuCid);
+        jsTreeHibernateDTO.setC_id(new Long(1));
         MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
