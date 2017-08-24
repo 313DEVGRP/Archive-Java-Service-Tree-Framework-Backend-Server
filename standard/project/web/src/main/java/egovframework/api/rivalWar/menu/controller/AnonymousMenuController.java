@@ -142,7 +142,7 @@ public class AnonymousMenuController extends GenericAbstractController {
     public ModelAndView getRootMenuCategories(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        long rootMenuCid = new Long(1);
+        long rootMenuCid = new Long(2);
         jsTreeHibernateDTO.setC_id(new Long(1));
         MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
 
@@ -156,7 +156,7 @@ public class AnonymousMenuController extends GenericAbstractController {
     public ModelAndView getRecentList(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        long rootMenuCid = new Long(2);
+        long rootMenuCid = new Long(3);
         jsTreeHibernateDTO.setC_id(rootMenuCid);
         MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
 
@@ -170,7 +170,7 @@ public class AnonymousMenuController extends GenericAbstractController {
     public ModelAndView getClassifiedMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        long rootMenuCid = new Long(3);
+        long rootMenuCid = new Long(4);
         jsTreeHibernateDTO.setC_id(rootMenuCid);
         MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
 
