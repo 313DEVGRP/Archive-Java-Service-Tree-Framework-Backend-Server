@@ -119,18 +119,12 @@ public class AnonymousMenuController extends GenericAbstractController {
 
         ParameterParser parser = new ParameterParser(request);
 
-        logger.info("jrebel reload test");
-
         if (parser.getInt("c_id") <= 0) {
             throw new RuntimeException();
         }
 
-        logger.info("jrebel reload test #1");
-
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
         List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
-
-        logger.info("jrebel reload test #3");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
@@ -142,11 +136,11 @@ public class AnonymousMenuController extends GenericAbstractController {
     public ModelAndView getRootMenuCategories(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        jsTreeHibernateDTO.setC_id(new Long(2));
-        MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
+        jsTreeHibernateDTO.setWhere("c_parentid", new Long(2));
+        List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuDTO);
+        modelAndView.addObject("result", list);
         return modelAndView;
     }
 
@@ -155,12 +149,11 @@ public class AnonymousMenuController extends GenericAbstractController {
     public ModelAndView getRecentList(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        long rootMenuCid = new Long(3);
-        jsTreeHibernateDTO.setC_id(rootMenuCid);
-        MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
+        jsTreeHibernateDTO.setWhere("c_parentid", new Long(3));
+        List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuDTO);
+        modelAndView.addObject("result", list);
         return modelAndView;
     }
 
@@ -169,12 +162,11 @@ public class AnonymousMenuController extends GenericAbstractController {
     public ModelAndView getClassifiedMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        long rootMenuCid = new Long(4);
-        jsTreeHibernateDTO.setC_id(rootMenuCid);
-        MenuDTO menuDTO = menuService.getMenu(jsTreeHibernateDTO);
+        jsTreeHibernateDTO.setWhere("c_parentid", new Long(4));
+        List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuDTO);
+        modelAndView.addObject("result", list);
         return modelAndView;
     }
 
