@@ -413,13 +413,13 @@
                                     });
                                 </script>
                                 <customTags:jstree target="#demo"
-                                                   getChildNode="${pageContext.request.contextPath}/rivalWar/api/menu/getChildMenu.do"
-                                                   searchNode="${pageContext.request.contextPath}/rivalWar/api/menu/searchMenu.do"
-                                                   addNode="${pageContext.request.contextPath}/rivalWar/api/menu/addMenu.do"
-                                                   removeNode="${pageContext.request.contextPath}/rivalWar/api/menu/removeMenu.do"
-                                                   alterNode="${pageContext.request.contextPath}/rivalWar/api/menu/alterMenu.do"
-                                                   alterNodeType="${pageContext.request.contextPath}/rivalWar/api/menu/alterMenuType.do"
-                                                   moveNode="${pageContext.request.contextPath}/rivalWar/api/menu/moveMenu.do"></customTags:jstree>
+                                                   getChildNode="${pageContext.request.contextPath}/api/rivalWar/menu/getChildMenu.do"
+                                                   searchNode="${pageContext.request.contextPath}/api/rivalWar/menu/searchMenu.do"
+                                                   addNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/addMenu.do"
+                                                   removeNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/removeMenu.do"
+                                                   alterNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/alterMenu.do"
+                                                   alterNodeType="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/alterMenuType.do"
+                                                   moveNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/moveMenu.do"></customTags:jstree>
                             </div>
                         </div>
                     </div>

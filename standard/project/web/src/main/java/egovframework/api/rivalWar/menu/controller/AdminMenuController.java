@@ -36,38 +36,146 @@ public class AdminMenuController extends GenericAbstractController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * 자식노드를 요청한다.
+     * 노드를 추가한다.
+     *
+     * @param jsTreeHibernateDTO
+     * @param model
+     * @param bindingResult
+     * @return
+     * @throws JsonProcessingException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/addMenu.do", method = RequestMethod.POST)
+    public ModelAndView addMenu(@Validated(value = AddNode.class) MenuDTO jsTreeHibernateDTO,
+                                BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors())
+            throw new RuntimeException();
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", menuService.addMenu(jsTreeHibernateDTO));
+        return modelAndView;
+    }
+
+    /**
+     * 노드를 삭제한다.
+     *
+     * @param jsTreeHibernateDTO
+     * @param model
+     * @param bindingResult
+     * @return
+     * @throws JsonProcessingException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/removeMenu.do", method = RequestMethod.POST)
+    public ModelAndView removeNode(@Validated(value = RemoveNode.class) MenuDTO jsTreeHibernateDTO,
+                                   BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors())
+            throw new RuntimeException();
+
+        jsTreeHibernateDTO.setStatus(menuService.removeMenu(jsTreeHibernateDTO));
+        setJsonDefaultSetting(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", jsTreeHibernateDTO);
+        return modelAndView;
+    }
+
+    private void setJsonDefaultSetting(MenuDTO jsTreeHibernateDTO) {
+        long defaultSettingValue = 0;
+        jsTreeHibernateDTO.setC_parentid(defaultSettingValue);
+        jsTreeHibernateDTO.setC_position(defaultSettingValue);
+        jsTreeHibernateDTO.setC_left(defaultSettingValue);
+        jsTreeHibernateDTO.setC_right(defaultSettingValue);
+        jsTreeHibernateDTO.setC_level(defaultSettingValue);
+        jsTreeHibernateDTO.setRef(defaultSettingValue);
+    }
+
+    /**
+     * 노드를 변경한다.
+     *
+     * @param jsTreeHibernateDTO
+     * @param model
+     * @param bindingResult
+     * @return
+     * @throws JsonProcessingException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/alterMenu.do", method = RequestMethod.POST)
+    public ModelAndView alterNode(@Validated(value = AlterNode.class) MenuDTO jsTreeHibernateDTO,
+                                  BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors()){
+            throw new RuntimeException();
+        }
+
+        jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
+
+        jsTreeHibernateDTO.setStatus(menuService.alterMenu(jsTreeHibernateDTO));
+        setJsonDefaultSetting(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", jsTreeHibernateDTO);
+        return modelAndView;
+    }
+
+    /**
+     * 노드의 타입을 변경한다.
+     *
+     * @param jsTreeHibernateDTO
+     * @param model
+     * @param bindingResult
+     * @return
+     * @throws JsonProcessingException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/alterMenuType.do", method = RequestMethod.POST)
+    public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) MenuDTO jsTreeHibernateDTO,
+                                      BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors())
+            throw new RuntimeException();
+
+        menuService.alterMenuType(jsTreeHibernateDTO);
+        setJsonDefaultSetting(jsTreeHibernateDTO);
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", jsTreeHibernateDTO);
+        return modelAndView;
+    }
+
+    /**
+     * 노드를 이동한다.
      *
      * @param jsTreeHibernateDTO
      * @param model
      * @param request
-     * @return String
+     * @return
      * @throws JsonProcessingException
+     * @throws ReflectiveOperationException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
      */
-    @IncludedInfo(name = "RivalWar Admin Menu", listUrl = "/api/rivalWar/ROLE_ADMIN/menu/getJsTreeView.do", order = 7000, gid = 7313)
-    @RequestMapping("/getJsTreeView.do")
-    public String jsTreeSpringHibernate() {
-        return "egovframework/rivalWar/api/menu/admin/JsTreeView";
+    @ResponseBody
+    @RequestMapping(value = "/moveMenu.do", method = RequestMethod.POST)
+    public ModelAndView moveNode(@Validated(value = MoveNode.class) MenuDTO jsTreeHibernateDTO,
+                                 BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
+        if (bindingResult.hasErrors())
+            throw new RuntimeException();
+
+        menuService.moveMenu(jsTreeHibernateDTO, request);
+        setJsonDefaultSetting(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", jsTreeHibernateDTO);
+        return modelAndView;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getChildMenu.do", method = RequestMethod.GET)
-    public ModelAndView getChildMenu(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
-
-        ParameterParser parser = new ParameterParser(request);
-
-        logger.info("jrebel reload test");
-
-        if (parser.getInt("c_id") <= 0) {
-            throw new RuntimeException();
-        }
-
-        jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
-        List<MenuDTO> list = menuService.getChildMenu(jsTreeHibernateDTO);
+    @RequestMapping(value = "/analyzeMenu.do", method = RequestMethod.GET)
+    public ModelAndView getChildNode(ModelMap model) {
+        model.addAttribute("analyzeResult", "");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", list);
+        modelAndView.addObject("result", "ture");
         return modelAndView;
     }
 
