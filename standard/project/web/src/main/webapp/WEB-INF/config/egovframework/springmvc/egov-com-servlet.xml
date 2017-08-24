@@ -7,6 +7,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- ************************************* egovFramework ************************************* -->
+	<mvc:annotation-driven />
 	<context:annotation-config />
 	<context:component-scan base-package="egovframework">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
@@ -78,6 +79,12 @@
 		<property name="messageConverters">
 			<list>
 				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=UTF-8</value>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
 					<property name="objectMapper" ref="jacksonObjectMapper" />
 				</bean>
 			</list>

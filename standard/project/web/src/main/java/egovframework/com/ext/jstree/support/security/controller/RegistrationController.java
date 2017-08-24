@@ -25,7 +25,7 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/signup", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView signup(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "User Registration Form");
@@ -33,11 +33,8 @@ public class RegistrationController {
         return model;
     }
 
-    @RequestMapping(value = {"/user/register"}, method = { RequestMethod.GET, RequestMethod.POST }, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = {"/user/register"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody String registerUser(@RequestBody UserRegistrationForm registrationForm) throws UserAlreadyExistAuthenticationException {
-
-        String mailStr = registrationForm.getEmail();
-        System.out.print(mailStr);
 
         if (registrationForm.getUserId() == null) {
             registrationForm.setUserId(registrationForm.getUserId());
