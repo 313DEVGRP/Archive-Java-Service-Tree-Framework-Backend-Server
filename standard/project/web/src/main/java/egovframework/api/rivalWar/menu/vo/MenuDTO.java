@@ -18,9 +18,6 @@ import java.io.Serializable;
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_JSTREE_MENU", allocationSize = 1)
 public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5641929581490357881L;
 
 	public MenuDTO() {
