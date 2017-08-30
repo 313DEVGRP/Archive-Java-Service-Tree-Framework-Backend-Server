@@ -13,7 +13,6 @@ public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO
 	
 	private static final long serialVersionUID = 3465234289025484577L;
 
-
 	/** 검색조건 */
 	@JsonIgnore
     private String searchCondition = "";
