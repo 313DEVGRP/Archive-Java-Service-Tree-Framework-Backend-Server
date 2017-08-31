@@ -31,18 +31,9 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /**
-     * 자식노드를 요청한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return String
-     * @throws JsonProcessingException
-     */
     @IncludedInfo(name = "RivalWar Admin Menu", listUrl = "/api/rivalWar/menu/getJsTreeView.do", order = 7000, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
-    public String jsTreeSpringHibernate() {
+    public String getRivalWarMenu() {
         return "egovframework/api/rivalWar/menu/JsTreeView";
     }
 

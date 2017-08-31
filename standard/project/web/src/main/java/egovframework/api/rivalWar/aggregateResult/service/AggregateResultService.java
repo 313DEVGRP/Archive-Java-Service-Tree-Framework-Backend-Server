@@ -7,22 +7,22 @@ import java.util.List;
 
 public interface AggregateResultService {
 
-    public <T extends JsTreeHibernateSearchDTO> T getAggregateResult(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> T getNode(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> List<T> getChildAggregateResult(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> List<T> getChildNode(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildAggregateResult(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildNode(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> List<String> searchAggregateResult(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> List<String> searchNode(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> T addAggregateResult(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> T addNode(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> int removeAggregateResult(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> int removeNode(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> int alterAggregateResult(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> int alterNode(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> int alterAggregateResultType(T jsTreeHibernateDTO) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> int alterNodeType(T jsTreeHibernateDTO) throws Exception;
 
-    public <T extends JsTreeHibernateSearchDTO> T moveAggregateResult(T jsTreeHibernateDTO, HttpServletRequest request) throws Exception;
+    public <T extends JsTreeHibernateSearchDTO> T moveNode(T jsTreeHibernateDTO, HttpServletRequest request) throws Exception;
 
 }

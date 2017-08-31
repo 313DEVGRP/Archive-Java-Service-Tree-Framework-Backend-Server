@@ -6,6 +6,6 @@
 	<dwr:configuration>
 		<dwr:convert type="bean" class="egovframework.com.ext.jstree.springDWR.domain.User"></dwr:convert>
 	</dwr:configuration>
-	<dwr:annotation-config id="dwrAnnotationConfig" />
+	<dwr:annotation-config/>
 	<dwr:annotation-scan base-package="egovframework.com.ext.jstree.springDWR.*.*" scanDataTransferObject="true" scanRemoteProxy="true" />
 </beans>
