@@ -15,47 +15,47 @@ public class MenuServiceImpl implements MenuService {
 	private JsTreeHibernateService jsTreeHibernateService;
 	
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> T getMenu(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> T getNode(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.getNode(jsTreeHibernateDTO);
 	}
 
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> List<T> getChildMenu(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> List<T> getChildNode(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.getChildNode(jsTreeHibernateDTO);
 	}
 	
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildMenu(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildNode(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.getPaginatedChildNode(jsTreeHibernateDTO);
 	}
 
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> List<String> searchMenu(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> List<String> searchNode(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.searchNode(jsTreeHibernateDTO);
 	}
 
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> T addMenu(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> T addNode(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.addNode(jsTreeHibernateDTO);
 	}
 
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> int removeMenu(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> int removeNode(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.removeNode(jsTreeHibernateDTO);
 	}
 
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> int alterMenu(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> int alterNode(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.alterNode(jsTreeHibernateDTO);
 	}
 
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> int alterMenuType(T jsTreeHibernateDTO) throws Exception {
+	public <T extends JsTreeHibernateSearchDTO> int alterNodeType(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.alterNodeType(jsTreeHibernateDTO);
 	}
 
 	@Override
-	public <T extends JsTreeHibernateSearchDTO> T moveMenu(T jsTreeHibernateDTO, HttpServletRequest request)
+	public <T extends JsTreeHibernateSearchDTO> T moveNode(T jsTreeHibernateDTO, HttpServletRequest request)
 			throws Exception {
 		return jsTreeHibernateService.moveNode(jsTreeHibernateDTO, request);
 	}

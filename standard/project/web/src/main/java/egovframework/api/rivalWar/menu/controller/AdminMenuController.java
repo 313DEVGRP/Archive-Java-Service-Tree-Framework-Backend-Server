@@ -41,14 +41,14 @@ public class AdminMenuController extends GenericAbstractController {
      * @throws InstantiationException
      */
     @ResponseBody
-    @RequestMapping(value = "/addMenu.do", method = RequestMethod.POST)
-    public ModelAndView addMenu(@Validated(value = AddNode.class) MenuDTO jsTreeHibernateDTO,
+    @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
+    public ModelAndView addNode(@Validated(value = AddNode.class) MenuDTO jsTreeHibernateDTO,
                                 BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuService.addMenu(jsTreeHibernateDTO));
+        modelAndView.addObject("result", menuService.addNode(jsTreeHibernateDTO));
         return modelAndView;
     }
 
@@ -68,7 +68,7 @@ public class AdminMenuController extends GenericAbstractController {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        jsTreeHibernateDTO.setStatus(menuService.removeMenu(jsTreeHibernateDTO));
+        jsTreeHibernateDTO.setStatus(menuService.removeNode(jsTreeHibernateDTO));
         setJsonDefaultSetting(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -96,7 +96,7 @@ public class AdminMenuController extends GenericAbstractController {
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/alterMenu.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/alterNode.do", method = RequestMethod.POST)
     public ModelAndView alterNode(@Validated(value = AlterNode.class) MenuDTO jsTreeHibernateDTO,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors()){
@@ -105,7 +105,7 @@ public class AdminMenuController extends GenericAbstractController {
 
         jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
 
-        jsTreeHibernateDTO.setStatus(menuService.alterMenu(jsTreeHibernateDTO));
+        jsTreeHibernateDTO.setStatus(menuService.alterNode(jsTreeHibernateDTO));
         setJsonDefaultSetting(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -123,13 +123,13 @@ public class AdminMenuController extends GenericAbstractController {
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/alterMenuType.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
     public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) MenuDTO jsTreeHibernateDTO,
                                       BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        menuService.alterMenuType(jsTreeHibernateDTO);
+        menuService.alterNodeType(jsTreeHibernateDTO);
         setJsonDefaultSetting(jsTreeHibernateDTO);
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", jsTreeHibernateDTO);
@@ -149,13 +149,13 @@ public class AdminMenuController extends GenericAbstractController {
      * @throws InstantiationException
      */
     @ResponseBody
-    @RequestMapping(value = "/moveMenu.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/moveNode.do", method = RequestMethod.POST)
     public ModelAndView moveNode(@Validated(value = MoveNode.class) MenuDTO jsTreeHibernateDTO,
                                  BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        menuService.moveMenu(jsTreeHibernateDTO, request);
+        menuService.moveNode(jsTreeHibernateDTO, request);
         setJsonDefaultSetting(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -164,7 +164,7 @@ public class AdminMenuController extends GenericAbstractController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/analyzeMenu.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/analyzeNode.do", method = RequestMethod.GET)
     public ModelAndView getChildNode(ModelMap model) {
         model.addAttribute("analyzeResult", "");
 

@@ -1,5 +1,6 @@
 package egovframework.api.rivalWar.menu.vo;
 
+import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
@@ -77,5 +78,10 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 			this.setC_vote_end_date(this.getC_vote_end_date());
 		}
 	}
+
+	@MapsId
+	@OneToOne
+	@JoinColumn(name = "c_id")
+	AggregateResultDTO aggregateResultDTO;
 
 }
