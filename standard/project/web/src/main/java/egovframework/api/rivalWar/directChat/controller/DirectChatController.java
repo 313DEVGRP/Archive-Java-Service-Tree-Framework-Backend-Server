@@ -272,7 +272,7 @@ public class DirectChatController extends GenericAbstractController {
         model.addAttribute("analyzeResult", "");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", "ture");
+        modelAndView.addObject("result", "true");
         return modelAndView;
     }
 }
