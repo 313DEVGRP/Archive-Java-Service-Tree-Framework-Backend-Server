@@ -58,12 +58,6 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     private Long likeCount;
     private Long totalRegisteredPosts;
     private Long registeredHashTag;
-    //graph percent: 15%, score point: 21304 point,
-
-    //Total Traffic : 24 541, Unique Visits : 14 778, Revenue : $3 583.18, Total Sales : $59 871.12
-
-    //등록된 글 총합: 19,23 좋아요 선택 총합: 2,443(21.2%) 추가된 스펙개수: 7개 등록된 해시태그 총합: 13,233개
-    // 표준오차: 64821, 등분상 가정 유의확률: 124 유의확률: 823, 99% 신뢰구간 하한: -23134 상한: 235421 T분포결과: 8.423
 
     @Column(name = "c_number_of_advantages")
     public Long getNumberOfAdvantages() {
@@ -100,6 +94,31 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     public void setRegisteredHashTag(Long registeredHashTag) {
         this.registeredHashTag = registeredHashTag;
     }
+
+    //graph percent: 15%, score point: 21304 point,
+    private Long graphPercent;
+    private Long versusScore;
+
+    //Total Traffic : 24 541, Unique Visits : 14 778, Revenue : $3 583.18, Total Sales : $59 871.12
+    private Long totalTraffic;
+    private Long uniqueVisit;
+    private Long revisitCount;
+    private Long pageView;
+
+    //등록된 글 총합: 19,23 좋아요 선택 총합: 2,443(21.2%) 추가된 스펙개수: 7개 등록된 해시태그 총합: 13,233개
+    private Long totalArticle;
+    private Long likeArticleCount;
+    private Long specCount;
+    private Long hashCount;
+
+    // 표준오차: 64821, 등분상 가정 유의확률: 124 유의확률: 823, 99% 신뢰구간 하한: -23134 상한: 235421 T분포결과: 8.423
+    private Long standardError;
+    private Long equilibriumAssumption;
+    private Long probability;
+    private Long lowerLimit;
+    private Long higherLimit;
+    private Long distributionTResult;
+
 
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
