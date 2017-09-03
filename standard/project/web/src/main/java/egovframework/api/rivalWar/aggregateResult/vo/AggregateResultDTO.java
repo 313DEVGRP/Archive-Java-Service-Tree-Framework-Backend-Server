@@ -53,11 +53,17 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
         this.copyBooleanValue = copyBooleanValue;
     }
 
-    //우위 스펙 갯수: 6 좋아요 획득 갯수 : 3133<br>총 등록 글 : 10,490 총 등록된 해시 태그 : 4300
+    //우위 스펙 갯수: 6, 좋아요 획득 갯수 : 3133,총 등록 글 : 10,490, 총 등록된 해시 태그 : 4300
     private Long numberOfAdvantages;
     private Long likeCount;
     private Long totalRegisteredPosts;
     private Long registeredHashTag;
+    //graph percent: 15%, score point: 21304 point,
+
+    //Total Traffic : 24 541, Unique Visits : 14 778, Revenue : $3 583.18, Total Sales : $59 871.12
+
+    //등록된 글 총합: 19,23 좋아요 선택 총합: 2,443(21.2%) 추가된 스펙개수: 7개 등록된 해시태그 총합: 13,233개
+    // 표준오차: 64821, 등분상 가정 유의확률: 124 유의확률: 823, 99% 신뢰구간 하한: -23134 상한: 235421 T분포결과: 8.423
 
     @Column(name = "c_number_of_advantages")
     public Long getNumberOfAdvantages() {

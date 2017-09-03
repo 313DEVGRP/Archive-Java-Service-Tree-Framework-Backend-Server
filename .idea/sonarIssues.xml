@@ -918,6 +918,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/api/rivalWar/menu/Menu_DDL_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/com/ext/jstree/jsTreeSpringHibernate_DDL_Oracle.sql">
           <value>
             <set />
@@ -964,6 +969,36 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/aggregateResult/vo/AggregateResultDTO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/compareInfo/controller/AdminCompareInfoController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/compareInfo/controller/AdminCompareStatusInfoController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/compareInfo/controller/AnonymousCompareInfoController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/compareInfo/controller/AnonymousCompareStatusInfoController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/compareInfo/controller/UserCompareInfoController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/compareInfo/controller/UserCompareStatusInfoController.java">
           <value>
             <set />
           </value>

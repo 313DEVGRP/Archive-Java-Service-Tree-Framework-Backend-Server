@@ -6,6 +6,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -79,9 +80,15 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 		}
 	}
 
-	@MapsId
-	@OneToOne
-	@JoinColumn(name = "c_id")
-	AggregateResultDTO aggregateResultDTO;
+	private AggregateResultDTO aggregateResultDTO;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "AGGREGATE_RESULT_ID")
+	public AggregateResultDTO getAggregateResultDTO() {
+		return aggregateResultDTO;
+	}
+
+	public void setAggregateResultDTO(AggregateResultDTO aggregateResultDTO) {
+		this.aggregateResultDTO = aggregateResultDTO;
+	}
 }
