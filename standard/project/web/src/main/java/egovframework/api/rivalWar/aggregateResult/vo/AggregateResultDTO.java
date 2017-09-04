@@ -54,50 +54,191 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     }
 
     //우위 스펙 갯수: 6, 좋아요 획득 갯수 : 3133,총 등록 글 : 10,490, 총 등록된 해시 태그 : 4300
-    private Long numberOfAdvantages;
-    private Long likeCount;
-    private Long totalRegisteredPosts;
-    private Long registeredHashTag;
+    private Long topNumberOfAdvantages;
+    private Long topLikeCount;
+    private Long topTotalRegisteredPosts;
+    private Long topRegisteredHashTag;
 
-    @Column(name = "c_number_of_advantages")
-    public Long getNumberOfAdvantages() {
-        return numberOfAdvantages;
+    private Long midNumberOfAdvantages;
+    private Long midLikeCount;
+    private Long midTotalRegisteredPosts;
+    private Long midRegisteredHashTag;
+
+    private Long botNumberOfAdvantages;
+    private Long botLikeCount;
+    private Long botTotalRegisteredPosts;
+    private Long botRegisteredHashTag;
+
+    @Column(name = "top_number_of_advantages")
+    public Long getTopNumberOfAdvantages() {
+        return topNumberOfAdvantages;
     }
 
-    public void setNumberOfAdvantages(Long numberOfAdvantages) {
-        this.numberOfAdvantages = numberOfAdvantages;
+    public void setTopNumberOfAdvantages(Long topNumberOfAdvantages) {
+        this.topNumberOfAdvantages = topNumberOfAdvantages;
     }
 
-    @Column(name = "c_like_count")
-    public Long getLikeCount() {
-        return likeCount;
+    @Column(name = "top_like_count")
+    public Long getTopLikeCount() {
+        return topLikeCount;
     }
 
-    public void setLikeCount(Long likeCount) {
-        this.likeCount = likeCount;
+    public void setTopLikeCount(Long topLikeCount) {
+        this.topLikeCount = topLikeCount;
     }
 
-    @Column(name = "c_total_registered_posts")
-    public Long getTotalRegisteredPosts() {
-        return totalRegisteredPosts;
+    @Column(name = "top_total_registered_posts")
+    public Long getTopTotalRegisteredPosts() {
+        return topTotalRegisteredPosts;
     }
 
-    public void setTotalRegisteredPosts(Long totalRegisteredPosts) {
-        this.totalRegisteredPosts = totalRegisteredPosts;
+    public void setTopTotalRegisteredPosts(Long topTotalRegisteredPosts) {
+        this.topTotalRegisteredPosts = topTotalRegisteredPosts;
     }
 
-    @Column(name = "c_registered_hash_tag")
-    public Long getRegisteredHashTag() {
-        return registeredHashTag;
+    @Column(name = "top_registered_hash_tag")
+    public Long getTopRegisteredHashTag() {
+        return topRegisteredHashTag;
     }
 
-    public void setRegisteredHashTag(Long registeredHashTag) {
-        this.registeredHashTag = registeredHashTag;
+    public void setTopRegisteredHashTag(Long topRegisteredHashTag) {
+        this.topRegisteredHashTag = topRegisteredHashTag;
+    }
+
+    @Column(name = "mid_number_of_advantages")
+    public Long getMidNumberOfAdvantages() {
+        return midNumberOfAdvantages;
+    }
+
+    public void setMidNumberOfAdvantages(Long midNumberOfAdvantages) {
+        this.midNumberOfAdvantages = midNumberOfAdvantages;
+    }
+
+    @Column(name = "mid_like_count")
+    public Long getMidLikeCount() {
+        return midLikeCount;
+    }
+
+    public void setMidLikeCount(Long midLikeCount) {
+        this.midLikeCount = midLikeCount;
+    }
+
+    @Column(name = "mid_total_registered_posts")
+    public Long getMidTotalRegisteredPosts() {
+        return midTotalRegisteredPosts;
+    }
+
+    public void setMidTotalRegisteredPosts(Long midTotalRegisteredPosts) {
+        this.midTotalRegisteredPosts = midTotalRegisteredPosts;
+    }
+
+    @Column(name = "mid_registered_hash_tag")
+    public Long getMidRegisteredHashTag() {
+        return midRegisteredHashTag;
+    }
+
+    public void setMidRegisteredHashTag(Long midRegisteredHashTag) {
+        this.midRegisteredHashTag = midRegisteredHashTag;
+    }
+
+    @Column(name = "bot_number_of_advantages")
+    public Long getBotNumberOfAdvantages() {
+        return botNumberOfAdvantages;
+    }
+
+    public void setBotNumberOfAdvantages(Long botNumberOfAdvantages) {
+        this.botNumberOfAdvantages = botNumberOfAdvantages;
+    }
+
+    @Column(name = "bot_like_count")
+    public Long getBotLikeCount() {
+        return botLikeCount;
+    }
+
+    public void setBotLikeCount(Long botLikeCount) {
+        this.botLikeCount = botLikeCount;
+    }
+
+    @Column(name = "bot_total_registered_posts")
+    public Long getBotTotalRegisteredPosts() {
+        return botTotalRegisteredPosts;
+    }
+
+    public void setBotTotalRegisteredPosts(Long botTotalRegisteredPosts) {
+        this.botTotalRegisteredPosts = botTotalRegisteredPosts;
+    }
+
+    @Column(name = "bot_registered_hash_tag")
+    public Long getBotRegisteredHashTag() {
+        return botRegisteredHashTag;
+    }
+
+    public void setBotRegisteredHashTag(Long botRegisteredHashTag) {
+        this.botRegisteredHashTag = botRegisteredHashTag;
     }
 
     //graph percent: 15%, score point: 21304 point,
-    private Long graphPercent;
-    private Long versusScore;
+    private Long topGraphPercent;
+    private Long midGraphPercent;
+    private Long botGraphPercent;
+
+    private Long topVersusScore;
+    private Long midVersusScore;
+    private Long botVersusScore;
+
+    @Column(name = "top_graph_percent")
+    public Long getTopGraphPercent() {
+        return topGraphPercent;
+    }
+
+    public void setTopGraphPercent(Long topGraphPercent) {
+        this.topGraphPercent = topGraphPercent;
+    }
+
+    @Column(name = "mid_graph_percent")
+    public Long getMidGraphPercent() {
+        return midGraphPercent;
+    }
+
+    public void setMidGraphPercent(Long midGraphPercent) {
+        this.midGraphPercent = midGraphPercent;
+    }
+
+    @Column(name = "bot_graph_percent")
+    public Long getBotGraphPercent() {
+        return botGraphPercent;
+    }
+
+    public void setBotGraphPercent(Long botGraphPercent) {
+        this.botGraphPercent = botGraphPercent;
+    }
+
+    @Column(name = "top_versus_score")
+    public Long getTopVersusScore() {
+        return topVersusScore;
+    }
+
+    public void setTopVersusScore(Long topVersusScore) {
+        this.topVersusScore = topVersusScore;
+    }
+
+    @Column(name = "mid_versus_score")
+    public Long getMidVersusScore() {
+        return midVersusScore;
+    }
+
+    public void setMidVersusScore(Long midVersusScore) {
+        this.midVersusScore = midVersusScore;
+    }
+
+    @Column(name = "bot_versus_score")
+    public Long getBotVersusScore() {
+        return botVersusScore;
+    }
+
+    public void setBotVersusScore(Long botVersusScore) {
+        this.botVersusScore = botVersusScore;
+    }
 
     //Total Traffic : 24 541, Unique Visits : 14 778, Revenue : $3 583.18, Total Sales : $59 871.12
     private Long totalTraffic;
@@ -105,11 +246,83 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     private Long revisitCount;
     private Long pageView;
 
+    @Column(name = "total_traffic")
+    public Long getTotalTraffic() {
+        return totalTraffic;
+    }
+
+    public void setTotalTraffic(Long totalTraffic) {
+        this.totalTraffic = totalTraffic;
+    }
+
+    @Column(name = "unique_visit")
+    public Long getUniqueVisit() {
+        return uniqueVisit;
+    }
+
+    public void setUniqueVisit(Long uniqueVisit) {
+        this.uniqueVisit = uniqueVisit;
+    }
+
+    @Column(name = "revisit_count")
+    public Long getRevisitCount() {
+        return revisitCount;
+    }
+
+    public void setRevisitCount(Long revisitCount) {
+        this.revisitCount = revisitCount;
+    }
+
+    @Column(name = "page_view")
+    public Long getPageView() {
+        return pageView;
+    }
+
+    public void setPageView(Long pageView) {
+        this.pageView = pageView;
+    }
+
     //등록된 글 총합: 19,23 좋아요 선택 총합: 2,443(21.2%) 추가된 스펙개수: 7개 등록된 해시태그 총합: 13,233개
     private Long totalArticle;
-    private Long likeArticleCount;
-    private Long specCount;
-    private Long hashCount;
+    private Long totalLikeCount;
+    private Long totalSpecCount;
+    private Long totalHashCount;
+
+    @Column(name = "total_article")
+    public Long getTotalArticle() {
+        return totalArticle;
+    }
+
+    public void setTotalArticle(Long totalArticle) {
+        this.totalArticle = totalArticle;
+    }
+
+    @Column(name = "total_like_count")
+    public Long getTotalLikeCount() {
+        return totalLikeCount;
+    }
+
+    public void setTotalLikeCount(Long totalLikeCount) {
+        this.totalLikeCount = totalLikeCount;
+    }
+
+    @Column(name = "total_spec_count")
+    public Long getTotalSpecCount() {
+        return totalSpecCount;
+    }
+
+    public void setTotalSpecCount(Long totalSpecCount) {
+        this.totalSpecCount = totalSpecCount;
+    }
+
+    @Column(name = "total_hash_count")
+    public Long getTotalHashCount() {
+        return totalHashCount;
+    }
+
+    public void setTotalHashCount(Long totalHashCount) {
+        this.totalHashCount = totalHashCount;
+    }
 
     // 표준오차: 64821, 등분상 가정 유의확률: 124 유의확률: 823, 99% 신뢰구간 하한: -23134 상한: 235421 T분포결과: 8.423
     private Long standardError;
@@ -119,14 +332,106 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     private Long higherLimit;
     private Long distributionTResult;
 
+    @Column(name = "standard_error")
+    public Long getStandardError() {
+        return standardError;
+    }
+
+    public void setStandardError(Long standardError) {
+        this.standardError = standardError;
+    }
+
+    @Column(name = "equilibrium_assumption")
+    public Long getEquilibriumAssumption() {
+        return equilibriumAssumption;
+    }
+
+    public void setEquilibriumAssumption(Long equilibriumAssumption) {
+        this.equilibriumAssumption = equilibriumAssumption;
+    }
+
+    @Column(name = "probability")
+    public Long getProbability() {
+        return probability;
+    }
+
+    public void setProbability(Long probability) {
+        this.probability = probability;
+    }
+
+    @Column(name = "lower_limit")
+    public Long getLowerLimit() {
+        return lowerLimit;
+    }
+
+    public void setLowerLimit(Long lowerLimit) {
+        this.lowerLimit = lowerLimit;
+    }
+
+    @Column(name = "higher_limit")
+    public Long getHigherLimit() {
+        return higherLimit;
+    }
+
+    public void setHigherLimit(Long higherLimit) {
+        this.higherLimit = higherLimit;
+    }
+
+    @Column(name = "distribution_t_result")
+    public Long getDistributionTResult() {
+        return distributionTResult;
+    }
+
+    public void setDistributionTResult(Long distributionTResult) {
+        this.distributionTResult = distributionTResult;
+    }
 
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof AggregateResultDTO) {
-            this.setNumberOfAdvantages(this.getNumberOfAdvantages());
-            this.setLikeCount(this.getLikeCount());
-            this.setTotalRegisteredPosts(this.getTotalRegisteredPosts());
-            this.setRegisteredHashTag(this.getRegisteredHashTag());
+            this.setTopNumberOfAdvantages(this.getTopNumberOfAdvantages());
+            this.setTopLikeCount(this.getTopLikeCount());
+            this.setTopTotalRegisteredPosts(this.getTopTotalRegisteredPosts());
+            this.setTopRegisteredHashTag(this.getTopRegisteredHashTag());
+
+            this.setMidNumberOfAdvantages(this.getMidNumberOfAdvantages());
+            this.setMidLikeCount(this.getMidLikeCount());
+            this.setMidTotalRegisteredPosts(this.getMidTotalRegisteredPosts());
+            this.setMidRegisteredHashTag(this.getMidRegisteredHashTag());
+
+            this.setBotNumberOfAdvantages(this.getBotNumberOfAdvantages());
+            this.setBotLikeCount(this.getBotLikeCount());
+            this.setBotTotalRegisteredPosts(this.getBotTotalRegisteredPosts());
+            this.setBotRegisteredHashTag(this.getBotRegisteredHashTag());
+
+            this.setTopGraphPercent(this.getTopGraphPercent());
+            this.setMidGraphPercent(this.getMidGraphPercent());
+            this.setBotGraphPercent(this.getBotGraphPercent());
+
+            this.setTopVersusScore(this.getTopVersusScore());
+            this.setMidVersusScore(this.getMidVersusScore());
+            this.setBotVersusScore(this.getBotVersusScore());
+
+            this.setTotalTraffic(this.getTotalTraffic());
+            this.setUniqueVisit(this.getUniqueVisit());
+            this.setRevisitCount(this.getRevisitCount());
+            this.setPageView(this.getPageView());
+
+            this.setTotalArticle(this.getTotalArticle());
+            this.setTotalLikeCount(this.getTotalLikeCount());
+            this.setTotalSpecCount(this.getTotalSpecCount());
+            this.setTotalHashCount(this.getTotalHashCount());
+
+            this.setStandardError(this.getStandardError());
+            this.setEquilibriumAssumption(this.getEquilibriumAssumption());
+            this.setProbability(this.getProbability());
+            this.setLowerLimit(this.getLowerLimit());
+            this.setHigherLimit(this.getHigherLimit());
+
+            this.setDistributionTResult(this.getDistributionTResult());
+
+
+
         }
     }
 }

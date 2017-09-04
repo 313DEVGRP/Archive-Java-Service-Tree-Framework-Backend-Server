@@ -933,6 +933,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/menu/Menu_Data_Script_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/jsTreeServiceFramework/SecurityController.java">
           <value>
             <set />
