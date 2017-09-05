@@ -149,7 +149,7 @@ public class AnonymousMenuController extends GenericAbstractController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getRecentFirstChildNode.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/getRootAggregateResult.do", method = RequestMethod.GET)
     public ModelAndView getRecentFirstChildNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
