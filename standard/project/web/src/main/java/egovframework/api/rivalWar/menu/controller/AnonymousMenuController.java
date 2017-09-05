@@ -2,6 +2,7 @@ package egovframework.api.rivalWar.menu.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
+import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
@@ -62,7 +63,6 @@ public class AnonymousMenuController extends GenericAbstractController {
         modelAndView.addObject("result", menuService.searchNode(jsTreeHibernateDTO));
         return modelAndView;
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/getPaginatedChildNode.do", method = RequestMethod.GET)
@@ -146,6 +146,27 @@ public class AnonymousMenuController extends GenericAbstractController {
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
         return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getRecentFirstChildNode.do", method = RequestMethod.GET)
+    public ModelAndView getRecentFirstChildNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setWhere("c_parentid", new Long(3));
+        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
+        if(list.size() > 0){
+            MenuDTO tempMenuDTO = list.get(0);
+            AggregateResultDTO resultDTO = tempMenuDTO.getAggregateResultDTO();
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", resultDTO);
+            return modelAndView;
+        }else{
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", "none exist childnode");
+            return modelAndView;
+        }
+
     }
 
     @ResponseBody
