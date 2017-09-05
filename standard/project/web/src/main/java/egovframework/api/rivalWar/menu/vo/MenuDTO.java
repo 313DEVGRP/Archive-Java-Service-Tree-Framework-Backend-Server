@@ -1,5 +1,6 @@
 package egovframework.api.rivalWar.menu.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
@@ -82,6 +83,7 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	private AggregateResultDTO aggregateResultDTO;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "AGGREGATE_RESULT_ID")
 	public AggregateResultDTO getAggregateResultDTO() {
