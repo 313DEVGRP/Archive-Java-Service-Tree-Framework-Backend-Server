@@ -329,31 +329,34 @@
                                     <div id="demo" class="demo demo_side"></div>
 
                                     <div class="demo_con">
-                                        <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
-                                            <thead>
-                                            <tr>
-                                                <th>topName</th>
-                                                <th>topNumberOfAdvantages</th>
-                                                <th>topVersusScore</th>
-                                                <th>topLikeCount</th>
-                                                <th>topTotalRegisteredPosts</th>
-                                                <th>topRegisteredHashTag</th>
-                                                <th>topGraphPercent</th>
-                                            </tr>
-                                            </thead>
-                                            <tfoot>
-                                            <tr>
-                                                <th>topName</th>
-                                                <th>topNumberOfAdvantages</th>
-                                                <th>topVersusScore</th>
-                                                <th>topLikeCount</th>
-                                                <th>topTotalRegisteredPosts</th>
-                                                <th>topRegisteredHashTag</th>
-                                                <th>topGraphPercent</th>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
                                     </div>
+                                </div>
+
+                                <div class="datatableDiv">
+                                    <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>topName</th>
+                                            <th>topNumberOfAdvantages</th>
+                                            <th>topVersusScore</th>
+                                            <th>topLikeCount</th>
+                                            <th>topTotalRegisteredPosts</th>
+                                            <th>topRegisteredHashTag</th>
+                                            <th>topGraphPercent</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>topName</th>
+                                            <th>topNumberOfAdvantages</th>
+                                            <th>topVersusScore</th>
+                                            <th>topLikeCount</th>
+                                            <th>topTotalRegisteredPosts</th>
+                                            <th>topRegisteredHashTag</th>
+                                            <th>topGraphPercent</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
 
                                 <div id='alog'
