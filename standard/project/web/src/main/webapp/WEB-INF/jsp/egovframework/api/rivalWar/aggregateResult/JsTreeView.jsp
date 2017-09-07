@@ -329,20 +329,29 @@
                                     <div id="demo" class="demo demo_side"></div>
 
                                     <div class="demo_con">
-                                        <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0"
-                                               width="100%">
+                                        <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
                                             <thead>
                                             <tr>
-                                                <th>c_id</th>
-                                                <th>c_parentid</th>
-                                                <th>c_position</th>
-                                                <th>c_left</th>
-                                                <th>c_right</th>
-                                                <th>c_level</th>
-                                                <th>c_title</th>
-                                                <th>c_type</th>
+                                                <th>topName</th>
+                                                <th>topNumberOfAdvantages</th>
+                                                <th>topVersusScore</th>
+                                                <th>topLikeCount</th>
+                                                <th>topTotalRegisteredPosts</th>
+                                                <th>topRegisteredHashTag</th>
+                                                <th>topGraphPercent</th>
                                             </tr>
                                             </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>topName</th>
+                                                <th>topNumberOfAdvantages</th>
+                                                <th>topVersusScore</th>
+                                                <th>topLikeCount</th>
+                                                <th>topTotalRegisteredPosts</th>
+                                                <th>topRegisteredHashTag</th>
+                                                <th>topGraphPercent</th>
+                                            </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -354,63 +363,36 @@
 
                                 <!-- JavaScript neccessary for the tree -->
                                 <script type="text/javascript">
-                                    function jstreeDataTableReload() {
+
+                                    function jsTreeClick(selectedNodeID) {
+                                        console.log(selectedNodeID);
+                                        var tempAjaxID = selectedNodeID.replace("node_", "").replace("copy_", "");
                                         var jstreeDataTable = $('#jstreeTable').dataTable({
-                                            "ajax": {
-                                                "url": "${pageContext.request.contextPath}/rivalWar/api/aggregateResult/monitor/list.do",
-                                                "dataSrc": "rows"
-                                            },
                                             "processing": true,
-                                            "responsive": true,
-                                            "columns": [{
-                                                "data": "cell.0"
-                                            }, {
-                                                "data": "cell.1"
-                                            }, {
-                                                "data": "cell.2"
-                                            }, {
-                                                "data": "cell.3"
-                                            }, {
-                                                "data": "cell.4"
-                                            }, {
-                                                "data": "cell.5"
-                                            }, {
-                                                "data": "cell.6"
-                                            }, {
-                                                "data": "cell.7"
-                                            }]
+                                            "serverSide": true,
+                                            "bDestroy": true,
+                                            "bJQueryUI": true,
+                                            "bRegex": true,
+                                            "ajax": {
+                                                "url": "${pageContext.request.contextPath}/api/rivalWar/aggregateResult/getNodeForDatatable.do",
+                                                "data": function ( d ) {
+                                                    delete(d.order);
+                                                    d.c_id = tempAjaxID;
+                                                },
+                                                "dataSrc": ""
+                                            },
+                                            "columns": [
+                                                {"data": "topName"},
+                                                {"data": "topNumberOfAdvantages"},
+                                                {"data": "topVersusScore"},
+                                                {"data": "topLikeCount"},
+                                                {"data": "topTotalRegisteredPosts"},
+                                                {"data": "topRegisteredHashTag"},
+                                                {"data": "topGraphPercent"}
+                                            ]
                                         });
-                                        jstreeDataTable.api().ajax.reload();
                                     }
 
-                                    $(function () {
-
-                                        var jstreeDataTable = $('#jstreeTable').dataTable({
-                                            "ajax": {
-                                                "url": "${pageContext.request.contextPath}/rivalWar/api/aggregateResult/monitor/list.do",
-                                                "dataSrc": "rows"
-                                            },
-                                            "processing": true,
-                                            "responsive": true,
-                                            "columns": [{
-                                                "data": "cell.0"
-                                            }, {
-                                                "data": "cell.1"
-                                            }, {
-                                                "data": "cell.2"
-                                            }, {
-                                                "data": "cell.3"
-                                            }, {
-                                                "data": "cell.4"
-                                            }, {
-                                                "data": "cell.5"
-                                            }, {
-                                                "data": "cell.6"
-                                            }, {
-                                                "data": "cell.7"
-                                            }]
-                                        });
-                                    });
                                 </script>
                                 <customTags:jstree target="#demo"
                                                    getChildNode="${pageContext.request.contextPath}/api/rivalWar/aggregateResult/getChildNode.do"

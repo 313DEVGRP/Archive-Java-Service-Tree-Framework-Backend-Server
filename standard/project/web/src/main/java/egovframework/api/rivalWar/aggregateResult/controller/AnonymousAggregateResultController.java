@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,20 +91,50 @@ public class AnonymousAggregateResultController extends GenericAbstractControlle
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getNode.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/getNode.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getNode(AggregateResultDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
-        ParameterParser parser = new ParameterParser(request);
+        if(request.getMethod().equals("GET")){
+            ParameterParser parser = new ParameterParser(request);
 
-        if (parser.getInt("c_id") <= 0) {
-            throw new RuntimeException();
+            if (parser.getInt("c_id") <= 0 ) {
+                throw new RuntimeException();
+            }
+        }else{
+            if(jsTreeHibernateDTO.getC_id() <= 0){
+                throw new RuntimeException();
+            }
         }
 
         AggregateResultDTO aggregateResultDTO = aggregateResultService.getNode(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", aggregateResultDTO);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getNodeForDatatable.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView getNodeForDatatable(AggregateResultDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        if(request.getMethod().equals("GET")){
+            ParameterParser parser = new ParameterParser(request);
+
+            if (parser.getInt("c_id") <= 0 ) {
+                throw new RuntimeException();
+            }
+        }else{
+            if(jsTreeHibernateDTO.getC_id() <= 0){
+                throw new RuntimeException();
+            }
+        }
+        List<AggregateResultDTO> list = new ArrayList<AggregateResultDTO>();
+        list.add(aggregateResultService.getNode(jsTreeHibernateDTO));
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
         return modelAndView;
     }
 

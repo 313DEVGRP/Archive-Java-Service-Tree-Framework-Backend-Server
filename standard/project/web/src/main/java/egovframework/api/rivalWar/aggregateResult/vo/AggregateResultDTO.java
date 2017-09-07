@@ -54,20 +54,49 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     }
 
     //우위 스펙 갯수: 6, 좋아요 획득 갯수 : 3133,총 등록 글 : 10,490, 총 등록된 해시 태그 : 4300
+    //graph percent: 15%, score point: 21304 point,
+    private String calTime;
+    @Column(name = "cal_time")
+    public String getCalTime() {
+        return calTime;
+    }
+
+    public void setCalTime(String calTime) {
+        this.calTime = calTime;
+    }
+
+    private String topName;
     private Long topNumberOfAdvantages;
+    private Long topVersusScore;
     private Long topLikeCount;
     private Long topTotalRegisteredPosts;
     private Long topRegisteredHashTag;
+    private Long topGraphPercent;
 
+    private String midName;
     private Long midNumberOfAdvantages;
     private Long midLikeCount;
     private Long midTotalRegisteredPosts;
     private Long midRegisteredHashTag;
+    private Long midGraphPercent;
+    private Long midVersusScore;
 
+    private String botName;
     private Long botNumberOfAdvantages;
     private Long botLikeCount;
     private Long botTotalRegisteredPosts;
     private Long botRegisteredHashTag;
+    private Long botGraphPercent;
+    private Long botVersusScore;
+
+    @Column(name = "top_name")
+    public String getTopName() {
+        return topName;
+    }
+
+    public void setTopName(String topName) {
+        this.topName = topName;
+    }
 
     @Column(name = "top_number_of_advantages")
     public Long getTopNumberOfAdvantages() {
@@ -103,6 +132,33 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
 
     public void setTopRegisteredHashTag(Long topRegisteredHashTag) {
         this.topRegisteredHashTag = topRegisteredHashTag;
+    }
+
+    @Column(name = "top_graph_percent")
+    public Long getTopGraphPercent() {
+        return topGraphPercent;
+    }
+
+    public void setTopGraphPercent(Long topGraphPercent) {
+        this.topGraphPercent = topGraphPercent;
+    }
+
+    @Column(name = "top_versus_score")
+    public Long getTopVersusScore() {
+        return topVersusScore;
+    }
+
+    public void setTopVersusScore(Long topVersusScore) {
+        this.topVersusScore = topVersusScore;
+    }
+
+    @Column(name = "mid_name")
+    public String getMidName() {
+        return midName;
+    }
+
+    public void setMidName(String midName) {
+        this.midName = midName;
     }
 
     @Column(name = "mid_number_of_advantages")
@@ -141,6 +197,33 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
         this.midRegisteredHashTag = midRegisteredHashTag;
     }
 
+    @Column(name = "mid_graph_percent")
+    public Long getMidGraphPercent() {
+        return midGraphPercent;
+    }
+
+    public void setMidGraphPercent(Long midGraphPercent) {
+        this.midGraphPercent = midGraphPercent;
+    }
+
+    @Column(name = "mid_versus_score")
+    public Long getMidVersusScore() {
+        return midVersusScore;
+    }
+
+    public void setMidVersusScore(Long midVersusScore) {
+        this.midVersusScore = midVersusScore;
+    }
+
+    @Column(name = "bot_name")
+    public String getBotName() {
+        return botName;
+    }
+
+    public void setBotName(String botName) {
+        this.botName = botName;
+    }
+
     @Column(name = "bot_number_of_advantages")
     public Long getBotNumberOfAdvantages() {
         return botNumberOfAdvantages;
@@ -177,33 +260,6 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
         this.botRegisteredHashTag = botRegisteredHashTag;
     }
 
-    //graph percent: 15%, score point: 21304 point,
-    private Long topGraphPercent;
-    private Long midGraphPercent;
-    private Long botGraphPercent;
-
-    private Long topVersusScore;
-    private Long midVersusScore;
-    private Long botVersusScore;
-
-    @Column(name = "top_graph_percent")
-    public Long getTopGraphPercent() {
-        return topGraphPercent;
-    }
-
-    public void setTopGraphPercent(Long topGraphPercent) {
-        this.topGraphPercent = topGraphPercent;
-    }
-
-    @Column(name = "mid_graph_percent")
-    public Long getMidGraphPercent() {
-        return midGraphPercent;
-    }
-
-    public void setMidGraphPercent(Long midGraphPercent) {
-        this.midGraphPercent = midGraphPercent;
-    }
-
     @Column(name = "bot_graph_percent")
     public Long getBotGraphPercent() {
         return botGraphPercent;
@@ -211,24 +267,6 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
 
     public void setBotGraphPercent(Long botGraphPercent) {
         this.botGraphPercent = botGraphPercent;
-    }
-
-    @Column(name = "top_versus_score")
-    public Long getTopVersusScore() {
-        return topVersusScore;
-    }
-
-    public void setTopVersusScore(Long topVersusScore) {
-        this.topVersusScore = topVersusScore;
-    }
-
-    @Column(name = "mid_versus_score")
-    public Long getMidVersusScore() {
-        return midVersusScore;
-    }
-
-    public void setMidVersusScore(Long midVersusScore) {
-        this.midVersusScore = midVersusScore;
     }
 
     @Column(name = "bot_versus_score")
@@ -389,27 +427,31 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof AggregateResultDTO) {
+
+            this.setCalTime(this.getCalTime());
+
+            this.setTopName(this.getTopName());
             this.setTopNumberOfAdvantages(this.getTopNumberOfAdvantages());
             this.setTopLikeCount(this.getTopLikeCount());
             this.setTopTotalRegisteredPosts(this.getTopTotalRegisteredPosts());
             this.setTopRegisteredHashTag(this.getTopRegisteredHashTag());
+            this.setTopGraphPercent(this.getTopGraphPercent());
+            this.setTopVersusScore(this.getTopVersusScore());
 
+            this.setMidName(this.getMidName());
             this.setMidNumberOfAdvantages(this.getMidNumberOfAdvantages());
             this.setMidLikeCount(this.getMidLikeCount());
             this.setMidTotalRegisteredPosts(this.getMidTotalRegisteredPosts());
             this.setMidRegisteredHashTag(this.getMidRegisteredHashTag());
+            this.setMidGraphPercent(this.getMidGraphPercent());
+            this.setMidVersusScore(this.getMidVersusScore());
 
+            this.setBotName(this.getBotName());
             this.setBotNumberOfAdvantages(this.getBotNumberOfAdvantages());
             this.setBotLikeCount(this.getBotLikeCount());
             this.setBotTotalRegisteredPosts(this.getBotTotalRegisteredPosts());
             this.setBotRegisteredHashTag(this.getBotRegisteredHashTag());
-
-            this.setTopGraphPercent(this.getTopGraphPercent());
-            this.setMidGraphPercent(this.getMidGraphPercent());
             this.setBotGraphPercent(this.getBotGraphPercent());
-
-            this.setTopVersusScore(this.getTopVersusScore());
-            this.setMidVersusScore(this.getMidVersusScore());
             this.setBotVersusScore(this.getBotVersusScore());
 
             this.setTotalTraffic(this.getTotalTraffic());
@@ -429,9 +471,6 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
             this.setHigherLimit(this.getHigherLimit());
 
             this.setDistributionTResult(this.getDistributionTResult());
-
-
-
         }
     }
 }

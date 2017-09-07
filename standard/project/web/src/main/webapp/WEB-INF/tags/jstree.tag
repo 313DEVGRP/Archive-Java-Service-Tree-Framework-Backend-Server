@@ -324,6 +324,12 @@
           }
         });
       });
+    }).bind("select_node.jstree", function (event, data) {
+      // `data.rslt.obj` is the jquery extended node that was clicked
+      if ($.isFunction(jsTreeClick)) {
+        console.log(data.rslt.obj);
+        jsTreeClick(data.rslt.obj.attr("id"));
+      }
     });
 
   });

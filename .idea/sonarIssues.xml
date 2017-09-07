@@ -1793,6 +1793,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/js/egovframework/com/ext/jstree/DataTables-1.10.4/media/js/jquery.dataTables.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/js/egovframework/com/ext/jstree/jquery-1.12.4/.gitignore">
           <value>
             <set />
@@ -1834,6 +1839,11 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRecentList.do">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRootAggregateResult.do">
           <value>
             <set />
           </value>
