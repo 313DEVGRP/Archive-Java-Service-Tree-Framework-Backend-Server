@@ -89,7 +89,7 @@
     <customTags:assetsCssExtendNas
             theRestOfFileName="/DataTables-1.10.16/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
     <customTags:assetsCssExtendNas
-            theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
+            theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/css/responsive.dataTables.css"></customTags:assetsCssExtendNas>
 
     <customTags:assetsJsExtendNas
             theRestOfFileName="/DataTables-1.10.16/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>

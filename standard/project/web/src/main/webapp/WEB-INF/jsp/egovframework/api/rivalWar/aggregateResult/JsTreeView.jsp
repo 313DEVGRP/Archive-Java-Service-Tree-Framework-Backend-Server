@@ -82,10 +82,16 @@
 
     <!-- dataTable -->
     <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
-    <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/css/responsive.dataTables.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Buttons/css/buttons.dataTables.min.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Select/css/select.dataTables.min.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Editor-1.6.5/css/editor.dataTables.min.css"></customTags:assetsCssExtendNas>
 
-    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
-    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/media/js/jquery.dataTables.min.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/js/dataTables.responsive.min.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Buttons/js/dataTables.buttons.min.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Select/js/dataTables.select.min.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Editor-1.6.5/js/dataTables.editor.min.js"></customTags:assetsJsExtendNas>
 
     <!-- Style Setting -->
     <style type="text/css">
@@ -316,52 +322,77 @@
                                     </div>
                                 </div>
 
+
                                 <div class="clearfix">
                                     <div id="demo" class="demo demo_side"></div>
 
                                     <div class="demo_con">
+                                        <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>topName</th>
+                                                <th>topNumberOfAdvantages</th>
+                                                <th>topVersusScore</th>
+                                                <th>topLikeCount</th>
+                                                <th>topTotalRegisteredPosts</th>
+                                                <th>topRegisteredHashTag</th>
+                                                <th>topGraphPercent</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>topName</th>
+                                                <th>topNumberOfAdvantages</th>
+                                                <th>topVersusScore</th>
+                                                <th>topLikeCount</th>
+                                                <th>topTotalRegisteredPosts</th>
+                                                <th>topRegisteredHashTag</th>
+                                                <th>topGraphPercent</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
                                     </div>
                                 </div>
 
-                                <div class="datatableDiv">
-                                    <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
-                                        <thead>
-                                        <tr>
-                                            <th>topName</th>
-                                            <th>topNumberOfAdvantages</th>
-                                            <th>topVersusScore</th>
-                                            <th>topLikeCount</th>
-                                            <th>topTotalRegisteredPosts</th>
-                                            <th>topRegisteredHashTag</th>
-                                            <th>topGraphPercent</th>
-                                        </tr>
-                                        </thead>
-                                        <tfoot>
-                                        <tr>
-                                            <th>topName</th>
-                                            <th>topNumberOfAdvantages</th>
-                                            <th>topVersusScore</th>
-                                            <th>topLikeCount</th>
-                                            <th>topTotalRegisteredPosts</th>
-                                            <th>topRegisteredHashTag</th>
-                                            <th>topGraphPercent</th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                <div id='alog' style="float: left; border: 1px solid gray; padding: 5px; height: 150px; margin-top: 15px; overflow: auto; width: 98%;">분석 결과</div>
 
-                                <div id='alog'
-                                     style="float: left; border: 1px solid gray; padding: 5px; height: 150px; margin-top: 15px; overflow: auto; width: 98%;">
-                                    분석 결과
-                                </div>
 
                                 <!-- JavaScript neccessary for the tree -->
                                 <script type="text/javascript">
 
+                                    var editor = new $.fn.dataTable.Editor( {
+                                        ajax: "../php/staff.php",
+                                        table: "#jstreeTable",
+                                        idSrc:  'topName',
+                                        fields: [ {
+                                            label: "topName:",
+                                            name: "topName"
+                                        }, {
+                                            label: "topNumberOfAdvantages:",
+                                            name: "topNumberOfAdvantages"
+                                        }, {
+                                            label: "topVersusScore:",
+                                            name: "topVersusScore"
+                                        }, {
+                                            label: "topLikeCount:",
+                                            name: "topLikeCount"
+                                        }, {
+                                            label: "topTotalRegisteredPosts:",
+                                            name: "topTotalRegisteredPosts"
+                                        }, {
+                                            label: "topRegisteredHashTag:",
+                                            name: "topRegisteredHashTag"
+                                        }, {
+                                            label: "topGraphPercent:",
+                                            name: "topGraphPercent"
+                                        }
+                                        ]
+                                    } );
+
                                     function jsTreeClick(selectedNodeID) {
                                         console.log(selectedNodeID);
                                         var tempAjaxID = selectedNodeID.replace("node_", "").replace("copy_", "");
-                                        var jstreeDataTable = $('#jstreeTable').dataTable({
+                                        $('#jstreeTable').dataTable({
                                             "processing": true,
                                             "serverSide": true,
                                             "bDestroy": true,
@@ -383,6 +414,11 @@
                                                 {"data": "topTotalRegisteredPosts"},
                                                 {"data": "topRegisteredHashTag"},
                                                 {"data": "topGraphPercent"}
+                                            ],
+                                            select: true,
+                                            dom: "Bfrtip",
+                                            buttons: [
+                                                { extend: "edit",   editor: editor }
                                             ]
                                         });
                                     }
