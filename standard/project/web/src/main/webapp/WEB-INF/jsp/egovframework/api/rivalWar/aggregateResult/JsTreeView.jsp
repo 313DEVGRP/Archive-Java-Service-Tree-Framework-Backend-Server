@@ -70,31 +70,22 @@
     <customTags:assetsJsExtendNas theRestOfFileName="/jquery-migrate-1.4.1.min.js"></customTags:assetsJsExtendNas>
     <customTags:assetsJsExtendNas theRestOfFileName="/jquery-ui-1.12.1/jquery-ui.min.js"></customTags:assetsJsExtendNas>
 
-    <customTags:assetsCssExtendNas
-            theRestOfFileName="/normalize.css-4.2.0/normalize.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/normalize.css-4.2.0/normalize.css"></customTags:assetsCssExtendNas>
     <customTags:assetsCssExtendNas theRestOfFileName="/font/NanumGothic.css"></customTags:assetsCssExtendNas>
     <!-- JSTREE -->
-    <customTags:assetsJsExtendNas
-            theRestOfFileName="/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:assetsJsExtendNas>
-    <customTags:assetsJsExtendNas
-            theRestOfFileName="/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:assetsJsExtendNas>
     <customTags:assetsJsExtendNas theRestOfFileName="/jstree-v.pre1.0/jquery.jstree.js"></customTags:assetsJsExtendNas>
 
-    <customTags:assetsJsExtendNas
-            theRestOfFileName="/jnotify_v2.1/jquery/jNotify.jquery.min.js"></customTags:assetsJsExtendNas>
-    <customTags:assetsCssExtendNas
-            theRestOfFileName="/jnotify_v2.1/jquery/jNotify.jquery.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/jnotify_v2.1/jquery/jNotify.jquery.min.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/jnotify_v2.1/jquery/jNotify.jquery.css"></customTags:assetsCssExtendNas>
 
     <!-- dataTable -->
-    <customTags:assetsCssExtendNas
-            theRestOfFileName="/DataTables-1.10.4/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
-    <customTags:assetsCssExtendNas
-            theRestOfFileName="/DataTables-1.10.4/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
+    <customTags:assetsCssExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
 
-    <customTags:assetsJsExtendNas
-            theRestOfFileName="/DataTables-1.10.4/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
-    <customTags:assetsJsExtendNas
-            theRestOfFileName="/DataTables-1.10.4/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
+    <customTags:assetsJsExtendNas theRestOfFileName="/DataTables-1.10.16/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
 
     <!-- Style Setting -->
     <style type="text/css">
