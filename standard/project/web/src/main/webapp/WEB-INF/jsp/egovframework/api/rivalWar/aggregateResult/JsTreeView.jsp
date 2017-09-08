@@ -330,6 +330,17 @@
                                         <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
                                             <thead>
                                             <tr>
+                                                <th>c_id</th>
+                                                <th>c_parentid</th>
+                                                <th>c_position</th>
+                                                <th>c_left</th>
+                                                <th>c_right</th>
+                                                <th>c_level</th>
+                                                <th>c_title</th>
+                                                <th>c_type</th>
+
+                                                <th>calTime</th>
+
                                                 <th>topName</th>
                                                 <th>topNumberOfAdvantages</th>
                                                 <th>topVersusScore</th>
@@ -337,10 +348,53 @@
                                                 <th>topTotalRegisteredPosts</th>
                                                 <th>topRegisteredHashTag</th>
                                                 <th>topGraphPercent</th>
+
+                                                <th>midName</th>
+                                                <th>midNumberOfAdvantages</th>
+                                                <th>midLikeCount</th>
+                                                <th>midTotalRegisteredPosts</th>
+                                                <th>midRegisteredHashTag</th>
+                                                <th>midGraphPercent</th>
+                                                <th>midVersusScore</th>
+
+                                                <th>botName</th>
+                                                <th>botNumberOfAdvantages</th>
+                                                <th>botLikeCount</th>
+                                                <th>botTotalRegisteredPosts</th>
+                                                <th>botRegisteredHashTag</th>
+                                                <th>botGraphPercent</th>
+                                                <th>botVersusScore</th>
+
+                                                <th>totalTraffic</th>
+                                                <th>uniqueVisit</th>
+                                                <th>revisitCount</th>
+                                                <th>pageView</th>
+                                                <th>totalArticle</th>
+                                                <th>totalLikeCount</th>
+                                                <th>totalSpecCount</th>
+                                                <th>totalHashCount</th>
+                                                <th>standardError</th>
+                                                <th>equilibriumAssumption</th>
+                                                <th>probability</th>
+
+                                                <th>lowerLimit</th>
+                                                <th>higherLimit</th>
+                                                <th>distributionTResult</th>
                                             </tr>
                                             </thead>
                                             <tfoot>
                                             <tr>
+                                                <th>c_id</th>
+                                                <th>c_parentid</th>
+                                                <th>c_position</th>
+                                                <th>c_left</th>
+                                                <th>c_right</th>
+                                                <th>c_level</th>
+                                                <th>c_title</th>
+                                                <th>c_type</th>
+
+                                                <th>calTime</th>
+
                                                 <th>topName</th>
                                                 <th>topNumberOfAdvantages</th>
                                                 <th>topVersusScore</th>
@@ -348,6 +402,38 @@
                                                 <th>topTotalRegisteredPosts</th>
                                                 <th>topRegisteredHashTag</th>
                                                 <th>topGraphPercent</th>
+
+                                                <th>midName</th>
+                                                <th>midNumberOfAdvantages</th>
+                                                <th>midLikeCount</th>
+                                                <th>midTotalRegisteredPosts</th>
+                                                <th>midRegisteredHashTag</th>
+                                                <th>midGraphPercent</th>
+                                                <th>midVersusScore</th>
+
+                                                <th>botName</th>
+                                                <th>botNumberOfAdvantages</th>
+                                                <th>botLikeCount</th>
+                                                <th>botTotalRegisteredPosts</th>
+                                                <th>botRegisteredHashTag</th>
+                                                <th>botGraphPercent</th>
+                                                <th>botVersusScore</th>
+
+                                                <th>totalTraffic</th>
+                                                <th>uniqueVisit</th>
+                                                <th>revisitCount</th>
+                                                <th>pageView</th>
+                                                <th>totalArticle</th>
+                                                <th>totalLikeCount</th>
+                                                <th>totalSpecCount</th>
+                                                <th>totalHashCount</th>
+                                                <th>standardError</th>
+                                                <th>equilibriumAssumption</th>
+                                                <th>probability</th>
+
+                                                <th>lowerLimit</th>
+                                                <th>higherLimit</th>
+                                                <th>distributionTResult</th>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -359,32 +445,98 @@
 
                                 <!-- JavaScript neccessary for the tree -->
                                 <script type="text/javascript">
-
                                     var editor = new $.fn.dataTable.Editor( {
-                                        ajax: "../php/staff.php",
+                                        ajax: "${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/alterNode.do",
                                         table: "#jstreeTable",
                                         idSrc:  'topName',
                                         fields: [ {
-                                            label: "topName:",
-                                            name: "topName"
+                                            label: "c_id:", name: "c_id"
+                                        },{
+                                            label: "c_parentid:", name: "c_parentid"
+                                        },{
+                                            label: "c_position:", name: "c_position"
+                                        },{
+                                            label: "c_left:", name: "c_left"
+                                        },{
+                                            label: "c_right:", name: "c_right"
+                                        },{
+                                            label: "c_level:", name: "c_level"
+                                        },{
+                                            label: "c_title:", name: "c_title"
+                                        },{
+                                            label: "c_type:", name: "c_type"
+                                        },{
+                                            label: "calTime:", name: "calTime"
+                                        },{
+                                            label: "topName:", name: "topName"
                                         }, {
-                                            label: "topNumberOfAdvantages:",
-                                            name: "topNumberOfAdvantages"
+                                            label: "topNumberOfAdvantages:", name: "topNumberOfAdvantages"
                                         }, {
-                                            label: "topVersusScore:",
-                                            name: "topVersusScore"
+                                            label: "topVersusScore:", name: "topVersusScore"
                                         }, {
-                                            label: "topLikeCount:",
-                                            name: "topLikeCount"
+                                            label: "topLikeCount:", name: "topLikeCount"
                                         }, {
-                                            label: "topTotalRegisteredPosts:",
-                                            name: "topTotalRegisteredPosts"
+                                            label: "topTotalRegisteredPosts:", name: "topTotalRegisteredPosts"
                                         }, {
-                                            label: "topRegisteredHashTag:",
-                                            name: "topRegisteredHashTag"
+                                            label: "topRegisteredHashTag:", name: "topRegisteredHashTag"
                                         }, {
-                                            label: "topGraphPercent:",
-                                            name: "topGraphPercent"
+                                            label: "topGraphPercent:", name: "topGraphPercent"
+                                        }, {
+                                            label: "midName:", name: "midName"
+                                        }, {
+                                            label: "midNumberOfAdvantages:", name: "midNumberOfAdvantages"
+                                        }, {
+                                            label: "midLikeCount:", name: "midLikeCount"
+                                        }, {
+                                            label: "midTotalRegisteredPosts:", name: "midTotalRegisteredPosts"
+                                        }, {
+                                            label: "midRegisteredHashTag:", name: "midRegisteredHashTag"
+                                        }, {
+                                            label: "midGraphPercent:", name: "midGraphPercent"
+                                        }, {
+                                            label: "midVersusScore:", name: "midVersusScore"
+                                        }, {
+                                            label: "botName:", name: "botName"
+                                        }, {
+                                            label: "botNumberOfAdvantages:", name: "botNumberOfAdvantages"
+                                        }, {
+                                            label: "botLikeCount:", name: "botLikeCount"
+                                        }, {
+                                            label: "botTotalRegisteredPosts:", name: "botTotalRegisteredPosts"
+                                        }, {
+                                            label: "botRegisteredHashTag:", name: "botRegisteredHashTag"
+                                        }, {
+                                            label: "botGraphPercent:", name: "botGraphPercent"
+                                        }, {
+                                            label: "botVersusScore:", name: "botVersusScore"
+                                        }, {
+                                            label: "totalTraffic:", name: "totalTraffic"
+                                        }, {
+                                            label: "uniqueVisit:", name: "uniqueVisit"
+                                        }, {
+                                            label: "revisitCount:", name: "revisitCount"
+                                        }, {
+                                            label: "pageView:", name: "pageView"
+                                        }, {
+                                            label: "totalArticle:", name: "totalArticle"
+                                        }, {
+                                            label: "totalLikeCount:", name: "totalLikeCount"
+                                        }, {
+                                            label: "totalSpecCount:", name: "totalSpecCount"
+                                        }, {
+                                            label: "totalHashCount:", name: "totalHashCount"
+                                        }, {
+                                            label: "standardError:", name: "standardError"
+                                        }, {
+                                            label: "equilibriumAssumption:", name: "equilibriumAssumption"
+                                        }, {
+                                            label: "probability:", name: "probability"
+                                        }, {
+                                            label: "lowerLimit:", name: "lowerLimit"
+                                        }, {
+                                            label: "higherLimit:", name: "higherLimit"
+                                        }, {
+                                            label: "distributionTResult:", name: "distributionTResult"
                                         }
                                         ]
                                     } );
@@ -402,18 +554,62 @@
                                                 "url": "${pageContext.request.contextPath}/api/rivalWar/aggregateResult/getNodeForDatatable.do",
                                                 "data": function ( d ) {
                                                     delete(d.order);
+                                                    delete(d.columns);
                                                     d.c_id = tempAjaxID;
                                                 },
                                                 "dataSrc": ""
                                             },
                                             "columns": [
+                                                {"data": "c_id"},
+                                                {"data": "c_parentid"},
+                                                {"data": "c_position"},
+                                                {"data": "c_left"},
+                                                {"data": "c_right"},
+                                                {"data": "c_level"},
+                                                {"data": "c_title"},
+                                                {"data": "c_type"},
+
+                                                {"data": "calTime"},
+
                                                 {"data": "topName"},
                                                 {"data": "topNumberOfAdvantages"},
                                                 {"data": "topVersusScore"},
                                                 {"data": "topLikeCount"},
                                                 {"data": "topTotalRegisteredPosts"},
                                                 {"data": "topRegisteredHashTag"},
-                                                {"data": "topGraphPercent"}
+                                                {"data": "topGraphPercent"},
+
+                                                {"data": "midName"},
+                                                {"data": "midNumberOfAdvantages"},
+                                                {"data": "midLikeCount"},
+                                                {"data": "midTotalRegisteredPosts"},
+                                                {"data": "midRegisteredHashTag"},
+                                                {"data": "midGraphPercent"},
+                                                {"data": "midVersusScore"},
+
+                                                {"data": "botName"},
+                                                {"data": "botNumberOfAdvantages"},
+                                                {"data": "botLikeCount"},
+                                                {"data": "botTotalRegisteredPosts"},
+                                                {"data": "botRegisteredHashTag"},
+                                                {"data": "botGraphPercent"},
+                                                {"data": "botVersusScore"},
+
+                                                {"data": "totalTraffic"},
+                                                {"data": "uniqueVisit"},
+                                                {"data": "revisitCount"},
+                                                {"data": "pageView"},
+                                                {"data": "totalArticle"},
+                                                {"data": "totalLikeCount"},
+                                                {"data": "totalSpecCount"},
+
+                                                {"data": "totalHashCount"},
+                                                {"data": "standardError"},
+                                                {"data": "equilibriumAssumption"},
+                                                {"data": "probability"},
+                                                {"data": "lowerLimit"},
+                                                {"data": "higherLimit"},
+                                                {"data": "distributionTResult"}
                                             ],
                                             select: true,
                                             dom: "Bfrtip",

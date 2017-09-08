@@ -100,7 +100,7 @@ public class AdminAggregateResultController extends GenericAbstractController {
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/alterMenu.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/alterNode.do", method = RequestMethod.POST)
     public ModelAndView alterNode(@Validated(value = AlterNode.class) AggregateResultDTO jsTreeHibernateDTO,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors()){
