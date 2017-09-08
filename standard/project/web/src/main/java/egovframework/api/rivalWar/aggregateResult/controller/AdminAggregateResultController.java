@@ -46,8 +46,8 @@ public class AdminAggregateResultController extends GenericAbstractController {
      * @throws InstantiationException
      */
     @ResponseBody
-    @RequestMapping(value = "/addMenu.do", method = RequestMethod.POST)
-    public ModelAndView addMenu(@Validated(value = AddNode.class) AggregateResultDTO jsTreeHibernateDTO,
+    @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
+    public ModelAndView addNode(@Validated(value = AddNode.class) AggregateResultDTO jsTreeHibernateDTO,
                                 BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
@@ -67,7 +67,7 @@ public class AdminAggregateResultController extends GenericAbstractController {
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/removeMenu.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/removeNode.do", method = RequestMethod.POST)
     public ModelAndView removeNode(@Validated(value = RemoveNode.class) AggregateResultDTO jsTreeHibernateDTO,
                                    BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
@@ -129,7 +129,7 @@ public class AdminAggregateResultController extends GenericAbstractController {
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/alterMenuType.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
     public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) AggregateResultDTO jsTreeHibernateDTO,
                                       BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
@@ -170,7 +170,7 @@ public class AdminAggregateResultController extends GenericAbstractController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/analyzeMenu.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/analyzeNode.do", method = RequestMethod.GET)
     public ModelAndView getChildNode(ModelMap model) {
         model.addAttribute("analyzeResult", "");
 
