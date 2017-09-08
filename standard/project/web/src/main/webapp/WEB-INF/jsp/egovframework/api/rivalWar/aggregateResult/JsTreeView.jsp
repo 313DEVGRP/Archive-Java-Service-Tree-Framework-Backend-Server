@@ -483,6 +483,22 @@
                                                 d.botRegisteredHashTag = d.data.default.botRegisteredHashTag;
                                                 d.botGraphPercent = d.data.default.botGraphPercent;
                                                 d.botVersusScore = d.data.default.botVersusScore;
+
+                                                d.totalTraffic = d.data.default.totalTraffic;
+                                                d.uniqueVisit = d.data.default.uniqueVisit;
+                                                d.revisitCount = d.data.default.revisitCount;
+                                                d.pageView = d.data.default.pageView;
+                                                d.totalArticle = d.data.default.totalArticle;
+                                                d.totalLikeCount = d.data.default.totalLikeCount;
+                                                d.totalSpecCount = d.data.default.totalSpecCount;
+
+                                                d.totalHashCount = d.data.default.totalHashCount;
+                                                d.standardError = d.data.default.standardError;
+                                                d.equilibriumAssumption = d.data.default.equilibriumAssumption;
+                                                d.probability = d.data.default.probability;
+                                                d.lowerLimit = d.data.default.lowerLimit;
+                                                d.higherLimit = d.data.default.higherLimit;
+                                                d.distributionTResult = d.data.default.distributionTResult;
                                                 delete(d.data);
                                             }
                                         },
