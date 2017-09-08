@@ -428,49 +428,49 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof AggregateResultDTO) {
 
-            this.setCalTime(this.getCalTime());
+            this.setCalTime(((AggregateResultDTO) paramInstance).getCalTime());
 
-            this.setTopName(this.getTopName());
-            this.setTopNumberOfAdvantages(this.getTopNumberOfAdvantages());
-            this.setTopLikeCount(this.getTopLikeCount());
-            this.setTopTotalRegisteredPosts(this.getTopTotalRegisteredPosts());
-            this.setTopRegisteredHashTag(this.getTopRegisteredHashTag());
-            this.setTopGraphPercent(this.getTopGraphPercent());
-            this.setTopVersusScore(this.getTopVersusScore());
+            this.setTopName(((AggregateResultDTO) paramInstance).getTopName());
+            this.setTopNumberOfAdvantages(((AggregateResultDTO) paramInstance).getTopNumberOfAdvantages());
+            this.setTopLikeCount(((AggregateResultDTO) paramInstance).getTopLikeCount());
+            this.setTopTotalRegisteredPosts(((AggregateResultDTO) paramInstance).getTopTotalRegisteredPosts());
+            this.setTopRegisteredHashTag(((AggregateResultDTO) paramInstance).getTopRegisteredHashTag());
+            this.setTopGraphPercent(((AggregateResultDTO) paramInstance).getTopGraphPercent());
+            this.setTopVersusScore(((AggregateResultDTO) paramInstance).getTopVersusScore());
 
-            this.setMidName(this.getMidName());
-            this.setMidNumberOfAdvantages(this.getMidNumberOfAdvantages());
-            this.setMidLikeCount(this.getMidLikeCount());
-            this.setMidTotalRegisteredPosts(this.getMidTotalRegisteredPosts());
-            this.setMidRegisteredHashTag(this.getMidRegisteredHashTag());
-            this.setMidGraphPercent(this.getMidGraphPercent());
-            this.setMidVersusScore(this.getMidVersusScore());
+            this.setMidName(((AggregateResultDTO) paramInstance).getMidName());
+            this.setMidNumberOfAdvantages(((AggregateResultDTO) paramInstance).getMidNumberOfAdvantages());
+            this.setMidLikeCount(((AggregateResultDTO) paramInstance).getMidLikeCount());
+            this.setMidTotalRegisteredPosts(((AggregateResultDTO) paramInstance).getMidTotalRegisteredPosts());
+            this.setMidRegisteredHashTag(((AggregateResultDTO) paramInstance).getMidRegisteredHashTag());
+            this.setMidGraphPercent(((AggregateResultDTO) paramInstance).getMidGraphPercent());
+            this.setMidVersusScore(((AggregateResultDTO) paramInstance).getMidVersusScore());
 
-            this.setBotName(this.getBotName());
-            this.setBotNumberOfAdvantages(this.getBotNumberOfAdvantages());
-            this.setBotLikeCount(this.getBotLikeCount());
-            this.setBotTotalRegisteredPosts(this.getBotTotalRegisteredPosts());
-            this.setBotRegisteredHashTag(this.getBotRegisteredHashTag());
-            this.setBotGraphPercent(this.getBotGraphPercent());
-            this.setBotVersusScore(this.getBotVersusScore());
+            this.setBotName(((AggregateResultDTO) paramInstance).getBotName());
+            this.setBotNumberOfAdvantages(((AggregateResultDTO) paramInstance).getBotNumberOfAdvantages());
+            this.setBotLikeCount(((AggregateResultDTO) paramInstance).getBotLikeCount());
+            this.setBotTotalRegisteredPosts(((AggregateResultDTO) paramInstance).getBotTotalRegisteredPosts());
+            this.setBotRegisteredHashTag(((AggregateResultDTO) paramInstance).getBotRegisteredHashTag());
+            this.setBotGraphPercent(((AggregateResultDTO) paramInstance).getBotGraphPercent());
+            this.setBotVersusScore(((AggregateResultDTO) paramInstance).getBotVersusScore());
 
-            this.setTotalTraffic(this.getTotalTraffic());
-            this.setUniqueVisit(this.getUniqueVisit());
-            this.setRevisitCount(this.getRevisitCount());
-            this.setPageView(this.getPageView());
+            this.setTotalTraffic(((AggregateResultDTO) paramInstance).getTotalTraffic());
+            this.setUniqueVisit(((AggregateResultDTO) paramInstance).getUniqueVisit());
+            this.setRevisitCount(((AggregateResultDTO) paramInstance).getRevisitCount());
+            this.setPageView(((AggregateResultDTO) paramInstance).getPageView());
 
-            this.setTotalArticle(this.getTotalArticle());
-            this.setTotalLikeCount(this.getTotalLikeCount());
-            this.setTotalSpecCount(this.getTotalSpecCount());
-            this.setTotalHashCount(this.getTotalHashCount());
+            this.setTotalArticle(((AggregateResultDTO) paramInstance).getTotalArticle());
+            this.setTotalLikeCount(((AggregateResultDTO) paramInstance).getTotalLikeCount());
+            this.setTotalSpecCount(((AggregateResultDTO) paramInstance).getTotalSpecCount());
+            this.setTotalHashCount(((AggregateResultDTO) paramInstance).getTotalHashCount());
 
-            this.setStandardError(this.getStandardError());
-            this.setEquilibriumAssumption(this.getEquilibriumAssumption());
-            this.setProbability(this.getProbability());
-            this.setLowerLimit(this.getLowerLimit());
-            this.setHigherLimit(this.getHigherLimit());
+            this.setStandardError(((AggregateResultDTO) paramInstance).getStandardError());
+            this.setEquilibriumAssumption(((AggregateResultDTO) paramInstance).getEquilibriumAssumption());
+            this.setProbability(((AggregateResultDTO) paramInstance).getProbability());
+            this.setLowerLimit(((AggregateResultDTO) paramInstance).getLowerLimit());
+            this.setHigherLimit(((AggregateResultDTO) paramInstance).getHigherLimit());
 
-            this.setDistributionTResult(this.getDistributionTResult());
+            this.setDistributionTResult(((AggregateResultDTO) paramInstance).getDistributionTResult());
         }
     }
 }

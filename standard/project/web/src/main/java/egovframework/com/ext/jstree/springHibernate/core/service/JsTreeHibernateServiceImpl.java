@@ -291,6 +291,7 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
 		T alterTargetNode = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
 		alterTargetNode.setC_title(jsTreeHibernateDTO.getC_title());
+		alterTargetNode.setFieldFromNewInstance(jsTreeHibernateDTO);
 		jsTreeHibernateDao.update(alterTargetNode);
 		return 1;
 	}

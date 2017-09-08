@@ -446,9 +446,48 @@
                                 <!-- JavaScript neccessary for the tree -->
                                 <script type="text/javascript">
                                     var editor = new $.fn.dataTable.Editor( {
-                                        ajax: "${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/alterNode.do",
+                                        "ajax": {
+                                            "url": "${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/alterNode.do",
+                                            "data": function ( d ) {
+                                                delete(d.action);
+                                                d.c_id = d.data.default.c_id;
+                                                d.c_parentid = d.data.default.c_parentid;
+                                                d.c_position = d.data.default.c_position;
+                                                d.c_left = d.data.default.c_left;
+                                                d.c_right = d.data.default.c_right;
+                                                d.c_level = d.data.default.c_level;
+                                                d.c_title = d.data.default.c_title;
+                                                d.c_type = d.data.default.c_type;
+
+                                                d.calTime = d.data.default.calTime;
+                                                d.topName = d.data.default.topName;
+                                                d.topNumberOfAdvantages = d.data.default.topNumberOfAdvantages;
+                                                d.topVersusScore = d.data.default.topVersusScore;
+                                                d.topLikeCount = d.data.default.topLikeCount;
+                                                d.topTotalRegisteredPosts = d.data.default.topTotalRegisteredPosts;
+                                                d.topRegisteredHashTag = d.data.default.topRegisteredHashTag;
+                                                d.topGraphPercent = d.data.default.topGraphPercent;
+
+                                                d.midName = d.data.default.midName;
+                                                d.midNumberOfAdvantages = d.data.default.midNumberOfAdvantages;
+                                                d.midLikeCount = d.data.default.midLikeCount;
+                                                d.midTotalRegisteredPosts = d.data.default.midTotalRegisteredPosts;
+                                                d.midRegisteredHashTag = d.data.default.midRegisteredHashTag;
+                                                d.midGraphPercent = d.data.default.midGraphPercent;
+                                                d.midVersusScore = d.data.default.midVersusScore;
+
+                                                d.botName = d.data.default.botName;
+                                                d.botNumberOfAdvantages = d.data.default.botNumberOfAdvantages;
+                                                d.botLikeCount = d.data.default.botLikeCount;
+                                                d.botTotalRegisteredPosts = d.data.default.botTotalRegisteredPosts;
+                                                d.botRegisteredHashTag = d.data.default.botRegisteredHashTag;
+                                                d.botGraphPercent = d.data.default.botGraphPercent;
+                                                d.botVersusScore = d.data.default.botVersusScore;
+                                                delete(d.data);
+                                            }
+                                        },
                                         table: "#jstreeTable",
-                                        idSrc:  'topName',
+                                        idSrc:  'c_type',
                                         fields: [ {
                                             label: "c_id:", name: "c_id"
                                         },{

@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -116,6 +117,7 @@ public class AdminAggregateResultController extends GenericAbstractController {
         modelAndView.addObject("result", jsTreeHibernateDTO);
         return modelAndView;
     }
+
 
     /**
      * 노드의 타입을 변경한다.

@@ -76,8 +76,8 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
 		if (paramInstance instanceof MenuDTO) {
-			this.setC_vote_start_date(this.getC_vote_start_date());
-			this.setC_vote_end_date(this.getC_vote_end_date());
+			this.setC_vote_start_date(((MenuDTO) paramInstance).getC_vote_start_date());
+			this.setC_vote_end_date(((MenuDTO) paramInstance).getC_vote_end_date());
 		}
 	}
 
