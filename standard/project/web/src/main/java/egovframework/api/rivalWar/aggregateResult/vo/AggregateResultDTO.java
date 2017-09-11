@@ -368,7 +368,7 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     private Long probability;
     private Long lowerLimit;
     private Long higherLimit;
-    private Long distributionTResult;
+    private Double distributionTResult;
 
     @Column(name = "standard_error")
     public Long getStandardError() {
@@ -416,11 +416,11 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     }
 
     @Column(name = "distribution_t_result")
-    public Long getDistributionTResult() {
+    public Double getDistributionTResult() {
         return distributionTResult;
     }
 
-    public void setDistributionTResult(Long distributionTResult) {
+    public void setDistributionTResult(Double distributionTResult) {
         this.distributionTResult = distributionTResult;
     }
 
