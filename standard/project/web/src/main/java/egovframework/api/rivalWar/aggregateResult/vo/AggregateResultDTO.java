@@ -363,55 +363,55 @@ public class AggregateResultDTO extends JsTreeHibernateSearchDTO implements Seri
     }
 
     // 표준오차: 64821, 등분상 가정 유의확률: 124 유의확률: 823, 99% 신뢰구간 하한: -23134 상한: 235421 T분포결과: 8.423
-    private Long standardError;
-    private Long equilibriumAssumption;
-    private Long probability;
-    private Long lowerLimit;
-    private Long higherLimit;
+    private Double standardError;
+    private Double equilibriumAssumption;
+    private Double probability;
+    private Double lowerLimit;
+    private Double higherLimit;
     private Double distributionTResult;
 
     @Column(name = "standard_error")
-    public Long getStandardError() {
+    public Double getStandardError() {
         return standardError;
     }
 
-    public void setStandardError(Long standardError) {
+    public void setStandardError(Double standardError) {
         this.standardError = standardError;
     }
 
     @Column(name = "equilibrium_assumption")
-    public Long getEquilibriumAssumption() {
+    public Double getEquilibriumAssumption() {
         return equilibriumAssumption;
     }
 
-    public void setEquilibriumAssumption(Long equilibriumAssumption) {
+    public void setEquilibriumAssumption(Double equilibriumAssumption) {
         this.equilibriumAssumption = equilibriumAssumption;
     }
 
     @Column(name = "probability")
-    public Long getProbability() {
+    public Double getProbability() {
         return probability;
     }
 
-    public void setProbability(Long probability) {
+    public void setProbability(Double probability) {
         this.probability = probability;
     }
 
     @Column(name = "lower_limit")
-    public Long getLowerLimit() {
+    public Double getLowerLimit() {
         return lowerLimit;
     }
 
-    public void setLowerLimit(Long lowerLimit) {
+    public void setLowerLimit(Double lowerLimit) {
         this.lowerLimit = lowerLimit;
     }
 
     @Column(name = "higher_limit")
-    public Long getHigherLimit() {
+    public Double getHigherLimit() {
         return higherLimit;
     }
 
-    public void setHigherLimit(Long higherLimit) {
+    public void setHigherLimit(Double higherLimit) {
         this.higherLimit = higherLimit;
     }
 
