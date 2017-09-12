@@ -328,113 +328,80 @@
                                     <div class="demo_con">
                                         <table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
                                             <thead>
-                                            <tr>
-                                                <th>c_id</th>
-                                                <th>c_parentid</th>
-                                                <th>c_position</th>
-                                                <th>c_left</th>
-                                                <th>c_right</th>
-                                                <th>c_level</th>
-                                                <th>c_title</th>
-                                                <th>c_type</th>
+                                                <tr>
+                                                    <th>c_id</th>
+                                                    <th>c_parentid</th>
+                                                    <th>c_position</th>
+                                                    <th>c_left</th>
+                                                    <th>c_right</th>
+                                                    <th>c_level</th>
+                                                    <th>c_title</th>
+                                                    <th>c_type</th>
 
-                                                <th>calTime</th>
+                                                    <th>topImageUrl1<th>
+                                                    <th>topImageUrl2<th>
+                                                    <th>topImageUrl3<th>
+                                                    <th>topVenderUrl<th>
+                                                    <th>topVenderText<th>
+                                                    <th>topPost1Icon<th>
+                                                    <th>topPost1Url<th>
+                                                    <th>topPost1Text<th>
+                                                    <th>topPost2Icon<th>
+                                                    <th>topPost2Url<th>
+                                                    <th>topPost2Text<th>
+                                                    <th>topPost3Icon<th>
+                                                    <th>topPost3Url<th>
+                                                    <th>topPost3Text<th>
+                                                    <th>topPost4Icon<th>
+                                                    <th>topPost4Url<th>
+                                                    <th>topPost4Text<th>
+                                                    <th>topPost5Icon<th>
+                                                    <th>topPost5Url<th>
+                                                    <th>topPost5Text<th>
 
-                                                <th>topName</th>
-                                                <th>topNumberOfAdvantages</th>
-                                                <th>topVersusScore</th>
-                                                <th>topLikeCount</th>
-                                                <th>topTotalRegisteredPosts</th>
-                                                <th>topRegisteredHashTag</th>
-                                                <th>topGraphPercent</th>
+                                                    <th>midImageUrl1<th>
+                                                    <th>midImageUrl2<th>
+                                                    <th>midImageUrl3<th>
+                                                    <th>midVenderUrl<th>
+                                                    <th>midVenderText<th>
+                                                    <th>midPost1Icon<th>
+                                                    <th>midPost1Url<th>
+                                                    <th>midPost1Text<th>
+                                                    <th>midPost2Icon<th>
+                                                    <th>midPost2Url<th>
+                                                    <th>midPost2Text<th>
+                                                    <th>midPost3Icon<th>
+                                                    <th>midPost3Url<th>
+                                                    <th>midPost3Text<th>
+                                                    <th>midPost4Icon<th>
+                                                    <th>midPost4Url<th>
+                                                    <th>midPost4Text<th>
+                                                    <th>midPost5Icon<th>
+                                                    <th>midPost5Url<th>
+                                                    <th>midPost5Text<th>
 
-                                                <th>midName</th>
-                                                <th>midNumberOfAdvantages</th>
-                                                <th>midLikeCount</th>
-                                                <th>midTotalRegisteredPosts</th>
-                                                <th>midRegisteredHashTag</th>
-                                                <th>midGraphPercent</th>
-                                                <th>midVersusScore</th>
-
-                                                <th>botName</th>
-                                                <th>botNumberOfAdvantages</th>
-                                                <th>botLikeCount</th>
-                                                <th>botTotalRegisteredPosts</th>
-                                                <th>botRegisteredHashTag</th>
-                                                <th>botGraphPercent</th>
-                                                <th>botVersusScore</th>
-
-                                                <th>totalTraffic</th>
-                                                <th>uniqueVisit</th>
-                                                <th>revisitCount</th>
-                                                <th>pageView</th>
-                                                <th>totalArticle</th>
-                                                <th>totalLikeCount</th>
-                                                <th>totalSpecCount</th>
-                                                <th>totalHashCount</th>
-                                                <th>standardError</th>
-                                                <th>equilibriumAssumption</th>
-                                                <th>probability</th>
-
-                                                <th>lowerLimit</th>
-                                                <th>higherLimit</th>
-                                                <th>distributionTResult</th>
-                                            </tr>
+                                                    <th>botImageUrl1<th>
+                                                    <th>botImageUrl2<th>
+                                                    <th>botImageUrl3<th>
+                                                    <th>botVenderUrl<th>
+                                                    <th>botVenderText<th>
+                                                    <th>botPost1Icon<th>
+                                                    <th>botPost1Url<th>
+                                                    <th>botPost1Text<th>
+                                                    <th>botPost2Icon<th>
+                                                    <th>botPost2Url<th>
+                                                    <th>botPost2Text<th>
+                                                    <th>botPost3Icon<th>
+                                                    <th>botPost3Url<th>
+                                                    <th>botPost3Text<th>
+                                                    <th>botPost4Icon<th>
+                                                    <th>botPost4Url<th>
+                                                    <th>botPost4Text<th>
+                                                    <th>botPost5Icon<th>
+                                                    <th>botPost5Url<th>
+                                                    <th>botPost5Text<th>
+                                                </tr>
                                             </thead>
-                                            <tfoot>
-                                            <tr>
-                                                <th>c_id</th>
-                                                <th>c_parentid</th>
-                                                <th>c_position</th>
-                                                <th>c_left</th>
-                                                <th>c_right</th>
-                                                <th>c_level</th>
-                                                <th>c_title</th>
-                                                <th>c_type</th>
-
-                                                <th>calTime</th>
-
-                                                <th>topName</th>
-                                                <th>topNumberOfAdvantages</th>
-                                                <th>topVersusScore</th>
-                                                <th>topLikeCount</th>
-                                                <th>topTotalRegisteredPosts</th>
-                                                <th>topRegisteredHashTag</th>
-                                                <th>topGraphPercent</th>
-
-                                                <th>midName</th>
-                                                <th>midNumberOfAdvantages</th>
-                                                <th>midLikeCount</th>
-                                                <th>midTotalRegisteredPosts</th>
-                                                <th>midRegisteredHashTag</th>
-                                                <th>midGraphPercent</th>
-                                                <th>midVersusScore</th>
-
-                                                <th>botName</th>
-                                                <th>botNumberOfAdvantages</th>
-                                                <th>botLikeCount</th>
-                                                <th>botTotalRegisteredPosts</th>
-                                                <th>botRegisteredHashTag</th>
-                                                <th>botGraphPercent</th>
-                                                <th>botVersusScore</th>
-
-                                                <th>totalTraffic</th>
-                                                <th>uniqueVisit</th>
-                                                <th>revisitCount</th>
-                                                <th>pageView</th>
-                                                <th>totalArticle</th>
-                                                <th>totalLikeCount</th>
-                                                <th>totalSpecCount</th>
-                                                <th>totalHashCount</th>
-                                                <th>standardError</th>
-                                                <th>equilibriumAssumption</th>
-                                                <th>probability</th>
-
-                                                <th>lowerLimit</th>
-                                                <th>higherLimit</th>
-                                                <th>distributionTResult</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -457,46 +424,67 @@
                                                 d.c_title = d.data.default.c_title;
                                                 d.c_type = d.data.default.c_type;
 
-                                                d.calTime = d.data.default.calTime;
-                                                d.topName = d.data.default.topName;
-                                                d.topNumberOfAdvantages = d.data.default.topNumberOfAdvantages;
-                                                d.topVersusScore = d.data.default.topVersusScore;
-                                                d.topLikeCount = d.data.default.topLikeCount;
-                                                d.topTotalRegisteredPosts = d.data.default.topTotalRegisteredPosts;
-                                                d.topRegisteredHashTag = d.data.default.topRegisteredHashTag;
-                                                d.topGraphPercent = d.data.default.topGraphPercent;
+                                                d.topImageUrl1 = d.data.default.topImageUrl1;
+                                                d.topImageUrl2 = d.data.default.topImageUrl2;
+                                                d.topImageUrl3 = d.data.default.topImageUrl3;
+                                                d.topVenderUrl = d.data.default.topVenderUrl;
+                                                d.topVenderText = d.data.default.topVenderText;
+                                                d.topPost1Icon = d.data.default.topPost1Icon;
+                                                d.topPost1Url = d.data.default.topPost1Url;
+                                                d.topPost1Text = d.data.default.topPost1Text;
+                                                d.topPost2Icon = d.data.default.topPost2Icon;
+                                                d.topPost2Url = d.data.default.topPost2Url;
+                                                d.topPost2Text = d.data.default.topPost2Text;
+                                                d.topPost3Icon = d.data.default.topPost3Icon;
+                                                d.topPost3Url = d.data.default.topPost3Url;
+                                                d.topPost3Text = d.data.default.topPost3Text;
+                                                d.topPost4Icon = d.data.default.topPost4Icon;
+                                                d.topPost4Url = d.data.default.topPost4Url;
+                                                d.topPost4Text = d.data.default.topPost4Text;
+                                                d.topPost5Icon = d.data.default.topPost5Icon;
+                                                d.topPost5Url = d.data.default.topPost5Url;
+                                                d.topPost5Text = d.data.default.topPost5Text;
+                                                d.midImageUrl1 = d.data.default.midImageUrl1;
+                                                d.midImageUrl2 = d.data.default.midImageUrl2;
+                                                d.midImageUrl3 = d.data.default.midImageUrl3;
+                                                d.midVenderUrl = d.data.default.midVenderUrl;
+                                                d.midVenderText = d.data.default.midVenderText;
+                                                d.midPost1Icon = d.data.default.midPost1Icon;
+                                                d.midPost1Url = d.data.default.midPost1Url;
+                                                d.midPost1Text = d.data.default.midPost1Text;
+                                                d.midPost2Icon = d.data.default.midPost2Icon;
+                                                d.midPost2Url = d.data.default.midPost2Url;
+                                                d.midPost2Text = d.data.default.midPost2Text;
+                                                d.midPost3Icon = d.data.default.midPost3Icon;
+                                                d.midPost3Url = d.data.default.midPost3Url;
+                                                d.midPost3Text = d.data.default.midPost3Text;
+                                                d.midPost4Icon = d.data.default.midPost4Icon;
+                                                d.midPost4Url = d.data.default.midPost4Url;
+                                                d.midPost4Text = d.data.default.midPost4Text;
+                                                d.midPost5Icon = d.data.default.midPost5Icon;
+                                                d.midPost5Url = d.data.default.midPost5Url;
+                                                d.midPost5Text = d.data.default.midPost5Text;
+                                                d.botImageUrl1 = d.data.default.botImageUrl1;
+                                                d.botImageUrl2 = d.data.default.botImageUrl2;
+                                                d.botImageUrl3 = d.data.default.botImageUrl3;
+                                                d.botVenderUrl = d.data.default.botVenderUrl;
+                                                d.botVenderText = d.data.default.botVenderText;
+                                                d.botPost1Icon = d.data.default.botPost1Icon;
+                                                d.botPost1Url = d.data.default.botPost1Url;
+                                                d.botPost1Text = d.data.default.botPost1Text;
+                                                d.botPost2Icon = d.data.default.botPost2Icon;
+                                                d.botPost2Url = d.data.default.botPost2Url;
+                                                d.botPost2Text = d.data.default.botPost2Text;
+                                                d.botPost3Icon = d.data.default.botPost3Icon;
+                                                d.botPost3Url = d.data.default.botPost3Url;
+                                                d.botPost3Text = d.data.default.botPost3Text;
+                                                d.botPost4Icon = d.data.default.botPost4Icon;
+                                                d.botPost4Url = d.data.default.botPost4Url;
+                                                d.botPost4Text = d.data.default.botPost4Text;
+                                                d.botPost5Icon = d.data.default.botPost5Icon;
+                                                d.botPost5Url = d.data.default.botPost5Url;
+                                                d.botPost5Text = d.data.default.botPost5Text;
 
-                                                d.midName = d.data.default.midName;
-                                                d.midNumberOfAdvantages = d.data.default.midNumberOfAdvantages;
-                                                d.midLikeCount = d.data.default.midLikeCount;
-                                                d.midTotalRegisteredPosts = d.data.default.midTotalRegisteredPosts;
-                                                d.midRegisteredHashTag = d.data.default.midRegisteredHashTag;
-                                                d.midGraphPercent = d.data.default.midGraphPercent;
-                                                d.midVersusScore = d.data.default.midVersusScore;
-
-                                                d.botName = d.data.default.botName;
-                                                d.botNumberOfAdvantages = d.data.default.botNumberOfAdvantages;
-                                                d.botLikeCount = d.data.default.botLikeCount;
-                                                d.botTotalRegisteredPosts = d.data.default.botTotalRegisteredPosts;
-                                                d.botRegisteredHashTag = d.data.default.botRegisteredHashTag;
-                                                d.botGraphPercent = d.data.default.botGraphPercent;
-                                                d.botVersusScore = d.data.default.botVersusScore;
-
-                                                d.totalTraffic = d.data.default.totalTraffic;
-                                                d.uniqueVisit = d.data.default.uniqueVisit;
-                                                d.revisitCount = d.data.default.revisitCount;
-                                                d.pageView = d.data.default.pageView;
-                                                d.totalArticle = d.data.default.totalArticle;
-                                                d.totalLikeCount = d.data.default.totalLikeCount;
-                                                d.totalSpecCount = d.data.default.totalSpecCount;
-
-                                                d.totalHashCount = d.data.default.totalHashCount;
-                                                d.standardError = d.data.default.standardError;
-                                                d.equilibriumAssumption = d.data.default.equilibriumAssumption;
-                                                d.probability = d.data.default.probability;
-                                                d.lowerLimit = d.data.default.lowerLimit;
-                                                d.higherLimit = d.data.default.higherLimit;
-                                                d.distributionTResult = d.data.default.distributionTResult;
                                                 delete(d.data);
                                             }
                                         },
@@ -519,77 +507,125 @@
                                         },{
                                             label: "c_type:", name: "c_type"
                                         },{
-                                            label: "calTime:", name: "calTime"
+                                            label: "topImageUrl1:", name: "topImageUrl1"
                                         },{
-                                            label: "topName:", name: "topName"
-                                        }, {
-                                            label: "topNumberOfAdvantages:", name: "topNumberOfAdvantages"
-                                        }, {
-                                            label: "topVersusScore:", name: "topVersusScore"
-                                        }, {
-                                            label: "topLikeCount:", name: "topLikeCount"
-                                        }, {
-                                            label: "topTotalRegisteredPosts:", name: "topTotalRegisteredPosts"
-                                        }, {
-                                            label: "topRegisteredHashTag:", name: "topRegisteredHashTag"
-                                        }, {
-                                            label: "topGraphPercent:", name: "topGraphPercent"
-                                        }, {
-                                            label: "midName:", name: "midName"
-                                        }, {
-                                            label: "midNumberOfAdvantages:", name: "midNumberOfAdvantages"
-                                        }, {
-                                            label: "midLikeCount:", name: "midLikeCount"
-                                        }, {
-                                            label: "midTotalRegisteredPosts:", name: "midTotalRegisteredPosts"
-                                        }, {
-                                            label: "midRegisteredHashTag:", name: "midRegisteredHashTag"
-                                        }, {
-                                            label: "midGraphPercent:", name: "midGraphPercent"
-                                        }, {
-                                            label: "midVersusScore:", name: "midVersusScore"
-                                        }, {
-                                            label: "botName:", name: "botName"
-                                        }, {
-                                            label: "botNumberOfAdvantages:", name: "botNumberOfAdvantages"
-                                        }, {
-                                            label: "botLikeCount:", name: "botLikeCount"
-                                        }, {
-                                            label: "botTotalRegisteredPosts:", name: "botTotalRegisteredPosts"
-                                        }, {
-                                            label: "botRegisteredHashTag:", name: "botRegisteredHashTag"
-                                        }, {
-                                            label: "botGraphPercent:", name: "botGraphPercent"
-                                        }, {
-                                            label: "botVersusScore:", name: "botVersusScore"
-                                        }, {
-                                            label: "totalTraffic:", name: "totalTraffic"
-                                        }, {
-                                            label: "uniqueVisit:", name: "uniqueVisit"
-                                        }, {
-                                            label: "revisitCount:", name: "revisitCount"
-                                        }, {
-                                            label: "pageView:", name: "pageView"
-                                        }, {
-                                            label: "totalArticle:", name: "totalArticle"
-                                        }, {
-                                            label: "totalLikeCount:", name: "totalLikeCount"
-                                        }, {
-                                            label: "totalSpecCount:", name: "totalSpecCount"
-                                        }, {
-                                            label: "totalHashCount:", name: "totalHashCount"
-                                        }, {
-                                            label: "standardError:", name: "standardError"
-                                        }, {
-                                            label: "equilibriumAssumption:", name: "equilibriumAssumption"
-                                        }, {
-                                            label: "probability:", name: "probability"
-                                        }, {
-                                            label: "lowerLimit:", name: "lowerLimit"
-                                        }, {
-                                            label: "higherLimit:", name: "higherLimit"
-                                        }, {
-                                            label: "distributionTResult:", name: "distributionTResult"
+                                            label: "topImageUrl2:", name: "topImageUrl2"
+                                        },{
+                                            label: "topImageUrl3:", name: "topImageUrl3"
+                                        },{
+                                            label: "topVenderUrl:", name: "topVenderUrl"
+                                        },{
+                                            label: "topVenderText:", name: "topVenderText"
+                                        },{
+                                            label: "topPost1Icon:", name: "topPost1Icon"
+                                        },{
+                                            label: "topPost1Url:", name: "topPost1Url"
+                                        },{
+                                            label: "topPost1Text:", name: "topPost1Text"
+                                        },{
+                                            label: "topPost2Icon:", name: "topPost2Icon"
+                                        },{
+                                            label: "topPost2Url:", name: "topPost2Url"
+                                        },{
+                                            label: "topPost2Text:", name: "topPost2Text"
+                                        },{
+                                            label: "topPost3Icon:", name: "topPost3Icon"
+                                        },{
+                                            label: "topPost3Url:", name: "topPost3Url"
+                                        },{
+                                            label: "topPost3Text:", name: "topPost3Text"
+                                        },{
+                                            label: "topPost4Icon:", name: "topPost4Icon"
+                                        },{
+                                            label: "topPost4Url:", name: "topPost4Url"
+                                        },{
+                                            label: "topPost4Text:", name: "topPost4Text"
+                                        },{
+                                            label: "topPost5Icon:", name: "topPost5Icon"
+                                        },{
+                                            label: "topPost5Url:", name: "topPost5Url"
+                                        },{
+                                            label: "topPost5Text:", name: "topPost5Text"
+                                        },{
+                                            label: "midImageUrl1:", name: "midImageUrl1"
+                                        },{
+                                            label: "midImageUrl2:", name: "midImageUrl2"
+                                        },{
+                                            label: "midImageUrl3:", name: "midImageUrl3"
+                                        },{
+                                            label: "midVenderUrl:", name: "midVenderUrl"
+                                        },{
+                                            label: "midVenderText:", name: "midVenderText"
+                                        },{
+                                            label: "midPost1Icon:", name: "midPost1Icon"
+                                        },{
+                                            label: "midPost1Url:", name: "midPost1Url"
+                                        },{
+                                            label: "midPost1Text:", name: "midPost1Text"
+                                        },{
+                                            label: "midPost2Icon:", name: "midPost2Icon"
+                                        },{
+                                            label: "midPost2Url:", name: "midPost2Url"
+                                        },{
+                                            label: "midPost2Text:", name: "midPost2Text"
+                                        },{
+                                            label: "midPost3Icon:", name: "midPost3Icon"
+                                        },{
+                                            label: "midPost3Url:", name: "midPost3Url"
+                                        },{
+                                            label: "midPost3Text:", name: "midPost3Text"
+                                        },{
+                                            label: "midPost4Icon:", name: "midPost4Icon"
+                                        },{
+                                            label: "midPost4Url:", name: "midPost4Url"
+                                        },{
+                                            label: "midPost4Text:", name: "midPost4Text"
+                                        },{
+                                            label: "midPost5Icon:", name: "midPost5Icon"
+                                        },{
+                                            label: "midPost5Url:", name: "midPost5Url"
+                                        },{
+                                            label: "midPost5Text:", name: "midPost5Text"
+                                        },{
+                                            label: "botImageUrl1:", name: "botImageUrl1"
+                                        },{
+                                            label: "botImageUrl2:", name: "botImageUrl2"
+                                        },{
+                                            label: "botImageUrl3:", name: "botImageUrl3"
+                                        },{
+                                            label: "botVenderUrl:", name: "botVenderUrl"
+                                        },{
+                                            label: "botVenderText:", name: "botVenderText"
+                                        },{
+                                            label: "botPost1Icon:", name: "botPost1Icon"
+                                        },{
+                                            label: "botPost1Url:", name: "botPost1Url"
+                                        },{
+                                            label: "botPost1Text:", name: "botPost1Text"
+                                        },{
+                                            label: "botPost2Icon:", name: "botPost2Icon"
+                                        },{
+                                            label: "botPost2Url:", name: "botPost2Url"
+                                        },{
+                                            label: "botPost2Text:", name: "botPost2Text"
+                                        },{
+                                            label: "botPost3Icon:", name: "botPost3Icon"
+                                        },{
+                                            label: "botPost3Url:", name: "botPost3Url"
+                                        },{
+                                            label: "botPost3Text:", name: "botPost3Text"
+                                        },{
+                                            label: "botPost4Icon:", name: "botPost4Icon"
+                                        },{
+                                            label: "botPost4Url:", name: "botPost4Url"
+                                        },{
+                                            label: "botPost4Text:", name: "botPost4Text"
+                                        },{
+                                            label: "botPost5Icon:", name: "botPost5Icon"
+                                        },{
+                                            label: "botPost5Url:", name: "botPost5Url"
+                                        },{
+                                            label: "botPost5Text:", name: "botPost5Text"
                                         } ]
                                     });
 
@@ -621,47 +657,68 @@
                                                 {"data": "c_title"},
                                                 {"data": "c_type"},
 
-                                                {"data": "calTime"},
+                                                {"data": "topImageUrl1"},
+                                                {"data": "topImageUrl2"},
+                                                {"data": "topImageUrl3"},
+                                                {"data": "topVenderUrl"},
+                                                {"data": "topVenderText"},
+                                                {"data": "topPost1Icon"},
+                                                {"data": "topPost1Url"},
+                                                {"data": "topPost1Text"},
+                                                {"data": "topPost2Icon"},
+                                                {"data": "topPost2Url"},
+                                                {"data": "topPost2Text"},
+                                                {"data": "topPost3Icon"},
+                                                {"data": "topPost3Url"},
+                                                {"data": "topPost3Text"},
+                                                {"data": "topPost4Icon"},
+                                                {"data": "topPost4Url"},
+                                                {"data": "topPost4Text"},
+                                                {"data": "topPost5Icon"},
+                                                {"data": "topPost5Url"},
+                                                {"data": "topPost5Text"},
 
-                                                {"data": "topName"},
-                                                {"data": "topNumberOfAdvantages"},
-                                                {"data": "topVersusScore"},
-                                                {"data": "topLikeCount"},
-                                                {"data": "topTotalRegisteredPosts"},
-                                                {"data": "topRegisteredHashTag"},
-                                                {"data": "topGraphPercent"},
+                                                {"data": "midImageUrl1"},
+                                                {"data": "midImageUrl2"},
+                                                {"data": "midImageUrl3"},
+                                                {"data": "midVenderUrl"},
+                                                {"data": "midVenderText"},
+                                                {"data": "midPost1Icon"},
+                                                {"data": "midPost1Url"},
+                                                {"data": "midPost1Text"},
+                                                {"data": "midPost2Icon"},
+                                                {"data": "midPost2Url"},
+                                                {"data": "midPost2Text"},
+                                                {"data": "midPost3Icon"},
+                                                {"data": "midPost3Url"},
+                                                {"data": "midPost3Text"},
+                                                {"data": "midPost4Icon"},
+                                                {"data": "midPost4Url"},
+                                                {"data": "midPost4Text"},
+                                                {"data": "midPost5Icon"},
+                                                {"data": "midPost5Url"},
+                                                {"data": "midPost5Text"},
 
-                                                {"data": "midName"},
-                                                {"data": "midNumberOfAdvantages"},
-                                                {"data": "midLikeCount"},
-                                                {"data": "midTotalRegisteredPosts"},
-                                                {"data": "midRegisteredHashTag"},
-                                                {"data": "midGraphPercent"},
-                                                {"data": "midVersusScore"},
-
-                                                {"data": "botName"},
-                                                {"data": "botNumberOfAdvantages"},
-                                                {"data": "botLikeCount"},
-                                                {"data": "botTotalRegisteredPosts"},
-                                                {"data": "botRegisteredHashTag"},
-                                                {"data": "botGraphPercent"},
-                                                {"data": "botVersusScore"},
-
-                                                {"data": "totalTraffic"},
-                                                {"data": "uniqueVisit"},
-                                                {"data": "revisitCount"},
-                                                {"data": "pageView"},
-                                                {"data": "totalArticle"},
-                                                {"data": "totalLikeCount"},
-                                                {"data": "totalSpecCount"},
-
-                                                {"data": "totalHashCount"},
-                                                {"data": "standardError"},
-                                                {"data": "equilibriumAssumption"},
-                                                {"data": "probability"},
-                                                {"data": "lowerLimit"},
-                                                {"data": "higherLimit"},
-                                                {"data": "distributionTResult"}
+                                                {"data": "botImageUrl1"},
+                                                {"data": "botImageUrl2"},
+                                                {"data": "botImageUrl3"},
+                                                {"data": "botVenderUrl"},
+                                                {"data": "botVenderText"},
+                                                {"data": "botPost1Icon"},
+                                                {"data": "botPost1Url"},
+                                                {"data": "botPost1Text"},
+                                                {"data": "botPost2Icon"},
+                                                {"data": "botPost2Url"},
+                                                {"data": "botPost2Text"},
+                                                {"data": "botPost3Icon"},
+                                                {"data": "botPost3Url"},
+                                                {"data": "botPost3Text"},
+                                                {"data": "botPost4Icon"},
+                                                {"data": "botPost4Url"},
+                                                {"data": "botPost4Text"},
+                                                {"data": "botPost5Icon"},
+                                                {"data": "botPost5Url"},
+                                                {"data": "botPost5Text"}
                                             ],
                                             select: true,
                                             dom: "Bfrtip",

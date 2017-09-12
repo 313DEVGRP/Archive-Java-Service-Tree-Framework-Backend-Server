@@ -131,7 +131,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topVenderText = topVenderText;
     }
 
-    @Column(name = "top_post_1_icon")
+    @Column(name = "top_post1_icon")
     public String getTopPost1Icon() {
         return topPost1Icon;
     }
@@ -140,7 +140,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost1Icon = topPost1Icon;
     }
 
-    @Column(name = "top_post_1_url")
+    @Column(name = "top_post1_url")
     public String getTopPost1Url() {
         return topPost1Url;
     }
@@ -149,7 +149,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost1Url = topPost1Url;
     }
 
-    @Column(name = "top_post_1_text")
+    @Column(name = "top_post1_text")
     public String getTopPost1Text() {
         return topPost1Text;
     }
@@ -158,7 +158,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost1Text = topPost1Text;
     }
 
-    @Column(name = "top_post_2_icon")
+    @Column(name = "top_post2_icon")
     public String getTopPost2Icon() {
         return topPost2Icon;
     }
@@ -167,7 +167,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost2Icon = topPost2Icon;
     }
 
-    @Column(name = "top_post_2_url")
+    @Column(name = "top_post2_url")
     public String getTopPost2Url() {
         return topPost2Url;
     }
@@ -176,7 +176,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost2Url = topPost2Url;
     }
 
-    @Column(name = "top_post_2_text")
+    @Column(name = "top_post2_text")
     public String getTopPost2Text() {
         return topPost2Text;
     }
@@ -185,7 +185,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost2Text = topPost2Text;
     }
 
-    @Column(name = "top_post_3_icon")
+    @Column(name = "top_post3_icon")
     public String getTopPost3Icon() {
         return topPost3Icon;
     }
@@ -194,7 +194,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost3Icon = topPost3Icon;
     }
 
-    @Column(name = "top_post_3_url")
+    @Column(name = "top_post3_url")
     public String getTopPost3Url() {
         return topPost3Url;
     }
@@ -203,7 +203,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost3Url = topPost3Url;
     }
 
-    @Column(name = "top_post_3_text")
+    @Column(name = "top_post3_text")
     public String getTopPost3Text() {
         return topPost3Text;
     }
@@ -212,7 +212,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost3Text = topPost3Text;
     }
 
-    @Column(name = "top_post_4_icon")
+    @Column(name = "top_post4_icon")
     public String getTopPost4Icon() {
         return topPost4Icon;
     }
@@ -221,7 +221,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost4Icon = topPost4Icon;
     }
 
-    @Column(name = "top_post_4_url")
+    @Column(name = "top_post4_url")
     public String getTopPost4Url() {
         return topPost4Url;
     }
@@ -230,7 +230,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost4Url = topPost4Url;
     }
 
-    @Column(name = "top_post_4_text")
+    @Column(name = "top_post4_text")
     public String getTopPost4Text() {
         return topPost4Text;
     }
@@ -239,7 +239,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost4Text = topPost4Text;
     }
 
-    @Column(name = "top_post_5_icon")
+    @Column(name = "top_post5_icon")
     public String getTopPost5Icon() {
         return topPost5Icon;
     }
@@ -248,7 +248,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost5Icon = topPost5Icon;
     }
 
-    @Column(name = "top_post_5_url")
+    @Column(name = "top_post5_url")
     public String getTopPost5Url() {
         return topPost5Url;
     }
@@ -257,7 +257,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.topPost5Url = topPost5Url;
     }
 
-    @Column(name = "top_post_5_text")
+    @Column(name = "top_post5_text")
     public String getTopPost5Text() {
         return topPost5Text;
     }
@@ -338,7 +338,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midVenderText = midVenderText;
     }
 
-    @Column(name = "mid_post_1_icon")
+    @Column(name = "mid_post1_icon")
     public String getMidPost1Icon() {
         return midPost1Icon;
     }
@@ -347,7 +347,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost1Icon = midPost1Icon;
     }
 
-    @Column(name = "mid_post_1_url")
+    @Column(name = "mid_post1_url")
     public String getMidPost1Url() {
         return midPost1Url;
     }
@@ -356,7 +356,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost1Url = midPost1Url;
     }
 
-    @Column(name = "mid_post_1_text")
+    @Column(name = "mid_post1_text")
     public String getMidPost1Text() {
         return midPost1Text;
     }
@@ -365,7 +365,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost1Text = midPost1Text;
     }
 
-    @Column(name = "mid_post_2_icon")
+    @Column(name = "mid_post2_icon")
     public String getMidPost2Icon() {
         return midPost2Icon;
     }
@@ -374,7 +374,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost2Icon = midPost2Icon;
     }
 
-    @Column(name = "mid_post_2_url")
+    @Column(name = "mid_post2_url")
     public String getMidPost2Url() {
         return midPost2Url;
     }
@@ -383,7 +383,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost2Url = midPost2Url;
     }
 
-    @Column(name = "mid_post_2_text")
+    @Column(name = "mid_post2_text")
     public String getMidPost2Text() {
         return midPost2Text;
     }
@@ -392,7 +392,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost2Text = midPost2Text;
     }
 
-    @Column(name = "mid_post_3_icon")
+    @Column(name = "mid_post3_icon")
     public String getMidPost3Icon() {
         return midPost3Icon;
     }
@@ -401,7 +401,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost3Icon = midPost3Icon;
     }
 
-    @Column(name = "mid_post_3_url")
+    @Column(name = "mid_post3_url")
     public String getMidPost3Url() {
         return midPost3Url;
     }
@@ -410,7 +410,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost3Url = midPost3Url;
     }
 
-    @Column(name = "mid_post_3_text")
+    @Column(name = "mid_post3_text")
     public String getMidPost3Text() {
         return midPost3Text;
     }
@@ -419,7 +419,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost3Text = midPost3Text;
     }
 
-    @Column(name = "mid_post_4_icon")
+    @Column(name = "mid_post4_icon")
     public String getMidPost4Icon() {
         return midPost4Icon;
     }
@@ -428,7 +428,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost4Icon = midPost4Icon;
     }
 
-    @Column(name = "mid_post_4_url")
+    @Column(name = "mid_post4_url")
     public String getMidPost4Url() {
         return midPost4Url;
     }
@@ -437,7 +437,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost4Url = midPost4Url;
     }
 
-    @Column(name = "mid_post_4_text")
+    @Column(name = "mid_post4_text")
     public String getMidPost4Text() {
         return midPost4Text;
     }
@@ -446,7 +446,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost4Text = midPost4Text;
     }
 
-    @Column(name = "mid_post_5_icon")
+    @Column(name = "mid_post5_icon")
     public String getMidPost5Icon() {
         return midPost5Icon;
     }
@@ -455,7 +455,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost5Icon = midPost5Icon;
     }
 
-    @Column(name = "mid_post_5_url")
+    @Column(name = "mid_post5_url")
     public String getMidPost5Url() {
         return midPost5Url;
     }
@@ -464,7 +464,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.midPost5Url = midPost5Url;
     }
 
-    @Column(name = "mid_post_5_text")
+    @Column(name = "mid_post5_text")
     public String getMidPost5Text() {
         return midPost5Text;
     }
@@ -545,7 +545,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botVenderText = botVenderText;
     }
 
-    @Column(name = "bot_post_1_icon")
+    @Column(name = "bot_post1_icon")
     public String getBotPost1Icon() {
         return botPost1Icon;
     }
@@ -554,7 +554,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost1Icon = botPost1Icon;
     }
 
-    @Column(name = "bot_post_1_url")
+    @Column(name = "bot_post1_url")
     public String getBotPost1Url() {
         return botPost1Url;
     }
@@ -563,7 +563,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost1Url = botPost1Url;
     }
 
-    @Column(name = "bot_post_1_text")
+    @Column(name = "bot_post1_text")
     public String getBotPost1Text() {
         return botPost1Text;
     }
@@ -572,7 +572,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost1Text = botPost1Text;
     }
 
-    @Column(name = "bot_post_2_icon")
+    @Column(name = "bot_post2_icon")
     public String getBotPost2Icon() {
         return botPost2Icon;
     }
@@ -581,7 +581,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost2Icon = botPost2Icon;
     }
 
-    @Column(name = "bot_post_2_url")
+    @Column(name = "bot_post2_url")
     public String getBotPost2Url() {
         return botPost2Url;
     }
@@ -590,7 +590,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost2Url = botPost2Url;
     }
 
-    @Column(name = "bot_post_2_text")
+    @Column(name = "bot_post2_text")
     public String getBotPost2Text() {
         return botPost2Text;
     }
@@ -599,7 +599,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost2Text = botPost2Text;
     }
 
-    @Column(name = "bot_post_3_icon")
+    @Column(name = "bot_post3_icon")
     public String getBotPost3Icon() {
         return botPost3Icon;
     }
@@ -608,7 +608,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost3Icon = botPost3Icon;
     }
 
-    @Column(name = "bot_post_3_url")
+    @Column(name = "bot_post3_url")
     public String getBotPost3Url() {
         return botPost3Url;
     }
@@ -617,7 +617,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost3Url = botPost3Url;
     }
 
-    @Column(name = "bot_post_3_text")
+    @Column(name = "bot_post3_text")
     public String getBotPost3Text() {
         return botPost3Text;
     }
@@ -626,7 +626,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost3Text = botPost3Text;
     }
 
-    @Column(name = "bot_post_4_icon")
+    @Column(name = "bot_post4_icon")
     public String getBotPost4Icon() {
         return botPost4Icon;
     }
@@ -635,7 +635,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost4Icon = botPost4Icon;
     }
 
-    @Column(name = "bot_post_4_url")
+    @Column(name = "bot_post4_url")
     public String getBotPost4Url() {
         return botPost4Url;
     }
@@ -644,7 +644,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost4Url = botPost4Url;
     }
 
-    @Column(name = "bot_post_4_text")
+    @Column(name = "bot_post4_text")
     public String getBotPost4Text() {
         return botPost4Text;
     }
@@ -653,7 +653,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost4Text = botPost4Text;
     }
 
-    @Column(name = "bot_post_5_icon")
+    @Column(name = "bot_post5_icon")
     public String getBotPost5Icon() {
         return botPost5Icon;
     }
@@ -662,7 +662,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost5Icon = botPost5Icon;
     }
 
-    @Column(name = "bot_post_5_url")
+    @Column(name = "bot_post5_url")
     public String getBotPost5Url() {
         return botPost5Url;
     }
@@ -671,7 +671,7 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.botPost5Url = botPost5Url;
     }
 
-    @Column(name = "bot_post_5_text")
+    @Column(name = "bot_post5_text")
     public String getBotPost5Text() {
         return botPost5Text;
     }
