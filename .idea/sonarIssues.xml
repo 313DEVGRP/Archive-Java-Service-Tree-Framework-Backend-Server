@@ -1893,6 +1893,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRootCompareInfo.do">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRootNode.do">
           <value>
             <set />
@@ -1959,6 +1964,26 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/nv.d3.custom.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/aggregateResult.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/csrf.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/loginTransaction.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/menu.js">
           <value>
             <set />
           </value>

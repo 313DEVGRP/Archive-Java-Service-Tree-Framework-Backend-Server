@@ -3,6 +3,7 @@ package egovframework.api.rivalWar.menu.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
+import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
@@ -150,7 +151,7 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/getRootAggregateResult.do", method = RequestMethod.GET)
-    public ModelAndView getRecentFirstChildNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+    public ModelAndView getRootAggregateResult(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(3));
@@ -166,7 +167,26 @@ public class AnonymousMenuController extends GenericAbstractController {
             modelAndView.addObject("result", "none exist childnode");
             return modelAndView;
         }
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/getRootCompareInfo.do", method = RequestMethod.GET)
+    public ModelAndView getRootCompareInfo(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setWhere("c_parentid", new Long(3));
+        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
+        if(list.size() > 0){
+            MenuDTO tempMenuDTO = list.get(0);
+            CompareInfoDTO resultDTO = tempMenuDTO.getCompareInfoDTO();
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", resultDTO);
+            return modelAndView;
+        }else{
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", "none exist childnode");
+            return modelAndView;
+        }
     }
 
     @ResponseBody
