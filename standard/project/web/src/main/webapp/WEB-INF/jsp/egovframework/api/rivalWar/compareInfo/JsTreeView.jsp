@@ -338,6 +338,7 @@
                                                     <th>c_title</th>
                                                     <th>c_type</th>
 
+                                                    <th>calTime</th>
                                                     <th>topImageUrl1<th>
                                                     <th>topImageUrl2<th>
                                                     <th>topImageUrl3<th>
@@ -424,6 +425,7 @@
                                                 d.c_title = d.data.default.c_title;
                                                 d.c_type = d.data.default.c_type;
 
+                                                d.calTime = d.data.default.calTime;
                                                 d.topImageUrl1 = d.data.default.topImageUrl1;
                                                 d.topImageUrl2 = d.data.default.topImageUrl2;
                                                 d.topImageUrl3 = d.data.default.topImageUrl3;
@@ -506,6 +508,8 @@
                                             label: "c_title:", name: "c_title"
                                         },{
                                             label: "c_type:", name: "c_type"
+                                        },{
+                                            label: "calTime:", name: "calTime"
                                         },{
                                             label: "topImageUrl1:", name: "topImageUrl1"
                                         },{
@@ -657,6 +661,7 @@
                                                 {"data": "c_title"},
                                                 {"data": "c_type"},
 
+                                                {"data": "calTime"},
                                                 {"data": "topImageUrl1"},
                                                 {"data": "topImageUrl2"},
                                                 {"data": "topImageUrl3"},

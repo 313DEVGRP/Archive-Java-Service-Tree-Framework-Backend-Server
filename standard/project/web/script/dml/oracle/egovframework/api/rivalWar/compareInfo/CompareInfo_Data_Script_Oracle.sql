@@ -1,5 +1,5 @@
 Insert into T_JSTREE_COMPARE_INFO
-  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, CAL_TIME,
     TOP_IMAGE_URL_1, TOP_IMAGE_URL_2, TOP_IMAGE_URL_3, TOP_VENDER_URL , TOP_VENDER_TEXT,
     TOP_POST1_ICON , TOP_POST1_URL  , TOP_POST1_TEXT , TOP_POST2_ICON , TOP_POST2_URL  , TOP_POST2_TEXT ,
     TOP_POST3_ICON , TOP_POST3_URL  , TOP_POST3_TEXT , TOP_POST4_ICON , TOP_POST4_URL  , TOP_POST4_TEXT ,
@@ -13,7 +13,7 @@ Insert into T_JSTREE_COMPARE_INFO
     BOT_POST3_ICON , BOT_POST3_URL  , BOT_POST3_TEXT , BOT_POST4_ICON , BOT_POST4_URL  , BOT_POST4_TEXT ,
     BOT_POST5_ICON , BOT_POST5_URL  , BOT_POST5_TEXT )
 Values
-  ( 1, 0, 0, 1, 8, 0, 'Root Node', 'root',
+  ( 1, 0, 0, 1, 8, 0, 'Root Node', 'root', '',
     'http', 'http', 'http', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',
@@ -28,7 +28,7 @@ Values
     'icon', 'http', 'text');
 
 Insert into T_JSTREE_COMPARE_INFO
-  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, CAL_TIME,
     TOP_IMAGE_URL_1, TOP_IMAGE_URL_2, TOP_IMAGE_URL_3, TOP_VENDER_URL , TOP_VENDER_TEXT,
     TOP_POST1_ICON , TOP_POST1_URL  , TOP_POST1_TEXT , TOP_POST2_ICON , TOP_POST2_URL  , TOP_POST2_TEXT ,
     TOP_POST3_ICON , TOP_POST3_URL  , TOP_POST3_TEXT , TOP_POST4_ICON , TOP_POST4_URL  , TOP_POST4_TEXT ,
@@ -42,7 +42,7 @@ Insert into T_JSTREE_COMPARE_INFO
     BOT_POST3_ICON , BOT_POST3_URL  , BOT_POST3_TEXT , BOT_POST4_ICON , BOT_POST4_URL  , BOT_POST4_TEXT ,
     BOT_POST5_ICON , BOT_POST5_URL  , BOT_POST5_TEXT )
 Values
-  ( 2, 1, 0, 2, 7, 1, 'First Child', 'drive',
+  ( 2, 1, 0, 2, 7, 1, 'First Child', 'drive', '',
     'http', 'http', 'http', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',
@@ -57,7 +57,7 @@ Values
     'icon', 'http', 'text');
 
 Insert into T_JSTREE_COMPARE_INFO
-  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, CAL_TIME,
     TOP_IMAGE_URL_1, TOP_IMAGE_URL_2, TOP_IMAGE_URL_3, TOP_VENDER_URL , TOP_VENDER_TEXT,
     TOP_POST1_ICON , TOP_POST1_URL  , TOP_POST1_TEXT , TOP_POST2_ICON , TOP_POST2_URL  , TOP_POST2_TEXT ,
     TOP_POST3_ICON , TOP_POST3_URL  , TOP_POST3_TEXT , TOP_POST4_ICON , TOP_POST4_URL  , TOP_POST4_TEXT ,
@@ -71,7 +71,7 @@ Insert into T_JSTREE_COMPARE_INFO
     BOT_POST3_ICON , BOT_POST3_URL  , BOT_POST3_TEXT , BOT_POST4_ICON , BOT_POST4_URL  , BOT_POST4_TEXT ,
     BOT_POST5_ICON , BOT_POST5_URL  , BOT_POST5_TEXT )
 Values
-  ( 3, 2, 0, 3, 4, 2, 'Leaf Node', 'default',
+  ( 3, 2, 0, 3, 4, 2, 'Leaf Node', 'default', '',
     'http', 'http', 'http', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',
@@ -86,7 +86,7 @@ Values
     'icon', 'http', 'text');
 
 Insert into T_JSTREE_COMPARE_INFO
-  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+  ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, CAL_TIME,
     TOP_IMAGE_URL_1, TOP_IMAGE_URL_2, TOP_IMAGE_URL_3, TOP_VENDER_URL , TOP_VENDER_TEXT,
     TOP_POST1_ICON , TOP_POST1_URL  , TOP_POST1_TEXT , TOP_POST2_ICON , TOP_POST2_URL  , TOP_POST2_TEXT ,
     TOP_POST3_ICON , TOP_POST3_URL  , TOP_POST3_TEXT , TOP_POST4_ICON , TOP_POST4_URL  , TOP_POST4_TEXT ,
@@ -100,7 +100,7 @@ Insert into T_JSTREE_COMPARE_INFO
     BOT_POST3_ICON , BOT_POST3_URL  , BOT_POST3_TEXT , BOT_POST4_ICON , BOT_POST4_URL  , BOT_POST4_TEXT ,
     BOT_POST5_ICON , BOT_POST5_URL  , BOT_POST5_TEXT )
 Values
-  ( 4, 2, 1, 5, 6, 2, 'Branch Node', 'folder',
+  ( 4, 2, 1, 5, 6, 2, 'Branch Node', 'folder', '',
     'http', 'http', 'http', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',
     'icon', 'http', 'text', 'icon', 'http', 'text',

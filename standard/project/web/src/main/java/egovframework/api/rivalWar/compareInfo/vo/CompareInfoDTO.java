@@ -57,6 +57,16 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.copyBooleanValue = copyBooleanValue;
     }
 
+    private String calTime;
+    @Column(name = "cal_time")
+    public String getCalTime() {
+        return calTime;
+    }
+
+    public void setCalTime(String calTime) {
+        this.calTime = calTime;
+    }
+
     //image url, vender info ( etc ),
     //link url 1 ~ 5
     private String topImageUrl1;
@@ -683,6 +693,9 @@ public class CompareInfoDTO extends JsTreeHibernateSearchDTO implements Serializ
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof CompareInfoDTO) {
+
+            this.setCalTime(((CompareInfoDTO) paramInstance).getCalTime());
+
             //top
             this.setTopImageUrl1(((CompareInfoDTO) paramInstance).getTopImageUrl1());
             this.setTopImageUrl2(((CompareInfoDTO) paramInstance).getTopImageUrl2());
