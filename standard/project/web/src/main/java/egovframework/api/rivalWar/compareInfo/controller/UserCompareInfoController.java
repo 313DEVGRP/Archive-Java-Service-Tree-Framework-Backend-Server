@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_USER/compareInfo"})
-public class UserCompareInfoController  extends GenericAbstractController {
+public class UserCompareInfoController extends GenericAbstractController {
 
     @Autowired
     private CompareInfoService compareInfoService;
