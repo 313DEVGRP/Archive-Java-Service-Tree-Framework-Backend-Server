@@ -340,68 +340,102 @@
 
                                                 <th>calTime</th>
 
-                                                <th>topImageUrl1<th>
-                                                <th>topImageUrl2<th>
-                                                <th>topImageUrl3<th>
-                                                <th>topVenderUrl<th>
-                                                <th>topVenderText<th>
-                                                <th>topPost1Icon<th>
-                                                <th>topPost1Url<th>
-                                                <th>topPost1Text<th>
-                                                <th>topPost2Icon<th>
-                                                <th>topPost2Url<th>
-                                                <th>topPost2Text<th>
-                                                <th>topPost3Icon<th>
-                                                <th>topPost3Url<th>
-                                                <th>topPost3Text<th>
-                                                <th>topPost4Icon<th>
-                                                <th>topPost4Url<th>
-                                                <th>topPost4Text<th>
-                                                <th>topPost5Icon<th>
-                                                <th>topPost5Url<th>
-                                                <th>topPost5Text<th>
+                                                <th>topSpecName</th>
 
-                                                <th>midImageUrl1<th>
-                                                <th>midImageUrl2<th>
-                                                <th>midImageUrl3<th>
-                                                <th>midVenderUrl<th>
-                                                <th>midVenderText<th>
-                                                <th>midPost1Icon<th>
-                                                <th>midPost1Url<th>
-                                                <th>midPost1Text<th>
-                                                <th>midPost2Icon<th>
-                                                <th>midPost2Url<th>
-                                                <th>midPost2Text<th>
-                                                <th>midPost3Icon<th>
-                                                <th>midPost3Url<th>
-                                                <th>midPost3Text<th>
-                                                <th>midPost4Icon<th>
-                                                <th>midPost4Url<th>
-                                                <th>midPost4Text<th>
-                                                <th>midPost5Icon<th>
-                                                <th>midPost5Url<th>
-                                                <th>midPost5Text<th>
+                                                <th>topSpec1Title</th>
+                                                <th>topSpec1Amount</th>
+                                                <th>topSpec1Percent</th>
+                                                <th>topSpec1Trend</th>
+                                                <th>topSpec1Graph</th>
 
-                                                <th>botImageUrl1<th>
-                                                <th>botImageUrl2<th>
-                                                <th>botImageUrl3<th>
-                                                <th>botVenderUrl<th>
-                                                <th>botVenderText<th>
-                                                <th>botPost1Icon<th>
-                                                <th>botPost1Url<th>
-                                                <th>botPost1Text<th>
-                                                <th>botPost2Icon<th>
-                                                <th>botPost2Url<th>
-                                                <th>botPost2Text<th>
-                                                <th>botPost3Icon<th>
-                                                <th>botPost3Url<th>
-                                                <th>botPost3Text<th>
-                                                <th>botPost4Icon<th>
-                                                <th>botPost4Url<th>
-                                                <th>botPost4Text<th>
-                                                <th>botPost5Icon<th>
-                                                <th>botPost5Url<th>
-                                                <th>botPost5Text<th>
+                                                <th>topSpec2Title</th>
+                                                <th>topSpec2Amount</th>
+                                                <th>topSpec2Percent</th>
+                                                <th>topSpec2Trend</th>
+                                                <th>topSpec2Graph</th>
+
+                                                <th>topSpec3Title</th>
+                                                <th>topSpec3Amount</th>
+                                                <th>topSpec3Percent</th>
+                                                <th>topSpec3Trend</th>
+                                                <th>topSpec3Graph</th>
+
+                                                <th>topSpec4Title</th>
+                                                <th>topSpec4Amount</th>
+                                                <th>topSpec4Percent</th>
+                                                <th>topSpec4Trend</th>
+                                                <th>topSpec4Graph</th>
+
+                                                <th>topSpec5Title</th>
+                                                <th>topSpec5Amount</th>
+                                                <th>topSpec5Percent</th>
+                                                <th>topSpec5Trend</th>
+                                                <th>topSpec5Graph</th>
+
+                                                <th>midSpecName</th>
+
+                                                <th>midSpec1Title</th>
+                                                <th>midSpec1Amount</th>
+                                                <th>midSpec1Percent</th>
+                                                <th>midSpec1Trend</th>
+                                                <th>midSpec1Graph</th>
+
+                                                <th>midSpec2Title</th>
+                                                <th>midSpec2Amount</th>
+                                                <th>midSpec2Percent</th>
+                                                <th>midSpec2Trend</th>
+                                                <th>midSpec2Graph</th>
+
+                                                <th>midSpec3Title</th>
+                                                <th>midSpec3Amount</th>
+                                                <th>midSpec3Percent</th>
+                                                <th>midSpec3Trend</th>
+                                                <th>midSpec3Graph</th>
+
+                                                <th>midSpec4Title</th>
+                                                <th>midSpec4Amount</th>
+                                                <th>midSpec4Percent</th>
+                                                <th>midSpec4Trend</th>
+                                                <th>midSpec4Graph</th>
+
+                                                <th>midSpec5Title</th>
+                                                <th>midSpec5Amount</th>
+                                                <th>midSpec5Percent</th>
+                                                <th>midSpec5Trend</th>
+                                                <th>midSpec5Graph</th>
+
+                                                
+                                                <th>botSpecName</th>
+
+                                                <th>botSpec1Title</th>
+                                                <th>botSpec1Amount</th>
+                                                <th>botSpec1Percent</th>
+                                                <th>botSpec1Trend</th>
+                                                <th>botSpec1Graph</th>
+
+                                                <th>botSpec2Title</th>
+                                                <th>botSpec2Amount</th>
+                                                <th>botSpec2Percent</th>
+                                                <th>botSpec2Trend</th>
+                                                <th>botSpec2Graph</th>
+
+                                                <th>botSpec3Title</th>
+                                                <th>botSpec3Amount</th>
+                                                <th>botSpec3Percent</th>
+                                                <th>botSpec3Trend</th>
+                                                <th>botSpec3Graph</th>
+
+                                                <th>botSpec4Title</th>
+                                                <th>botSpec4Amount</th>
+                                                <th>botSpec4Percent</th>
+                                                <th>botSpec4Trend</th>
+                                                <th>botSpec4Graph</th>
+
+                                                <th>botSpec5Title</th>
+                                                <th>botSpec5Amount</th>
+                                                <th>botSpec5Percent</th>
+                                                <th>botSpec5Trend</th>
+                                                <th>botSpec5Graph</th>
                                             </tr>
                                             </thead>
                                         </table>
@@ -427,66 +461,104 @@
                                                 d.c_type = d.data.default.c_type;
 
                                                 d.calTime = d.data.default.calTime;
-                                                d.topImageUrl1 = d.data.default.topImageUrl1;
-                                                d.topImageUrl2 = d.data.default.topImageUrl2;
-                                                d.topImageUrl3 = d.data.default.topImageUrl3;
-                                                d.topVenderUrl = d.data.default.topVenderUrl;
-                                                d.topVenderText = d.data.default.topVenderText;
-                                                d.topPost1Icon = d.data.default.topPost1Icon;
-                                                d.topPost1Url = d.data.default.topPost1Url;
-                                                d.topPost1Text = d.data.default.topPost1Text;
-                                                d.topPost2Icon = d.data.default.topPost2Icon;
-                                                d.topPost2Url = d.data.default.topPost2Url;
-                                                d.topPost2Text = d.data.default.topPost2Text;
-                                                d.topPost3Icon = d.data.default.topPost3Icon;
-                                                d.topPost3Url = d.data.default.topPost3Url;
-                                                d.topPost3Text = d.data.default.topPost3Text;
-                                                d.topPost4Icon = d.data.default.topPost4Icon;
-                                                d.topPost4Url = d.data.default.topPost4Url;
-                                                d.topPost4Text = d.data.default.topPost4Text;
-                                                d.topPost5Icon = d.data.default.topPost5Icon;
-                                                d.topPost5Url = d.data.default.topPost5Url;
-                                                d.topPost5Text = d.data.default.topPost5Text;
-                                                d.midImageUrl1 = d.data.default.midImageUrl1;
-                                                d.midImageUrl2 = d.data.default.midImageUrl2;
-                                                d.midImageUrl3 = d.data.default.midImageUrl3;
-                                                d.midVenderUrl = d.data.default.midVenderUrl;
-                                                d.midVenderText = d.data.default.midVenderText;
-                                                d.midPost1Icon = d.data.default.midPost1Icon;
-                                                d.midPost1Url = d.data.default.midPost1Url;
-                                                d.midPost1Text = d.data.default.midPost1Text;
-                                                d.midPost2Icon = d.data.default.midPost2Icon;
-                                                d.midPost2Url = d.data.default.midPost2Url;
-                                                d.midPost2Text = d.data.default.midPost2Text;
-                                                d.midPost3Icon = d.data.default.midPost3Icon;
-                                                d.midPost3Url = d.data.default.midPost3Url;
-                                                d.midPost3Text = d.data.default.midPost3Text;
-                                                d.midPost4Icon = d.data.default.midPost4Icon;
-                                                d.midPost4Url = d.data.default.midPost4Url;
-                                                d.midPost4Text = d.data.default.midPost4Text;
-                                                d.midPost5Icon = d.data.default.midPost5Icon;
-                                                d.midPost5Url = d.data.default.midPost5Url;
-                                                d.midPost5Text = d.data.default.midPost5Text;
-                                                d.botImageUrl1 = d.data.default.botImageUrl1;
-                                                d.botImageUrl2 = d.data.default.botImageUrl2;
-                                                d.botImageUrl3 = d.data.default.botImageUrl3;
-                                                d.botVenderUrl = d.data.default.botVenderUrl;
-                                                d.botVenderText = d.data.default.botVenderText;
-                                                d.botPost1Icon = d.data.default.botPost1Icon;
-                                                d.botPost1Url = d.data.default.botPost1Url;
-                                                d.botPost1Text = d.data.default.botPost1Text;
-                                                d.botPost2Icon = d.data.default.botPost2Icon;
-                                                d.botPost2Url = d.data.default.botPost2Url;
-                                                d.botPost2Text = d.data.default.botPost2Text;
-                                                d.botPost3Icon = d.data.default.botPost3Icon;
-                                                d.botPost3Url = d.data.default.botPost3Url;
-                                                d.botPost3Text = d.data.default.botPost3Text;
-                                                d.botPost4Icon = d.data.default.botPost4Icon;
-                                                d.botPost4Url = d.data.default.botPost4Url;
-                                                d.botPost4Text = d.data.default.botPost4Text;
-                                                d.botPost5Icon = d.data.default.botPost5Icon;
-                                                d.botPost5Url = d.data.default.botPost5Url;
-                                                d.botPost5Text = d.data.default.botPost5Text;
+
+
+                                                d.topSpecName = d.data.default.topSpecName;
+
+                                                d.topSpec1Title = d.data.default.topSpec1Title;
+                                                d.topSpec1Amount = d.data.default.topSpec1Amount;
+                                                d.topSpec1Percent = d.data.default.topSpec1Percent;
+                                                d.topSpec1Trend = d.data.default.topSpec1Trend;
+                                                d.topSpec1Graph = d.data.default.topSpec1Graph;
+
+                                                d.topSpec2Title = d.data.default.topSpec2Title;
+                                                d.topSpec2Amount = d.data.default.topSpec2Amount;
+                                                d.topSpec2Percent = d.data.default.topSpec2Percent;
+                                                d.topSpec2Trend = d.data.default.topSpec2Trend;
+                                                d.topSpec2Graph = d.data.default.topSpec2Graph;
+
+                                                d.topSpec3Title = d.data.default.topSpec3Title;
+                                                d.topSpec3Amount = d.data.default.topSpec3Amount;
+                                                d.topSpec3Percent = d.data.default.topSpec3Percent;
+                                                d.topSpec3Trend = d.data.default.topSpec3Trend;
+                                                d.topSpec3Graph = d.data.default.topSpec3Graph;
+
+                                                d.topSpec4Title = d.data.default.topSpec4Title;
+                                                d.topSpec4Amount = d.data.default.topSpec4Amount;
+                                                d.topSpec4Percent = d.data.default.topSpec4Percent;
+                                                d.topSpec4Trend = d.data.default.topSpec4Trend;
+                                                d.topSpec4Graph = d.data.default.topSpec4Graph;
+
+                                                d.topSpec5Title = d.data.default.topSpec5Title;
+                                                d.topSpec5Amount = d.data.default.topSpec5Amount;
+                                                d.topSpec5Percent = d.data.default.topSpec5Percent;
+                                                d.topSpec5Trend = d.data.default.topSpec5Trend;
+                                                d.topSpec5Graph = d.data.default.topSpec5Graph;
+
+                                                d.midSpecName = d.data.default.midSpecName;
+
+                                                d.midSpec1Title = d.data.default.midSpec1Title;
+                                                d.midSpec1Amount = d.data.default.midSpec1Amount;
+                                                d.midSpec1Percent = d.data.default.midSpec1Percent;
+                                                d.midSpec1Trend = d.data.default.midSpec1Trend;
+                                                d.midSpec1Graph = d.data.default.midSpec1Graph;
+
+                                                d.midSpec2Title = d.data.default.midSpec2Title;
+                                                d.midSpec2Amount = d.data.default.midSpec2Amount;
+                                                d.midSpec2Percent = d.data.default.midSpec2Percent;
+                                                d.midSpec2Trend = d.data.default.midSpec2Trend;
+                                                d.midSpec2Graph = d.data.default.midSpec2Graph;
+
+                                                d.midSpec3Title = d.data.default.midSpec3Title;
+                                                d.midSpec3Amount = d.data.default.midSpec3Amount;
+                                                d.midSpec3Percent = d.data.default.midSpec3Percent;
+                                                d.midSpec3Trend = d.data.default.midSpec3Trend;
+                                                d.midSpec3Graph = d.data.default.midSpec3Graph;
+
+                                                d.midSpec4Title = d.data.default.midSpec4Title;
+                                                d.midSpec4Amount = d.data.default.midSpec4Amount;
+                                                d.midSpec4Percent = d.data.default.midSpec4Percent;
+                                                d.midSpec4Trend = d.data.default.midSpec4Trend;
+                                                d.midSpec4Graph = d.data.default.midSpec4Graph;
+
+                                                d.midSpec5Title = d.data.default.midSpec5Title;
+                                                d.midSpec5Amount = d.data.default.midSpec5Amount;
+                                                d.midSpec5Percent = d.data.default.midSpec5Percent;
+                                                d.midSpec5Trend = d.data.default.midSpec5Trend;
+                                                d.midSpec5Graph = d.data.default.midSpec5Graph;
+
+
+                                                d.botSpecName = d.data.default.botSpecName;
+
+                                                d.botSpec1Title = d.data.default.botSpec1Title;
+                                                d.botSpec1Amount = d.data.default.botSpec1Amount;
+                                                d.botSpec1Percent = d.data.default.botSpec1Percent;
+                                                d.botSpec1Trend = d.data.default.botSpec1Trend;
+                                                d.botSpec1Graph = d.data.default.botSpec1Graph;
+
+                                                d.botSpec2Title = d.data.default.botSpec2Title;
+                                                d.botSpec2Amount = d.data.default.botSpec2Amount;
+                                                d.botSpec2Percent = d.data.default.botSpec2Percent;
+                                                d.botSpec2Trend = d.data.default.botSpec2Trend;
+                                                d.botSpec2Graph = d.data.default.botSpec2Graph;
+
+                                                d.botSpec3Title = d.data.default.botSpec3Title;
+                                                d.botSpec3Amount = d.data.default.botSpec3Amount;
+                                                d.botSpec3Percent = d.data.default.botSpec3Percent;
+                                                d.botSpec3Trend = d.data.default.botSpec3Trend;
+                                                d.botSpec3Graph = d.data.default.botSpec3Graph;
+
+                                                d.botSpec4Title = d.data.default.botSpec4Title;
+                                                d.botSpec4Amount = d.data.default.botSpec4Amount;
+                                                d.botSpec4Percent = d.data.default.botSpec4Percent;
+                                                d.botSpec4Trend = d.data.default.botSpec4Trend;
+                                                d.botSpec4Graph = d.data.default.botSpec4Graph;
+
+                                                d.botSpec5Title = d.data.default.botSpec5Title;
+                                                d.botSpec5Amount = d.data.default.botSpec5Amount;
+                                                d.botSpec5Percent = d.data.default.botSpec5Percent;
+                                                d.botSpec5Trend = d.data.default.botSpec5Trend;
+                                                d.botSpec5Graph = d.data.default.botSpec5Graph;
 
                                                 delete(d.data);
                                             }
@@ -512,125 +584,161 @@
                                         },{
                                             label: "calTime:", name: "calTime"
                                         },{
-                                            label: "topImageUrl1:", name: "topImageUrl1"
+                                            label: "topSpecName:", name: "topSpecName"
                                         },{
-                                            label: "topImageUrl2:", name: "topImageUrl2"
+                                            label: "topSpec1Title:", name: "topSpec1Title"
                                         },{
-                                            label: "topImageUrl3:", name: "topImageUrl3"
+                                            label: "topSpec1Amount:", name: "topSpec1Amount"
                                         },{
-                                            label: "topVenderUrl:", name: "topVenderUrl"
+                                            label: "topSpec1Percent:", name: "topSpec1Percent"
                                         },{
-                                            label: "topVenderText:", name: "topVenderText"
+                                            label: "topSpec1Trend:", name: "topSpec1Trend"
                                         },{
-                                            label: "topPost1Icon:", name: "topPost1Icon"
+                                            label: "topSpec1Graph:", name: "topSpec1Graph"
                                         },{
-                                            label: "topPost1Url:", name: "topPost1Url"
+                                            label: "topSpec2Title:", name: "topSpec2Title"
                                         },{
-                                            label: "topPost1Text:", name: "topPost1Text"
+                                            label: "topSpec2Amount:", name: "topSpec2Amount"
                                         },{
-                                            label: "topPost2Icon:", name: "topPost2Icon"
+                                            label: "topSpec2Percent:", name: "topSpec2Percent"
                                         },{
-                                            label: "topPost2Url:", name: "topPost2Url"
+                                            label: "topSpec2Trend:", name: "topSpec2Trend"
                                         },{
-                                            label: "topPost2Text:", name: "topPost2Text"
+                                            label: "topSpec2Graph:", name: "topSpec2Graph"
                                         },{
-                                            label: "topPost3Icon:", name: "topPost3Icon"
+                                            label: "topSpec3Title:", name: "topSpec3Title"
                                         },{
-                                            label: "topPost3Url:", name: "topPost3Url"
+                                            label: "topSpec3Amount:", name: "topSpec3Amount"
                                         },{
-                                            label: "topPost3Text:", name: "topPost3Text"
+                                            label: "topSpec3Percent:", name: "topSpec3Percent"
                                         },{
-                                            label: "topPost4Icon:", name: "topPost4Icon"
+                                            label: "topSpec3Trend:", name: "topSpec3Trend"
                                         },{
-                                            label: "topPost4Url:", name: "topPost4Url"
+                                            label: "topSpec3Graph:", name: "topSpec3Graph"
                                         },{
-                                            label: "topPost4Text:", name: "topPost4Text"
+                                            label: "topSpec4Title:", name: "topSpec4Title"
                                         },{
-                                            label: "topPost5Icon:", name: "topPost5Icon"
+                                            label: "topSpec4Amount:", name: "topSpec4Amount"
                                         },{
-                                            label: "topPost5Url:", name: "topPost5Url"
+                                            label: "topSpec4Percent:", name: "topSpec4Percent"
                                         },{
-                                            label: "topPost5Text:", name: "topPost5Text"
+                                            label: "topSpec4Trend:", name: "topSpec4Trend"
                                         },{
-                                            label: "midImageUrl1:", name: "midImageUrl1"
+                                            label: "topSpec4Graph:", name: "topSpec4Graph"
                                         },{
-                                            label: "midImageUrl2:", name: "midImageUrl2"
+                                            label: "topSpec5Title:", name: "topSpec5Title"
                                         },{
-                                            label: "midImageUrl3:", name: "midImageUrl3"
+                                            label: "topSpec5Amount:", name: "topSpec5Amount"
                                         },{
-                                            label: "midVenderUrl:", name: "midVenderUrl"
+                                            label: "topSpec5Percent:", name: "topSpec5Percent"
                                         },{
-                                            label: "midVenderText:", name: "midVenderText"
+                                            label: "topSpec5Trend:", name: "topSpec5Trend"
                                         },{
-                                            label: "midPost1Icon:", name: "midPost1Icon"
+                                            label: "topSpec5Graph:", name: "topSpec5Graph"
                                         },{
-                                            label: "midPost1Url:", name: "midPost1Url"
+                                            label: "midSpecName:", name: "midSpecName"
                                         },{
-                                            label: "midPost1Text:", name: "midPost1Text"
+                                            label: "midSpec1Title:", name: "midSpec1Title"
                                         },{
-                                            label: "midPost2Icon:", name: "midPost2Icon"
+                                            label: "midSpec1Amount:", name: "midSpec1Amount"
                                         },{
-                                            label: "midPost2Url:", name: "midPost2Url"
+                                            label: "midSpec1Percent:", name: "midSpec1Percent"
                                         },{
-                                            label: "midPost2Text:", name: "midPost2Text"
+                                            label: "midSpec1Trend:", name: "midSpec1Trend"
                                         },{
-                                            label: "midPost3Icon:", name: "midPost3Icon"
+                                            label: "midSpec1Graph:", name: "midSpec1Graph"
                                         },{
-                                            label: "midPost3Url:", name: "midPost3Url"
+                                            label: "midSpec2Title:", name: "midSpec2Title"
                                         },{
-                                            label: "midPost3Text:", name: "midPost3Text"
+                                            label: "midSpec2Amount:", name: "midSpec2Amount"
                                         },{
-                                            label: "midPost4Icon:", name: "midPost4Icon"
+                                            label: "midSpec2Percent:", name: "midSpec2Percent"
                                         },{
-                                            label: "midPost4Url:", name: "midPost4Url"
+                                            label: "midSpec2Trend:", name: "midSpec2Trend"
                                         },{
-                                            label: "midPost4Text:", name: "midPost4Text"
+                                            label: "midSpec2Graph:", name: "midSpec2Graph"
                                         },{
-                                            label: "midPost5Icon:", name: "midPost5Icon"
+                                            label: "midSpec3Title:", name: "midSpec3Title"
                                         },{
-                                            label: "midPost5Url:", name: "midPost5Url"
+                                            label: "midSpec3Amount:", name: "midSpec3Amount"
                                         },{
-                                            label: "midPost5Text:", name: "midPost5Text"
+                                            label: "midSpec3Percent:", name: "midSpec3Percent"
                                         },{
-                                            label: "botImageUrl1:", name: "botImageUrl1"
+                                            label: "midSpec3Trend:", name: "midSpec3Trend"
                                         },{
-                                            label: "botImageUrl2:", name: "botImageUrl2"
+                                            label: "midSpec3Graph:", name: "midSpec3Graph"
                                         },{
-                                            label: "botImageUrl3:", name: "botImageUrl3"
+                                            label: "midSpec4Title:", name: "midSpec4Title"
                                         },{
-                                            label: "botVenderUrl:", name: "botVenderUrl"
+                                            label: "midSpec4Amount:", name: "midSpec4Amount"
                                         },{
-                                            label: "botVenderText:", name: "botVenderText"
+                                            label: "midSpec4Percent:", name: "midSpec4Percent"
                                         },{
-                                            label: "botPost1Icon:", name: "botPost1Icon"
+                                            label: "midSpec4Trend:", name: "midSpec4Trend"
                                         },{
-                                            label: "botPost1Url:", name: "botPost1Url"
+                                            label: "midSpec4Graph:", name: "midSpec4Graph"
                                         },{
-                                            label: "botPost1Text:", name: "botPost1Text"
+                                            label: "midSpec5Title:", name: "midSpec5Title"
                                         },{
-                                            label: "botPost2Icon:", name: "botPost2Icon"
+                                            label: "midSpec5Amount:", name: "midSpec5Amount"
                                         },{
-                                            label: "botPost2Url:", name: "botPost2Url"
+                                            label: "midSpec5Percent:", name: "midSpec5Percent"
                                         },{
-                                            label: "botPost2Text:", name: "botPost2Text"
+                                            label: "midSpec5Trend:", name: "midSpec5Trend"
                                         },{
-                                            label: "botPost3Icon:", name: "botPost3Icon"
+                                            label: "midSpec5Graph:", name: "midSpec5Graph"
                                         },{
-                                            label: "botPost3Url:", name: "botPost3Url"
+                                            label: "botSpecName:", name: "botSpecName"
                                         },{
-                                            label: "botPost3Text:", name: "botPost3Text"
+                                            label: "botSpec1Title:", name: "botSpec1Title"
                                         },{
-                                            label: "botPost4Icon:", name: "botPost4Icon"
+                                            label: "botSpec1Amount:", name: "botSpec1Amount"
                                         },{
-                                            label: "botPost4Url:", name: "botPost4Url"
+                                            label: "botSpec1Percent:", name: "botSpec1Percent"
                                         },{
-                                            label: "botPost4Text:", name: "botPost4Text"
+                                            label: "botSpec1Trend:", name: "botSpec1Trend"
                                         },{
-                                            label: "botPost5Icon:", name: "botPost5Icon"
+                                            label: "botSpec1Graph:", name: "botSpec1Graph"
                                         },{
-                                            label: "botPost5Url:", name: "botPost5Url"
+                                            label: "botSpec2Title:", name: "botSpec2Title"
                                         },{
-                                            label: "botPost5Text:", name: "botPost5Text"
+                                            label: "botSpec2Amount:", name: "botSpec2Amount"
+                                        },{
+                                            label: "botSpec2Percent:", name: "botSpec2Percent"
+                                        },{
+                                            label: "botSpec2Trend:", name: "botSpec2Trend"
+                                        },{
+                                            label: "botSpec2Graph:", name: "botSpec2Graph"
+                                        },{
+                                            label: "botSpec3Title:", name: "botSpec3Title"
+                                        },{
+                                            label: "botSpec3Amount:", name: "botSpec3Amount"
+                                        },{
+                                            label: "botSpec3Percent:", name: "botSpec3Percent"
+                                        },{
+                                            label: "botSpec3Trend:", name: "botSpec3Trend"
+                                        },{
+                                            label: "botSpec3Graph:", name: "botSpec3Graph"
+                                        },{
+                                            label: "botSpec4Title:", name: "botSpec4Title"
+                                        },{
+                                            label: "botSpec4Amount:", name: "botSpec4Amount"
+                                        },{
+                                            label: "botSpec4Percent:", name: "botSpec4Percent"
+                                        },{
+                                            label: "botSpec4Trend:", name: "botSpec4Trend"
+                                        },{
+                                            label: "botSpec4Graph:", name: "botSpec4Graph"
+                                        },{
+                                            label: "botSpec5Title:", name: "botSpec5Title"
+                                        },{
+                                            label: "botSpec5Amount:", name: "botSpec5Amount"
+                                        },{
+                                            label: "botSpec5Percent:", name: "botSpec5Percent"
+                                        },{
+                                            label: "botSpec5Trend:", name: "botSpec5Trend"
+                                        },{
+                                            label: "botSpec5Graph:", name: "botSpec5Graph"
                                         } ]
                                     });
 
@@ -663,68 +771,103 @@
                                                 {"data": "c_type"},
 
                                                 {"data": "calTime"},
-                                                {"data": "topImageUrl1"},
-                                                {"data": "topImageUrl2"},
-                                                {"data": "topImageUrl3"},
-                                                {"data": "topVenderUrl"},
-                                                {"data": "topVenderText"},
-                                                {"data": "topPost1Icon"},
-                                                {"data": "topPost1Url"},
-                                                {"data": "topPost1Text"},
-                                                {"data": "topPost2Icon"},
-                                                {"data": "topPost2Url"},
-                                                {"data": "topPost2Text"},
-                                                {"data": "topPost3Icon"},
-                                                {"data": "topPost3Url"},
-                                                {"data": "topPost3Text"},
-                                                {"data": "topPost4Icon"},
-                                                {"data": "topPost4Url"},
-                                                {"data": "topPost4Text"},
-                                                {"data": "topPost5Icon"},
-                                                {"data": "topPost5Url"},
-                                                {"data": "topPost5Text"},
 
-                                                {"data": "midImageUrl1"},
-                                                {"data": "midImageUrl2"},
-                                                {"data": "midImageUrl3"},
-                                                {"data": "midVenderUrl"},
-                                                {"data": "midVenderText"},
-                                                {"data": "midPost1Icon"},
-                                                {"data": "midPost1Url"},
-                                                {"data": "midPost1Text"},
-                                                {"data": "midPost2Icon"},
-                                                {"data": "midPost2Url"},
-                                                {"data": "midPost2Text"},
-                                                {"data": "midPost3Icon"},
-                                                {"data": "midPost3Url"},
-                                                {"data": "midPost3Text"},
-                                                {"data": "midPost4Icon"},
-                                                {"data": "midPost4Url"},
-                                                {"data": "midPost4Text"},
-                                                {"data": "midPost5Icon"},
-                                                {"data": "midPost5Url"},
-                                                {"data": "midPost5Text"},
+                                                {"data": "topSpecName"},
 
-                                                {"data": "botImageUrl1"},
-                                                {"data": "botImageUrl2"},
-                                                {"data": "botImageUrl3"},
-                                                {"data": "botVenderUrl"},
-                                                {"data": "botVenderText"},
-                                                {"data": "botPost1Icon"},
-                                                {"data": "botPost1Url"},
-                                                {"data": "botPost1Text"},
-                                                {"data": "botPost2Icon"},
-                                                {"data": "botPost2Url"},
-                                                {"data": "botPost2Text"},
-                                                {"data": "botPost3Icon"},
-                                                {"data": "botPost3Url"},
-                                                {"data": "botPost3Text"},
-                                                {"data": "botPost4Icon"},
-                                                {"data": "botPost4Url"},
-                                                {"data": "botPost4Text"},
-                                                {"data": "botPost5Icon"},
-                                                {"data": "botPost5Url"},
-                                                {"data": "botPost5Text"}
+                                                {"data": "topSpec1Title"},
+                                                {"data": "topSpec1Amount"},
+                                                {"data": "topSpec1Percent"},
+                                                {"data": "topSpec1Trend"},
+                                                {"data": "topSpec1Graph"},
+
+                                                {"data": "topSpec2Title"},
+                                                {"data": "topSpec2Amount"},
+                                                {"data": "topSpec2Percent"},
+                                                {"data": "topSpec2Trend"},
+                                                {"data": "topSpec2Graph"},
+
+                                                {"data": "topSpec3Title"},
+                                                {"data": "topSpec3Amount"},
+                                                {"data": "topSpec3Percent"},
+                                                {"data": "topSpec3Trend"},
+                                                {"data": "topSpec3Graph"},
+
+                                                {"data": "topSpec4Title"},
+                                                {"data": "topSpec4Amount"},
+                                                {"data": "topSpec4Percent"},
+                                                {"data": "topSpec4Trend"},
+                                                {"data": "topSpec4Graph"},
+
+                                                {"data": "topSpec5Title"},
+                                                {"data": "topSpec5Amount"},
+                                                {"data": "topSpec5Percent"},
+                                                {"data": "topSpec5Trend"},
+                                                {"data": "topSpec5Graph"},
+
+                                                {"data": "midSpecName"},
+
+                                                {"data": "midSpec1Title"},
+                                                {"data": "midSpec1Amount"},
+                                                {"data": "midSpec1Percent"},
+                                                {"data": "midSpec1Trend"},
+                                                {"data": "midSpec1Graph"},
+
+                                                {"data": "midSpec2Title"},
+                                                {"data": "midSpec2Amount"},
+                                                {"data": "midSpec2Percent"},
+                                                {"data": "midSpec2Trend"},
+                                                {"data": "midSpec2Graph"},
+
+                                                {"data": "midSpec3Title"},
+                                                {"data": "midSpec3Amount"},
+                                                {"data": "midSpec3Percent"},
+                                                {"data": "midSpec3Trend"},
+                                                {"data": "midSpec3Graph"},
+
+                                                {"data": "midSpec4Title"},
+                                                {"data": "midSpec4Amount"},
+                                                {"data": "midSpec4Percent"},
+                                                {"data": "midSpec4Trend"},
+                                                {"data": "midSpec4Graph"},
+
+                                                {"data": "midSpec5Title"},
+                                                {"data": "midSpec5Amount"},
+                                                {"data": "midSpec5Percent"},
+                                                {"data": "midSpec5Trend"},
+                                                {"data": "midSpec5Graph"},
+
+
+                                                {"data": "botSpecName"},
+
+                                                {"data": "botSpec1Title"},
+                                                {"data": "botSpec1Amount"},
+                                                {"data": "botSpec1Percent"},
+                                                {"data": "botSpec1Trend"},
+                                                {"data": "botSpec1Graph"},
+
+                                                {"data": "botSpec2Title"},
+                                                {"data": "botSpec2Amount"},
+                                                {"data": "botSpec2Percent"},
+                                                {"data": "botSpec2Trend"},
+                                                {"data": "botSpec2Graph"},
+
+                                                {"data": "botSpec3Title"},
+                                                {"data": "botSpec3Amount"},
+                                                {"data": "botSpec3Percent"},
+                                                {"data": "botSpec3Trend"},
+                                                {"data": "botSpec3Graph"},
+
+                                                {"data": "botSpec4Title"},
+                                                {"data": "botSpec4Amount"},
+                                                {"data": "botSpec4Percent"},
+                                                {"data": "botSpec4Trend"},
+                                                {"data": "botSpec4Graph"},
+
+                                                {"data": "botSpec5Title"},
+                                                {"data": "botSpec5Amount"},
+                                                {"data": "botSpec5Percent"},
+                                                {"data": "botSpec5Trend"},
+                                                {"data": "botSpec5Graph"}
                                             ],
                                             select: true,
                                             dom: "Bfrtip",
