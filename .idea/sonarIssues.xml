@@ -1893,6 +1893,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/.gitignore">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/RivalWar/api/menu/ROLE_USER/getChildNode.do">
           <value>
             <set />
@@ -2014,6 +2019,11 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/aggregateResult.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/compareInfo.js">
           <value>
             <set />
           </value>
