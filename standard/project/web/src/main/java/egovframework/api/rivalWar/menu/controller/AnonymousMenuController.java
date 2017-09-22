@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
+import egovframework.api.rivalWar.compareSpec.vo.CompareSpecDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
@@ -179,6 +180,26 @@ public class AnonymousMenuController extends GenericAbstractController {
         if(list.size() > 0){
             MenuDTO tempMenuDTO = list.get(0);
             CompareInfoDTO resultDTO = tempMenuDTO.getCompareInfoDTO();
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", resultDTO);
+            return modelAndView;
+        }else{
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", "none exist childnode");
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getRootCompareSpec.do", method = RequestMethod.GET)
+    public ModelAndView getRootCompareSpec(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setWhere("c_parentid", new Long(3));
+        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
+        if(list.size() > 0){
+            MenuDTO tempMenuDTO = list.get(0);
+            CompareSpecDTO resultDTO = tempMenuDTO.getCompareSpecDTO();
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", resultDTO);
             return modelAndView;

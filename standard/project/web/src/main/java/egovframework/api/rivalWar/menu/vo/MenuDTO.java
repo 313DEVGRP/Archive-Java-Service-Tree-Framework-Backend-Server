@@ -3,6 +3,7 @@ package egovframework.api.rivalWar.menu.vo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
+import egovframework.api.rivalWar.compareSpec.vo.CompareSpecDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
@@ -106,5 +107,18 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	public void setCompareInfoDTO(CompareInfoDTO compareInfoDTO) {
 		this.compareInfoDTO = compareInfoDTO;
+	}
+
+	private CompareSpecDTO compareSpecDTO;
+
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "COMPARE_SPEC_ID")
+	public CompareSpecDTO getCompareSpecDTO() {
+		return compareSpecDTO;
+	}
+
+	public void setCompareSpecDTO(CompareSpecDTO compareSpecDTO) {
+		this.compareSpecDTO = compareSpecDTO;
 	}
 }
