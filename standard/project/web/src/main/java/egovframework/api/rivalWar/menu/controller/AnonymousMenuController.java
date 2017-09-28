@@ -205,6 +205,8 @@ public class AnonymousMenuController extends GenericAbstractController {
             return modelAndView;
         }else{
             ModelAndView modelAndView = new ModelAndView("jsonView");
+
+
             modelAndView.addObject("result", "none exist childnode");
             return modelAndView;
         }

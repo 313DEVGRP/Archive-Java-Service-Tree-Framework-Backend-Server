@@ -888,6 +888,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/pom.xml">
           <value>
             <set />
@@ -1948,6 +1953,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRootCompareSpec.do">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRootNode.do">
           <value>
             <set />
@@ -2024,6 +2034,11 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/compareInfo.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/compareSpec.js">
           <value>
             <set />
           </value>

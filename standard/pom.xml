@@ -285,6 +285,16 @@
                 <artifactId>dashboard-maven-plugin</artifactId>
                 <version>1.0.0-beta-1</version>
             </plugin>
+            <plugin>
+                <groupId>com.soebes.maven.plugins.dmg</groupId>
+                <artifactId>doxygen-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <configuration>
+                    <haveDot>false</haveDot>
+                    <quiet>false</quiet>
+                    <projectName>This is a www.313.co.kr Project</projectName>
+                </configuration>
+            </plugin>
         </plugins>
     </reporting>
 </project>

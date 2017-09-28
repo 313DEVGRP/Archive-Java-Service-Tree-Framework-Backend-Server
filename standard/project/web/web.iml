@@ -219,15 +219,15 @@
     <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.3.4" level="project" />
     <orderEntry type="library" name="Maven: ognl:ognl:3.0.19" level="project" />
     <orderEntry type="library" name="Maven: javassist:javassist:3.11.0.GA" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.struts:struts2-core:2.3.32" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.struts.xwork:xwork-core:2.3.32" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.struts:struts2-core:2.3.34" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.struts.xwork:xwork-core:2.3.34" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:3.3" level="project" />
     <orderEntry type="library" name="Maven: asm:asm-commons:3.3" level="project" />
     <orderEntry type="library" name="Maven: asm:asm-tree:3.3" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.22" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.struts:struts2-spring-plugin:2.3.32" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.struts:struts2-dojo-plugin:2.3.32" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.struts:struts2-json-plugin:2.3.32" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.struts:struts2-spring-plugin:2.3.34" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.struts:struts2-dojo-plugin:2.3.34" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.struts:struts2-json-plugin:2.3.34" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.1.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.1.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.1.9.RELEASE" level="project" />
