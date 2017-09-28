@@ -226,6 +226,19 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.5.1</version>
             </plugin>
+            <plugin>
+                <groupId>com.soebes.maven.plugins</groupId>
+                <artifactId>doxygen-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <reporting>
@@ -284,11 +297,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dashboard-maven-plugin</artifactId>
                 <version>1.0.0-beta-1</version>
-            </plugin>
-            <plugin>
-                <groupId>com.soebes.maven.plugins</groupId>
-                <artifactId>doxygen-maven-plugin</artifactId>
-                <version>1.1.0</version>
             </plugin>
         </plugins>
     </reporting>
