@@ -49,8 +49,16 @@ public class DirectChatDTO extends JsTreeHibernateSearchDTO implements Serializa
 		this.copyBooleanValue = copyBooleanValue;
 	}
 
-	private Long user_id;  		//닉네임
-	private String c_time;		//글쓴시간
+	private Long	menu_c_id;		//다이렉트챗 메뉴아이디
+
+	// 채팅 입력자가 선택한 제품이나 섹션의 아이디
+	// 섹션의 아이디가 어느 메뉴 아이디랑 맵핑 되는지
+	//
+
+
+	private String 	userId;			//사용자 아이디 ( egovframework.com.ext.jstree.support.security.dto. 하위 클래스  )
+
+	private String writeTime;		//글쓴시간
 	private Long c_camp;		//글쓴이 선택 진영
 	private String c_contents; // 글내용
 	//글해시태그
