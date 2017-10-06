@@ -56,14 +56,15 @@ public class DirectChatDTO extends JsTreeHibernateSearchDTO implements Serializa
 	//
 
 
-	private String 	userId;			//사용자 아이디 ( egovframework.com.ext.jstree.support.security.dto. 하위 클래스  )
+	private String 	userId;			//사용자 아이디 ( egovframework.com.ext.jstree.support.security.dto. 하위 클래스 )
 
 	private String writeTime;		//글쓴시간
-	private Long c_camp;		//글쓴이 선택 진영
-	private String c_contents; // 글내용
-	//글해시태그
-	private Long c_likecount;	//좋아요 카운트
-	private Long c_hatecount;	//싫어요 카운트
+	private Long c_camp;			//글쓴이 선택 진영
+	private String c_contents; 		// 글내용
+
+									//글해시태그
+	private Long c_likecount;		//좋아요 카운트
+	private Long c_hatecount;		//싫어요 카운트
 
 
 	@Override
