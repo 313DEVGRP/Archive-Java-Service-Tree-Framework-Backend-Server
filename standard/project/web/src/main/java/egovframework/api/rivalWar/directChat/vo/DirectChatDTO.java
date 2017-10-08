@@ -53,8 +53,6 @@ public class DirectChatDTO extends JsTreeHibernateSearchDTO implements Serializa
 
 	// 채팅 입력자가 선택한 제품이나 섹션의 아이디
 	// 섹션의 아이디가 어느 메뉴 아이디랑 맵핑 되는지
-	//
-
 
 	private String 	userId;			//사용자 아이디 ( egovframework.com.ext.jstree.support.security.dto. 하위 클래스 )
 
