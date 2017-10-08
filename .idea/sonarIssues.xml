@@ -958,6 +958,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/compareItem/CompareItem_Data_Script_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/compareSpec/CompareSpec_Data_Script_Oracle.sql">
           <value>
             <set />
