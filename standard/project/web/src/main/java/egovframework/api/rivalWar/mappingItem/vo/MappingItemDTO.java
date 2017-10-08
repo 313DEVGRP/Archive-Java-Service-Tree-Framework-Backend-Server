@@ -2,11 +2,11 @@ package egovframework.api.rivalWar.mappingItem.vo;
 
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -23,11 +23,6 @@ public class MappingItemDTO extends JsTreeHibernateSearchDTO implements Serializ
 
     private static final long serialVersionUID = -2826589626313340365L;
 
-    /*
-	 * Extend Bean Field
-	 */
-    private Boolean copyBooleanValue;
-
     public MappingItemDTO() {
         super();
     }
@@ -36,6 +31,11 @@ public class MappingItemDTO extends JsTreeHibernateSearchDTO implements Serializ
         super();
         this.copyBooleanValue = copyBooleanValue;
     }
+
+    /*
+	 * Extend Bean Field
+	 */
+    private Boolean copyBooleanValue;
 
     @Transient
     public Boolean getCopyBooleanValue() {
@@ -50,6 +50,27 @@ public class MappingItemDTO extends JsTreeHibernateSearchDTO implements Serializ
 
     public void setCopyBooleanValue(Boolean copyBooleanValue) {
         this.copyBooleanValue = copyBooleanValue;
+    }
+
+    private Number mappingMenuId;
+    private String mappingItemName;
+
+    @Column(name = "mapping_menu_id")
+    public Number getMappingMenuId() {
+        return mappingMenuId;
+    }
+
+    public void setMappingMenuId(Number mappingMenuId) {
+        this.mappingMenuId = mappingMenuId;
+    }
+
+    @Column(name = "mapping_item_name")
+    public String getMappingItemName() {
+        return mappingItemName;
+    }
+
+    public void setMappingItemName(String mappingItemName) {
+        this.mappingItemName = mappingItemName;
     }
 
     @Override

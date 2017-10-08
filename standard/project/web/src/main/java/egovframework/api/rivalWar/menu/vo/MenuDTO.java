@@ -124,9 +124,16 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 		this.compareSpecDTO = compareSpecDTO;
 	}
 
+	private Collection<MappingItemDTO> mappingItemDTO;
+
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="MENU_ID")
-	private Collection<MappingItemDTO> phone;
+	@JoinColumn(name="MAPPING_ITEM_ID")
+	public Collection<MappingItemDTO> getMappingItemDTO() {
+		return mappingItemDTO;
+	}
 
+	public void setMappingItemDTO(Collection<MappingItemDTO> mappingItemDTO) {
+		this.mappingItemDTO = mappingItemDTO;
+	}
 }
