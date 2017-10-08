@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
 import egovframework.api.rivalWar.compareSpec.vo.CompareSpecDTO;
+import egovframework.api.rivalWar.mappingItem.vo.MappingItemDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
@@ -13,6 +14,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name = "T_JSTREE_MENU")
@@ -121,4 +123,10 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 	public void setCompareSpecDTO(CompareSpecDTO compareSpecDTO) {
 		this.compareSpecDTO = compareSpecDTO;
 	}
+
+	@JsonIgnore
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="MENU_ID")
+	private Collection<MappingItemDTO> phone;
+
 }
