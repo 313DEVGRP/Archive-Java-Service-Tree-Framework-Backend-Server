@@ -1098,6 +1098,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/mappingItem/vo/MappingItemDTO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/menu/controller/AdminMenuController.java">
           <value>
             <set />
