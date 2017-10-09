@@ -1933,6 +1933,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/js/egovframework/com/ext/jstree/DataTables-1.10.16/extensions/Editor-1.6.5/js/dataTables.editor.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/js/egovframework/com/ext/jstree/DataTables-1.10.4/media/js/jquery.dataTables.js">
           <value>
             <set />
@@ -2004,6 +2009,11 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getRootNode.do">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/bower.json">
           <value>
             <set />
           </value>
