@@ -1,5 +1,8 @@
 package egovframework.api.rivalWar.compareItem.vo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
@@ -52,9 +55,10 @@ public class CompareItemDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.copyBooleanValue = copyBooleanValue;
     }
 
-    private Number mappingMenuId;
+    //private Number mappingMenuId;
     private String compareItemName;
 
+    /*
     @Column(name = "MAPPING_MENU_ID")
     public Number getMappingMenuId() {
         return mappingMenuId;
@@ -63,7 +67,7 @@ public class CompareItemDTO extends JsTreeHibernateSearchDTO implements Serializ
     public void setMappingMenuId(Number mappingMenuId) {
         this.mappingMenuId = mappingMenuId;
     }
-
+    */
     @Column(name = "COMPARE_ITEM_NAME")
     public String getCompareItemName() {
         return compareItemName;
@@ -80,4 +84,17 @@ public class CompareItemDTO extends JsTreeHibernateSearchDTO implements Serializ
         }
     }
 
+    private MenuDTO menuDTO;
+
+    //영속성 전이 설정
+    @JsonBackReference
+    @ManyToOne(fetch=FetchType.LAZY)   //Lazy Loading 설정
+    @JoinColumn(name="MAPPING_MENU_ID") //조인 컬럼 설정
+    public MenuDTO getMenuDTO() {
+        return menuDTO;
+    }
+
+    public void setMenuDTO(MenuDTO menuDTO) {
+        this.menuDTO = menuDTO;
+    }
 }

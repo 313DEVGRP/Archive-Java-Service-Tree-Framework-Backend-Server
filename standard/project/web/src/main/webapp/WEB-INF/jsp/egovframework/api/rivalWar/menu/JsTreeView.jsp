@@ -411,6 +411,10 @@
                                             }]
                                         });
                                     });
+
+                                    function jsTreeClick(selectedNodeID) {
+                                        console.log(selectedNodeID);
+                                    }
                                 </script>
                                 <customTags:jstree target="#demo"
                                                    getChildNode="${pageContext.request.contextPath}/api/rivalWar/menu/getChildNode.do"

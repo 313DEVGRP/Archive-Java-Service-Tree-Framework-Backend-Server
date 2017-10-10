@@ -1,6 +1,7 @@
 package egovframework.api.rivalWar.menu.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
 import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
@@ -12,9 +13,13 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "T_JSTREE_MENU")
@@ -124,4 +129,17 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 		this.compareSpecDTO = compareSpecDTO;
 	}
 
+	private List<CompareItemDTO> compareItemDTOs = new ArrayList<CompareItemDTO>();
+
+	// default fetch type = LAZY
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "menuDTO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public List<CompareItemDTO> getCompareItemDTOs() {
+		return compareItemDTOs;
+	}
+
+	public void setCompareItemDTOs(List<CompareItemDTO> compareItemDTOs) {
+		this.compareItemDTOs = compareItemDTOs;
+	}
 }
