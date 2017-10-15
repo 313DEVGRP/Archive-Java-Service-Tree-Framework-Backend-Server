@@ -2,15 +2,20 @@ package egovframework.api.rivalWar.compareItem.vo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
+import egovframework.api.rivalWar.specHashTag.vo.SpecHashTagDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017-10-08.
@@ -58,16 +63,6 @@ public class CompareItemDTO extends JsTreeHibernateSearchDTO implements Serializ
     //private Number mappingMenuId;
     private String compareItemName;
 
-    /*
-    @Column(name = "MAPPING_MENU_ID")
-    public Number getMappingMenuId() {
-        return mappingMenuId;
-    }
-
-    public void setMappingMenuId(Number mappingMenuId) {
-        this.mappingMenuId = mappingMenuId;
-    }
-    */
     @Column(name = "COMPARE_ITEM_NAME")
     public String getCompareItemName() {
         return compareItemName;
@@ -96,5 +91,19 @@ public class CompareItemDTO extends JsTreeHibernateSearchDTO implements Serializ
 
     public void setMenuDTO(MenuDTO menuDTO) {
         this.menuDTO = menuDTO;
+    }
+
+    private List<SpecHashTagDTO> specHashTagDTOs = new ArrayList<SpecHashTagDTO>();
+
+    // default fetch type = LAZY
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "compareItemDTO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<SpecHashTagDTO> getSpecHashTagDTOs() {
+        return specHashTagDTOs;
+    }
+
+    public void setSpecHashTagDTOs(List<SpecHashTagDTO> specHashTagDTOs) {
+        this.specHashTagDTOs = specHashTagDTOs;
     }
 }

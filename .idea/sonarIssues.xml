@@ -983,6 +983,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/specHashTag/SpecHashTag_Data_Script_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/userSelectedItem/UserSelectedItem_Data_Script_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/jsTreeServiceFramework/SecurityController.java">
           <value>
             <set />

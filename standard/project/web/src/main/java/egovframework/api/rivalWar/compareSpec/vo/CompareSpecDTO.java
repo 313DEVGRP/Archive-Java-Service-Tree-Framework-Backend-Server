@@ -21,7 +21,6 @@ import java.io.Serializable;
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_JSTREE_COMPARE_SPEC", allocationSize = 1)
 public class CompareSpecDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
-
     private static final long serialVersionUID = 4641920581390357882L;
 
     /*
