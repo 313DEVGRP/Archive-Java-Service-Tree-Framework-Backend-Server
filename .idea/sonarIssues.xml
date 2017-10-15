@@ -938,6 +938,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/api/rivalWar/directChat/DirectChat_DDL_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/api/rivalWar/menu/Menu_DDL_Oracle.sql">
           <value>
             <set />
@@ -974,6 +979,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/compareSpec/CompareSpec_Data_Script_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/directChat/DirectChat_Data_Script_Oracle.sql">
           <value>
             <set />
           </value>

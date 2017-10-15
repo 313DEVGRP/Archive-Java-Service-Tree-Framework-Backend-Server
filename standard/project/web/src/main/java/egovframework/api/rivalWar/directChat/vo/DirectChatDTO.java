@@ -10,12 +10,12 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "T_JSTREE_DIRECT_CHAT")
+@Table(name = "T_DIRECT_CHAT")
 @SelectBeforeUpdate(value = true)
 @DynamicInsert(value = true)
 @DynamicUpdate(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_JSTREE_DIRECT_CHAT", allocationSize = 1)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_DIRECT_CHAT", allocationSize = 1)
 public class DirectChatDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	private static final long serialVersionUID = -2826589626523340365L;
@@ -50,18 +50,114 @@ public class DirectChatDTO extends JsTreeHibernateSearchDTO implements Serializa
 	}
 
 	private Long	menuId;					//다이렉트챗 메뉴아이디 ( request )
-	private String 	userId;					//글쓴 사용자 아이디 ( springsecurity )
+	@Column(name = "MENU_ID")
+	public Long getMenuId() {
+		return menuId;
+	}
 
-	private String 	writeTime;				//글쓴시간
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
+	}
+
+	private String 	userId;					//글쓴 사용자 아이디 ( springsecurity )
+	@Column(name = "USER_ID")
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	private Long	userLevel;				//글쓴 사용자 레벨 ( springsecurity )
+	@Column(name = "USER_LEVEL")
+	public Long getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(Long userLevel) {
+		this.userLevel = userLevel;
+	}
+
+	private String 	writeTime;				//글쓴시간 ( system )
+	@Column(name = "WRITE_TIME")
+	public String getWriteTime() {
+		return writeTime;
+	}
+
+	public void setWriteTime(String writeTime) {
+		this.writeTime = writeTime;
+	}
+
 	private Long 	selectedCompareItem;	//글쓴이 선택 진영 ( usermappingitem )
-	private String 	contents; 				//글내용
-	private String  hashtag;				//글해시태그
+	@Column(name = "SELECTED_COMPARE_ITEM")
+	public Long getSelectedCompareItem() {
+		return selectedCompareItem;
+	}
+
+	public void setSelectedCompareItem(Long selectedCompareItem) {
+		this.selectedCompareItem = selectedCompareItem;
+	}
+
+	private String 	contentsBody; 				//글내용
+	@Column(name = "CONTENTS_BODY")
+	public String getContentsBody() {
+		return contentsBody;
+	}
+
+	public void setContentsBody(String contentsBody) {
+		this.contentsBody = contentsBody;
+	}
+
+	private String  hashTags;				//글해시태그
+	@Column(name = "HASH_TAGS")
+	public String getHashTags() {
+		return hashTags;
+	}
+
+	public void setHashTags(String hashTags) {
+		this.hashTags = hashTags;
+	}
 
 	private Long 	likeCount;				//좋아요 카운트
-	private Long 	hateCount;				//싫어요 카운트
-	private String 	hiddenYN;				//글 보이기 감추기 여부
-	private String 	reportYN;				//신고여부
+	@Column(name = "LIKE_COUNT")
+	public Long getLikeCount() {
+		return likeCount;
+	}
 
+	public void setLikeCount(Long likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	private Long 	hateCount;				//싫어요 카운트
+	@Column(name = "HATE_COUNT")
+	public Long getHateCount() {
+		return hateCount;
+	}
+
+	public void setHateCount(Long hateCount) {
+		this.hateCount = hateCount;
+	}
+
+	private String 	hiddenYN;				//글 보이기 감추기 여부
+	@Column(name = "HIDDEN_YN")
+	public String getHiddenYN() {
+		return hiddenYN;
+	}
+
+	public void setHiddenYN(String hiddenYN) {
+		this.hiddenYN = hiddenYN;
+	}
+
+	private String 	reportYN;				//신고여부
+	@Column(name = "REPORT_YN")
+	public String getReportYN() {
+		return reportYN;
+	}
+
+	public void setReportYN(String reportYN) {
+		this.reportYN = reportYN;
+	}
 
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
