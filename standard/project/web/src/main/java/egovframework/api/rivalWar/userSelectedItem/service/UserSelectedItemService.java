@@ -1,7 +1,9 @@
 package egovframework.api.rivalWar.userSelectedItem.service;
 
+import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
+
 /**
  * Created by Administrator on 2017-10-14.
  */
-public class UserSelectedItemService {
+public interface UserSelectedItemService extends JsTreeHibernateService {
 }
