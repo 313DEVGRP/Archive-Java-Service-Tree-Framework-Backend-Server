@@ -28,16 +28,16 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/directChat"})
-public class AnonymousDirectChatController  extends GenericAbstractController {
+public class AnonymousDirectChatController extends GenericAbstractController {
 
     @Autowired
     private DirectChatService directChatService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @IncludedInfo(name = "RivalWar Admin DirectChat", listUrl = "/api/rivalWar/direcctChat/getJsTreeView.do", order = 7006, gid = 7313)
+    @IncludedInfo(name = "RivalWar Admin DirectChat", listUrl = "/api/rivalWar/directChat/getJsTreeView.do", order = 7006, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
-    public String getRivalWarCompareSpecJstreeView() {
+    public String getRivalWarDirectChatJstreeView() {
         return "egovframework/api/rivalWar/directChat/JsTreeView";
     }
 

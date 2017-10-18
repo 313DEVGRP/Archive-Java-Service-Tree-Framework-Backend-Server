@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_USER/directChat"})
-public class UserDirectChatController  extends GenericAbstractController {
+public class UserDirectChatController extends GenericAbstractController {
 
     @Autowired
     private DirectChatService directChatService;

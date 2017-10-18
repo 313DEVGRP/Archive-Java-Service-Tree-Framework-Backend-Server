@@ -37,7 +37,7 @@ public class AnonymousCompareItemController extends GenericAbstractController {
 
     @IncludedInfo(name = "RivalWar Admin CompareItem", listUrl = "/api/rivalWar/compareItem/getJsTreeView.do", order = 7005, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
-    public String getRivalWarCompareSpecJstreeView() {
+    public String getRivalWarCompareItemJstreeView() {
         return "egovframework/api/rivalWar/compareItem/JsTreeView";
     }
 

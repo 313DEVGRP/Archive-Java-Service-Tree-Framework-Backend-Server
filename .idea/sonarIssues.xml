@@ -1228,6 +1228,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/specHashTag/controller/AnonymousSpecHashTagController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/specHashTag/controller/UserSpecHashTagController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/specHashTag/service/SpecHashTagService.java">
           <value>
             <set />
