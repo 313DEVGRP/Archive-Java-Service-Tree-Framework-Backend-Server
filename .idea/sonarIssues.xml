@@ -1263,6 +1263,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/userSelectedItem/controller/AdminUserSelectedItemController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/userSelectedItem/controller/AnonymousUserSelectedItemController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/userSelectedItem/controller/UserSelectedItemController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/userSelectedItem/service/UserSelectedItemService.java">
           <value>
             <set />
