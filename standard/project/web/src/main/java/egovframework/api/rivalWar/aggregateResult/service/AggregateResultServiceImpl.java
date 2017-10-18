@@ -3,6 +3,7 @@ package egovframework.api.rivalWar.aggregateResult.service;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import java.util.List;
 public class AggregateResultServiceImpl implements AggregateResultService {
 
     @Autowired
+    @Qualifier("JsTreeHibernateService")
     private JsTreeHibernateService jsTreeHibernateService;
 
     @Override

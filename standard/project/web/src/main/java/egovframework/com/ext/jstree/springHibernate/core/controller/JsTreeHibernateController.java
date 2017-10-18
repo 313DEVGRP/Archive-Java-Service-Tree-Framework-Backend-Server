@@ -3,9 +3,11 @@ package egovframework.com.ext.jstree.springHibernate.core.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -36,6 +38,7 @@ import egovframework.com.ext.jstree.support.util.ParameterParser;
 public class JsTreeHibernateController extends GenericAbstractController {
 
     @Autowired
+    @Qualifier("JsTreeHibernateService")
     private JsTreeHibernateService jsTreeHibernateService;
 
     /**

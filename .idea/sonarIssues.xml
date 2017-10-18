@@ -1228,6 +1228,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/specHashTag/service/SpecHashTagService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/specHashTag/service/SpecHashTagServiceImple.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/specHashTag/vo/SpecHashTagDTO.java">
           <value>
             <set />
