@@ -305,7 +305,7 @@
                                             paste
                                         </button>
                                         <button type="button" id="analyze" title="analyze"
-                                                onclick="$('#alog').load('${pageContext.request.contextPath}/rivalWar/api/specHashTag/analyzeNode.do');">
+                                                onclick="$('#alog').load('${pageContext.request.contextPath}/api/rivalWar/specHashTag/analyzeNode.do');">
                                             <i class="fa fa-search"></i>
                                             analyze
                                         </button>
@@ -357,7 +357,7 @@
                                     function jstreeDataTableReload() {
                                         var jstreeDataTable = $('#jstreeTable').dataTable({
                                             "ajax": {
-                                                "url": "${pageContext.request.contextPath}/rivalWar/api/specHashTag/monitor/list.do",
+                                                "url": "${pageContext.request.contextPath}/api/rivalWar/specHashTag/monitor/list.do",
                                                 "dataSrc": "rows"
                                             },
                                             "processing": true,
@@ -387,7 +387,7 @@
 
                                         var jstreeDataTable = $('#jstreeTable').dataTable({
                                             "ajax": {
-                                                "url": "${pageContext.request.contextPath}/rivalWar/api/specHashTag/monitor/list.do",
+                                                "url": "${pageContext.request.contextPath}/api/rivalWar/specHashTag/monitor/list.do",
                                                 "dataSrc": "rows"
                                             },
                                             "processing": true,

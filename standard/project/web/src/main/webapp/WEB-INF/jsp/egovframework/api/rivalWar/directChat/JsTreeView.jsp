@@ -285,7 +285,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 												<i class="fa fa-paste"></i>
 												paste
 											</button>
-											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/rivalWar/api/directChat/analyzeDirectChat.do');">
+											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/api/rivalWar/directChat/analyzeDirectChat.do');">
 												<i class="fa fa-search"></i>
 												analyze
 											</button>
@@ -331,7 +331,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                     function jstreeDataTableReload() {
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "${pageContext.request.contextPath}/rivalWar/api/menu/monitor/list.do",
+                          "url": "${pageContext.request.contextPath}/api/rivalWar/menu/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,
@@ -361,7 +361,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "${pageContext.request.contextPath}/rivalWar/api/menu/monitor/list.do",
+                          "url": "${pageContext.request.contextPath}/api/rivalWar/menu/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,
@@ -386,13 +386,13 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                       });
                     });
                   </script>
-                  <customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/rivalWar/api/directChat/getChildDirectChat.do"
-										searchNode="${pageContext.request.contextPath}/rivalWar/api/directChat/searchDirectChat.do"
-										addNode="${pageContext.request.contextPath}/rivalWar/api/directChat/addDirectChat.do"
-										removeNode="${pageContext.request.contextPath}/rivalWar/api/directChat/removeDirectChat.do"
-										alterNode="${pageContext.request.contextPath}/rivalWar/api/directChat/alterDirectChat.do"
-										alterNodeType="${pageContext.request.contextPath}/rivalWar/api/directChat/alterDirectChatType.do"
-										moveNode="${pageContext.request.contextPath}/rivalWar/api/directChat/moveDirectChat.do"></customTags:jstree>
+                  <customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/api/rivalWar/directChat/getChildNode.do"
+										searchNode="${pageContext.request.contextPath}/api/rivalWar/directChat/searchNode.do"
+										addNode="${pageContext.request.contextPath}/api/rivalWar/directChat/addNode.do"
+										removeNode="${pageContext.request.contextPath}/api/rivalWar/directChat/removeNode.do"
+										alterNode="${pageContext.request.contextPath}/api/rivalWar/directChat/alterNode.do"
+										alterNodeType="${pageContext.request.contextPath}/api/rivalWar/directChat/alterNodeType.do"
+										moveNode="${pageContext.request.contextPath}/api/rivalWar/directChat/moveNode.do"></customTags:jstree>
 								</div>
 							</div>
 						</div>
