@@ -24,7 +24,7 @@ import java.io.Serializable;
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_JSTREE_SPEC_HASH_TAG", allocationSize = 1)
 public class SpecHashTagDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
-    private static final long serialVersionUID = 4641920581390357882L;
+    private static final long serialVersionUID = 4641920583190357882L;
 
     public SpecHashTagDTO() {
         super();

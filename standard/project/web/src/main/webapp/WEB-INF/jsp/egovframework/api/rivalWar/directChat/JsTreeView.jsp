@@ -385,6 +385,10 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                         }]
                       });
                     });
+
+					function jsTreeClick(selectedNodeID) {
+						console.log(selectedNodeID);
+					}
                   </script>
                   <customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/api/rivalWar/directChat/getChildNode.do"
 										searchNode="${pageContext.request.contextPath}/api/rivalWar/directChat/searchNode.do"

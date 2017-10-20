@@ -21,7 +21,7 @@ import java.io.Serializable;
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_USER_SELECTED_ITEM", allocationSize = 1)
 public class UserSelectedItemDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
-    private static final long serialVersionUID = 4641920581390357828L;
+    private static final long serialVersionUID = 3641420581390357339L;
 
     public UserSelectedItemDTO() {
         super();
@@ -61,23 +61,24 @@ public class UserSelectedItemDTO extends JsTreeHibernateSearchDTO implements Ser
         this.userCID = userCID;
     }
 
-    private Number  menuCID;         // 사용자가 선택한 아이템의 메뉴
+    private Long  menuCID;         // 사용자가 선택한 아이템의 메뉴
+
     @Column(name = "MENU_CID")
-    public Number getMenuCID() {
+    public Long getMenuCID() {
         return menuCID;
     }
 
-    public void setMenuCID(Number menuCID) {
+    public void setMenuCID(Long menuCID) {
         this.menuCID = menuCID;
     }
 
-    private Number  compareItemCID;  // 사용자 선택 아이템(진영)
+    private Long  compareItemCID;  // 사용자 선택 아이템(진영)
     @Column(name = "COMPARE_ITEM_CID")
-    public Number getCompareItemCID() {
+    public Long getCompareItemCID() {
         return compareItemCID;
     }
 
-    public void setCompareItemCID(Number compareItemCID) {
+    public void setCompareItemCID(Long compareItemCID) {
         this.compareItemCID = compareItemCID;
     }
 

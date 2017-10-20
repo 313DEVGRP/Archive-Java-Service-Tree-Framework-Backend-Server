@@ -147,6 +147,7 @@ public class AnonymousSpecHashTagController extends GenericAbstractController {
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
         List<SpecHashTagDTO> list = specHashTagService.getChildNode(jsTreeHibernateDTO);
 
+        logger.error(list.get(0).toString());
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
         return modelAndView;
