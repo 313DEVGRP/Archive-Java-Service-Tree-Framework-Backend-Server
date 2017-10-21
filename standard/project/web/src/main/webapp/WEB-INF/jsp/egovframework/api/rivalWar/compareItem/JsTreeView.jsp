@@ -261,7 +261,7 @@
             <div class="container bm-medium">
                 <div class="one-whole">
                     <div class="text-center">
-                        <h1 class="bm-remove">Rival War Menu Controller</h1>
+                        <h1 class="bm-remove">Rival War CompareItem Controller</h1>
                     </div>
                 </div>
             </div>
@@ -305,7 +305,7 @@
                                             paste
                                         </button>
                                         <button type="button" id="analyze" title="analyze"
-                                                onclick="$('#alog').load('${pageContext.request.contextPath}/rivalWar/api/menu/analyzeMenu.do');">
+                                                onclick="$('#alog').load('${pageContext.request.contextPath}/rivalWar/api/compareItem/analyzeNode.do');">
                                             <i class="fa fa-search"></i>
                                             analyze
                                         </button>
@@ -357,7 +357,7 @@
                                     function jstreeDataTableReload() {
                                         var jstreeDataTable = $('#jstreeTable').dataTable({
                                             "ajax": {
-                                                "url": "${pageContext.request.contextPath}/rivalWar/api/menu/monitor/list.do",
+                                                "url": "${pageContext.request.contextPath}/rivalWar/api/compareItem/monitor/list.do",
                                                 "dataSrc": "rows"
                                             },
                                             "processing": true,
@@ -387,7 +387,7 @@
 
                                         var jstreeDataTable = $('#jstreeTable').dataTable({
                                             "ajax": {
-                                                "url": "${pageContext.request.contextPath}/rivalWar/api/menu/monitor/list.do",
+                                                "url": "${pageContext.request.contextPath}/rivalWar/api/compareItem/monitor/list.do",
                                                 "dataSrc": "rows"
                                             },
                                             "processing": true,
@@ -411,15 +411,19 @@
                                             }]
                                         });
                                     });
+
+                                    function jsTreeClick(selectedNodeID) {
+                                        console.log(selectedNodeID);
+                                    }
                                 </script>
                                 <customTags:jstree target="#demo"
-                                                   getChildNode="${pageContext.request.contextPath}/api/rivalWar/menu/getChildNode.do"
-                                                   searchNode="${pageContext.request.contextPath}/api/rivalWar/menu/searchNode.do"
-                                                   addNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/addNode.do"
-                                                   removeNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/removeNode.do"
-                                                   alterNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/alterNode.do"
-                                                   alterNodeType="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/alterNodeType.do"
-                                                   moveNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/moveNode.do"></customTags:jstree>
+                                                   getChildNode="${pageContext.request.contextPath}/api/rivalWar/compareItem/getChildNode.do"
+                                                   searchNode="${pageContext.request.contextPath}/api/rivalWar/compareItem/searchNode.do"
+                                                   addNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/compareItem/addNode.do"
+                                                   removeNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/compareItem/removeNode.do"
+                                                   alterNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/compareItem/alterNode.do"
+                                                   alterNodeType="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/compareItem/alterNodeType.do"
+                                                   moveNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/compareItem/moveNode.do"></customTags:jstree>
                             </div>
                         </div>
                     </div>

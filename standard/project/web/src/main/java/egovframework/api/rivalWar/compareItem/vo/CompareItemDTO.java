@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017-10-08.
@@ -79,31 +80,21 @@ public class CompareItemDTO extends JsTreeHibernateSearchDTO implements Serializ
         }
     }
 
-    private MenuDTO menuDTO;
+    private Set<SpecHashTagDTO> specHashTagDTOs;
 
-    //영속성 전이 설정
-    @JsonBackReference
-    @ManyToOne(fetch=FetchType.LAZY)   //Lazy Loading 설정
-    @JoinColumn(name="MAPPING_MENU_ID") //조인 컬럼 설정
-    public MenuDTO getMenuDTO() {
-        return menuDTO;
-    }
-
-    public void setMenuDTO(MenuDTO menuDTO) {
-        this.menuDTO = menuDTO;
-    }
-
-    private List<SpecHashTagDTO> specHashTagDTOs = new ArrayList<SpecHashTagDTO>();
-
-    // default fetch type = LAZY
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonManagedReference
-    @OneToMany(mappedBy = "compareItemDTO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public List<SpecHashTagDTO> getSpecHashTagDTOs() {
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "T_M_COMPAREITEM_SPECHASHTAG",
+            joinColumns = @JoinColumn(name = "COMPAREITEM_CID"),
+            inverseJoinColumns = @JoinColumn(name = "SPECHASHTAG_CID")
+    )
+    public Set<SpecHashTagDTO> getSpecHashTagDTOs() {
         return specHashTagDTOs;
     }
 
-    public void setSpecHashTagDTOs(List<SpecHashTagDTO> specHashTagDTOs) {
+    public void setSpecHashTagDTOs(Set<SpecHashTagDTO> specHashTagDTOs) {
         this.specHashTagDTOs = specHashTagDTOs;
     }
 }

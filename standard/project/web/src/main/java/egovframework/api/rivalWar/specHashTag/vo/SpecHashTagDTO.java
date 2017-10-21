@@ -65,13 +65,13 @@ public class SpecHashTagDTO extends JsTreeHibernateSearchDTO implements Serializ
         this.tagName = tagName;
     }
 
-    private String  tagSourceChatID;    //결국 chat 안으로 들어갈테니까
+    private Long  tagSourceChatID;    //결국 chat 안으로 들어갈테니까
     @Column(name = "TAG_SOURCE_CHAT_ID")
-    public String getTagSourceChatID() {
+    public Long getTagSourceChatID() {
         return tagSourceChatID;
     }
 
-    public void setTagSourceChatID(String tagSourceChatID) {
+    public void setTagSourceChatID(Long tagSourceChatID) {
         this.tagSourceChatID = tagSourceChatID;
     }
 
@@ -82,16 +82,5 @@ public class SpecHashTagDTO extends JsTreeHibernateSearchDTO implements Serializ
         }
     }
 
-    private CompareItemDTO  compareItemDTO;
-    //영속성 전이 설정, 어떤 아이템에 해당하는 해쉬태그인지 구분
-    @JsonBackReference
-    @ManyToOne(fetch=FetchType.LAZY)   //Lazy Loading 설정
-    @JoinColumn(name="MAPPING_COMPARE_ID") //조인 컬럼 설정
-    public CompareItemDTO getCompareItemDTO() {
-        return compareItemDTO;
-    }
 
-    public void setCompareItemDTO(CompareItemDTO compareItemDTO) {
-        this.compareItemDTO = compareItemDTO;
-    }
 }

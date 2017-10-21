@@ -918,6 +918,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/api/rivalWar/JsTreeMap_DDL_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/api/rivalWar/aggregateResult/AggregateResult_DDL_Oracle.sql">
           <value>
             <set />

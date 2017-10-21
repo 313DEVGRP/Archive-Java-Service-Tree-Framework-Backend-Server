@@ -6,6 +6,7 @@ import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
 import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
 import egovframework.api.rivalWar.compareSpec.vo.CompareSpecDTO;
+import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
@@ -129,17 +130,40 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 		this.compareSpecDTO = compareSpecDTO;
 	}
 
-	private List<CompareItemDTO> compareItemDTOs = new ArrayList<CompareItemDTO>();
+	private Set<CompareItemDTO> compareItemDTOs;
 
-	// default fetch type = LAZY
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonManagedReference
-	@OneToMany(mappedBy = "menuDTO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<CompareItemDTO> getCompareItemDTOs() {
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "T_M_MENU_COMPAREITEM",
+			joinColumns = @JoinColumn(name = "MENU_CID"),
+			inverseJoinColumns = @JoinColumn(name = "COMPAREITEM_CID")
+	)
+	public Set<CompareItemDTO> getCompareItemDTOs() {
 		return compareItemDTOs;
 	}
 
-	public void setCompareItemDTOs(List<CompareItemDTO> compareItemDTOs) {
+	public void setCompareItemDTOs(Set<CompareItemDTO> compareItemDTOs) {
 		this.compareItemDTOs = compareItemDTOs;
 	}
+
+	private Set<DirectChatDTO> directChatDTOs;
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "T_M_MENU_DIRECTCHAT",
+			joinColumns = @JoinColumn(name = "MENU_CID"),
+			inverseJoinColumns = @JoinColumn(name = "DIRECTCHAT_CID")
+	)
+	public Set<DirectChatDTO> getDirectChatDTOs() {
+		return directChatDTOs;
+	}
+
+	public void setDirectChatDTOs(Set<DirectChatDTO> directChatDTOs) {
+		this.directChatDTOs = directChatDTOs;
+	}
+
 }
