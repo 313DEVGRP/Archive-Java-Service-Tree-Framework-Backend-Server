@@ -2,7 +2,7 @@
 
 **313 DEV GRP**는 2010년 12월에 출범한 자바 개발자 그룹입니다.
 
-### jsTree Service Framework 를 배포합니다.###
+### jsTree Service Framework 를 배포합니다. ###
 
 jsTree Service Framework란:
 
@@ -17,5 +17,5 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 서비스레이
 
 ### jsTree Service Framework는 무료입니다. ###
 
-### 우리 313 DEV GRP는 언제나 열려있습니다, ###
+### 우리 313 DEV GRP는 언제나 열려있습니다. ###
 
