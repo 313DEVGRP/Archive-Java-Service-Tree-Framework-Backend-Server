@@ -301,7 +301,7 @@
                                             paste
                                         </button>
                                         <button type="button" id="analyze" title="analyze"
-                                                onclick="$('#alog').load('${pageContext.request.contextPath}/rivalWar/api/menu/analyzeMenu.do');">
+                                                onclick="$('#alog').load('${pageContext.request.contextPath}/rivalWar/api/compareInfo/analyzeNode.do');">
                                             <i class="fa fa-search"></i>
                                             analyze
                                         </button>

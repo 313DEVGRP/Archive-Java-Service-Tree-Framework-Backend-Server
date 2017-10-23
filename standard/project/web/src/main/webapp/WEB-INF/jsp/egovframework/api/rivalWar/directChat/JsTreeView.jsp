@@ -285,7 +285,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 												<i class="fa fa-paste"></i>
 												paste
 											</button>
-											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/api/rivalWar/directChat/analyzeDirectChat.do');">
+											<button type="button" id="analyze" title="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/api/rivalWar/directChat/analyzeNode.do');">
 												<i class="fa fa-search"></i>
 												analyze
 											</button>
@@ -331,7 +331,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                     function jstreeDataTableReload() {
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "${pageContext.request.contextPath}/api/rivalWar/menu/monitor/list.do",
+                          "url": "${pageContext.request.contextPath}/api/rivalWar/directChat/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,
@@ -361,7 +361,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 
                       var jstreeDataTable = $('#jstreeTable').dataTable({
                         "ajax": {
-                          "url": "${pageContext.request.contextPath}/api/rivalWar/menu/monitor/list.do",
+                          "url": "${pageContext.request.contextPath}/api/rivalWar/directChat/monitor/list.do",
                           "dataSrc": "rows"
                         },
                         "processing": true,

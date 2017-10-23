@@ -62,7 +62,7 @@ public class AdminMenuController extends GenericAbstractController {
      * @throws JsonProcessingException
      */
     @ResponseBody
-    @RequestMapping(value = "/removeMenu.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/removeNode.do", method = RequestMethod.POST)
     public ModelAndView removeNode(@Validated(value = RemoveNode.class) MenuDTO jsTreeHibernateDTO,
                                    BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
