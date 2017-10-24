@@ -1,4 +1,4 @@
-package egovframework.api.jsTreeServiceFramework.security.controller;
+package egovframework.com.ext.jstree.support.security.controller;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
