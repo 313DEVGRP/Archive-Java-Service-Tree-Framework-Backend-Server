@@ -390,13 +390,14 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 						console.log(selectedNodeID);
 					}
                   </script>
-                  <customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/api/rivalWar/directChat/getChildNode.do"
-										searchNode="${pageContext.request.contextPath}/api/rivalWar/directChat/searchNode.do"
-										addNode="${pageContext.request.contextPath}/api/rivalWar/directChat/addNode.do"
-										removeNode="${pageContext.request.contextPath}/api/rivalWar/directChat/removeNode.do"
-										alterNode="${pageContext.request.contextPath}/api/rivalWar/directChat/alterNode.do"
-										alterNodeType="${pageContext.request.contextPath}/api/rivalWar/directChat/alterNodeType.do"
-										moveNode="${pageContext.request.contextPath}/api/rivalWar/directChat/moveNode.do"></customTags:jstree>
+									<customTags:jstree target="#demo"
+													   getChildNode="${pageContext.request.contextPath}/api/rivalWar/directChat/getChildNode.do"
+													   searchNode="${pageContext.request.contextPath}/api/rivalWar/directChat/searchNode.do"
+													   addNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/directChat/addNode.do"
+													   removeNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/directChat/removeNode.do"
+													   alterNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/directChat/alterNode.do"
+													   alterNodeType="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/directChat/alterNodeType.do"
+													   moveNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/directChat/moveNode.do"></customTags:jstree>
 								</div>
 							</div>
 						</div>

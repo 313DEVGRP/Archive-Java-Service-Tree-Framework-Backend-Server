@@ -1,11 +1,15 @@
 package egovframework.api.rivalWar.menu.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import egovframework.api.rivalWar.directChat.service.DirectChatService;
+import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
+import egovframework.com.ext.jstree.support.security.database.model.Role;
+import egovframework.com.ext.jstree.support.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_ADMIN/menu"})
@@ -26,6 +31,9 @@ public class AdminMenuController extends GenericAbstractController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private DirectChatService directChatService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -47,8 +55,38 @@ public class AdminMenuController extends GenericAbstractController {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
+        //신규 메뉴가 추가됬다.
+        DirectChatDTO searchNode = new DirectChatDTO();
+        Long rootNodeCID =new Long(2);
+        searchNode.setC_id(rootNodeCID); // 2번 노드 밑으로 붙일 것이다.
+        DirectChatDTO rootDirectChatDTO = directChatService.getNode(searchNode);
+        //DirectChat의 2번 노드 밑에 첫번째 채팅을 입력한다.
+        Long childCount = rootDirectChatDTO.getC_right() - rootDirectChatDTO.getC_left() - 1;
+        if(childCount < 1){
+            throw new RuntimeException("jsTree is index broken");
+        }else{
+            Long nodeSize = new Long(2);
+            childCount = childCount / nodeSize;
+        }
+
+        DirectChatDTO insertFirstDirectChatNode = new DirectChatDTO();
+        logger.error("----------------" + childCount +"," + rootNodeCID);
+        insertFirstDirectChatNode.setC_position(childCount);
+        //insertFirstDirectChatNode.setC_parentid(rootNodeCID);
+        insertFirstDirectChatNode.setRef(rootNodeCID);
+        insertFirstDirectChatNode.setC_title("first directchat contents" + DateUtils.getCurrentDay());
+        insertFirstDirectChatNode.setC_type("default");
+        DirectChatDTO insertedDTO = directChatService.addNode(insertFirstDirectChatNode);
+
+        final HashSet<DirectChatDTO> directChatDTOs = new HashSet<DirectChatDTO>();
+        directChatDTOs.add(insertedDTO);
+        jsTreeHibernateDTO.setDirectChatDTOs(directChatDTOs);
+
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", menuService.addNode(jsTreeHibernateDTO));
+
+        //후처리.
+
         return modelAndView;
     }
 
