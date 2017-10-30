@@ -9,6 +9,7 @@ import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.DateUtils;
+import egovframework.com.ext.jstree.support.util.ParameterParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017-09-24.
@@ -52,16 +54,28 @@ public class AdminDirectChatController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
-    public ModelAndView addNode(@Validated(value = AddNode.class) DirectChatDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model) throws Exception {
+    public ModelAndView addNode(@Validated(value = AddNode.class) DirectChatDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
         MenuDTO searchMenuDTO = new MenuDTO();
-        Long menuCId = new Long(92);
-        searchMenuDTO.setC_id(menuCId);
+        ParameterParser parser = new ParameterParser(request);
 
-        MenuDTO menuDTO = menuService.getNode(searchMenuDTO);
-        jsTreeHibernateDTO.setMenuDTO(menuDTO);
+        if(null == parser.get("menuCId")){
+            Long menuCId = new Long(3);
+            searchMenuDTO.setC_id(menuCId);
+            menuService.getChildNode(searchMenuDTO);
+
+            searchMenuDTO.setWhere("c_parentid", menuCId);
+            List<MenuDTO> list = menuService.getChildNode(searchMenuDTO);
+            MenuDTO recentMenuNode = list.get(0);
+            jsTreeHibernateDTO.setMenuDTO(recentMenuNode);
+
+        }else{
+            searchMenuDTO.setC_id(parser.getLong("menuCId"));
+            MenuDTO targetMenuNode = menuService.getNode(searchMenuDTO);
+            jsTreeHibernateDTO.setMenuDTO(targetMenuNode);
+        }
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", directChatService.addNode(jsTreeHibernateDTO));
