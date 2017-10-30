@@ -678,7 +678,8 @@
                                                        removeNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/removeNode.do"
                                                        alterNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/alterNode.do"
                                                        alterNodeType="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/alterNodeType.do"
-                                                       moveNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/moveNode.do"></customTags:jstree>
+                                                       moveNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/aggregateResult/moveNode.do">
+                                    </customTags:jstree>
                                 </div>
                             </div>
                         </div>

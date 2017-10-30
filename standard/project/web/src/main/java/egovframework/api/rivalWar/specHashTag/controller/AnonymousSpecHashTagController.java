@@ -2,11 +2,13 @@ package egovframework.api.rivalWar.specHashTag.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
+import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.api.rivalWar.specHashTag.service.SpecHashTagService;
 import egovframework.api.rivalWar.specHashTag.vo.SpecHashTagDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,6 +150,19 @@ public class AnonymousSpecHashTagController extends GenericAbstractController {
         List<SpecHashTagDTO> list = specHashTagService.getChildNode(jsTreeHibernateDTO);
 
         logger.error(list.get(0).toString());
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getMonitor.do", method = RequestMethod.GET)
+    public ModelAndView getMonitor(SpecHashTagDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setOrder(Order.asc("c_id"));
+        List<SpecHashTagDTO> list = specHashTagService.getChildNode(jsTreeHibernateDTO);
+
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
         return modelAndView;

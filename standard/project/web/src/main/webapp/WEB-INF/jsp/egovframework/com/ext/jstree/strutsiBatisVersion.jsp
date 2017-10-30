@@ -335,6 +335,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           "dataSrc": "rows"
                         },
                         "processing": true,
+					  	"destroy": true,
                         "responsive": true,
                         "columns": [{
                           "data": "cell.0"
@@ -354,37 +355,15 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           "data": "cell.7"
                         }]
                       });
-                      jstreeDataTable.api().ajax.reload();
                     }
 
-                    $(function() {
+					$(function() {
+						jstreeDataTableReload();
+					});
 
-                      var jstreeDataTable = $('#jstreeTable').dataTable({
-                        "ajax": {
-                          "url": "${pageContext.request.contextPath}/com/ext/jstree/strutsiBatis/core/monitor/list.action",
-                          "dataSrc": "rows"
-                        },
-                        "processing": true,
-                        "responsive": true,
-                        "columns": [{
-                          "data": "cell.0"
-                        }, {
-                          "data": "cell.1"
-                        }, {
-                          "data": "cell.2"
-                        }, {
-                          "data": "cell.3"
-                        }, {
-                          "data": "cell.4"
-                        }, {
-                          "data": "cell.5"
-                        }, {
-                          "data": "cell.6"
-                        }, {
-                          "data": "cell.7"
-                        }]
-                      });
-                    });
+					function jsTreeClick(selectedNodeID) {
+						console.log(selectedNodeID);
+					}
                   </script>
 									<customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/com/ext/jstree/strutsiBatis/core/getChildNode.action"
 										searchNode="${pageContext.request.contextPath}/com/ext/jstree/strutsiBatis/core/searchNode.action"

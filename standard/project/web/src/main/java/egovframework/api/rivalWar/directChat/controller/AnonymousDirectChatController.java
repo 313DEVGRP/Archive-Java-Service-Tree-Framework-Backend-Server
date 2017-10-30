@@ -2,11 +2,13 @@ package egovframework.api.rivalWar.directChat.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
+import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
 import egovframework.api.rivalWar.directChat.service.DirectChatService;
 import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,6 +147,19 @@ public class AnonymousDirectChatController extends GenericAbstractController {
         }
 
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
+        List<DirectChatDTO> list = directChatService.getChildNode(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getMonitor.do", method = RequestMethod.GET)
+    public ModelAndView getMonitor(DirectChatDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setOrder(Order.asc("c_id"));
         List<DirectChatDTO> list = directChatService.getChildNode(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");

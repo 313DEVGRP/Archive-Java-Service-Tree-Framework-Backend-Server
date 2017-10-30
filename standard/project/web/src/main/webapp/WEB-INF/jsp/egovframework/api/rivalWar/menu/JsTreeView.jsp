@@ -355,61 +355,29 @@
                                 <!-- JavaScript neccessary for the tree -->
                                 <script type="text/javascript">
                                     function jstreeDataTableReload() {
-                                        var jstreeDataTable = $('#jstreeTable').dataTable({
+                                        $('#jstreeTable').dataTable({
                                             "ajax": {
-                                                "url": "${pageContext.request.contextPath}/api/rivalWar/menu/monitor/list.do",
-                                                "dataSrc": "rows"
+                                                "url": "${pageContext.request.contextPath}/api/rivalWar/menu/getMonitor.do",
+                                                "dataSrc": ""
                                             },
+                                            "destroy": true,
                                             "processing": true,
                                             "responsive": true,
-                                            "columns": [{
-                                                "data": "cell.0"
-                                            }, {
-                                                "data": "cell.1"
-                                            }, {
-                                                "data": "cell.2"
-                                            }, {
-                                                "data": "cell.3"
-                                            }, {
-                                                "data": "cell.4"
-                                            }, {
-                                                "data": "cell.5"
-                                            }, {
-                                                "data": "cell.6"
-                                            }, {
-                                                "data": "cell.7"
-                                            }]
+                                            "columns": [
+                                                { "data": "c_id" },
+                                                { "data": "c_parentid" },
+                                                { "data": "c_position" },
+                                                { "data": "c_left" },
+                                                { "data": "c_right" },
+                                                { "data": "c_level" },
+                                                { "data": "c_title" },
+                                                { "data": "c_type" }
+                                            ]
                                         });
-                                        jstreeDataTable.api().ajax.reload();
                                     }
 
-                                    $(function () {
-
-                                        var jstreeDataTable = $('#jstreeTable').dataTable({
-                                            "ajax": {
-                                                "url": "${pageContext.request.contextPath}/api/rivalWar/menu/monitor/list.do",
-                                                "dataSrc": "rows"
-                                            },
-                                            "processing": true,
-                                            "responsive": true,
-                                            "columns": [{
-                                                "data": "cell.0"
-                                            }, {
-                                                "data": "cell.1"
-                                            }, {
-                                                "data": "cell.2"
-                                            }, {
-                                                "data": "cell.3"
-                                            }, {
-                                                "data": "cell.4"
-                                            }, {
-                                                "data": "cell.5"
-                                            }, {
-                                                "data": "cell.6"
-                                            }, {
-                                                "data": "cell.7"
-                                            }]
-                                        });
+                                    $(function() {
+                                        jstreeDataTableReload();
                                     });
 
                                     function jsTreeClick(selectedNodeID) {

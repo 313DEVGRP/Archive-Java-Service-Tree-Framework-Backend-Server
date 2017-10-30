@@ -334,6 +334,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           "url": "${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/monitor/list.do",
                           "dataSrc": "rows"
                         },
+					  	"destroy": true,
                         "processing": true,
                         "responsive": true,
                         "columns": [{
@@ -354,37 +355,15 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           "data": "cell.7"
                         }]
                       });
-                      jstreeDataTable.api().ajax.reload();
                     }
 
-                    $(function() {
+					$(function() {
+						jstreeDataTableReload();
+					});
 
-                      var jstreeDataTable = $('#jstreeTable').dataTable({
-                        "ajax": {
-                          "url": "${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/monitor/list.do",
-                          "dataSrc": "rows"
-                        },
-                        "processing": true,
-                        "responsive": true,
-                        "columns": [{
-                          "data": "cell.0"
-                        }, {
-                          "data": "cell.1"
-                        }, {
-                          "data": "cell.2"
-                        }, {
-                          "data": "cell.3"
-                        }, {
-                          "data": "cell.4"
-                        }, {
-                          "data": "cell.5"
-                        }, {
-                          "data": "cell.6"
-                        }, {
-                          "data": "cell.7"
-                        }]
-                      });
-                    });
+					function jsTreeClick(selectedNodeID) {
+						console.log(selectedNodeID);
+					}
                   </script>
                   <customTags:jstree target="#demo" getChildNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/getChildNode.do"
 										searchNode="${pageContext.request.contextPath}/com/ext/jstree/springiBatis/core/searchNode.do"

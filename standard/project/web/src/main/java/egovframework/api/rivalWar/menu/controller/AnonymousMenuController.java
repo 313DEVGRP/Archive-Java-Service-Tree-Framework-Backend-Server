@@ -8,8 +8,10 @@ import egovframework.api.rivalWar.compareSpec.vo.CompareSpecDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +119,19 @@ public class AnonymousMenuController extends GenericAbstractController {
         }
 
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
+        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getMonitor.do", method = RequestMethod.GET)
+    public ModelAndView getMonitor(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setOrder(Order.asc("c_id"));
         List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");

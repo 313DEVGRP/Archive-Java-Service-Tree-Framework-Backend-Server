@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -264,11 +265,24 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/analyzeNode.do", method = RequestMethod.GET)
-    public ModelAndView getChildNode(ModelMap model) {
+    public ModelAndView analyzeNode(ModelMap model) {
         model.addAttribute("analyzeResult", "");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", "ture");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getMonitor.do", method = RequestMethod.GET)
+    public ModelAndView getMonitor(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setOrder(Order.asc("c_id"));
+        List<JsTreeHibernateDTO> list = jsTreeHibernateService.getChildNode(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
         return modelAndView;
     }
 

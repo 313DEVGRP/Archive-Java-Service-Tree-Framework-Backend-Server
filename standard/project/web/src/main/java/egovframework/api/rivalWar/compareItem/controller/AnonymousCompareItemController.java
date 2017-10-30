@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.compareItem.service.CompareItemService;
 import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
+import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +151,19 @@ public class AnonymousCompareItemController extends GenericAbstractController {
         }
 
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
+        List<CompareItemDTO> list = compareItemService.getChildNode(jsTreeHibernateDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getMonitor.do", method = RequestMethod.GET)
+    public ModelAndView getMonitor(CompareItemDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+            throws Exception {
+
+        jsTreeHibernateDTO.setOrder(Order.asc("c_id"));
         List<CompareItemDTO> list = compareItemService.getChildNode(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");

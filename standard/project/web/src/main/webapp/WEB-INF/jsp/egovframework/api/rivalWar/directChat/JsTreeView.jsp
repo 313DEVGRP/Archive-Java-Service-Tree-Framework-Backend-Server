@@ -326,70 +326,37 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 
 									<div id='alog' style="float: left; border: 1px solid gray; padding: 5px; height: 150px; margin-top: 15px; overflow: auto; width: 98%;">분석 결과</div>
 
-									<!-- JavaScript neccessary for the tree -->
 									<script type="text/javascript">
-                    function jstreeDataTableReload() {
-                      var jstreeDataTable = $('#jstreeTable').dataTable({
-                        "ajax": {
-                          "url": "${pageContext.request.contextPath}/api/rivalWar/directChat/monitor/list.do",
-                          "dataSrc": "rows"
-                        },
-                        "processing": true,
-                        "responsive": true,
-                        "columns": [{
-                          "data": "cell.0"
-                        }, {
-                          "data": "cell.1"
-                        }, {
-                          "data": "cell.2"
-                        }, {
-                          "data": "cell.3"
-                        }, {
-                          "data": "cell.4"
-                        }, {
-                          "data": "cell.5"
-                        }, {
-                          "data": "cell.6"
-                        }, {
-                          "data": "cell.7"
-                        }]
-                      });
-                      jstreeDataTable.api().ajax.reload();
-                    }
+										function jstreeDataTableReload() {
+											$('#jstreeTable').dataTable({
+												"ajax": {
+													"url": "${pageContext.request.contextPath}/api/rivalWar/directChat/getMonitor.do",
+													"dataSrc": ""
+												},
+												"destroy": true,
+												"processing": true,
+												"responsive": true,
+												"columns": [
+													{ "data": "c_id" },
+													{ "data": "c_parentid" },
+													{ "data": "c_position" },
+													{ "data": "c_left" },
+													{ "data": "c_right" },
+													{ "data": "c_level" },
+													{ "data": "c_title" },
+													{ "data": "c_type" }
+												]
+											});
+										}
 
-                    $(function() {
+										$(function() {
+											jstreeDataTableReload();
+										});
 
-                      var jstreeDataTable = $('#jstreeTable').dataTable({
-                        "ajax": {
-                          "url": "${pageContext.request.contextPath}/api/rivalWar/directChat/monitor/list.do",
-                          "dataSrc": "rows"
-                        },
-                        "processing": true,
-                        "responsive": true,
-                        "columns": [{
-                          "data": "cell.0"
-                        }, {
-                          "data": "cell.1"
-                        }, {
-                          "data": "cell.2"
-                        }, {
-                          "data": "cell.3"
-                        }, {
-                          "data": "cell.4"
-                        }, {
-                          "data": "cell.5"
-                        }, {
-                          "data": "cell.6"
-                        }, {
-                          "data": "cell.7"
-                        }]
-                      });
-                    });
-
-					function jsTreeClick(selectedNodeID) {
-						console.log(selectedNodeID);
-					}
-                  </script>
+										function jsTreeClick(selectedNodeID) {
+											console.log(selectedNodeID);
+										}
+									</script>
 									<customTags:jstree target="#demo"
 													   getChildNode="${pageContext.request.contextPath}/api/rivalWar/directChat/getChildNode.do"
 													   searchNode="${pageContext.request.contextPath}/api/rivalWar/directChat/searchNode.do"

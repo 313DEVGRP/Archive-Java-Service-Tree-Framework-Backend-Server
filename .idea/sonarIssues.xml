@@ -1373,6 +1373,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/service/JsTreeHibernateService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/springHibernate/core/service/JsTreeHibernateServiceImpl.java">
           <value>
             <set />
