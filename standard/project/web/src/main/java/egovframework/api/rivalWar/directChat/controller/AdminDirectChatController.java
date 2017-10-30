@@ -61,19 +61,10 @@ public class AdminDirectChatController extends GenericAbstractController {
         searchMenuDTO.setC_id(menuCId);
 
         MenuDTO menuDTO = menuService.getNode(searchMenuDTO);
-
-        DirectChatDTO addedNode = directChatService.addNode(jsTreeHibernateDTO);
-
-        menuDTO.getDirectChatDTOs().add(addedNode);
-
-        menuService.alterNode(menuDTO);
+        jsTreeHibernateDTO.setMenuDTO(menuDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", addedNode);
-
-        //메뉴 하나 가져온다 ( 향후 이부분은 리퀘스트로 대치 )
-
-
+        modelAndView.addObject("result", directChatService.addNode(jsTreeHibernateDTO));
 
         return modelAndView;
     }

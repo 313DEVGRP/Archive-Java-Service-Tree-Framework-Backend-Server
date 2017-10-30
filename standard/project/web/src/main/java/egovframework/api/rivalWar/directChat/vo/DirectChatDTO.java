@@ -1,5 +1,7 @@
 package egovframework.api.rivalWar.directChat.vo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
@@ -165,4 +167,21 @@ public class DirectChatDTO extends JsTreeHibernateSearchDTO implements Serializa
 		}
 	}
 
+
+	private MenuDTO menuDTO;
+
+	@JsonBackReference
+	@ManyToOne
+	@JoinTable(
+			name = "T_M_MENU_DIRECTCHAT",
+			joinColumns = @JoinColumn(name = "DIRECTCHAT_CID"),
+			inverseJoinColumns = @JoinColumn(name = "MENU_CID")
+	)
+	public MenuDTO getMenuDTO() {
+		return menuDTO;
+	}
+
+	public void setMenuDTO(MenuDTO menuDTO) {
+		this.menuDTO = menuDTO;
+	}
 }
