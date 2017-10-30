@@ -31,7 +31,7 @@ public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO
     
     /** 페이지갯수 */
 	@JsonIgnore
-    private int pageUnit = 10;
+    private int pageUnit = 1000;
     
     /** 페이지사이즈 */
 	@JsonIgnore

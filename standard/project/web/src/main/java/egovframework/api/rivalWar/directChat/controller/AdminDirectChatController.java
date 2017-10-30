@@ -3,9 +3,12 @@ package egovframework.api.rivalWar.directChat.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import egovframework.api.rivalWar.directChat.service.DirectChatService;
 import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
+import egovframework.api.rivalWar.menu.service.MenuService;
+import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
+import egovframework.com.ext.jstree.support.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 
 /**
  * Created by Administrator on 2017-09-24.
@@ -29,6 +33,9 @@ public class AdminDirectChatController extends GenericAbstractController {
 
     @Autowired
     private DirectChatService directChatService;
+
+    @Autowired
+    private MenuService menuService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -49,8 +56,25 @@ public class AdminDirectChatController extends GenericAbstractController {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
+        MenuDTO searchMenuDTO = new MenuDTO();
+        Long menuCId = new Long(92);
+        searchMenuDTO.setC_id(menuCId);
+
+        MenuDTO menuDTO = menuService.getNode(searchMenuDTO);
+
+        DirectChatDTO addedNode = directChatService.addNode(jsTreeHibernateDTO);
+
+        menuDTO.getDirectChatDTOs().add(addedNode);
+
+        menuService.alterNode(menuDTO);
+
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", directChatService.addNode(jsTreeHibernateDTO));
+        modelAndView.addObject("result", addedNode);
+
+        //메뉴 하나 가져온다 ( 향후 이부분은 리퀘스트로 대치 )
+
+
+
         return modelAndView;
     }
 
@@ -164,7 +188,7 @@ public class AdminDirectChatController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/analyzeNode.do", method = RequestMethod.GET)
-    public ModelAndView getChildNode(ModelMap model) {
+    public ModelAndView analyzeNode(ModelMap model) {
         model.addAttribute("analyzeResult", "");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
