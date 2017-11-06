@@ -963,6 +963,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/api/rivalWar/notice/Notice_DDL_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/script/ddl/oracle/egovframework/api/rivalWar/specHashTag/SpecHashTag_DDL_Oracle.sql">
           <value>
             <set />
@@ -1004,6 +1009,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/menu/Menu_Data_Script_Oracle.sql">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/script/dml/oracle/egovframework/api/rivalWar/notice/Notice_Data_Script_Oracle.sql">
           <value>
             <set />
           </value>
@@ -1264,6 +1274,36 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/menuCompareItem/vo/MenuCompareItemDTO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/notice/controller/AdminNoticeController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/notice/controller/AnonymousNoticeController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/notice/controller/UserNoticeController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/notice/service/NoticeService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/notice/service/NoticeServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/api/rivalWar/notice/vo/NoticeDTO.java">
           <value>
             <set />
           </value>
@@ -1994,6 +2034,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/api/rivalWar/menu/JsTreeView.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/jsp/egovframework/api/rivalWar/notice/JsTreeView.jsp">
           <value>
             <set />
           </value>
