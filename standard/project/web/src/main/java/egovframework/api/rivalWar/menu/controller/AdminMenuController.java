@@ -108,13 +108,22 @@ public class AdminMenuController extends GenericAbstractController {
 
         MenuDTO targetMenuNode = menuService.getNode(jsTreeHibernateDTO);
 
-        HashSet<DirectChatDTO> dummyChatDTOs = new HashSet<DirectChatDTO>();
-        targetMenuNode.setDirectChatDTOs(dummyChatDTOs);
-        if ( menuService.alterNode(targetMenuNode) == 1 ){
-            jsTreeHibernateDTO.setStatus(menuService.removeNode(jsTreeHibernateDTO));
-        }else{
-            throw new RuntimeException("none remove target node");
+        if(targetMenuNode.getDirectChatDTOs().size() > 0){
+
+            final HashSet<DirectChatDTO> dummyChatDTOs = new HashSet<DirectChatDTO>();
+            targetMenuNode.setDirectChatDTOs(dummyChatDTOs);
+            menuService.alterNode(targetMenuNode);
+
+            HashSet<DirectChatDTO> targetChatDTOs = (HashSet<DirectChatDTO>) targetMenuNode.getDirectChatDTOs();
+            for (DirectChatDTO loopChatDTO :targetChatDTOs) {
+                directChatService.removeNode(loopChatDTO);
+            }
         }
+
+
+
+
+        jsTreeHibernateDTO.setStatus(menuService.removeNode(targetMenuNode));
 
         setJsonDefaultSetting(jsTreeHibernateDTO);
 

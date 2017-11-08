@@ -15,7 +15,8 @@
 <%@ attribute name="moveNode"%>
 
 <script type="text/javascript">
-  $(function() {
+  function jsTreeBuild(){
+
     $.ajax({
       async: false,
       type: 'GET',
@@ -24,7 +25,7 @@
         var token = r._csrf_token;
         var header = r._csrf_headerName;
         $(document).ajaxSend(function(e, xhr, options) {
-        	xhr.setRequestHeader(header, token);
+          xhr.setRequestHeader(header, token);
         });
       }
     });
@@ -43,7 +44,7 @@
 
       //contextmenu
       "contextmenu": {
-        items: { // Could be a function that should return an object like this one             
+        items: { // Could be a function that should return an object like this one
           "create": {
             "separator_before": true,
             "separator_after": true,
@@ -147,7 +148,7 @@
           // the URL to fetch the data
           "url": "${getChildNode}",
           // the `data` function is executed in the instance's scope
-          // the parameter is the node being loaded 
+          // the parameter is the node being loaded
           // (may be -1, 0, or undefined when loading the root nodes)
           "data": function(n) {
             // the result is fed to the AJAX request `data` option
@@ -184,7 +185,7 @@
         // Those two checks may slow jstree a lot, so use only when needed
         "max_depth": -2,
         "max_children": -2,
-        // I want only `drive` nodes to be root nodes 
+        // I want only `drive` nodes to be root nodes
         // This will prevent moving or creating any other type as a root node
         "valid_children": ["drive"],
         "types": {
@@ -206,7 +207,7 @@
               "image": "${pageContext.request.contextPath}/js/egovframework/com/ext/jstree/jstree-v.pre1.0/themes/ic_explorer.png"
             }
           },
-          // The `drive` nodes 
+          // The `drive` nodes
           "drive": {
             // can have files and folders inside, but NOT other `drive` nodes
             "valid_children": ["default", "folder"],
@@ -248,9 +249,8 @@
         } else {
           $.jstree.rollback(data.rlbk);
         }
-        $("#analyze").click();
-        $("span.ui-icon-refresh").click();
         jstreeDataTableReload();
+        jsTreeBuild();
       });
     }).bind("remove.jstree", function(e, data) {
       data.rslt.obj.each(function() {
@@ -262,10 +262,9 @@
             "c_id": this.id.replace("node_", "").replace("copy_", "")
           },
           success: function(r) {
-            $("#analyze").click();
-            $("span.ui-icon-refresh").click();
             jNotify('Notification : <strong>Remove Node</strong>, Complete !');
             jstreeDataTableReload();
+            jsTreeBuild();
           }
         });
       });
@@ -279,9 +278,8 @@
           $.jstree.rollback(data.rlbk);
         }
         jSuccess('Rename Node Complete');
-        $("#analyze").click();
-        $("span.ui-icon-refresh").click();
         jstreeDataTableReload();
+        jsTreeBuild();
       });
     }).bind("set_type.jstree", function(e, data) {
       $.post("${alterNodeType}", {
@@ -289,10 +287,9 @@
         "c_title": data.rslt.new_name,
         "c_type": data.rslt.obj.attr("rel")
       }, function(r) {
-        $("#analyze").click();
-        $("span.ui-icon-refresh").click();
         jSuccess('Node Type Change');
         jstreeDataTableReload();
+        jsTreeBuild();
       });
     }).bind("move_node.jstree", function(e, data) {
       data.rslt.o.each(function(i) {
@@ -318,9 +315,8 @@
               }
               jNotify('Notification : <strong>Move Node</strong> Complete !');
             }
-            $("#analyze").click();
-            $("span.ui-icon-refresh").click();
             jstreeDataTableReload();
+            jsTreeBuild();
           }
         });
       });
@@ -332,31 +328,34 @@
       }
     });
 
-  });
-  // Code for the menu buttons
-  $(function() {
     $("#mmenu input, #mmenu button").click(function() {
       switch (this.id) {
-      case "add_default":
-      case "add_folder":
-        $("${target}").jstree("create", null, "last", {
-          "attr": {
-            "rel": this.id.toString().replace("add_", "")
-          }
-        });
-        break;
-      case "search":
-        $("${target}").jstree("search", document.getElementById("text").value);
-        //$("#jstreeTable_filter").find('input[type="search"]').val();
-        $('#jstreeTable').DataTable().column(6).search(document.getElementById("text").value).draw();
-        ;
-        break;
-      case "text":
-        break;
-      default:
-        $("${target}").jstree(this.id);
-        break;
+        case "add_default":
+        case "add_folder":
+          $("${target}").jstree("create", null, "last", {
+            "attr": {
+              "rel": this.id.toString().replace("add_", "")
+            }
+          });
+          break;
+        case "search":
+          $("${target}").jstree("search", document.getElementById("text").value);
+          //$("#jstreeTable_filter").find('input[type="search"]').val();
+          $('#jstreeTable').DataTable().column(6).search(document.getElementById("text").value).draw();
+          ;
+          break;
+        case "text":
+          break;
+        default:
+          $("${target}").jstree(this.id);
+          break;
       }
     });
+  }
+
+  $(function() {
+    jsTreeBuild();
   });
+  // Code for the menu buttons
+
 </script>
