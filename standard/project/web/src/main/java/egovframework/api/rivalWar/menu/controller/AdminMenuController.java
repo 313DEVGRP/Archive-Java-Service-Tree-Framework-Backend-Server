@@ -106,7 +106,16 @@ public class AdminMenuController extends GenericAbstractController {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        jsTreeHibernateDTO.setStatus(menuService.removeNode(jsTreeHibernateDTO));
+        MenuDTO targetMenuNode = menuService.getNode(jsTreeHibernateDTO);
+
+        HashSet<DirectChatDTO> dummyChatDTOs = new HashSet<DirectChatDTO>();
+        targetMenuNode.setDirectChatDTOs(dummyChatDTOs);
+        if ( menuService.alterNode(targetMenuNode) == 1 ){
+            jsTreeHibernateDTO.setStatus(menuService.removeNode(jsTreeHibernateDTO));
+        }else{
+            throw new RuntimeException("none remove target node");
+        }
+
         setJsonDefaultSetting(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
