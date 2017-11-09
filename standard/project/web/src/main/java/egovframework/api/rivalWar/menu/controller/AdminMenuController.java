@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_ADMIN/menu"})
@@ -110,18 +111,11 @@ public class AdminMenuController extends GenericAbstractController {
 
         if(targetMenuNode.getDirectChatDTOs().size() > 0){
 
-            final HashSet<DirectChatDTO> dummyChatDTOs = new HashSet<DirectChatDTO>();
-            targetMenuNode.setDirectChatDTOs(dummyChatDTOs);
-            menuService.alterNode(targetMenuNode);
-
-            HashSet<DirectChatDTO> targetChatDTOs = (HashSet<DirectChatDTO>) targetMenuNode.getDirectChatDTOs();
+            Set<DirectChatDTO> targetChatDTOs = targetMenuNode.getDirectChatDTOs();
             for (DirectChatDTO loopChatDTO :targetChatDTOs) {
                 directChatService.removeNode(loopChatDTO);
             }
         }
-
-
-
 
         jsTreeHibernateDTO.setStatus(menuService.removeNode(targetMenuNode));
 

@@ -152,7 +152,7 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, orphanRemoval=false, cascade=CascadeType.PERSIST)
 	@JoinTable(
 			name = "T_M_MENU_DIRECTCHAT",
 			joinColumns = @JoinColumn(name = "MENU_CID"),
