@@ -1,4 +1,4 @@
-<%@ tag language="java" pageEncoding="UTF-8" isELIgnored="false" body-content="scriptless" description="NAS 연동 CSS 출력 태그" trimDirectiveWhitespaces="true"%>
+<%@ tag language="java" pageEncoding="UTF-8" isELIgnored="false" body-content="scriptless" description="jsTree Service Framework Frontend Tag" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
@@ -367,7 +367,6 @@
           $("${target}").jstree("search", document.getElementById("text").value);
           //$("#jstreeTable_filter").find('input[type="search"]').val();
           $('#jstreeTable').DataTable().column(6).search(document.getElementById("text").value).draw();
-          ;
           break;
         case "text":
           break;
