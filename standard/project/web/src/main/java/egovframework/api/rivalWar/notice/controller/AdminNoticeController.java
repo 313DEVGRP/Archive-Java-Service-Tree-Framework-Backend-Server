@@ -156,7 +156,7 @@ public class AdminNoticeController extends GenericAbstractController {
      * @throws InstantiationException
      */
     @ResponseBody
-    @RequestMapping(value = "/moveMenu.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/moveNode.do", method = RequestMethod.POST)
     public ModelAndView moveNode(@Validated(value = MoveNode.class) NoticeDTO jsTreeHibernateDTO,
                                  BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
         if (bindingResult.hasErrors()) {
