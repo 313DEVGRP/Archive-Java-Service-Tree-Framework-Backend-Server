@@ -249,6 +249,11 @@
         } else {
           $.jstree.rollback(data.rlbk);
         }
+        if(Chat){
+          Chat.sendMessage("노드를 추가했습니다. 추가된 노드의 아이디는 " + r.id , function(data) {
+            console.log(data);
+          });
+        }
         jstreeDataTableReload();
         jsTreeBuild();
       });
@@ -263,6 +268,11 @@
           },
           success: function(r) {
             jNotify('Notification : <strong>Remove Node</strong>, Complete !');
+            if(Chat){
+              Chat.sendMessage("노드를 삭제했습니다. 삭제된 노드의 아이디는 " + r.c_id , function(data) {
+                console.log(data);
+              });
+            }
             jstreeDataTableReload();
             jsTreeBuild();
           }
@@ -278,6 +288,11 @@
           $.jstree.rollback(data.rlbk);
         }
         jSuccess('Rename Node Complete');
+        if(Chat){
+          Chat.sendMessage("노드를 변경했습니다. 변경된 노드의 아이디는 " + r.c_id , function(data) {
+            console.log(data);
+          });
+        }
         jstreeDataTableReload();
         jsTreeBuild();
       });
@@ -288,6 +303,11 @@
         "c_type": data.rslt.obj.attr("rel")
       }, function(r) {
         jSuccess('Node Type Change');
+        if(Chat){
+          Chat.sendMessage("노드를 변경했습니다. 변경된 노드의 아이디는 " + r.c_id , function(data) {
+            console.log(data);
+          });
+        }
         jstreeDataTableReload();
         jsTreeBuild();
       });
@@ -313,7 +333,12 @@
               if (data.rslt.cy && $(data.rslt.oc).children("UL").length) {
                 data.inst.refresh(data.inst._get_parent(data.rslt.oc));
               }
-              jNotify('Notification : <strong>Move Node</strong> Complete !');
+            }
+            jNotify('Notification : <strong>Move Node</strong> Complete !');
+            if(Chat){
+              Chat.sendMessage("노드가 이동되었습니다. 이동된 노드의 아이디는 " + r.c_id , function(data) {
+                console.log(data);
+              });
             }
             jstreeDataTableReload();
             jsTreeBuild();

@@ -399,6 +399,13 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 
                     $(function() {
                         jstreeDataTableReload();
+
+						function rollDice() {
+							return (Math.floor(Math.random() * 1000000) + 1);
+						}
+						Chat.login(rollDice(), function(data) {
+							console.log(data);
+						});
                     });
 
                     function jsTreeClick(selectedNodeID) {
