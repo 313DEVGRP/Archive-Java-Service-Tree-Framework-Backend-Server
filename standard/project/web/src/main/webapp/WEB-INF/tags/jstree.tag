@@ -288,7 +288,7 @@
           $.jstree.rollback(data.rlbk);
         }
         jSuccess('Rename Node Complete');
-        if(document.getElementById("Chat")  != null){{
+        if(document.getElementById("Chat")  != null){
           Chat.sendMessage("노드를 변경했습니다. 변경된 노드의 아이디는 " + r.c_id , function(data) {
             console.log(data);
           });
