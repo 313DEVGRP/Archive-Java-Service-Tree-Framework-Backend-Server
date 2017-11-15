@@ -78,7 +78,8 @@ public class SpecHashTagDTO extends JsTreeHibernateSearchDTO implements Serializ
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof SpecHashTagDTO) {
-
+            this.setTagName(((SpecHashTagDTO)paramInstance).getTagName());
+            this.setTagSourceChatID(((SpecHashTagDTO)paramInstance).getTagSourceChatID());
         }
     }
 

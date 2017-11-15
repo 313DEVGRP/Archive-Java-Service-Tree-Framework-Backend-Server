@@ -164,6 +164,19 @@ public class DirectChatDTO extends JsTreeHibernateSearchDTO implements Serializa
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
 		if (paramInstance instanceof DirectChatDTO) {
+
+			this.setMenuId(((DirectChatDTO)paramInstance).getMenuId());
+			this.setUserId(((DirectChatDTO)paramInstance).getUserId());
+			this.setUserLevel(((DirectChatDTO)paramInstance).getUserLevel());
+			this.setWriteTime(((DirectChatDTO)paramInstance).getWriteTime());
+			this.setSelectedCompareItem(((DirectChatDTO)paramInstance).getSelectedCompareItem());
+			this.setContentsBody(((DirectChatDTO)paramInstance).getContentsBody());
+			this.setHashTags(((DirectChatDTO)paramInstance).getHashTags());
+			this.setLikeCount(((DirectChatDTO)paramInstance).getLikeCount());
+			this.setHateCount(((DirectChatDTO)paramInstance).getHateCount());
+			this.setHiddenYN(((DirectChatDTO)paramInstance).getHiddenYN());
+			this.setReportYN(((DirectChatDTO)paramInstance).getReportYN());
+
 		}
 	}
 

@@ -85,7 +85,9 @@ public class UserSelectedItemDTO extends JsTreeHibernateSearchDTO implements Ser
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof UserSelectedItemDTO) {
-
+            this.setUserCID(((UserSelectedItemDTO)paramInstance).getUserCID());
+            this.setMenuCID(((UserSelectedItemDTO)paramInstance).getMenuCID());
+            this.setCompareItemCID(((UserSelectedItemDTO)paramInstance).getCompareItemCID());
         }
     }
 }

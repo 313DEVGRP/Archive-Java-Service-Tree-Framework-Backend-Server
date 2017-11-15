@@ -68,7 +68,7 @@ public class NoticeDTO extends JsTreeHibernateSearchDTO implements Serializable 
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof NoticeDTO) {
-
+            this.setNoticeBody(((NoticeDTO)paramInstance).getNoticeBody());
         }
     }
 

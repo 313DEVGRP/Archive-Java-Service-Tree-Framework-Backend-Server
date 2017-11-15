@@ -76,7 +76,8 @@ public class CompareItemDTO extends JsTreeHibernateSearchDTO implements Serializ
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof CompareItemDTO) {
-
+            this.setCopyBooleanValue(((CompareItemDTO) paramInstance).getCopyBooleanValue());
+            this.setCompareItemName(((CompareItemDTO) paramInstance).getCompareItemName());
         }
     }
 

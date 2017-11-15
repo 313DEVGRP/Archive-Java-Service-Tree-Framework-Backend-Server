@@ -66,6 +66,102 @@ public class CompareSpecDTO extends JsTreeHibernateSearchDTO implements Serializ
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
         if (paramInstance instanceof CompareSpecDTO) {
             this.setCalTime(((CompareSpecDTO) paramInstance).getCalTime());
+
+            this.setTopSpecName(((CompareSpecDTO) paramInstance).getTopSpecName());
+
+            this.setTopSpec1Title(((CompareSpecDTO) paramInstance).getTopSpec1Title());
+            this.setTopSpec1Amount(((CompareSpecDTO) paramInstance).getTopSpec1Amount());
+            this.setTopSpec1Percent(((CompareSpecDTO) paramInstance).getTopSpec1Percent());
+            this.setTopSpec1Trend(((CompareSpecDTO) paramInstance).getTopSpec1Trend());
+            this.setTopSpec1Graph(((CompareSpecDTO) paramInstance).getTopSpec1Graph());
+
+            this.setTopSpec2Title(((CompareSpecDTO) paramInstance).getTopSpec2Title());
+            this.setTopSpec2Amount(((CompareSpecDTO) paramInstance).getTopSpec2Amount());
+            this.setTopSpec2Percent(((CompareSpecDTO) paramInstance).getTopSpec2Percent());
+            this.setTopSpec2Trend(((CompareSpecDTO) paramInstance).getTopSpec2Trend());
+            this.setTopSpec2Graph(((CompareSpecDTO) paramInstance).getTopSpec2Graph());
+
+            this.setTopSpec3Title(((CompareSpecDTO) paramInstance).getTopSpec3Title());
+            this.setTopSpec3Amount(((CompareSpecDTO) paramInstance).getTopSpec3Amount());
+            this.setTopSpec3Percent(((CompareSpecDTO) paramInstance).getTopSpec3Percent());
+            this.setTopSpec3Trend(((CompareSpecDTO) paramInstance).getTopSpec3Trend());
+            this.setTopSpec3Graph(((CompareSpecDTO) paramInstance).getTopSpec3Graph());
+
+            this.setTopSpec4Title(((CompareSpecDTO) paramInstance).getTopSpec4Title());
+            this.setTopSpec4Amount(((CompareSpecDTO) paramInstance).getTopSpec4Amount());
+            this.setTopSpec4Percent(((CompareSpecDTO) paramInstance).getTopSpec4Percent());
+            this.setTopSpec4Trend(((CompareSpecDTO) paramInstance).getTopSpec4Trend());
+            this.setTopSpec4Graph(((CompareSpecDTO) paramInstance).getTopSpec4Graph());
+
+            this.setTopSpec5Title(((CompareSpecDTO) paramInstance).getTopSpec5Title());
+            this.setTopSpec5Amount(((CompareSpecDTO) paramInstance).getTopSpec5Amount());
+            this.setTopSpec5Percent(((CompareSpecDTO) paramInstance).getTopSpec5Percent());
+            this.setTopSpec5Trend(((CompareSpecDTO) paramInstance).getTopSpec5Trend());
+            this.setTopSpec5Graph(((CompareSpecDTO) paramInstance).getTopSpec5Graph());
+
+
+
+            this.setMidSpec1Title(((CompareSpecDTO) paramInstance).getMidSpec1Title());
+            this.setMidSpec1Amount(((CompareSpecDTO) paramInstance).getMidSpec1Amount());
+            this.setMidSpec1Percent(((CompareSpecDTO) paramInstance).getMidSpec1Percent());
+            this.setMidSpec1Trend(((CompareSpecDTO) paramInstance).getMidSpec1Trend());
+            this.setMidSpec1Graph(((CompareSpecDTO) paramInstance).getMidSpec1Graph());
+
+            this.setMidSpec2Title(((CompareSpecDTO) paramInstance).getMidSpec2Title());
+            this.setMidSpec2Amount(((CompareSpecDTO) paramInstance).getMidSpec2Amount());
+            this.setMidSpec2Percent(((CompareSpecDTO) paramInstance).getMidSpec2Percent());
+            this.setMidSpec2Trend(((CompareSpecDTO) paramInstance).getMidSpec2Trend());
+            this.setMidSpec2Graph(((CompareSpecDTO) paramInstance).getMidSpec2Graph());
+
+            this.setMidSpec3Title(((CompareSpecDTO) paramInstance).getMidSpec3Title());
+            this.setMidSpec3Amount(((CompareSpecDTO) paramInstance).getMidSpec3Amount());
+            this.setMidSpec3Percent(((CompareSpecDTO) paramInstance).getMidSpec3Percent());
+            this.setMidSpec3Trend(((CompareSpecDTO) paramInstance).getMidSpec3Trend());
+            this.setMidSpec3Graph(((CompareSpecDTO) paramInstance).getMidSpec3Graph());
+
+            this.setMidSpec4Title(((CompareSpecDTO) paramInstance).getMidSpec4Title());
+            this.setMidSpec4Amount(((CompareSpecDTO) paramInstance).getMidSpec4Amount());
+            this.setMidSpec4Percent(((CompareSpecDTO) paramInstance).getMidSpec4Percent());
+            this.setMidSpec4Trend(((CompareSpecDTO) paramInstance).getMidSpec4Trend());
+            this.setMidSpec4Graph(((CompareSpecDTO) paramInstance).getMidSpec4Graph());
+
+            this.setMidSpec5Title(((CompareSpecDTO) paramInstance).getMidSpec5Title());
+            this.setMidSpec5Amount(((CompareSpecDTO) paramInstance).getMidSpec5Amount());
+            this.setMidSpec5Percent(((CompareSpecDTO) paramInstance).getMidSpec5Percent());
+            this.setMidSpec5Trend(((CompareSpecDTO) paramInstance).getMidSpec5Trend());
+            this.setMidSpec5Graph(((CompareSpecDTO) paramInstance).getMidSpec5Graph());
+
+
+
+            this.setBotSpec1Title(((CompareSpecDTO) paramInstance).getBotSpec1Title());
+            this.setBotSpec1Amount(((CompareSpecDTO) paramInstance).getBotSpec1Amount());
+            this.setBotSpec1Percent(((CompareSpecDTO) paramInstance).getBotSpec1Percent());
+            this.setBotSpec1Trend(((CompareSpecDTO) paramInstance).getBotSpec1Trend());
+            this.setBotSpec1Graph(((CompareSpecDTO) paramInstance).getBotSpec1Graph());
+
+            this.setBotSpec2Title(((CompareSpecDTO) paramInstance).getBotSpec2Title());
+            this.setBotSpec2Amount(((CompareSpecDTO) paramInstance).getBotSpec2Amount());
+            this.setBotSpec2Percent(((CompareSpecDTO) paramInstance).getBotSpec2Percent());
+            this.setBotSpec2Trend(((CompareSpecDTO) paramInstance).getBotSpec2Trend());
+            this.setBotSpec2Graph(((CompareSpecDTO) paramInstance).getBotSpec2Graph());
+
+            this.setBotSpec3Title(((CompareSpecDTO) paramInstance).getBotSpec3Title());
+            this.setBotSpec3Amount(((CompareSpecDTO) paramInstance).getBotSpec3Amount());
+            this.setBotSpec3Percent(((CompareSpecDTO) paramInstance).getBotSpec3Percent());
+            this.setBotSpec3Trend(((CompareSpecDTO) paramInstance).getBotSpec3Trend());
+            this.setBotSpec3Graph(((CompareSpecDTO) paramInstance).getBotSpec3Graph());
+
+            this.setBotSpec4Title(((CompareSpecDTO) paramInstance).getBotSpec4Title());
+            this.setBotSpec4Amount(((CompareSpecDTO) paramInstance).getBotSpec4Amount());
+            this.setBotSpec4Percent(((CompareSpecDTO) paramInstance).getBotSpec4Percent());
+            this.setBotSpec4Trend(((CompareSpecDTO) paramInstance).getBotSpec4Trend());
+            this.setBotSpec4Graph(((CompareSpecDTO) paramInstance).getBotSpec4Graph());
+
+            this.setBotSpec5Title(((CompareSpecDTO) paramInstance).getBotSpec5Title());
+            this.setBotSpec5Amount(((CompareSpecDTO) paramInstance).getBotSpec5Amount());
+            this.setBotSpec5Percent(((CompareSpecDTO) paramInstance).getBotSpec5Percent());
+            this.setBotSpec5Trend(((CompareSpecDTO) paramInstance).getBotSpec5Trend());
+            this.setBotSpec5Graph(((CompareSpecDTO) paramInstance).getBotSpec5Graph());
         }
     }
 
