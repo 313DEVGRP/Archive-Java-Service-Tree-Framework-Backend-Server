@@ -335,11 +335,9 @@
               }
             }
             jNotify('Notification : <strong>Move Node</strong> Complete !');
-            if(document.getElementById("Chat")  != null){
               Chat.sendMessage("노드가 이동되었습니다. 이동된 노드의 아이디는 " + r.c_id , function(data) {
                 console.log(data);
               });
-            }
             jstreeDataTableReload();
             jsTreeBuild();
           }
