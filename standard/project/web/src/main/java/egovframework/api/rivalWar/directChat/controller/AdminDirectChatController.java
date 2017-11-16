@@ -63,9 +63,6 @@ public class AdminDirectChatController extends GenericAbstractController {
 
         if(null == parser.get("menuCId")){
             Long menuCId = new Long(3);
-            searchMenuDTO.setC_id(menuCId);
-            menuService.getChildNode(searchMenuDTO);
-
             searchMenuDTO.setWhere("c_parentid", menuCId);
             List<MenuDTO> list = menuService.getChildNode(searchMenuDTO);
             MenuDTO recentMenuNode = list.get(0);
