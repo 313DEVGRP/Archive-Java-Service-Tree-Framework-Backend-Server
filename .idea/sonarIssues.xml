@@ -2198,6 +2198,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/directChat/getPaginatedChildNode.do">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/menu/getBranchNode.do">
           <value>
             <set />
@@ -2334,6 +2339,11 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/csrf.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/directChat.js">
           <value>
             <set />
           </value>
