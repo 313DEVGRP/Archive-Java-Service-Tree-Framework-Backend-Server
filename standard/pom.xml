@@ -226,7 +226,24 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.5.1</version>
             </plugin>
+
+            <plugin>
+                <groupId>com.fortify.ps.maven.plugin</groupId>
+                <artifactId>sca-maven-plugin</artifactId>
+                <version>4.30</version>
+                <configuration>
+                    <findbugs>true</findbugs>
+                    <htmlReport>true</htmlReport>
+                    <maxHeap>800M</maxHeap>
+                    <source>myJavaVersion</source>
+                    <buildId>myBuildId</buildId>
+                    <verbose>true</verbose>
+                    <skipTests>true</skipTests>
+                    <toplevelArtifactId>myTopLevelId</toplevelArtifactId>
+                </configuration>
+            </plugin>
         </plugins>
+
     </build>
     <reporting>
         <outputDirectory>${basedir}/target/site</outputDirectory>

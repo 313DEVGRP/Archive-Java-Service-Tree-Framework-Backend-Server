@@ -7,7 +7,10 @@ import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
+import egovframework.com.ext.jstree.support.util.DateUtils;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import egovframework.com.ext.jstree.support.util.StringUtils;
+import net.sf.ehcache.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,13 @@ public class UserDirectChatController extends GenericAbstractController {
         }
 
         //user 권한 체크할 필요없음. 필터 처리되 있음.
+        jsTreeHibernateDTO.setUserId(getUser());
+        jsTreeHibernateDTO.setLikeCount(new Long(0));
+        jsTreeHibernateDTO.setHateCount(new Long(0));
+        jsTreeHibernateDTO.setReportYN("N");
+        jsTreeHibernateDTO.setHiddenYN("N");
+        jsTreeHibernateDTO.setUserLevel(new Long(0));
+        jsTreeHibernateDTO.setWriteTime(DateUtils.getCurrentDay().toString());
 
         ParameterParser parser = new ParameterParser(request);
 
@@ -70,6 +80,17 @@ public class UserDirectChatController extends GenericAbstractController {
         modelAndView.addObject("result", directChatService.addNode(jsTreeHibernateDTO));
 
         return modelAndView;
+    }
+
+    private String getUser() {
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
     }
 
 }

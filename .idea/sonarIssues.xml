@@ -2328,6 +2328,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/chat.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/partials/common/js/rivalWar/compareInfo.js">
           <value>
             <set />
