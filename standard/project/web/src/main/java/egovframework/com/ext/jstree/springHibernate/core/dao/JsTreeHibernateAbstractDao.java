@@ -443,6 +443,9 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 			logger.error("no search instace class id");
 		}
 
+		if( null == value){
+			throw new RuntimeException("getId value is null");
+		}
 		return Long.parseLong(value);
 	}
 
@@ -455,6 +458,9 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 			logger.error("no search instace class id");
 		}
 
+		if( null == value){
+			throw new RuntimeException("getId value is null");
+		}
 		return Long.parseLong(value);
 	}
 	
@@ -465,10 +471,18 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
     @SuppressWarnings("rawtypes")
 	public List search(Map<String, Object> parameterMap) {
         Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
-        Set<String> fieldName = parameterMap.keySet();
-        for (String field : fieldName) {
+
+		/* coveriry 처리.
+		Set<String> fieldName = parameterMap.keySet();
+		for (String field : fieldName) {
             criteria.add(Restrictions.ilike(field, parameterMap.get(field)));
         }
+        */
+
+		for (Map.Entry<String, Object> entry : parameterMap.entrySet()) {
+			criteria.add(Restrictions.ilike(entry.getKey(), entry.getValue()));
+		}
+
         return criteria.list();
     }
  
@@ -477,7 +491,11 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
     }
  
     public void deleteById(ID id) {
-        delete(getByID(id));
+		if(null != getByID(id)){
+			delete(getByID(id));
+		}else{
+			throw new RuntimeException("getByID(id) is null");
+		}
     }
  
 }
