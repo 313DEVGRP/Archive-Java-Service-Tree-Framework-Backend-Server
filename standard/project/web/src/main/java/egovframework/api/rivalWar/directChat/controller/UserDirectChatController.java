@@ -44,7 +44,7 @@ public class UserDirectChatController extends GenericAbstractController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ResponseBody
-    @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/addNode.do")
     public ModelAndView addNode(@Validated(value = AddNode.class) DirectChatDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
 
         if (bindingResult.hasErrors()){

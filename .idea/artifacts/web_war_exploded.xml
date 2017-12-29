@@ -53,6 +53,7 @@
           <element id="library" level="project" name="Maven: egovframework.rte:egovframework.rte.fdl.xml:3.1.0" />
           <element id="library" level="project" name="Maven: org.jdom:jdom2:2.0.5" />
           <element id="library" level="project" name="Maven: org.springmodules:spring-modules-validation:0.9" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.0" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.0" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.0" />
@@ -118,7 +119,6 @@
           <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
           <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi-contrib:3.5-FINAL" />
-          <element id="library" level="project" name="Maven: log4j:log4j:1.2.13" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Maven: net.sourceforge.collections:collections-generic:4.01" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.1" />

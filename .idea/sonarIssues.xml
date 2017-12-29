@@ -2203,6 +2203,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/directChat/addNode.do">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/api/rivalWar/directChat/getPaginatedChildNode.do">
           <value>
             <set />
