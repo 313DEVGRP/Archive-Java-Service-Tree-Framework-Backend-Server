@@ -1,20 +1,19 @@
 package egovframework.com.ext.jstree.support.security.service;
 
-import java.util.HashSet;
-
-import egovframework.com.ext.jstree.support.security.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import egovframework.com.ext.jstree.support.security.database.dao.UserDAO;
 import egovframework.com.ext.jstree.support.security.database.model.Role;
 import egovframework.com.ext.jstree.support.security.database.model.User;
 import egovframework.com.ext.jstree.support.security.dto.LocalUser;
 import egovframework.com.ext.jstree.support.security.dto.UserRegistrationForm;
 import egovframework.com.ext.jstree.support.security.exception.UserAlreadyExistAuthenticationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
 
 /**
  * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
@@ -29,6 +28,9 @@ public class RegistrationUserDetailService implements egovframework.com.ext.jstr
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -52,7 +54,7 @@ public class RegistrationUserDetailService implements egovframework.com.ext.jstr
         user.setUserId(formDTO.getUserId());
         user.setEmailId(formDTO.getEmail());
         user.setName(formDTO.getFirstName());
-        user.setPassword(formDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(formDTO.getPassword()));
         final HashSet<Role> roles = new HashSet<Role>();
         Role role = new Role();
         role.setName("ROLE_USER");

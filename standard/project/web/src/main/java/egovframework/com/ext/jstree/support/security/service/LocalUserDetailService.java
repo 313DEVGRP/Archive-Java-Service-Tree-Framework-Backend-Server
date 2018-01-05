@@ -1,25 +1,20 @@
 package egovframework.com.ext.jstree.support.security.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import egovframework.com.ext.jstree.support.security.database.dao.UserDAO;
+import egovframework.com.ext.jstree.support.security.database.model.Role;
+import egovframework.com.ext.jstree.support.security.database.model.User;
+import egovframework.com.ext.jstree.support.security.dto.LocalUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import egovframework.com.ext.jstree.support.security.database.dao.UserDAO;
-import egovframework.com.ext.jstree.support.security.database.model.Role;
-import egovframework.com.ext.jstree.support.security.database.model.User;
-import egovframework.com.ext.jstree.support.security.dto.LocalUser;
+import java.util.ArrayList;
+import java.util.List;
 
-
-/**
- * @author <a href="mailto:psunil1278@gmail.com">Sunil Kumar</a>
- * @since 26/12/15
- */
 @Service("localUserDetailService")
 public class LocalUserDetailService implements UserDetailsService {
 
