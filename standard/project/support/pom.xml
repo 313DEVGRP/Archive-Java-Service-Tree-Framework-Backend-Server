@@ -488,6 +488,7 @@
             <version>4.1</version>
         </dependency>
 
+        <!-- 크롤러, 빅데이터, 형태소 분석기, 써치엔진, 인공지능 -->
         <dependency>
             <groupId>org.bitbucket.eunjeon</groupId>
             <artifactId>seunjeon_2.12</artifactId>
