@@ -1,6 +1,6 @@
 package egovframework.com.ext.jstree.support.security.service;
 
-import egovframework.com.ext.jstree.support.security.database.dao.UserDAO;
+import egovframework.com.ext.jstree.support.security.database.dao.UserDao;
 import egovframework.com.ext.jstree.support.security.database.model.Role;
 import egovframework.com.ext.jstree.support.security.database.model.User;
 import egovframework.com.ext.jstree.support.security.dto.LocalUser;
@@ -23,7 +23,7 @@ public class RegistrationUserDetailService implements egovframework.com.ext.jstr
     private UserDetailsService userDetailService;
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDao userDao;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -33,14 +33,14 @@ public class RegistrationUserDetailService implements egovframework.com.ext.jstr
     @Transactional(value = "transactionManager")
     public LocalUser registerNewUser(final UserRegistrationForm userRegistrationForm) throws UserAlreadyExistAuthenticationException {
 
-        User userExist = userDAO.get(userRegistrationForm.getUserId());
+        User userExist = userDao.get(userRegistrationForm.getUserId());
         if (userExist != null) {
             throw new UserAlreadyExistAuthenticationException("User with email id " + userRegistrationForm.getEmail() + " already exist");
         }
 
         User user = buildUser(userRegistrationForm);
-        userDAO.save(user);
-        userDAO.flush();
+        userDao.save(user);
+        userDao.flush();
 
         return (LocalUser) userDetailService.loadUserByUsername(userRegistrationForm.getUserId());
     }

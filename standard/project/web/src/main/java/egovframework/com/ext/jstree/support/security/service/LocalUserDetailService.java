@@ -1,6 +1,6 @@
 package egovframework.com.ext.jstree.support.security.service;
 
-import egovframework.com.ext.jstree.support.security.database.dao.UserDAO;
+import egovframework.com.ext.jstree.support.security.database.dao.UserDao;
 import egovframework.com.ext.jstree.support.security.database.model.Role;
 import egovframework.com.ext.jstree.support.security.database.model.User;
 import egovframework.com.ext.jstree.support.security.dto.LocalUser;
@@ -18,12 +18,12 @@ import java.util.List;
 public class LocalUserDetailService implements UserDetailsService {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDao userDao;
 
     @Override
     @Transactional
     public LocalUser loadUserByUsername(final String userId) throws UsernameNotFoundException {
-        User user = userDAO.get(userId);
+        User user = userDao.get(userId);
         if (user == null) {
             return null;
         }

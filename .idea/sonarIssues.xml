@@ -1798,7 +1798,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/RoleDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/UserDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/UserDao.java">
           <value>
             <set />
           </value>
