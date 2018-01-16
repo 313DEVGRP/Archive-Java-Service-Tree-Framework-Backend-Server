@@ -1,19 +1,16 @@
 package egovframework.com.ext.jstree.support.security.registry;
 
-import egovframework.com.ext.jstree.support.security.database.dao.UserDAO;
+import egovframework.com.ext.jstree.support.security.dto.LocalUser;
+import egovframework.com.ext.jstree.support.security.dto.SocialProvider;
+import egovframework.com.ext.jstree.support.security.dto.UserRegistrationForm;
+import egovframework.com.ext.jstree.support.security.service.UserService;
+import egovframework.com.ext.jstree.support.security.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
-
-import egovframework.com.ext.jstree.support.security.util.SecurityUtil;
-import egovframework.com.ext.jstree.support.security.dto.LocalUser;
-import egovframework.com.ext.jstree.support.security.dto.SocialProvider;
-import egovframework.com.ext.jstree.support.security.dto.UserRegistrationForm;
-import egovframework.com.ext.jstree.support.security.service.UserService;
-import org.springframework.util.ObjectUtils;
 
 /**
  * If no local user associated with the given connection then
@@ -30,9 +27,6 @@ public class AppConnectionSignUp implements ConnectionSignUp {
     @Autowired
     @Qualifier(value = "localUserDetailService")
     private UserDetailsService userDetailService;
-
-    @Autowired
-    private UserDAO userDAO;
 
     @Override
     public String execute(final Connection<?> connection) {

@@ -1,14 +1,12 @@
 package egovframework.com.ext.jstree.support.security.database.dao;
 
-import java.io.Serializable;
-import java.util.List;
-
-import egovframework.com.ext.jstree.support.security.database.dao.GenericDao;
+import egovframework.com.ext.jstree.support.security.database.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
-import egovframework.com.ext.jstree.support.security.database.model.User;
+import java.io.Serializable;
+import java.util.List;
 
 
 /**
