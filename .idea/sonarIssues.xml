@@ -1788,6 +1788,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/GenericDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/RoleDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/database/dao/UserDAO.java">
           <value>
             <set />
@@ -1828,6 +1838,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/exception/UserAlreadyExistAuthenticationException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/handler/AppSuccessHandler.java">
           <value>
             <set />
@@ -1838,12 +1853,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/registry/AppSocialAuthenticationServiceRegistry.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/service/LocalUserDetailService.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/service/RegistrationUserDetailService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/service/SocialUserDetailService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/ext/jstree/support/security/service/UserService.java">
           <value>
             <set />
           </value>

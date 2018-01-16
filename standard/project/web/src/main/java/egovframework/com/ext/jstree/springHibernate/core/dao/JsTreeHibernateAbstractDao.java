@@ -1,34 +1,16 @@
 package egovframework.com.ext.jstree.springHibernate.core.dao;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Resource;
-
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
-import org.hibernate.CacheMode;
-import org.hibernate.Criteria;
-import org.hibernate.LockMode;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.*;
+import org.hibernate.criterion.*;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
+import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearchDTO, ID extends Serializable> extends HibernateDaoSupport {

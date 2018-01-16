@@ -1,20 +1,13 @@
 package egovframework.com.ext.jstree.support.security.database.dao;
 
-import java.io.Serializable;
-import java.util.List;
-
-import egovframework.com.ext.jstree.support.security.database.dao.GenericDao;
+import egovframework.com.ext.jstree.support.security.database.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
-import egovframework.com.ext.jstree.support.security.database.model.Role;
+import java.io.Serializable;
+import java.util.List;
 
-
-/**
- * @author <a href="mailto:psunil1278@gmail.com">Sunil Kumar</a>
- * @since 26/12/15
- */
 @Service
 public class RoleDAO implements GenericDao<Role,Integer> {
 

@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.util.List;
 
-
-/**
- * @author <a href="mailto:psunil1278@gmail.com">Sunil Kumar</a>
- * @since 26/12/15
- */
 @Service
 public class UserDAO implements GenericDao<User,String> {
 

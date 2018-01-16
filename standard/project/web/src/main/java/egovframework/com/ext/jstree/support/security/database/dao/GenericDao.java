@@ -3,10 +3,6 @@ package egovframework.com.ext.jstree.support.security.database.dao;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author <a href="mailto:psunil1278@gmail.com">Sunil Kumar</a>
- * @since 26/12/15
- */
 public interface GenericDao<T extends Serializable, K extends Serializable> {
 
     public T load(K id);

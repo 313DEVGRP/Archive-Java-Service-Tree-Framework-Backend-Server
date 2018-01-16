@@ -11,10 +11,6 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
-/**
- * @author <a href="mailto:psunil1278@gmail.com">Sunil Kumar</a>
- * @since 30/12/15
- */
 public class AppAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

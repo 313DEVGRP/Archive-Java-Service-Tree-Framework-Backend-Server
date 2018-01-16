@@ -12,13 +12,6 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
 
-/**
- * If no local user associated with the given connection then
- * connection signup will create a new local user from the given connection.
- *
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 27/3/16
- */
 public class AppConnectionSignUp implements ConnectionSignUp {
 
     @Autowired

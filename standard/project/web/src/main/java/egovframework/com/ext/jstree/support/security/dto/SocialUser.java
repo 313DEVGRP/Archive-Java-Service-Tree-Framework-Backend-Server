@@ -4,10 +4,6 @@ import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 
-/**
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 2/4/16
- */
 public class SocialUser extends org.springframework.social.security.SocialUser {
 
     private String userId;

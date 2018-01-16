@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 22/3/16
- */
 @RestController
 public class PagesController {
 

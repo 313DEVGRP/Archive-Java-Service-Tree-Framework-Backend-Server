@@ -15,10 +15,6 @@ import egovframework.com.ext.jstree.support.security.dto.UserRegistrationForm;
 import egovframework.com.ext.jstree.support.security.exception.UserAlreadyExistAuthenticationException;
 import egovframework.com.ext.jstree.support.security.service.UserService;
 
-/**
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 29/3/16
- */
 @RestController
 public class RegistrationController {
 

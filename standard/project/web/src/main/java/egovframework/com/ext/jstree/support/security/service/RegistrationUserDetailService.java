@@ -15,10 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 
-/**
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 28/3/16
- */
 @Service("registrationUserDetailService")
 public class RegistrationUserDetailService implements egovframework.com.ext.jstree.support.security.service.UserService {
 

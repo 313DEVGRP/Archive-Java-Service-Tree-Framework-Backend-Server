@@ -7,10 +7,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.social.security.SocialAuthenticationServiceRegistry;
 import org.springframework.social.security.provider.SocialAuthenticationService;
 
-/**
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 21/3/16
- */
 public class AppSocialAuthenticationServiceRegistry extends SocialAuthenticationServiceRegistry {
 
     private List<SocialAuthenticationService<?>> authenticationServices;

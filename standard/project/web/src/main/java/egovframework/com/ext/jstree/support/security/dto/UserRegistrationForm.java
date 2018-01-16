@@ -1,11 +1,5 @@
 package egovframework.com.ext.jstree.support.security.dto;
 
-import egovframework.com.ext.jstree.support.security.dto.*;
-
-/**
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 28/3/16
- */
 public class UserRegistrationForm {
 
     private String userId;

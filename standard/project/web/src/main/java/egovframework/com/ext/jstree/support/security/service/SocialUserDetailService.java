@@ -13,10 +13,6 @@ import org.springframework.stereotype.Service;
 import egovframework.com.ext.jstree.support.security.dto.LocalUser;
 import egovframework.com.ext.jstree.support.security.dto.SocialUser;
 
-/**
- * @author <a href="mailto:sunil.pulugula@wavemaker.com">Sunil Kumar</a>
- * @since 21/3/16
- */
 @Service("socialUserDetailService")
 public class SocialUserDetailService implements SocialUserDetailsService {
 

@@ -5,7 +5,6 @@ import egovframework.com.ext.jstree.support.security.database.model.Role;
 import egovframework.com.ext.jstree.support.security.database.model.User;
 import egovframework.com.ext.jstree.support.security.dto.LocalUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -14,10 +14,6 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
-/**
- * @author <a href="mailto:psunil1278@gmail.com">Sunil Kumar</a>
- * @since 29/12/15
- */
 public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

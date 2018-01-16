@@ -1,21 +1,14 @@
 package egovframework.com.ext.jstree.support.security.database.model;
 
-import egovframework.com.ext.jstree.support.security.database.model.User;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
-
-/**
- * @author <a href="mailto:psunil1278@gmail.com">Sunil Kumar</a>
- * @since 25/12/15
- */
 @Entity
 @Table(name = "T_ROLE")
 @SelectBeforeUpdate(value=true)
