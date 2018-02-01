@@ -1,6 +1,5 @@
 package egovframework.api.rivalWar.directChat.controller;
 
-import egovframework.api.rivalWar.compareSpec.service.CompareSpecService;
 import egovframework.api.rivalWar.directChat.service.DirectChatService;
 import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
@@ -9,8 +8,6 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.DateUtils;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
-import egovframework.com.ext.jstree.support.util.StringUtils;
-import net.sf.ehcache.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +18,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
