@@ -197,7 +197,7 @@
         </snapshotRepository>
         <site>
             <id>StandardProject-Site-Public</id>
-            <url>ftp://www.313.co.kr</url>
+            <url>ftp://www.313.co.kr/web/analysis</url>
         </site>
     </distributionManagement>
 
