@@ -205,9 +205,9 @@
     <build>
         <extensions>
             <extension>
-                <groupId>org.mod4j.patched</groupId>
+                <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ftp</artifactId>
-                <version>1.0-beta-5-PATCHED-v1</version>
+                <version>2.12</version>
             </extension>
         </extensions>
 
