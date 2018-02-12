@@ -14,29 +14,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
-/**
- * Modification Information
- * 
- * @author 이동민
- * @since 2014.07.28
- * @version 1.0
- * @see <pre>
- * 
- * Class Name 	: C_AnalyzeNodeOfJstreeSolution.java
- * Description 	: JSTree의 이벤트의 정보를 보여주는  actionController 클래스
- * Infomation	: 
- *
- * jstree의 이벤트를 사용자에게 보여준다.
- * 
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.28    Dongmin.Lee      최초 생성 
- * 
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * */
 @SuppressWarnings("rawtypes")
 public class C_AnalyzeNodeOfJstreeSolution extends ActionSupport implements Preparable, ModelDriven, ServletRequestAware, SessionAware, RequestAware {
 

@@ -21,29 +21,6 @@ import egovframework.com.ext.jstree.strutsiBatis.core.service.Util_SwapNode;
 import egovframework.com.ext.jstree.strutsiBatis.core.service.Util_TitleChecker;
 import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
 
-/**
- * Modification Information
- *
- * @author 이동민
- * @version 1.0
- * @see <pre>
- *
- * Class Name 	: C_AlterNode.java
- * Description 	: JSTree의 node를 수정하는 actionController 클래스
- * Infomation	:
- *
- * node 수정
- *
- *  << 개정이력(Modification Information) >>
- *
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.28    Dongmin.Lee      최초 생성
- *
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * @since 2014.07.28
- */
 @SuppressWarnings("rawtypes")
 public class C_AlterNode extends ActionSupport implements Preparable, ModelDriven, ServletRequestAware, SessionAware, RequestAware {
 

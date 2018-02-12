@@ -19,12 +19,6 @@ public class ParameterParser {
         this.req = req;
     }
 
-    /**
-     * 파라미터를 String 타입으로 얻는다.
-     *
-     * @param 파라미터 key
-     * @return 파라미터가 없을 경우 null
-     */
     public String get(String name) {
         String value = req.getParameter(name);
         if (null != value && 0 == value.length()) {
@@ -33,13 +27,6 @@ public class ParameterParser {
         return StringUtils.trim(value);
     }
 
-    /**
-     * 파라미터를 String 타입으로 얻는다.
-     *
-     * @param 파라미터 key
-     * @param 디폴트  값
-     * @return 파라미터가 없을 경우 디폴트
-     */
     public String get(String name, String def) {
         String value = get(name);
         if (null == value) {
@@ -48,12 +35,6 @@ public class ParameterParser {
         return StringUtils.trim(value);
     }
 
-    /**
-     * 파라미터를 boolean 타입으로 얻는다.
-     *
-     * @param 파라미터 key
-     * @return 파라미터가 없을 경우 false
-     */
     public boolean getBoolean(String name) {
         String value = get(name);
         if (null == value || 0 == value.length()) {
@@ -69,13 +50,6 @@ public class ParameterParser {
         }
     }
 
-    /**
-     * 파라미터를 boolean 타입으로 얻는다.
-     *
-     * @param 파라미터 key
-     * @param 디폴트
-     * @return 파라미터가 없을 경우 디폴트
-     */
     public boolean getBoolean(String name, boolean def) {
         String value = get(name);
         if (null == value || 0 == value.length()) {
@@ -91,12 +65,6 @@ public class ParameterParser {
         }
     }
 
-    /**
-     * 파라미터를 int 타입으로 얻는다.
-     *
-     * @param 파라미터 key
-     * @return 파라미터가 없을 경우, 예외 발생시 0
-     */
     public int getInt(String name) {
         String value = get(name);
         if (null == value || 0 == value.length()) {
@@ -109,13 +77,6 @@ public class ParameterParser {
         }
     }
 
-    /**
-     * 파라미터를 int 타입으로 얻는다.
-     *
-     * @param 파라미터 key
-     * @param 디폴트
-     * @return 파라미터가 없을 경우, 예외 발생시 디폴트
-     */
     public int getInt(String name, int def) {
         String value = get(name);
         if (null == value || 0 == value.length()) {
@@ -128,23 +89,10 @@ public class ParameterParser {
         }
     }
 
-    /**
-     * 파라미터를 int 타입으로 얻는다. 3자리마다 붙는 쉼표(,)를 삭제한다.
-     *
-     * @param 파라미터 key
-     * @return 파라미터가 없을 경우, 예외 발생시 0
-     */
     public int getCurrency(String name) {
         return getCurrency(name, 0);
     }
 
-    /**
-     * 파라미터를 int 타입으로 얻는다. 3자리마다 붙는 쉼표(,)를 삭제한다.
-     *
-     * @param 파라미터 key
-     * @param 디폴트
-     * @return 파라미터가 없을 경우, 예외 발생시 디폴트
-     */
     public int getCurrency(String name, int def) {
         String value = get(name);
         if (null == value) {
@@ -170,12 +118,6 @@ public class ParameterParser {
         }
     }
 
-    /**
-     * 파라미터를 long 타입으로 얻는다.
-     *
-     * @param 파라미터 key
-     * @return 파라미터가 없을 경우, 예외 발생시 0
-     */
     public long getLong(String name) {
         String value = get(name);
         if (null == value || 0 == value.length()) {
@@ -303,13 +245,6 @@ public class ParameterParser {
         return false;
     }
 
-    /**
-     * 파라미터를 int 타입으로 얻는다.
-     *
-     * @param name 파라미터 key
-     * @param def  디폴트
-     * @return 파라미터가 없을 경우, 예외 발생시 디폴트
-     */
     public long getLong(String name, long def) {
         String value = get(name);
         if (null == value || 0 == value.length()) {
@@ -322,10 +257,6 @@ public class ParameterParser {
         }
     }
 
-    /**
-     * 파라미터를 Date 형으로 읽는다. "yyyy-MM-dd" 형식이다. 파라미터가 없거나 형식이 맞지 않는 경우 현재 시간을
-     * 사용한다.
-     */
     public Date getDate(String name) {
         return getDate(name, new Date());
     }
@@ -334,9 +265,6 @@ public class ParameterParser {
         return DateUtils.addDays(getDate(name, new Date()), 1);
     }
 
-    /**
-     * 파라미터를 Date 형으로 읽는다. "yyyy-MM-dd" 형식이다.
-     */
     public Date getDate(String name, Date def) {
         String temp = get(name);
         if (null == temp) {
@@ -376,11 +304,6 @@ public class ParameterParser {
         return DateUtils.getDate(date);
     }
 
-    /**
-     * 시작일자의 00:00:00 부터
-     *
-     * @return
-     */
     public Date getDateStart(int day) {
         String date1 = get("startDate1");
 
@@ -392,11 +315,6 @@ public class ParameterParser {
         return DateUtils.getDate(date);
     }
 
-    /**
-     * 종료일자의 23:59:59 까지
-     *
-     * @return
-     */
     public Date getDateEnd() {
         String date1 = get("endDate1");
 
@@ -443,9 +361,6 @@ public class ParameterParser {
         return DateUtils.getDate(date);
     }
 
-    /**
-     * 파라미터를 Date 형으로 읽는다. "yyyy-MM-dd HH:mm" 형식이다.
-     */
     public Date getDateHour(String name) {
         return getDateHour(name, new Date());
     }
@@ -462,12 +377,6 @@ public class ParameterParser {
         }
     }
 
-    /**
-     * 파라미터를 String array 타입으로 얻는다.
-     *
-     * @param name 파라미터 key
-     * @return String Array
-     */
     public String[] getArray(String name) {
         List<String> list = new ArrayList<String>();
         String[] tempArray = req.getParameterValues(name);
@@ -509,12 +418,6 @@ public class ParameterParser {
         return String.valueOf(sum);
     }
 
-    /**
-     * 파라미터를 integer array 타입으로 얻는다.
-     *
-     * @param name 파라미터 key
-     * @return integer Array
-     */
     public int[] getIntArray(String name) {
         String[] tempArray = req.getParameterValues(name);
         if (null == tempArray) {

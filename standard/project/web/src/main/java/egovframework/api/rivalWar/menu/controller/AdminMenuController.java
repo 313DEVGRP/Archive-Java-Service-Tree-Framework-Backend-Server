@@ -1,6 +1,5 @@
 package egovframework.api.rivalWar.menu.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import egovframework.api.rivalWar.directChat.service.DirectChatService;
 import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
@@ -8,7 +7,6 @@ import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
-import egovframework.com.ext.jstree.support.security.database.model.Role;
 import egovframework.com.ext.jstree.support.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,17 +36,6 @@ public class AdminMenuController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /**
-     * 노드를 추가한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
     public ModelAndView addNode(@Validated(value = AddNode.class) MenuDTO jsTreeHibernateDTO,
@@ -91,15 +78,6 @@ public class AdminMenuController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 삭제한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/removeNode.do", method = RequestMethod.POST)
     public ModelAndView removeNode(@Validated(value = RemoveNode.class) MenuDTO jsTreeHibernateDTO,
@@ -136,15 +114,6 @@ public class AdminMenuController extends GenericAbstractController {
         jsTreeHibernateDTO.setRef(defaultSettingValue);
     }
 
-    /**
-     * 노드를 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNode.do", method = RequestMethod.POST)
     public ModelAndView alterNode(@Validated(value = AlterNode.class) MenuDTO jsTreeHibernateDTO,
@@ -163,15 +132,6 @@ public class AdminMenuController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드의 타입을 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
     public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) MenuDTO jsTreeHibernateDTO,
@@ -186,18 +146,6 @@ public class AdminMenuController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 이동한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     * @throws ReflectiveOperationException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/moveNode.do", method = RequestMethod.POST)
     public ModelAndView moveNode(@Validated(value = MoveNode.class) MenuDTO jsTreeHibernateDTO,

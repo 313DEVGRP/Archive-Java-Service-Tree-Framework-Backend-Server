@@ -1,9 +1,6 @@
 package egovframework.api.rivalWar.compareSpec.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
-import egovframework.api.rivalWar.compareInfo.service.CompareInfoService;
-import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
 import egovframework.api.rivalWar.compareSpec.service.CompareSpecService;
 import egovframework.api.rivalWar.compareSpec.vo.CompareSpecDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
@@ -25,10 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-09-13.
- */
-
 @Controller
 @RequestMapping(value = {"/api/rivalWar/compareSpec"})
 public class AnonymousCompareSpecController extends GenericAbstractController {
@@ -44,15 +37,6 @@ public class AnonymousCompareSpecController extends GenericAbstractController {
         return "egovframework/api/rivalWar/compareSpec/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(CompareSpecDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request) throws Exception {

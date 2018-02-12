@@ -34,15 +34,6 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	/** Node 의 title */
 	private String c_title;
 
-	/**
-	 * <pre>
-	 * 노드의 type
-	 * root : root 노드
-	 * drive : first child 노드
-	 * folder : branch 노드
-	 * default : leaf 노드
-	 * </pre>
-	 */
 	private String c_type;
 
 	private long ref;

@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017-10-14.
- */
 @Entity
 @Table(name = "T_USER_SELECTED_ITEM")
 @SelectBeforeUpdate(value = true)

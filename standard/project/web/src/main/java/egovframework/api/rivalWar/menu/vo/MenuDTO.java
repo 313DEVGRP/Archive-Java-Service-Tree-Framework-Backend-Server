@@ -11,15 +11,11 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.CascadeType;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Entity

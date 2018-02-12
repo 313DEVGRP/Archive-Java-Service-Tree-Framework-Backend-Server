@@ -1,26 +1,18 @@
 package egovframework.api.rivalWar.compareItem.vo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.api.rivalWar.specHashTag.vo.SpecHashTagDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
-import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.CascadeType;
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Administrator on 2017-10-08.
- */
 @Entity
 @Table(name = "T_JSTREE_COMPARE_ITEM")
 @SelectBeforeUpdate(value = true)

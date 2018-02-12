@@ -17,30 +17,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
-/**
- * Modification Information
- *
- * @author 이동민
- * @version 1.0
- * @see <pre>
- *
- * Class Name 	: C_MoveNode.java
- * Description 	: JSTree의 node의 이동을 하는  actionController 클래스
- * Infomation	:
- *
- * jstree의 node의 이동
- *
- *  << 개정이력(Modification Information) >>
- *
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.28    Dongmin.Lee      최초 생성
- *
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * @since 2014.07.28
- */
 @SuppressWarnings("rawtypes")
 public class C_MoveNode extends ActionSupport implements Preparable, ModelDriven, ServletRequestAware, SessionAware, RequestAware {
 

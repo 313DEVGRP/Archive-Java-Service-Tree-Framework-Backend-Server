@@ -12,29 +12,6 @@ import egovframework.com.ext.jstree.strutsiBatis.core.dao.I_DB_MoveNode;
 import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
 
-/**
- * Modification Information
- *
- * @author 이동민
- * @version 1.0
- * @see <pre>
- *
- * Class Name 	: S_MoveNode.java
- * Description 	: JSTree의 node를 이동하는  I_S_MoveNode interface를 구현한 service
- * Infomation	:
- *
- * node들을 이동한다.
- *
- *  << 개정이력(Modification Information) >>
- *
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.25    Dongmin.Lee      최초 생성
- *
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * @since 2014.07.25
- */
 @Service("S_MoveNode")
 public class S_MoveNode implements I_S_MoveNode {
 
@@ -59,12 +36,6 @@ public class S_MoveNode implements I_S_MoveNode {
         this.request = request;
     }
 
-    /**
-     * node를 이동한다.
-     *
-     * @param P_ComprehensiveTree(p_ComprehensiveTree)
-     * @return 조회한 결과 T_ComprehensiveTree
-     */
     @Override
     public T_ComprehensiveTree moveNode(P_ComprehensiveTree p_ComprehensiveTree) {
 

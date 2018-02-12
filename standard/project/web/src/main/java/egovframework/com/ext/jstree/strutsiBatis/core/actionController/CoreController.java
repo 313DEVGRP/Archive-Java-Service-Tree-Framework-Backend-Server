@@ -11,29 +11,6 @@ import org.apache.struts2.interceptor.SessionAware;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-/**
- * Modification Information
- *
- * @author 이동민
- * @version 1.0
- * @see <pre>
- *
- * Class Name 	: C_GetChildNode.java
- * Description 	: JSTree의 하위 node의 정보를 가져오는 actionController 클래스
- * Infomation	:
- *
- * jstree의 하위 node의 정보를 가져온다.
- *
- *  << 개정이력(Modification Information) >>
- *
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.28    Dongmin.Lee      최초 생성
- *
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * @since 2014.07.28
- */
 @SuppressWarnings("rawtypes")
 public class CoreController extends ActionSupport implements Preparable, ModelDriven, ServletRequestAware, SessionAware, RequestAware {
     private static final long serialVersionUID = -727128969816759415L;

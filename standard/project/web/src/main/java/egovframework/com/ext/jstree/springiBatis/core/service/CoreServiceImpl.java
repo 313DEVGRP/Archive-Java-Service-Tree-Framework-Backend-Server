@@ -22,52 +22,6 @@ import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
 
-/**
- * Modification Information
- * 
- * @author 이동민
- * @since 2014. 7. 31.
- * @version 1.0
- * @see <pre>
- * 	Class Name 	: CoreServiceImpl.java
- * 	Description : jstree Spring + iBatis 버젼의 서비스 구현체
- * 	Information	: CoreService.java 를 구현한 클래스 로 실제 작업이 이루어지는 클래스
- *  
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일               수정자                 수정내용
- *  -------       ------------   -----------------------
- *  2014.  7. 31.  이동민                 최초 생성
- *  2014. 10. 12.  류강하                 리플렉션을 성공적으로 수행하기 위한 메서드 시그너쳐 변경, 리플렉션 코드를 newInstance 메서드로 추출
- *  2015. 01. 07.  류강하                 alterNodeType() 리팩토링
- *  2015. 05. 19.  김형채                 addNode() 사용하지 않는 로직 삭제, nodeByRef 타입 체크 로직 추가
- *  2015. 06. 01.  김형채                 addNode() Position이 포함된 변수명을 Point로 변경
- *  2015. 06. 01.  김형채                 calculatePostion() 노드 이동시 폴더를 대상으로 했을때 생기는 버그 발생 로직 분기 추가
- *  2015. 06. 01.  김형채                 calculatePostion() 멀티 노드의 위치가 0번 노드보다 앞일때 로직 분기추가
- *  2015. 06. 01.  김형채                 메소드 순서 변경
- *  2015. 06. 03.  김형채                 alterNodeType() 매직넘버 상수로 변경 , 리턴변수명 변경  
- *  2015. 06. 03.  김형채                 moveNode() nodeById null 체크 로직 else 분기 삭제 및 위치 이동
- *  2015. 06. 03.  김형채                 moveNode() rightPosition 변수명을 rightPoint로 변경
- *  2015. 06. 03.  김형채                 moveNode() self 변수명을 selfPosition으로 변경
- *  2015. 06. 03.  김형채                 moveNode() nodeById null 체크 중복로직 삭제 
- *  2015. 06. 03.  김형채                 moveNode() !comprehensiveTree.isCopied() 중복체크 로직 하나로 변경
- *  2015. 06. 03.  김형채                 moveNode() comparePosition 변수명을 comparePoint로 변경
- *  2015. 06. 03.  김형채                 moveNode() fixCopy 메소드명을 fixPositionParentIdOfCopyNodes로 변경
- *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() idx 변수명을 insertSeqResult로 변경
- *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() ref 변수명을 position로 변경
- *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() map 변수명을 parentIds로 변경
- *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() for loop를 for each로 변경
- *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() parentIds의 셋팅 로직을 for each 내부로 이동
- *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() 로그 변수명 수정
- *  2015. 06. 03.  김형채                 calculatePostion() 세션 중복 저장 로직 삭제 및 위치 변경
- *  2015. 06. 03.  김형채                 calculatePostion() 조건절을 추출해서 상수로 변경
- *  2015. 06. 07.  김형채                 moveNode() logger.isDebugEnabled() 분기 추가
- *  2015. 08. 02.  류강하                 getChildNode에 페이지네이션 옵션 추가
- *  
- *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
- * </pre>
- */
-
 @Service("CoreService")
 public class CoreServiceImpl implements CoreService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -75,25 +29,11 @@ public class CoreServiceImpl implements CoreService {
 	@Resource(name = "CoreDao")
 	private CoreDao coreDao;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
-	 * getNode
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
 		T getNode = ((T) coreDao.getNode(comprehensiveTree));
 		return getNode;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
-	 * getChildNode
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception {
 		List<T> childNode = null;
 
@@ -113,13 +53,6 @@ public class CoreServiceImpl implements CoreService {
 		return childNode;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
-	 * searchNode
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	public <T extends ComprehensiveTree> List<String> searchNode(T comprehensiveTree) throws Exception {
 		List<T> searchNodeByStrings = (List<T>) coreDao.searchNodeByString(comprehensiveTree);
 
@@ -137,13 +70,6 @@ public class CoreServiceImpl implements CoreService {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
-	 * executeRemoveNode
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	@Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception {
 		T removeNode = ((T) coreDao.getNode(comprehensiveTree));
@@ -157,25 +83,11 @@ public class CoreServiceImpl implements CoreService {
 		return 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNode
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	@Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception {
 		return coreDao.alterNode(comprehensiveTree);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
-	 * alterNodeType
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	@Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception {
 		final int FAILURE = 0;
@@ -208,13 +120,6 @@ public class CoreServiceImpl implements CoreService {
 		return returnStatus;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#addNode
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	@Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception {
 		T nodeByRef = ((T) coreDao.getNodeByRef(comprehensiveTree));
@@ -279,13 +184,6 @@ public class CoreServiceImpl implements CoreService {
 		coreDao.stretchLeftRightForMyselfFromJstree(onlyStretchLeftRightForMyselfFromJstree);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#moveNode
-	 * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-	 */
 	@Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree, HttpServletRequest request) throws Exception {
 		T nodeById = (T) coreDao.getNode(comprehensiveTree);
@@ -598,16 +496,6 @@ public class CoreServiceImpl implements CoreService {
 		}
 	}
 
-	/**
-	 * 파라미터로 넘겨진 인스턴스의 정보를 이용해 리플렉션하여 새로운 인스턴스를 만들어 반환한다.
-	 * 
-	 * @param comprehensiveTree
-	 *            리플렉션을 위한 타입 정보를 제공하기 위한 인스턴스
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 */
 	@SuppressWarnings("unchecked")
 	private <T extends ComprehensiveTree> T newInstance(T comprehensiveTree) throws Exception {
 		Class<T> target = (Class<T>) Class.forName(comprehensiveTree.getClass().getCanonicalName());

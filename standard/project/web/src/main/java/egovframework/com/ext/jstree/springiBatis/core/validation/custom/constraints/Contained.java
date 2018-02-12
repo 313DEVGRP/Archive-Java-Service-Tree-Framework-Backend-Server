@@ -10,31 +10,6 @@ import javax.validation.Payload;
 
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.validator.ContainedValidator;
 
-/**
- * Modification Information
- * 
- * @author 전경훈
- * @since 2015. 3. 5.
- * @version 1.0
- * @see <pre>
- * 	Class Name 	: Contained.java
- * 	Description : Contained Constraint Annotation
- * 	Infomation	: 어노테이션에 해당하는 필드의 매핑 값이 
- * 				  명시된 String 배열 안에 속하는지 체크함
- *  Usage 	    : 사용할 String타입의 필드 위에 지정함
- *  			  @Contained(values={"example1", "example2"}, groups={Example.class})
- *  			  values : 속해야 할 String 배열, groups : 검증 그룹
- *  			  
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2015. 3. 5.  전경훈           최초 생성
- * 
- *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
- * </pre>
- */
-
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ContainedValidator.class)

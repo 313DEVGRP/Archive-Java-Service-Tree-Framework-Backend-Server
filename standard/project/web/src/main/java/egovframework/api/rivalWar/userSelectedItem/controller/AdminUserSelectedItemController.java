@@ -1,6 +1,5 @@
 package egovframework.api.rivalWar.userSelectedItem.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import egovframework.api.rivalWar.userSelectedItem.service.UserSelectedItemService;
 import egovframework.api.rivalWar.userSelectedItem.vo.UserSelectedItemDTO;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
@@ -9,7 +8,6 @@ import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,9 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Administrator on 2017-10-14.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_ADMIN/userSelectedItem"})
 public class AdminUserSelectedItemController extends GenericAbstractController {
@@ -33,17 +28,6 @@ public class AdminUserSelectedItemController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /**
-     * 노드를 추가한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
     public ModelAndView addNode(@Validated(value = AddNode.class) UserSelectedItemDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model) throws Exception {
@@ -55,15 +39,6 @@ public class AdminUserSelectedItemController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 삭제한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/removeNode.do", method = RequestMethod.POST)
     public ModelAndView removeNode(@Validated(value = RemoveNode.class) UserSelectedItemDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model) throws Exception {
@@ -88,15 +63,6 @@ public class AdminUserSelectedItemController extends GenericAbstractController {
         jsTreeHibernateDTO.setRef(defaultSettingValue);
     }
 
-    /**
-     * 노드를 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNode.do", method = RequestMethod.POST)
     public ModelAndView alterNode(@Validated(value = AlterNode.class) UserSelectedItemDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model) throws Exception {
@@ -115,15 +81,6 @@ public class AdminUserSelectedItemController extends GenericAbstractController {
     }
 
 
-    /**
-     * 노드의 타입을 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
     public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) UserSelectedItemDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model) throws Exception {
@@ -137,18 +94,6 @@ public class AdminUserSelectedItemController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 이동한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     * @throws ReflectiveOperationException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/moveNode.do", method = RequestMethod.POST)
     public ModelAndView moveNode(@Validated(value = MoveNode.class) UserSelectedItemDTO jsTreeHibernateDTO, BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {

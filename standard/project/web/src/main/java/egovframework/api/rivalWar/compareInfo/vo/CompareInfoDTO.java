@@ -1,9 +1,5 @@
 package egovframework.api.rivalWar.compareInfo.vo;
 
-/**
- * Created by Administrator on 2017-09-03.
- */
-
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
@@ -13,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017-08-29.
- */
 @Entity
 @Table(name = "T_JSTREE_COMPARE_INFO")
 @SelectBeforeUpdate(value = true)

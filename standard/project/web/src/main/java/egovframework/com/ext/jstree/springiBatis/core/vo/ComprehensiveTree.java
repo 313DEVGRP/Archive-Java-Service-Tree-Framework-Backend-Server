@@ -17,35 +17,6 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
 
-
-/**
- * Modification Information
- * 
- * @author 이동민
- * @since 2014. 7. 31.
- * @version 1.0
- * @see <pre>
- * 	Class Name 	: ComprehensiveTree.java
- * 	Description : jstree에서 사용되는 VO 
- * 	Infomation	: jstree에서 사용되는 VO
- *  
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일            수정자             수정내용
- *  --------      ------------   -----------------------
- *  2014.  7. 31.  이동민            최초 생성
- * 	2014.  9.  4.  전경훈            주석 추가
- *  2014.  9. 16.  류강하            주석 추가
- *  2014. 10. 12.  류강하            getSqlMapSelector 메서드의 null 체크 추가
- *  2015.  1. 31.  한지훈            toString, equals, hashCode 구현
- *  2015.  3.  3.  전경훈            Constraint Annotation 추가
- *  2015.  3.  9.  전경훈            Constraint Annotation 변경 (공백값 체크를 위해 NotEmpty -> NotBlank)
- *  2015.  5. 25.  손호성            c_title NotBlank Annotation 제거
- *  2015.  8.  4.  류강하            ajaxMessage 프라퍼티 추가
- *  
- *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
- * </pre>
- */
 public class ComprehensiveTree implements Serializable{
 
 	/**
@@ -92,14 +63,6 @@ public class ComprehensiveTree implements Serializable{
 	/** Node 의 title */
 	private String c_title;
 	
-	/**<pre>
-	 * 노드의 type
-	 * root : root 노드
-	 * drive : first child 노드
-	 * folder : branch 노드
-	 * default : leaf 노드
-	 * </pre>
-	 */
     @Contained(values = {"folder", "default"}, message = "c_type must be folder or default",
             groups = {AddNode.class, AlterNode.class, AlterNodeType.class})
 	private String c_type;

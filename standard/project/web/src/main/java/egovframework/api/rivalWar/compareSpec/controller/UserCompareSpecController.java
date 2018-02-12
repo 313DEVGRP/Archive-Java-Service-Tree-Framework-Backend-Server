@@ -1,10 +1,5 @@
 package egovframework.api.rivalWar.compareSpec.controller;
 
-/**
- * Created by Administrator on 2017-09-13.
- */
-
-import egovframework.api.rivalWar.compareInfo.service.CompareInfoService;
 import egovframework.api.rivalWar.compareSpec.service.CompareSpecService;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import org.slf4j.Logger;

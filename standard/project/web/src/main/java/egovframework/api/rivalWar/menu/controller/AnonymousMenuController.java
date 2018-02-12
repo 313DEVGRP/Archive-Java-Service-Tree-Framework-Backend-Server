@@ -1,6 +1,5 @@
 package egovframework.api.rivalWar.menu.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
 import egovframework.api.rivalWar.compareInfo.vo.CompareInfoDTO;
@@ -8,7 +7,6 @@ import egovframework.api.rivalWar.compareSpec.vo.CompareSpecDTO;
 import egovframework.api.rivalWar.menu.service.MenuService;
 import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import org.hibernate.criterion.Order;
@@ -42,15 +40,6 @@ public class AnonymousMenuController extends GenericAbstractController {
         return "egovframework/api/rivalWar/menu/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)

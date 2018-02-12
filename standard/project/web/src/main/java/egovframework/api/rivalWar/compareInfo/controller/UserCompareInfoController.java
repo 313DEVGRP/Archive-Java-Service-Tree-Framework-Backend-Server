@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * Created by Administrator on 2017-09-03.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_USER/compareInfo"})
 public class UserCompareInfoController extends GenericAbstractController {

@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017-09-13.
- */
 @Entity
 @Table(name = "T_JSTREE_COMPARE_SPEC")
 @SelectBeforeUpdate(value = true)

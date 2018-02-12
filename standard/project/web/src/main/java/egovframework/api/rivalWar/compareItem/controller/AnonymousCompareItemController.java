@@ -1,10 +1,8 @@
 package egovframework.api.rivalWar.compareItem.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.compareItem.service.CompareItemService;
 import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
-import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
@@ -25,9 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-10-08.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/compareItem"})
 public class AnonymousCompareItemController extends GenericAbstractController {
@@ -43,15 +38,6 @@ public class AnonymousCompareItemController extends GenericAbstractController {
         return "egovframework/api/rivalWar/compareItem/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(CompareItemDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)

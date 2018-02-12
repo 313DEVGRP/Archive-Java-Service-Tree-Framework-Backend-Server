@@ -16,12 +16,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return df;
     }
     
-    /**
-     * 문자열로 된 날짜 정보를 Date 형으로 리턴한다.
-     * @param text 문자열로 된 날짜 정보
-     * @param pattern 날짜 패턴
-     * @param defaultDate ParsingException이 일어나는 경우 리턴할 Date
-     */
     public synchronized static Date getDate(String text, String pattern, Date defaultDate) {
         DateFormat df = getDateFormat(pattern);
         Date result = null;
@@ -33,32 +27,14 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return result;
     }
     
-    /**
-     * 문자열로 된 날짜 정보를 Date 형으로 리턴한다.
-     * @param text 문자열로 된 날짜 정보
-     * @param pattern 날짜 패턴
-     * @return ParsingException이 일어나는 경우 null
-     */
     public static Date getDate(String text, String pattern) {
         return getDate(text, pattern, (Date) null);
     }
     
-    /**
-     * 문자열로 된 날짜 정보를 Date 형으로 리턴한다.
-     * 패턴은 yyyy-MM-dd 이다.
-     * @param text 문자열로 된 날짜 정보
-     * @param defaultDate ParsingException이 일어나는 경우 리턴할 Date
-     */
     public static Date getDate(String text, Date defaultDate) {
         return getDate(text, "yyyy-MM-dd", defaultDate);
     }
     
-    /**
-     * 문자열로 된 날짜 정보를 Date 형으로 리턴한다.
-     * 패턴은 yyyy-MM-dd 이다.
-     * @param text 문자열로 된 날짜 정보
-     * @return ParsingException이 일어나는 경우 null
-     */
     public static Date getDate(String text) {
         if (10 >= text.length()) {
             return getDate(text, "yyyy-MM-dd");
@@ -67,45 +43,22 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         }
     }
     
-    /**
-     * 날짜 정보를 Date 형으로 리턴한다.
-     * 패턴은 yyyy-MM-dd 이다.
-     * @param defaultDate ParsingException이 일어나는 경우 리턴할 Date
-     */
     public static Date getDate(int year, int month, int day, Date defaultDate) {
         return getDate(year + "-" + month + "-" + day, defaultDate);
     }
     
-    /**
-     * 날짜 정보를 Date 형으로 리턴한다.
-     * 패턴은 yyyy-MM-dd 이다.
-     * @param defaultDate ParsingException이 일어나는 경우 리턴할 Date
-     */
     public static Date getDate(String year, String month, String day, Date defaultDate) {
         return getDate(year + "-" + month + "-" + day, defaultDate);
     }
     
-    /**
-     * 날짜 정보를 Date 형으로 리턴한다.
-     * 패턴은 yyyy-MM-dd 이다.
-     * @return ParsingException이 일어나는 경우 null
-     */
     public static Date getDate(int year, int month, int day) {
         return getDate(year + "-" + month + "-" + day);
     }
     
-    /**
-     * 날짜 정보를 Date 형으로 리턴한다.
-     * 패턴은 yyyy-MM-dd 이다.
-     * @return ParsingException이 일어나는 경우 null
-     */
     public static Date getDate(String year, String month, String day) {
         return getDate(year + "-" + month + "-" + day);
     }
     
-    /**
-     * yyyy-MM-ddTHH:mm:ss.SSS 형식을 읽어들인다.
-     */
     public static Date parseDateTime(String str) {
         DateFormat df = getDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
         try {
@@ -115,9 +68,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         }
     }
     
-    /**
-     * yyyy-MM-ddTHH:mm:ss.SSS 형식의 문자열을 얻는다.
-     */
     public static String dateTimeToString(Date date) {
         DateFormat df = getDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         return df.format(date);
@@ -159,12 +109,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return cal.getTime();
     }
     
-    /**
-     * 해당 날짜가 속해 있는 주의 첫째 일과 마지막 일을 구함
-     *  
-     * @param date 
-     * @return
-     */
     public static Map<String, Date> getWeekDate(Date date) {
         Map<String, Date> map = new HashMap<String, Date>();
         
@@ -181,11 +125,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return map;
     }
     
-    /**
-     * 현재 날짜로 이전 parameter에 날짜를 구해준다.
-     * @param prevDay
-     * @return 
-     */
     public static Date getPreDate(int preDate) {
     	GregorianCalendar cal = new GregorianCalendar();
     	cal.setTime(new Date());
@@ -238,12 +177,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return cal.getTime();
     }
     
-    /**
-     * 현재날짜기준 이전 (다음)월을 구한다.
-     * @param date
-     * @param month
-     * @return
-     */
     public static Date getMonthDate(Date date, int month) {
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(date);
@@ -256,12 +189,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return cal.getTime();
     }
     
-    /**
-     * 현재날짜기준 이전 (다음)주을 구한다.
-     * @param date
-     * @param month
-     * @return
-     */
     public static Date getWeekDate(Date date, int week) {
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(date);
@@ -274,11 +201,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return cal.getTime();
     }
     
-    /**
-     *  날짜로 이전 parameter에 날짜를 구해준다.
-     * @param prevDay
-     * @return 
-     */
     public static Date getPreDate(Date date, int preDate) {
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(date);
@@ -290,11 +212,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return cal.getTime();
     }
     
-    /**
-     * 현재 날짜로 이후 parameter에 날짜를 구해준다.
-     * @param prevDay
-     * @return 
-     */
     public static Date getNextDate(int nextDate) {
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(new Date());
@@ -306,11 +223,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return cal.getTime();
     }
     
-    /**
-     *  날짜로 이후 parameter에 날짜를 구해준다.
-     * @param prevDay
-     * @return 
-     */
     public static Date getNextDate(Date date, int nextDate) {
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(date);
@@ -322,9 +234,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return cal.getTime();
     }
     
-    /**
-     * 월초에 값을 가져온다 ex) '2013-05-01 00:00:00'
-     */
     public static Date getMonthFirstDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -334,9 +243,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return getStartOfDate(calendar2.getTime());
     }
     
-    /**
-     * 월말에 값을 가져온다 ex) '2013-05-31 23:59:59.999'
-     */
     public static Date getMonthLastDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -346,10 +252,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
         return getEndOfDate(calendar2.getTime());
     }
     
-    /**
-     * 두 날짜의 일수 차이를 구한다.
-     * endDay - startDay
-     */
     public static long getDiffDay(Date startDay, Date endDay) {
     	long endDayTime = endDay.getTime();
     	long startDayTime = startDay.getTime();
@@ -357,22 +259,12 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
     	return result;
     }
     
-    /**
-     * 유닉스시간을 스트링으로 변환
-     * yyyy-MM-dd HH:mm:ss
-     *  ex) 1399459378 (초단위).
-     */
     public static String getUnixToString(long unixTime) {
         SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String result = format2.format(unixTime * 1000);
         return result;
     }
     
-    /**
-     * 유닉스시간을 Date타입으로 변환
-     * yyyy-MM-dd HH:mm:ss
-     *  ex) 1399459378 (초단위).
-     */
     public static Date getUnixToDate(long unixTime) {
         Date result = getDate(getUnixToString(unixTime), "yyyy-MM-dd HH:mm:ss");
         return result;

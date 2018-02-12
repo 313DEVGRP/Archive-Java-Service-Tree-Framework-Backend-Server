@@ -18,29 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Modification Information
- * 
- * @author 이동민
- * @since 2014.07.25
- * @version 1.0
- * @see <pre>
- * 
- * Class Name 	: DB_AddNode.java
- * Description 	: JSTree의 node를 추가하는 I_DB_AddNode interface를 구현하고 DB연동을 지원하는 EgovComAbstractDAO를 확장한 dao 클래스
- * Infomation	: 
- * 
- * node 추가
- * 
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.25    Dongmin.Lee      최초 생성 
- * 
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * */
 @Repository("DB_AddNode")
 public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
 {
@@ -62,24 +39,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         
     }
     
-    /**
-     * node 추가
-     * 
-     * @param P_ComprehensiveTree
-     *            (p_ComprehensiveTree)
-     * @param T_ComprehensiveTree
-     *            (nodeById)
-     * @param T_ComprehensiveTree
-     *            (nodeByRef)
-     * @param List
-     *            &lt;T_ComprehensiveTree&gt;(childNodesFromNodeByRef)
-     * @return t_ComprehensiveTree
-     * @see <pre>
-     * 
-     * node를 추가 하기 위하여 node가 들어갈 위치를 계산하고 들어갈 위치의 공간을 벌리고
-     * 들어갈 위치의 공간에 따라서 반응한다.
-     * </pre>
-     * */
     @SuppressWarnings("deprecation")
     @Override
     public T_ComprehensiveTree addNode(P_ComprehensiveTree p_ComprehensiveTree, T_ComprehensiveTree nodeById,
@@ -196,44 +155,18 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         
     }
     
-    /**
-     * node 수정하기
-     * 
-     * @param P_ComprehensiveTree
-     *            (p_ComprehensiveTree)
-     * @return 수정결과에 따른 결과값 (int)
-     * @throws SQLException
-     * @see node의 type(UI 종류로는 drive/ folder/ default(file) ) / title(사용자 지정
-     *      node 명칭) 등을 수정한다.
-     * */
     @SuppressWarnings("deprecation")
     private int alterNode(P_ComprehensiveTree p_ComprehensiveTree) throws SQLException
     {
         return getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.alterNode", p_ComprehensiveTree);
     }
     
-    /**
-     * node 값 추가하기
-     * 
-     * @param P_ComprehensiveTree
-     *            (p_ComprehensiveTree)
-     * @return 추가 결과에 따른 결과값 (int)
-     * */
     @SuppressWarnings("deprecation")
     private int addMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree) throws SQLException
     {
         return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.addMyselfFromJstree", p_ComprehensiveTree);
     }
     
-    /**
-     * node 잘라내기
-     * 
-     * @param P_ComprehensiveTree
-     *            (p_ComprehensiveTree)
-     * @throws SQLException
-     * @see 잘라낸 node가 차지하고 있던 공간의 position값과 left/right 값을 줄인다.
-     * 
-     * */
     @SuppressWarnings("deprecation")
     public void cutMyself(T_ComprehensiveTree nodeById, int spaceOfTargetNode,
             Collection<Integer> c_idsByChildNodeFromNodeById) throws SQLException
@@ -249,23 +182,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfRightFix", p_OnlyCutMyselfFromJstree);
     }
     
-    /**
-     * position값 계산하기
-     * 
-     * @param P_ComprehensiveTree
-     *            (p_ComprehensiveTree)
-     * @param T_ComprehensiveTree
-     *            (nodeById)
-     * @param List
-     *            &lt;T_ComprehensiveTree&gt;(childNodesFromNodeByRef)
-     * @throws SQLException
-     * @see <pre>
-     * 조건은 
-     * 이동할 노드가 동일 부모에서 움직이는지 외부로 움직이는지
-     * 멀티 카운터(움직이는 node의 갯수 0은 하나)가 0인지 아닌지
-     * 현재의 positon값보다 앞인지/ 뒤인지 / 현재 위치인지
-     * </pre>
-     * */
     public void calculatePostion(P_ComprehensiveTree p_ComprehensiveTree, T_ComprehensiveTree nodeById, List<T_ComprehensiveTree> childNodesFromNodeByRef)
     {
         
@@ -353,17 +269,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         
     }
     
-    /**
-     * node 추가를 위해서 node가 들어갈 공간을 만듬 (postion)
-     * 
-     * @param Collection
-     *            &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @param T_ComprehensiveTree
-     *            (c_idsByChildNodeFromNodeById)
-     * @param P_ComprehensiveTree
-     *            (p_ComprehensiveTree)
-     * @throws SQLException
-     * */
     @SuppressWarnings("deprecation")
     public void stretchPositionForMyselfFromJstree(Collection<Integer> c_idsByChildNodeFromNodeById,
             T_ComprehensiveTree nodeById, P_ComprehensiveTree p_ComprehensiveTree) throws SQLException
@@ -376,16 +281,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         
     }
     
-    /**
-     * node 추가를 위해 left값과 right 값의 공간을 만듬 (들어갈 node들의 크기 만큼 left와 right값을 늘린다)
-     * 
-     * @param int(spaceOfTargetNode)
-     * @param int(rightPositionFromNodeByRef)
-     * @param Collection
-     *            &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @param int(copy)
-     * @throws SQLException
-     * */
     @SuppressWarnings("deprecation")
     public void stretchLeftRightForMyselfFromJstree(int spaceOfTargetNode, int rightPositionFromNodeByRef,
             Collection<Integer> c_idsByChildNodeFromNodeById, int copy) throws SQLException
@@ -401,19 +296,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.stretchRightForMyselfFromJstree", p_OnlyStretchLeftRightForMyselfFromJstree);
     }
     
-    /**
-     * node를 붙여넣는다.
-     * 
-     * @param int(ref)
-     * @param int(idif)
-     * @param int(spaceOfTargetNode)
-     * @param int (ldif)
-     * @param Collection
-     *            &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @return 붙여넣기 처리에 대한 DB의 결과값 (int)
-     * @throws SQLException
-     * 
-     * */
     @SuppressWarnings("deprecation")
     public int pasteMyselfFromJstree(int ref, int idif, int spaceOfTargetNode, int ldif,
             Collection<Integer> c_idsByChildNodeFromNodeById, int rightPositionFromNodeByRef,
@@ -436,18 +318,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert("jstreeStrutsiBatis.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
     }
     
-    /**
-     *
-     * @param int(ref)
-     * @param int(c_position)
-     * @param int(c_id)
-     * @param int(idif)
-     * @param int(ldif)
-     * @param Collection
-     *            &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @throws SQLException
-     * 
-     * */
     @SuppressWarnings("deprecation")
     public void enterMyselfFromJstree(int ref, int c_position, int c_id, int idif, int ldif, Collection<Integer> c_idsByChildNodeFromNodeById) throws SQLException
     {
@@ -464,13 +334,6 @@ public class DB_AddNode extends EgovComiBatisAbstractDAO implements I_DB_AddNode
         
     }
     
-    /**
-     * node의 position 값과 parentId 값을 수정한다.
-     * 
-     * @param int(ind)
-     * @param int(ref)
-     * @throws SQLException
-     * */
     @SuppressWarnings("deprecation")
     public void fixCopy(int ind, int ref) throws SQLException
     {

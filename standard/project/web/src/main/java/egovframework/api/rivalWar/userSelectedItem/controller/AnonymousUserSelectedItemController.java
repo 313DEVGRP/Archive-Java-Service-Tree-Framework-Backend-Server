@@ -1,8 +1,6 @@
 package egovframework.api.rivalWar.userSelectedItem.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
-import egovframework.api.rivalWar.specHashTag.vo.SpecHashTagDTO;
 import egovframework.api.rivalWar.userSelectedItem.service.UserSelectedItemService;
 import egovframework.api.rivalWar.userSelectedItem.vo.UserSelectedItemDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
@@ -12,7 +10,6 @@ import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -26,9 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-10-14.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/userSelectedItem"})
 public class AnonymousUserSelectedItemController extends GenericAbstractController {
@@ -44,15 +38,6 @@ public class AnonymousUserSelectedItemController extends GenericAbstractControll
         return "egovframework/api/rivalWar/userSelectedItem/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(UserSelectedItemDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request) throws Exception {

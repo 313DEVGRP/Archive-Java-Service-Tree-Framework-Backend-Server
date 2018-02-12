@@ -1,9 +1,5 @@
 package egovframework.api.rivalWar.notice.vo;
 
-/**
- * Created by Administrator on 2017-11-06.
- */
-
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;

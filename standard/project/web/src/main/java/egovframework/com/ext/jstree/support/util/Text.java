@@ -22,11 +22,6 @@ public class Text {
     private Text() {
     }
     
-    /**
-     * 
-     * @param str
-     * @return nl2br String
-     */
     public static String nl2br(String str) {
         if (StringUtils.isEmpty(str)) {
             return "";
@@ -74,10 +69,6 @@ public class Text {
         }
     }
     
-    /**
-     * @param versionText
-     * @return 99.99.99.99.99999 -> 12121311313131
-     */
     public static long versionToLong(String versionText) {
         String[] versionArray = versionText.split("\\.");
         
@@ -188,13 +179,6 @@ public class Text {
         return result;
     }
     
-    /**
-     * Given an integer, return a string that is in an approximate, but human readable format. It uses the bases 'k', 'm', and 'g' for 1024, 1024**2, and 1024**3.
-     * 
-     * @param number
-     *            the number to format
-     * @return a human readable form of the integer
-     */
     public static String convertFormat(long number) {
         long absNumber = Math.abs(number);
         double result = number;
@@ -400,21 +384,6 @@ public class Text {
         return gulim;
     }
     
-    /**
-     * 문자열의 각 문자가 차지하는 픽셀을 세어 문자열이 표현될 때 너비가 정해진 픽셀을 넘지 않도록 문자열을 잘라준다.
-     * 
-     * @param src
-     *            원본 문자열
-     * @param width
-     *            픽셀 너비
-     * @param postfix
-     *            문자열을 자를 때 생략 기호로 붙일 문자열
-     * @param font
-     *            폰트 이름 (gulim, batang, dotum, gungsuh, arial, times, tahoma, verdana만 된다)
-     * @param pixel
-     *            폰트 크기 (pixel 단위, 8pt = 11px, 9pt = 12px, 10pt = 13px, 11pt = 15px, 12pt = 16px, 13pt = 17px, 14pt = 19px이다)
-     * @return 잘려진 문자열
-     */
     public static String limitStringByFontWidth(String src, int width, String postfix, String font, int point) {
         if (null == src || 0 == src.length()) {
             return src;

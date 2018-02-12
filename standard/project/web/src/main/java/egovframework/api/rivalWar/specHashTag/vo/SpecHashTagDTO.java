@@ -1,20 +1,14 @@
 package egovframework.api.rivalWar.specHashTag.vo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
-import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
-import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017-10-14.
- */
 @Entity
 @Table(name = "T_JSTREE_SPEC_HASH_TAG")
 @SelectBeforeUpdate(value = true)

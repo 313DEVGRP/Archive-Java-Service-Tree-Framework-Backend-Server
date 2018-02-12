@@ -10,29 +10,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Modification Information
- *
- * @author 이동민
- * @version 1.0
- * @see <pre>
- *
- * Class Name 	: S_AlterNodeType.java
- * Description 	: JSTree의 node의 type을 변경하는 I_S_AlterNodeType interface를 구현한 service
- * Infomation	:
- *
- * node type을 folder 와 default(file) 형태로 변경을 한다.
- *
- *  << 개정이력(Modification Information) >>
- *
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.25    Dongmin.Lee      최초 생성
- *
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * @since 2014.07.25
- */
 @Service("S_AlterNodeType")
 public class S_AlterNodeType implements I_S_AlterNodeType {
 

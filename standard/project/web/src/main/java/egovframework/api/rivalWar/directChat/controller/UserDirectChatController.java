@@ -24,9 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-09-24.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_USER/directChat"})
 public class UserDirectChatController extends GenericAbstractController {

@@ -42,26 +42,12 @@ public class JsTreeHibernateController extends GenericAbstractController {
     @Qualifier("JsTreeHibernateService")
     private JsTreeHibernateService jsTreeHibernateService;
 
-    /**
-     * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
-     *
-     * @return String jstreeSolutionSpringVersion 페이지를
-     */
     @IncludedInfo(name = "Spring-Hibernate Ver.", listUrl = "/com/ext/jstree/springHibernate/core/getJsTreeView.do", order = 3360, gid = 313)
     @RequestMapping("/getJsTreeView.do")
     public String jsTreeSpringHibernate() {
         return "egovframework/com/ext/jstree/springHibernateVersion";
     }
 
-    /**
-     * 자식노드를 요청한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return String
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/getChildNode.do", method = RequestMethod.GET)
     public ModelAndView getChildNode(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
@@ -102,15 +88,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
@@ -128,17 +105,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 추가한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
     public ModelAndView addNode(@Validated(value = AddNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,
@@ -153,15 +119,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 삭제한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/removeNode.do", method = RequestMethod.POST)
     public ModelAndView removeNode(@Validated(value = RemoveNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,
@@ -187,15 +144,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
         jsTreeHibernateDTO.setRef(defaultSettingValue);
     }
 
-    /**
-     * 노드를 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNode.do", method = RequestMethod.POST)
     public ModelAndView alterNode(@Validated(value = AlterNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,
@@ -214,15 +162,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드의 타입을 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return ModelAndView
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
     public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) JsTreeHibernateDTO jsTreeHibernateDTO,
@@ -237,18 +176,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 이동한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     * @throws ReflectiveOperationException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/moveNode.do", method = RequestMethod.POST)
     public ModelAndView moveNode(@Validated(value = MoveNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,

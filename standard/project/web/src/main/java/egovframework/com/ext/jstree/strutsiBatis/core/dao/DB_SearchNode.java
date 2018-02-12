@@ -10,42 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Modification Information
- * 
- * @author 이동민
- * @since 2014.07.25
- * @version 1.0
- * @see <pre>
- * 
- * Class Name 	: DB_SearchNode.java
- * Description 	: JSTree의 node를 조회하는 I_DB_SearchNode interface를 구현하고 DB연동을 지원하는 EgovComAbstractDAO를 확장한 dao 클래스
- * Infomation	: 
- *
- * node의 조회
- * 
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.25    Dongmin.Lee      최초 생성 
- * 
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * */
 @Repository("DB_SearchNode")
 public class DB_SearchNode extends EgovComiBatisAbstractDAO implements I_DB_SearchNode {
 
 	private static final Logger logger = Logger.getLogger(DB_GetChildNode.class);
 	
 	
-	/**
-	 * String을 통한 node 검색
-	 * 
-	 * @param P_ComprehensiveTree(p_ComprehensiveTree)
-	 * @param String(determineDBSetting)
-	 * @return 조회결과에 따른 node들의 정보 List&lt;T_ComprehensiveTree&gt
-	 * */
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<T_ComprehensiveTree> searchNodeByString(
@@ -64,13 +34,6 @@ public class DB_SearchNode extends EgovComiBatisAbstractDAO implements I_DB_Sear
 		return t_ComprehensiveTrees;
 	}
 	
-	/**
-	 * position 검색
-	 * 
-	 * @param List&lt;P_ComprehensiveTree&gt(p_SearchNodeByPositions)
-	 * @param String(determineDBSetting)
-	 * @return 조회결과에 따른 node position값들의 정보 List&lt;String&gt
-	 * */
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<String> searchNodeByPosition(

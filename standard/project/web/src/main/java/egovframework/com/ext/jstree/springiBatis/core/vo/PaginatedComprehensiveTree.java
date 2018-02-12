@@ -2,26 +2,6 @@ package egovframework.com.ext.jstree.springiBatis.core.vo;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-/**
- * Modification Information
- * 
- * @author 류강하
- * @since 2015. 8. 2.
- * @version 1.0
- * @see <pre>
- * Class Name  : PaginatedComprehensiveTree.java
- * Description : 페이지네이션을 위한 ComprehensiveTree 확장 클래스
- * Information : 
- * 
- * << 개정이력(Modification Information) >>
- * 
- * 수정일               수정자                 수정내용
- * -------       ------------   -----------------------
- * 2015. 8. 2.   류강하                 최초 생성
- * 
- * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
- * </pre>
- */
 public class PaginatedComprehensiveTree extends ComprehensiveTree{
 
 	/**
@@ -138,35 +118,18 @@ public class PaginatedComprehensiveTree extends ComprehensiveTree{
         return ToStringBuilder.reflectionToString(this);
     }
 
-    
-    /**
-	 * searchKeywordFrom attribute를 리턴한다.
-	 * @return String
-	 */
 	public String getSearchKeywordFrom() {
 		return searchKeywordFrom;
 	}
 
-	/**
-	 * searchKeywordFrom attribute 값을 설정한다.
-	 * @param searchKeywordFrom String
-	 */
 	public void setSearchKeywordFrom(String searchKeywordFrom) {
 		this.searchKeywordFrom = searchKeywordFrom;
 	}
 
-	/**
-	 * searchKeywordTo attribute를 리턴한다.
-	 * @return String
-	 */
 	public String getSearchKeywordTo() {
 		return searchKeywordTo;
 	}
 
-	/**
-	 * searchKeywordTo attribute 값을 설정한다.
-	 * @param searchKeywordTo String
-	 */
 	public void setSearchKeywordTo(String searchKeywordTo) {
 		this.searchKeywordTo = searchKeywordTo;
 	}

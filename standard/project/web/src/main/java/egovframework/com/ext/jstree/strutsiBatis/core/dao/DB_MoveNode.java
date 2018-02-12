@@ -20,29 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Modification Information
- *
- * @author 이동민
- * @version 1.0
- * @see <pre>
- *
- * Class Name 	: DB_MoveNode.java
- * Description 	: JSTree의 node를 이동하는 I_DB_MoveNode interface를 구현하고 DB연동을 지원하는 EgovComAbstractDAO를 확장한 dao 클래스
- * Infomation	:
- *
- * node의 이동 클래스
- *
- *  << 개정이력(Modification Information) >>
- *
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.25    Dongmin.Lee      최초 생성
- *
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * @since 2014.07.25
- */
 @Repository("DB_MoveNode")
 public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNode {
 
@@ -62,16 +39,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
 
     }
 
-    /**
-     * node 이동
-     *
-     * @param P_ComprehensiveTree (p_ComprehensiveTree)
-     * @param T_ComprehensiveTree (nodeById)
-     * @param List                &lt;T_ComprehensiveTree&gt;(childNodesFromNodeById)
-     * @param T_ComprehensiveTree (nodeByRef)
-     * @param List                &lt;T_ComprehensiveTree&gt;(childNodesFromNodeByRef)
-     * @return T_ComprehensiveTree
-     */
     @SuppressWarnings({"unused", "deprecation"})
     @Override
     public T_ComprehensiveTree moveNode(P_ComprehensiveTree p_ComprehensiveTree, T_ComprehensiveTree nodeById,
@@ -178,14 +145,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
 
     }
 
-    /**
-     * 현재 node빼기
-     *
-     * @param T_ComprehensiveTree    (nodeById)
-     * @param int(spaceOfTargetNode)
-     * @param Collection             &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @throws SQLException
-     */
     @SuppressWarnings("deprecation")
     public void cutMyself(T_ComprehensiveTree nodeById, int spaceOfTargetNode,
                           Collection<Integer> c_idsByChildNodeFromNodeById) throws SQLException {
@@ -203,13 +162,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
                 p_OnlyCutMyselfFromJstree);
     }
 
-    /**
-     * position 계산하기
-     *
-     * @param P_ComprehensiveTree (p_ComprehensiveTree)
-     * @param T_ComprehensiveTree (nodeById)
-     * @param List                &lt;T_ComprehensiveTree&gt;(childNodesFromNodeByRef)
-     */
     public void calculatePostion(P_ComprehensiveTree p_ComprehensiveTree, T_ComprehensiveTree nodeById, List<T_ComprehensiveTree> childNodesFromNodeByRef) {
 
         ActionContext actionContext = ActionContext.getContext();
@@ -298,13 +250,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
 
     }
 
-    /**
-     * position 계산하기
-     *
-     * @param P_ComprehensiveTree (p_ComprehensiveTree)
-     * @param T_ComprehensiveTree (nodeById)
-     * @param List                &lt;T_ComprehensiveTree&gt;(childNodesFromNodeByRef)
-     */
     @SuppressWarnings("deprecation")
     public void stretchPositionForMyselfFromJstree(Collection<Integer> c_idsByChildNodeFromNodeById, T_ComprehensiveTree nodeById, P_ComprehensiveTree p_ComprehensiveTree) throws SQLException {
 
@@ -315,15 +260,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
 
     }
 
-    /**
-     * left,right 늘리기
-     *
-     * @param int(spaceOfTargetNode)
-     * @param int(rightPositionFromNodeByRef)
-     * @param Collection                      &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @param int(copy)
-     * @throws SQLException
-     */
     @SuppressWarnings("deprecation")
     public void stretchLeftRightForMyselfFromJstree(int spaceOfTargetNode, int rightPositionFromNodeByRef, Collection<Integer> c_idsByChildNodeFromNodeById, int copy) throws SQLException {
 
@@ -339,18 +275,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
                 p_OnlyStretchLeftRightForMyselfFromJstree);
     }
 
-    /**
-     * node 붙여넣기
-     *
-     * @param int(ref)
-     * @param int(idif)
-     * @param int(spaceOfTargetNode)
-     * @param Collection                      &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @param int(rightPositionFromNodeByRef)
-     * @param T_ComprehensiveTree             (nodeById)
-     * @return 붙여넣기 처리를 하고 난 후의 결과값(int)
-     * @throws SQLException
-     */
     @SuppressWarnings("deprecation")
     public int pasteMyselfFromJstree(int ref, int idif, int spaceOfTargetNode, int ldif,
                                      Collection<Integer> c_idsByChildNodeFromNodeById, int rightPositionFromNodeByRef,
@@ -375,17 +299,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
                 p_OnlyPasteMyselfFromJstree);
     }
 
-    /**
-     * node 붙여넣기
-     *
-     * @param int(ref)
-     * @param int(c_position)
-     * @param int(c_id)
-     * @param int(idif)
-     * @param int(ldif)
-     * @param Collection      &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @throws SQLException
-     */
     @SuppressWarnings("deprecation")
     public void enterMyselfFromJstree(int ref, int c_position, int c_id, int idif, int ldif,
                                       Collection<Integer> c_idsByChildNodeFromNodeById) throws SQLException {
@@ -404,17 +317,6 @@ public class DB_MoveNode extends EgovComiBatisAbstractDAO implements I_DB_MoveNo
                 p_OnlyPasteMyselfFromJstree);
     }
 
-    /**
-     * node 붙여넣기
-     *
-     * @param int(ref)
-     * @param int(c_position)
-     * @param int(c_id)
-     * @param int(idif)
-     * @param int(ldif)
-     * @param Collection      &lt;Integer&gt;(c_idsByChildNodeFromNodeById)
-     * @throws SQLException
-     */
     @SuppressWarnings("deprecation")
     public void fixCopy(int ind, int ref) throws SQLException {
         logger.debug("SUDO : 카피뜬 녀석의 하위 노드들에 대한 고민.");

@@ -1,8 +1,6 @@
 package egovframework.api.rivalWar.specHashTag.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
-import egovframework.api.rivalWar.menu.vo.MenuDTO;
 import egovframework.api.rivalWar.specHashTag.service.SpecHashTagService;
 import egovframework.api.rivalWar.specHashTag.vo.SpecHashTagDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
@@ -25,9 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-10-14.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/specHashTag"})
 public class AnonymousSpecHashTagController extends GenericAbstractController {
@@ -43,15 +38,6 @@ public class AnonymousSpecHashTagController extends GenericAbstractController {
         return "egovframework/api/rivalWar/specHashTag/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(SpecHashTagDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request) throws Exception {

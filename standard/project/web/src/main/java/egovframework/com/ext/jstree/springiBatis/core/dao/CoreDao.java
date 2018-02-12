@@ -6,12 +6,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 public interface CoreDao {
 
-	/**
-	 * 자식노드를 요청한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @return List<ComprehensiveTree>
-	 */
 	public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception;
 	
 	public <T extends ComprehensiveTree> List<T> searchNodeByString(T comprehensiveTree) throws Exception;
@@ -54,11 +48,5 @@ public interface CoreDao {
 
 	public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree);
     
-	/**
-	 * Root node를 제외한 노드들 중 페이징 처리된 노드들을 조회한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @return
-	 */
     public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree);
 }

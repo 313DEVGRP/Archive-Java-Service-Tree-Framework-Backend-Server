@@ -1,6 +1,5 @@
 package egovframework.api.rivalWar.notice.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.notice.service.NoticeService;
 import egovframework.api.rivalWar.notice.vo.NoticeDTO;
@@ -24,9 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-11-06.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/notice"})
 public class AnonymousNoticeController extends GenericAbstractController {
@@ -42,15 +38,6 @@ public class AnonymousNoticeController extends GenericAbstractController {
         return "egovframework/api/rivalWar/notice/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(NoticeDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)

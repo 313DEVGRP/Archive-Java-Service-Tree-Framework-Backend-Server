@@ -1,8 +1,6 @@
 package egovframework.api.rivalWar.directChat.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
-import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
 import egovframework.api.rivalWar.directChat.service.DirectChatService;
 import egovframework.api.rivalWar.directChat.vo.DirectChatDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
@@ -25,9 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-09-24.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/directChat"})
 public class AnonymousDirectChatController extends GenericAbstractController {
@@ -43,15 +38,6 @@ public class AnonymousDirectChatController extends GenericAbstractController {
         return "egovframework/api/rivalWar/directChat/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(DirectChatDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request) throws Exception {

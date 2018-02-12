@@ -184,10 +184,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         return "";
     }
     
-    /**
-     * 문자열에서 원하는 바이트 상당의 문자를 뒤에서부터 자른다.
-     * @throws UnsupportedEncodingException 
-     */
     public static String substringBeforeLastByte(String str, String encoding, int cutByte) throws UnsupportedEncodingException {
         int subStrByte = str.getBytes(encoding).length - cutByte;
         
@@ -203,14 +199,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         return temp;
     }
     
-    /**
-     * 운영체제 별로 다른, 개행 문자와 탭 문자를 기준으로 문자열을 잘라 문자열 배열로 만들어 반환
-     * 
-     * @author 류강하
-     * @since 2015. 5. 23.
-     * @param str 문자열
-     * @return
-     */
     public static String[] splitStringByNewLineOrTab(String str) {
         
         return str.split("(\r\n)|\r|\n|\t");

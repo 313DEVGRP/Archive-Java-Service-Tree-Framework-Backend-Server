@@ -32,86 +32,36 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveT
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
-/**
- * Modification Information
- * 
- * @author taekyung.Lee
- * @since 2014. 7. 30.
- * @version 1.0
- * @see <pre>
- * 	Class Name 	: CoreController.java
- * 	Description : jstree 의 Spring+iBatis 버젼의 컨트롤러 클래스
- * 	Infomation	: jstree Controller 정보. 
- *  
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014. 7. 30.  taekyung.Lee        최초 생성
- *  2015. 3.  5.  전경훈            @Validated 를 통한 파라미터 빈 검증
- *  
- *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
- * </pre>
- */
 @Controller
 @RequestMapping(value = { "/com/ext/jstree/springiBatis/core" })
 public class CoreController extends GenericAbstractController{
 	@Resource(name = "CoreService")
 	CoreService coreService;
 	
-	/**
-	 * jstree Struts + iBatis 버전의 첫페이지를 요청한다.
-	 * 
-	 * @return String jstreeSolutionStrutsVersion 페이지를
-	 */
 	@IncludedInfo(name = "Struts-iBatis Ver.", listUrl = "/com/ext/jstree/strutsiBatis/core/getJsTreeView.action", order = 3310, gid = 313)
 	@RequestMapping("/strutsiBatis.do")
 	public String jsTreeStrutsiBatis() {
 		return "for struts iBatis annotation instead of controller";
 	}
 	
-	/**
-	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
-	 * 
-	 * @return String jstreeSolutionSpringVersion 페이지를
-	 */
 	@IncludedInfo(name = "Spring-iBatis Ver.", listUrl = "/com/ext/jstree/springiBatis/core/getJsTreeView.do", order = 3320, gid = 313)
 	@RequestMapping("/getJsTreeView.do")
 	public String jsTreespringiBatis() {
 		return "egovframework/com/ext/jstree/springiBatisVersion";
 	}
 	
-	/**
-	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
-	 * 
-	 * @return String jstreeSolutionSpringVersion 페이지를
-	 */
 	@IncludedInfo(name = "DWR-Chat Ver.", listUrl = "/html/egovframework/com/ext/jstree/dwr/index.html", order = 3330, gid = 313)
 	@RequestMapping("/getDWRChat.do")
 	public String jsTreeDWRChat() {
 		return "html page not support";
 	}
 	
-	/**
-	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
-	 * 
-	 * @return String jstreeSolutionSpringVersion 페이지를
-	 */
 	@IncludedInfo(name = "jsTree Spring-DWR", listUrl = "/com/ext/jstree/springiBatis/core/getDWRView.do", order = 3340, gid = 313)
 	@RequestMapping("/getDWRView.do")
 	public String jsTreeSpringDWR() {
 		return "egovframework/com/ext/jstree/springDWRVersion";
 	}
 
-	/**
-	 * 자식노드를 요청한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return String
-	 * @throws JsonProcessingException
-	 */
 	@ResponseBody
 	@RequestMapping(value="/getChildNode.do", method=RequestMethod.GET)
 	public ModelAndView getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model,
@@ -152,15 +102,6 @@ public class CoreController extends GenericAbstractController{
 		return modelAndView;
 	}
 
-	/**
-	 * 노드를 검색한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return
-	 * @throws JsonProcessingException
-	 */
 	@ResponseBody
 	@RequestMapping(value="/searchNode.do",method=RequestMethod.GET)
 	public ModelAndView searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
@@ -176,17 +117,6 @@ public class CoreController extends GenericAbstractController{
 		return modelAndView;
 	}
 
-	/**
-	 * 노드를 추가한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return
-	 * @throws JsonProcessingException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 */
 	@ResponseBody
 	@RequestMapping(value="/addNode.do",method=RequestMethod.POST)
 	public ModelAndView addNode(@Validated(value = AddNode.class) ComprehensiveTree comprehensiveTree,
@@ -201,15 +131,6 @@ public class CoreController extends GenericAbstractController{
 		return modelAndView;
 	}
 
-	/**
-	 * 노드를 삭제한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return
-	 * @throws JsonProcessingException
-	 */
 	@ResponseBody
 	@RequestMapping(value="/removeNode.do",method=RequestMethod.POST)
 	public ModelAndView removeNode(@Validated(value = RemoveNode.class) ComprehensiveTree comprehensiveTree,
@@ -224,15 +145,6 @@ public class CoreController extends GenericAbstractController{
 		return modelAndView;
 	}
 
-	/**
-	 * 노드를 변경한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return
-	 * @throws JsonProcessingException
-	 */
 	@ResponseBody
 	@RequestMapping(value="/alterNode.do",method=RequestMethod.POST)
 	public ModelAndView alterNode(@Validated(value = AlterNode.class) ComprehensiveTree comprehensiveTree,
@@ -249,15 +161,6 @@ public class CoreController extends GenericAbstractController{
 		return modelAndView;
 	}
 
-	/**
-	 * 노드의 타입을 변경한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return
-	 * @throws JsonProcessingException
-	 */
 	@ResponseBody
 	@RequestMapping(value="/alterNodeType.do",method=RequestMethod.POST)
 	public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) ComprehensiveTree comprehensiveTree,
@@ -272,18 +175,6 @@ public class CoreController extends GenericAbstractController{
 		return modelAndView;
 	}
 
-	/**
-	 * 노드를 이동한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return
-	 * @throws JsonProcessingException
-	 * @throws ReflectiveOperationException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 */
 	@ResponseBody
 	@RequestMapping(value="/moveNode.do",method=RequestMethod.POST)
 	public ModelAndView moveNode(@Validated(value = MoveNode.class) ComprehensiveTree comprehensiveTree,

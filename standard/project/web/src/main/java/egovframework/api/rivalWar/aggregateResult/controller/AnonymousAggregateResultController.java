@@ -1,6 +1,5 @@
 package egovframework.api.rivalWar.aggregateResult.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import egovframework.api.rivalWar.aggregateResult.service.AggregateResultService;
 import egovframework.api.rivalWar.aggregateResult.vo.AggregateResultDTO;
@@ -23,9 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017-08-29.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/aggregateResult"})
 public class AnonymousAggregateResultController extends GenericAbstractController {
@@ -41,15 +37,6 @@ public class AnonymousAggregateResultController extends GenericAbstractControlle
         return "egovframework/api/rivalWar/aggregateResult/JsTreeView";
     }
 
-    /**
-     * 노드를 검색한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
     public ModelAndView searchNode(AggregateResultDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)

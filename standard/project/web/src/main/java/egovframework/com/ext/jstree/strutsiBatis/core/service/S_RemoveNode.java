@@ -8,29 +8,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Modification Information
- *
- * @author 이동민
- * @version 1.0
- * @see <pre>
- *
- * Class Name 	: S_RemoveNode.java
- * Description 	: JSTree의 node정보를 가져오는  I_S_RemoveNode interface를 구현한 service
- * Infomation	:
- *
- * node들을 제거한다.
- *
- *  << 개정이력(Modification Information) >>
- *
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.07.25    Dongmin.Lee      최초 생성
- *
- *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
- * </pre>
- * @since 2014.07.25
- */
 @Service("S_RemoveNode")
 public class S_RemoveNode implements I_S_RemoveNode {
 
@@ -60,12 +37,6 @@ public class S_RemoveNode implements I_S_RemoveNode {
                 p_ComprehensiveTree, "remove")));
     }
 
-    /**
-     * node를 제거한다.
-     *
-     * @param P_ComprehensiveTree(p_RemoveNode)
-     * @return node 제거 처리에 대한 결과값 (int)
-     */
     @Override
     public int removeNode(P_ComprehensiveTree p_RemoveNode) {
 

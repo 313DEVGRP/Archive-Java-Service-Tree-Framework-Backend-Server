@@ -1,6 +1,5 @@
 package egovframework.api.rivalWar.compareItem.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import egovframework.api.rivalWar.compareItem.service.CompareItemService;
 import egovframework.api.rivalWar.compareItem.vo.CompareItemDTO;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
@@ -20,9 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Administrator on 2017-10-08.
- */
 @Controller
 @RequestMapping(value = {"/api/rivalWar/ROLE_ADMIN/compareItem"})
 public class AdminCompareItemController extends GenericAbstractController {
@@ -32,17 +28,6 @@ public class AdminCompareItemController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /**
-     * 노드를 추가한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
     public ModelAndView addNode(@Validated(value = AddNode.class) CompareItemDTO jsTreeHibernateDTO,
@@ -55,15 +40,6 @@ public class AdminCompareItemController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 삭제한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/removeNode.do", method = RequestMethod.POST)
     public ModelAndView removeNode(@Validated(value = RemoveNode.class) CompareItemDTO jsTreeHibernateDTO,
@@ -89,15 +65,6 @@ public class AdminCompareItemController extends GenericAbstractController {
         jsTreeHibernateDTO.setRef(defaultSettingValue);
     }
 
-    /**
-     * 노드를 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNode.do", method = RequestMethod.POST)
     public ModelAndView alterNode(@Validated(value = AlterNode.class) CompareItemDTO jsTreeHibernateDTO,
@@ -117,15 +84,6 @@ public class AdminCompareItemController extends GenericAbstractController {
     }
 
 
-    /**
-     * 노드의 타입을 변경한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param bindingResult
-     * @return
-     * @throws JsonProcessingException
-     */
     @ResponseBody
     @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
     public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) CompareItemDTO jsTreeHibernateDTO,
@@ -140,18 +98,6 @@ public class AdminCompareItemController extends GenericAbstractController {
         return modelAndView;
     }
 
-    /**
-     * 노드를 이동한다.
-     *
-     * @param jsTreeHibernateDTO
-     * @param model
-     * @param request
-     * @return
-     * @throws JsonProcessingException
-     * @throws ReflectiveOperationException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
     @ResponseBody
     @RequestMapping(value = "/moveNode.do", method = RequestMethod.POST)
     public ModelAndView moveNode(@Validated(value = MoveNode.class) CompareItemDTO jsTreeHibernateDTO,
