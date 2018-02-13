@@ -1,21 +1,3 @@
-/**
- *  Class Name : EgovPdfCnvr.java
- *  Description : xls,doc,ppt를 Pdf로 변환하는 화면 Business Interface class
- *  Modification Information
- *
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.02.02    이 용          최초 생성
- *   2017.03.03          조성원 	    시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
- *
- *  @author 공통 서비스 개발팀 이 용
- *  @since 2009. 02. 02
- *  @version 1.0
- *  @see
- * The type com.sun.star.lang.XeventListener cannot be resolved. It is indirectly referenced from required .class files
- *  Copyright (C) 2009 by EGOV  All right reserved.
- */
-
 package egovframework.com.utl.sim.service;
 
 import java.io.File;

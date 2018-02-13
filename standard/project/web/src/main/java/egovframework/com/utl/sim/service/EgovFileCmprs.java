@@ -1,21 +1,3 @@
-/**
- *  Class Name : EgovFileCmprs.java
- *  Description : 파일(디렉토리)의 압축 및 압축해제 하는 Business Interface class
- *  Modification Information
- *
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.02.04    박지욱          최초 생성
- *   2017.03.03          조성원 	      시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
- *   2017.03.03          조성원 	      시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
- *
- *  @author 공통 서비스 개발팀 박지욱
- *  @since 2009. 02. 04
- *  @version 1.0
- *  @see
- *
- *  Copyright (C) 2009 by MOPAS  All right reserved.
- */
 package egovframework.com.utl.sim.service;
 
 import java.io.File;

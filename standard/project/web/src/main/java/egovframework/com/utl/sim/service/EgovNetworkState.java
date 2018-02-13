@@ -1,20 +1,3 @@
-/**
- *  Class Name : EgovNetworkState.java
- *  Description : 네트워크(Network)상태 체크 Business Interface class
- *  Modification Information
- *
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.02.02    이 용          최초 생성
- *
- *  @author 공통 서비스 개발팀 이 용
- *  @since 2009. 02. 02
- *  @version 1.0
- *  @see
- * The type com.sun.star.lang.XeventListener cannot be resolved. It is indirectly referenced from required .class files
- *  Copyright (C) 2009 by EGOV  All right reserved.
- */
-
 package egovframework.com.utl.sim.service;
 
 import java.io.BufferedReader;

@@ -1,32 +1,7 @@
 package egovframework.com.utl.fcc.service;
 
-/**
- *
- * 번호유효성체크 에 대한 Util 클래스
- * @author 공통컴포넌트 개발팀 윤성록
- * @since 2009.06.10
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자           수정내용
- *  -------    --------    ---------------------------
- *   2009.06.10  윤성록          최초 생성
- *   2012.02.27  이기하          법인번호 체크로직 수정
- *
- * </pre>
- */
 public class EgovNumberCheckUtil {
 
-	 /**
-     * <p>XXXXXX - XXXXXXX 형식의 주민번호 앞, 뒤 문자열 2개 입력 받아 유효한 주민번호인지 검사.</p>
-     *
-     *
-     * @param   6자리 주민앞번호 문자열 , 7자리 주민뒷번호 문자열
-     * @return  유효한 주민번호인지 여부 (True/False)
-     */
     @SuppressWarnings("static-access")
 	public static boolean checkJuminNumber(String jumin1, String jumin2) {
 

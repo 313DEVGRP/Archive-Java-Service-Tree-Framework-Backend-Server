@@ -19,24 +19,6 @@ import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.rte.fdl.property.EgovPropertyService;
 
-/**
- * 요소기술 json 관한 controller 클래스를 정의한다.
- * @author 2016 표준프레임웤크 유지보수 장동한
- * @since 2016.07.14
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자           수정내용
- *  -------    --------    ---------------------------
- *   2016.07.14  장동한          최초 생성
- *
- * </pre>
- */
-
-
 @Controller
 public class EgovUtlJsonController {
 

@@ -15,22 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * 웹에디터 이미지 upload 처리 Controller
- * @author 공통컴포넌트개발팀 한성곤
- * @since 2009.08.26
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자           수정내용
- *  -------    --------    ---------------------------
- *   2009.08.26  한성곤          최초 생성
- *
- * </pre>
- */
 @Controller
 public class EgovWebEditorImageController {
 

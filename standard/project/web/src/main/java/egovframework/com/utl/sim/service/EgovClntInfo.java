@@ -1,19 +1,3 @@
-/**
- *  Class Name : EgovClntInfo.java
- *  Description : 클라이언트(Client)의 IP주소, OS정보, 웹브라우저정보를 조회하는 Business Interface class
- *  Modification Information
- * 
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.01.19    박지욱          최초 생성
- *
- *  @author 공통 서비스 개발팀 박지욱
- *  @since 2009. 01. 19
- *  @version 1.0
- *  @see 
- * 
- *  Copyright (C) 2009 by MOPAS  All right reserved.
- */
 package egovframework.com.utl.sim.service;
 
 import egovframework.com.cmm.service.EgovProperties;
@@ -23,12 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public class EgovClntInfo {
 	
-	/**
-	 * 클라이언트(Client)의 IP주소를 조회하는 기능
-	 * @param HttpServletRequest request Request객체
-	 * @return String ipAddr IP주소
-	 * @exception Exception
-	*/
 	public static String getClntIP(HttpServletRequest request) throws Exception {
 		
 		// IP주소
@@ -36,12 +14,6 @@ public class EgovClntInfo {
 		return ipAddr;
 	}
 	
-	/**
-	 * 클라이언트(Client)의 OS 정보를 조회하는 기능
-	 * @param HttpServletRequest request Request객체
-	 * @return String osInfo OS 정보
-	 * @exception Exception
-	*/
 	public static String getClntOsInfo(HttpServletRequest request) throws Exception {
 	
 		String user_agent = request.getHeader("user-agent");
@@ -56,12 +28,6 @@ public class EgovClntInfo {
 		return osInfo;
 	}
 	
-	/**
-	 * 클라이언트(Client)의 웹브라우저 종류를 조회하는 기능
-	 * @param HttpServletRequest request Request객체
-	 * @return String webKind 웹브라우저 종류
-	 * @exception Exception
-	*/
 	public static String getClntWebKind(HttpServletRequest request) throws Exception {
 		
 		String user_agent = request.getHeader("user-agent");
@@ -96,12 +62,6 @@ public class EgovClntInfo {
 		return webKind;
 	}
 	
-	/**
-	 * 클라이언트(Client)의 웹브라우저 버전을 조회하는 기능
-	 * @param HttpServletRequest request Request객체
-	 * @return String webVer 웹브라우저 버전
-	 * @exception Exception
-	*/
 	public static String getClntWebVer(HttpServletRequest request) throws Exception {
 		
 		String user_agent = request.getHeader("user-agent");

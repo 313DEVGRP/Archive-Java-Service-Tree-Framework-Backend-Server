@@ -35,22 +35,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/**
- * Created by guava on 1/20/14.
- *  이미지 저장 처리 클래스
- * @author guavatak
- * @since 2014.12.04
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일        수정자       수정내용
- *  -------       --------    ---------------------------
- *   2014.12.04	표준프레임워크	최초 적용 (패키지 변경 및 소스 정리)
- * </pre>
- */
 public class CkImageSaver {
 	private static final Log log = LogFactory.getLog(CkFilter.class);
 

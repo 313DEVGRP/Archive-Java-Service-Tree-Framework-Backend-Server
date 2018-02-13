@@ -1,20 +1,3 @@
-/**
- *  Class Name : EgovFileMntrg.java
- *  Description : 시스템 네트워크 정보를 확인하여 제공하는  Business class
- *  Modification Information
- *
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.01.13    조재영          최초 생성
- *   2017.03.06    조성원          시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
- *
- *  @author 공통 서비스 개발팀 조재영
- *  @since 2009. 01. 13
- *  @version 1.0
- *  @see
- *
- *  Copyright (C) 2009 by EGOV  All right reserved.
- */
 package egovframework.com.utl.sim.service;
 
 import java.io.BufferedReader;
@@ -32,11 +15,6 @@ import egovframework.com.cmm.util.EgovResourceCloseHelper;
 
 public class EgovFileMntrg extends Thread {
 
-	/**
-	 * <p>
-	 * 해당 파일의 변경 유무를 체크하기 위한 Default 초의 stati final 변수, 기본 적용은 값은 60초
-	 * </p>
-	 */
 	//static final public long DEFAULT_DELAY = 60000; // 60초
 	static final public long DEFAULT_DELAY = 30000; // 30초
 
@@ -45,19 +23,8 @@ public class EgovFileMntrg extends Thread {
 	 **/
 	static final int MAX_STR_LEN = 1024;
 
-	/**
-	 * <p>
-	 * 파일의 변경 유무를 체크하기 위한 해당파일명 변수
-	 * </p>
-	 */
 	protected String filename;
 
-	/**
-	 * <p>
-	 * 해당 파일의 변경 유무를 체크하기 위한 Default 초의 stati final 변수, 기본 적용은 값은 60초{@link
-	 * #DEFAULT_DELAY}.
-	 * </p>
-	 */
 	protected long delay = DEFAULT_DELAY;
 
 	File file; // 타겟(감시대상) 디렉토리
@@ -73,13 +40,6 @@ public class EgovFileMntrg extends Thread {
 																							// totalChangedList는 필요시 checkAndConfigure함수 내에서 주석해제후 사용(부하량을 고려하여 사용)
 	int cnt = 0;
 
-	/**
-	 * <p>
-	 * 감시 하고자 하는 파일명을 파라메타로 받는 기본 컨스트럭터(Constructor).
-	 * </p>
-	 *
-	 * @param filename
-	 */
 	protected EgovFileMntrg(String filename, File logFile) {
 		//log.debug("EgovFileMntrg start");
 		this.logFile = logFile;

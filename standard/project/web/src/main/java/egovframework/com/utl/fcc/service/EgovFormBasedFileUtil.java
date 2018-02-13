@@ -28,21 +28,6 @@ import org.apache.commons.fileupload.util.Streams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @Class Name  : EgovFormBasedFileUtil.java
- * @Description : Form-based File Upload 유틸리티
- * @Modification Information
- *
- *     수정일         수정자                   수정내용
- *     -------          --------        ---------------------------
- *   2009.08.26       한성곤                  최초 생성
- *   2017.03.03 	     조성원 	            시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
- *
- * @author 공통컴포넌트 개발팀 한성곤
- * @since 2009.08.26
- * @version 1.0
- * @see
- */
 public class EgovFormBasedFileUtil {
 	/** Buffer size */
 	public static final int BUFFER_SIZE = 8192;
@@ -51,11 +36,6 @@ public class EgovFormBasedFileUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovFormBasedFileUtil.class);
 
-	/**
-	 * 오늘 날짜 문자열 취득.
-	 * ex) 20090101
-	 * @return
-	 */
 	public static String getTodayString() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
 
@@ -234,19 +214,6 @@ public class EgovFormBasedFileUtil {
 		}
 	}
 
-	/**
-	 * 이미지에 대한 미리보기 기능을 제공한다.
-	 *
-	 * mimeType의 경우는 JSP 상에서 다음과 같이 얻을 수 있다.
-	 * getServletConfig().getServletContext().getMimeType(name);
-	 *
-	 * @param response
-	 * @param where
-	 * @param serverSubPath
-	 * @param physicalName
-	 * @param mimeType
-	 * @throws Exception
-	 */
 	public static void viewFile(HttpServletResponse response, String where, String serverSubPath, String physicalName, String mimeTypeParam) throws Exception {
 		String mimeType = mimeTypeParam;
 		String downFileName = where + SEPERATOR + serverSubPath + SEPERATOR + physicalName;

@@ -1,21 +1,3 @@
-/**
- *  Class Name : EgovFileTool.java
- *  Description : 시스템 디렉토리 정보를 확인하여 제공하는  Business class
- *  Modification Information
- *
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.01.13    조재영          최초 생성
- *   2017.03.03          조성원 	      시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
- *   2017.03.03    조성원          시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
- *
- *  @author 공통 서비스 개발팀 조재영,박지욱
- *  @since 2009. 01. 13
- *  @version 1.0
- *  @see
- *
- *  Copyright (C) 2009 by MOPAS  All right reserved.
- */
 package egovframework.com.utl.sim.service;
 
 import java.io.BufferedReader;

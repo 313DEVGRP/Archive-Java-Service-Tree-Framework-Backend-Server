@@ -1,31 +1,7 @@
 package egovframework.com.utl.fcc.service;
 
-/**
- * 
- * 포맷유효성체크 에 대한 Util 클래스 
- * @author 공통컴포넌트 개발팀 윤성록
- * @since 2009.06.23
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *   
- *   수정일      수정자           수정내용
- *  -------    --------    ---------------------------
- *   2009.06.23  윤성록          최초 생성
- *
- * </pre>
- */
 public class EgovFormatCheckUtil {
 	
-    /**
-     * <pxxx - xxx- xxxx 형식의 전화번호 앞, 중간, 뒤 문자열 3개 입력 받아 유요한 전화번호형식인지 검사.</p>
-     * 
-     * 
-     * @param   전화번호 문자열( 3개 )
-     * @return  유효한 전화번호 형식인지 여부 (True/False)
-     */
     public static boolean checkFormatTell(String tell1, String tell2, String tell3) {
 		 
 	 String[] check = {"02", "031", "032", "033", "041", "042", "043", "051", "052", "053", "054", "055", "061", 
@@ -55,13 +31,6 @@ public class EgovFormatCheckUtil {
 	 return true;
     }
 	
-    /**
-     * <p>xxx - xxx- xxxx 형식의 전화번호 하나를 입력 받아 유요한 전화번호형식인지 검사.</p>
-     * 
-     * 
-     * @param   전화번호 문자열 (1개)
-     * @return  유효한 전화번호 형식인지 여부 (True/False)
-     */
     public static boolean checkFormatTell(String tellNumber) {
 	 
 	 String temp1;
@@ -98,13 +67,6 @@ public class EgovFormatCheckUtil {
 	 return checkFormatTell(temp1, temp2, temp3);
     }
 	
-    /**
-     * <p>xxx - xxx- xxxx 형식의 휴대폰번호 앞, 중간, 뒤 문자열 3개 입력 받아 유요한 휴대폰번호형식인지 검사.</p>
-     * 
-     * 
-     * @param   휴대폰번호 문자열,(3개)
-     * @return  유효한 휴대폰번호 형식인지 여부 (True/False)
-     */
     public static boolean checkFormatCell(String cell1, String cell2, String cell3) {
 	 String[] check = {"010", "011", "016", "017", "018", "019"}; //유효한 휴대폰 첫자리 번호 데이터
 	 String temp = cell1 + cell2 + cell3;
@@ -127,13 +89,6 @@ public class EgovFormatCheckUtil {
 	 return true;
     }
 	 
-    /**
-     * <p>XXXXXXXXXX 형식의 휴대폰번호 문자열 3개 입력 받아 유요한 휴대폰번호형식인지 검사.</p>
-     * 
-     * 
-     * @param   휴대폰번호 문자열(1개)
-     * @return  유효한 휴대폰번호 형식인지 여부 (True/False)
-     */
     public static boolean checkFormatCell(String cellNumber) {
 		 
 	 String temp1;
@@ -158,13 +113,6 @@ public class EgovFormatCheckUtil {
 	 return checkFormatCell(temp1, temp2, temp3);
     }
 	 
-    /**
-     * <p> 이메일의  앞, 뒤 문자열 2개 입력 받아 유요한 이메일형식인지 검사.</p>
-     * 
-     * 
-     * @param   이메일 문자열 (2개)
-     * @return  유효한 이메일 형식인지 여부 (True/False)
-     */
     public static boolean checkFormatMail(String mail1, String mail2) {
 		 
 	 int count = 0;
@@ -188,13 +136,6 @@ public class EgovFormatCheckUtil {
 		 
     }
 	
-    /**
-     * <p> 이메일의 전체문자열 1개 입력 받아 유요한 이메일형식인지 검사.</p>
-     * 
-     * 
-     * @param   이메일 문자열 (1개)
-     * @return  유효한 이메일 형식인지 여부 (True/False)
-     */
     public static boolean checkFormatMail(String mail) {
 		 
 	 String[] temp = mail.split("@");	// '@' 를 기점으로 앞, 뒤 문자열 구분

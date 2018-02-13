@@ -1,19 +1,3 @@
-/**
- *  Class Name : EgovXMLDoc.java
- *  Description : XML파일을 파싱하여 구조체 형태로 반환 또는 구조체 형태의 데이터를 XML파일로 저장하는 Business Interface class
- *  Modification Information
- *
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.02.03    박지욱          최초 생성
- *
- *  @author 공통 서비스 개발팀 박지욱
- *  @since 2009. 02. 03
- *  @version 1.0
- *  @see
- *
- *  Copyright (C) 2009 by MOPAS  All right reserved.
- */
 package egovframework.com.utl.sim.service;
 
 import java.io.BufferedReader;

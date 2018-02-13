@@ -42,20 +42,6 @@ public class EgovEhgtCalcUtil {
 
 	static StringBuffer sb = new StringBuffer();
 
-	/**
-	 * 대한민국(KRW), 미국(USD), 유럽연합(EUR), 일본(JPY), 중국원화(CNY) 사이의 환율을 계산하는 기능이다
-	 * 환율표 - 매매기준율 => 미국(USD) - 1485.00(USD), 일본-100(JPY) - 1596.26(JPY)
-	 * 계산법: 대한민원(KRW) - 1,000원 -> 미국(USD)로 변환 시 => 1,000(원)/1485(매매기준율) = 0.67(URS)
-	 * 계산법: 일본(JPY) - 100,000원 -> 대한민국(KRW) 변환 시 => (100,000(원) * 1596.26(매매기준율)) / 100(100엔당 기준표이므로) = 1,596,260.00 (KRW)
-	 * 계산법: 일본(JPY) - 100,000원 -> 미국(USD) 변환 시     => (
-	 * (100,000(원) * 1596.26(매매기준율)) / 100(100엔당 기준표이므로) = 1,596,260.00 (KRW))  / 1,485.00 = 1,074.92 (USD)
-	 * @param srcType 			- 환율기준
-	 * @param srcAmount 		- 금액
-	 * @param cnvrType 			- 변환환율
-	 * @return 환율금액
-	 * @exception MyException
-	 * @see
-	 */
 	public void readHtmlParsing(String str) {
 		HttpURLConnection con = null;
 		InputStream is = null;

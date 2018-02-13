@@ -1,20 +1,3 @@
-/**
- *  Class Name : EgovSysInfo.java
- *  Description : 시스템정보를 조회하는 Business Interface class
- *  Modification Information
- *
- *     수정일         수정자                   수정내용
- *   -------    --------    ---------------------------
- *   2009.02.02    박지욱          최초 생성
- *   2017.03.03          조성원 	      시큐어코딩(ES)-Null Pointer 역참조[CWE-476]
- *
- *  @author 공통 서비스 개발팀 박지욱
- *  @since 2009. 02. 11
- *  @version 1.0
- *  @see
- *
- *  Copyright (C) 2009 by MOPAS  All right reserved.
- */
 package egovframework.com.utl.sim.service;
 
 import java.io.BufferedReader;
