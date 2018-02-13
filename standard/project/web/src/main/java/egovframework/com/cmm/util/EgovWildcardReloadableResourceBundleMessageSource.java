@@ -12,22 +12,6 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-/**
- * @Class Name : EgovWildcardReloadableResourceBundleMessageSource
- * @Description : 다국어 properties 파일을 팩키지 구조의 폴더로 읽어드리는 MessageSource
- * @Modification Information
- * @
- * @  수정일         수정자                   수정내용
- * @ -------    --------    ---------------------------
- * @ 2016.06.10    장동한          최초 생성
- *
- *  @author 2016 표준프레임워크 유지보수 장동한
- *  @since 2016.06.10
- *  @version 1.0
- *  @see
- *
- */
-
 public class EgovWildcardReloadableResourceBundleMessageSource extends
         org.springframework.context.support.ReloadableResourceBundleMessageSource {
     private ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();

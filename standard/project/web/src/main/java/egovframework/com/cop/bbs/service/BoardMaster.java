@@ -4,23 +4,6 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-/**
- *  게시판 속성정보를 담기위한 엔티티 클래스
- * @author 공통서비스개발팀 이삼섭
- * @since 2009.06.01
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *   
- *   수정일      수정자           수정내용
- *  -------    --------    ---------------------------
- *   2009.03.12  이삼섭          최초 생성
- *   2009.06.26  한성곤		2단계 기능 추가 (댓글관리, 만족도조사)
- *
- * </pre>
- */
 @SuppressWarnings("serial")
 public class BoardMaster implements Serializable {
     

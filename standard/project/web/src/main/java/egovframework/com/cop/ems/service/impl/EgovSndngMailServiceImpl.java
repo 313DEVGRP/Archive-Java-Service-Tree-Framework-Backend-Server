@@ -16,23 +16,6 @@ import org.springframework.mail.MailParseException;
 import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Service;
 
-/**
- * 메일 솔루션과 연동해서 이용해서 메일을 보내는 서비스 구현 클래스
- * @since 2011.09.09
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자          수정내용
- *  -------    --------    ---------------------------
- *  2011.09.09  서준식       최초 작성
- *  2011.12.06  이기하       메일 첨부파일이 기능 추가
- *  2013.05.23  이기하       메일 첨부파일이 없을 때 로직 추가
- *
- *  </pre>
- */
 @Service("egovSndngMailService")
 public class EgovSndngMailServiceImpl extends EgovAbstractServiceImpl implements EgovSndngMailService {
 

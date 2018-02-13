@@ -21,24 +21,6 @@ import noNamespace.SndngMailDocument;
 
 import org.springframework.stereotype.Service;
 
-/**
- * 발송메일등록, 발송요청XML파일 생성하는 비즈니스 구현 클래스
- * @author 공통서비스 개발팀 박지욱
- * @since 2009.03.12
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자          수정내용
- *  -------    --------    ---------------------------
- *  2009.03.12  박지욱          최초 생성
- *  2011.07.27  서준식          메일 발송내역 DB 저장시 첨부파일이 없으면 NULL로 변경
- *  2011.12.06  이기하          메일 첨부파일이 기능 추가
- *  2015.02.02  표준프레임워크  메일 첨부파일 오류 수정
- *  </pre>
- */
 @Service("sndngMailRegistService")
 public class EgovSndngMailRegistServiceImpl extends EgovAbstractServiceImpl implements EgovSndngMailRegistService {
 

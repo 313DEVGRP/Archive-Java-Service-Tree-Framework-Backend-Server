@@ -16,36 +16,12 @@ import java.io.*;
 import java.net.URLEncoder;
 import java.util.Map;
 
-/**
- * 파일 다운로드를 위한 컨트롤러 클래스
- * @author 공통서비스개발팀 이삼섭
- * @since 2009.06.01
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *     수정일      	수정자           수정내용
- *  ------------   --------    ---------------------------
- *   2009.03.25  	이삼섭          최초 생성
- *   2014.02.24		이기하          IE11 브라우저 한글 파일 다운로드시 에러 수정
- *
- * Copyright (C) 2009 by MOPAS  All right reserved.
- * </pre>
- */
 @Controller
 public class EgovFileDownloadController {
 
 	@Resource(name = "EgovFileMngService")
 	private EgovFileMngService fileService;
 
-	/**
-	 * 브라우저 구분 얻기.
-	 *
-	 * @param request
-	 * @return
-	 */
 	private String getBrowser(HttpServletRequest request) {
 		String header = request.getHeader("User-Agent");
 		if (header.indexOf("MSIE") > -1) {
@@ -60,14 +36,6 @@ public class EgovFileDownloadController {
 		return "Firefox";
 	}
 
-	/**
-	 * Disposition 지정하기.
-	 *
-	 * @param filename
-	 * @param request
-	 * @param response
-	 * @throws Exception
-	 */
 	private void setDisposition(String filename, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String browser = getBrowser(request);
 
@@ -104,13 +72,6 @@ public class EgovFileDownloadController {
 		}
 	}
 
-	/**
-	 * 첨부파일로 등록된 파일에 대하여 다운로드를 제공한다.
-	 *
-	 * @param commandMap
-	 * @param response
-	 * @throws Exception
-	 */
 	@RequestMapping(value = "/cmm/fms/FileDown.do")
 	public void cvplFileDownload(@RequestParam Map<String, Object> commandMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 

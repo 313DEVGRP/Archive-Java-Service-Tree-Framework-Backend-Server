@@ -4,21 +4,6 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-/**
- * @Class Name  : Board.java
- * @Description : 게시물에 대한 데이터 처리 모델
- * @Modification Information
- * 
- *     수정일         수정자                   수정내용
- *     -------          --------        ---------------------------
- *   2009.03.06       이삼섭                  최초 생성
- *
- * @author 공통 서비스 개발팀 이삼섭
- * @since 2009. 02. 13
- * @version 1.0
- * @see 
- * 
- */
 @SuppressWarnings("serial")
 public class Board implements Serializable {
 

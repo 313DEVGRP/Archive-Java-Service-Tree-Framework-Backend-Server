@@ -24,24 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-/**
- * 발송메일등록, 발송요청XML파일 생성하는 컨트롤러 클래스
- * @author 공통서비스 개발팀 박지욱
- * @since 2009.03.12
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      	수정자          수정내용
- *  ----------     --------    ---------------------------
- *  2009.03.12  	박지욱          최초 생성
- *  2011.12.06  	이기하          메일 첨부파일이 기능 추가
- *  2015.05.08  	조정국          오류페이지 표시 경로 수정 - insertSndngMail()
- *
- *  </pre>
- */
 @Controller
 public class EgovSndngMailRegistController {
 

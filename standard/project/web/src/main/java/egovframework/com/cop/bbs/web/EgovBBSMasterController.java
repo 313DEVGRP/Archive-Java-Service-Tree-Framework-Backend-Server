@@ -25,27 +25,6 @@ import egovframework.com.cop.bbs.service.EgovBBSMasterService;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
-
-/**
- * 게시판 속성관리를 위한 컨트롤러  클래스
- *
- * @author 공통서비스개발팀 이삼섭
- * @version 1.0
- * @see <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자           수정내용
- *  -------       --------    ---------------------------
- *   2009.3.12  이삼섭          최초 생성
- *   2009.06.26	한성곤		    2단계 기능 추가 (댓글관리, 만족도조사)
- * 	 2011.07.21 안민정          커뮤니티 관련 메소드 분리 (->EgovBBSAttributeManageController)
- * 	 2011.8.26	정진오			IncludedInfo annotation 추가
- *   2011.09.15 서준식           2단계 기능 추가 (댓글관리, 만족도조사) 적용방법 변경
- *   2016.06.13 김연호          표준프레임워크 v3.6 개선
- * </pre>
- * @since 2009.06.01
- */
-
 @Controller
 public class EgovBBSMasterController {
 

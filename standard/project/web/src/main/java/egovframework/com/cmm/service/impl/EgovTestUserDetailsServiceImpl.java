@@ -8,23 +8,6 @@ import egovframework.com.cmm.service.EgovUserDetailsService;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
-/**
- *
- * @author 공통서비스 개발팀 서준식
- * @since 2011. 8. 12.
- * @version 1.0
- * @see
- *
- * <pre>
- * 개정이력(Modification Information)
- *
- *   수정일      수정자          수정내용
- *  -------    --------    ---------------------------
- *  2011. 8. 12.    서준식        최초생성
- *
- *  </pre>
- */
-
 public class EgovTestUserDetailsServiceImpl extends EgovAbstractServiceImpl implements
 		EgovUserDetailsService {
 

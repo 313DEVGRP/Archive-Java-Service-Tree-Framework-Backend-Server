@@ -893,6 +893,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/.project">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/README.md">
           <value>
             <set />
@@ -1378,6 +1383,61 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/ComDefaultCodeVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/ComDefaultVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/EgovComCrossSiteHndlr.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/EgovComExcepHndlr.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/EgovComponentChecker.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/EgovMessageSource.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/EgovWebUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/ImagePaginationRenderer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/IncludedCompInfoVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/LoginVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/SessionVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/annotation/IncludedInfo.java">
           <value>
             <set />
@@ -1413,7 +1473,52 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/CmmnDetailCode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/EgovCmmUseService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/EgovFileMngService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/EgovFileMngUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/EgovProperties.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/FileVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/Globals.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/impl/CmmUseDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/impl/EgovCmmUseServiceImpl.java">
           <value>
             <set />
           </value>
@@ -1428,7 +1533,122 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/impl/EgovFileMngServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/impl/EgovTestUserDetailsServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/impl/EgovUserDetailsSessionServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/service/impl/FileManageDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/taglibs/DoubleSubmitTag.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovBasicLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovDoubleSubmitHelper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovHttpRequestHelper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovMybaitsUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovResourceCloseHelper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovUrlRewriteFilter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovWildcardReloadableResourceBundleMessageSource.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/util/EgovXssChecker.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/web/EgovComIndexController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/web/EgovComUtlController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/web/EgovFileDownloadController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/web/EgovFileMngController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/web/EgovImageProcessController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cmm/web/EgovMultipartResolver.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/service/Board.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/service/BoardMaster.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/service/BoardMasterVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/service/BoardVO.java">
           <value>
             <set />
           </value>
@@ -1444,6 +1664,96 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/bbs/web/EgovBBSMasterController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/AtchmnFileVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/EgovMultiPartEmail.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/EgovSndngMailDetailService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/EgovSndngMailDtlsService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/EgovSndngMailRegistService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/EgovSndngMailService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/SndngMail.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/SndngMailVO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/impl/EgovSndngMailDetailServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/impl/EgovSndngMailDtlsServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/impl/EgovSndngMailRegistServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/impl/EgovSndngMailServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/impl/SndngMailDetailDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/impl/SndngMailDtlsDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/service/impl/SndngMailRegistDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/web/EgovSndngMailDetailController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/web/EgovSndngMailDtlsController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/java/egovframework/com/cop/ems/web/EgovSndngMailRegistController.java">
           <value>
             <set />
           </value>

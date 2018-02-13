@@ -22,25 +22,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * 발송메일을 상세 조회하는 컨트롤러 클래스
- * @author 공통서비스 개발팀 박지욱
- * @since 2009.03.12
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자          수정내용
- *  -------    --------    ---------------------------
- *  2009.03.12  박지욱          최초 생성
- *  2011.10.10	이기하			보안점검 후속조치(교차접속 스크립트 공격 취약성 방지(파라미터 문자열 교체),
- *  											  HTTP 응답분할 방지)
- *  2017.03.03 	조성원 	시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
- *
- *  </pre>
- */
 @Controller
 public class EgovSndngMailDetailController {
 

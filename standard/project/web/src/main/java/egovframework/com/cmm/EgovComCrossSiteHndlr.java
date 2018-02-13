@@ -10,21 +10,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.apache.taglibs.standard.tag.common.core.Util;
 
-/**
- * Cross-Site Scripting 체크하여 값을 되돌려 받는 핸들러 JSP TLD, 자바에서 사용가능
- *
- * @author 공통서비스 장동한
- * @since 2010.11.09
- * @version 1.0
- * @see <pre>
- * &lt;&lt; 개정이력(Modification Information) &gt;&gt;
- *
- *   수정일      수정자           수정내용
- *  -------    --------    ---------------------------
- *   2010.11.09  장동한          최초 생성
- *
- * </pre>
- */
 @SuppressWarnings("serial")
 public class EgovComCrossSiteHndlr extends BodyTagSupport {
 

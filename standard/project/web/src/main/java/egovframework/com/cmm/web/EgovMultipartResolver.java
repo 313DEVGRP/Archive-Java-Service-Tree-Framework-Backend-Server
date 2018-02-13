@@ -35,34 +35,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-/**
- * 실행환경의 파일업로드 처리를 위한 기능 클래스
- * @author 공통서비스개발팀 이삼섭
- * @since 2009.06.01
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *   수정일      수정자           수정내용
- *  -------    --------    ---------------------------
- *   2009.3.25  이삼섭          최초 생성
- *   2011.06.11 서준식          스프링 3.0 업그레이드 API변경으로인한 수정
- *
- * </pre>
- */
 public class EgovMultipartResolver extends CommonsMultipartResolver {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovMultipartResolver.class);
 
 	public EgovMultipartResolver() {}
 
-    /**
-     * 첨부파일 처리를 위한 multipart resolver를 생성한다.
-     *
-     * @param servletContext
-     */
     public EgovMultipartResolver(ServletContext servletContext) {
 	super(servletContext);
     }

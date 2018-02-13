@@ -7,24 +7,6 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
-/**
- * 발송메일에 첨부파일용으로 사용되는 VO 클래스
- * @author 공통서비스 개발팀 이기하
- * @since 2011.12.06
- * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- *    수정일      	수정자          수정내용
- *  ----------     --------    ---------------------------
- *  2011.12.06		이기하          최초 생성
- *  2013.05.23		이기하          thread-safe 하게 변경
- *
- *  </pre>
- */
-
 public class EgovMultiPartEmail implements Serializable {
 
 	private static final long serialVersionUID = -4322006921324597283L;

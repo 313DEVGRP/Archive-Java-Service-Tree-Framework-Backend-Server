@@ -33,22 +33,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * @Class Name  : EgovFileMngUtil.java
- * @Description : 메시지 처리 관련 유틸리티
- * @Modification Information
- *
- *     수정일         수정자                   수정내용
- *     -------          --------        ---------------------------
- *   2009.02.13       이삼섭                  최초 생성
- *   2011.08.09       서준식                  utl.fcc패키지와 Dependency제거를 위해 getTimeStamp()메서드 추가
- *   2017.03.03 	     조성원 	            시큐어코딩(ES)-부적절한 예외 처리[CWE-253, CWE-440, CWE-754]
- * @author 공통 서비스 개발팀 이삼섭
- * @since 2009. 02. 13
- * @version 1.0
- * @see
- *
- */
 @Component("EgovFileMngUtil")
 public class EgovFileMngUtil {
 
@@ -59,13 +43,6 @@ public class EgovFileMngUtil {
 	@Resource(name = "egovFileIdGnrService")
 	private EgovIdGnrService idgenService;
 
-	/**
-	 * 첨부파일에 대한 목록 정보를 취득한다.
-	 *
-	 * @param files
-	 * @return
-	 * @throws Exception
-	 */
 	public List<FileVO> parseFileInf(Map<String, MultipartFile> files, String KeyStr, int fileKeyParam, String atchFileId, String storePath) throws Exception {
 		int fileKey = fileKeyParam;
 
@@ -144,14 +121,6 @@ public class EgovFileMngUtil {
 		return result;
 	}
 
-	/**
-	 * 첨부파일을 서버에 저장한다.
-	 *
-	 * @param file
-	 * @param newName
-	 * @param stordFilePath
-	 * @throws Exception
-	 */
 	protected void writeUploadedFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
 		InputStream stream = null;
 		OutputStream bos = null;
@@ -180,13 +149,6 @@ public class EgovFileMngUtil {
 		}
 	}
 
-	/**
-	 * 서버의 파일을 다운로드한다.
-	 *
-	 * @param request
-	 * @param response
-	 * @throws Exception
-	 */
 	public static void downFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String downFileName = "";
@@ -240,13 +202,6 @@ public class EgovFileMngUtil {
 		}
 	}
 
-	/**
-	 * 첨부로 등록된 파일을 서버에 업로드한다.
-	 *
-	 * @param file
-	 * @return
-	 * @throws Exception
-	 */
 	public static HashMap<String, String> uploadFile(MultipartFile file) throws Exception {
 
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -273,14 +228,6 @@ public class EgovFileMngUtil {
 		return map;
 	}
 
-	/**
-	 * 파일을 실제 물리적인 경로에 생성한다.
-	 *
-	 * @param file
-	 * @param newName
-	 * @param stordFilePath
-	 * @throws Exception
-	 */
 	protected static void writeFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
 		InputStream stream = null;
 		OutputStream bos = null;
@@ -311,14 +258,6 @@ public class EgovFileMngUtil {
 		}
 	}
 
-	/**
-	 * 서버 파일에 대하여 다운로드를 처리한다.
-	 *
-	 * @param response
-	 * @param streFileNm 파일저장 경로가 포함된 형태
-	 * @param orignFileNm
-	 * @throws Exception
-	 */
 	public void downFile(HttpServletResponse response, String streFileNm, String orignFileNm) throws Exception {
 		String downFileName = streFileNm;
 		String orgFileName = orignFileNm;
@@ -411,14 +350,6 @@ public class EgovFileMngUtil {
 		//*/
 	}
 
-	/**
-	 * 공통 컴포넌트 utl.fcc 패키지와 Dependency제거를 위해 내부 메서드로 추가 정의함
-	 * 응용어플리케이션에서 고유값을 사용하기 위해 시스템에서17자리의TIMESTAMP값을 구하는 기능
-	 *
-	 * @param
-	 * @return Timestamp 값
-	 * @see
-	 */
 	private static String getTimeStamp() {
 
 		String rtnStr = null;
