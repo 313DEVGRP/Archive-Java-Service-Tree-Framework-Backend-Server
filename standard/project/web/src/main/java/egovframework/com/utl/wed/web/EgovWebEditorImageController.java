@@ -24,13 +24,6 @@ public class EgovWebEditorImageController {
     /** 첨부 최대 파일 크기 지정 */
     private final long maxFileSize = 1024 * 1024 * 100;   //업로드 최대 사이즈 설정 (100M)
 
-    /**
-     * 이미지 Upload 화면으로 이동한다.
-     *
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value="/utl/wed/insertImage.do", method=RequestMethod.GET)
     public String goInsertImage() throws Exception {
 
 	return "egovframework/com/utl/wed/EgovInsertImage";

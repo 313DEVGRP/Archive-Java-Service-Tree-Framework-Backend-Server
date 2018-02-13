@@ -17,10 +17,7 @@ public class SessionVO implements Serializable {
 	private String orgnztId;
 	/** 고유아이디 */
 	private String uniqId;
-	/**
-	 * sUserId attribute 를 리턴한다.
-	 * @return String
-	 */
+
 	public String getSUserId() {
 		return sUserId;
 	}

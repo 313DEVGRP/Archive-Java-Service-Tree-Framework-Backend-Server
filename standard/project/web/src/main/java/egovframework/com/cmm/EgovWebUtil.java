@@ -51,12 +51,6 @@ public class EgovWebUtil {
 		return returnValue;
 	}
 
-	/**
-	 * 행안부 보안취약점 점검 조치 방안.
-	 *
-	 * @param value
-	 * @return
-	 */
 	public static String filePathReplaceAll(String value) {
 		String returnValue = value;
 		if (returnValue == null || returnValue.trim().equals("")) {

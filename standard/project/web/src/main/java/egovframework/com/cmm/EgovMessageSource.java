@@ -10,19 +10,10 @@ public class EgovMessageSource extends ReloadableResourceBundleMessageSource imp
 
 	private ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource;
 
-	/**
-	 * getReloadableResourceBundleMessageSource() 
-	 * @param reloadableResourceBundleMessageSource - resource MessageSource
-	 * @return ReloadableResourceBundleMessageSource
-	 */	
 	public void setReloadableResourceBundleMessageSource(ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource) {
 		this.reloadableResourceBundleMessageSource = reloadableResourceBundleMessageSource;
 	}
 	
-	/**
-	 * getReloadableResourceBundleMessageSource() 
-	 * @return ReloadableResourceBundleMessageSource
-	 */	
 	public ReloadableResourceBundleMessageSource getReloadableResourceBundleMessageSource() {
 		return reloadableResourceBundleMessageSource;
 	}
