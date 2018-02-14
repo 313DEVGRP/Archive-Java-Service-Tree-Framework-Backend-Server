@@ -15,13 +15,9 @@ public class EgovComUtlController {
     //@Resource(name = "egovUserManageService")
     //private EgovUserManageService egovUserManageService;
 
-    /** EgovPropertyService */
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
 
-    /**
-	 * JSP 호출작업만 처리하는 공통 함수
-	 */
 	@RequestMapping(value="/EgovPageLink.do")
 	public String moveToPage(@RequestParam("link") String linkPage){
 		String link = linkPage;
@@ -40,9 +36,6 @@ public class EgovComUtlController {
         return "egovframework/com/cmm/EgovModal";
     }
     
-    /**
-	 * validato rule dynamic Javascript
-	 */
 	@RequestMapping("/validator.do")
 	public String validate(){
 		return "egovframework/com/cmm/validator";

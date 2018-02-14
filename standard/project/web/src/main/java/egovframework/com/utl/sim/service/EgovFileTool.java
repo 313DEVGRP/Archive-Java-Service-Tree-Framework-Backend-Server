@@ -42,14 +42,6 @@ public class EgovFileTool {
 	// Log
 	//protected static final Log log = LogFactory.getLog(EgovFileTool.class);
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리 존재여부를 확인한다. (단일디렉토리 확인용)
-	 * </pre>
-	 *
-	 * @param String targetDirPath 존재여부를 확인할 디렉토리의 절대경로
-	 * @return String result 존재하는 디렉토리 경로를 리턴한다.
-	 */
 	public static boolean getExistDirectory(String targetDirPath) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -66,16 +58,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리 존재여부를 확인한다. (하위디렉토리 확인용)
-	 * </pre>
-	 *
-	 * @param String baseDirPath 존재여부를 확인할 디렉토리명의 기준경로
-	 * @param String targetDirPath 확인할 대상 디렉토리. baseDirPath 하위에서 존재여부를 확인한다.
-	 * @param int cnt 확인할 디렉토리 갯수 (0보다 큰값이 입력되어야 한다. -1 입력시 21474846까지 찾도록 지원함 )
-	 * @return String result 존재하는 디렉토리 경로를 리턴한다.
-	 */
 	public static List<String> getExistDirectory(String baseDirPath, String targetDirPath, int cnt) throws Exception {
 
 		// 인자값 유효하지 않은 경우 빈 ArrayList 리턴
@@ -152,16 +134,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리 존재여부를 확인한다. (생성일자를 조건으로 조건구간내 포함되는지 확인)
-	 * </pre>
-	 *
-	 * @param String targetDirPath 존재여부를 확인할 디렉토리의 절대경로
-	 * @param String fromDate 생성일자 조건에 해당하는 시작일자(YYYYMMDD 형태로 입력)
-	 * @param String toDate 생성일자 조건에 해당하는 종료일자(YYYYMMDD 형태로 입력)
-	 * @return String result 존재하는 디렉토리 경로를 리턴한다.
-	 */
 	public static boolean getExistDirectory(String targetDirPath, String fromDate, String toDate) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -183,15 +155,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리 존재여부를 확인한다. (생성자를 조건으로 일치하는지 확인)
-	 * </pre>
-	 *
-	 * @param String targetDirPath 존재여부를 확인할 디렉토리의 절대경로
-	 * @param String ownerName 생성자명(계정정보)
-	 * @return String result 존재하는 디렉토리 경로를 리턴한다.
-	 */
 	public static boolean getExistDirectory(String targetDirPath, String ownerName) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -215,14 +178,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)의 최종 수정일자를 확인한다. (기본로케일 java.util.Locale.KOREA 기준)
-	 * </pre>
-	 *
-	 * @param File f 수정일자를 확인할 대상파일
-	 * @return String result 최종수정일자를 문자열로 리턴한다.
-	 */
 	public static String getLastModifiedDateFromFile(File f) {
 
 		String result = "";
@@ -238,14 +193,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)의 최종 수정일자를 확인한다. (기본로케일 java.util.Locale.KOREA 기준)
-	 * </pre>
-	 *
-	 * @param String filePath 수정일자를 확인할 대상파일경로
-	 * @return String result 최종수정일자를 문자열로 리턴한다.
-	 */
 	public static String getLastModifiedDateFromFile(String filePath) {
 
 		File f = null;
@@ -256,16 +203,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 조건구간내에 생성된 디렉토리 목록을 조회한다.
-	 * </pre>
-	 *
-	 * @param String filePath 하위디렉토리를 확인할 경로
-	 * @param String fromDate 조건시작일
-	 * @param String toDate 조건 종료일
-	 * @return ArrayList result 조건구간내에 생성된 디렉토리 목록을 리턴한다.
-	 */
 	public static List<String> getLastDirectoryForModifiedDate(String baseDirPath, String fromDate, String toDate) {
 
 		// 인자값 유효하지 않은 경우 빈 ArrayList 리턴
@@ -308,14 +245,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)의 읽기권한을 확인한다.
-	 * </pre>
-	 *
-	 * @param String filePath 읽기권한을 확인할 대상파일경로
-	 * @return boolean result 읽기가능하면 true를 리턴한다. 권한이 없어가 파일이 없는 경우는 false를 리턴한다.
-	 */
 	public static boolean canRead(String filePath) {
 
 		// 인자값 유효하지 않은 경우 빈 false 리턴
@@ -333,14 +262,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)의 쓰기권한을 확인한다.(대상경로가 파일인 경우만 정보가 유효함)
-	 * </pre>
-	 *
-	 * @param String filePath 쓰기권한을 확인할 대상파일경로
-	 * @return boolean result 쓰기가능하면 true를 리턴한다. 권한이 없어가 파일이 없는 경우는 false를 리턴한다.
-	 */
 	public static boolean canWrite(String filePath) {
 
 		// 인자값 유효하지 않은 경우 빈 false 리턴
@@ -358,14 +279,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)의 이름을  확인한다.
-	 * </pre>
-	 *
-	 * @param String filePath 이름을 확인할 대상경로
-	 * @return String result 이름을 리턴한다. 존재하지 않는 경우는 블랭크를 리턴한다.
-	 */
 	public static String getName(String filePath) {
 
 		// 인자값 유효하지 않은 경우 빈 false 리턴
@@ -384,15 +297,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)를 삭제한다. (파일,디렉토리 구분없이 존재하는 경우 무조건 삭제한다)
-	 * </pre>
-	 *
-	 * @param filePathToBeDeleted 삭제하고자 하는 파일의 절대경로 + 파일명
-	 * @return 성공하면 삭제된 절대경로, 아니면블랭크
-	 */
-
 	public static String deletePath(String filePath) {
 		File file = new File(EgovWebUtil.filePathBlackList(filePath));
 		String result = "";
@@ -406,15 +310,6 @@ public class EgovFileTool {
 
 		return result;
 	}
-
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 생성한다.
-	 * </pre>
-	 *
-	 * @param dirPath 생성하고자 하는 절대경로
-	 * @return 성공하면 새성된 절대경로, 아니면 블랭크
-	 */
 
 	public static String createDirectory(String dirPath) {
 		File file = new File(EgovWebUtil.filePathBlackList(dirPath));
@@ -437,14 +332,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 디렉토리에 파일이 존재하는지 체크하는 기능
-	 *
-	 * @param String dir 디렉토리
-	 * @param String file 파일
-	 * @return boolean result 존재여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean checkFileExstByName(String dir, String file) throws Exception {
 
 		// 파일 존재 여부
@@ -474,14 +361,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 확장자별로 디렉토리에 파일이 존재하는지 체크하는 기능
-	 *
-	 * @param String dir 디렉토리
-	 * @param String eventn 확장자명(.txt 형태 입력)
-	 * @return boolean result 존재여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean checkFileExstByExtnt(String dir, String eventn) throws Exception {
 
 		// 파일 존재 여부
@@ -511,14 +390,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 디렉토리에 생성자별 파일이 존재하는지 체크하는 기능
-	 *
-	 * @param String dir 디렉토리
-	 * @param String owner 생성자
-	 * @return boolean result 존재여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean checkFileExstByOwner(String dir, String owner) throws Exception {
 
 		// 파일 존재 여부
@@ -548,15 +419,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 수정기간별로 디렉토리에 파일이 존재하는지 체크하는 기능
-	 *
-	 * @param String dir 디렉토리
-	 * @param String updtFrom 수정일자From(YYYYMMDD 형태로 입력)
-	 * @param String updtTo 수정일자To(YYYYMMDD 형태로 입력)
-	 * @return boolean result 존재여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean checkFileExstByUpdtPd(String dir, String updtFrom, String updtTo) throws Exception {
 
 		// 파일 존재 여부
@@ -586,15 +448,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 사이즈별로 디렉토리에 파일이 존재하는지 체크하는 기능
-	 *
-	 * @param String dir 디렉토리
-	 * @param long sizeFrom 사이즈From (KB)
-	 * @param long sizeTo 사이즈To (KB)
-	 * @return boolean result 존재여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean checkFileExstBySize(String dir, long sizeFrom, long sizeTo) throws Exception {
 
 		// 파일 존재 여부
@@ -624,13 +477,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 디렉토리 내부 하위목록들 중에서 파일을 찾는 기능(모든 목록 조회)
-	 *
-	 * @param File[] fileArray 파일목록
-	 * @return ArrayList list 파일목록(절대경로)
-	 * @exception Exception
-	 */
 	public static List<String> getSubFilesByAll(File[] fileArray) throws Exception {
 
 		ArrayList<String> list = new ArrayList<String>();
@@ -649,14 +495,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 디렉토리 내부 하위목록들 중에서 파일을 찾는 기능(파일명)
-	 *
-	 * @param File[] fileArray 파일목록
-	 * @param String file 파일명
-	 * @return ArrayList list 파일목록(절대경로)
-	 * @exception Exception
-	 */
 	public static List<String> getSubFilesByName(File[] fileArray, String file) throws Exception {
 
 		List<String> list = new ArrayList<String>();
@@ -677,14 +515,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 디렉토리 내부 하위목록들 중에서 파일을 찾는 기능(확장자별)
-	 *
-	 * @param File[] fileArray 파일목록
-	 * @param String extnt 확장자
-	 * @return ArrayList list 파일목록(절대경로)
-	 * @exception Exception
-	 */
 	public static List<String> getSubFilesByExtnt(File[] fileArray, String extnt) throws Exception {
 
 		List<String> list = new ArrayList<String>();
@@ -705,15 +535,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 디렉토리 내부 하위목록들 중에서 파일을 찾는 기능(최종수정기간별)
-	 *
-	 * @param File[] fileArray 파일목록
-	 * @param String updtFrom 수정일자From(YYYYMMDD 형태로 입력)
-	 * @param String updtTo 수정일자To(YYYYMMDD 형태로 입력)
-	 * @return ArrayList list 파일목록(절대경로)
-	 * @exception Exception
-	 */
 	public static List<String> getSubFilesByUpdtPd(File[] fileArray, String updtFrom, String updtTo) throws Exception {
 
 		List<String> list = new ArrayList<String>();
@@ -739,15 +560,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 디렉토리 내부 하위목록들 중에서 파일을 찾는 기능(사이즈별)
-	 *
-	 * @param File[] fileArray 파일목록
-	 * @param long sizeFrom 사이즈From(KB)
-	 * @param long sizeTo 사이즈To(KB)
-	 * @return ArrayList list 파일목록(절대경로)
-	 * @exception Exception
-	 */
 	public static List<String> getSubFilesBySize(File[] fileArray, long sizeFrom, long sizeTo) throws Exception {
 
 		List<String> list = new ArrayList<String>();
@@ -771,14 +583,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 디렉토리 내부 하위목록들 중에서 파일을 찾는 기능(생성자별)
-	 *
-	 * @param File[] fileArray 파일목록
-	 * @param String creator 생성자
-	 * @return ArrayList list 파일목록(절대경로)
-	 * @exception Exception
-	 */
 	public static List<String> getSubFilesByOwner(File[] fileArray, String owner) throws Exception {
 
 		List<String> list = new ArrayList<String>();
@@ -843,15 +647,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 생성한다.
-	 * </pre>
-	 *
-	 * @param dirPath 생성하고자 하는 절대경로
-	 * @return 성공하면 새성된 절대경로, 아니면 블랭크
-	 */
-
 	public static String createNewDirectory(String dirPath) {
 
 		// 인자값 유효하지 않은 경우 블랭크 리턴
@@ -882,15 +677,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 파일을 생성한다.
-	 * </pre>
-	 *
-	 * @param String fileName 파일의 절대경로 +파일명
-	 * @param String content 저장할 문자열입니다. c:/test/test1/test44.txt
-	 *
-	 */
 	public static String createNewFile(String filePath) {
 
 		// 인자값 유효하지 않은 경우 블랭크 리턴
@@ -921,15 +707,6 @@ public class EgovFileTool {
 
 		return result;
 	}
-
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 삭제한다.
-	 * </pre>
-	 *
-	 * @param dirDeletePath 삭제하고자 하는디렉토리의 절대경로(파일의 경로가 들어오는 경우 삭제하지 않음)
-	 * @return 성공하면 삭제된 절대경로, 아니면블랭크
-	 */
 
 	public static String deleteDirectory(String dirDeletePath) {
 
@@ -974,15 +751,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 파일을 삭제한다.
-	 * </pre>
-	 *
-	 * @param fileDeletePath 삭제하고자 하는파일의 절대경로
-	 * @return 성공하면 삭제된 파일의 절대경로, 아니면블랭크
-	 */
-
 	public static String deleteFile(String fileDeletePath) {
 
 		// 인자값 유효하지 않은 경우 블랭크 리턴
@@ -1000,13 +768,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 파일의 읽기권한을 체크한다.
-	 *
-	 * @param String file 파일
-	 * @return boolean result 읽기권한 True / False
-	 * @exception Exception
-	 */
 	public static boolean checkReadAuth(String file) throws Exception {
 
 		// 읽기가능여부
@@ -1025,13 +786,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 파일의 쓰기권한을 체크한다.
-	 *
-	 * @param String file 파일
-	 * @return boolean result 쓰기권한 True / False
-	 * @exception Exception
-	 */
 	public static boolean checkWriteAuth(String file) throws Exception {
 
 		// 쓰기가능여부
@@ -1050,14 +804,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 파일의 최종수정일자별 파일목록 조회하는 기능
-	 *
-	 * @param String drctry 디렉토리
-	 * @param String updtDate 최종수정일자(YYYYMMDD 형태로 입력)
-	 * @return ArrayList list 파일목록
-	 * @exception Exception
-	 */
 	public static List<String> getFileListByDate(String drctry, String updtDate) throws Exception {
 
 		// 결과 목록
@@ -1082,15 +828,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 파일의 최종수정기간내 파일목록 조회하는 기능
-	 *
-	 * @param String drctry 디렉토리
-	 * @param String updtFrom 최종수정일자From(YYYYMMDD 형태로 입력)
-	 * @param String updtTo 최종수정일자To(YYYYMMDD 형태로 입력)
-	 * @return ArrayList list 파일목록
-	 * @exception Exception
-	 */
 	public static List<String> getFileListByUpdtPd(String drctry, String updtFrom, String updtTo) throws Exception {
 
 		// 결과 목록
@@ -1115,14 +852,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 하위디렉토리 포함 최종수정일자가 같은 파일목록을 찾는 기능
-	 *
-	 * @param File fileArray 파일목록
-	 * @param String updtDate 최종수정일자(YYYYMMDD 형태로 입력)
-	 * @return ArrayList list 파일목록
-	 * @exception Exception
-	 */
 	public static List<String> getSubFilesByDate(File[] fileArray, String updtDate) throws Exception {
 
 		List<String> list = new ArrayList<String>();
@@ -1147,15 +876,6 @@ public class EgovFileTool {
 		return list;
 	}
 
-	/**
-	 * 파일을 특정 구분자(',', '|', 'TAB')로 파싱하는 기능
-	 *
-	 * @param String parFile 파일
-	 * @param String parChar 구분자(',', '|', 'TAB')
-	 * @param int parField 필드수
-	 * @return Vector parResult 파싱결과 구조체
-	 * @exception Exception
-	 */
 	public static Vector<List<String>> parsFileByChar(String parFile, String parChar, int parField) throws Exception {
 
 		// 파싱결과 구조체
@@ -1225,15 +945,6 @@ public class EgovFileTool {
 		return parResult;
 	}
 
-	/**
-	 * 파일을 일정 길이로 파싱하는 기능
-	 *
-	 * @param String parFile 파일
-	 * @param int[] parLen 각 필드의 길이
-	 * @param int parLine 읽어낼 라인수
-	 * @return Vector parResult 파싱결과 구조체
-	 * @exception Exception
-	 */
 	public static Vector<List<String>> parsFileBySize(String parFile, int[] parLen, int parLine) throws Exception {
 
 		// 파싱결과 구조체
@@ -1289,14 +1000,6 @@ public class EgovFileTool {
 		return parResult;
 	}
 
-	/**
-	 * 두 파일의 사이즈를 비교하는 기능 (KB 단위 비교)
-	 *
-	 * @param String cmprFile1 파일1
-	 * @param String cmprFile2 파일2
-	 * @return boolean result 동일여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean cmprFilesBySize(String cmprFile1, String cmprFile2) throws Exception {
 
 		// 파일 동일 여부
@@ -1327,14 +1030,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 두 파일의 수정일자를 비교하는 기능
-	 *
-	 * @param String cmprFile1 파일1
-	 * @param String cmprFile2 파일2
-	 * @return boolean result 동일여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean cmprFilesByUpdtPd(String cmprFile1, String cmprFile2) throws Exception {
 
 		// 파일 동일 여부
@@ -1368,14 +1063,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 두 파일의 내용을 비교하는 기능 (TEXT파일만 가능)
-	 *
-	 * @param String cmprFile1 파일1
-	 * @param String cmprFile2 파일2
-	 * @return boolean result 동일여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean cmprFilesByContent(String cmprFile1, String cmprFile2) throws Exception {
 
 		// 파일 동일 여부
@@ -1437,14 +1124,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 두 파일의 생성자를 비교하는 기능
-	 *
-	 * @param String cmprFile1 파일1
-	 * @param String cmprFile2 파일2
-	 * @return boolean result 동일여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean cmprFilesByOwner(String cmprFile1, String cmprFile2) throws Exception {
 
 		// 파일 동일 여부
@@ -1463,14 +1142,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 단일 파일을 다른 파일에 복사(Copy)한다.
-	 *
-	 * @param String source 원본파일
-	 * @param String target 타겟파일
-	 * @return boolean result 복사여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean copyFile(String source, String target) throws Exception {
 
 		// 복사여부
@@ -1498,14 +1169,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 여러 파일을 다른 디렉토리에 복사(Copy)한다.
-	 *
-	 * @param String source 원본파일들
-	 * @param String target 타겟디렉토리
-	 * @return boolean result 복사여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean copyFiles(String[] source, String target) throws Exception {
 
 		// 복사여부
@@ -1544,15 +1207,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 확장자별 파일들을 다른 디렉토리에 복사(Copy)한다.
-	 *
-	 * @param String source 원본디렉토리
-	 * @param String extnt 확장자(.txt 형태 입력)
-	 * @param String target 타겟디렉토리
-	 * @return boolean result 복사여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean copyFilesByExtnt(String source, String extnt, String target) throws Exception {
 
 		// 복사여부
@@ -1600,16 +1254,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 수정기간내 파일들을 다른 디렉토리에 복사(Copy)한다.
-	 *
-	 * @param String source 원본디렉토리
-	 * @param String updtFrom 수정시작일자(YYYYMMDD 형태로 입력)
-	 * @param String updtTo 수정종료일자(YYYYMMDD 형태로 입력)
-	 * @param String target 타겟디렉토리
-	 * @return boolean result 복사여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean copyFilesByUpdtPd(String source, String updtFrom, String updtTo, String target) throws Exception {
 
 		// 복사여부
@@ -1659,16 +1303,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 사이즈내 파일들을 다른 디렉토리에 복사(Copy)한다.
-	 *
-	 * @param String source 원본디렉토리
-	 * @param Long sizeFrom 최소사이즈(KB)
-	 * @param Long sizeTo 최대사이즈(KB)
-	 * @param String target 타겟디렉토리
-	 * @return boolean result 복사여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean copyFilesBySize(String source, long sizeFrom, long sizeTo, String target) throws Exception {
 
 		// 복사여부
@@ -1715,15 +1349,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 생성자별 파일들을 다른 디렉토리에 복사(Copy)한다.
-	 *
-	 * @param String source 원본디렉토리
-	 * @param String owner 생성자
-	 * @param String target 타겟디렉토리
-	 * @return boolean result 복사여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean copyFilesByOwner(String source, String owner, String target) throws Exception {
 
 		// 복사여부
@@ -1778,14 +1403,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 복사를 수행하는 기능
-	 *
-	 * @param File srcFile 원본파일
-	 * @param File tarFile 타겟파일
-	 * @return boolean result 복사여부 True / False
-	 * @exception Exception
-	 */
 	public static boolean execCopyFile(File srcFile, File tarFile) throws Exception {
 
 		// 결과
@@ -1817,16 +1434,6 @@ public class EgovFileTool {
 
 		return result;
 	}
-
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 삭제한다. (소유자 정보를 통해 삭제)
-	 * </pre>
-	 *
-	 * @param dirDeletePath 삭제하고자 하는디렉토리의 절대경로(파일의 경로가 들어오는 경우 삭제하지 않음)
-	 * @param owner 디렉토리의 삭제조건 생성자
-	 * @return 성공하면 삭제된 절대경로, 아니면블랭크
-	 */
 
 	public static String deleteDirectory(String dirDeletePath, String dirOwner) {
 
@@ -1860,16 +1467,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 삭제한다. (생성일자 조건으로 삭제)
-	 * </pre>
-	 *
-	 * @param dirDeletePath 삭제하고자 하는디렉토리의 절대경로(파일의 경로가 들어오는 경우 삭제하지 않음)
-	 * @param fromDate 디렉토리의 삭제조건 시작일자
-	 * @param toDate 디렉토리의 삭제조건 종료일자
-	 * @return 성공하면 삭제된 절대경로, 아니면블랭크
-	 */
 	public static String deleteDirectory(String dirDeletePath, String fromDate, String toDate) {
 
 		// 인자값 유효하지 않은 경우 블랭크 리턴
@@ -1898,13 +1495,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 파일(디렉토리)가 존재하는 파일시스템(마운트된 위치)을 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return String mountLc 마운트위치
-	 * @exception Exception
-	 */
 	public static String getMountLc(String file) throws Exception {
 
 		// 디스크명
@@ -1956,13 +1546,6 @@ public class EgovFileTool {
 		return diskName;
 	}
 
-	/**
-	 * 파일(디렉토리)가 존재하는 디렉토리(Parent)를 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return String drctryName 디렉토리
-	 * @exception Exception
-	 */
 	public static String getDrctryName(String file) throws Exception {
 
 		String drctryName = "";
@@ -1976,13 +1559,6 @@ public class EgovFileTool {
 		return drctryName;
 	}
 
-	/**
-	 * 파일(디렉토리)가 존재하는 파일명을 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return String fileName 파일명
-	 * @exception Exception
-	 */
 	public static String getFileName(String file) throws Exception {
 
 		String fileName = "";
@@ -1996,13 +1572,6 @@ public class EgovFileTool {
 		return fileName;
 	}
 
-	/**
-	 * 파일(디렉토리)의 최종수정일자를 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return String updtDate 최종수정일자(YYYYMMDD 형태)
-	 * @exception Exception
-	 */
 	public static String getUpdtDate(String file) throws Exception {
 
 		String updtDate = "";
@@ -2018,13 +1587,6 @@ public class EgovFileTool {
 		return updtDate;
 	}
 
-	/**
-	 * 파일(디렉토리)의 생성자를 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return String owner 생성자
-	 * @exception Exception
-	 */
 	public static String getOwner(String file) throws Exception {
 
 		String owner = "";
@@ -2080,13 +1642,6 @@ public class EgovFileTool {
 		return owner;
 	}
 
-	/**
-	 * 파일(디렉토리)의 접근권한을 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return String access 접근권한(유닉스=777, 666, 윈도우=Read, Write, Read Only)
-	 * @exception Exception
-	 */
 	public static String getAccess(String file) throws Exception {
 
 		String access = "";
@@ -2210,13 +1765,6 @@ public class EgovFileTool {
 		return access;
 	}
 
-	/**
-	 * 파일(디렉토리)의 사이즈를 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return Long size 사이즈(Byte)
-	 * @exception Exception
-	 */
 	public static long getSize(String file) throws Exception {
 
 		long size = 0L;
@@ -2230,13 +1778,6 @@ public class EgovFileTool {
 		return size;
 	}
 
-	/**
-	 * 파일(디렉토리)의 포맷을 조회하는 기능
-	 *
-	 * @param String file 파일(디렉토리)
-	 * @return String format 포맷
-	 * @exception Exception
-	 */
 	public static String getFormat(String file) throws Exception {
 
 		// 포맷, 타입
@@ -2258,15 +1799,6 @@ public class EgovFileTool {
 		return type;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 복사한다.
-	 * </pre>
-	 *
-	 * @param String originalDirPath 원본 디렉토리 의 절대경로
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @return boolean result 복사가 성공하면 true, 실패하면 false를 리턴한다.
-	 */
 	public static boolean copyDirectory(String originalDirPath, String targetDirPath) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -2323,17 +1855,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 복사한다. (생성일자 조건으로  복사)
-	 * </pre>
-	 *
-	 * @param String originalDirPath 원본 디렉토리 의 절대경로
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @param fromDate 디렉토리의 복사조건 시작일자
-	 * @param toDate 디렉토리의 복사조건 종료일자
-	 * @return boolean result 복사가 성공함변 true, 실패하면 false를 리턴한다.
-	 */
 	public static boolean copyDirectory(String originalDirPath, String targetDirPath, String fromDate, String toDate) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -2399,16 +1920,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 복사한다. (생성자 조건으로복사)
-	 * </pre>
-	 *
-	 * @param String originalDirPath 원본 디렉토리 의 절대경로
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @param String owner 디렉토리의 복사조건생성자
-	 * @return boolean result 복사가 성공함변 true, 실패하면 false를 리턴한다.
-	 */
 	public static boolean copyDirectory(String originalDirPath, String targetDirPath, String owner) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -2473,13 +1984,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * 디렉토리의 사이즈를 조회한다.
-	 *
-	 * @param String targetDirPath 디렉토리
-	 * @return long size 디렉토리사이즈
-	 * @exception Exception
-	 */
 	public static long getDirectorySize(String targetDirPath) throws Exception {
 
 		File f = new File(EgovWebUtil.filePathBlackList(targetDirPath));
@@ -2513,15 +2017,6 @@ public class EgovFileTool {
 		return size;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 이동한다.
-	 * </pre>
-	 *
-	 * @param String originalDirPath 원본 디렉토리 의 절대경로
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @return boolean result 이동이 성공하면 true, 실패하면 false를 리턴한다.
-	 */
 	public static boolean moveFile(String originalDirPath, String targetDirPath) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -2577,17 +2072,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 이동한다. (생성일자 조건으로 이동)
-	 * </pre>
-	 *
-	 * @param String originalDirPath 원본 디렉토리 의 절대경로
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @param fromDate 디렉토리의이동조건 시작일자
-	 * @param toDate 디렉토리의 이동조건 종료일자
-	 * @return boolean result 이동이 성공하면 true, 실패하면 false를 리턴한다.
-	 */
 	public static boolean moveFile(String originalDirPath, String targetDirPath, String fromDate, String toDate) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -2661,16 +2145,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리를 이동한다. (생성자 조건으로 이동)
-	 * </pre>
-	 *
-	 * @param String originalDirPath 원본 디렉토리 의 절대경로
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @param String owner 디렉토리의 이동조건생성자
-	 * @return boolean result 이동이 성공하면 true, 실패하면 false를 리턴한다.
-	 */
 	public static boolean moveFile(String originalDirPath, String targetDirPath, String owner) throws Exception {
 
 		// 인자값 유효하지 않은 경우 공백 리턴
@@ -2747,17 +2221,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리감시를 시작한다. 모니터링 시작시 해당 디렉토리의 이름으로 생성된 로그파일에 START기입하고 종료시END기입한다.
-	 *           (로그파일이 이미 존재하는 경우는 모니터링이 현재 진행중인 상태이므로 새로 감시기능을 시작하지 않는다.)
-	 * </pre>
-	 *
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @param String logFile 모니터링정보를 보관할 로그파일경로
-	 * @param String eventPrg 이벤트 발생시 동작할 프로그램
-	 * @return boolean result 모니터링 시작 여부를 리턴한다. (모니터링 시작했으면 true, 모니터링이 시작되지 않았으면 false)
-	 */
 	public static boolean startDirectoryMonitering(String targetDirPath) throws Exception {
 
 		// 인자값 유효하지 않은 경우 false 리턴
@@ -2807,16 +2270,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리감시를 종료한다. 모니터링 시작시 해당 디렉토리의 이름으로 생성된 로그파일에 START기입하고 종료시END기입한다.
-	 *           (로그파일이 존재하지 않는 경우는  모니터링이 아직 시작되지 않은 상태이므로별도로   종료하지 않는다.)
-	 * </pre>
-	 *
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @param String logFile 모니터링정보를 보관할 로그파일경로(감시프로세스 확인의 키값으로 사용된다)
-	 * @return boolean result 모니터링 시작 여부를 리턴한다. (모니터링 시작했으면 true, 모니터링이 시작되지 않았으면 false)
-	 */
 	public static boolean stopDirectoryMonitering(String targetDirPath) throws Exception {
 
 		// 인자값 유효하지 않은 경우 false 리턴
@@ -2872,15 +2325,6 @@ public class EgovFileTool {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리감시정보를 로그파일로부터 읽어온다.
-	 * </pre>
-	 *
-	 * @param String targetDirPath 타겟 디렉토리 의 절대경로
-	 * @param String logFile 모니터링정보를 보관하는 로그파일경로
-	 * @return ArrayList result 로그파일의 정보를 라인단위로 담아서 리턴한다.
-	 */
 	public static StringBuffer getDirectoryMoniteringInfo(String targetDirPath) throws Exception {
 
 		// 인자값 유효하지 않은 경우 빈 ArrayList 리턴

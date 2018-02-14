@@ -24,13 +24,6 @@ public class EgovFileCmprs {
 	final static  int BUFFER_SIZE = 64 * 1024;
 	final static  char FILE_SEPARATOR = File.separatorChar;
 
-	/**
-	 * 파일(디렉토리)을 압축하는 기능
-	 * @param String source 원본파일명(디렉토리명)
-	 * @param String target 압축파일명
-	 * @return boolean result 압축성공여부 True / False
-	 * @exception Exception
-	*/
 	public static boolean cmprsFile(String source, String target) throws Exception {
 
 		// 압축성공여부
@@ -129,13 +122,6 @@ public class EgovFileCmprs {
 		return result;
 	}
 
-	/**
-	 * 파일(디렉토리)을 압축해제하는 기능
-	 * @param String source 압축파일명
-	 * @param String target 압출이 풀릴 디렉토리
-	 * @return boolean result 압축해제성공여부 True / False
-	 * @exception Exception
-	*/
 	public static boolean decmprsFile(String source, String target) throws Exception {
 
 		// 압축해제성공여부

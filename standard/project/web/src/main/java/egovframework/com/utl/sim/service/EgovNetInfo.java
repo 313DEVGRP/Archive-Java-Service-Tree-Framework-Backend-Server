@@ -11,14 +11,6 @@ public class EgovNetInfo {
 	// 최대 문자길이
 	static final int MAX_STR_LEN = 1024;
 
-	/**
-	 * <pre>
-	 * Comment : 호스트 정보를 확인한다.
-	 * </pre>
-	 * @return String hostStr 호스트명을 리턴한다.(테스트용 함수)
-	 * @version 1.0 (2009.01.12.)
-	 * @see
-	 */
 	public static String getHostName() throws Exception {
 		// 실행할 명령을 프로퍼티 파일에서 확인한다.
 		String command = EgovProperties.getPathProperty(Globals.SHELL_FILE_PATH, "SHELL." + Globals.OS_TYPE + ".getHostName");

@@ -27,12 +27,6 @@ public class EgovSndngMailDetailServiceImpl extends EgovAbstractServiceImpl impl
 	@Resource(name = "EgovFileMngService")
 	private EgovFileMngService egovFileMngService;
 
-	/**
-	 * 발송메일을 상세 조회한다.
-	 * @param vo SndngMailVO
-	 * @return SndngMailVO
-	 * @exception Exception
-	 */
 	@Override
 	public SndngMailVO selectSndngMail(SndngMailVO vo) throws Exception {
 
@@ -42,11 +36,6 @@ public class EgovSndngMailDetailServiceImpl extends EgovAbstractServiceImpl impl
 		return resultMailVO;
 	}
 
-	/**
-	 * 발송메일을 삭제한다.
-	 * @param vo SndngMailVO
-	 * @exception
-	 */
 	@Override
 	public void deleteSndngMail(SndngMailVO vo) throws Exception {
 
@@ -58,11 +47,6 @@ public class EgovSndngMailDetailServiceImpl extends EgovAbstractServiceImpl impl
 		EgovFileTool.deleteFile(xmlFile);
 	}
 
-	/**
-	 * 첨부파일을 삭제한다.
-	 * @param vo SndngMailVO
-	 * @exception
-	 */
 	@Override
 	public void deleteAtchmnFile(SndngMailVO vo) throws Exception {
 

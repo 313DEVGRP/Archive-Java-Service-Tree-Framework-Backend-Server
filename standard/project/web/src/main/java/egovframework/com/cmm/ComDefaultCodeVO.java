@@ -27,11 +27,6 @@ public class ComDefaultCodeVO implements Serializable {
     /** 상세 조건 */
     private String detailCondition = "";
     
-    /**
-     * codeId attribute를 리턴한다.
-     * 
-     * @return the codeId
-     */
     public String getCodeId() {
 	return codeId;
     }

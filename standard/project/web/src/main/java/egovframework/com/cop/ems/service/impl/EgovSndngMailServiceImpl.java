@@ -22,18 +22,11 @@ public class EgovSndngMailServiceImpl extends EgovAbstractServiceImpl implements
 	@Resource(name = "egovMultiPartEmail")
 	private EgovMultiPartEmail egovMultiPartEmail;
 
-	/** SndngMailRegistDAO */
 	@Resource(name = "sndngMailRegistDAO")
 	private SndngMailRegistDAO sndngMailRegistDAO;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovSndngMailServiceImpl.class);
 
-	/**
-	 * 메일을 발송한다
-	 * @param vo SndngMailVO
-	 * @return boolean
-	 * @exception Exception
-	 */
 	@Override
 	@SuppressWarnings("unused")
 	public boolean sndngMail(SndngMailVO sndngMailVO) throws Exception {

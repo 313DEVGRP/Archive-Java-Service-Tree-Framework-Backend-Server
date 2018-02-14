@@ -28,49 +28,16 @@ public class EgovFtpTool {
 	// Log
 	//protected static final Log log = LogFactory.getLog(EgovFtpTool.class);
 
-	/**
-	 * FTP 서버로부터 파일을 수신 하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param String remote 수신할 파일명
-	 * @return boolean result 수신성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean getFile(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, String remote) throws Exception {
 
 		return getFile(ftp_ip, ftp_port, ftp_id, ftp_pw, ASCII_MODE, remote, null);
 	}
 
-	/**
-	 * FTP 서버로부터 파일을 수신 하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param int ftp_mode 전송모드(ASCII, BINARY)
-	 * @param String remote 수신할 파일명
-	 * @return boolean result 수신성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean getFile(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, int ftp_mode, String remote) throws Exception {
 
 		return getFile(ftp_ip, ftp_port, ftp_id, ftp_pw, ftp_mode, remote, null);
 	}
 
-	/**
-	 * FTP 서버로부터 파일을 수신 하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param int ftp_mode 전송모드(ASCII, BINARY)
-	 * @param String remote 수신할 파일명
-	 * @param String local 전송받을 파일명
-	 * @return boolean result 수신성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean getFile(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, int ftp_mode, String remote, String local) throws Exception {
 
 		// 수신결과
@@ -119,18 +86,6 @@ public class EgovFtpTool {
 		return result;
 	}
 
-	/**
-	 * FTP 서버로부터 파일을 읽어 byte[] 로 반환하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param int ftp_mode 전송모드(ASCII, BINARY)
-	 * @param String remote 수신할 파일명
-	 * @param String local 수신받을 파일명
-	 * @return byte[] buffer 실제파일데이터
-	 * @exception Exception
-	*/
 	public static byte[] getFileAsByte(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, int ftp_mode, String remote, String local) throws Exception {
 
 		// 수신결과
@@ -182,49 +137,16 @@ public class EgovFtpTool {
 		return outByte;
 	}
 
-	/**
-	 * FTP 서버로 파일을 송신 하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param String local 송신할 파일명
-	 * @return boolean result 송신성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean sendFile(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, String local) throws Exception {
 
 		return sendFile(ftp_ip, ftp_port, ftp_id, ftp_pw, ASCII_MODE, local, null);
 	}
 
-	/**
-	 * FTP 서버로 파일을 송신 하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param int ftp_mode 전송모드(ASCII, BINARY)
-	 * @param String local 송신할 파일명
-	 * @return boolean result 송신성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean sendFile(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, int ftp_mode, String local) throws Exception {
 
 		return sendFile(ftp_ip, ftp_port, ftp_id, ftp_pw, ftp_mode, local, null);
 	}
 
-	/**
-	 * FTP 서버로 파일을 송신 하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param int ftp_mode 전송모드(ASCII, BINARY)
-	 * @param String local 송신할 파일명
-	 * @param String remote 송신될 파일명
-	 * @return boolean result 송신성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean sendFile(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, int ftp_mode, String local, String remote) throws Exception {
 
 		// 송신결과
@@ -268,18 +190,6 @@ public class EgovFtpTool {
 		return result;
 	}
 
-	/**
-	 * FTP 서버로 데이터(InputStream)를 송신 하는 기능
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param int ftp_mode 전송모드(ASCII, BINARY)
-	 * @param String local 송신할 파일명
-	 * @param String remote 송신될 파일명
-	 * @return boolean result 송신성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean sendFile(String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, int ftp_mode, InputStream data, String remote) throws Exception {
 
 		// 송신결과
@@ -320,17 +230,6 @@ public class EgovFtpTool {
 		return result;
 	}
 
-	/**
-	 * FTP 클라이언트 연결 기능
-	 * @param FTPClient ftpClient FTP 클라이언트 객체
-	 * @param String ftp_ip 아이피
-	 * @param int ftp_port 포트
-	 * @param String ftp_id 아이디
-	 * @param String ftp_pw 비밀번호
-	 * @param int ftp_ssmode 전송 모드
-	 * @return boolean result 연결성공여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean connect(FTPClient ftpClient, String ftp_ip, int ftp_port, String ftp_id, String ftp_pw, int ftp_mode) throws Exception {
 
 		boolean result = false;
@@ -355,24 +254,12 @@ public class EgovFtpTool {
 		return result;
 	}
 
-	/**
-	 * FTP 클라이언트 연결 종료 기능
-	 * @param FTPClient ftpClient FTP 클라이언트 객체
-	 * @exception Exception
-	*/
 	public static void disconnect(FTPClient ftpClient) throws Exception {
 		if (ftpClient != null && ftpClient.isConnected()) {
 			ftpClient.disconnect();
 		}
 	}
 
-	/**
-	 * FTP 서버의 디렉토리로 이동하는 기능
-	 * @param FTPClient ftpClient FTP 클라이언트 객체
-	 * @param String remote_drctry 이동할 디렉토리
-	 * @return boolean result 디렉토리이동여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean changeRemoteDrctry(FTPClient ftpClient, String remote_drctry) throws Exception {
 
 		boolean result = false;
@@ -394,12 +281,6 @@ public class EgovFtpTool {
 		return result;
 	}
 
-	/**
-	 * 파일명이 포함된 전체경로를 주면 파일경로와 파일명으로 분리
-	 * @param String fullpath 전체경로
-	 * @return String[] path 파일경로[0], 파일명[1]
-	 * @exception Exception
-	*/
 	public static String[] splitPathAndName(String path, String fileSep) {
 
 		String[] split = new String[2];

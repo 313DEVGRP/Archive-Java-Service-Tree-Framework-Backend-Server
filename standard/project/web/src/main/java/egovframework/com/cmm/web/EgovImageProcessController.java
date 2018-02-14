@@ -34,8 +34,6 @@ public class EgovImageProcessController extends HttpServlet {
     @RequestMapping("/cmm/fms/getImage.do")
     public void getImageInf(SessionVO sessionVO, ModelMap model, @RequestParam Map<String, Object> commandMap, HttpServletResponse response) throws Exception {
 
-		//@RequestParam("atchFileId") String atchFileId,
-		//@RequestParam("fileSn") String fileSn,
 		String atchFileId = (String)commandMap.get("atchFileId");
 		String fileSn = (String)commandMap.get("fileSn");
 

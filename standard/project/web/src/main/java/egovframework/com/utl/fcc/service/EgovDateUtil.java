@@ -244,12 +244,6 @@ public class EgovDateUtil {
 		return sdf.format(cal.getTime());
 	}
 
-	/**
-	 * 입력받은 일자 사이의 임의의 일자를 반환
-	 * @param sDate1 시작일자
-	 * @param sDate2 종료일자
-	 * @return 임의일자
-	 */
 	public static String getRandomDate(String sDate1, String sDate2) {
 		String dateStr1 = validChkDate(sDate1);
 		String dateStr2 = validChkDate(sDate2);
@@ -290,11 +284,6 @@ public class EgovDateUtil {
 		return randomDate;
 	}
 
-	/**
-	 * 입력받은 양력일자를 변환하여 음력일자로 반환
-	 * @param sDate 양력일자
-	 * @return 음력일자
-	 */
 	public static Map<String, String> toLunar(String sDate) {
 		String dateStr = validChkDate(sDate);
 
@@ -338,12 +327,6 @@ public class EgovDateUtil {
 		return hm;
 	}
 
-	/**
-	 * 입력받은 음력일자를 변환하여 양력일자로 반환
-	 * @param sDate 음력일자
-	 * @param iLeapMonth 음력윤달여부(IS_LEAP_MONTH)
-	 * @return 양력일자
-	 */
 	public static String toSolar(String sDate, int iLeapMonth) {
 		String dateStr = validChkDate(sDate);
 
@@ -374,11 +357,6 @@ public class EgovDateUtil {
 		return retYear + retMonth + retDay;
 	}
 
-	/**
-	 * 입력받은 요일의 영문명을 국문명의 요일로 반환
-	 * @param sWeek 영문 요일명
-	 * @return 국문 요일명
-	 */
 	public static String convertWeek(String sWeek) {
 		String retStr = null;
 
@@ -401,11 +379,6 @@ public class EgovDateUtil {
 		return retStr;
 	}
 
-	/**
-	 * 입력일자의 유효 여부를 확인
-	 * @param sDate 일자
-	 * @return 유효 여부
-	 */
 	public static boolean validDate(String sDate) {
 		String dateStr = validChkDate(sDate);
 
@@ -438,12 +411,6 @@ public class EgovDateUtil {
 		return ret;
 	}
 
-	/**
-	 * 입력일자, 요일의 유효 여부를 확인
-	 * @param     sDate 일자
-	 * @param     sWeek 요일 (DAY_OF_WEEK)
-	 * @return    유효 여부
-	 */
 	public static boolean validDate(String sDate, int sWeek) {
 		String dateStr = validChkDate(sDate);
 
@@ -467,11 +434,6 @@ public class EgovDateUtil {
 		return ret;
 	}
 
-	/**
-	 * 입력시간의 유효 여부를 확인
-	 * @param     sTime 입력시간
-	 * @return    유효 여부
-	 */
 	public static boolean validTime(String sTime) {
 		String timeStr = validChkTime(sTime);
 
@@ -500,14 +462,6 @@ public class EgovDateUtil {
 		return ret;
 	}
 
-	/**
-	 * 입력된 일자에 연, 월, 일을 가감한 날짜의 요일을 반환
-	 * @param sDate 날짜
-	 * @param year 연
-	 * @param month 월
-	 * @param day 일
-	 * @return 계산된 일자의 요일(DAY_OF_WEEK)
-	 */
 	public static String addYMDtoWeek(String sDate, int year, int month, int day) {
 		String dateStr = validChkDate(sDate);
 
@@ -526,18 +480,6 @@ public class EgovDateUtil {
 		return rsdf.format(cal.getTime());
 	}
 
-	/**
-	 * 입력된 일자에 연, 월, 일, 시간, 분을 가감한 날짜, 시간을 포멧스트링 형식으로 반환
-	 * @param sDate 날짜
-	 * @param sTime 시간
-	 * @param year 연
-	 * @param month 월
-	 * @param day 일
-	 * @param hour 시간
-	 * @param minute 분
-	 * @param formatStr 포멧스트링
-	 * @return
-	 */
 	public static String addYMDtoDayTime(String sDate, String sTime, int year, int month, int day, int hour, int minute, String formatStr) {
 		String dateStr = validChkDate(sDate);
 		String timeStr = validChkTime(sTime);
@@ -568,20 +510,10 @@ public class EgovDateUtil {
 		return rsdf.format(cal.getTime());
 	}
 
-	/**
-	 * 입력된 일자를 int 형으로 반환
-	 * @param sDate 일자
-	 * @return int(일자)
-	 */
 	public static int datetoInt(String sDate) {
 		return Integer.parseInt(convertDate(sDate, "0000", "yyyyMMdd"));
 	}
 
-	/**
-	 * 입력된 시간을 int 형으로 반환
-	 * @param sTime 시간
-	 * @return int(시간)
-	 */
 	public static int timetoInt(String sTime) {
 		return Integer.parseInt(convertDate("00000101", sTime, "HHmm"));
 	}

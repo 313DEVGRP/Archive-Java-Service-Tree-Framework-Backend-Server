@@ -23,33 +23,16 @@ public class EgovSndngMailDtlsServiceImpl extends EgovAbstractServiceImpl implem
 	@Resource(name = "sndngMailDetailService")
 	private EgovSndngMailDetailService sndngMailDetailService;
 
-	/**
-	 * 발송메일 목록을 조회한다.
-	 * @param vo ComDefaultVO
-	 * @return List
-	 * @exception Exception
-	 */
 	@Override
 	public List<?> selectSndngMailList(ComDefaultVO vo) throws Exception {
 		return sndngMailDtlsDAO.selectSndngMailList(vo);
 	}
 
-	/**
-	 * 발송메일 총건수를 조회한다.
-	 * @param vo ComDefaultVO
-	 * @return int
-	 * @exception
-	 */
 	@Override
 	public int selectSndngMailListTotCnt(ComDefaultVO vo) throws Exception {
 		return sndngMailDtlsDAO.selectSndngMailListTotCnt(vo);
 	}
 
-	/**
-	 * 발송메일을 삭제한다.
-	 * @param vo SndngMailVO
-	 * @exception
-	 */
 	@Override
 	public void deleteSndngMailList(SndngMailVO vo) throws Exception {
 

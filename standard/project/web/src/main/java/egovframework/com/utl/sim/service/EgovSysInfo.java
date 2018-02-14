@@ -24,11 +24,6 @@ public class EgovSysInfo {
 	// Log
 	//protected static final Log log = LogFactory.getLog(EgovSysInfo.class);
 
-	/**
-	 * 시스템에 존재하는 서버목록을 조회하는 기능
-	 * @return Vector server_list 서버목록
-	 * @exception Exception
-	*/
 	public static Vector<Map<String, String>> getPrductList() throws Exception {
 
 		String strlist = EgovProperties.getProperty(Globals.SERVER_CONF_PATH, "SERVER_LIST");
@@ -50,12 +45,6 @@ public class EgovSysInfo {
 		return serverList;
 	}
 
-	/**
-	 * 시스템에 존재하는 서버의 제품명, 버전정보를 조회하는 기능
-	 * @param String server 서버명
-	 * @return String version 버전
-	 * @exception Exception
-	*/
 	public static String getPrductVersion(String server) throws Exception {
 
 		String version = EgovProperties.getProperty(Globals.SERVER_CONF_PATH, server.toUpperCase() + ".VERSION");
@@ -63,12 +52,6 @@ public class EgovSysInfo {
 		return version;
 	}
 
-	/**
-	 * 시스템에 존재하는 서버의 포트 정보를 조회하는 기능
-	 * @param String server 서버명
-	 * @return String port 포트
-	 * @exception Exception
-	*/
 	public static String getPrductPort(String server) throws Exception {
 
 		String port = EgovProperties.getProperty(Globals.SERVER_CONF_PATH, server.toUpperCase() + ".PORT");
@@ -76,12 +59,6 @@ public class EgovSysInfo {
 		return port;
 	}
 
-	/**
-	 * 시스템에 존재하는 서버의 실행상태 정보를 조회하는 기능
-	 * @param String port 사용포트
-	 * @return String status 실행상태
-	 * @exception Exception
-	*/
 	public static String getPrductStatus(String port) throws Exception {
 
 		String status = "CLOSE";
@@ -126,11 +103,6 @@ public class EgovSysInfo {
 		return status;
 	}
 
-	/**
-	 * 시스템의 호스트명을 조회하는 기능
-	 * @return String hostName 호스트명
-	 * @exception Exception
-	*/
 	public static String getHostName() throws Exception {
 
 		// 호스트명 결과
@@ -164,11 +136,6 @@ public class EgovSysInfo {
 		return hostName;
 	}
 
-	/**
-	 * 시스템의 OS 이름을 조회하는 기능
-	 * @return String osname OS이름
-	 * @exception Exception
-	*/
 	public static String getOSName() throws Exception {
 
 		// OS 이름
@@ -215,11 +182,6 @@ public class EgovSysInfo {
 		return osname;
 	}
 
-	/**
-	 * 시스템의 OS 버전을 조회하는 기능
-	 * @return String osversion OS버전
-	 * @exception Exception
-	*/
 	public static String getOSVersion() throws Exception {
 
 		// OS 버전
@@ -265,11 +227,6 @@ public class EgovSysInfo {
 		return osversion;
 	}
 
-	/**
-	 * 시스템의 OS 제조사를 조회하는 기능
-	 * @return String osprductor OS제조사
-	 * @exception Exception
-	*/
 	public static String getOSPrductor() throws Exception {
 
 		// OS 제조사
@@ -315,11 +272,6 @@ public class EgovSysInfo {
 		return osprductor;
 	}
 
-	/**
-	 * 시스템의 Processor ID를 조회하는 기능
-	 * @return String processor 프로세서ID
-	 * @exception Exception
-	*/
 	public static String getProcessorID() throws Exception {
 
 		// 프로세서ID
@@ -366,11 +318,6 @@ public class EgovSysInfo {
 		return processor;
 	}
 
-	/**
-	 * 시스템의 디스크명을 확인
-	 * @return ArrayList list 디스크명이 담긴 목록
-	 * @exception Exception
-	*/
 	public static List<String> getDiskName() throws Exception {
 
 		// 디스크명
@@ -409,12 +356,6 @@ public class EgovSysInfo {
 		return list;
 	}
 
-	/**
-	 * 시스템의 디스크 전체용량을 확인
-	 * @param String disk 디스크명
-	 * @return long cpcty 디스크 전체용량(MB)
-	 * @exception Exception
-	*/
 	public static float getDiskFullCpcty(String disk) throws Exception {
 
 		// 디스크 전체용량
@@ -452,12 +393,6 @@ public class EgovSysInfo {
 		return cpcty;
 	}
 
-	/**
-	 * 시스템의 디스크 사용중 용량을 확인
-	 * @param String disk 디스크명
-	 * @return long cpcty 디스크 사용중 용량(MB)
-	 * @exception Exception
-	*/
 	public static float getDiskUsedCpcty(String disk) throws Exception {
 
 		// 디스크 사용중 용량
@@ -495,12 +430,6 @@ public class EgovSysInfo {
 		return cpcty;
 	}
 
-	/**
-	 * 시스템의 디스크 유효 용량을 확인
-	 * @param String disk 디스크명
-	 * @return long cpcty 디스크 유효 용량(MB)
-	 * @exception Exception
-	*/
 	public static float getDiskFreeCpcty(String disk) throws Exception {
 
 		// 디스크 유효 용량
@@ -539,11 +468,6 @@ public class EgovSysInfo {
 		return cpcty;
 	}
 
-	/**
-	 * 시스템의 메모리 전체용량을 확인
-	 * @return long cpcty 메모리 전체용량(MB)
-	 * @exception Exception
-	*/
 	public static float getMoryFullCpcty() throws Exception {
 
 		// 메모리 전체 용량
@@ -594,11 +518,6 @@ public class EgovSysInfo {
 		*/
 	}
 
-	/**
-	 * 시스템의 메모리 사용중 용량을 확인
-	 * @return long cpcty 메모리 사용중 용량(MB)
-	 * @exception Exception
-	*/
 	public static float getMoryUsedCpcty() throws Exception {
 
 		// 메모리 사용중 용량
@@ -654,11 +573,6 @@ public class EgovSysInfo {
 		return cpcty;
 	}
 
-	/**
-	 * 시스템의 메모리 유효 용량을 확인
-	 * @return long cpcty 메모리 유효 용량
-	 * @exception Exception
-	*/
 	public static float getMoryFreeCpcty() throws Exception {
 
 		// 메모리 유효 용량
@@ -705,12 +619,6 @@ public class EgovSysInfo {
 		return cpcty;
 	}
 
-	/**
-	 * 특정 프로그램을 실행시키기 위해 메모리용량이 충분한지 확인
-	 * @param String memory 메모리용량(MB)
-	 * @return boolean 가용여부 True/False
-	 * @exception Exception
-	*/
 	public static boolean checkMoryCpcty(long memory) throws Exception {
 
 		// 가용여부
@@ -728,12 +636,6 @@ public class EgovSysInfo {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디스크속성정보를 확인한다.
-	 * </pre>
-	 * @return ArrayList result  디스크속성정보를 라인단위로 담은 ArrayList를 리턴한다.
-	 */
 	public static List<String> getDiskAttribute() {
 
 		List<String> result = new ArrayList<String>();
@@ -747,12 +649,6 @@ public class EgovSysInfo {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디스크용량정보를 확인한다.
-	 * </pre>
-	 * @return ArrayList result  디스크용량정보를 라인단위로 담은 ArrayList를 리턴한다.
-	 */
 	public static List<String> getDiskCapacity() {
 
 		List<String> result = new ArrayList<String>();
@@ -766,12 +662,6 @@ public class EgovSysInfo {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디스크존재여부를 확인한다.
-	 * </pre>
-	 * @return ArrayList result  디스크존재여부를 라인단위로 담은 ArrayList를 리턴한다.
-	 */
 	public static List<String> getExistDisk(String diskName) {
 
 		List<String> result = new ArrayList<String>();
@@ -785,13 +675,6 @@ public class EgovSysInfo {
 		return result;
 	}
 
-	/**
-	 * 시스템에서 특정 쉘프로그램을 동작하고 콘솔에 출력된 결과를 라인단위로 ArrayList에 담아서 전달한다.
-	 * @param String propertyKeyword 프로퍼티키워드 -프로퍼티에서 해당키에 대한 프로그램정보를 확인)
-	 * @param String[] command 실행할  프로그램의 argument
-	 * @return ArrayList resultTxtList 콘솔상에 출력된 결과를 라인단위 문자열로 보관
-	 * @exception Exception
-	*/
 	public static List<String> executeProgram(String propertyKeyword, String[] command) throws Exception {
 
 		List<String> resultTxtList = new ArrayList<String>();
@@ -832,15 +715,6 @@ public class EgovSysInfo {
 		return resultTxtList;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 프로세스 정보를 확인한다. (
-	 * </pre>
-	 * @param
-	 * @return List<String[]> 프로세스 정보를 리턴한다.
-	 * @version 1.0 (2009.01.12.)
-	 * @see
-	 */
 	public static List<String[]> getProcessId() {
 
 		List<String[]> processes = new ArrayList<String[]>();
@@ -900,15 +774,6 @@ public class EgovSysInfo {
 		return processes;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 프로세스 정보를 확인한다. (
-	 * </pre>
-	 * @param String processName
-	 * @return List<String[]> 프로세스 정보를 리턴한다.
-	 * @version 1.0 (2009.01.12.)
-	 * @see
-	 */
 	public static List<String[]> getProcessId(String processName) {
 		//log.debug("getProcessId_start");
 		List<String[]> processes = new ArrayList<String[]>();

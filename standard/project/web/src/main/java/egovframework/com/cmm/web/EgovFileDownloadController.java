@@ -99,12 +99,6 @@ public class EgovFileDownloadController {
 				setDisposition(fvo.getOrignlFileNm(), request, response);
 				//response.setContentLength(fSize);
 
-				/*
-				 * FileCopyUtils.copy(in, response.getOutputStream());
-				 * in.close();
-				 * response.getOutputStream().flush();
-				 * response.getOutputStream().close();
-				 */
 				BufferedInputStream in = null;
 				BufferedOutputStream out = null;
 

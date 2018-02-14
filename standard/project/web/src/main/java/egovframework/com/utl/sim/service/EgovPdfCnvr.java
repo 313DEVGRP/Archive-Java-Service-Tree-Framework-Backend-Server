@@ -35,16 +35,6 @@ public class EgovPdfCnvr {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovPdfCnvr.class);
 
-	/**
-	 * <pre>
-	 * Comment : doc, xls 파일등을 PDF변환 변환한다. .
-	 * </pre>
-	 * @param String pdfFileSrc        doc, xls 파일 전체경로
-	 * @param String targetPdf         변환파일명(확장자 제외)
-	 * @return boolean  status         true/false 를 리턴한다.
-	 * @version 1.0 (2009.02.10)
-	 * @see
-	 */
 	public static boolean getPDF(String targetPdf, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean status = false;
 
@@ -105,13 +95,6 @@ public class EgovPdfCnvr {
 		return status;
 	}
 
-	/**
-	 * 파일을 실제 물리적인 경로에 생성한다.
-	 * @param file
-	 * @param newName
-	 * @param stordFilePath
-	 * @throws Exception
-	 */
 	protected static void writeFile(MultipartFile file, String newName, String stordFilePath) throws IOException {
 		InputStream stream = null;
 		OutputStream bos = null;

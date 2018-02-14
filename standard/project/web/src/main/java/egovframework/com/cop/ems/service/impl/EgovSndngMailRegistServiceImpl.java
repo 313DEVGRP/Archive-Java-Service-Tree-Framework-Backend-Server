@@ -38,12 +38,6 @@ public class EgovSndngMailRegistServiceImpl extends EgovAbstractServiceImpl impl
 	@Resource(name = "EgovFileMngService")
 	private EgovFileMngService fileService;
 
-	/**
-	 * 발송할 메일을 등록한다
-	 * @param vo SndngMailVO
-	 * @return boolean
-	 * @exception Exception
-	 */
 	@Override
 	public boolean insertSndngMail(SndngMailVO vo) throws Exception {
 
@@ -100,12 +94,6 @@ public class EgovSndngMailRegistServiceImpl extends EgovAbstractServiceImpl impl
 		return true;
 	}
 
-	/**
-	 * 발송할 메일을 XML파일로 만들어 저장한다.
-	 * @param vo SndngMailVO
-	 * @return boolean
-	 * @exception Exception
-	 */
 	@Override
 	public boolean trnsmitXmlData(SndngMailVO vo) throws Exception {
 
@@ -144,12 +132,6 @@ public class EgovSndngMailRegistServiceImpl extends EgovAbstractServiceImpl impl
 		return result;
 	}
 
-	/**
-	 * 발송메일 발송결과 XML파일을 읽어 발송결과코드에 수정한다.
-	 * @param xml String
-	 * @return boolean
-	 * @exception Exception
-	 */
 	@Override
 	public boolean recptnXmlData(String xmlFile) throws Exception {
 

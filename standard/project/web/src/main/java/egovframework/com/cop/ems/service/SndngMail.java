@@ -17,114 +17,58 @@ public class SndngMail {
 	/** 발신일자 */
 	private String sndngDe;
 
-	/**
-	 * dsptchPerson attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getDsptchPerson() {
 		return dsptchPerson;
 	}
 
-	/**
-	 * dsptchPerson attribute 값을 설정한다.
-	 * @param dsptchPerson String
-	 */
 	public void setDsptchPerson(String dsptchPerson) {
 		this.dsptchPerson = dsptchPerson;
 	}
 
-	/**
-	 * emailCn attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getEmailCn() {
 		return emailCn;
 	}
 
-	/**
-	 * emailCn attribute 값을 설정한다.
-	 * @param emailCn String
-	 */
 	public void setEmailCn(String emailCn) {
 		this.emailCn = emailCn;
 	}
 
-	/**
-	 * mssageId attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getMssageId() {
 		return mssageId;
 	}
 
-	/**
-	 * mssageId attribute 값을 설정한다.
-	 * @param mssageId String
-	 */
 	public void setMssageId(String mssageId) {
 		this.mssageId = mssageId;
 	}
 
-	/**
-	 * recptnPerson attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getRecptnPerson() {
 		return recptnPerson;
 	}
 
-	/**
-	 * recptnPerson attribute 값을 설정한다.
-	 * @param recptnPerson String
-	 */
 	public void setRecptnPerson(String recptnPerson) {
 		this.recptnPerson = recptnPerson;
 	}
 
-	/**
-	 * sj attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getSj() {
 		return sj;
 	}
 
-	/**
-	 * sj attribute 값을 설정한다.
-	 * @param sj String
-	 */
 	public void setSj(String sj) {
 		this.sj = sj;
 	}
 
-	/**
-	 * sndngResultCode attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getSndngResultCode() {
 		return sndngResultCode;
 	}
 
-	/**
-	 * sndngResultCode attribute 값을 설정한다.
-	 * @param sndngResultCode String
-	 */
 	public void setSndngResultCode(String sndngResultCode) {
 		this.sndngResultCode = sndngResultCode;
 	}
 
-	/**
-	 * sndngDe attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getSndngDe() {
 		return sndngDe;
 	}
 
-	/**
-	 * sndngDe attribute 값을 설정한다.
-	 * @param sndngDe String
-	 */
 	public void setSndngDe(String sndngDe) {
 		this.sndngDe = sndngDe;
 	}

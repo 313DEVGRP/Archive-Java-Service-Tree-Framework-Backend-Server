@@ -73,28 +73,11 @@ public class EgovFormBasedUUID implements Serializable {
         this.leastSigBits = lsb;
     }
 
-    /**
-     * Constructs a new <tt>UUID</tt> using the specified data.
-     * <tt>mostSigBits</tt> is used for the most significant 64 bits of the
-     * <tt>UUID</tt> and <tt>leastSigBits</tt> becomes the least significant
-     * 64 bits of the <tt>UUID</tt>.
-     *
-     * @param mostSigBits
-     * @param leastSigBits
-     */
     public EgovFormBasedUUID(long mostSigBits, long leastSigBits) {
         this.mostSigBits = mostSigBits;
         this.leastSigBits = leastSigBits;
     }
 
-    /**
-     * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
-     *
-     * The <code>UUID</code> is generated using a cryptographically strong
-     * pseudo random number generator.
-     *
-     * @return a randomly generated <tt>UUID</tt>.
-     */
     public static EgovFormBasedUUID randomUUID() {
         SecureRandom ng = numberGenerator;
         if (ng == null) {
@@ -111,14 +94,6 @@ public class EgovFormBasedUUID implements Serializable {
         return new EgovFormBasedUUID(randomBytes);
     }
 
-    /**
-     * Static factory to retrieve a type 3 (name based) <tt>UUID</tt> based on
-     * the specified byte array.
-     *
-     * @param name
-     *            a byte array to be used to construct a <tt>UUID</tt>.
-     * @return a <tt>UUID</tt> generated from the specified array.
-     */
     public static EgovFormBasedUUID nameUUIDFromBytes(byte[] name) {
         MessageDigest md;
         try {
@@ -156,17 +131,6 @@ public class EgovFormBasedUUID implements Serializable {
         return new EgovFormBasedUUID(md5Bytes);
     }
 
-    /**
-     * Creates a <tt>UUID</tt> from the string standard representation as
-     * described in the {@link #toString} method.
-     *
-     * @param name
-     *            a string that specifies a <tt>UUID</tt>.
-     * @return a <tt>UUID</tt> with the specified value.
-     * @throws IllegalArgumentException
-     *             if name does not conform to the string representation as
-     *             described in {@link #toString}.
-     */
     public static EgovFormBasedUUID fromString(String name) {
         String[] components = name.split("-");
         if (components.length != 5)
@@ -189,39 +153,14 @@ public class EgovFormBasedUUID implements Serializable {
 
     // Field Accessor Methods
 
-    /**
-     * Returns the least significant 64 bits of this UUID's 128 bit value.
-     *
-     * @return the least significant 64 bits of this UUID's 128 bit value.
-     */
     public long getLeastSignificantBits() {
         return leastSigBits;
     }
 
-    /**
-     * Returns the most significant 64 bits of this UUID's 128 bit value.
-     *
-     * @return the most significant 64 bits of this UUID's 128 bit value.
-     */
     public long getMostSignificantBits() {
         return mostSigBits;
     }
 
-    /**
-     * The version number associated with this <tt>UUID</tt>. The version
-     * number describes how this <tt>UUID</tt> was generated.
-     *
-     * The version number has the following meaning:
-     * <p>
-     * <ul>
-     * <li>1 Time-based UUID
-     * <li>2 DCE security UUID
-     * <li>3 Name-based UUID
-     * <li>4 Randomly generated UUID
-     * </ul>
-     *
-     * @return the version number of this <tt>UUID</tt>.
-     */
     public int version() {
         if (version < 0) {
             // Version is bits masked by 0x000000000000F000 in MS long
@@ -230,21 +169,6 @@ public class EgovFormBasedUUID implements Serializable {
         return version;
     }
 
-    /**
-     * The variant number associated with this <tt>UUID</tt>. The variant
-     * number describes the layout of the <tt>UUID</tt>.
-     *
-     * The variant number has the following meaning:
-     * <p>
-     * <ul>
-     * <li>0 Reserved for NCS backward compatibility
-     * <li>2 The Leach-Salz variant (used by this class)
-     * <li>6 Reserved, Microsoft Corporation backward compatibility
-     * <li>7 Reserved for future definition
-     * </ul>
-     *
-     * @return the variant number of this <tt>UUID</tt>.
-     */
     public int variant() {
         if (variant < 0) {
             // This field is composed of a varying number of bits
@@ -259,22 +183,6 @@ public class EgovFormBasedUUID implements Serializable {
         return variant;
     }
 
-    /**
-     * The timestamp value associated with this UUID.
-     *
-     * <p>
-     * The 60 bit timestamp value is constructed from the time_low, time_mid,
-     * and time_hi fields of this <tt>UUID</tt>. The resulting timestamp is
-     * measured in 100-nanosecond units since midnight, October 15, 1582 UTC.
-     * <p>
-     *
-     * The timestamp value is only meaningful in a time-based UUID, which has
-     * version type 1. If this <tt>UUID</tt> is not a time-based UUID then
-     * this method throws UnsupportedOperationException.
-     *
-     * @throws UnsupportedOperationException
-     *             if this UUID is not a version 1 UUID.
-     */
     public long timestamp() {
         if (version() != 1) {
             throw new UnsupportedOperationException("Not a time-based UUID");
@@ -289,23 +197,6 @@ public class EgovFormBasedUUID implements Serializable {
         return result;
     }
 
-    /**
-     * The clock sequence value associated with this UUID.
-     *
-     * <p>
-     * The 14 bit clock sequence value is constructed from the clock sequence
-     * field of this UUID. The clock sequence field is used to guarantee
-     * temporal uniqueness in a time-based UUID.
-     * <p>
-     *
-     * The clockSequence value is only meaningful in a time-based UUID, which
-     * has version type 1. If this UUID is not a time-based UUID then this
-     * method throws UnsupportedOperationException.
-     *
-     * @return the clock sequence of this <tt>UUID</tt>.
-     * @throws UnsupportedOperationException
-     *             if this UUID is not a version 1 UUID.
-     */
     public int clockSequence() {
         if (version() != 1) {
             throw new UnsupportedOperationException("Not a time-based UUID");
@@ -316,23 +207,6 @@ public class EgovFormBasedUUID implements Serializable {
         return sequence;
     }
 
-    /**
-     * The node value associated with this UUID.
-     *
-     * <p>
-     * The 48 bit node value is constructed from the node field of this UUID.
-     * This field is intended to hold the IEEE 802 address of the machine that
-     * generated this UUID to guarantee spatial uniqueness.
-     * <p>
-     *
-     * The node value is only meaningful in a time-based UUID, which has version
-     * type 1. If this UUID is not a time-based UUID then this method throws
-     * UnsupportedOperationException.
-     *
-     * @return the node value of this <tt>UUID</tt>.
-     * @throws UnsupportedOperationException
-     *             if this UUID is not a version 1 UUID.
-     */
     public long node() {
         if (version() != 1) {
             throw new UnsupportedOperationException("Not a time-based UUID");
@@ -345,32 +219,6 @@ public class EgovFormBasedUUID implements Serializable {
 
     // Object Inherited Methods
 
-    /**
-     * Returns a <code>String</code> object representing this
-     * <code>UUID</code>.
-     *
-     * <p>
-     * The UUID string representation is as described by this BNF :
-     *
-     * <pre>
-     *    UUID                   = &lt;time_low&gt; &quot;-&quot; &lt;time_mid&gt; &quot;-&quot;
-     *                             &lt;time_high_and_version&gt; &quot;-&quot;
-     *                             &lt;variant_and_sequence&gt; &quot;-&quot;
-     *                             &lt;node&gt;
-     *    time_low               = 4*&lt;hexOctet&gt;
-     *    time_mid               = 2*&lt;hexOctet&gt;
-     *    time_high_and_version  = 2*&lt;hexOctet&gt;
-     *    variant_and_sequence   = 2*&lt;hexOctet&gt;
-     *    node                   = 6*&lt;hexOctet&gt;
-     *    hexOctet               = &lt;hexDigit&gt;&lt;hexDigit&gt;
-     *    hexDigit               =
-     *          &quot;0&quot; | &quot;1&quot; | &quot;2&quot; | &quot;3&quot; | &quot;4&quot; | &quot;5&quot; | &quot;6&quot; | &quot;7&quot; | &quot;8&quot; | &quot;9&quot;
-     *          | &quot;a&quot; | &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;f&quot;
-     *          | &quot;A&quot; | &quot;B&quot; | &quot;C&quot; | &quot;D&quot; | &quot;E&quot; | &quot;F&quot;
-     * </pre>
-     *
-     * @return a string representation of this <tt>UUID</tt>.
-     */
     @Override
 	public String toString() {
         return (digits(mostSigBits >> 32, 8) + "-"
@@ -385,11 +233,6 @@ public class EgovFormBasedUUID implements Serializable {
         return Long.toHexString(hi | (val & (hi - 1))).substring(1);
     }
 
-    /**
-     * Returns a hash code for this <code>UUID</code>.
-     *
-     * @return a hash code value for this <tt>UUID</tt>.
-     */
     @Override
 	public int hashCode() {
         if (hashCode == -1) {
@@ -399,17 +242,6 @@ public class EgovFormBasedUUID implements Serializable {
         return hashCode;
     }
 
-    /**
-     * Compares this object to the specified object. The result is <tt>true</tt>
-     * if and only if the argument is not <tt>null</tt>, is a <tt>UUID</tt>
-     * object, has the same variant, and contains the same value, bit for bit,
-     * as this <tt>UUID</tt>.
-     *
-     * @param obj
-     *            the object to compare with.
-     * @return <code>true</code> if the objects are the same;
-     *         <code>false</code> otherwise.
-     */
     @Override
 	public boolean equals(Object obj) {
         // 보안 취약점 점검 지적사항 반영 시작
@@ -425,20 +257,6 @@ public class EgovFormBasedUUID implements Serializable {
     }
 
     // Comparison Operations
-
-    /**
-     * Compares this UUID with the specified UUID.
-     *
-     * <p>
-     * The first of two UUIDs follows the second if the most significant field
-     * in which the UUIDs differ is greater for the first UUID.
-     *
-     * @param val
-     *            <tt>UUID</tt> to which this <tt>UUID</tt> is to be
-     *            compared.
-     * @return -1, 0 or 1 as this <tt>UUID</tt> is less than, equal to, or
-     *         greater than <tt>val</tt>.
-     */
     public int compareTo(EgovFormBasedUUID val) {
         // The ordering is intentionally set up so that the UUIDs
         // can simply be numerically compared as two numbers
@@ -448,11 +266,6 @@ public class EgovFormBasedUUID implements Serializable {
                                 : (this.leastSigBits > val.leastSigBits ? 1 : 0))));
     }
 
-    /**
-     * Reconstitute the <tt>UUID</tt> instance from a stream (that is,
-     * deserialize it). This is necessary to set the transient fields to their
-     * correct uninitialized value so they will be recomputed on demand.
-     */
     private void readObject(java.io.ObjectInputStream in)
             throws java.io.IOException, ClassNotFoundException {
 

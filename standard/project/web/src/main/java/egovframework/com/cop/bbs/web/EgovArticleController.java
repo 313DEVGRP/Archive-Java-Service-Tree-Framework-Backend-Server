@@ -64,12 +64,6 @@ public class EgovArticleController {
 
     //protected Logger log = Logger.getLogger(this.getClass());
     
-    /**
-     * XSS 방지 처리.
-     * 
-     * @param data
-     * @return
-     */
     protected String unscript(String data) {
         if (data == null || data.trim().equals("")) {
             return "";
@@ -95,15 +89,6 @@ public class EgovArticleController {
         return ret;
     }
 
-    /**
-     * 게시물에 대한 목록을 조회한다.
-     * 
-     * @param boardVO
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/selectArticleList.do")
     public String selectArticleList(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
 		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -164,15 +149,6 @@ public class EgovArticleController {
 		return "egovframework/com/cop/bbs/EgovArticleList";
     }
 
-    /**
-     * 게시물에 대한 상세 정보를 조회한다.
-     * 
-     * @param boardVO
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/selectArticleDetail.do")
     public String selectArticleDetail(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
 		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -210,14 +186,6 @@ public class EgovArticleController {
 		return "egovframework/com/cop/bbs/EgovArticleDetail";
     }
 
-    /**
-     * 게시물 등록을 위한 등록페이지로 이동한다.
-     * 
-     * @param boardVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/insertArticleView.do")
     public String insertArticleView(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
 		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -249,15 +217,6 @@ public class EgovArticleController {
 		return "egovframework/com/cop/bbs/EgovArticleRegist";
     }
 
-    /**
-     * 게시물을 등록한다.
-     * 
-     * @param boardVO
-     * @param board
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/insertArticle.do")
     public String insertArticle(final MultipartHttpServletRequest multiRequest, @ModelAttribute("searchVO") BoardVO boardVO,
 	    @ModelAttribute("bdMstr") BoardMaster bdMstr, @ModelAttribute("board") BoardVO board, BindingResult bindingResult, 
@@ -328,14 +287,6 @@ public class EgovArticleController {
 		return "forward:/cop/bbs/selectArticleList.do";
     }
 
-    /**
-     * 게시물에 대한 답변 등록을 위한 등록페이지로 이동한다.
-     * 
-     * @param boardVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/replyArticleView.do")
     public String addReplyBoardArticle(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -363,15 +314,6 @@ public class EgovArticleController {
 		return "egovframework/com/cop/bbs/EgovArticleReply";
     }
 
-    /**
-     * 게시물에 대한 답변을 등록한다.
-     * 
-     * @param boardVO
-     * @param board
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/replyArticle.do")
     public String replyBoardArticle(final MultipartHttpServletRequest multiRequest, @ModelAttribute("searchVO") BoardVO boardVO,
 	    @ModelAttribute("bdMstr") BoardMaster bdMstr, @ModelAttribute("board") BoardVO board, BindingResult bindingResult, ModelMap model
@@ -440,15 +382,6 @@ public class EgovArticleController {
 		return "forward:/cop/bbs/selectArticleList.do";
     }
 
-    /**
-     * 게시물 수정을 위한 수정페이지로 이동한다.
-     * 
-     * @param boardVO
-     * @param vo
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/updateArticleView.do")
     public String updateArticleView(@ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("board") BoardVO vo, ModelMap model)
 	    throws Exception {
@@ -493,15 +426,6 @@ public class EgovArticleController {
 		return "egovframework/com/cop/bbs/EgovArticleUpdt";
     }
 
-    /**
-     * 게시물에 대한 내용을 수정한다.
-     * 
-     * @param boardVO
-     * @param board
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/updateArticle.do")
     public String updateBoardArticle(final MultipartHttpServletRequest multiRequest, @ModelAttribute("searchVO") BoardVO boardVO,
 	    @ModelAttribute("bdMstr") BoardMaster bdMstr, @ModelAttribute("board") Board board, BindingResult bindingResult, ModelMap model) throws Exception {
@@ -578,15 +502,6 @@ public class EgovArticleController {
 		return "forward:/cop/bbs/selectArticleList.do";
     }
 
-    /**
-     * 게시물에 대한 내용을 삭제한다.
-     * 
-     * @param boardVO
-     * @param board
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/deleteArticle.do")
     public String deleteBoardArticle(HttpServletRequest request, @ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("board") Board board,
 	    @ModelAttribute("bdMstr") BoardMaster bdMstr, ModelMap model) throws Exception {
@@ -627,15 +542,6 @@ public class EgovArticleController {
 		return "forward:/cop/bbs/selectArticleList.do";
     }
     
-    /**
-     * 방명록에 대한 목록을 조회한다.
-     * 
-     * @param boardVO
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/selectGuestArticleList.do")
     public String selectGuestArticleList(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
 
@@ -689,16 +595,6 @@ public class EgovArticleController {
     }
     
 	
-    /**
-     * 방명록에 대한 내용을 등록한다.
-     * 
-     * @param boardVO
-     * @param board
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/insertGuestArticle.do")
     public String insertGuestList(@ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("Board") Board board, BindingResult bindingResult,
 	    ModelMap model) throws Exception {
@@ -764,15 +660,6 @@ public class EgovArticleController {
 		return "forward:/cop/bbs/selectGuestArticleList.do";
     }
     
-    /**
-     * 방명록에 대한 내용을 삭제한다.
-     * 
-     * @param boardVO
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/deleteGuestArticle.do")
     public String deleteGuestList(@ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("articleVO") Board board, ModelMap model) throws Exception {
 		@SuppressWarnings("unused")
@@ -786,15 +673,6 @@ public class EgovArticleController {
 		return "forward:/cop/bbs/selectGuestArticleList.do";
     }
     
-    /**
-     * 방명록 수정을 위한 특정 내용을 조회한다.
-     * 
-     * @param boardVO
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/updateGuestArticleView.do")
     public String updateGuestArticleView(@ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("boardMasterVO") BoardMasterVO brdMstrVO,
 	    ModelMap model) throws Exception {
@@ -837,15 +715,6 @@ public class EgovArticleController {
 		return "egovframework/com/cop/bbs/EgovGuestArticleList";
     }
     
-    /**
-     * 방명록을 수정하고 게시판 메인페이지를 조회한다.
-     * 
-     * @param boardVO
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/updateGuestArticle.do")
     public String updateGuestArticle(@ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute Board board, BindingResult bindingResult,
 	    ModelMap model) throws Exception {

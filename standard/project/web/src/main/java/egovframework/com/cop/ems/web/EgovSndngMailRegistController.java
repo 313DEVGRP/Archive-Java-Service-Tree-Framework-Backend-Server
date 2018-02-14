@@ -42,12 +42,6 @@ public class EgovSndngMailRegistController {
 	/** 파일구분자 */
 	static final char FILE_SEPARATOR = File.separatorChar;
 
-	/**
-	 * 발송메일 등록화면으로 들어간다
-	 * @param sndngMailVO SndngMailVO
-	 * @return String
-	 * @exception Exception
-	 */
 	//@IncludedInfo(name = "메일발송", order = 360, gid = 40)
 	@RequestMapping(value = "/cop/ems/insertSndngMailView.do")
 	public String insertSndngMailView(@ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, ModelMap model) throws Exception {
@@ -56,13 +50,6 @@ public class EgovSndngMailRegistController {
 		return "egovframework/com/cop/ems/EgovMailRegist";
 	}
 
-	/**
-	 * 발송메일을 등록한다
-	 * @param multiRequest MultipartHttpServletRequest
-	 * @param sndngMailVO SndngMailVO
-	 * @return String
-	 * @exception Exception
-	 */
 	@RequestMapping(value = "/cop/ems/insertSndngMail.do")
 	public String insertSndngMail(final MultipartHttpServletRequest multiRequest, @ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, ModelMap model, HttpServletRequest request)
 			throws Exception {
@@ -110,12 +97,6 @@ public class EgovSndngMailRegistController {
 		}
 	}
 
-	/**
-	 * 발송메일 내용조회로 돌아간다.
-	 * @param sndngMailVO SndngMailVO
-	 * @return String
-	 * @exception Exception
-	 */
 	@RequestMapping(value = "/cop/ems/backSndngMailRegist.do")
 	public String backSndngMailRegist(@ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, ModelMap model) throws Exception {
 

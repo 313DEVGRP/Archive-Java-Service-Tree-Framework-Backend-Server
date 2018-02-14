@@ -24,15 +24,6 @@ public class EgovNetworkState {
 	// Log
 	// protected static final Log log = LogFactory.getLog(EgovNetworkState.class);
 
-	/**
-	 * <pre>
-	 * Comment : Local MAC Address를 확인한다.
-	 * </pre>
-	 * @param String localIP  로컬 IP주소
-	 * @return String mac        MAC Address를 리턴한다.
-	 * @version 1.0 (2009.02.03.)
-	 * @see
-	 */
 	public static String getMyMACAddress(String localIP) {
 		//log.debug("getMyMACAddress Start!! : ");
 		String mac = null;
@@ -65,15 +56,6 @@ public class EgovNetworkState {
 		return mac;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : Local Port를 확인한다.
-	 * </pre>
-
-	 * @return String port       port를 리턴한다.
-	 * @version 1.0 (2009.02.03.)
-	 * @see
-	 */
 	public static List<String> getMyPortScan() {
 
 		List<String> processes = new ArrayList<String>();
@@ -128,14 +110,6 @@ public class EgovNetworkState {
 		return processes;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : Local IPAddress를 확인한다.
-	 * </pre>
-	 * @return String mac        Local IPAddress를 리턴한다.
-	 * @version 1.0 (2009.02.03.)
-	 * @see
-	 */
 	public static String getMyIPaddress() {
 		try {
 
@@ -153,15 +127,6 @@ public class EgovNetworkState {
 		return addrIP;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 네트워크 상태체크를 확인한다.
-	 * </pre>
-	 * @param String localIP           localhost, gateway, host 주소
-	 * @return boolean  status         true/false 를 리턴한다.
-	 * @version 1.0 (2009.02.03.)
-	 * @see
-	 */
 	public static boolean getPingTest(String requestIP) throws Exception {
 
 		boolean status = false;
@@ -175,15 +140,6 @@ public class EgovNetworkState {
 		return status;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 네트워크(MAC,IP,S/M,G/W,DNS) 정보를 확인한다.
-	 * </pre>
-	 * @param String stringOne         확인할 네트웍 정보 표기 ( ex:"MAC","IP","S/M","G/W","DNS")
-	 * @return String (MAC,IP,S/M,G/W,DNS) 정보를 리턴한다.
-	 * @version 1.0 (2009.02.07.)
-	 * @see
-	 */
 	public static String getNetWorkInfo(String stringOne) throws IOException {
 		// 실행할 명령을 프로퍼티 파일에서 확인한다.
 		Process p = null;
@@ -233,15 +189,6 @@ public class EgovNetworkState {
 		return outValue;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : String 타입의 str값 중 숫자 정보만 필터링, 담아서 리턴.
-	 * </pre>
-	 * @param String str         필터링 대상 정보
-	 * @return String outValue   숫자 정보를 필터링 리턴한다.
-	 * @version 1.0 (2009.02.07.)
-	 * @see
-	 */
 	private static String getCharFilter(String str) {
 		String outValue = "";
 

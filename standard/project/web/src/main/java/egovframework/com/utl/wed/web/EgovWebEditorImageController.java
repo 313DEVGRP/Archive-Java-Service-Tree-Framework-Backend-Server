@@ -29,14 +29,6 @@ public class EgovWebEditorImageController {
 	return "egovframework/com/utl/wed/EgovInsertImage";
     }
 
-    /**
-     * 이미지 Upload를 처리한다.
-     *
-     * @param request
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping(value="/utl/wed/insertImage.do", method=RequestMethod.POST)
     public String imageUpload(HttpServletRequest request, Model model) throws Exception {
 	// Spring multipartResolver 미사용 시 (commons-fileupload 활용)
@@ -60,13 +52,6 @@ public class EgovWebEditorImageController {
 	return "egovframework/com/utl/wed/EgovInsertImage";
     }
 
-    /**
-     * 이미지 view를 제공한다.
-     *
-     * @param request
-     * @param response
-     * @throws Exception
-     */
     @RequestMapping(value="/utl/web/imageSrc.do",method=RequestMethod.GET)
     public void download(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	String subPath = request.getParameter("path");

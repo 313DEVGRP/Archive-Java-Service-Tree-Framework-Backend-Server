@@ -1,20 +1,3 @@
-/**
- * @Class Name : EgovEhgtCalcUtil.java
- * @Description : 대한민국, 미국,유럽연합, 일본, 중국연합 사이의 환율계산기능을
- * 제공하는  Business Interface class
- * @Modification Information
- * @
- * @  수정일         수정자                   수정내용
- * @ -------    --------    ---------------------------
- * @ 2009.01.13    박정규          최초 생성
- *
- *  @author 공통 서비스 개발팀 박정규
- *  @since 2009. 01. 13
- *  @version 1.0
- *  @see
- *
- */
-
 package egovframework.com.utl.fcc.service;
 
 import java.io.IOException;

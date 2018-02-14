@@ -13,17 +13,6 @@ public class EgovMenuGov {
 	// 파일구분자
 	static final char FILE_SEPARATOR = File.separatorChar;
 
-	/**
-	 * <pre>
-	 * Comment : DAT 파일을 파싱하여 메뉴관리화면에 리턴.
-	 * </pre>
-	 * @param String parFile   DAT파일명
-	 * @param String parChar   구분자
-	 * @param Int    parField  필드수
-	 * @return Vector list
-	 * @version 1.0 (2009.02.04.)
-	 * @see
-	 */
 	public static Vector<List<String>> parsFileByMenuChar(String parFile, String parChar, int parField) throws Exception {
 		Vector<List<String>> list = null;
 		String FileName = null;
@@ -41,18 +30,6 @@ public class EgovMenuGov {
 		return list;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 메뉴관리 화면의 데이타를 DAT 파일로 생성.
-	 * </pre>
-	 * @param String[] menuIDArray     ID Array
-	 * @param String[] menuNameArray   Name Array
-	 * @param String[] menuLevelArray  Lefel Array
-	 * @param String[] menuURLArray    URL Array
-	 * @return boolean true/false
-	 * @version 1.0 (2009.02.04.)
-	 * @see
-	 */
 
 	public static boolean setDataByDATFile(String parFile, String[] menuIDArray, String[] menuNameArray, String[] menuLevelArray, String[] menuURLArray) throws Exception {
 		boolean success = false;

@@ -63,22 +63,10 @@ public class EgovFileMntrg extends Thread {
 		//log.debug("EgovFileMntrg end");
 	}
 
-	/**
-	 * <p>
-	 * 감시 하고자 하는 파일의 변경 유무를 체크 하고자 하는 delay 초를 set.
-	 * </p>
-	 *
-	 * @param delay 감시 주기 초
-	 */
 	public void setDelay(long delay) {
 		this.delay = delay;
 	}
 
-	/**
-	 * <p>
-	 * 해당 파일의 변경시 작업 할 내용을 기술 할 추상(abstract) 메소드
-	 * </p>
-	 */
 	//abstract protected void doOnChange();
 	protected void doOnChange(List<String> changedList) {
 		//log.debug("doOnChange() start");
@@ -92,11 +80,6 @@ public class EgovFileMntrg extends Thread {
 		//log.debug("doOnChange() end");
 	}
 
-	/**
-	 * <p>
-	 * 파일의 변경 유무를 체크하는 메소드
-	 * </p>
-	 */
 	protected void checkAndConfigure() {
 		//log.debug("checkAndConfigure start");
 		try {
@@ -185,11 +168,6 @@ public class EgovFileMntrg extends Thread {
 		//log.debug("checkAndConfigure end"+changedList.size());
 	}
 
-	/**
-	 * <p>
-	 * 파일의 변경 유무의 체크를 주기적 초 단위로 실행 시키는 메소드
-	 * </p>
-	 */
 	public void run() {
 		while (!interrupted) {
 			try {
@@ -204,26 +182,12 @@ public class EgovFileMntrg extends Thread {
 		}
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)의 최종 수정시간를 확인한다.(기본로케일 java.util.Locale.KOREA 기준)
-	 * </pre>
-	 * @param File f 수정일자를 확인할 대상파일
-	 * @return String result 최종수정일자를 문자열로 리턴한다.
-	 */
 	public static String getLastModifiedTime(File f) {
 		long date = f.lastModified();
 		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyyMMdd:HH:mm:ss", java.util.Locale.KOREA);
 		return dateFormat.format(new java.util.Date(date));
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리(파일)의  로그정보를 기록한다.
-	 * </pre>
-	 * @param String  logStr  추가할 로그정보(라인단위)
-	 * @return boolean result  로그추가 성공여부
-	 */
 	public boolean writeLog(String logStr) {
 		boolean result = false;
 
@@ -250,12 +214,6 @@ public class EgovFileMntrg extends Thread {
 		return result;
 	}
 
-	/**
-	 * <pre>
-	 * Comment : 디렉토리감시 종료여부를 확인한다. 해당 디렉토리에 대한 로그파일이 삭제된 경우는 감시를 종료한다.
-	 * </pre>
-	 * @return boolean isEnd 감시종료여부 중단하려면  true 리턴, 계속하려면 false 리턴
-	 */
 	public boolean isEnd() {
 		//log.debug("isEnd start");
 		boolean isEnd = false;

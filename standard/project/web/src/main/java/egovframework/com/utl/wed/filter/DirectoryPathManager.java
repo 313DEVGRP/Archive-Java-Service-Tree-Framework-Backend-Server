@@ -13,12 +13,6 @@ public class DirectoryPathManager {
 		DATE_POLICY_YYYY_MM_DD, DATE_POLICY_YYYY_MM, DATE_POLICY_YYYY
 	};
 
-	/**
-	 * 2012/12/22/
-	 * @param dateType
-	 * @return
-	 * @throws InvalidArgumentException
-	 */
 	public static String getDirectoryPathByDateType(DIR_DATE_TYPE policy) {
 
 		Calendar calendar = Calendar.getInstance();

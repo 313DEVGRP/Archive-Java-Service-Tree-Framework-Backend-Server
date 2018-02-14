@@ -38,13 +38,6 @@ public class EgovNumberCheckUtil {
         	return false;
     }
 
-    /**
-     * <p>XXXXXXXXXXXXX 형식의 13자리 주민번호 1개를 입력 받아 유효한 주민번호인지 검사.</p>
-     *
-     *
-     * @param   13자리 주민번호 문자열
-     * @return  유효한 주민번호인지 여부 (True/False)
-     */
     public static boolean checkJuminNumber(String jumin) {
 
     	if(jumin.length() != 13) return false;
@@ -52,13 +45,6 @@ public class EgovNumberCheckUtil {
         return checkJuminNumber(jumin.substring(0,6), jumin.substring(6,13));	//주민번호
     }
 
-    /**
-     * <p>XXXXXX - XXXXXXX 형식의 법인번호 앞, 뒤 문자열 2개 입력 받아 유효한 법인번호인지 검사.</p>
-     *
-     *
-     * @param   6자리 법인앞번호 문자열 , 7자리 법인뒷번호 문자열
-     * @return  유효한 법인번호인지 여부 (True/False)
-     */
     public static boolean checkBubinNumber(String bubin1, String bubin2) {
 
     	String bubinNumber = bubin1 + bubin2;
@@ -88,13 +74,6 @@ public class EgovNumberCheckUtil {
     		return false;
     	}
 
-    /**
-     * <p>XXXXXXXXXXXXX 형식의 13자리 법인번호 1개를 입력 받아 유효한 법인번호인지 검사.</p>
-     *
-     *
-     * @param   13자리 법인번호 문자열
-     * @return  유효한 법인번호인지 여부 (True/False)
-     */
     public static boolean checkBubinNumber(String bubin) {
 
     	if(bubin.length() != 13) return false;
@@ -103,13 +82,6 @@ public class EgovNumberCheckUtil {
     	}
 
 
-    /**
-     * <p>xxx - xx - xxxx 형식의 사업자번호 앞,중간, 뒤 문자열 3개 입력 받아 유효한 사업자번호인지 검사.</p>
-     *
-     *
-     * @param   3자리 사업자앞번호 문자열 , 2자리 사업자중간번호 문자열, 5자리 사업자뒷번호 문자열
-     * @return  유효한 사업자번호인지 여부 (True/False)
-     */
 	public static boolean checkCompNumber(String comp1, String comp2, String comp3) {
 
 		String compNumber = comp1 + comp2 + comp3;
@@ -137,26 +109,12 @@ public class EgovNumberCheckUtil {
 			return false;
  	}
 
-	 /**
-     * <p>XXXXXXXXXX 형식의 10자리 사업자번호 3개를 입력 받아 유효한 사업자번호인지 검사.</p>
-     *
-     *
-     * @param   10자리 사업자번호 문자열
-     * @return  유효한 사업자번호인지 여부 (True/False)
-     */
 	public static boolean checkCompNumber(String comp) {
 
 		if(comp.length() != 10) return false;
 		return checkCompNumber(comp.substring(0,3), comp.substring(3,5), comp.substring(5,10));
  	}
 
-	 /**
-     * <p>XXXXXX - XXXXXXX 형식의 외국인등록번호 앞, 뒤 문자열 2개 입력 받아 유효한 외국인등록번호인지 검사.</p>
-     *
-     *
-     * @param   6자리 외국인등록앞번호 문자열 , 7자리 외국인등록뒷번호 문자열
-     * @return  유효한 외국인등록번호인지 여부 (True/False)
-     */
 	@SuppressWarnings("static-access")
 	public static boolean checkforeignNumber( String foreign1, String foreign2  ) {
 
@@ -204,13 +162,6 @@ public class EgovNumberCheckUtil {
 		}
 
 
-	 /**
-     * <p>XXXXXXXXXXXXX 형식의 13자리 외국인등록번호 1개를 입력 받아 유효한 외국인등록번호인지 검사.</p>
-     *
-     *
-     * @param   13자리 외국인등록번호 문자열
-     * @return  유효한 외국인등록번호인지 여부 (True/False)
-     */
 	public static boolean checkforeignNumber( String foreign  ) {
 
 		if(foreign.length() != 13) return false;

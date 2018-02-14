@@ -33,12 +33,6 @@ public class EgovSndngMailDtlsController {
 	@Resource(name = "egovMessageSource")
 	EgovMessageSource egovMessageSource;
 
-	/**
-	 * 발송메일 내역을 조회한다
-	 * @param searchVO ComDefaultVO
-	 * @return String
-	 * @exception Exception
-	 */
 	//@IncludedInfo(name = "발송메일내역", order = 361, gid = 40)
 	@RequestMapping(value = "/cop/ems/selectSndngMailList.do")
 	public String selectSndngMailList(@ModelAttribute("searchVO") ComDefaultVO searchVO, ModelMap model) throws Exception {
@@ -69,12 +63,6 @@ public class EgovSndngMailDtlsController {
 		return "egovframework/com/cop/ems/EgovMailDtls";
 	}
 
-	/**
-	 * 발송메일을 삭제한다.
-	 * @param sndngMailVO SndngMailVO
-	 * @return String
-	 * @exception
-	 */
 	@RequestMapping(value = "/cop/ems/deleteSndngMailList.do")
 	public String deleteSndngMailList(@ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, ModelMap model) throws Exception {
 

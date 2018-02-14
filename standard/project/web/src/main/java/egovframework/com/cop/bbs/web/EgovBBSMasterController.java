@@ -42,14 +42,6 @@ public class EgovBBSMasterController {
 
     //Logger log = Logger.getLogger(this.getClass());
 
-    /**
-     * 신규 게시판 마스터 등록을 위한 등록페이지로 이동한다.
-     *
-     * @param boardMasterVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/insertBBSMasterView.do")
     public String insertBBSMasterView(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, ModelMap model) throws Exception {
         BoardMasterVO boardMaster = new BoardMasterVO();
@@ -66,15 +58,6 @@ public class EgovBBSMasterController {
         return "egovframework/com/cop/bbs/EgovBBSMasterRegist";
     }
 
-    /**
-     * 신규 게시판 마스터 정보를 등록한다.
-     *
-     * @param boardMasterVO
-     * @param boardMaster
-     * @param status
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/insertBBSMaster.do")
     public String insertBBSMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @ModelAttribute("boardMaster") BoardMaster boardMaster,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
@@ -105,14 +88,6 @@ public class EgovBBSMasterController {
         return "forward:/cop/bbs/selectBBSMasterInfs.do";
     }
 
-    /**
-     * 게시판 마스터 목록을 조회한다.
-     *
-     * @param boardMasterVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @IncludedInfo(name = "게시판관리", order = 180, gid = 40)
     @RequestMapping("/cop/bbs/selectBBSMasterInfs.do")
     public String selectBBSMasterInfs(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, ModelMap model) throws Exception {
@@ -141,14 +116,6 @@ public class EgovBBSMasterController {
         return "egovframework/com/cop/bbs/EgovBBSMasterList";
     }
 
-    /**
-     * 게시판 마스터 상세내용을 조회한다.
-     *
-     * @param boardMasterVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/selectBBSMasterDetail.do")
     public String selectBBSMasterDetail(@ModelAttribute("searchVO") BoardMasterVO searchVO, ModelMap model) throws Exception {
         BoardMasterVO vo = egovBBSMasterService.selectBBSMasterInf(searchVO);
@@ -157,14 +124,6 @@ public class EgovBBSMasterController {
         return "egovframework/com/cop/bbs/EgovBBSMasterDetail";
     }
 
-    /**
-     * 게시판 마스터정보를 수정하기 위한 전 처리
-     *
-     * @param bbsId
-     * @param searchVO
-     * @param model
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/updateBBSMasterView.do")
     public String updateBBSMasterView(@RequestParam("bbsId") String bbsId,
                                       @ModelAttribute("searchVO") BoardMaster searchVO, ModelMap model)
@@ -189,15 +148,6 @@ public class EgovBBSMasterController {
     }
 
 
-    /**
-     * 게시판 마스터 정보를 수정한다.
-     *
-     * @param boardMasterVO
-     * @param boardMaster
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/updateBBSMaster.do")
     public String updateBBSMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @ModelAttribute("boardMaster") BoardMaster boardMaster,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
@@ -228,15 +178,6 @@ public class EgovBBSMasterController {
         return "forward:/cop/bbs/selectBBSMasterInfs.do";
     }
 
-    /**
-     * 게시판 마스터 정보를 삭제한다.
-     *
-     * @param boardMasterVO
-     * @param boardMaster
-     * @param status
-     * @return
-     * @throws Exception
-     */
     @RequestMapping("/cop/bbs/deleteBBSMaster.do")
     public String deleteBBSMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @ModelAttribute("boardMaster") BoardMaster boardMaster
     ) throws Exception {

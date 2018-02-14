@@ -18,9 +18,6 @@ import org.slf4j.LoggerFactory;
 public class DoubleSubmitTag extends TagSupport {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DoubleSubmitTag.class);
 
-	/**
-	 * Generated Serial Version UID
-	 */
 	private static final long serialVersionUID = 5242217605452312594L;
 	
 	private String tokenKey = EgovDoubleSubmitHelper.DEFAULT_TOKEN_KEY;

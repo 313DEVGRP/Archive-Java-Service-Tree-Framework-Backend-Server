@@ -80,434 +80,190 @@ public class BoardMaster implements Serializable {
     private String stsfdgAt = "";
     ////-------------------------------
 
-    /**
-     * bbsId attribute를 리턴한다.
-     * 
-     * @return the bbsId
-     */
     public String getBbsId() {
 	return bbsId;
     }
 
-    /**
-     * bbsId attribute 값을 설정한다.
-     * 
-     * @param bbsId
-     *            the bbsId to set
-     */
     public void setBbsId(String bbsId) {
 	this.bbsId = bbsId;
     }
 
-    /**
-     * bbsIntrcn attribute를 리턴한다.
-     * 
-     * @return the bbsIntrcn
-     */
     public String getBbsIntrcn() {
 	return bbsIntrcn;
     }
 
-    /**
-     * bbsIntrcn attribute 값을 설정한다.
-     * 
-     * @param bbsIntrcn
-     *            the bbsIntrcn to set
-     */
     public void setBbsIntrcn(String bbsIntrcn) {
 	this.bbsIntrcn = bbsIntrcn;
     }
 
-    /**
-     * bbsNm attribute를 리턴한다.
-     * 
-     * @return the bbsNm
-     */
     public String getBbsNm() {
 	return bbsNm;
     }
 
-    /**
-     * bbsNm attribute 값을 설정한다.
-     * 
-     * @param bbsNm
-     *            the bbsNm to set
-     */
     public void setBbsNm(String bbsNm) {
 	this.bbsNm = bbsNm;
     }
 
-    /**
-     * bbsTyCode attribute를 리턴한다.
-     * 
-     * @return the bbsTyCode
-     */
     public String getBbsTyCode() {
 	return bbsTyCode;
     }
 
-    /**
-     * bbsTyCode attribute 값을 설정한다.
-     * 
-     * @param bbsTyCode
-     *            the bbsTyCode to set
-     */
     public void setBbsTyCode(String bbsTyCode) {
 	this.bbsTyCode = bbsTyCode;
     }
 
-    /**
-     * fileAtchPosblAt attribute를 리턴한다.
-     * 
-     * @return the fileAtchPosblAt
-     */
     public String getFileAtchPosblAt() {
 	return fileAtchPosblAt;
     }
 
-    /**
-     * fileAtchPosblAt attribute 값을 설정한다.
-     * 
-     * @param fileAtchPosblAt
-     *            the fileAtchPosblAt to set
-     */
     public void setFileAtchPosblAt(String fileAtchPosblAt) {
 	this.fileAtchPosblAt = fileAtchPosblAt;
     }
 
-    /**
-     * frstRegisterId attribute를 리턴한다.
-     * 
-     * @return the frstRegisterId
-     */
     public String getFrstRegisterId() {
 	return frstRegisterId;
     }
 
-    /**
-     * frstRegisterId attribute 값을 설정한다.
-     * 
-     * @param frstRegisterId
-     *            the frstRegisterId to set
-     */
     public void setFrstRegisterId(String frstRegisterId) {
 	this.frstRegisterId = frstRegisterId;
     }
 
-    /**
-     * frstRegisterPnttm attribute를 리턴한다.
-     * 
-     * @return the frstRegisterPnttm
-     */
     public String getFrstRegisterPnttm() {
 	return frstRegisterPnttm;
     }
 
-    /**
-     * frstRegisterPnttm attribute 값을 설정한다.
-     * 
-     * @param frstRegisterPnttm
-     *            the frstRegisterPnttm to set
-     */
     public void setFrstRegisterPnttm(String frstRegisterPnttm) {
 	this.frstRegisterPnttm = frstRegisterPnttm;
     }
 
-    /**
-     * lastUpdusrId attribute를 리턴한다.
-     * 
-     * @return the lastUpdusrId
-     */
     public String getLastUpdusrId() {
 	return lastUpdusrId;
     }
 
-    /**
-     * lastUpdusrId attribute 값을 설정한다.
-     * 
-     * @param lastUpdusrId
-     *            the lastUpdusrId to set
-     */
     public void setLastUpdusrId(String lastUpdusrId) {
 	this.lastUpdusrId = lastUpdusrId;
     }
 
-    /**
-     * lastUpdusrPnttm attribute를 리턴한다.
-     * 
-     * @return the lastUpdusrPnttm
-     */
     public String getLastUpdusrPnttm() {
 	return lastUpdusrPnttm;
     }
 
-    /**
-     * lastUpdusrPnttm attribute 값을 설정한다.
-     * 
-     * @param lastUpdusrPnttm
-     *            the lastUpdusrPnttm to set
-     */
     public void setLastUpdusrPnttm(String lastUpdusrPnttm) {
 	this.lastUpdusrPnttm = lastUpdusrPnttm;
     }
 
-    /**
-     * atchPosblFileNumber attribute를 리턴한다.
-     * 
-     * @return the atchPosblFileNumber
-     */
     public int getAtchPosblFileNumber() {
 	return atchPosblFileNumber;
     }
 
-    /**
-     * atchPosblFileNumber attribute 값을 설정한다.
-     * 
-     * @param atchPosblFileNumber
-     *            the atchPosblFileNumber to set
-     */
     public void setAtchPosblFileNumber(int atchPosblFileNumber) {
 	this.atchPosblFileNumber = atchPosblFileNumber;
     }
 
-    /**
-     * atchPosblFileSize attribute를 리턴한다.
-     * 
-     * @return the atchPosblFileSize
-     */
     public String getAtchPosblFileSize() {
 	return atchPosblFileSize;
     }
 
-    /**
-     * atchPosblFileSize attribute 값을 설정한다.
-     * 
-     * @param atchPosblFileSize
-     *            the atchPosblFileSize to set
-     */
     public void setAtchPosblFileSize(String atchPosblFileSize) {
 	this.atchPosblFileSize = atchPosblFileSize;
     }
 
-    /**
-     * replyPosblAt attribute를 리턴한다.
-     * 
-     * @return the replyPosblAt
-     */
     public String getReplyPosblAt() {
 	return replyPosblAt;
     }
 
-    /**
-     * replyPosblAt attribute 값을 설정한다.
-     * 
-     * @param replyPosblAt
-     *            the replyPosblAt to set
-     */
     public void setReplyPosblAt(String replyPosblAt) {
 	this.replyPosblAt = replyPosblAt;
     }
 
-    /**
-     * tmplatId attribute를 리턴한다.
-     * 
-     * @return the tmplatId
-     */
     public String getTmplatId() {
 	return tmplatId;
     }
 
-    /**
-     * tmplatId attribute 값을 설정한다.
-     * 
-     * @param tmplatId
-     *            the tmplatId to set
-     */
     public void setTmplatId(String tmplatId) {
 	this.tmplatId = tmplatId;
     }
 
-    /**
-     * useAt attribute를 리턴한다.
-     * 
-     * @return the useAt
-     */
     public String getUseAt() {
 	return useAt;
     }
 
-    /**
-     * useAt attribute 값을 설정한다.
-     * 
-     * @param useAt
-     *            the useAt to set
-     */
     public void setUseAt(String useAt) {
 	this.useAt = useAt;
     }
 
-    /**
-     * bbsUseFlag attribute를 리턴한다.
-     * 
-     * @return the bbsUseFlag
-     */
     public String getBbsUseFlag() {
 	return bbsUseFlag;
     }
 
-    /**
-     * bbsUseFlag attribute 값을 설정한다.
-     * 
-     * @param bbsUseFlag
-     *            the bbsUseFlag to set
-     */
     public void setBbsUseFlag(String bbsUseFlag) {
 	this.bbsUseFlag = bbsUseFlag;
     }
 
-    /**
-     * trgetId attribute를 리턴한다.
-     * 
-     * @return the trgetId
-     */
     public String getTrgetId() {
 	return trgetId;
     }
 
-    /**
-     * trgetId attribute 값을 설정한다.
-     * 
-     * @param trgetId
-     *            the trgetId to set
-     */
     public void setTrgetId(String trgetId) {
 	this.trgetId = trgetId;
     }
 
-    /**
-     * registSeCode attribute를 리턴한다.
-     * 
-     * @return the registSeCode
-     */
     public String getRegistSeCode() {
 	return registSeCode;
     }
 
-    /**
-     * registSeCode attribute 값을 설정한다.
-     * 
-     * @param registSeCode
-     *            the registSeCode to set
-     */
     public void setRegistSeCode(String registSeCode) {
 	this.registSeCode = registSeCode;
     }
 
-    /**
-     * uniqId attribute를 리턴한다.
-     * 
-     * @return the uniqId
-     */
     public String getUniqId() {
 	return uniqId;
     }
 
-    /**
-     * uniqId attribute 값을 설정한다.
-     * 
-     * @param uniqId
-     *            the uniqId to set
-     */
     public void setUniqId(String uniqId) {
 	this.uniqId = uniqId;
     }
 
-    /**
-     * tmplatNm attribute를 리턴한다.
-     * 
-     * @return the tmplatNm
-     */
     public String getTmplatNm() {
 	return tmplatNm;
     }
 
-    /**
-     * tmplatNm attribute 값을 설정한다.
-     * 
-     * @param tmplatNm
-     *            the tmplatNm to set
-     */
     public void setTmplatNm(String tmplatNm) {
 	this.tmplatNm = tmplatNm;
     }
 
-    /**
-     * option attribute를 리턴한다.
-     * @return the option
-     */
     public String getOption() {
         return option;
     }
 
-    /**
-     * option attribute 값을 설정한다.
-     * @param option the option to set
-     */
     public void setOption(String option) {
         this.option = option;
     }
 
-    /**
-     * commentAt attribute를 리턴한다.
-     * @return the commentAt
-     */
     public String getCommentAt() {
         return commentAt;
     }
 
-    /**
-     * commentAt attribute 값을 설정한다.
-     * @param commentAt the commentAt to set
-     */
     public void setCommentAt(String commentAt) {
         this.commentAt = commentAt;
     }
 
-    /**
-     * stsfdgAt attribute를 리턴한다.
-     * @return the stsfdgAt
-     */
     public String getStsfdgAt() {
         return stsfdgAt;
     }
 
-    /**
-     * stsfdg attribute 값을 설정한다.
-     * @param stsfdgAt the stsfdgAt to set
-     */
     public void setStsfdgAt(String stsfdgAt) {
         this.stsfdgAt = stsfdgAt;
     }
     
-    /**
-     * cmmntyId attribute를 리턴한다.
-     * @return the cmmntyId
-     */
     public String getCmmntyId() {
     	return cmmntyId;
     }
     
-    /**
-     * cmmntyId attribute 값을 설정한다.
-     * @param cmmntyId the cmmntyId to set
-     */
     public void setCmmntyId(String cmmntyId) {
     	this.cmmntyId = cmmntyId;
     }
 
-    /**
-     * toString 메소드를 대치한다.
-     */
     public String toString() {
 	return ToStringBuilder.reflectionToString(this);
     }

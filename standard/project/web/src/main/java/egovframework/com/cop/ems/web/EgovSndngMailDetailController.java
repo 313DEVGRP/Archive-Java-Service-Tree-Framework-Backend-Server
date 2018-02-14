@@ -31,12 +31,6 @@ public class EgovSndngMailDetailController {
 	@Resource(name = "sndngMailDetailService")
 	private EgovSndngMailDetailService sndngMailDetailService;
 
-	/**
-	 * 발송메일을 상세 조회한다.
-	 * @param sndngMailVO SndngMailVO
-	 * @return String
-	 * @exception Exception
-	 */
 	@RequestMapping(value = "/cop/ems/selectSndngMailDetail.do")
 	public String selectSndngMail(@ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, ModelMap model) throws Exception {
 
@@ -58,12 +52,6 @@ public class EgovSndngMailDetailController {
 		}
 	}
 
-	/**
-	 * 발송메일을 삭제한다.
-	 * @param sndngMailVO SndngMailVO
-	 * @return String
-	 * @exception Exception
-	 */
 	@RequestMapping(value = "/cop/ems/deleteSndngMail.do")
 	public String deleteSndngMail(@ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, ModelMap model) throws Exception {
 
@@ -81,23 +69,12 @@ public class EgovSndngMailDetailController {
 		return "redirect:/cop/ems/selectSndngMailList.do";
 	}
 
-	/**
-	 * 발송메일 내용조회로 돌아간다.
-	 * @param sndngMailVO SndngMailVO
-	 * @return String
-	 * @exception Exception
-	 */
 	@RequestMapping(value = "/cop/ems/backSndngMailDetail.do")
 	public String backSndngMailDtls(@ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, ModelMap model) throws Exception {
 
 		return "redirect:/cop/ems/selectSndngMailList.do";
 	}
 
-	/**
-	 * XML형태의 발송요청메일을 조회한다.
-	 * @param sndngMailVO SndngMailVO
-	 * @exception Exception
-	 */
 	@RequestMapping(value = "/cop/ems/selectSndngMailXml.do")
 	public void selectSndngMailXml(@ModelAttribute("sndngMailVO") SndngMailVO sndngMailVO, HttpServletResponse response, ModelMap model) throws Exception {
 		String xmlFile = Globals.MAIL_REQUEST_PATH + sndngMailVO.getMssageId() + ".xml";

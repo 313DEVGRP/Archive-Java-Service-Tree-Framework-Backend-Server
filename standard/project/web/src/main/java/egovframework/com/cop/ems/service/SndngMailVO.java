@@ -29,114 +29,58 @@ public class SndngMailVO {
 	/** 팝업링크여부(Y/N) */
 	private String link;
 
-	/**
-	 * mssageId attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getMssageId() {
 		return mssageId;
 	}
 
-	/**
-	 * mssageId attribute 값을 설정한다.
-	 * @param mssageId String
-	 */
 	public void setMssageId(String mssageId) {
 		this.mssageId = mssageId;
 	}
 
-	/**
-	 * dsptchPerson attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getDsptchPerson() {
 		return dsptchPerson;
 	}
 
-	/**
-	 * dsptchPerson attribute 값을 설정한다.
-	 * @param dsptchPerson String
-	 */
 	public void setDsptchPerson(String dsptchPerson) {
 		this.dsptchPerson = dsptchPerson;
 	}
 
-	/**
-	 * recptnPerson attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getRecptnPerson() {
 		return recptnPerson;
 	}
 
-	/**
-	 * recptnPerson attribute 값을 설정한다.
-	 * @param recptnPerson String
-	 */
 	public void setRecptnPerson(String recptnPerson) {
 		this.recptnPerson = recptnPerson;
 	}
 
-	/**
-	 * sj attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getSj() {
 		return sj;
 	}
 
-	/**
-	 * sj attribute 값을 설정한다.
-	 * @param sj String
-	 */
 	public void setSj(String sj) {
 		this.sj = sj;
 	}
 
-	/**
-	 * sndngResultCode attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getSndngResultCode() {
 		return sndngResultCode;
 	}
 
-	/**
-	 * sndngResultCode attribute 값을 설정한다.
-	 * @param sndngResultCode String
-	 */
 	public void setSndngResultCode(String sndngResultCode) {
 		this.sndngResultCode = sndngResultCode;
 	}
 
-	/**
-	 * emailCn attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getEmailCn() {
 		return emailCn;
 	}
 
-	/**
-	 * emailCn attribute 값을 설정한다.
-	 * @param emailCn String
-	 */
 	public void setEmailCn(String emailCn) {
 		this.emailCn = emailCn;
 	}
 
-	/**
-	 * atchFileId attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getAtchFileId() {
 		return atchFileId;
 	}
 
-	/**
-	 * atchFileId attribute 값을 설정한다.
-	 * @param atchFileId String
-	 */
 	public void setAtchFileId(String atchFileId) {
 		this.atchFileId = atchFileId;
 	}
@@ -157,66 +101,34 @@ public class SndngMailVO {
 		this.orignlFileNm = orignlFileNm;
 	}
 
-	/**
-	 * sndngDe attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getSndngDe() {
 		return sndngDe;
 	}
 
-	/**
-	 * sndngDe attribute 값을 설정한다.
-	 * @param sndngDe String
-	 */
 	public void setSndngDe(String sndngDe) {
 		this.sndngDe = sndngDe;
 	}
 
-	/**
-	 * atchFileIdList attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getAtchFileIdList() {
 		return atchFileIdList;
 	}
 
-	/**
-	 * atchFileIdList attribute 값을 설정한다.
-	 * @param atchFileIdList String
-	 */
 	public void setAtchFileIdList(String atchFileIdList) {
 		this.atchFileIdList = atchFileIdList;
 	}
 
-	/**
-	 * xmlContent attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getXmlContent() {
 		return xmlContent;
 	}
 
-	/**
-	 * xmlContent attribute 값을 설정한다.
-	 * @param xmlContent String
-	 */
 	public void setXmlContent(String xmlContent) {
 		this.xmlContent = xmlContent;
 	}
 
-	/**
-	 * link attribute 를 리턴한다.
-	 * @return String
-	 */
 	public String getLink() {
 		return link;
 	}
 
-	/**
-	 * link attribute 값을 설정한다.
-	 * @param link String
-	 */
 	public void setLink(String link) {
 		this.link = link;
 	}

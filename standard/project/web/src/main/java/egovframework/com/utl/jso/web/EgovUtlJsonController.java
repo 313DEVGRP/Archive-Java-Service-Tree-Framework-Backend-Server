@@ -34,11 +34,6 @@ public class EgovUtlJsonController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EgovUtlJsonController.class);
     
-    /**
-	 * json 단건조회
-	 * @return String
-	 * @exception Exception
-	 */
     @RequestMapping(value="/utl/jso/EgovUtlJsonInquire.do",method = RequestMethod.GET)
     public String selectUtlJsonInquire()  throws Exception {
         return "egovframework/com/utl/jso/EgovUtlJsonInquire";
@@ -62,11 +57,6 @@ public class EgovUtlJsonController {
     	
     	return modelAndView;
     }
-    /**
-	 * json 다건조회
-	 * @return String
-	 * @exception Exception
-	 */
     @RequestMapping(value="/utl/jso/EgovUtlJsonMultiInquire.do",method = RequestMethod.GET)
     public String selectUtlJsonMultiInquire(@RequestParam Map<?, ?> commandMap)  throws Exception {    	
         return "egovframework/com/utl/jso/EgovUtlJsonMultiInquire";

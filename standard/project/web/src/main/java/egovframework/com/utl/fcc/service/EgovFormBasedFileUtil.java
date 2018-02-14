@@ -42,31 +42,15 @@ public class EgovFormBasedFileUtil {
 		return format.format(new Date());
 	}
 
-	/**
-	 * 물리적 파일명 생성.
-	 * @return
-	 */
 	public static String getPhysicalFileName() {
 		return EgovFormBasedUUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 	}
 
-	/**
-	 * 파일명 변환.
-	 * @param filename String
-	 * @return
-	 * @throws Exception
-	 */
 	protected static String convert(String filename) throws Exception {
 		//return java.net.URLEncoder.encode(filename, "utf-8");
 		return filename;
 	}
 
-	/**
-	 * Stream으로부터 파일을 저장함.
-	 * @param is InputStream
-	 * @param file File
-	 * @throws IOException
-	 */
 	public static long saveFile(InputStream is, File file) throws IOException {
 		// 디렉토리 생성
 		if (!file.getParentFile().exists()) {
@@ -98,15 +82,6 @@ public class EgovFormBasedFileUtil {
 		return size;
 	}
 
-	/**
-	 * 파일을 Upload 처리한다.
-	 *
-	 * @param request
-	 * @param where
-	 * @param maxFileSize
-	 * @return
-	 * @throws Exception
-	 */
 	public static List<EgovFormBasedFileVo> uploadFiles(HttpServletRequest request, String where, long maxFileSize) throws Exception {
 		List<EgovFormBasedFileVo> list = new ArrayList<EgovFormBasedFileVo>();
 
@@ -165,16 +140,6 @@ public class EgovFormBasedFileUtil {
 		return list;
 	}
 
-	/**
-	 * 파일을 Download 처리한다.
-	 *
-	 * @param response
-	 * @param where
-	 * @param serverSubPath
-	 * @param physicalName
-	 * @param original
-	 * @throws Exception
-	 */
 	public static void downloadFile(HttpServletResponse response, String where, String serverSubPath, String physicalName, String original) throws Exception {
 		String downFileName = where + SEPERATOR + serverSubPath + SEPERATOR + physicalName;
 
