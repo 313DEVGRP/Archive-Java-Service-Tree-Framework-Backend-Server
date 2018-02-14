@@ -99,9 +99,6 @@ public class Text {
         return InetAddressValidator.getInstance().isValidInet4Address(ip);
     }
     
-    /**
-     * ex) seperator = ";" => 1;2;3;5;6 -> 1-3,5-6 으로 변경해주는 코드 ex) seperator = "," => 1,2,3,5,6 -> 1-3,5-6 으로 변경해주는 코드
-     */
     public static String convertCommmaForString(String value, String seperator) {
         List<Integer> arrList = new ArrayList<>();
         String result = "";
@@ -138,9 +135,6 @@ public class Text {
         return result;
     }
     
-    /**
-     * ex) seperator = ";" => 1-3,5,6 -> 1;2;3;5;6 으로 변경해주는 코드 ex) seperator = "," => 1-3,5,6 -> 1;2;3;5;6 으로 변경해주는 코드
-     */
     public static String convertDashForString(String value, String seperator) {
         List<Integer> arrList = new ArrayList<>();
         String result = "";
@@ -163,9 +157,6 @@ public class Text {
         return result;
     }
     
-    /**
-     * UTF-8 인코딩으로 URL Encode를 한다. URLEncoder.encode() 메서드와 달리 Exception 처리를 하지 않아도 된다.
-     */
     public static String urlEncode(String src) {
         if (null == src) {
             return null;
@@ -200,9 +191,6 @@ public class Text {
         return oneDecimal.format(result) + suffix;
     }
     
-    /**
-     * 문자열의 md5 해시값을 구하여 그것의 문자열 표현을 구한다.
-     */
     public static String md5(String src) {
         if (null == src || 0 == src.length()) {
             return src;
@@ -226,9 +214,6 @@ public class Text {
         return sbf.toString();
     }
     
-    /**
-     * 문자열의 sha1 해시값을 구하여 그것의 문자열 표현을 구한다.
-     */
     public static String sha1(String src) {
         if (null == src || 0 == src.length()) {
             return src;
@@ -313,9 +298,6 @@ public class Text {
         }
     }
     
-    /**
-     * 문자열이 한글, 영문, 숫자, 공백으로만 이루어진 평범한 문자열인지 판단한다.
-     */
     public static boolean checkNormalString(String query) {
         if (StringUtils.isEmpty(query)) {
             return false;
@@ -335,9 +317,6 @@ public class Text {
         return true;
     }
     
-    /*
-     * css에서 사용하는 point 값을 pixel 값으로 바꾼다. (8pt = 11px, 9pt = 12px, 10pt = 13px, 11pt = 15px, 12pt = 16px, 13pt = 17px, 14pt = 19px) getTextWidth(), limitStringByFontWidth() 메서드에서 사용한다.
-     */
     private static int pointToPixel(int point) {
         switch (point) {
         case 8:
@@ -583,9 +562,6 @@ public class Text {
         return "";
     }
     
-    /**
-     * 9번째 URL 변경
-     */
     public static String getUrlByDepth(HttpServletRequest request, int Depth, String targetUrl) {
         String preUrl = request.getHeader("Referer");
         String[] urlArray = preUrl.split("\\?");
@@ -595,9 +571,6 @@ public class Text {
         return url;
     }
     
-    /**
-     * int[] arry 값 Sum
-     */
     public static String arraySum(int[] valuel) {
         int arrSum = 0;
         for (Integer control : valuel) {
@@ -606,9 +579,6 @@ public class Text {
         return String.valueOf(arrSum);
     }
     
-    /**
-     * 멤버객체값을 바인딩된 문자열 값으로 변환해 주는 유틸 1;2;3;4;5 => one,two,three,four,five input => 멤버객체스트링, 멤버를분기할Flag, 바인딩할 맵객체, 키
-     */
     public static String getBindStringFromMembers(String includeMemberString, String seperator, Map<String, Map<String, Object>> bindTypes, String typeKey) {
         
         String[] membersArray = StringUtils.split(includeMemberString, seperator);
@@ -620,17 +590,11 @@ public class Text {
         return StringUtils.join(bindStringList, ",");
     }
     
-    /**
-     * 멤버 객체값을 분기하는 Flag를 , 로 변환하는 유틸
-     */
     public static String getReplaceCommaFromMembers(String includeMemberString, String seperator) {
         String returnStr = includeMemberString.replace(seperator, ",");
         return returnStr;
     }
     
-    /**
-     * 로그 유틸 : 비밀번호 *로 표시 함수
-     */
     public static String getToPasswordString(String pass) {
         
         if (pass == null) {

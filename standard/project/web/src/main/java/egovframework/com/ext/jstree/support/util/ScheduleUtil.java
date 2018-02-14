@@ -207,10 +207,6 @@ public class ScheduleUtil {
         return output;
     }
     
-    /**
-     * 객체 - 매월 일 
-     * 1-3,5,6 => 1,2,3,5,6 으로 변환후 2진수의 지수승 ture로 변환
-     */
     public static String dayConvert(String value) {
         BigInteger divNum = new BigInteger("0"); 
         String[] st = StringUtils.split(Text.convertDashForString(value ,";"), ",");

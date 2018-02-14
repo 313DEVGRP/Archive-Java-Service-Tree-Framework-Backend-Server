@@ -59,9 +59,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         return ip;
     }
     
-    /**
-     * 1.2.3.4/32 -> array
-     */
     public static String[] makeIpv4(String ipMask) {
         if (!StringUtils.contains(ipMask, "/")) {
             String[] ips = { ipMask, "32" };
@@ -71,9 +68,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         }
     }
     
-    /**
-     * ip : 0, ipMask: 1, range:2
-     */
     public static String[] getTypeForIp(String value) {
         String type = "0";
         String mask = "32";
@@ -97,9 +91,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         return result;
     }
     
-    /**
-     * 값 비교후 0번에 삭제대상 1번에 추가대상 2번에 업데이트 대상 반환.
-     */
     public static List<List<String>> diffMembers(List<String> oldMember, List<String> newMember) {
         return diffMembers(oldMember.toArray(new String[oldMember.size()]), newMember.toArray(new String[newMember.size()]));
     }
@@ -163,9 +154,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         return StringUtils.substring(result, 1, result.length() - 1);
     }
     
-    /**
-     * url 의 full path를 얻어온다.
-     */
     public static String getFullURL(HttpServletRequest request) {
         String requestURL = request.getRequestURI();
         String queryString = request.getQueryString();
