@@ -169,6 +169,7 @@
                         <option>-keepattributes Signature</option>
                         <option>-keepattributes *Annotation*</option>
                         <option>-keepattributes InnerClasses,EnclosingMethod</option>
+                        <option>-ignorewarnings</option>
                     </options>
                 </configuration>
                 <dependencies>
