@@ -315,6 +315,16 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+                <configuration>
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <!-- <docletPath>/path/to/UmlGraph.jar</docletPath> -->
+                    <docletArtifact>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>doclet</artifactId>
+                        <version>5.1</version>
+                    </docletArtifact>
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
