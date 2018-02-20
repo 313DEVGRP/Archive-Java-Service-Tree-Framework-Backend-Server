@@ -308,15 +308,15 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.10.4</version>
                 <configuration>
-                    <minmemory>128m</minmemory>
-                    <maxmemory>1g</maxmemory>
+                    <minmemory>256m</minmemory>
+                    <maxmemory>512m</maxmemory>
                     <encoding>UTF-8</encoding>
                     <docencoding>UTF-8</docencoding>
                     <charset>UTF-8</charset>
                     <overview>${project.build.directory}/javadoc/overview.html</overview>
                     <docfilessubdirs>true</docfilessubdirs>
                     <links>
-                        <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
                     <show>protected</show>
                     <source>1.8</source>
