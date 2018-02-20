@@ -336,6 +336,16 @@
                         -nodefontpackagesize 7
                         -outputencoding UTF-8
                     </additionalparam>
+                    <reportOutputDirectory>${project.basedir}/target</reportOutputDirectory>
+                    <destDir>javadoc</destDir>
+                    <windowtitle>TSF</windowtitle>
+                    <doctitle>TSF</doctitle>
+                    <show>private</show>
+                    <detectLinks>false</detectLinks>
+                    <detectOfflineLinks>true</detectOfflineLinks>
+                    <linksource>true</linksource>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
                 <reportSets>
                     <reportSet>
