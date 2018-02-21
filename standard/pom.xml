@@ -306,7 +306,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <version>3.0.0</version>
                 <configuration>
                     <minmemory>256m</minmemory>
                     <maxmemory>512m</maxmemory>
@@ -329,13 +329,6 @@
                         <artifactId>UmlGraph</artifactId>
                         <version>5.2</version>
                     </docletArtifact>
-                    <additionalparam>
-                        -inferrel -inferdep -quiet -hide java.*
-                        -collpackages java.util.* -qualify
-                        -postfixpackage -nodefontsize 9
-                        -nodefontpackagesize 7
-                        -outputencoding UTF-8
-                    </additionalparam>
                     <reportOutputDirectory>${project.basedir}/target</reportOutputDirectory>
                     <destDir>javadoc</destDir>
                     <windowtitle>TSF</windowtitle>
@@ -344,7 +337,6 @@
                     <detectLinks>false</detectLinks>
                     <detectOfflineLinks>true</detectOfflineLinks>
                     <linksource>true</linksource>
-                    <additionalparam>-Xdoclint:none</additionalparam>
                     <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
                 <reportSets>
