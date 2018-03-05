@@ -316,52 +316,7 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <minmemory>256m</minmemory>
-                    <maxmemory>512m</maxmemory>
-                    <encoding>UTF-8</encoding>
-                    <docencoding>UTF-8</docencoding>
-                    <charset>UTF-8</charset>
-                    <overview>${project.build.directory}/javadoc/overview.html</overview>
-                    <docfilessubdirs>true</docfilessubdirs>
-                    <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                    </links>
-                    <show>protected</show>
-                    <source>1.8</source>
-                    <sourcepath>${basedir}/src/main/java</sourcepath>
-                    <doclet>
-                        org.umlgraph.doclet.UmlGraphDoc
-                    </doclet>
-                    <docletArtifact>
-                        <groupId>gr.spinellis</groupId>
-                        <artifactId>UmlGraph</artifactId>
-                        <version>5.2</version>
-                    </docletArtifact>
-                    <reportOutputDirectory>${project.basedir}/target</reportOutputDirectory>
-                    <destDir>javadoc</destDir>
-                    <windowtitle>TSF</windowtitle>
-                    <doctitle>TSF</doctitle>
-                    <show>private</show>
-                    <detectLinks>false</detectLinks>
-                    <detectOfflineLinks>true</detectOfflineLinks>
-                    <linksource>true</linksource>
-                    <detectJavaApiLink>true</detectJavaApiLink>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            -->
+
         </plugins>
     </reporting>
 </project>

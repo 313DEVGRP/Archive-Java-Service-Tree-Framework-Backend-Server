@@ -2998,6 +2998,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/AdminLTE-2.3.11/starter.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/Gruntfile.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/RivalWar/api/menu/ROLE_USER/getChildNode.do">
           <value>
             <set />
@@ -3073,6 +3083,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/css/AdminLTE.css">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/css/AdminLTE.org.css">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/css/skins/_all-skins.css">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/css/skins/_all-skins.org.css">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/index.bak.html">
           <value>
             <set />
@@ -3114,6 +3144,11 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/login.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/package.json">
           <value>
             <set />
           </value>
@@ -3218,12 +3253,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/robots.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/security/csrf.do">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/uss/ion/fbk/facebookSignin.do">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/oldFrontend/Gruntfile.js">
           <value>
             <set />
           </value>
