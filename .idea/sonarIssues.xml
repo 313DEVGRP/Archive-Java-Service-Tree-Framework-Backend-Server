@@ -2813,6 +2813,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/main/scala/egovframework/com/ext/jstree/study.scala">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/standard/project/web/src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml">
           <value>
             <set />
@@ -2993,6 +2998,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/standard/project/web/src/test/scala/sampletest.scala">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/.gitignore">
           <value>
             <set />
@@ -3099,6 +3109,21 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/css/skins/_all-skins.org.css">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/js/pages/dashboard.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/js/rivalWar/directChat.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/frontend/dist/js/rivalWar/shareContents.js">
           <value>
             <set />
           </value>
@@ -3269,6 +3294,11 @@
           </value>
         </entry>
         <entry key="$APPLICATION_HOME_DIR$/jstree/oldFrontend/Gruntfile.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/oldFrontend/index.html">
           <value>
             <set />
           </value>
