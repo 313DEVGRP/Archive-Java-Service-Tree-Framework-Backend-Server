@@ -11,9 +11,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>web</artifactId>
+    <artifactId>web-module</artifactId>
     <packaging>war</packaging>
-    <name>web</name>
+    <name>web-module</name>
     <description>Web Project by 313 DEV GRP</description>
 
     <properties>

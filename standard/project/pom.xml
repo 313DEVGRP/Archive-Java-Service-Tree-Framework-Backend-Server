@@ -18,8 +18,8 @@
 	<description>ROOT Project Repository by 313 DEV GRP</description>
 	
 	<modules>
-		<module>support</module>
-		<module>web</module>
+		<module>lib-module</module>
+		<module>web-module</module>
 	</modules>
 
 	<properties>

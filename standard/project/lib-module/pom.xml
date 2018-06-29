@@ -9,9 +9,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>support</artifactId>
+    <artifactId>lib-module</artifactId>
     <packaging>pom</packaging>
-    <name>support</name>
+    <name>lib-module</name>
     <description>server by 313 DEV GRP</description>
 
     <properties>
