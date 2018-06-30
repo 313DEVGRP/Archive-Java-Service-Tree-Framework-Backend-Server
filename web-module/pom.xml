@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>development</groupId>
-        <artifactId>project</artifactId>
+        <groupId>313devgrp</groupId>
+        <artifactId>standard-project</artifactId>
         <version>${project.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -36,8 +36,8 @@
     <dependencies>
         <!-- 실행환경 라이브러리 -->
         <dependency>
-            <groupId>development</groupId>
-            <artifactId>support</artifactId>
+            <groupId>313devgrp</groupId>
+            <artifactId>lib-module</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
         </dependency>

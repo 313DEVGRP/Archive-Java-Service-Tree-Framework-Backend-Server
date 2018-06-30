@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>development</groupId>
-        <artifactId>project</artifactId>
+        <groupId>313devgrp</groupId>
+        <artifactId>standard-project</artifactId>
         <version>${project.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
