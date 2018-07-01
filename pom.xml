@@ -13,7 +13,7 @@
     <version>${project.version}</version>
     <packaging>pom</packaging>
 
-    <name>jsTree Service Framework - RivalWar</name>
+    <name>standard-project</name>
     <description>대한민국 IT 의 표준을 정의합니다. 최초의 서비스 프레임워크를 공개합니다. by 313 DEV GRP</description>
     <url>http://www.313.co.kr</url>
 
