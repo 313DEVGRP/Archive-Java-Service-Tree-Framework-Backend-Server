@@ -1,10 +1,8 @@
 ## jsTree Service Framework By 313DEVGRP ##
 
-**313 DEV GRP**는 2010년 12월에 출범한 자바 개발자 그룹입니다.
-
-TSF(jsTree Service Framework)는 MIT License로 배포됩니다.
-
-개인, 기업, 정부에서 무료로 사용이 가능합니다.
+-**313 DEV GRP**는 2010년 12월에 출범한 자바 개발자 그룹입니다.
+-TSF(jsTree Service Framework)는 MIT License로 배포됩니다.
+-개인, 기업, 정부에서 무료로 사용이 가능합니다.
 
 
 ### jsTree Service Framework란: ###
@@ -13,10 +11,10 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework
 
 특장점 :
 
-- 중앙집중형 아키텍쳐
-- 확장(extend)을 염두해 둔 객체지향 개발 방식
-- 안정성
-- Speeeeeeeeeeed~!
+    * 중앙집중형 아키텍쳐
+    * 확장(extend)을 염두해 둔 객체지향 개발 방식
+    * 안정성
+    * Speeeeeeeeeeed~!
 
 ### jsTree Service Framework에서 사용한 기술: ###
 
