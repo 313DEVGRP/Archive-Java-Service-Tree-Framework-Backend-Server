@@ -20,10 +20,10 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework
 
 ### jsTree Service Framework에서 사용한 기술: ###
 
-Part		  | Detail Skill
-------------- | -------------
-View Part 	  | html+css,Bootstrap,RequireJS,Bower,Grunt,AngularJS,jQuery,Qunit,Flex,Json,xml,BlazeDS 
-Server Part	  | Apache(modjk),NGINX,Tomcat,Resin,Jetty,SiteMash,Tiles,FreeMarker,Velocity 
+> Part		        | Detail Skill
+> -------------     | -------------
+> View Part 	    | html+css, Bootstrap, RequireJS, Bower, Grunt, AngularJS, jQuery, Qunit, Flex, Json, xml, BlazeDS
+> Server Part	    | Apache(modjk), Nginx, Tomcat, Resin, Jetty, SiteMash, Tiles, FreeMarker, Velocity
 
 ### 우리 313 DEV GRP는 언제나 열려있습니다. Click To Contribute! ###
 
