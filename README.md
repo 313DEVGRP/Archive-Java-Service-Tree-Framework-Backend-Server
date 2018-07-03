@@ -1,12 +1,15 @@
-## Welcome to 313 DEV GRP ##
+## jsTree Service Framework By 313DEVGRP ##
 
 **313 DEV GRP**는 2010년 12월에 출범한 자바 개발자 그룹입니다.
 
-### jsTree Service Framework 를 배포합니다. ###
+TSF(jsTree Service Framework)는 MIT License로 배포됩니다.
 
-jsTree Service Framework란:
+개인, 기업, 정부에서 무료로 사용이 가능합니다.
 
-MVC패턴을 구현한 다양한 프레임워크를 대상으로 서비스레이어의 도메인 객체를 Tree Base Object로 간주하여 서비스 - DAO - DTO - DB를 정형화한 기반 구현체를 제공하는 프레임워크 입니다.
+
+### jsTree Service Framework란: ###
+
+MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework 기반한 ) 서비스레이어의 도메인 객체를 Tree Base Object로 간주하여 서비스 - DAO - DTO - DB를 정형화한 기반 구현체를 제공하는 프레임워크 입니다.
 
 특장점 :
 
@@ -15,7 +18,12 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 서비스레이
 - 안정성
 - Speeeeeeeeeeed~!
 
-### jsTree Service Framework는 무료입니다. ###
+### jsTree Service Framework에서 사용한 기술: ###
 
-### 우리 313 DEV GRP는 언제나 열려있습니다. ###
+Part		  | Detail Skill
+------------- | -------------
+View Part 	  | html+css,Bootstrap,RequireJS,Bower,Grunt,AngularJS,jQuery,Qunit,Flex,Json,xml,BlazeDS 
+Server Part	  | Apache(modjk),NGINX,Tomcat,Resin,Jetty,SiteMash,Tiles,FreeMarker,Velocity 
+
+### 우리 313 DEV GRP는 언제나 열려있습니다. Click To Contribute! ###
 
