@@ -16,6 +16,7 @@
     <name>standard-project</name>
     <description>대한민국 IT 의 표준을 정의합니다. 최초의 서비스 프레임워크를 공개합니다. by 313 DEV GRP</description>
     <url>http://www.313.co.kr</url>
+    <inceptionYear>2011</inceptionYear>
 
     <organization>
         <name>313 DEV GRP</name>
@@ -62,7 +63,7 @@
     </ciManagement>
     <scm>
         <connection>
-            scm:git:https://github.com/jstree/jsTree-Service-Framework-Backend-App/tree/master/development-project
+            scm:git:https://github.com/jstree/jsTree-Service-Framework-Backend-App/tree/master
         </connection>
         <url>scm:git:https://github.com/jstree</url>
         <developerConnection>scm:git:https://github.com/jstree</developerConnection>
@@ -82,18 +83,14 @@
     <!-- 라이센스 정보 -->
     <licenses>
         <license>
-            <name>Apache License Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-        </license>
-        <license>
-            <name>The New BSD License</name>
-            <url>http://www.opensource.org/licenses/bsd-license.html</url>
-        </license>
-        <license>
-            <name>The Academic Free License, v. 2.1</name>
-            <url>http://opensource-definition.org/licenses/afl-2.1.html</url>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
+
+    <prerequisites>
+        <maven>3.0.5</maven>
+    </prerequisites>
 
     <profiles>
         <profile>
