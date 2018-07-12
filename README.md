@@ -34,9 +34,8 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework
 
 ### jsTree Service Framework을 지속적으로 성장시키는 툴###
 
-[ - 형상관리 바로가기 : https://github.com/jstree](https://github.com/jstree)
-
-[이슈관리 바로가기 : http://www.313.co.kr/jira](http://www.313.co.kr/jira)
+[ -> 형상관리 바로가기](https://github.com/jstree) : https://github.com/jstree
+[ -> 이슈관리 바로가기 : http://www.313.co.kr/jira](http://www.313.co.kr/jira)
 
 [문서관리 바로가기 : http://www.313.co.kr/confluence](http://www.313.co.kr/confluence)
 
