@@ -15,7 +15,7 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework
     * 안정성
     * Speeeeeeeeeeed~!
 
-### jsTree Service Framework에서 사용한 기술: ###
+### jsTree Service Framework에서 사용한 기술 ###
 
 > Part              | Detail Skill
 > -------------     | -------------
@@ -33,7 +33,8 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework
 
 
 
-### jsTree Service Framework을 지속적으로 성장시키는 툴###
+
+### jsTree Service Framework을 지속적으로 성장시키는 툴 ###
 
 > [ -> 형상관리 바로가기](https://github.com/jstree) : https://github.com/jstree
 >
@@ -52,6 +53,7 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework
 > [ -> jsTree Service Framework 관리 샘플 사이트](http://www.313.co.kr/index.do) : http://www.313.co.kr/index.do
 >
 > [ -> jsTree Service Framework 사용 샘플 사이트](http://www.313.co.kr/) : http://www.313.co.kr
+
 
 
 
