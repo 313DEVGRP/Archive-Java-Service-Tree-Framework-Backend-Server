@@ -42,6 +42,7 @@ public class AnonymousAggregateResultController extends GenericAbstractControlle
     public ModelAndView searchNode(AggregateResultDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
             throws Exception {
 
+        logger.info("searchNode request jrebel");
         ParameterParser parser = new ParameterParser(request);
 
         if (!StringUtils.hasText(request.getParameter("searchString"))) {
