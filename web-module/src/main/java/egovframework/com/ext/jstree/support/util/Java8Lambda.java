@@ -5,10 +5,16 @@ package egovframework.com.ext.jstree.support.util;
  */
 public class Java8Lambda {
 
-    private String givenName;
-       private String surName;
-       private int age;
-       private String eMail;
-       private String phone;
-       private String address;
+   String name;
+   int age;
+
+   Java8Lambda(String name, int age) {
+      this.name = name;
+      this.age = age;
+   }
+
+   @Override
+   public String toString() {
+      return name;
+   }
 }
