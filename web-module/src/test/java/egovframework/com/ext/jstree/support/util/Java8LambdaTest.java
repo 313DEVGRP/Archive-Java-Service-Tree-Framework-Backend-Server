@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/**
- * Created by Administrator on 2018-07-12.
- */
 public class Java8LambdaTest {
 
     static List<Java8Lambda> persons;
@@ -177,6 +174,6 @@ public class Java8LambdaTest {
                         .filter(p -> p.name.startsWith("P"))
                         .collect(Collectors.toList());
 
-        System.out.println(filtered);    // [Peter, Pamela]
+        System.out.println(filtered);
     }
 }
