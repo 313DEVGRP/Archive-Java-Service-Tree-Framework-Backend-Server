@@ -2,15 +2,8 @@
 <application generated-by="intellij" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://update.zeroturnaround.com/jrebel/rebel-2_1.xsd">
 
 	<classpath>
-		<dir name="C:/DEV/ideaIU-15.0.6/jstree/backend/web-module/target/classes">
+		<dir name="C:/DEV/ideaIU-15.0.6/jstree/backend/core-module/target/classes">
 		</dir>
 	</classpath>
-
-	<web>
-		<link target="/">
-			<dir name="C:/DEV/ideaIU-15.0.6/jstree/backend/web-module/src/main/webapp">
-			</dir>
-		</link>
-	</web>
 
 </application>
