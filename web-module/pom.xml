@@ -37,9 +37,8 @@
         <!-- 실행환경 라이브러리 -->
         <dependency>
             <groupId>313devgrp</groupId>
-            <artifactId>lib-module</artifactId>
+            <artifactId>core-module</artifactId>
             <version>${project.version}</version>
-            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -147,6 +146,23 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <resourceBundles>
+                        <resourceBundle>313devgrp:core-module:${project.version}</resourceBundle>
+                    </resourceBundles>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
