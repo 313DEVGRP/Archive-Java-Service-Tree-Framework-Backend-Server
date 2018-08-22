@@ -37,8 +37,9 @@
         <!-- 실행환경 라이브러리 -->
         <dependency>
             <groupId>313devgrp</groupId>
-            <artifactId>core-module</artifactId>
+            <artifactId>lib-module</artifactId>
             <version>${project.version}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
