@@ -99,6 +99,7 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
@@ -110,7 +111,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>**/*.xml</include>
+                        <include>**/*.*</include>
                     </includes>
                 </configuration>
             </plugin>
