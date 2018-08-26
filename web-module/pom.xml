@@ -151,12 +151,14 @@
                     <resourceBundles>
                         <resourceBundle>313devgrp:core-module:${project.version}</resourceBundle>
                     </resourceBundles>
+                    <includeProjectProperties>true</includeProjectProperties>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>process</goal>
                         </goals>
+                        <phase>generate-resources</phase>
                     </execution>
                 </executions>
             </plugin>

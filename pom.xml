@@ -24,7 +24,7 @@
     </organization>
 
     <properties>
-        <project.version>8.8.5</project.version>
+        <project.version>8.8.6</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
         <build.time>${maven.build.timestamp}</build.time>
