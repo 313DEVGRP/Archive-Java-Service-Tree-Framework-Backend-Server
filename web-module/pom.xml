@@ -90,6 +90,10 @@
         <directory>${basedir}/target</directory>
         <finalName>web</finalName>
 
+        <filters>
+            <filter>${basedir}/profiles/${build.profile.id}/support.properties</filter>
+        </filters>
+
         <resources>
             <resource>
                 <filtering>true</filtering>
