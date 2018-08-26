@@ -111,7 +111,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>**/*</include>
+                        <include>**/*.*</include>
                     </includes>
                 </configuration>
             </plugin>
