@@ -24,8 +24,8 @@
     </organization>
 
     <properties>
-        <project.version>8.8.7</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.version>2018.07.11</project.version>
         <maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
         <build.time>${maven.build.timestamp}</build.time>
     </properties>
@@ -33,7 +33,6 @@
     <!-- 모듈 셋팅 -->
     <modules>
         <module>lib-module</module>
-        <module>core-module</module>
         <module>web-module</module>
     </modules>
 
@@ -106,7 +105,7 @@
         <profile>
             <id>dev</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <build.profile.id>dev</build.profile.id>
