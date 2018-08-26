@@ -155,7 +155,6 @@
                     <resourceBundles>
                         <resourceBundle>313devgrp:core-module:${project.version}</resourceBundle>
                     </resourceBundles>
-                    <includeProjectProperties>true</includeProjectProperties>
                 </configuration>
                 <executions>
                     <execution>

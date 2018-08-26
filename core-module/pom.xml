@@ -107,7 +107,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>**/*</include>
+                        <include>**/*.xml</include>
                     </includes>
                 </configuration>
             </plugin>
