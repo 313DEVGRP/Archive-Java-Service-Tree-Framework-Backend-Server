@@ -90,12 +90,14 @@
         <directory>${basedir}/target</directory>
         <finalName>web</finalName>
 
+        <filters>
+            <filter>${basedir}/src/main/resources/profiles/${build.profile.id}/support.properties</filter>
+        </filters>
+
         <resources>
             <resource>
-                <directory>${basedir}/src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>${project.build.directory}/maven-shared-archive-resources</directory>
+                <filtering>true</filtering>
+                <directory>${project.basedir}/src/main/resources</directory>
             </resource>
         </resources>
 

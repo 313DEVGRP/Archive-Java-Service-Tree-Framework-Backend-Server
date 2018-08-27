@@ -91,39 +91,22 @@
         <directory>${basedir}/target</directory>
         <finalName>core</finalName>
 
-        <filters>
-            <filter>${basedir}/src/main/resources/profiles/${build.profile.id}/support.properties</filter>
-        </filters>
-
-        <resources>
-            <resource>
-                <filtering>true</filtering>
-                <directory>${project.basedir}/src/main/resources</directory>
-            </resource>
-        </resources>
-
         <plugins>
             <plugin>
                 <artifactId>maven-remote-resources-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
                     <execution>
-                        <phase>process-resources</phase>
                         <goals>
                             <goal>bundle</goal>
                         </goals>
-                        <configuration>
-                            <resourcesDirectory>${project.build.outputDirectory}</resourcesDirectory>
-                            <excludes>
-                                <exclude>**/WEB-INF/**</exclude>
-                                <exclude>**/META-INF/**</exclude>
-                            </excludes>
-                            <includes>
-                                <include>**/*.*</include>
-                            </includes>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <includes>
+                        <include>**/*.*</include>
+                    </includes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
