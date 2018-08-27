@@ -92,7 +92,7 @@
         <finalName>core</finalName>
 
         <filters>
-            <filter>${basedir}/profiles/${build.profile.id}/support.properties</filter>
+            <filter>${basedir}/src/main/resources/profiles/${build.profile.id}/support.properties</filter>
         </filters>
 
         <resources>
