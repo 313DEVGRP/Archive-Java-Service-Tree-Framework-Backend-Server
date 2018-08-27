@@ -99,6 +99,9 @@
                     <resourceBundles>
                         <resourceBundle>313devgrp:core-module:${project.version}</resourceBundle>
                     </resourceBundles>
+                    <attachToMain>false</attachToMain>
+                    <attachToTest>true</attachToTest>
+                    <appendedResourcesDirectory>${basedir}/src/main/resources</appendedResourcesDirectory>
                 </configuration>
                 <executions>
                     <execution>
