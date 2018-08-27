@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>core-module</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>core-module</name>
     <description>core Project by 313 DEV GRP</description>
 
@@ -103,6 +103,23 @@
         </resources>
 
         <plugins>
+            <plugin>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>**/*.properties</include>
+                        <include>**/*.xml</include>
+                    </includes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
