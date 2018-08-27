@@ -161,6 +161,14 @@
                             <Build-ETC>Korea Standard Project</Build-ETC>
                         </manifestEntries>
                     </archive>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/src/main/resources</directory>
+                        </resource>
+                        <resource>
+                            <directory>${project.build.directory}/maven-shared-archive-resources</directory>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             <plugin>
