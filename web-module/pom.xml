@@ -96,7 +96,6 @@
             </resource>
             <resource>
                 <directory>${project.build.directory}/maven-shared-archive-resources</directory>
-                <filtering>true</filtering>
             </resource>
         </resources>
 
