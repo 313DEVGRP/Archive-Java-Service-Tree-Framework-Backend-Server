@@ -33,6 +33,7 @@
     <!-- 모듈 셋팅 -->
     <modules>
         <module>lib-module</module>
+        <module>core-module</module>
         <module>web-module</module>
     </modules>
 
