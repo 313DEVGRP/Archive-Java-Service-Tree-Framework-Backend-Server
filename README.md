@@ -20,16 +20,16 @@ MVC패턴을 구현한 다양한 프레임워크를 대상으로 ( EgovFramework
 > Part              | Detail Skill
 > -------------     | -------------
 > View Part 	    | html+css, Bootstrap, RequireJS, Bower, Grunt, AngularJS, jQuery, Qunit, Flex, Json, xml, BlazeDS
-> Server Part	    | Apache(modjk), ApiGateway(Zulu), Kafka, Nginx, Tomcat, Resin, Jetty, SiteMash, Tiles, FreeMarker, Velocity
+> Server Part	    | Apache(modjk), Nginx, Tomcat, Resin, Jetty, SiteMash, Tiles, FreeMarker, Velocity
 > Framework Part    | Struts, Spring, iBatis, Hibernate, Spring-integration, Spring-security, Spring-Boot, Spring-DW, Spring-WebFlow, Spring-Data(JPA), Spring-Batch, Spring-WebServices, Spring-Mobile, Spring-MVC
 > Tool Part         | Quartz, Ehcache, MemCache, Redis, Apache-Commons, EgovFramework(Component)
 > CI Part           | Junit, Maven, Hudson, Jenkins, Bamboo, Nexus, Jira, Fisheye, Crucible, Confluence, Sonar
-> Database Part     | MySql, Oracle, MS-sql, postgres, Hadoop, Storm, Spark, Cassandra, MongoDB, GraphDB
+> Database Part     | MySql, Oracle, MS-sql, postgres, Hadoop, Storm, Spark, Cassandra, MongoDB
 > Mobile Part       | Android, PhoneGap
 > Search Engine Part| Lucene, Elastic Search, Kibana, Logstash, Beats
 > Management Part   | PMBOK, MicroService, CBD, PLE, Prototype, PMS, ALM
-> Virtual Image Part| Kubernetes - Zookeeper - Docker
-> Microservice Part | Scala - Netty - Finagle
+> Virtual Image Part| Docker
+> Microservice Part | Netty - Zookeeper - Finagle
 
 
 
