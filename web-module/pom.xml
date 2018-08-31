@@ -110,7 +110,7 @@
                 <executions>
                     <execution>
                         <id>unpack-copy</id>
-                        <phase>validate</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
