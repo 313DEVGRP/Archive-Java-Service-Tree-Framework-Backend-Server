@@ -110,7 +110,7 @@
                 <executions>
                     <execution>
                         <id>unpack-copy</id>
-                        <phase>compile</phase>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
