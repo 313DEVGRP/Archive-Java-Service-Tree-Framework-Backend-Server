@@ -28,6 +28,7 @@
         <project.version>8.8.20</project.version>
         <maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
         <build.time>${maven.build.timestamp}</build.time>
+        <dependency.locations.enabled>false</dependency.locations.enabled>
     </properties>
 
     <!-- 모듈 셋팅 -->
