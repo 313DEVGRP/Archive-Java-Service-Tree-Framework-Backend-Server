@@ -1061,6 +1061,8 @@
             <div id="field-add">
                 +
             </div>
+
+            <input id="submit" type="submit" name="submit" value="submit">
         </form>
     </div>
 </section>
