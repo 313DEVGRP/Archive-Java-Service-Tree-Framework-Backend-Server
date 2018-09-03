@@ -247,7 +247,7 @@
                 </executions>
                 <configuration>
                     <repository>313devgrp/jstree-service-framework-backend-app</repository>
-                    <tag>latest</tag>
+                    <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>web.war</JAR_FILE>
                     </buildArgs>
