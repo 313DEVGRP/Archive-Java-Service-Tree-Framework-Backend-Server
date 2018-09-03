@@ -100,7 +100,243 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- ANALYTICS START -->
+    <!-- Style Setting -->
+    <style type="text/css">
+        #fields div.field {
+            background-color: white;
+            min-height: 50px;
+            box-sizing: border-box;
+        }
+        #fields div.placeholder {
+            background-color: #f9f9f9;
+            border: 1px dotted #ccc;
+        }
+        #fields div.ui-sortable-helper {
+            opacity: 0.7;
+        }
+
+        div.fields input,
+        div.fields select {
+            width: 100%;
+        }
+        div.fields select {
+        }
+        div.fields label span.field-move {
+            display: inline-block;
+            padding: 0.3em 0.7em;
+            margin-right: 0.5em;
+            border: 1px solid #ccc;
+            color: #444;
+            border-radius: 3px;
+        }
+        div.fields label span.field-move:hover {
+            border: 1px solid #777;
+            background: #f9f9f9;
+        }
+        div.fields div.field-title {
+            width: 30%;
+            float: left;
+            padding-right: 3%;
+            box-sizing: border-box;
+        }
+        div.fields div.field-type {
+            width: 30%;
+            float: left;
+            padding-right: 3%;
+            box-sizing: border-box;
+        }
+        div.fields div.field-end {
+            width: 40%;
+            float: left;
+            padding-right: 3%;
+            box-sizing: border-box;
+        }
+        div.fields div.field-type-options {
+            width: 30%;
+            float: left;
+            padding-right: 3%;
+            box-sizing: border-box;
+        }
+        div.fields div.field-remove {
+            width: 10%;
+            float: left;
+            color: #bb2525;
+            font-size: 0.9em;
+            cursor: pointer;
+            padding-top: 5px;
+        }
+        div.fields div.field-remove:hover {
+            text-decoration: underline;
+        }
+        div.fields div.field-details {
+            clear: both;
+            color: #bb2525;
+            font-size: 0.9em;
+            cursor: pointer;
+            margin-bottom: 0.5em;
+        }
+        div.fields div.field-details:hover {
+            text-decoration: underline;
+        }
+
+        #field-add {
+            clear: both;
+            text-align: center;
+            padding: 0.5em;
+            margin-top: 1em;
+            margin-left: 30%;
+            border: 1px solid #ccc;
+            background: #f3f3f3;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #field-add:hover {
+            border: 1px solid #999;
+            background: #eee;
+        }
+
+        form select {
+            margin: 0 !important;
+        }
+
+        h3 {
+            margin-top: 2em;
+        }
+
+        #generator input[type="text"] {
+            width: 110px;
+        }
+
+        #generator .small {
+            font-size: 0.8em;
+        }
+
+        #generator select,
+        #generator input[type=checkbox],
+        #generator img {
+            margin: 8px 0 0 0 !important;
+        }
+
+        #generator .include {
+            text-align: center;
+        }
+
+        button.btn-small {
+            padding: 0.5em 1.5em;
+            font-size: 13px;
+            text-shadow: none;
+        }
+
+        #download-config-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            background: -ms-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+            background: -moz-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+            background: -o-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+            background: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(1, rgba(0, 0, 0, 0.7)));
+            background: -webkit-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+            background: radial-gradient(ellipse farthest-corner at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+        }
+
+        #download-config {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 70vw;
+            height: 80vh;
+            margin-top: -40vh;
+            margin-left: -35vw;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 4px;
+            z-index: 11;
+        }
+
+        #download-config div.download-scroller {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            padding: 1em;
+            box-sizing: border-box;
+        }
+
+        #download-config div.download-close {
+            position: absolute;
+            top: -11px;
+            right: -11px;
+            width: 22px;
+            height: 22px;
+            border: 2px solid white;
+            background-color: black;
+            text-align: center;
+            border-radius: 15px;
+            cursor: pointer;
+            z-index: 12;
+            box-shadow: 2px 2px 6px #111;
+            color: white;
+        }
+
+        #download-config h3:first-child {
+            margin-top: 0.2em;
+        }
+
+        div.DTE_Field.DTE_Field_Type_title label {
+            width: 100% !important;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-bottom: 1px solid #aaa;
+        }
+        div.DTE_Field.DTE_Field_Type_title div {
+            display: none;
+        }
+        div.DTE_Field.DTE_Field_Type_title:hover {
+            background-color: white;
+            border: 1px solid transparent;
+        }
+
+        div.DTE_Field div.DTE_Field_Info {
+            padding-top: 2px;
+        }
+
+        div.values-multi-info {
+            position: absolute;
+            padding: 1em;
+            border: #ddd;
+            width: 200px;
+            box-shadow: 2px 2px 10px #aaa;
+            background-color: #f9f9f9;
+            font-size: 0.8em;
+            border-radius: 3px;
+        }
+        div.values-multi-info:before {
+            display: block;
+            position: absolute;
+            content: ' ';
+            height: 10px;
+            width: 10px;
+            top: -6px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-left: none;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+    </style>
+
     <!-- https://www.google.com/analytics/settings/home?scid=18527803 web log Analyzer  -->
     <script type="text/javascript">
         /**
@@ -796,61 +1032,12 @@
 <body id="demo_body">
 <section class="clearfix">
     <div class="box">
-        <form id="generator_form" action="generator.php" method="POST" class="layout">
+        <form id="generator_form" action="generator.do" method="POST" class="layout">
             <input id="column_count" type="hidden" name="columns">
             <input id="action" type="hidden" name="action" value="">
             <input id="build" type="hidden" name="build" value="dt/jqc-1.12.4/moment-2.18.1/dt-1.10.18/b-1.5.2/sl-1.2.6">
 
             <h3>Software and styling</h3>
-            <div class="field border text">
-                <label>Styling:</label>
-                <div id="builder-style">
-                    DataTables
-                </div>
-                <div class="clear"></div>
-            </div>
-
-            <div class="field border text">
-                <label>Software:</label>
-                <div>
-                    <div id="builder-software">DataTables, Buttons, Editor, Select, jQuery 1, Moment</div>
-                    <button class="site-btn btn-small download-builder" style="margin-top:1em;">Customise</button>
-                </div>
-                <div class="clear"></div>
-            </div>
-
-
-            <h3>Server and database</h3>
-            <div class="field border">
-                <label>Server type:</label>
-                <div>
-                    <select name="server_type" style="display: none">
-                        <option value="php" selected>PHP</option>
-                        <option value=".net">.NET</option>
-                        <option value="nodejs">.NodeJS</option>
-                    </select>
-                    <button class="site-btn btn-small btn-inline active" data-val="php">PHP</button>
-                    <button class="site-btn btn-small btn-inline" data-val=".net">.NET</button>
-                    <button class="site-btn btn-small btn-inline" data-val="nodejs">NodeJS</button>
-                </div>
-                <div class="clear"></div>
-            </div>
-
-            <div class="field border">
-                <label>Database type:</label>
-                <div>
-                    <select name="db_type" style="display: none">
-                        <option value="mysql" selected>MySQL</option>
-                        <option value="postgres">PostgreSQL</option>
-                        <option value="sqlserver">SQL Server</option>
-                    </select>
-                    <button class="site-btn btn-small btn-inline active" data-val="mysql">MySQL / MariaDB</button>
-                    <button class="site-btn btn-small btn-inline" data-val="postgres">PostgreSQL</button>
-                    <button class="site-btn btn-small btn-inline" data-val="sqlserver">SQL Server</button>
-                </div>
-                <div class="clear"></div>
-            </div>
-
             <div class="field border">
                 <label>Table name:</label>
                 <div>
@@ -859,22 +1046,14 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="field border">
-                <label>Primary key:</label>
-                <div>
-                    <input type="text" name="db_table_pkey" value="id">
-                </div>
-                <div class="clear"></div>
-            </div>
-
             <h3>Form / Table</h3>
-
             <div class="fields">
                 <div class="field field-header">
                     <label> </label>
-                    <div>
+                    <div class="testldm">
                         <div class="field-title">Title</div>
                         <div class="field-type">Type</div>
+                        <div class="field-end">&nbsp</div>
                     </div>
                 </div>
                 <div id="fields"></div>
