@@ -37,8 +37,9 @@
         <!-- 실행환경 라이브러리 -->
         <dependency>
             <groupId>313devgrp</groupId>
-            <artifactId>core-module</artifactId>
+            <artifactId>lib-module</artifactId>
             <version>${project.version}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -71,11 +72,10 @@
             <artifactId>javax.websocket-api</artifactId>
             <version>1.1</version>
         </dependency>
-
         <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.11.7</version>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
         </dependency>
 
     </dependencies>
