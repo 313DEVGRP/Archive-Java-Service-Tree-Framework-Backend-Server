@@ -46,13 +46,6 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.11.7</version>
-        </dependency>
-
     </dependencies>
 
     <build>
