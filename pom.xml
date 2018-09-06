@@ -29,6 +29,10 @@
         <maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
         <build.time>${maven.build.timestamp}</build.time>
         <dependency.locations.enabled>false</dependency.locations.enabled>
+        <java.bootstrap.classes>${java.home}/lib/rt.jar</java.bootstrap.classes>
+        <java.cryptographic.extension.classes>${java.home}/lib/jce.jar</java.cryptographic.extension.classes>
+        <java.secure.socket.extension.classes>${java.home}/lib/jsse.jar</java.secure.socket.extension.classes>
+        <version.proguard-base>5.3.3</version.proguard-base>
     </properties>
 
     <!-- 모듈 셋팅 -->

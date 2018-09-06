@@ -16,23 +16,6 @@
     <name>web-module</name>
     <description>Web Project by 313 DEV GRP</description>
 
-    <properties>
-        <java.bootstrap.classes>${java.home}/lib/rt.jar</java.bootstrap.classes>
-        <java.cryptographic.extension.classes>${java.home}/lib/jce.jar</java.cryptographic.extension.classes>
-        <java.secure.socket.extension.classes>${java.home}/lib/jsse.jar</java.secure.socket.extension.classes>
-        <version.proguard-base>5.3.3</version.proguard-base>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>net.sf.proguard</groupId>
-                <artifactId>proguard-base</artifactId>
-                <version>${version.proguard-base}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <!-- 실행환경 라이브러리 -->
         <dependency>
@@ -77,7 +60,6 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-
     </dependencies>
 
     <build>
