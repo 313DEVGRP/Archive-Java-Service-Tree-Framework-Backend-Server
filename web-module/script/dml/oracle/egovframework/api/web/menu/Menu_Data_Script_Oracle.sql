@@ -1,25 +1,25 @@
-Insert into T_JSTREE_SPEC_HASH_TAG
+Insert into T_COMPREHENSIVE_MENU
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
-  MAPPING_COMPARE_ID, TAG_SOURCE_CHAT_ID, TAG_NAME)
+  C_LINK)
 Values
   (1, 0, 0, 1, 8, 0, 'Root Node', 'root',
-  3, 3, 'Root');
-Insert into T_JSTREE_SPEC_HASH_TAG
+  'http://www.313.co.kr');
+Insert into T_COMPREHENSIVE_MENU
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
-  MAPPING_COMPARE_ID, TAG_SOURCE_CHAT_ID, TAG_NAME)
+  C_LINK)
 Values
   (2, 1, 0, 2, 7, 1, 'First Child', 'drive',
-  3, 3, 'First Child');
-Insert into T_JSTREE_SPEC_HASH_TAG
+  'http://www.313.co.kr');
+Insert into T_COMPREHENSIVE_MENU
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
-  MAPPING_COMPARE_ID, TAG_SOURCE_CHAT_ID, TAG_NAME)
+  C_LINK)
 Values
   (3, 2, 0, 3, 4, 2, 'Leaf Node', 'default',
-  3, 3, 'Node');
-Insert into T_JSTREE_SPEC_HASH_TAG
+  'http://www.313.co.kr');
+Insert into T_COMPREHENSIVE_MENU
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
-  MAPPING_COMPARE_ID, TAG_SOURCE_CHAT_ID, TAG_NAME)
+  C_LINK)
 Values
   (4, 2, 1, 5, 6, 2, 'Branch Node', 'folder',
-  3, 3, 'Branch');
+  'http://www.313.co.kr');
 COMMIT;
