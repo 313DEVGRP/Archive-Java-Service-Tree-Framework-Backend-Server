@@ -105,7 +105,7 @@ link:hover { color: #000000; text-decoration: none; }
 		</c:if>
 		<c:if test="${isRivalWar == 'false' && result.gid == '7313'}">
 			<li>
-				<strong class="left_title_strong"><strong class="top_title_strong">RivalWar</strong></strong><!-- 외부 추가 컴포넌트 -->
+				<strong class="left_title_strong"><strong class="top_title_strong">Developer Portal</strong></strong><!-- 외부 추가 컴포넌트 -->
 			</li>
 			<c:set var="isRivalWar" value="true"/>
 		</c:if>

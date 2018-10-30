@@ -31,7 +31,7 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @IncludedInfo(name = "web Admin Menu", listUrl = "/api/web/menu/getJsTreeView.do", order = 7000, gid = 7313)
+    @IncludedInfo(name = "Developer Portal Web Admin Menu", listUrl = "/api/web/menu/getJsTreeView.do", order = 7000, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
     public String getWebMenu() {
         return "egovframework/api/web/menu/JsTreeView";
