@@ -15,10 +15,10 @@
 	<bean id="messageSource" class="egovframework.com.cmm.util.EgovWildcardReloadableResourceBundleMessageSource">
 		<property name="egovBasenames">
 			<list>
-				<value>classpath*:egovframework/message/com/**/*</value>
+				<value>classpath*:/META-INF/egovframework/message/com/**/*</value>
 				<value>classpath:/egovframework/rte/fdl/idgnr/messages/idgnr</value>
 				<value>classpath:/egovframework/rte/fdl/property/messages/properties</value>
-				<value>classpath:/egovframework/egovProps/globals</value>
+				<value>classpath:/META-INF/egovframework/egovProps/globals</value>
 			</list>
 		</property>
 		<property name="cacheSeconds">

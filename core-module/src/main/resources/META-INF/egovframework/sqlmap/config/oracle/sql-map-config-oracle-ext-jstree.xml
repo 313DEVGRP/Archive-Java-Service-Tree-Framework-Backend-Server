@@ -5,9 +5,9 @@
 		lazyLoadingEnabled="true" maxRequests="64" maxSessions="32"
 		maxTransactions="16" useStatementNamespaces="true" />
 		
-	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeCoreManage_SQL_Oracle_iBatis.xml"/>
-	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeMonitorManage_SQL_Oracle_iBatis.xml"/>
+	<sqlMap resource="META-INF/egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeCoreManage_SQL_Oracle_iBatis.xml"/>
+	<sqlMap resource="META-INF/egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeMonitorManage_SQL_Oracle_iBatis.xml"/>
 
-	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeCoreManage_SQL_Oracle_iBatis.xml"/>
-	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeMonitorManage_SQL_Oracle_iBatis.xml"/>
+	<sqlMap resource="META-INF/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeCoreManage_SQL_Oracle_iBatis.xml"/>
+	<sqlMap resource="META-INF/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeMonitorManage_SQL_Oracle_iBatis.xml"/>
 </sqlMapConfig>

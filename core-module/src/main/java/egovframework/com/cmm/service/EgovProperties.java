@@ -31,7 +31,7 @@ public class EgovProperties {
 
 	public static final String RELATIVE_PATH_PREFIX = EgovProperties.class.getResource("").getPath().substring(0, EgovProperties.class.getResource("").getPath().lastIndexOf("com"));
 
-	public static final String GLOBALS_PROPERTIES_FILE = RELATIVE_PATH_PREFIX + "egovProps" + FILE_SEPARATOR + "globals.properties";
+	public static final String GLOBALS_PROPERTIES_FILE = "/META-INF/"+ RELATIVE_PATH_PREFIX + "egovProps" + FILE_SEPARATOR + "globals.properties";
 
 	public static String getPathProperty(String keyName) {
 		String value = "";

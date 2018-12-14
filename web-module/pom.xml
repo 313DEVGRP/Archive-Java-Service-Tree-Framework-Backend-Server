@@ -98,7 +98,7 @@
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                                    <includes>**/*.class,**/*.xml</includes>
+                                    <includes>**/*.class,**/*.xml,**/*.class,**/*.properties</includes>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
