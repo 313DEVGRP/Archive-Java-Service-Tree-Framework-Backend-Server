@@ -8,6 +8,116 @@
             <set />
           </value>
         </entry>
+        <entry key="/a.regexp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/core-module/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/core-module/src/main/java/egovframework/com/cmm/web/EgovComUtlController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/core-module/src/main/resources/META-INF/egovframework/spring/com/context-common.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/core-module/src/main/resources/META-INF/egovframework/spring/com/context-sqlMap.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/core-module/src/main/resources/META-INF/egovframework/spring/com/context-validator.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/core-module/src/main/resources/egovframework/spring/com/context-schedule.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/core-module/src/main/resources/egovframework/spring/com/context-security.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/lib-module/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$APPLICATION_HOME_DIR$/jstree/JavaServiceTree-CoreModule/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core-module/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core-module/src/main/resources/META-INF/egovframework/spring/com/context-common.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core-module/src/main/resources/META-INF/egovframework/spring/com/context-datasource.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core-module/src/main/resources/META-INF/egovframework/spring/com/context-sqlMap.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core-module/src/main/resources/META-INF/egovframework/spring/com/context-validator.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core-module/src/main/resources/META-INF/egovframework/sqlmap/config/oracle/sql-map-config-oracle-ext-jstree.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core-module/src/main/resources/META-INF/struts.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/web-module/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/web-module/src/main/resources/struts.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/web-module/src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/web-module/src/main/webapp/WEB-INF/web.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
       </map>
     </option>
   </component>

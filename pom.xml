@@ -37,10 +37,7 @@
 
     <!-- 모듈 셋팅 -->
     <modules>
-        <module>lib-module</module>
-        <module>core-module</module>
         <module>web-module</module>
-        <module>web-rivalwar</module>
     </modules>
 
     <!-- 개발자 정보 -->

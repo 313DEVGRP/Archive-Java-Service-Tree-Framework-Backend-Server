@@ -108,6 +108,7 @@
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>
 
+    <!--
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -116,6 +117,7 @@
         <filter-name>struts2</filter-name>
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
+    -->
 
     <filter>
         <filter-name>ServletContextRequestLogging</filter-name>
