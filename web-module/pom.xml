@@ -21,7 +21,7 @@
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>core-module</artifactId>
-            <version>19.01.05</version>
+            <version>19.01.50</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -100,7 +100,7 @@
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                                    <includes>**/*.class,**/*.xml</includes>
+                                    <includes>**/*.class,**/*.xml,,**/*.properties</includes>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
