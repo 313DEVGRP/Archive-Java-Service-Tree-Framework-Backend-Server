@@ -151,4 +151,17 @@
         </jsp-property-group>
     </jsp-config>
 
+    <!--  웹 취약성 대응(PUT, DELETE, TRACE, OPTIONS 메소드 제한) -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Forbidden</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>OPTIONS</http-method>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+
 </web-app>
