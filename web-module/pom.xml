@@ -101,6 +101,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- #Docker 로 배포 방식을 변경하여 다음의 배포 방식을 주석처리 합니다.
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -122,6 +123,7 @@
                     <protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
