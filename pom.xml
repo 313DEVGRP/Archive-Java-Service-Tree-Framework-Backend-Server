@@ -4,15 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>313devgrp</groupId>
     <artifactId>web-module</artifactId>
     <packaging>war</packaging>
     <name>web-module</name>
     <version>19.02.03</version>
-    <description>Web Project by 313 DEV GRP</description>
+    <description>Dev Portal Web Project by 313 DEV GRP(jsTree Service Framework)</description>
 
     <prerequisites>
         <maven>3.0.5</maven>
     </prerequisites>
+
+    <properties>
+        <jsTree.Service.Framework.Version>19.02.03</jsTree.Service.Framework.Version>
+    </properties>
 
     <profiles>
         <profile>
@@ -105,7 +110,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-
     <distributionManagement>
         <repository>
             <id>StandardProject</id>
@@ -126,13 +130,13 @@
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>lib-module</artifactId>
-            <version>19.02.03</version>
+            <version>${jsTree.Service.Framework.Version}</version>
             <type>pom</type>
         </dependency>
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>core-module</artifactId>
-            <version>19.02.03</version>
+            <version>${jsTree.Service.Framework.Version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -195,7 +199,7 @@
                                 <artifactItem>
                                     <groupId>313devgrp</groupId>
                                     <artifactId>core-module</artifactId>
-                                    <version>19.02.03</version>
+                                    <version>${jsTree.Service.Framework.Version}</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
