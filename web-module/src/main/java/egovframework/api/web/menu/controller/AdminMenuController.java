@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping(value = {"/api/web/ROLE_ADMIN/menu"})
+@RequestMapping(value = {"/api/ROLE_ADMIN/menu"})
 public class AdminMenuController extends GenericAbstractController {
 
     @Autowired

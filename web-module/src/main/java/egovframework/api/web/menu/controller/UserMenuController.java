@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = {"/api/web/ROLE_USER/menu"})
+@RequestMapping(value = {"/api/ROLE_USER/menu"})
 public class UserMenuController extends GenericAbstractController {
 
     @Autowired

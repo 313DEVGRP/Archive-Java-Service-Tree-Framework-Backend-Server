@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = {"/api/web/menu"})
+@RequestMapping(value = {"/api/menu"})
 public class AnonymousMenuController extends GenericAbstractController {
 
     @Autowired
@@ -31,10 +31,10 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @IncludedInfo(name = "Developer Portal Web Admin Menu", listUrl = "/api/web/menu/getJsTreeView.do", order = 7000, gid = 7313)
+    @IncludedInfo(name = "Developer Portal Web Admin Menu", listUrl = "/api/menu/getJsTreeView.do", order = 7000, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
     public String getWebMenu() {
-        return "egovframework/api/web/menu/JsTreeView";
+        return "egovframework/api/menu/JsTreeView";
     }
 
     @ResponseBody
