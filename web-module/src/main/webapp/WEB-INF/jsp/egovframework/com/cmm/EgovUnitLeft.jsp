@@ -26,7 +26,7 @@ link:hover { color: #000000; text-decoration: none; }
 <c:set var="isCom" value="false"/>
 <c:set var="isExt" value="false"/>
 <c:set var="isJsTree" value="false"/>
-<c:set var="isRivalWar" value="false"/>
+<c:set var="isDevPortal" value="false"/>
 <ul class="lnb_title">
 	<c:forEach var="result" items="${resultList}" varStatus="status">
 	
@@ -69,7 +69,7 @@ link:hover { color: #000000; text-decoration: none; }
 		</c:if>
 		<c:if test="${isSym == 'false' && result.gid == '60'}">
 			<li>
-				<strong class="left_title_strong"><strong class="top_title_strong"><spring:message code="comCmm.sym.title"/></strong></strong><!-- 시스템관리 -->
+				<strong class="left_title_strong"><strong class="top_title_strong"><spring:message code="comCmm.sys.title"/></strong></strong><!-- 시스템관리 -->
 			</li>
 			<c:set var="isSym" value="true"/>
 		</c:if>
@@ -103,11 +103,11 @@ link:hover { color: #000000; text-decoration: none; }
 			</li>
 			<c:set var="isJsTree" value="true"/>
 		</c:if>
-		<c:if test="${isRivalWar == 'false' && result.gid == '7313'}">
+		<c:if test="${isDevPortal == 'false' && result.gid == '7313'}">
 			<li>
 				<strong class="left_title_strong"><strong class="top_title_strong">Developer Portal</strong></strong><!-- 외부 추가 컴포넌트 -->
 			</li>
-			<c:set var="isRivalWar" value="true"/>
+			<c:set var="isDevPortal" value="true"/>
 		</c:if>
 
 		<c:set var="componentMsgKey">comCmm.left.${result.order}</c:set>

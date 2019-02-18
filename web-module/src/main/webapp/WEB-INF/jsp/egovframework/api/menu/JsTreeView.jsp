@@ -304,7 +304,7 @@
                                             paste
                                         </button>
                                         <button type="button" id="analyze" title="analyze"
-                                                onclick="$('#alog').load('${pageContext.request.contextPath}/api/rivalWar/menu/analyzeNode.do');">
+                                                onclick="$('#alog').load('${pageContext.request.contextPath}/api/menu/analyzeNode.do');">
                                             <i class="fa fa-search"></i>
                                             analyze
                                         </button>
@@ -356,7 +356,7 @@
                                     function jstreeDataTableReload() {
                                         $('#jstreeTable').dataTable({
                                             "ajax": {
-                                                "url": "${pageContext.request.contextPath}/api/rivalWar/menu/getMonitor.do",
+                                                "url": "${pageContext.request.contextPath}/api/menu/getMonitor.do",
                                                 "dataSrc": ""
                                             },
                                             "destroy": true,
@@ -384,13 +384,13 @@
                                     }
                                 </script>
                                 <customTags:jstree target="#demo"
-                                                   getChildNode="${pageContext.request.contextPath}/api/rivalWar/menu/getChildNode.do"
-                                                   searchNode="${pageContext.request.contextPath}/api/rivalWar/menu/searchNode.do"
-                                                   addNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/addNode.do"
-                                                   removeNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/removeNode.do"
-                                                   alterNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/alterNode.do"
-                                                   alterNodeType="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/alterNodeType.do"
-                                                   moveNode="${pageContext.request.contextPath}/api/rivalWar/ROLE_ADMIN/menu/moveNode.do"></customTags:jstree>
+                                                   getChildNode="${pageContext.request.contextPath}/api/menu/getChildNode.do"
+                                                   searchNode="${pageContext.request.contextPath}/api/menu/searchNode.do"
+                                                   addNode="${pageContext.request.contextPath}/api/ROLE_ADMIN/menu/addNode.do"
+                                                   removeNode="${pageContext.request.contextPath}/api/ROLE_ADMIN/menu/removeNode.do"
+                                                   alterNode="${pageContext.request.contextPath}/api/ROLE_ADMIN/menu/alterNode.do"
+                                                   alterNodeType="${pageContext.request.contextPath}/api/ROLE_ADMIN/menu/alterNodeType.do"
+                                                   moveNode="${pageContext.request.contextPath}/api/ROLE_ADMIN/menu/moveNode.do"></customTags:jstree>
                             </div>
                         </div>
                     </div>
