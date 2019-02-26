@@ -5,4 +5,4 @@ RUN rm -rf /usr/local/tomcat/webapps/ROOT
 ARG JAR_FILE
 ADD target/${JAR_FILE} /usr/local/tomcat/webapps/ROOT.war
 
-CMD /usr/local/tomcat/bin/startup.sh; tail -f /usr/local/tomcat/logs/catalina.out
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
