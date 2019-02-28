@@ -21,7 +21,7 @@
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>lib-module</artifactId>
-            <version>${jsTree.Service.Framework.Version}}</version>
+            <version>${jsTree.Service.Framework.Version}</version>
             <type>pom</type>
         </dependency>
         <dependency>
