@@ -1,4 +1,4 @@
-FROM 313devgrp/jstree:latest
+FROM 313devgrp/jstree:19.03.03
 MAINTAINER 313DEVGRP <313@313.co.kr>
 
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
