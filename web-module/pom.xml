@@ -81,7 +81,7 @@
                 <executions>
                     <execution>
                         <id>unpack</id>
-                        <phase>generate-resources</phase>
+                        <phase>dependency:sources</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
