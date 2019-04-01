@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>313devgrp</groupId>
-        <artifactId>standard-project</artifactId>
+        <artifactId>standard-backend-project</artifactId>
         <version>19.03.04</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -81,7 +81,7 @@
                 <executions>
                     <execution>
                         <id>unpack</id>
-                        <phase>generate-resources</phase>
+                        <phase>dependency:sources</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>

@@ -9,11 +9,11 @@
     <!-- 기본적인 pom Setting -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>313devgrp</groupId>
-    <artifactId>standard-project</artifactId>
+    <artifactId>standard-backend-project</artifactId>
     <version>19.03.04</version>
     <packaging>pom</packaging>
 
-    <name>standard-project</name>
+    <name>standard-backend-project</name>
     <description>대한민국 IT 의 표준을 정의합니다. 최초의 서비스 프레임워크를 공개합니다. by 313 DEV GRP</description>
     <url>http://www.313.co.kr</url>
     <inceptionYear>2011</inceptionYear>
