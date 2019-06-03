@@ -186,22 +186,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-
-    <distributionManagement>
-        <repository>
-            <id>StandardProject</id>
-            <url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
-        </repository>
-        <snapshotRepository>
-            <id>StandardProject-Snapshot</id>
-            <url>http://www.313.co.kr/nexus/content/repositories/StandardProject-SnapShots</url>
-        </snapshotRepository>
-        <site>
-            <id>StandardProject-Site-Public</id>
-            <url>ftp://www.313.co.kr/web/analysis</url>
-        </site>
-    </distributionManagement>
-
     <!-- 공용으로 쓰이는 빌드 이므로 아래에 추가함. 각종 하위 프로젝트를 업데이트 하기 위함임 -->
     <build>
         <extensions>
