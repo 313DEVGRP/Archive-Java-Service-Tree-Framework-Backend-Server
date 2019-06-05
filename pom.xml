@@ -185,7 +185,7 @@
             <url>https://m2proxy.atlassian.com/repository/public</url>
         </pluginRepository>
     </pluginRepositories>
-s
+
     <distributionManagement>
         <repository>
             <id>StandardProject</id>
