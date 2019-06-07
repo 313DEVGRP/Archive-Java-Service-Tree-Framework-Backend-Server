@@ -25,8 +25,6 @@ link:hover { color: #000000; text-decoration: none; }
 <c:set var="isDam" value="false"/>
 <c:set var="isCom" value="false"/>
 <c:set var="isExt" value="false"/>
-<c:set var="isJsTree" value="false"/>
-<c:set var="isDevPortal" value="false"/>
 <ul class="lnb_title">
 	<c:forEach var="result" items="${resultList}" varStatus="status">
 	
@@ -96,18 +94,6 @@ link:hover { color: #000000; text-decoration: none; }
 				<strong class="left_title_strong"><strong class="top_title_strong"><spring:message code="comCmm.ext.title"/></strong></strong><!-- 외부 추가 컴포넌트 -->
 			</li>
 			<c:set var="isExt" value="true"/>
-		</c:if>
-		<c:if test="${isJsTree == 'false' && result.gid == '313'}">
-			<li>
-				<strong class="left_title_strong"><strong class="top_title_strong">jsTree Service Framework</strong></strong><!-- 외부 추가 컴포넌트 -->
-			</li>
-			<c:set var="isJsTree" value="true"/>
-		</c:if>
-		<c:if test="${isDevPortal == 'false' && result.gid == '7313'}">
-			<li>
-				<strong class="left_title_strong"><strong class="top_title_strong">Developer Portal</strong></strong><!-- 외부 추가 컴포넌트 -->
-			</li>
-			<c:set var="isDevPortal" value="true"/>
 		</c:if>
 
 		<c:set var="componentMsgKey">comCmm.left.${result.order}</c:set>

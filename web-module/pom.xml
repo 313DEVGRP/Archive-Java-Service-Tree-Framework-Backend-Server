@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>standard-project</artifactId>
-        <version>19.04.05</version>
+        <version>19.06.04</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -21,13 +21,13 @@
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>lib-module</artifactId>
-            <version>19.06.03</version>
+            <version>19.06.04</version>
             <type>pom</type>
         </dependency>
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>core-module</artifactId>
-            <version>19.06.03</version>
+            <version>19.06.04</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
