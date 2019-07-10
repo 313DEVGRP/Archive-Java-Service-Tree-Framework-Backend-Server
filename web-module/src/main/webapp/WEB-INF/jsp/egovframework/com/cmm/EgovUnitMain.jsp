@@ -8,8 +8,7 @@
 </head>
 
 <frameset frameborder="0" framespacing="0">
-		<frameset frameborder="0" framespacing="0" cols="20%, 80%">
-			<frame name="_left" src="<c:url value='/EgovLeft.do' />" scrolling="yes" title="메뉴페이지">
+		<frameset frameborder="0" framespacing="0">
 			<frame name="_content" src="<c:url value='/services/login' />" title="메인페이지">
 		</frameset>
 </frameset>
