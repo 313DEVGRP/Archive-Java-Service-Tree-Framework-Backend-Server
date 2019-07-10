@@ -5,7 +5,7 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
-{	
-	"_csrf_token":"${_csrf.token}",
-	"_csrf_headerName":"${_csrf.headerName}"
+{
+"_csrf_token":"${_csrf.token}",
+"_csrf_headerName":"${_csrf.headerName}"
 }
