@@ -21,13 +21,13 @@
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>lib-module</artifactId>
-            <version>19.07.02</version>
+            <version>19.07.07</version>
             <type>pom</type>
         </dependency>
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>core-module</artifactId>
-            <version>19.07.02</version>
+            <version>19.07.07</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -90,7 +90,7 @@
                                 <artifactItem>
                                     <groupId>313devgrp</groupId>
                                     <artifactId>core-module</artifactId>
-                                    <version>19.02.10</version>
+                                    <version>19.07.07</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
