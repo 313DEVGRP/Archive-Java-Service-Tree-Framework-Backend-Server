@@ -90,7 +90,7 @@
                                 <artifactItem>
                                     <groupId>313devgrp</groupId>
                                     <artifactId>core-module</artifactId>
-                                    <version>19.07.14</version>
+                                    <version>19.07.15</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
