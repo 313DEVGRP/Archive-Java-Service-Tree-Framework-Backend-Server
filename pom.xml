@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>313devgrp</groupId>
     <artifactId>standard-project</artifactId>
-    <version>19.07.15</version>
+    <version>19.07.16</version>
     <packaging>pom</packaging>
 
     <name>standard-project</name>

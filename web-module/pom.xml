@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>standard-project</artifactId>
-        <version>19.07.15</version>
+        <version>19.07.16</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -16,18 +16,22 @@
     <name>web-module</name>
     <description>Web Project by 313 DEV GRP</description>
 
+    <properties>
+        <version.jstree.service.framework>19.07.16</version.jstree.service.framework>
+    </properties>
+
     <dependencies>
         <!-- 실행환경 라이브러리 -->
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>lib-module</artifactId>
-            <version>19.07.15</version>
+            <version>${version.jstree.service.framework}</version>
             <type>pom</type>
         </dependency>
         <dependency>
             <groupId>313devgrp</groupId>
             <artifactId>core-module</artifactId>
-            <version>19.07.15</version>
+            <version>${version.jstree.service.framework}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -90,7 +94,7 @@
                                 <artifactItem>
                                     <groupId>313devgrp</groupId>
                                     <artifactId>core-module</artifactId>
-                                    <version>19.07.15</version>
+                                    <version>${version.jstree.service.framework}</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
