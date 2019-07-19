@@ -3,7 +3,6 @@ package egovframework.api.menu.controller;
 import egovframework.api.menu.service.MenuService;
 import egovframework.api.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.*;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +28,7 @@ public class AdminMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
-    public ModelAndView addNode(@Validated(value = AddNode.class) MenuDTO jsTreeHibernateDTO,
+    public ModelAndView addNode(MenuDTO jsTreeHibernateDTO,
                                 BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
@@ -43,7 +41,7 @@ public class AdminMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/removeNode.do", method = RequestMethod.POST)
-    public ModelAndView removeNode(@Validated(value = RemoveNode.class) MenuDTO jsTreeHibernateDTO,
+    public ModelAndView removeNode(MenuDTO jsTreeHibernateDTO,
                                    BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
@@ -71,7 +69,7 @@ public class AdminMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/alterNode.do", method = RequestMethod.POST)
-    public ModelAndView alterNode(@Validated(value = AlterNode.class) MenuDTO jsTreeHibernateDTO,
+    public ModelAndView alterNode(MenuDTO jsTreeHibernateDTO,
                                   BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors()){
             throw new RuntimeException();
@@ -89,7 +87,7 @@ public class AdminMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
-    public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) MenuDTO jsTreeHibernateDTO,
+    public ModelAndView alterNodeType(MenuDTO jsTreeHibernateDTO,
                                       BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
@@ -103,7 +101,7 @@ public class AdminMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/moveNode.do", method = RequestMethod.POST)
-    public ModelAndView moveNode(@Validated(value = MoveNode.class) MenuDTO jsTreeHibernateDTO,
+    public ModelAndView moveNode(MenuDTO jsTreeHibernateDTO,
                                  BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
         if (bindingResult.hasErrors())
             throw new RuntimeException();
