@@ -59,8 +59,7 @@
 				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">egovframework/com/cmm/error/egovBizException</prop>
 				<prop key="org.springframework.web.HttpSessionRequiredException">egovframework/com/cmm/error/EgovLoginUsr</prop>
 				<prop key="egovframework.com.cmm.exception.EgovXssException">eovframework/com/cmm/error/EgovXssException</prop>
-				<prop key="org.springframework.security.core.AuthenticationException.UserAlreadyExistAuthenticationException">eovframework/com/cmm/error/UserAlreadyExistError</prop>
-
+				<prop key="egovframework.com.ext.jstree.support.security.exception.UserAlreadyExistAuthenticationException">eovframework/com/cmm/error/UserAlreadyExistError</prop>
 			</props>
 		</property>
 	</bean>

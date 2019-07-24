@@ -6,5 +6,5 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 {
-	"error":"Noname Error"
+	"error":"Error"
 }
