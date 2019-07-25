@@ -10,12 +10,12 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "T_COMPREHENSIVE_MENU")
+@Table(name = "T_JSTREE_MENU")
 @SelectBeforeUpdate(value = true)
 @DynamicInsert(value = true)
 @DynamicUpdate(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_COMPREHENSIVE_MENU", allocationSize = 1)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_JSTREE_MENU", allocationSize = 1)
 public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	private static final long serialVersionUID = 5641929581490357882L;
