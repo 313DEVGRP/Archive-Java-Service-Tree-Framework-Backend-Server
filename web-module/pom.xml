@@ -208,8 +208,8 @@
                 </executions>
                 <configuration>
                     <repository>313devgrp/jstree-service-framework-backend-app</repository>
-                    <!--tag>${project.version}</tag-->
-                    <tag>latest</tag>
+                    <tag>${project.version}</tag>
+                    <!--tag>latest</tag-->
                     <buildArgs>
                         <JAR_FILE>web.war</JAR_FILE>
                     </buildArgs>
