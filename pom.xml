@@ -10,11 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>313devgrp</groupId>
     <artifactId>standard-project</artifactId>
-    <version>19.07.33</version>
+    <version>19.08.02</version>
     <packaging>pom</packaging>
 
     <name>standard-project</name>
-    <description>대한민국 IT 의 표준을 정의합니다. 최초의 서비스 프레임워크를 공개합니다. by 313 DEV GRP</description>
+    <description>개발자 포탈 프로젝트 with TSF. by 313 DEV GRP</description>
     <url>http://www.313.co.kr</url>
     <inceptionYear>2011</inceptionYear>
 
