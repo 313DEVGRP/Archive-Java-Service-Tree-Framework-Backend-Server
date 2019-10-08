@@ -99,7 +99,7 @@
         <profile>
             <id>operation</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <build.profile.id>operation</build.profile.id>
