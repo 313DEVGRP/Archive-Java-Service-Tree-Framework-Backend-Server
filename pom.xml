@@ -242,6 +242,18 @@
                     <toplevelArtifactId>myTopLevelId</toplevelArtifactId>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <db.username>${db.username}</db.username>
+                        <db.password>${db.password}</db.password>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
         </plugins>
 
     </build>
