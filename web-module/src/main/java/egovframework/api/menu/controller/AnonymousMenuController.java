@@ -151,5 +151,4 @@ public class AnonymousMenuController extends GenericAbstractController {
         return modelAndView;
     }
 
-
 }

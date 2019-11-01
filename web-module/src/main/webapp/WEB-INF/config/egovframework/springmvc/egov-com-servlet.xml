@@ -8,6 +8,7 @@
 
 	<!-- ************************************* egovFramework ************************************* -->
 	<mvc:annotation-driven />
+
 	<context:annotation-config />
 	<context:component-scan base-package="egovframework">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
