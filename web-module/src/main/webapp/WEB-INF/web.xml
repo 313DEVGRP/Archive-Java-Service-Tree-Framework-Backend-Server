@@ -55,8 +55,9 @@
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>*.do</url-pattern>
-        <url-pattern>/connect/facebook</url-pattern>
-        <url-pattern>/signin/facebook</url-pattern>
+        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/connect/*</url-pattern>
+        <url-pattern>/signin/*</url-pattern>
         <url-pattern>/auth/*</url-pattern>
         <url-pattern>/services/*</url-pattern>
         <url-pattern>/userpage</url-pattern>
