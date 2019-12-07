@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>standard-project</artifactId>
-        <version>19.12.04</version>
+        <version>19.12.24</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -17,10 +17,20 @@
     <description>Web Project by 313 DEV GRP</description>
 
     <properties>
-        <version.jstree.service.framework>19.12.19</version.jstree.service.framework>
+        <version.jstree.service.framework>19.12.24</version.jstree.service.framework>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
         <!-- 실행환경 라이브러리 -->
         <dependency>
             <groupId>313devgrp</groupId>
