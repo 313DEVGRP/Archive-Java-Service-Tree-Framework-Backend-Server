@@ -104,7 +104,7 @@
                 <version>3.1.1</version>
                 <executions>
                     <execution>
-                        <id>copy</id>
+                        <id>scoutercopy</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy</goal>
@@ -125,7 +125,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy</id>
+                        <id>scouterconfcopy</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy</goal>
