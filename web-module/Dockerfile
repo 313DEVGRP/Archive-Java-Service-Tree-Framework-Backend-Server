@@ -11,4 +11,6 @@ ADD target/${SCOUTER_FILE} /usr/local/tomcat/lib/scouter.agent.jar
 ARG SCOUTER_CONF
 ADD target/${SCOUTER_CONF} /usr/local/tomcat/conf/scouter.conf
 
+ENV JAVA_OPTS="-javaagent:/usr/local/tomcat/lib/scouter.agent.jar -Dscouter.config=/usr/local/tomcat/conf/scouter.conf -Dobj_name=www313cokr"
+
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
