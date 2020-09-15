@@ -341,6 +341,9 @@ services:
     user: "$UID:$GID"
     ports:
       - 3000:3000
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_SECURITY_ALLOW_EMBEDDING=true
     depends_on:
       - chronograf
     volumes:
