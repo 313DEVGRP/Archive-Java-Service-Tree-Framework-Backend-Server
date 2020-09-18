@@ -132,6 +132,7 @@ services:
       cluster.remote.connect: "false"
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
+      xpack.monitoring.collection.enabled: "false"
     configs: *es-limits-conf
     networks: *efk-network
     depends_on:
@@ -391,140 +392,140 @@ volumes:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/kafka3"
 
   kafka2-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/kafka2"
 
   kafka1-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/kafka1"
 
   chronograf:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/chronograf"
 
   grafana:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/grafana"
 
   sc-extweb:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/scouter/sc-extweb"
 
   sc-conf:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/scouter/sc-conf"
 
   sc-libs:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/scouter/sc-libs"
 
   sc-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/scouter/sc-data"
 
   sc-logs:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/scouter/sc-logs"
 
   zookeeper3-logs:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/zookeeper3/logs"
 
   zookeeper3-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/zookeeper3/data"
 
   zookeeper2-logs:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/zookeeper2/logs"
 
   zookeeper2-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/zookeeper2/data"
 
   zookeeper1-logs:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/zookeeper1/logs"
 
   zookeeper1-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/zookeeper1/data"
 
   influxdb-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/influxdb/data"
 
   es-master-01-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/es-master-01/data"
 
   es-master-02-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/es-master-02/data"
 
   es-master-03-data:
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":/volume1/design/allinone/es-master-03/data"
 
 networks:
