@@ -1,7 +1,9 @@
 version: '3.6'
 
 services:
-  
+  #command
+  #ELKVERSION=7.4.2 NFSSERVER=192.168.25.42 NFSPATH=/volume1/design docker stack deploy -c allinone.yml allinone
+
   #https://github.com/jakubhajek/elasticsearch-docker-swarm/blob/master/stack-elastic.yml
   # elasticsearch coordinating node
   # /etc/security/limits.conf
@@ -21,7 +23,7 @@ services:
 
   # elasticsearch master node
   es-master-01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
     hostname: es-master-01
     volumes:
       #- es-master-01-data:/usr/share/elasticsearch/data
@@ -46,7 +48,7 @@ services:
       cluster.remote.connect: "false"
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
     configs: &es-limits-conf
       - source: es-limits.conf
         target: /etc/security/limits.conf
@@ -57,16 +59,14 @@ services:
       mode: replicated
       replicas: 1
     logging:
-      driver: "fluentd"
+      driver: "json-file"
       options:
-        fluentd-address: 192.168.25.46:24224
-        fluentd-async-connect: "true"
-        fluentd-retry-wait: "1s"
-        fluentd-max-retries: "30"
+        max-file: "5"
+        max-size: "100m"
 
   # elasticsearch master node
   es-master-02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
     hostname: es-master-02
     volumes:
       #- es-master-02-data:/usr/share/elasticsearch/data
@@ -91,16 +91,21 @@ services:
       cluster.remote.connect: "false"
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
     configs: *es-limits-conf
     networks: *efk-network
     deploy:
       endpoint_mode: dnsrr
       mode: replicated
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   es-master-03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
     hostname: es-master-03
     volumes:
       #- es-master-03-data:/usr/share/elasticsearch/data
@@ -125,16 +130,21 @@ services:
       cluster.remote.connect: "false"
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
     configs: *es-limits-conf
     networks: *efk-network
     deploy:
       endpoint_mode: dnsrr
       mode: replicated
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   es-coordinating:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
     hostname: es-coordinating
     ports:
       - 9200:9200
@@ -142,7 +152,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
-      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
       cluster.name: es-swarm-cluster
       discovery.seed_hosts: "es-master-01,es-master-02,es-master-03"
       node.name: "es-coordinating"
@@ -164,9 +174,33 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+  elastichq:
+    image: elastichq/elasticsearch-hq
+    environment:
+      - HQ_DEFAULT_URL=http://es-coordinating:9200
+      - HQ_DEBUG=True
+      - HQ_ENABLE_SSL=False
+      - HQ_VERIFY_CERTS=False
+    ports:
+      - 5050:5000
+    networks: *efk-network
+    deploy:
+      mode: replicated
+      replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   kibana:
-    image: kibana:7.4.0
+    image: docker.elastic.co/kibana/kibana:${ELKVERSION:-7.9.2}
     hostname: kibana
     ports:
       - 5601:5601
@@ -181,9 +215,14 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.4.0
+    image: docker.elastic.co/logstash/logstash:${ELKVERSION:-7.9.2}
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -194,33 +233,18 @@ services:
       - source: logstash_pipeline
         target: /usr/share/logstash/pipeline/logstash.conf
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_JAVA_OPTS: "-Xmx2g -Xms2g"
     networks: *efk-network
     depends_on:
       - kibana
     deploy:
       mode: replicated
       replicas: 1
-
-  fluentd:
-    image: 313devgrp/fluentd:3.1.3
-    networks: *efk-network
-    depends_on:
-      - es-coordinating
-    configs:
-      - source: fluent_conf
-        target: /fluentd/etc/fluentd.conf
-    ports:
-      - "24224:24224"
-      - "24224:24224/udp"
-    deploy:
-      mode: replicated
-      replicas: 1
     logging:
       driver: "json-file"
       options:
-        max-size: "100M"
-        max-file: "50"
+        max-file: "5"
+        max-size: "100m"
 
   #https://gist.github.com/dkurzaj/2a899de8cb5ae698919f0a9bbf7685f0
   zookeeper1:
@@ -235,6 +259,11 @@ services:
       - ZOO_SERVER_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   zookeeper2:
     image: wurstmeister/zookeeper:3.4.6
@@ -248,6 +277,11 @@ services:
       - ZOO_SERVER_ID=2
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   zookeeper3:
     image: wurstmeister/zookeeper:3.4.6
@@ -261,6 +295,11 @@ services:
       - ZOO_SERVER_ID=3
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   kafka1:
     image: wurstmeister/kafka:2.12-2.3.0
@@ -283,6 +322,11 @@ services:
       - zookeeper1
       - zookeeper2
       - zookeeper3
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   kafka2:
     image: wurstmeister/kafka:2.12-2.3.0
@@ -305,7 +349,12 @@ services:
       - zookeeper1
       - zookeeper2
       - zookeeper3
-    
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
   kafka3:
     image: wurstmeister/kafka:2.12-2.3.0
     ports:
@@ -327,6 +376,11 @@ services:
       - zookeeper1
       - zookeeper2
       - zookeeper3
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   # https://github.com/hleb-albau/kafka-manager-docker
   kafka-manager:
@@ -341,10 +395,15 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
     networks: *efk-network
     ports:
-      - "9000:9000"
+      - "8282:9000"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   apm-server:
-    image: docker.elastic.co/apm/apm-server:7.4.0
+    image: docker.elastic.co/apm/apm-server:${ELKVERSION:-7.9.2}
     ports:
       - "8200:8200"
     networks: *efk-network
@@ -353,6 +412,11 @@ services:
     configs:
       - source: apmserver.conf
         target: /usr/share/apm-server/apm-server.yml
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   influxdb:
     image: influxdb:1.7.10
@@ -366,6 +430,11 @@ services:
         target: /etc/influxdb/influxdb.conf
     volumes:
       - influxdb-data:/var/lib/influxdb
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   chronograf:
     image: chronograf:1.7.17
@@ -378,6 +447,11 @@ services:
     environment:
       INFLUXDB_URL: http://influxdb:8086
     networks: *efk-network
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   grafana:
     image: grafana/grafana:6.7.4
@@ -392,6 +466,11 @@ services:
       - chronograf
     volumes:
       - grafana:/var/lib/grafana
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
   scouter:
     image : scouterapm/scouter-server:2.7.0
@@ -413,10 +492,16 @@ services:
     networks: *efk-network
     depends_on:
       - influxdb
+      - fluentd
     ports:
       - 6180:6180
       - 6100:6100
       - 6100:6100/udp
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
 configs:
   fluent_conf:
