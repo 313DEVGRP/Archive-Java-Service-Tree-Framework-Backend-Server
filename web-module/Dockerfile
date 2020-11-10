@@ -5,11 +5,10 @@ RUN rm -rf /usr/local/tomcat/webapps/ROOT
 ARG JAR_FILE
 ADD target/${JAR_FILE} /usr/local/tomcat/webapps/ROOT.war
 
-ARG SCOUTER_FILE
-ADD target/${SCOUTER_FILE} /usr/local/tomcat/lib/scouter.agent.jar
+ADD scouter-2.8.1.jar /usr/local/tomcat/lib/scouter.jar
+ADD scouter-2.8.1.conf /usr/local/tomcat/conf/scouter.conf
 
-ARG SCOUTER_CONF
-ADD target/${SCOUTER_CONF} /usr/local/tomcat/conf/scouter.conf
+ADD elastic-apm-agent-1.18.1.jar /usr/local/tomcat/lib/elastic-apm-agent-1.18.1.jar
 
 ENV JAVA_OPTS="-javaagent:/usr/local/tomcat/lib/scouter.agent.jar -Dscouter.config=/usr/local/tomcat/conf/scouter.conf -Dobj_name=www313cokr"
 
