@@ -35,7 +35,7 @@ ADD scouter-2.8.1.conf /usr/local/tomcat/conf/scouter.conf
 RUN wget http://www.313.co.kr/nexus/content/groups/public/313devgrp/elastic-apm-agent/1.18.1/elastic-apm-agent-1.18.1.jar
 RUN mv elastic-apm-agent-1.18.1.jar /usr/local/tomcat/lib/elastic-apm-agent.jar
 
-ENV JAVA_OPTS="-Xmx2g -Xms2g -javaagent:/usr/local/tomcat/lib/scouter.agent.jar -Dscouter.config=/usr/local/tomcat/conf/scouter.conf -Dobj_name=www313cokr -javaagent:/usr/local/tomcat/lib/elastic-apm-agent.jar -Delastic.apm.service_name=my-cool-service -Delastic.apm.application_packages=egovframework.api,egovframework.com -Delastic.apm.server_urls=http://192.168.25.46:8200"
+ENV JAVA_OPTS="-Xmx2g -Xms2g -javaagent:/usr/local/tomcat/lib/scouter.agent.jar -Dscouter.config=/usr/local/tomcat/conf/scouter.conf -Dobj_name=www313cokr -javaagent:/usr/local/tomcat/lib/elastic-apm-agent.jar -Delastic.apm.service_name=www313cokr -Delastic.apm.application_packages=egovframework.api,egovframework.com -Delastic.apm.server_urls=http://192.168.25.46:8200"
 
 ADD docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
