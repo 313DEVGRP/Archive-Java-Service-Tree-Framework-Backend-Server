@@ -15,9 +15,5 @@
 #filebeat start
 /usr/local/tomcat/filebeat-7.4.2-linux-x86_64/filebeat -e -c /usr/local/tomcat/filebeat-7.4.2-linux-x86_64/filebeat.yml &
 
-#apm start
-#TOMCATPIDNUM=$(ps -eaf | grep java | grep /usr/local/tomcat | awk '{print $2}')
-#java -jar apm-agent-attach-1.17.0-standalone.jar --pid $TOMCATPIDNUM --config service_name=www313cokr server_urls=http://192.168.25.46:8200
-
 #tomcat start
 /usr/local/tomcat/bin/catalina.sh run
