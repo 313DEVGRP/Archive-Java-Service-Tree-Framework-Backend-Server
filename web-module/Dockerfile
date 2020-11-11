@@ -40,5 +40,5 @@ ENV JAVA_OPTS="-Xmx2g -Xms2g -javaagent:/usr/local/tomcat/lib/scouter.agent.jar 
 ADD docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh","/entrypoint.sh"]
 CMD ["start"]
