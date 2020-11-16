@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>standard-project</artifactId>
-        <version>20.11.13</version>
+        <version>20.11.15</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -17,7 +17,7 @@
     <description>Web Project by 313 DEV GRP</description>
 
     <properties>
-        <version.jstree.service.framework>20.11.02</version.jstree.service.framework>
+        <version.jstree.service.framework>20.11.11</version.jstree.service.framework>
     </properties>
 
     <dependencies>
