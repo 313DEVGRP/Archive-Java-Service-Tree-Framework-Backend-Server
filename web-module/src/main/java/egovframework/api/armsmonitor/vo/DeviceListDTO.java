@@ -29,17 +29,21 @@ public class DeviceListDTO extends JsTreeHibernateSearchDTO implements Serializa
     }
 
     @Getter @Setter
-    private String c_monitor_source_name;
+    private String c_monitor_name;
     @Getter @Setter
-    private String c_monitor_url_cpu;
+    private String c_monitor_url_filebeat;
     @Getter @Setter
-    private String c_monitor_url_memory;
+    private String c_monitor_url_packetbeat;
     @Getter @Setter
-    private String c_monitor_url_disk;
+    private String c_monitor_url_heartbeat;
     @Getter @Setter
-    private String c_monitor_url_application;
+    private String c_monitor_url_metricbeat;
     @Getter @Setter
-    private String c_monitor_url_log;
+    private String c_monitor_url_topbeat;
+    @Getter @Setter
+    private String c_monitor_url_apm;
+    @Getter @Setter
+    private String c_monitor_url_scouter;
 
     @Override
     public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
