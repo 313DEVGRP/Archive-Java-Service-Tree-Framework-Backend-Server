@@ -19,8 +19,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class DeviceListBatch {
 
-    //@Scheduled(fixedDelay=10000)
-    //@Scheduled(cron="*/30 * * * * *")
+    @Scheduled(fixedDelay=60000*5, initialDelay =10000)
+    //@Scheduled(cron="0 0/5 * * * ?")
     public void getInfoFromELK() throws Exception {
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
         factory.setReadTimeout(5000); // 읽기시간초과, ms
