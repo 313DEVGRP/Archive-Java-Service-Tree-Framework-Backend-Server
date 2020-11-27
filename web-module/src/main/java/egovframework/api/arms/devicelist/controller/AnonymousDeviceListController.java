@@ -1,8 +1,8 @@
-package egovframework.api.menu.controller;
+package egovframework.api.arms.devicelist.controller;
 
 import com.google.common.collect.Maps;
-import egovframework.api.menu.service.MenuService;
-import egovframework.api.menu.vo.MenuDTO;
+import egovframework.api.arms.devicelist.service.DeviceListService;
+import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
@@ -22,25 +22,28 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Created by Administrator on 2020-11-27.
+ */
 @Controller
-@RequestMapping(value = {"/api/menu"})
-public class AnonymousMenuController extends GenericAbstractController {
+@RequestMapping(value = {"/api/devicelist"})
+public class AnonymousDeviceListController extends GenericAbstractController {
 
     @Autowired
-    private MenuService menuService;
+    private DeviceListService deviceListService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @IncludedInfo(name = "Developer Portal Web Admin Menu", listUrl = "/api/menu/getJsTreeView.do", order = 7000, gid = 7313)
+    @IncludedInfo(name = "ARMS Device list API", listUrl = "/api/devicelist/getJsTreeView.do", order = 7777, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
-    public String getMenu() {
-        return "egovframework/api/menu/JsTreeView";
+    public String getDeviceList() {
+        return "egovframework/api/devicelist/JsTreeView";
     }
 
     @ResponseBody
     @RequestMapping(value = "/searchNode.do", method = RequestMethod.GET)
-    public ModelAndView searchNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
+    public ModelAndView searchNode(DeviceListDTO jsTreeHibernateDTO, ModelMap model,
+                                   HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
 
@@ -49,14 +52,16 @@ public class AnonymousMenuController extends GenericAbstractController {
         }
 
         jsTreeHibernateDTO.setWhereLike("c_title", parser.get("parser"));
+
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", menuService.searchNode(jsTreeHibernateDTO));
+        modelAndView.addObject("result", deviceListService.searchNode(jsTreeHibernateDTO));
         return modelAndView;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getPaginatedChildNode.do", method = RequestMethod.GET)
-    public ModelAndView getPaginatedChildNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+    public ModelAndView getPaginatedChildNode(DeviceListDTO jsTreeHibernateDTO,
+                                              ModelMap model, HttpServletRequest request)
             throws Exception {
 
         if (jsTreeHibernateDTO.getC_id() <= 0 || jsTreeHibernateDTO.getPageIndex() <= 0
@@ -65,7 +70,7 @@ public class AnonymousMenuController extends GenericAbstractController {
         }
 
         jsTreeHibernateDTO.setWhere("c_parentid", jsTreeHibernateDTO.getC_id());
-        List<MenuDTO> list = menuService.getPaginatedChildNode(jsTreeHibernateDTO);
+        List<DeviceListDTO> list = deviceListService.getPaginatedChildNode(jsTreeHibernateDTO);
         jsTreeHibernateDTO.getPaginationInfo().setTotalRecordCount(list.size());
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -78,8 +83,8 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/getNode.do", method = RequestMethod.GET)
-    public ModelAndView getNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
+    public ModelAndView getNode(DeviceListDTO jsTreeHibernateDTO, ModelMap model,
+                                HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
 
@@ -87,7 +92,7 @@ public class AnonymousMenuController extends GenericAbstractController {
             throw new RuntimeException();
         }
 
-        MenuDTO menuDTO = menuService.getNode(jsTreeHibernateDTO);
+        DeviceListDTO menuDTO = deviceListService.getNode(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", menuDTO);
@@ -96,7 +101,8 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/getChildNode.do", method = RequestMethod.GET)
-    public ModelAndView getChildNode(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request) throws Exception {
+    public ModelAndView getChildNode(DeviceListDTO jsTreeHibernateDTO, ModelMap model,
+                                     HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
 
@@ -105,7 +111,7 @@ public class AnonymousMenuController extends GenericAbstractController {
         }
 
         jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
-        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
+        List<DeviceListDTO> list = deviceListService.getChildNode(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
@@ -114,41 +120,14 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/getMonitor.do", method = RequestMethod.GET)
-    public ModelAndView getMonitor(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
+    public ModelAndView getMonitor(DeviceListDTO jsTreeHibernateDTO, ModelMap model,
+                                   HttpServletRequest request) throws Exception {
 
         jsTreeHibernateDTO.setOrder(Order.asc("c_id"));
-        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
+        List<DeviceListDTO> list = deviceListService.getChildNode(jsTreeHibernateDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
         return modelAndView;
     }
-
-    @ResponseBody
-    @RequestMapping(value = "/getRootMenuCategories.do", method = RequestMethod.GET)
-    public ModelAndView getRootNodeCategories(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
-
-        jsTreeHibernateDTO.setWhere("c_parentid", new Long(2));
-        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
-
-        ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", list);
-        return modelAndView;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/getRecentList.do", method = RequestMethod.GET)
-    public ModelAndView getRecentList(MenuDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
-            throws Exception {
-
-        jsTreeHibernateDTO.setWhere("c_parentid", new Long(3));
-        List<MenuDTO> list = menuService.getChildNode(jsTreeHibernateDTO);
-
-        ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", list);
-        return modelAndView;
-    }
-
 }

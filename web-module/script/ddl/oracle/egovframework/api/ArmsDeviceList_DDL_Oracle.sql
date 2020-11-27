@@ -40,6 +40,11 @@ CREATE TABLE T_ARMS_MONITOR_DEVICELIST
  C_LINK      VARCHAR2(4000 BYTE),
 
  c_monitor_name             VARCHAR2(4000 BYTE),
+ c_monitor_update_date      VARCHAR2(4000 BYTE),
+ c_monitor_update_beatname  VARCHAR2(4000 BYTE),
+ c_monitor_device_hostname  VARCHAR2(4000 BYTE),
+ c_monitor_device_ip        VARCHAR2(4000 BYTE),
+
  c_monitor_url_filebeat     VARCHAR2(4000 BYTE),
  c_monitor_url_packetbeat   VARCHAR2(4000 BYTE),
  c_monitor_url_heartbeat    VARCHAR2(4000 BYTE),
@@ -62,6 +67,11 @@ COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.C_TITLE IS '노드 명';
 COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.C_TYPE IS '노드 타입';
 
 COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_name IS '모니터링 이름';
+COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_update_date IS '모니터링 최초 업데이트 날짜';
+COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_update_beatname IS '모니터링 데이터 푸쉬 에이전트 이름';
+COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_device_hostname IS '모니터링 데이터 푸쉬 호스트 이름';
+COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_device_ip IS '모니터링 데이터 푸쉬 아이피 주소';
+
 COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_url_filebeat IS '파일비트 로그 접속 주소';
 COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_url_packetbeat IS '패킷비트 로그 접속 주소';
 COMMENT ON COLUMN T_ARMS_MONITOR_DEVICELIST.c_monitor_url_heartbeat IS '하트비트 로그 접속 주소';
