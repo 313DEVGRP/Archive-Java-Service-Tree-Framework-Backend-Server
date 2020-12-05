@@ -1,8 +1,16 @@
 package egovframework.com.ext.jstree.support.util;
 
+import egovframework.api.arms.devicelist.vo.DeviceListDTO;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +19,7 @@ import java.util.stream.Stream;
 
 public class Java8LambdaTest {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     static List<Java8Lambda> persons;
 
     @BeforeClass
@@ -22,7 +31,6 @@ public class Java8LambdaTest {
                         new Java8Lambda("Pamela", 23),
                         new Java8Lambda("David", 12));
     }
-
 
     @Test
     public void functionalJavaTest1() {
@@ -175,5 +183,75 @@ public class Java8LambdaTest {
                         .collect(Collectors.toList());
 
         System.out.println(filtered);
+    }
+
+    @Test
+    public void jsonObjectTest() throws ParseException {
+        String orgStr = "{\n" +
+                "    \"took\": 3590,\n" +
+                "    \"timed_out\": false,\n" +
+                "    \"_shards\": {\n" +
+                "        \"total\": 13,\n" +
+                "        \"successful\": 13,\n" +
+                "        \"skipped\": 0,\n" +
+                "        \"failed\": 0\n" +
+                "    },\n" +
+                "    \"hits\": {\n" +
+                "        \"total\": {\n" +
+                "            \"value\": 10000,\n" +
+                "            \"relation\": \"gte\"\n" +
+                "        },\n" +
+                "        \"max_score\": null,\n" +
+                "        \"hits\": []\n" +
+                "    },\n" +
+                "    \"aggregations\": {\n" +
+                "        \"2\": {\n" +
+                "            \"doc_count_error_upper_bound\": 0,\n" +
+                "            \"sum_other_doc_count\": 16619,\n" +
+                "            \"buckets\": [\n" +
+                "                {\n" +
+                "                    \"key\": \"jstree-backend-654b68476c-jrtpg\",\n" +
+                "                    \"doc_count\": 593514\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"key\": \"jstree-backend-68ff5f655c-chckb\",\n" +
+                "                    \"doc_count\": 354578\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"key\": \"5d6951d245a1\",\n" +
+                "                    \"doc_count\": 336206\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"key\": \"jstree-backend-5b5746d7cc-9npd2\",\n" +
+                "                    \"doc_count\": 109625\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"key\": \"1dc3be21a15d\",\n" +
+                "                    \"doc_count\": 7436\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+        JSONParser jsonParser = new JSONParser();
+        Object jsonObj = jsonParser.parse( orgStr );
+        JSONObject resultJsonObj = (JSONObject) jsonObj;
+
+        JSONObject filtedJsonObj = (JSONObject) jsonParser.parse( resultJsonObj.get("aggregations").toString() );
+        JSONObject hostJsonObj = (JSONObject) jsonParser.parse( filtedJsonObj.get("2").toString() );
+        JSONArray bucketJsonObjs = (JSONArray) jsonParser.parse( hostJsonObj.get("buckets").toString() );
+
+        ArrayList<DeviceListDTO> deviceListDTOs = new ArrayList<DeviceListDTO>();
+        for (Object bucketJsonObj: bucketJsonObjs) {
+            JSONObject bucketJson = (JSONObject) bucketJsonObj;
+            logger.info(bucketJson.get("key").toString());
+
+            DeviceListDTO deviceListDTO = new DeviceListDTO();
+            deviceListDTO.setC_monitor_device_hostname(bucketJson.get("key").toString());
+            deviceListDTOs.add(deviceListDTO);
+        }
+
+        logger.info("list size = " + deviceListDTOs.size());
+
     }
 }

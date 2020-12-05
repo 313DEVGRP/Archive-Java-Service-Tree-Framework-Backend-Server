@@ -130,4 +130,22 @@ public class AnonymousDeviceListController extends GenericAbstractController {
         modelAndView.addObject("result", list);
         return modelAndView;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/update.do", method = RequestMethod.GET)
+    public ModelAndView updateList(ModelMap model,
+                                   HttpServletRequest request) throws Exception {
+
+        try {
+            Integer updateCount = deviceListService.updateDeviceListToJstree();
+            logger.info("DeviceList update Count = " + updateCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", "done");
+        return modelAndView;
+    }
 }

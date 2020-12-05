@@ -112,4 +112,5 @@ public class AdminDeviceListController extends GenericAbstractController {
         modelAndView.addObject("result", "true");
         return modelAndView;
     }
+
 }
