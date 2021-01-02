@@ -186,7 +186,7 @@ public class Java8LambdaTest {
     }
 
     @Test
-    public void jsonObjectTest() throws ParseException {
+    public void getJsonObjectFromELKTest() throws ParseException {
         String orgStr = "{\n" +
                 "    \"took\": 3590,\n" +
                 "    \"timed_out\": false,\n" +
@@ -252,6 +252,101 @@ public class Java8LambdaTest {
         }
 
         logger.info("list size = " + deviceListDTOs.size());
+
+    }
+
+    @Test
+    public void getJsonObjectFromInfluxDBTest() throws ParseException {
+        String orgStr = "{\n" +
+                "  \"results\": [\n" +
+                "    {\n" +
+                "      \"statement_id\": 0,\n" +
+                "      \"series\": [\n" +
+                "        {\n" +
+                "          \"name\": \"counter\",\n" +
+                "          \"columns\": [\n" +
+                "            \"key\",\n" +
+                "            \"value\"\n" +
+                "          ],\n" +
+                "          \"values\": [\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/16679af642a5/testwww313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/5d6951d245a1/testwww313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/6d6ea7e0b0f9/testwww313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/9eb75e7e6e3e/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/DELLR710-SERVER/dockerTomcat\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/a6bc99072812/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/cf91e7a17560/testwww313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/ef7ac7c4c30b/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/ff3377c71608/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/jstree-backend-5b5746d7cc-9npd2/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/jstree-backend-5bdb8776bb-5lklt/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/jstree-backend-5bdb8776bb-kqjmg/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/jstree-backend-5c6c68b8ff-m6rrp/www313cokr\"\n" +
+                "            ],\n" +
+                "            [\n" +
+                "              \"obj\",\n" +
+                "              \"/jstree-backend-654b68476c-jrtpg/www313cokr\"\n" +
+                "            ]\n" +
+                "          ]\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        JSONParser jsonParser = new JSONParser();
+        Object jsonObj = jsonParser.parse( orgStr );
+        JSONObject resultJsonObj = (JSONObject) jsonObj;
+
+        JSONArray resultArrJsonObj = (JSONArray) jsonParser.parse( resultJsonObj.get("results").toString() );
+        JSONObject filteredresultArrJsonObj = (JSONObject) resultArrJsonObj.get(0);
+
+        JSONArray seriesJsonObj = (JSONArray) jsonParser.parse( filteredresultArrJsonObj.get("series").toString() );
+        JSONObject filteredSeriesJsonObj = (JSONObject) seriesJsonObj.get(0);
+
+        JSONArray hostStrJsonObjs = (JSONArray) jsonParser.parse( filteredSeriesJsonObj.get("values").toString() );
+
+        for (int i = 0; i < hostStrJsonObjs.size(); i++) {
+            JSONArray hostStrArr = (JSONArray) hostStrJsonObjs.get(i);
+            logger.info(hostStrArr.get(1).toString());
+        }
 
     }
 }

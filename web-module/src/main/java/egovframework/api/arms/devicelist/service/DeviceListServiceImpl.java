@@ -1,10 +1,8 @@
 package egovframework.api.arms.devicelist.service;
 
-import egovframework.api.arms.devicelist.batch.DeviceListBatch;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.hibernate.criterion.Order;
@@ -13,19 +11,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +59,25 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
             DeviceListDTO deviceListDTO = new DeviceListDTO();
             deviceListDTO.setC_title(bucketJson.get("key").toString());
             deviceListDTO.setC_monitor_device_hostname(bucketJson.get("key").toString());
+            //포지션 잡아야 함
+            deviceListDTOs.add(deviceListDTO);
+        }
+
+        return deviceListDTOs;
+    }
+
+    public List<DeviceListDTO> getDeviceListsFromInfluxDB() throws Exception {
+
+        JSONArray jsonArrayInfoFromInfluxDB = this.getInfoFromInfluxDB();
+
+        ArrayList<DeviceListDTO> deviceListDTOs = new ArrayList<DeviceListDTO>();
+        for (Object bucketJsonObj: jsonArrayInfoFromInfluxDB) {
+            JSONObject bucketJson = (JSONObject) bucketJsonObj;
+            logger.info(bucketJson.toString());
+
+            DeviceListDTO deviceListDTO = new DeviceListDTO();
+            deviceListDTO.setC_title(bucketJson.toString());
+            deviceListDTO.setC_monitor_device_hostname(bucketJson.toString());
             //포지션 잡아야 함
             deviceListDTOs.add(deviceListDTO);
         }
@@ -121,6 +134,9 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
         //elasticsearch api 를 활용해서 full list 를 얻어온다. -> ELK에 등록된 host full list
         List<DeviceListDTO> deviceListsFromELK = getDeviceListsFromELK();
 
+        //influxdb api 를 활용해서 full list 를 얻어온다 -> InfluxDB에 등록된 host full list
+        List<DeviceListDTO> deviceListsFromInfluxDB = getDeviceListsFromInfluxDB();
+
         //차집합을 통해 디비에 등록할 리스트를 추린다.
         List<DeviceListDTO> differenceUpdateSet = getDeviceListDifference(deviceListsFromJstree, deviceListsFromELK);
 
@@ -128,7 +144,14 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
             this.addNode(deviceListDTO);
         }
 
-        return differenceUpdateSet.size();
+        //차집합을 통해 디비에 등록할 리스트를 추린다.
+        List<DeviceListDTO> diffUpdateSet = getDeviceListDifference(deviceListsFromJstree, deviceListsFromInfluxDB);
+
+        for (DeviceListDTO deviceListDTO: diffUpdateSet) {
+            this.addNode(deviceListDTO);
+        }
+
+        return differenceUpdateSet.size() + diffUpdateSet.size();
     }
 
     public JSONArray getInfoFromELK() throws Exception {
@@ -207,5 +230,45 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
         logger.info(resultJsonObj.toJSONString());
 
         return bucketJsonObjs;
+    }
+
+    public JSONArray getInfoFromInfluxDB() throws Exception {
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        factory.setReadTimeout(5000); // 읽기시간초과, ms
+        factory.setConnectTimeout(3000); // 연결시간초과, ms
+        HttpClient httpClient = HttpClientBuilder.create()
+                .setMaxConnTotal(100) // connection pool 적용
+                .setMaxConnPerRoute(5) // connection pool 적용
+                .build();
+        factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
+        RestTemplate restTemplate = new RestTemplate(factory);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String influxdbBaseUrl = EgovProperties.getProperty("allinone.monitoring.influx.url");
+        String influxdbBaseQuery = EgovProperties.getProperty("allinone.monitoring.influx.query");
+        String returnResultStr = restTemplate.getForObject( influxdbBaseUrl + influxdbBaseQuery , String.class);
+
+        JSONParser jsonParser = new JSONParser();
+        Object jsonObj = jsonParser.parse( returnResultStr );
+        JSONObject resultJsonObj = (JSONObject) jsonObj;
+
+        JSONArray resultArrJsonObj = (JSONArray) jsonParser.parse( resultJsonObj.get("results").toString() );
+        JSONObject filteredresultArrJsonObj = (JSONObject) resultArrJsonObj.get(0);
+
+        JSONArray seriesJsonObj = (JSONArray) jsonParser.parse( filteredresultArrJsonObj.get("series").toString() );
+        JSONObject filteredSeriesJsonObj = (JSONObject) seriesJsonObj.get(0);
+
+        JSONArray hostStrJsonObjs = (JSONArray) jsonParser.parse( filteredSeriesJsonObj.get("values").toString() );
+
+        JSONArray returnJsonArray = new JSONArray();
+        for (int i = 0; i < hostStrJsonObjs.size(); i++) {
+            JSONArray hostStrArr = (JSONArray) hostStrJsonObjs.get(i);
+            logger.info(hostStrArr.get(1).toString());
+            returnJsonArray.add(hostStrArr.get(1).toString());
+        }
+
+        return returnJsonArray;
     }
 }
