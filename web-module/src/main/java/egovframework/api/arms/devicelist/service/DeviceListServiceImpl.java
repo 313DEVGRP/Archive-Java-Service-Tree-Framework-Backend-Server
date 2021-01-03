@@ -72,12 +72,12 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
 
         ArrayList<DeviceListDTO> deviceListDTOs = new ArrayList<DeviceListDTO>();
         for (Object bucketJsonObj: jsonArrayInfoFromInfluxDB) {
-            JSONObject bucketJson = (JSONObject) bucketJsonObj;
-            logger.info(bucketJson.toString());
+            String bucketJson = (String) bucketJsonObj;
+            logger.info(bucketJson);
 
             DeviceListDTO deviceListDTO = new DeviceListDTO();
-            deviceListDTO.setC_title(bucketJson.toString());
-            deviceListDTO.setC_monitor_device_hostname(bucketJson.toString());
+            deviceListDTO.setC_title(bucketJson);
+            deviceListDTO.setC_monitor_device_hostname(bucketJson);
             //포지션 잡아야 함
             deviceListDTOs.add(deviceListDTO);
         }
@@ -241,14 +241,17 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
                 .setMaxConnPerRoute(5) // connection pool 적용
                 .build();
         factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
+
         RestTemplate restTemplate = new RestTemplate(factory);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+
         String influxdbBaseUrl = EgovProperties.getProperty("allinone.monitoring.influx.url");
-        String influxdbBaseQuery = EgovProperties.getProperty("allinone.monitoring.influx.query");
-        String returnResultStr = restTemplate.getForObject( influxdbBaseUrl + influxdbBaseQuery , String.class);
+        logger.info("====>" + influxdbBaseUrl);
+        String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
 
         JSONParser jsonParser = new JSONParser();
         Object jsonObj = jsonParser.parse( returnResultStr );
