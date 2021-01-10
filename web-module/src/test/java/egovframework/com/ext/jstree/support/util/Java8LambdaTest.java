@@ -1,6 +1,11 @@
 package egovframework.com.ext.jstree.support.util;
 
+import egovframework.api.arms.dashboardlist.batch.DashboardListConst;
+import egovframework.api.arms.datasourcelist.batch.DataSourceListConst;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
+import egovframework.com.cmm.service.EgovProperties;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,9 +14,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.*;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -349,4 +358,199 @@ public class Java8LambdaTest {
         }
 
     }
+
+    //@Test
+    public void getJsonObjectFromInfluxDBapiTest() throws ParseException {
+
+        String theUrl = "http://192.168.25.46:3000/api/datasources/1";
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            HttpHeaders headers = createHttpHeaders("admin","qwe123");
+            HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+            ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
+            System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.hasBody());
+
+            logger.info(response.getBody().toString());
+        }
+        catch (Exception eek) {
+            System.out.println("** Exception: "+ eek.getMessage());
+        }
+
+    }
+
+    //@Test
+    public void getDatasourceByNameTest() throws ParseException {
+
+        String theUrl = "http://192.168.25.46:3000/api/datasources/name/Elasticsearch - TopBeat";
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            HttpHeaders headers = createHttpHeaders("admin","qwe123");
+            HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+            ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
+            System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.hasBody());
+
+            logger.info(response.getBody().toString());
+        }
+        catch (Exception eek) {
+            System.out.println("** Exception: "+ eek.getMessage());
+        }
+
+    }
+
+    //@Test
+    public void putJsonObjectFromInfluxDBapiTest() throws ParseException {
+
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        factory.setReadTimeout(5000); // 읽기시간초과, ms
+        factory.setConnectTimeout(3000); // 연결시간초과, ms
+        HttpClient httpClient = HttpClientBuilder.create()
+                .setMaxConnTotal(100) // connection pool 적용
+                .setMaxConnPerRoute(5) // connection pool 적용
+                .build();
+        factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
+
+        RestTemplate restTemplate = new RestTemplate(factory);
+
+        HttpHeaders headers = createHttpHeaders("admin","qwe123");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String postdata =   "{\n" +
+                "  \"name\":\"test_datasource\",\n" +
+                "  \"type\":\"influxdb\",\n" +
+                "  \"url\":\"http://influxdb:8086313\",\n" +
+                "  \"access\":\"proxy\",\n" +
+                "  \"basicAuth\":false\n" +
+                "}";
+
+        HttpEntity<String> request = new HttpEntity<String>(postdata, headers);
+
+        String influxdbBaseUrl = "http://192.168.25.46:3000/api/datasources";
+        String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
+
+        logger.info(returnResultStr);
+
+    }
+
+    //@Test
+    public void getDashboardDataTest() throws ParseException {
+        String theUrl = "http://192.168.25.46:3000/api/search?query=test";
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            HttpHeaders headers = createHttpHeaders("admin","qwe123");
+            HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+            ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
+            System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.hasBody());
+
+            logger.info(response.getBody().toString());
+
+            JSONParser jsonParser = new JSONParser();
+            Object jsonObj = jsonParser.parse( response.getBody().toString() );
+            JSONArray hostStrJsonObjs = (JSONArray) jsonObj;
+
+            for (int i = 0; i < hostStrJsonObjs.size(); i++) {
+                JSONObject hostStrJsonObj = (JSONObject) hostStrJsonObjs.get(i);
+                logger.info(hostStrJsonObj.get("uid").toString());
+
+                ///api/dashboards/uid/cIBgcSjkk
+                String dashboardUrl = "http://192.168.25.46:3000/api/dashboards/uid/" + hostStrJsonObj.get("uid").toString();
+                ResponseEntity<String> dashboardResponse = restTemplate.exchange(dashboardUrl, HttpMethod.GET, entity, String.class);
+                logger.info(dashboardResponse.getBody().toString());
+            }
+
+        }
+        catch (Exception eek) {
+            System.out.println("** Exception: "+ eek.getMessage());
+        }
+    }
+
+    //@Test
+    public void putDashboardDataTest() throws ParseException {
+
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        factory.setReadTimeout(5000); // 읽기시간초과, ms
+        factory.setConnectTimeout(3000); // 연결시간초과, ms
+        HttpClient httpClient = HttpClientBuilder.create()
+                .setMaxConnTotal(100) // connection pool 적용
+                .setMaxConnPerRoute(5) // connection pool 적용
+                .build();
+        factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
+
+        RestTemplate restTemplate = new RestTemplate(factory);
+
+        HttpHeaders headers = createHttpHeaders("admin","qwe123");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String postdata = DashboardListConst.DASHBOARD_TEMPLATE;
+
+        HttpEntity<String> request = new HttpEntity<String>(postdata, headers);
+
+        String influxdbBaseUrl = "http://192.168.25.46:3000/api/dashboards/db";
+        String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
+
+        logger.info(returnResultStr);
+
+    }
+
+    //@Test
+    public void putDashboardListTest() throws ParseException {
+        String influxdbUrl = EgovProperties.getProperty("allinone.monitoring.influxdb.url");
+        String theUrl = influxdbUrl + "/api/datasources/name/";
+
+        HttpHeaders headers = createHttpHeaders("admin","qwe123");
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String datasourceList = EgovProperties.getProperty("allinone.monitoring.influxdb.datasource");
+        String[] datasourceArray = datasourceList.split(",");
+
+        for (int i = 0; i < datasourceArray.length; i++) {
+            String datasourceUrl = theUrl + datasourceArray[i];
+            logger.info(datasourceUrl);
+            try {
+                ResponseEntity<String> response = restTemplate.exchange(datasourceUrl, HttpMethod.GET, entity, String.class);
+                System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.hasBody());
+
+                logger.info(response.getBody().toString());
+            }
+            catch (Exception eek) {
+                System.out.println("** Exception: "+ eek.getMessage());
+
+                HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+                factory.setReadTimeout(5000); // 읽기시간초과, ms
+                factory.setConnectTimeout(3000); // 연결시간초과, ms
+                HttpClient httpClient = HttpClientBuilder.create()
+                        .setMaxConnTotal(100) // connection pool 적용
+                        .setMaxConnPerRoute(5) // connection pool 적용
+                        .build();
+                factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
+
+                RestTemplate addRestTemplate = new RestTemplate(factory);
+
+                HttpHeaders addHeaders = createHttpHeaders("admin","qwe123");
+                addHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+                String postdata = DataSourceListConst.getDatasourceJson(datasourceArray[i]);
+
+                HttpEntity<String> request = new HttpEntity<String>(postdata, addHeaders);
+
+                String influxdbBaseUrl = influxdbUrl + "/api/datasources";
+                String returnResultStr = addRestTemplate.postForObject( influxdbBaseUrl, request, String.class);
+
+                logger.info(returnResultStr);
+
+            }
+        }
+    }
+
+    private HttpHeaders createHttpHeaders(String user, String password)
+    {
+        String notEncoded = user + ":" + password;
+        String encodedAuth = Base64.getEncoder().encodeToString(notEncoded.getBytes());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Authorization", "Basic " + encodedAuth);
+        return headers;
+    }
+
 }
