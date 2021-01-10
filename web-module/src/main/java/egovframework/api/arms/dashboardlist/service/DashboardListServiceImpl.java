@@ -11,6 +11,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Base64;
@@ -18,6 +19,7 @@ import java.util.Base64;
 /**
  * Created by Administrator on 2021-01-10.
  */
+@Service("DashboardListService")
 public class DashboardListServiceImpl extends JsTreeHibernateServiceImpl implements DashboardListService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
