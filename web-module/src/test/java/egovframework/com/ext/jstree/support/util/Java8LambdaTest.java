@@ -433,7 +433,7 @@ public class Java8LambdaTest {
 
     //@Test
     public void getDashboardDataTest() throws ParseException {
-        String theUrl = "http://192.168.25.46:3000/api/search?query=test";
+        String theUrl = "http://192.168.25.46:3000/api/search?query=org";
         RestTemplate restTemplate = new RestTemplate();
         try {
             HttpHeaders headers = createHttpHeaders("admin","qwe123");
@@ -463,7 +463,7 @@ public class Java8LambdaTest {
         }
     }
 
-    //@Test
+    @Test
     public void putDashboardDataTest() throws ParseException {
 
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
