@@ -463,7 +463,7 @@ public class Java8LambdaTest {
         }
     }
 
-    @Test
+    //@Test
     public void putDashboardDataTest() throws ParseException {
 
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
