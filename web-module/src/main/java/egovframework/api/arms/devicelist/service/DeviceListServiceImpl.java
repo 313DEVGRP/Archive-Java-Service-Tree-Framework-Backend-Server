@@ -12,9 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -272,8 +271,12 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
         HttpEntity<String> request = new HttpEntity<String>(headers);
 
         String influxdbBaseUrl = EgovProperties.getProperty("allinone.monitoring.influx.url");
-        logger.info("====>" + influxdbBaseUrl);
-        String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
+        String influxdbBasePath = EgovProperties.getProperty("allinone.monitoring.influx.path");
+        String datasourceId = getDatasourceID();
+        String influxdbBaseQuery = EgovProperties.getProperty("allinone.monitoring.influx.query");
+        logger.info("====>" + influxdbBaseUrl+influxdbBasePath+datasourceId+influxdbBaseQuery);
+        String fullUrl = influxdbBaseUrl+influxdbBasePath+datasourceId+influxdbBaseQuery;
+        String returnResultStr = restTemplate.postForObject(fullUrl , request, String.class);
 
         JSONParser jsonParser = new JSONParser();
         Object jsonObj = jsonParser.parse( returnResultStr );
@@ -295,5 +298,42 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
         }
 
         return returnJsonArray;
+    }
+
+    public String getDatasourceID(){
+
+        String influxdbBaseUrl = EgovProperties.getProperty("allinone.monitoring.influx.url");
+        String theUrl = influxdbBaseUrl + "/api/datasources/name/InfluxDB - Scouter";
+        RestTemplate restTemplate = new RestTemplate();
+        String returnStr = "";
+        try {
+            HttpHeaders headers = createHttpHeaders("admin","qwe123");
+            HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+            ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
+            System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.hasBody());
+
+            logger.info(response.getBody().toString());
+            JSONParser jsonParser = new JSONParser();
+            Object jsonObj = jsonParser.parse( response.getBody().toString() );
+            JSONObject hostStrJsonObj = (JSONObject) jsonObj;
+            logger.info(hostStrJsonObj.get("id").toString());
+
+            returnStr = hostStrJsonObj.get("id").toString();
+        }
+        catch (Exception eek) {
+            System.out.println("** Exception: "+ eek.getMessage());
+        }
+
+        return returnStr;
+    }
+
+    private HttpHeaders createHttpHeaders(String user, String password)
+    {
+        String notEncoded = user + ":" + password;
+        String encodedAuth = Base64.getEncoder().encodeToString(notEncoded.getBytes());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Authorization", "Basic " + encodedAuth);
+        return headers;
     }
 }

@@ -378,10 +378,10 @@ public class Java8LambdaTest {
 
     }
 
-    //@Test
+    @Test
     public void getDatasourceByNameTest() throws ParseException {
 
-        String theUrl = "http://192.168.25.46:3000/api/datasources/name/Elasticsearch - TopBeat";
+        String theUrl = "http://192.168.25.46:3000/api/datasources/name/InfluxDB - Scouter";
         RestTemplate restTemplate = new RestTemplate();
         try {
             HttpHeaders headers = createHttpHeaders("admin","qwe123");
@@ -390,6 +390,11 @@ public class Java8LambdaTest {
             System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.hasBody());
 
             logger.info(response.getBody().toString());
+            JSONParser jsonParser = new JSONParser();
+            Object jsonObj = jsonParser.parse( response.getBody().toString() );
+            JSONObject hostStrJsonObj = (JSONObject) jsonObj;
+            logger.info(hostStrJsonObj.get("id").toString());
+
         }
         catch (Exception eek) {
             System.out.println("** Exception: "+ eek.getMessage());
@@ -540,6 +545,18 @@ public class Java8LambdaTest {
                 logger.info(returnResultStr);
 
             }
+        }
+    }
+
+    @Test
+    public void containStringTest() throws ParseException {
+        String mainStr = "/a6bc99072812/www313cokr";
+        String searchStr = "a6bc99072812";
+
+        if(StringUtils.contains(mainStr, searchStr)){
+            logger.info("true");
+        }else{
+            logger.info("false");
         }
     }
 
