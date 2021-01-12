@@ -235,11 +235,11 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
                 "          \"range\": {\n" +
                 "            \"@timestamp\": {\n" +
                 "              \"format\": \"strict_date_optional_time\",\n" +
-                "              \"gte\": " + dateFormat + "\"T00:00:00.603Z\",\n" +
-                "              \"lte\": " + dateFormat + "\"T23:59:59.603Z\"\n" +
+                "              \"gte\": \"" + dateFormat + "T00:00:00.000Z\",\n" +
+                "              \"lte\": \"" + dateFormat + "T23:59:00.000Z\"\n" +
                 "            }\n" +
                 "          }\n" +
-                "        }"+
+                "        }\n" +
                 "      ],\n" +
                 "      \"should\": [],\n" +
                 "      \"must_not\": []\n" +
