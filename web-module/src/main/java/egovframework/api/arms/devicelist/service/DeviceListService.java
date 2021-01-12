@@ -15,7 +15,7 @@ public interface DeviceListService extends JsTreeHibernateService {
     //차집합을 통해 디비에 등록할 리스트를 추린다.
     //추려진 데이터를 jstree method api를 통해 업데이트 한다.
 
-    public List<DeviceListDTO> getDeviceListsFromJstree () throws Exception;
+    public List<DeviceListDTO> getAllDeviceListsFromJstree () throws Exception;
     public List<DeviceListDTO> getDeviceListsFromELK () throws Exception;
     public List<DeviceListDTO> getDeviceListDifference (List<DeviceListDTO> jstreeDeviceList, List<DeviceListDTO> elkDeviceLists) throws Exception;
     public Integer updateDeviceListToJstree () throws Exception;

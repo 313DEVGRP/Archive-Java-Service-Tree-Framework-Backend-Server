@@ -3,6 +3,7 @@ package egovframework.api.arms.devicelist.service;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.hibernate.criterion.Order;
@@ -38,7 +39,7 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
 
 
     @Override
-    public List<DeviceListDTO> getDeviceListsFromJstree() throws Exception {
+    public List<DeviceListDTO> getAllDeviceListsFromJstree() throws Exception {
 
         DeviceListDTO jsTreeHibernateDTO = new DeviceListDTO();
         jsTreeHibernateDTO.setOrder(Order.asc("c_id"));
@@ -76,8 +77,7 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
             logger.info(bucketJson);
 
             DeviceListDTO deviceListDTO = new DeviceListDTO();
-            deviceListDTO.setC_title(bucketJson);
-            deviceListDTO.setC_monitor_device_hostname(bucketJson);
+            deviceListDTO.setC_monitor_url_scouter(bucketJson);
             //포지션 잡아야 함
             deviceListDTOs.add(deviceListDTO);
         }
@@ -114,6 +114,12 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
             DeviceListDTO deviceListDTO = new DeviceListDTO();
             deviceListDTO.setC_title(insertTargetDeviceHost);
             deviceListDTO.setC_monitor_device_hostname(insertTargetDeviceHost);
+            deviceListDTO.setC_monitor_url_apm(insertTargetDeviceHost);
+            deviceListDTO.setC_monitor_url_filebeat(insertTargetDeviceHost);
+            deviceListDTO.setC_monitor_url_heartbeat(insertTargetDeviceHost);
+            deviceListDTO.setC_monitor_url_metricbeat(insertTargetDeviceHost);
+            deviceListDTO.setC_monitor_url_packetbeat(insertTargetDeviceHost);
+            deviceListDTO.setC_monitor_url_topbeat(insertTargetDeviceHost);
             deviceListDTO.setC_parentid(new Long(2));
             deviceListDTO.setRef(new Long(2));
             deviceListDTO.setC_type("default");
@@ -128,14 +134,12 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
     @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public Integer updateDeviceListToJstree() throws Exception {
 
+        //1. 기존의 디비에서 getDeviceListsFromInfluxDB 를 대입해 업데이트 한다.
         //database jstree method 를 활용하여 full list를 얻어온다. -> 디비에 등록된 host full list
-        List<DeviceListDTO> deviceListsFromJstree = getDeviceListsFromJstree();
+        List<DeviceListDTO> deviceListsFromJstree = getAllDeviceListsFromJstree();
 
         //elasticsearch api 를 활용해서 full list 를 얻어온다. -> ELK에 등록된 host full list
         List<DeviceListDTO> deviceListsFromELK = getDeviceListsFromELK();
-
-        //influxdb api 를 활용해서 full list 를 얻어온다 -> InfluxDB에 등록된 host full list
-        List<DeviceListDTO> deviceListsFromInfluxDB = getDeviceListsFromInfluxDB();
 
         //차집합을 통해 디비에 등록할 리스트를 추린다.
         List<DeviceListDTO> differenceUpdateSet = getDeviceListDifference(deviceListsFromJstree, deviceListsFromELK);
@@ -144,14 +148,32 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
             this.addNode(deviceListDTO);
         }
 
-        //차집합을 통해 디비에 등록할 리스트를 추린다.
-        List<DeviceListDTO> diffUpdateSet = getDeviceListDifference(deviceListsFromJstree, deviceListsFromInfluxDB);
 
-        for (DeviceListDTO deviceListDTO: diffUpdateSet) {
-            this.addNode(deviceListDTO);
+        //influxdb api 를 활용해서 full list 를 얻어온다 -> InfluxDB에 등록된 host full list
+        List<DeviceListDTO> deviceListsFromInfluxDB = getDeviceListsFromInfluxDB();
+
+        for ( DeviceListDTO jstreeDeviceDTO : deviceListsFromJstree ) {
+
+            String deviceHostStr = jstreeDeviceDTO.getC_monitor_device_hostname();
+
+            for ( DeviceListDTO influxdbDeviceDTO : deviceListsFromInfluxDB ){
+                String deviceScouterStr = influxdbDeviceDTO.getC_monitor_url_scouter();
+
+                if(StringUtils.contains(deviceScouterStr, deviceHostStr)){
+                    jstreeDeviceDTO.setC_monitor_url_scouter(deviceScouterStr);
+                    jstreeDeviceDTO.setC_monitor_url_apm(deviceHostStr);
+                    jstreeDeviceDTO.setC_monitor_url_filebeat(deviceHostStr);
+                    jstreeDeviceDTO.setC_monitor_url_heartbeat(deviceHostStr);
+                    jstreeDeviceDTO.setC_monitor_url_metricbeat(deviceHostStr);
+                    jstreeDeviceDTO.setC_monitor_url_packetbeat(deviceHostStr);
+                    jstreeDeviceDTO.setC_monitor_url_topbeat(deviceHostStr);
+                    this.alterNode(jstreeDeviceDTO);
+                }
+            }
+
         }
 
-        return differenceUpdateSet.size() + diffUpdateSet.size();
+        return differenceUpdateSet.size();
     }
 
     public JSONArray getInfoFromELK() throws Exception {
