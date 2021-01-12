@@ -4,6 +4,7 @@ import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
 import egovframework.com.ext.jstree.support.util.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.hibernate.criterion.Order;
@@ -21,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -189,6 +191,8 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        Date today = new Date();
+        String dateFormat = DateFormatUtils.format(today, "yyyy-MM-dd");
         String postdata =   "{\n" +
                 "  \"aggs\": {\n" +
                 "    \"2\": {\n" +
@@ -226,7 +230,16 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
                 "      \"filter\": [\n" +
                 "        {\n" +
                 "          \"match_all\": {}\n" +
-                "        }\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"range\": {\n" +
+                "            \"@timestamp\": {\n" +
+                "              \"format\": \"strict_date_optional_time\",\n" +
+                "              \"gte\": " + dateFormat + "\"T00:00:00.603Z\",\n" +
+                "              \"lte\": " + dateFormat + "\"T23:59:59.603Z\"\n" +
+                "            }\n" +
+                "          }\n" +
+                "        }"+
                 "      ],\n" +
                 "      \"should\": [],\n" +
                 "      \"must_not\": []\n" +

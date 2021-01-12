@@ -4,7 +4,9 @@ import egovframework.api.arms.dashboardlist.batch.DashboardListConst;
 import egovframework.api.arms.datasourcelist.batch.DataSourceListConst;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import egovframework.com.cmm.service.EgovProperties;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.utils.*;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,10 +20,7 @@ import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -558,6 +557,10 @@ public class Java8LambdaTest {
         }else{
             logger.info("false");
         }
+
+        Date today = new Date();
+        String dateFormat = DateFormatUtils.format(today, "yyyy-MM-dd");
+        System.out.println("yyyy-MM-dd HH:mm:ss = " + dateFormat);
     }
 
     private HttpHeaders createHttpHeaders(String user, String password)
