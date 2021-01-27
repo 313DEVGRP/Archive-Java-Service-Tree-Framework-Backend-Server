@@ -1,0 +1,126 @@
+version: '3.6'
+
+#apt update
+#apt install apt-transport-https ca-certificates curl software-properties-common
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+#add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+#apt update
+
+#apt-cache policy docker-ce
+#apt install docker-ce=18.06.3~ce~3-0~ubuntu
+#apt-get install nfs-common
+
+#docker swarm join-token worker
+#docker swarm join --token SWMTKN-1-1fd9zytidyai9bfelii0vt5nee6l43ibedvwjztbgncxfil2oi-0ungbwdty6jaihk5g7usk5pv9 192.168.25.46:2377
+
+services:
+
+  jira:
+    image: 313devgrp/jira:12.14
+    ports:
+      - "48080:48080"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role!=manager]
+    networks: &dev-network
+      - dev
+    extra_hosts:
+      - "db.313.co.kr:192.168.25.40"
+      - "nas.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+  confluence:
+    image: 313devgrp/confluence:12.14
+    ports:
+      - "58090:58090"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role!=manager]
+    networks: &dev-network
+      - dev
+    extra_hosts:
+      - "db.313.co.kr:192.168.25.40"
+      - "nas.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+  fecru:
+    image: 313devgrp/fecru:13.02
+    ports:
+      - "8060:8060"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role!=manager]
+    networks: &dev-network
+      - dev
+    extra_hosts:
+      - "db.313.co.kr:192.168.25.40"
+      - "nas.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+  sonar:
+    image: 313devgrp/sonar:12.06
+    ports:
+      - "9000:9000"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role!=manager]
+    networks: &dev-network
+      - dev
+    extra_hosts:
+      - "db.313.co.kr:192.168.25.40"
+      - "nas.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+  jrebel:
+    image: 313devgrp/jrebel:2018.07.12
+    ports:
+      - "31301:8888"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role!=manager]
+    networks: &dev-network
+      - dev
+    extra_hosts:
+      - "db.313.co.kr:192.168.25.40"
+      - "nas.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+networks:
+  dev:
+    attachable: true
