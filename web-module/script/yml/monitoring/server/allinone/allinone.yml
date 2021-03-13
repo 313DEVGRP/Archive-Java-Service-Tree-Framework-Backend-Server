@@ -21,7 +21,7 @@ services:
 
   # elasticsearch master node
   es-master-01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     hostname: es-master-01
     volumes:
       #- es-master-01-data:/usr/share/elasticsearch/data
@@ -46,7 +46,7 @@ services:
       cluster.remote.connect: "false"
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
     configs: &es-limits-conf
       - source: es-limits.conf
         target: /etc/security/limits.conf
@@ -56,10 +56,6 @@ services:
       endpoint_mode: dnsrr
       mode: replicated
       replicas: 1
-      placement:
-        constraints: 
-          - node.role!=manager
-          - node.hostname == sub-slave1node
     logging:
       driver: "json-file"
       options:
@@ -68,7 +64,7 @@ services:
 
   # elasticsearch master node
   es-master-02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     hostname: es-master-02
     volumes:
       #- es-master-02-data:/usr/share/elasticsearch/data
@@ -93,17 +89,13 @@ services:
       cluster.remote.connect: "false"
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
     configs: *es-limits-conf
     networks: *efk-network
     deploy:
       endpoint_mode: dnsrr
       mode: replicated
       replicas: 1
-      placement:
-        constraints:
-          - node.role!=manager
-          - node.hostname == sub-slave2node
     logging:
       driver: "json-file"
       options:
@@ -111,7 +103,7 @@ services:
         max-size: "100m"
 
   es-master-03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     hostname: es-master-03
     volumes:
       #- es-master-03-data:/usr/share/elasticsearch/data
@@ -136,17 +128,13 @@ services:
       cluster.remote.connect: "false"
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
     configs: *es-limits-conf
     networks: *efk-network
     deploy:
       endpoint_mode: dnsrr
       mode: replicated
       replicas: 1
-      placement:
-        constraints:
-          - node.role!=manager
-          - node.hostname == sub-slave3node
     logging:
       driver: "json-file"
       options:
@@ -154,7 +142,7 @@ services:
         max-size: "100m"
 
   es-coordinating:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     hostname: es-coordinating
     ports:
       - 9200:9200
@@ -162,7 +150,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
-      ES_JAVA_OPTS: "-Xms4g -Xmx4g"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
       cluster.name: es-swarm-cluster
       discovery.seed_hosts: "es-master-01,es-master-02,es-master-03"
       node.name: "es-coordinating"
@@ -184,15 +172,18 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      placement:
-        constraints:
-          - node.role!=manager
-          - node.hostname == sub-slave1node
     logging:
       driver: "json-file"
       options:
         max-file: "5"
         max-size: "100m"
+    #logging:
+    #  driver: "fluentd"
+    #  options:
+    #    fluentd-address: fluentd-ui:24224
+    #    fluentd-async-connect: "true"
+    #    fluentd-retry-wait: "1s"
+    #    fluentd-max-retries: "30"
 
   elastichq:
     image: elastichq/elasticsearch-hq
@@ -204,19 +195,9 @@ services:
     ports:
       - 5050:5000
     networks: *efk-network
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:${ELKVERSION:-7.9.2}
+    image: docker.elastic.co/kibana/kibana:7.9.3
     hostname: kibana
     ports:
       - 5601:5601
@@ -231,8 +212,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      placement:
-        constraints: [node.role==manager]
     logging:
       driver: "json-file"
       options:
@@ -240,7 +219,7 @@ services:
         max-size: "100m"
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:${ELKVERSION:-7.9.2}
+    image: docker.elastic.co/logstash/logstash:7.9.3
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -258,8 +237,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      placement:
-        constraints: [node.role==manager]
     logging:
       driver: "json-file"
       options:
@@ -274,11 +251,6 @@ services:
       - zookeeper1-logs:/datalog
     ports:
       - "2181:2181"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     environment:
       - ZOO_SERVER_ID=1
@@ -297,11 +269,6 @@ services:
       - zookeeper2-logs:/datalog
     ports:
       - "2182:2181"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     environment:
       - ZOO_SERVER_ID=2
@@ -320,11 +287,6 @@ services:
       - zookeeper3-logs:/datalog
     ports:
       - "2183:2181"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     environment:
       - ZOO_SERVER_ID=3
@@ -352,11 +314,6 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     depends_on:
       - zookeeper1
@@ -384,11 +341,6 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka2:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     depends_on:
       - zookeeper1
@@ -416,11 +368,6 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka3:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     depends_on:
       - zookeeper1
@@ -443,11 +390,6 @@ services:
       ZK_HOSTS: zookeeper1:2181,zookeeper2:2182,zookeeper3:2183
       APPLICATION_SECRET: "random-secret"
       KM_ARGS: -Djava.net.preferIPv4Stack=true
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     ports:
       - "8282:9000"
@@ -458,14 +400,9 @@ services:
         max-size: "100m"
 
   apm-server:
-    image: docker.elastic.co/apm/apm-server:${ELKVERSION:-7.9.2}
+    image: docker.elastic.co/apm/apm-server:7.9.3
     ports:
       - "8200:8200"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     depends_on:
       - kafka-manager
@@ -484,11 +421,6 @@ services:
       - 8086:8086
       - 8083:8083
       - 8089:8089/udp
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     configs:
       - source: influxdb.conf
@@ -511,11 +443,6 @@ services:
       - influxdb
     environment:
       INFLUXDB_URL: http://influxdb:8086
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     logging:
       driver: "json-file"
@@ -525,11 +452,6 @@ services:
 
   grafana:
     image: grafana/grafana:6.7.4
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     user: "$UID:$GID"
     ports:
@@ -564,11 +486,6 @@ services:
       - sc-libs:/home/scouter-server/lib
       - sc-conf:/home/scouter-server/conf
       - sc-extweb:/home/scouter-server/extweb
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
     networks: *efk-network
     depends_on:
       - influxdb
@@ -582,27 +499,9 @@ services:
         max-file: "5"
         max-size: "100m"
 
-  www313cokr:
-    image: 313devgrp/jstree-service-framework-backend-app:21.01.10
-    ports:
-      - "31313:8080"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
-    depends_on:
-      - scouter
-    extra_hosts:
-      - "db.313.co.kr:192.168.25.40"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
-
 configs:
+  fluent_conf:
+    file: ./allinone/fluentd/conf/fluent.conf
   apmserver.conf:
     file: ./allinone/apm-server.yml
   influxdb.conf:
