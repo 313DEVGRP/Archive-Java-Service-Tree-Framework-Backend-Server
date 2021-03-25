@@ -1,5 +1,6 @@
 package egovframework.com.ext.jstree.support.util;
 
+import egovframework.api.PropertiesReader;
 import egovframework.api.arms.dashboardlist.batch.DashboardListConst;
 import egovframework.api.arms.datasourcelist.batch.DataSourceListConst;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
@@ -20,6 +21,7 @@ import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -496,8 +498,9 @@ public class Java8LambdaTest {
     }
 
     //@Test
-    public void putDashboardListTest() throws ParseException {
-        String influxdbUrl = EgovProperties.getProperty("allinone.monitoring.influxdb.url");
+    public void putDashboardListTest() throws ParseException, IOException {
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String influxdbUrl = propertiesReader.getProperty("allinone.monitoring.influxdb.url");
         String theUrl = influxdbUrl + "/api/datasources/name/";
 
         HttpHeaders headers = createHttpHeaders("admin","qwe123");
@@ -505,7 +508,7 @@ public class Java8LambdaTest {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        String datasourceList = EgovProperties.getProperty("allinone.monitoring.influxdb.datasource");
+        String datasourceList = propertiesReader.getProperty("allinone.monitoring.influxdb.datasource");
         String[] datasourceArray = datasourceList.split(",");
 
         for (int i = 0; i < datasourceArray.length; i++) {

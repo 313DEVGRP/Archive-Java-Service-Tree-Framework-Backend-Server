@@ -1,5 +1,6 @@
 package egovframework.api.arms.devicelist.service;
 
+import egovframework.api.PropertiesReader;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -249,8 +251,9 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
 
         HttpEntity<String> request = new HttpEntity<String>(postdata, headers);
 
-        String allinoneBaseUrl = EgovProperties.getProperty("allinone.monitoring.baseurl");
-        String allinoneMetricbeatPatternStr = EgovProperties.getProperty("allinone.monitoring.metricbeatindex");
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String allinoneBaseUrl = propertiesReader.getProperty("allinone.monitoring.baseurl");
+        String allinoneMetricbeatPatternStr = propertiesReader.getProperty("allinone.monitoring.metricbeatindex");
         String returnResultStr = restTemplate.postForObject( allinoneBaseUrl + allinoneMetricbeatPatternStr + "/_search", request, String.class);
 
         JSONParser jsonParser = new JSONParser();
@@ -283,10 +286,11 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
 
         HttpEntity<String> request = new HttpEntity<String>(headers);
 
-        String influxdbBaseUrl = EgovProperties.getProperty("allinone.monitoring.influx.url");
-        String influxdbBasePath = EgovProperties.getProperty("allinone.monitoring.influx.path");
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String influxdbBaseUrl = propertiesReader.getProperty("allinone.monitoring.influx.url");
+        String influxdbBasePath = propertiesReader.getProperty("allinone.monitoring.influx.path");
         String datasourceId = getDatasourceID();
-        String influxdbBaseQuery = EgovProperties.getProperty("allinone.monitoring.influx.query");
+        String influxdbBaseQuery = propertiesReader.getProperty("allinone.monitoring.influx.query");
         logger.info("====>" + influxdbBaseUrl+influxdbBasePath+datasourceId+influxdbBaseQuery);
         String fullUrl = influxdbBaseUrl+influxdbBasePath+datasourceId+influxdbBaseQuery;
         String returnResultStr = restTemplate.postForObject(fullUrl , request, String.class);
@@ -313,9 +317,10 @@ public class DeviceListServiceImpl extends JsTreeHibernateServiceImpl implements
         return returnJsonArray;
     }
 
-    public String getDatasourceID(){
+    public String getDatasourceID() throws IOException {
 
-        String influxdbBaseUrl = EgovProperties.getProperty("allinone.monitoring.influx.url");
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String influxdbBaseUrl = propertiesReader.getProperty("allinone.monitoring.influx.url");
         String theUrl = influxdbBaseUrl + "/api/datasources/name/InfluxDB - Scouter";
         RestTemplate restTemplate = new RestTemplate();
         String returnStr = "";

@@ -1,7 +1,9 @@
 package egovframework.api.arms.datasourcelist.service;
 
+import egovframework.api.PropertiesReader;
 import egovframework.api.arms.datasourcelist.batch.DataSourceListConst;
 import egovframework.com.cmm.service.EgovProperties;
+import egovframework.com.cmm.service.Globals;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -32,7 +34,9 @@ public class DataSourceListServiceImpl extends JsTreeHibernateServiceImpl implem
         // 있으면 pass, 없으면 데이터소스 입력
         // 프로퍼티에서 데이터소스 리스트 로드
         // 검색 후 없으면 const 에서 로드하여 입력
-        String influxdbUrl = EgovProperties.getProperty("allinone.monitoring.influxdb.url");
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+
+        String influxdbUrl = propertiesReader.getProperty("allinone.monitoring.influxdb.url");
         String theUrl = influxdbUrl + "/api/datasources/name/";
 
         HttpHeaders headers = createHttpHeaders("admin","qwe123");
@@ -40,7 +44,7 @@ public class DataSourceListServiceImpl extends JsTreeHibernateServiceImpl implem
 
         RestTemplate restTemplate = new RestTemplate();
 
-        String datasourceList = EgovProperties.getProperty("allinone.monitoring.influxdb.datasource");
+        String datasourceList = propertiesReader.getProperty("allinone.monitoring.influxdb.datasource");
         String[] datasourceArray = datasourceList.split(",");
 
         Integer returnCount = 0;

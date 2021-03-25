@@ -1,5 +1,6 @@
 package egovframework.api.arms.dashboardlist.service;
 
+import egovframework.api.PropertiesReader;
 import egovframework.api.arms.dashboardlist.batch.DashboardListConst;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
@@ -46,7 +47,8 @@ public class DashboardListServiceImpl extends JsTreeHibernateServiceImpl impleme
 
         HttpEntity<String> request = new HttpEntity<String>(postdata, headers);
 
-        String influxdbUrl = EgovProperties.getProperty("allinone.monitoring.influxdb.url");
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String influxdbUrl = propertiesReader.getProperty("allinone.monitoring.influxdb.url");
         String influxdbBaseUrl = influxdbUrl + "/api/dashboards/db";
         String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
 
