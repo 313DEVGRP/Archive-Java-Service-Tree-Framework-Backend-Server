@@ -19,6 +19,11 @@ services:
       mode: global
       placement:
         constraints: [node.platform.os == linux]
+    logging:
+          driver: "json-file"
+          options:
+            max-file: "5"
+            max-size: "100m"
 
   portainer:
     image: portainer/portainer
@@ -35,6 +40,11 @@ services:
       replicas: 1
       placement:
         constraints: [node.role == manager]
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
 networks:
   agent_network:

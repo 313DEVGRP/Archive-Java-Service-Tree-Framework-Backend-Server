@@ -52,8 +52,8 @@ public class DashboardListServiceImpl extends JsTreeHibernateServiceImpl impleme
         String influxdbBaseUrl = influxdbUrl + "/api/dashboards/db";
         String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
 
-
-        return null;
+        logger.debug("returnResultStr" + returnResultStr);
+        return 1;
     }
 
     private HttpHeaders createHttpHeaders(String user, String password)

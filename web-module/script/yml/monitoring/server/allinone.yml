@@ -224,6 +224,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
+      ELASTICSEARCH_URL: http://es-coordinating:9200
       ELASTICSEARCH_HOSTS: "http://es-coordinating:9200"
     networks: *efk-network
     depends_on:
@@ -232,7 +233,7 @@ services:
       mode: replicated
       replicas: 1
       placement:
-        constraints: [node.role==manager]
+        constraints: [node.role!=manager]
     logging:
       driver: "json-file"
       options:
@@ -540,7 +541,8 @@ services:
     depends_on:
       - chronograf
     volumes:
-      - grafana:/var/lib/grafana
+      - grafanavar:/var/lib/grafana
+      - grafanaetc:/etc/grafana
     logging:
       driver: "json-file"
       options:
@@ -583,7 +585,7 @@ services:
         max-size: "100m"
 
   www313cokr:
-    image: 313devgrp/jstree-service-framework-backend-app:21.01.10
+    image: 313devgrp/jstree-service-framework-backend-app:21.03.25
     ports:
       - "31313:8080"
     deploy:
@@ -643,12 +645,19 @@ volumes:
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":${NFSPATH:-/nfspath}/allinone/chronograf"
 
-  grafana:
+  grafanavar:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/grafana"
+      device: ":${NFSPATH:-/nfspath}/allinone/grafana/var"
+
+  grafanaetc:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
+      device: ":${NFSPATH:-/nfspath}/allinone/grafana/etc"
 
   sc-extweb:
     driver: local
