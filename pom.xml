@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>313devgrp</groupId>
     <artifactId>standard-project</artifactId>
-    <version>21.03.26</version>
+    <version>21.03.27</version>
     <packaging>pom</packaging>
 
     <name>standard-project</name>
@@ -197,7 +197,7 @@
         </snapshotRepository>
         <site>
             <id>StandardProject-Site-Public</id>
-            <url>ftp://www.313.co.kr/web/analysis</url>
+            <url>ftp://www.313.co.kr/web/DeveloperPortal/analysis</url>
         </site>
     </distributionManagement>
 

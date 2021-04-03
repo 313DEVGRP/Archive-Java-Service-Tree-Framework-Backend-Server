@@ -1,4 +1,4 @@
-FROM tomcat:8.5.38-jre8-slim
+FROM tomcat:8.5.64-jdk8-openjdk
 MAINTAINER 313DEVGRP <313@313.co.kr>
 
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
