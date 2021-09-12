@@ -1,0 +1,116 @@
+version: '3.6'
+
+services:
+
+#  test-redis:
+#    image: redis:4.0.13
+#    command: redis-server --port 6379
+#    volumes:
+#      - testRedis:/data
+#    ports:
+#      - 26379:6379
+#    networks:
+#      - test_network
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      placement:
+#        constraints: [node.role == manager]
+
+#  test-redis-browser:
+#    image: obytes/redis-browser
+#    command: --url redis://test-redis:6379
+#    ports:
+#      - "24567:4567"
+#    networks:
+#      - test_network
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      placement:
+#        constraints: [node.role == manager]
+
+#  test-redis-commander:
+#    image: rediscommander/redis-commander:latest
+#    restart: always
+#    environment:
+#      - REDIS_HOSTS=local:test-redis:6379
+#    ports:
+#      - "28081:8081"
+#    networks:
+#      - test_network
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      placement:
+#        constraints: [node.role == manager]
+
+#  jenkins:
+    #image: jenkins/jenkins:2.289.2-lts
+#    image: jenkins:2.7.2
+#    environment:
+#      JAVA_OPTS: "-Xms1g -Xmx1g -Dhudson.model.DownloadService.noSignatureCheck=true"
+#    ports:
+#      - "58080:8080"
+#      - "50000:50000"
+#    volumes:
+#      - jenkinsHome:/var/jenkins_home
+#    deploy: &default-deploy
+#      mode: replicated
+#      replicas: 1
+#      placement:
+#        constraints: [node.role==manager]
+#    networks: &default-network
+#      - test_network
+#    extra_hosts: &default-addhost
+#      - "db.313.co.kr:192.168.25.40"
+#      - "nas.313.co.kr:192.168.25.42"
+#      - "ubuntu.313.co.kr:192.168.25.46"
+#    logging: &default-logging
+#      driver: "json-file"
+#      options:
+#        max-file: "5"
+#        max-size: "100m"
+
+  proxyGateway:
+    image: 313devgrp/jstree-service-framework-proxy-app:21.08.30
+    ports:
+      - "28282:28282"
+    deploy: &default-deploy
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role==manager]
+    networks: &default-network
+      - test_network
+    extra_hosts: &default-addhost
+      - "313.co.kr:192.168.25.42"
+      - "db.313.co.kr:192.168.25.40"
+      - "nas.313.co.kr:192.168.25.42"
+      - "www.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    logging: &default-logging
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+
+#volumes:
+#  jenkinsHome:
+#    driver: local
+#    driver_opts:
+#      type: "nfs"
+#      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
+#      device: ":${NFSPATH:-/nfspath}/devtool/jenkins"
+#  testRedis:
+#    driver: local
+#    driver_opts:
+#      type: "nfs"
+#      o: "addr=192.168.25.42,nolock,soft,rw,sync"
+#      device: ":${NFSPATH:-/nfspath}/test/redis"
+
+
+networks:
+  test_network:
+    driver: overlay

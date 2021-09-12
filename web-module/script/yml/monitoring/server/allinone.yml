@@ -2,22 +2,38 @@ version: '3.6'
 
 services:
   
-  #https://github.com/jakubhajek/elasticsearch-docker-swarm/blob/master/stack-elastic.yml
-  # elasticsearch coordinating node
-  # /etc/security/limits.conf
-  # * hard memlock unlimited
-  # * soft memlock unlimited
-  # * hard nofile 65536
-  # * soft nofile 65536
-  # * hard nproc 65536
-  # * soft nproc 65536
+#https://github.com/jakubhajek/elasticsearch-docker-swarm/blob/master/stack-elastic.yml
+# elasticsearch coordinating node
+# /etc/security/limits.conf
+# * hard memlock unlimited
+# * soft memlock unlimited
+# * hard nofile 65536
+# * soft nofile 65536
+# * hard nproc 65536
+# * soft nproc 65536
 
-  # sysctl -w vm.max_map_count=262144
-  # /etc/sysctl.conf
-  # vm.max_map_count=262144
+# sysctl -w vm.max_map_count=262144
+# /etc/sysctl.conf
+# vm.max_map_count=262144
 
-  # /lib/systemd/system/docker.service
-  # LimitMEMLOCK=infinity
+# /lib/systemd/system/docker.service
+# LimitMEMLOCK=infinity
+
+#apt update
+#apt install apt-transport-https ca-certificates curl software-properties-common
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+#add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+#apt update
+
+#apt-cache policy docker-ce
+#apt install docker-ce=18.06.3~ce~3-0~ubuntu
+#apt-get install nfs-common
+
+#docker swarm join-token worker
+#docker swarm join --token SWMTKN-1-1fd9zytidyai9bfelii0vt5nee6l43ibedvwjztbgncxfil2oi-0ungbwdty6jaihk5g7usk5pv9 192.168.25.46:2377
+
+
 
   # elasticsearch master node
   es-master-01:
@@ -52,15 +68,14 @@ services:
         target: /etc/security/limits.conf
     networks: &efk-network
       - efk
-    deploy:
+    deploy: &efk-deploy
       endpoint_mode: dnsrr
       mode: replicated
       replicas: 1
       placement:
         constraints: 
           - node.role != manager
-          - node.hostname == sub-slave1node
-    logging:
+    logging: &default-logging
       driver: "json-file"
       options:
         max-file: "5"
@@ -96,19 +111,8 @@ services:
       ES_JAVA_OPTS: "-Xms2g -Xmx2g"
     configs: *es-limits-conf
     networks: *efk-network
-    deploy:
-      endpoint_mode: dnsrr
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role!=manager
-          - node.hostname == sub-slave2node
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *efk-deploy
+    logging: *default-logging
 
   es-master-03:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
@@ -139,19 +143,8 @@ services:
       ES_JAVA_OPTS: "-Xms2g -Xmx2g"
     configs: *es-limits-conf
     networks: *efk-network
-    deploy:
-      endpoint_mode: dnsrr
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role!=manager
-          - node.hostname == sub-slave3node
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *efk-deploy
+    logging: *default-logging
 
   es-coordinating:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ELKVERSION:-7.9.2}
@@ -175,24 +168,18 @@ services:
       MAX_LOCKED_MEMORY: unlimited
       bootstrap.memory_lock: "true"
       xpack.monitoring.collection.enabled: "false"
-    configs: *es-limits-conf
-    networks: *efk-network
     depends_on:
       - es-master-01
       - es-master-02
       - es-master-03
-    deploy:
+    configs: *es-limits-conf
+    networks: *efk-network
+    deploy: &default-deploy
       mode: replicated
       replicas: 1
       placement:
-        constraints:
-          - node.role!=manager
-          - node.hostname == sub-slave1node
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+        constraints: [node.role!=manager]
+    logging: *default-logging
 
   elastichq:
     image: elastichq/elasticsearch-hq
@@ -204,16 +191,8 @@ services:
     ports:
       - 5050:5000
     networks: *efk-network
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    logging: *default-logging
 
   kibana:
     image: docker.elastic.co/kibana/kibana:${ELKVERSION:-7.9.2}
@@ -224,21 +203,13 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
-      ELASTICSEARCH_URL: http://es-coordinating:9200
-      ELASTICSEARCH_HOSTS: "http://es-coordinating:9200"
-    networks: *efk-network
+      - "ELASTICSEARCH_URL=http://es-coordinating:9200"
+      - "ELASTICSEARCH_HOSTS=http://es-coordinating:9200"
     depends_on:
       - es-coordinating
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    networks: *efk-network
+    deploy: *default-deploy
+    logging: *default-logging
 
   logstash:
     image: docker.elastic.co/logstash/logstash:${ELKVERSION:-7.9.2}
@@ -252,90 +223,49 @@ services:
       - source: logstash_pipeline
         target: /usr/share/logstash/pipeline/logstash.conf
     environment:
-      LS_JAVA_OPTS: "-Xmx2g -Xms2g"
-    networks: *efk-network
+      - "LS_JAVA_OPTS=-Xmx2g -Xms2g"
     depends_on:
       - kibana
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role==manager]
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    networks: *efk-network
+    deploy: *default-deploy
+    logging: *default-logging
 
   #https://gist.github.com/dkurzaj/2a899de8cb5ae698919f0a9bbf7685f0
   zookeeper1:
     image: wurstmeister/zookeeper:3.4.6
-    volumes:
-      - zookeeper1-data:/data
-      - zookeeper1-logs:/datalog
     ports:
       - "2181:2181"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     environment:
       - ZOO_SERVER_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   zookeeper2:
     image: wurstmeister/zookeeper:3.4.6
-    volumes:
-      - zookeeper2-data:/data
-      - zookeeper2-logs:/datalog
     ports:
       - "2182:2181"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     environment:
       - ZOO_SERVER_ID=2
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   zookeeper3:
     image: wurstmeister/zookeeper:3.4.6
-    volumes:
-      - zookeeper3-data:/data
-      - zookeeper3-logs:/datalog
     ports:
       - "2183:2181"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     environment:
       - ZOO_SERVER_ID=3
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   kafka1:
     image: wurstmeister/kafka:2.12-2.3.0
@@ -353,21 +283,13 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     depends_on:
       - zookeeper1
       - zookeeper2
       - zookeeper3
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   kafka2:
     image: wurstmeister/kafka:2.12-2.3.0
@@ -385,21 +307,13 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka2:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     depends_on:
       - zookeeper1
       - zookeeper2
       - zookeeper3
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   kafka3:
     image: wurstmeister/kafka:2.12-2.3.0
@@ -417,21 +331,13 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka3:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     depends_on:
       - zookeeper1
       - zookeeper2
       - zookeeper3
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   # https://github.com/hleb-albau/kafka-manager-docker
   kafka-manager:
@@ -444,63 +350,39 @@ services:
       ZK_HOSTS: zookeeper1:2181,zookeeper2:2182,zookeeper3:2183
       APPLICATION_SECRET: "random-secret"
       KM_ARGS: -Djava.net.preferIPv4Stack=true
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     ports:
       - "8282:9000"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   apm-server:
     image: docker.elastic.co/apm/apm-server:${ELKVERSION:-7.9.2}
     ports:
       - "8200:8200"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     depends_on:
       - kafka-manager
     configs:
       - source: apmserver.conf
         target: /usr/share/apm-server/apm-server.yml
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   influxdb:
     image: influxdb:1.7.10
     ports:
-      - 8086:8086
-      - 8083:8083
-      - 8089:8089/udp
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
+      - 18086:8086
+      - 18083:8083
+      - 18089:8089/udp
     configs:
       - source: influxdb.conf
         target: /etc/influxdb/influxdb.conf
     volumes:
       - influxdb-data:/var/lib/influxdb
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   chronograf:
     image: chronograf:1.7.17
@@ -512,26 +394,12 @@ services:
       - influxdb
     environment:
       INFLUXDB_URL: http://influxdb:8086
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
+    deploy: *default-deploy
     networks: *efk-network
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    logging: *default-logging
 
   grafana:
     image: grafana/grafana:6.7.4
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     user: "$UID:$GID"
     ports:
       - 3000:3000
@@ -543,11 +411,9 @@ services:
     volumes:
       - grafanavar:/var/lib/grafana
       - grafanaetc:/etc/grafana
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   scouter:
     image : scouterapm/scouter-server:2.7.0
@@ -566,43 +432,31 @@ services:
       - sc-libs:/home/scouter-server/lib
       - sc-conf:/home/scouter-server/conf
       - sc-extweb:/home/scouter-server/extweb
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     depends_on:
       - influxdb
     ports:
       - 6180:6180
       - 6100:6100
       - 6100:6100/udp
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
   www313cokr:
-    image: 313devgrp/jstree-service-framework-backend-app:21.03.27
+    image: 313devgrp/jstree-service-framework-backend-app:21.04.03
     ports:
       - "31313:8080"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: *efk-network
     depends_on:
       - scouter
     extra_hosts:
+      - "313.co.kr:192.168.25.42"
       - "db.313.co.kr:192.168.25.40"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+      - "nas.313.co.kr:192.168.25.42"
+      - "www.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    deploy: *default-deploy
+    networks: *efk-network
+    logging: *default-logging
 
 configs:
   apmserver.conf:
@@ -664,105 +518,63 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/scouter/sc-extweb"
+      device: ":${NFSPATH:-/nfspath}/allinone/scouter/extweb"
 
   sc-conf:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/scouter/sc-conf"
+      device: ":${NFSPATH:-/nfspath}/allinone/scouter/conf"
 
   sc-libs:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/scouter/sc-libs"
+      device: ":${NFSPATH:-/nfspath}/allinone/scouter/libs"
 
   sc-data:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/scouter/sc-data"
+      device: ":${NFSPATH:-/nfspath}/allinone/scouter/data"
 
   sc-logs:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/scouter/sc-logs"
-
-  zookeeper3-logs:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/zookeeper3/logs"
-
-  zookeeper3-data:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/zookeeper3/data"
-
-  zookeeper2-logs:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/zookeeper2/logs"
-
-  zookeeper2-data:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/zookeeper2/data"
-
-  zookeeper1-logs:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/zookeeper1/logs"
-
-  zookeeper1-data:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/zookeeper1/data"
+      device: ":${NFSPATH:-/nfspath}/allinone/scouter/logs"
 
   influxdb-data:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/influxdb/data"
+      device: ":${NFSPATH:-/nfspath}/allinone/influxdb"
 
   es-master-01-data:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/es-master-01/data"
+      device: ":${NFSPATH:-/nfspath}/allinone/es-master-01"
 
   es-master-02-data:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/es-master-02/data"
+      device: ":${NFSPATH:-/nfspath}/allinone/es-master-02"
 
   es-master-03-data:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/allinone/es-master-03/data"
+      device: ":${NFSPATH:-/nfspath}/allinone/es-master-03"
 
 networks:
   efk:

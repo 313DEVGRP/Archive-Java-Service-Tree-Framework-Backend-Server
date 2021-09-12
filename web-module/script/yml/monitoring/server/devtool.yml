@@ -1,5 +1,23 @@
 version: '3.6'
 
+#https://github.com/jakubhajek/elasticsearch-docker-swarm/blob/master/stack-elastic.yml
+# elasticsearch coordinating node
+# /etc/security/limits.conf
+# * hard memlock unlimited
+# * soft memlock unlimited
+# * hard nofile 65536
+# * soft nofile 65536
+# * hard nproc 65536
+# * soft nproc 65536
+
+# sysctl -w vm.max_map_count=262144
+# /etc/sysctl.conf
+# vm.max_map_count=262144
+
+# /lib/systemd/system/docker.service
+# LimitMEMLOCK=infinity
+
+
 #apt update
 #apt install apt-transport-https ca-certificates curl software-properties-common
 #curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -20,18 +38,20 @@ services:
     image: 313devgrp/jira:12.14
     ports:
       - "48080:48080"
-    deploy:
+    deploy: &default-deploy
       mode: replicated
       replicas: 1
       placement:
         constraints: [node.role!=manager]
-    networks: &dev-network
-      - dev
-    extra_hosts:
+    networks: &default-network
+      - dev_network
+    extra_hosts: &default-addhost
+      - "313.co.kr:192.168.25.42"
       - "db.313.co.kr:192.168.25.40"
       - "nas.313.co.kr:192.168.25.42"
+      - "www.313.co.kr:192.168.25.42"
       - "ubuntu.313.co.kr:192.168.25.46"
-    logging:
+    logging: &default-logging
       driver: "json-file"
       options:
         max-file: "5"
@@ -41,86 +61,60 @@ services:
     image: 313devgrp/confluence:12.14
     ports:
       - "58090:58090"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: &dev-network
-      - dev
-    extra_hosts:
-      - "db.313.co.kr:192.168.25.40"
-      - "nas.313.co.kr:192.168.25.42"
-      - "ubuntu.313.co.kr:192.168.25.46"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *default-network
+    extra_hosts: *default-addhost
+    logging: *default-logging
 
   fecru:
     image: 313devgrp/fecru:13.02
     ports:
       - "8060:8060"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: &dev-network
-      - dev
-    extra_hosts:
-      - "db.313.co.kr:192.168.25.40"
-      - "nas.313.co.kr:192.168.25.42"
-      - "ubuntu.313.co.kr:192.168.25.46"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *default-network
+    extra_hosts: *default-addhost
+    logging: *default-logging
 
   sonar:
     image: 313devgrp/sonar:12.06
     ports:
-      - "9000:9000"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: &dev-network
-      - dev
-    extra_hosts:
-      - "db.313.co.kr:192.168.25.40"
-      - "nas.313.co.kr:192.168.25.42"
-      - "ubuntu.313.co.kr:192.168.25.46"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+      - "9090:9000"
+    deploy: *default-deploy
+    networks: *default-network
+    extra_hosts: *default-addhost
+    logging: *default-logging
+
+  jenkins:
+    image: jenkins:2.7.2
+    environment:
+      JAVA_OPTS: "-Xms1g -Xmx1g -Dhudson.model.DownloadService.noSignatureCheck=true"
+    ports:
+      - "58080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkinsHome:/var/jenkins_home
+    deploy: *default-deploy
+    networks: *default-network
+    extra_hosts: *default-addhost
+    logging: *default-logging
 
   jrebel:
     image: 313devgrp/jrebel:2018.07.12
     ports:
       - "31301:8888"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: &dev-network
-      - dev
-    extra_hosts:
-      - "db.313.co.kr:192.168.25.40"
-      - "nas.313.co.kr:192.168.25.42"
-      - "ubuntu.313.co.kr:192.168.25.46"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
+    deploy: *default-deploy
+    networks: *default-network
+    extra_hosts: *default-addhost
+    logging: *default-logging
+
+volumes:
+  jenkinsHome:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
+      device: ":${NFSPATH:-/nfspath}/devtool/jenkins"
 
 networks:
-  dev:
+  dev_network:
     attachable: true
