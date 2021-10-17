@@ -1,4 +1,4 @@
-package egovframework.api;
+package egovframework.api.arms.util;
 
 import java.io.IOException;
 import java.io.InputStream;

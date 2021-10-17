@@ -1,13 +1,11 @@
 package egovframework.com.ext.jstree.support.util;
 
-import egovframework.api.PropertiesReader;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.api.arms.dashboardlist.batch.DashboardListConst;
 import egovframework.api.arms.datasourcelist.batch.DataSourceListConst;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
-import egovframework.com.cmm.service.EgovProperties;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.utils.*;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

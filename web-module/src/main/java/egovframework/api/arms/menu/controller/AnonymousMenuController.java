@@ -1,9 +1,8 @@
-package egovframework.api.menu.controller;
+package egovframework.api.arms.menu.controller;
 
 import com.google.common.collect.Maps;
-import egovframework.api.menu.service.MenuService;
-import egovframework.api.menu.vo.MenuDTO;
-import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.api.arms.menu.service.MenuService;
+import egovframework.api.arms.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import org.hibernate.criterion.Order;
@@ -31,7 +30,6 @@ public class AnonymousMenuController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @IncludedInfo(name = "Developer Portal Web Admin Menu", listUrl = "/api/menu/getJsTreeView.do", order = 7000, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
     public String getMenu() {
         return "egovframework/api/menu/JsTreeView";

@@ -97,12 +97,12 @@
 
     <profiles>
         <profile>
-            <id>operation</id>
+            <id>live</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <build.profile.id>operation</build.profile.id>
+                <build.profile.id>live</build.profile.id>
             </properties>
         </profile>
         <profile>

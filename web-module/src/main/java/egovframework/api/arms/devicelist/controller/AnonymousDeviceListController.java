@@ -3,7 +3,6 @@ package egovframework.api.arms.devicelist.controller;
 import com.google.common.collect.Maps;
 import egovframework.api.arms.devicelist.service.DeviceListService;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
-import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import org.hibernate.criterion.Order;
@@ -34,7 +33,6 @@ public class AnonymousDeviceListController extends GenericAbstractController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @IncludedInfo(name = "ARMS Device list API", listUrl = "/api/devicelist/getJsTreeView.do", order = 7777, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
     public String getDeviceList() {
         return "egovframework/api/devicelist/JsTreeView";

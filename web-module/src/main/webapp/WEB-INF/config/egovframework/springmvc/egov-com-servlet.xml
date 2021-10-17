@@ -43,7 +43,7 @@
 	</bean>
 
 	<!-- For Pagination Tag -->
-	<bean id="imageRenderer" class="egovframework.com.cmm.ImagePaginationRenderer"/>
+	<bean id="imageRenderer" class="egovframework.com.ext.jstree.support.ImagePaginationRenderer"/>
 	<bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
 		<property name="rendererType">
 			<map>
@@ -53,7 +53,7 @@
 	</bean>
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="webBindingInitializer">
-			<bean class="egovframework.com.cmm.web.EgovBindingInitializer"/>
+			<bean class="egovframework.com.ext.jstree.support.EgovBindingInitializer"/>
 		</property>
 	</bean>
 
@@ -81,7 +81,7 @@
 		<property name="objectMapper" ref="jsonMapper" />
 	</bean>
 
-	<!-- ************************************* socialSecurity ************************************* -->
+	<!-- ************************************* message Converter ************************************* -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>

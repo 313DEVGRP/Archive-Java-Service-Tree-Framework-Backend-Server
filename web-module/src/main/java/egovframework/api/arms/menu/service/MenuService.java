@@ -1,4 +1,4 @@
-package egovframework.api.menu.service;
+package egovframework.api.arms.menu.service;
 
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
 

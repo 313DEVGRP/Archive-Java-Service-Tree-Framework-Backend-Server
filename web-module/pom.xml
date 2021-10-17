@@ -17,7 +17,7 @@
     <description>Web Project by 313 DEV GRP</description>
 
     <properties>
-        <version.jstree.service.framework>21.04.04</version.jstree.service.framework>
+        <version.jstree.service.framework>21.10.16</version.jstree.service.framework>
     </properties>
 
     <dependencies>
@@ -90,6 +90,12 @@
             <artifactId>jira-rest-java-client-api</artifactId>
             <version>5.1.6</version>
         </dependency>
+        <dependency>
+            <groupId>io.atlassian.fugue</groupId>
+            <artifactId>fugue</artifactId>
+            <version>4.7.2</version>
+        </dependency>
+
 
     </dependencies>
 

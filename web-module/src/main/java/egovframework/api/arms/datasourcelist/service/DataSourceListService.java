@@ -1,9 +1,6 @@
 package egovframework.api.arms.datasourcelist.service;
 
-import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2021-01-09.

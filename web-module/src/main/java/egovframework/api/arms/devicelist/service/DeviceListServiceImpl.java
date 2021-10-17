@@ -1,8 +1,7 @@
 package egovframework.api.arms.devicelist.service;
 
-import egovframework.api.PropertiesReader;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.api.arms.devicelist.vo.DeviceListDTO;
-import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;

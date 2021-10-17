@@ -1,14 +1,10 @@
 package egovframework.api.arms.datasourcelist.service;
 
-import egovframework.api.PropertiesReader;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.api.arms.datasourcelist.batch.DataSourceListConst;
-import egovframework.com.cmm.service.EgovProperties;
-import egovframework.com.cmm.service.Globals;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;

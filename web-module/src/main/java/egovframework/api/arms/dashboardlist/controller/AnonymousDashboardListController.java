@@ -1,7 +1,6 @@
 package egovframework.api.arms.dashboardlist.controller;
 
 import egovframework.api.arms.dashboardlist.service.DashboardListService;
-import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,6 @@ public class AnonymousDashboardListController extends GenericAbstractController 
     @Autowired
     private DashboardListService dashboardListService;
 
-    @IncludedInfo(name = "ARMS Dashboard list API", listUrl = "/api/dashboardlist/getJsTreeView.do", order = 7777, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
     public String getDashboardList() {
         return "egovframework/api/dashboardlist/JsTreeView";

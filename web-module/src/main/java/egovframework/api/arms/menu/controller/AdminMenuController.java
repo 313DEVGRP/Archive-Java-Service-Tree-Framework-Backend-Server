@@ -1,7 +1,7 @@
-package egovframework.api.menu.controller;
+package egovframework.api.arms.menu.controller;
 
-import egovframework.api.menu.service.MenuService;
-import egovframework.api.menu.vo.MenuDTO;
+import egovframework.api.arms.menu.service.MenuService;
+import egovframework.api.arms.menu.vo.MenuDTO;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import org.slf4j.Logger;

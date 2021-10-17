@@ -1,7 +1,6 @@
 package egovframework.api.arms.datasourcelist.controller;
 
 import egovframework.api.arms.datasourcelist.service.DataSourceListService;
-import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,6 @@ public class AnonymousDataSourceListController extends GenericAbstractController
     @Autowired
     private DataSourceListService dataSourceListService;
 
-    @IncludedInfo(name = "ARMS Datasource list API", listUrl = "/api/datasourcelist/getJsTreeView.do", order = 7777, gid = 7313)
     @RequestMapping("/getJsTreeView.do")
     public String getDeviceList() {
         return "egovframework/api/datasourcelist/JsTreeView";

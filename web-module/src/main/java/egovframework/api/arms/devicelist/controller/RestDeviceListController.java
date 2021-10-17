@@ -2,7 +2,6 @@ package egovframework.api.arms.devicelist.controller;
 
 import egovframework.api.arms.devicelist.service.DeviceListService;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
-import egovframework.com.ext.jstree.support.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

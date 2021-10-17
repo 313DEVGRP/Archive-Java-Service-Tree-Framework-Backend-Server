@@ -1,4 +1,4 @@
-package egovframework.api.menu.vo;
+package egovframework.api.arms.menu.vo;
 
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;

@@ -1,8 +1,7 @@
 package egovframework.api.arms.dashboardlist.service;
 
-import egovframework.api.PropertiesReader;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.api.arms.dashboardlist.batch.DashboardListConst;
-import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
