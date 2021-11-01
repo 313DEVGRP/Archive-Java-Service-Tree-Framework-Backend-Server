@@ -246,7 +246,7 @@
                 </executions>
                 <configuration>
                     <noCache>true</noCache>
-                    <repository>313devgrp/jstree-service-framework-backend-app</repository>
+                    <repository>313devgrp/java-service-tree-framework-arms-server</repository>
                     <tag>${project.version}</tag>
                     <!--tag>latest</tag-->
                     <buildArgs>
