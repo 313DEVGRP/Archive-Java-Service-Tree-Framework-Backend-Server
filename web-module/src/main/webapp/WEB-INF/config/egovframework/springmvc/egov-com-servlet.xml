@@ -42,21 +42,6 @@
 		</property>
 	</bean>
 
-	<!-- For Pagination Tag -->
-	<bean id="imageRenderer" class="egovframework.com.ext.jstree.support.ImagePaginationRenderer"/>
-	<bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
-		<property name="rendererType">
-			<map>
-				<entry key="image" value-ref="imageRenderer"/>
-			</map>
-		</property>
-	</bean>
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="webBindingInitializer">
-			<bean class="egovframework.com.ext.jstree.support.EgovBindingInitializer"/>
-		</property>
-	</bean>
-
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="defaultErrorView" value="egovframework/com/cmm/error/egovError"/>
 		<property name="exceptionMappings">
@@ -66,7 +51,6 @@
 				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">egovframework/com/cmm/error/egovBizException</prop>
 				<prop key="org.springframework.web.HttpSessionRequiredException">egovframework/com/cmm/error/EgovLoginUsr</prop>
 				<prop key="egovframework.com.cmm.exception.EgovXssException">egovframework/com/cmm/error/EgovXssException</prop>
-				<prop key="egovframework.com.ext.jstree.support.security.exception.UserAlreadyExistAuthenticationException">egovframework/com/cmm/error/UserAlreadyExistError</prop>
 			</props>
 		</property>
 	</bean>
