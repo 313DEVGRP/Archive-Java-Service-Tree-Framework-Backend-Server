@@ -9,7 +9,7 @@
     <!-- 기본적인 pom Setting -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>313devgrp</groupId>
-    <artifactId>standard-project</artifactId>
+    <artifactId>arms-project</artifactId>
     <version>21.10.10</version>
     <packaging>pom</packaging>
 
