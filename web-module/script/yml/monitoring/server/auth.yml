@@ -2,27 +2,7 @@ version: '3.6'
 
 services:
 
-  authApache:
-    image: httpd:2.4.46
-    ports:
-      - "8094:80"
-    volumes:
-      - authApache:/var/www/html
-      - authApacheConf:/usr/local/apache2/conf
-    deploy: &default-deploy
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: &auth-network
-      - authnetwork
-    logging: &default-logging
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "100m"
-
-  authCrowd:
+  crowd:
     image: atlassian/crowd:4.2.3
     ports:
       - "8095:8095"
@@ -33,92 +13,75 @@ services:
       #- ATL_PROXY_PORT=8094
       #- ATL_TOMCAT_SCHEME=http
     extra_hosts:
-      - "313.co.kr:192.168.25.42"
+      - "313.co.kr:192.168.25.46"
       - "db.313.co.kr:192.168.25.40"
       - "nas.313.co.kr:192.168.25.42"
       - "www.313.co.kr:192.168.25.42"
       - "ubuntu.313.co.kr:192.168.25.46"
     volumes:
-      - authCrowdApp:/var/atlassian/application-data/crowd
-      - authCrowdLib:/opt/atlassian/crowd/apache-tomcat/lib
+      - crowdApp:/var/atlassian/application-data/crowd
+      - crowdLib:/opt/atlassian/crowd/apache-tomcat/lib
       - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     depends_on:
-      - authMysql
-    deploy: *default-deploy
-    networks: *auth-network
-    logging: *default-logging
+      - mysql
+    deploy: &auth-deploy
+      mode: replicated
+      replicas: 1
+    networks: &auth-network
+      - authnetwork
+    logging: &auth-logging
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
 
-# create database keycloak1204db character set utf8 collate utf8_bin;
-# GRANT ALL PRIVILEGES ON keycloak1204db.* TO 'authuser'@'%';
+# create database keycloakdb character set utf8 collate utf8_bin;
+# GRANT ALL PRIVILEGES ON keycloakdb.* TO 'mysqluser'@'%';
+# create database crowddb character set utf8 collate utf8_bin;
+# GRANT ALL PRIVILEGES ON keycloakdb.* TO 'mysqluser'@'%';
 # flush privileges;
-  authKeycloak:
+  keycloak:
     image: jboss/keycloak:12.0.4
     environment:
       - DB_VENDOR=MYSQL
-      - DB_ADDR=authMysql
-      - DB_DATABASE=keycloak1204db
-      - DB_USER=authuser
-      - DB_PASSWORD=authpassword
+      - DB_ADDR=mysql
+      - DB_DATABASE=keycloakdb
+      - DB_USER=mysqluser
+      - DB_PASSWORD=mysqluserpassword
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=qwe123
       - JDBC_PARAMS=serverTimezone=UTC&connectTimeout=30000
     ports:
       - "8585:8080"
     depends_on:
-      - authMysql
-      - authCrowd
+      - mysql
+      - crowd
     volumes:
-      - authKeycloak:/opt/jboss/keycloak/standalone/deployments
-    deploy: *default-deploy
-    networks: *auth-network
-    logging: *default-logging
-
-  authMysql:
-    image: mysql:5.7.32
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_DATABASE=crowd423db
-      - MYSQL_USER=authuser
-      - MYSQL_PASSWORD=authpassword
-      - MYSQL_ROOT_PASSWORD=authrootpass
-      - TZ=Asia/Seoul
-    command:
-      - --lower_case_table_names=1
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - authMysqlData:/var/lib/mysql
-      - authMysqlTmp:/tmp
-      - authMysqlLog:/var/log/mysql
+      - keycloak:/opt/jboss/keycloak/standalone/deployments
+      - keycloakThemes:/opt/jboss/keycloak/themes
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-    deploy: *default-deploy
+    deploy: *auth-deploy
     networks: *auth-network
-    logging: *default-logging
+    logging: *auth-logging
 
   mysql:
     image: mysql:5.7.34
     ports:
-      - "33306:3306"
+      - "3306:3306"
     environment:
-      - MYSQL_DATABASE=crowd423db
-      - MYSQL_USER=authuser
-      - MYSQL_PASSWORD=authpassword
-      - MYSQL_ROOT_PASSWORD=authrootpass
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqluserpassword
+      - MYSQL_ROOT_PASSWORD=mysqlrootpass
       - TZ=Asia/Seoul
-      #- MYSQL_ROOT_PASSWORD_FILE=/run/secrests/mysql_password
-    #secrets:
-    #  - mysql_password
-    #  - mysql_client_auth
     command: >-
       --user=mysql
       --port=3306
       --pid-file=/data/dbfiles/mysql.pid
       --datadir=/data/dbfiles
       --tmpdir=/data/dbfiles
-      --slow_query_log_file=/data/logs/slowlog/slow.log
-      --slow_query_log=on
       --long_query_time=1
       --lc-messages=en_US
       --event_scheduler=1
@@ -196,71 +159,44 @@ services:
       --binlog-ignore-db=sys
       --log_slave_updates=1
     volumes:
-      - defaultMysqlData:/data
+      - mysql:/data
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-    deploy: *default-deploy
+    deploy: *auth-deploy
     networks: *auth-network
-    logging: *default-logging
+    logging: *auth-logging
 
 volumes:
-  authApache:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/auth/apache"
 
-  authApacheConf:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/auth/apacheConf"
-
-  authCrowdApp:
+  crowdApp:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":${NFSPATH:-/nfspath}/auth/crowdApp"
 
-  authCrowdLib:
+  crowdLib:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":${NFSPATH:-/nfspath}/auth/crowdLib"
 
-  authKeycloak:
+  keycloak:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
       device: ":${NFSPATH:-/nfspath}/auth/keycloak"
 
-  authMysqlData:
+  keycloakThemes:
     driver: local
     driver_opts:
       type: "nfs"
       o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/auth/mysqlData"
+      device: ":${NFSPATH:-/nfspath}/auth/keycloakThemes"
 
-  authMysqlTmp:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/auth/mysqlTmp"
-
-  authMysqlLog:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
-      device: ":${NFSPATH:-/nfspath}/auth/mysqlLog"
-
-  defaultMysqlData:
+  mysql:
     driver: local
     driver_opts:
       type: "nfs"

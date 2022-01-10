@@ -18,7 +18,7 @@ public class DashboardListBatch {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Scheduled(fixedDelay=60000*5, initialDelay =30000)
+    //@Scheduled(fixedDelay=60000*5, initialDelay =30000)
     public void updateDashboardList() throws Exception {
 
         Integer updateCount = dashboardListService.updateDashboardToGrafana();

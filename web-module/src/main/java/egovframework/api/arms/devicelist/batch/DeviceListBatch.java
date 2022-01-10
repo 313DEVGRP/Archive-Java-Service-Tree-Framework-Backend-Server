@@ -18,7 +18,7 @@ public class DeviceListBatch {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Scheduled(fixedDelay=60000*5, initialDelay =10000)
+    //@Scheduled(fixedDelay=60000*5, initialDelay =10000)
     public void updateDeviceHost() throws Exception {
 
         Integer updateCount = deviceListService.updateDeviceListToJstree();

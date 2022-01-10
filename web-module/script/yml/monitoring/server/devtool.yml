@@ -38,20 +38,21 @@ services:
     image: 313devgrp/jira:12.14
     ports:
       - "48080:48080"
-    deploy: &default-deploy
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    deploy: &devtool-deploy
       mode: replicated
       replicas: 1
-      placement:
-        constraints: [node.role!=manager]
-    networks: &default-network
+    networks: &devtool-network
       - dev_network
-    extra_hosts: &default-addhost
-      - "313.co.kr:192.168.25.42"
+    extra_hosts: &devtool-addhost
+      - "313.co.kr:192.168.25.46"
       - "db.313.co.kr:192.168.25.40"
       - "nas.313.co.kr:192.168.25.42"
       - "www.313.co.kr:192.168.25.42"
       - "ubuntu.313.co.kr:192.168.25.46"
-    logging: &default-logging
+    logging: &devtool-logging
       driver: "json-file"
       options:
         max-file: "5"
@@ -61,51 +62,98 @@ services:
     image: 313devgrp/confluence:12.14
     ports:
       - "58090:58090"
-    deploy: *default-deploy
-    networks: *default-network
-    extra_hosts: *default-addhost
-    logging: *default-logging
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    deploy: *devtool-deploy
+    networks: *devtool-network
+    extra_hosts: *devtool-addhost
+    logging: *devtool-logging
 
   fecru:
     image: 313devgrp/fecru:13.02
     ports:
       - "8060:8060"
-    deploy: *default-deploy
-    networks: *default-network
-    extra_hosts: *default-addhost
-    logging: *default-logging
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    deploy: *devtool-deploy
+    networks: *devtool-network
+    extra_hosts: *devtool-addhost
+    logging: *devtool-logging
 
   sonar:
     image: 313devgrp/sonar:12.06
     ports:
       - "9090:9000"
-    deploy: *default-deploy
-    networks: *default-network
-    extra_hosts: *default-addhost
-    logging: *default-logging
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    deploy: *devtool-deploy
+    networks: *devtool-network
+    extra_hosts: *devtool-addhost
+    logging: *devtool-logging
 
   jenkins:
-    image: jenkins:2.7.2
+    image: jenkins/jenkins:2.313
     environment:
-      JAVA_OPTS: "-Xms1g -Xmx1g -Dhudson.model.DownloadService.noSignatureCheck=true"
+      JAVA_OPTS: "-Xms4g -Xmx4g -XX:+UseG1GC -Dfile.encoding=UTF-8 -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true"
     ports:
-      - "58080:8080"
+      - "38080:8080"
       - "50000:50000"
     volumes:
-      - jenkinsHome:/var/jenkins_home
-    deploy: *default-deploy
-    networks: *default-network
-    extra_hosts: *default-addhost
-    logging: *default-logging
+      - jenkinsHome:/var/jenkins_home:nocopy
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    deploy: *devtool-deploy
+    networks: *devtool-network
+    extra_hosts: *devtool-addhost
+    logging: *devtool-logging
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - STORAGE_TYPE=elasticsearch
+      # Point the zipkin at the storage backend
+      - "ES_HOSTS=192.168.25.46:9300"
+      # Uncomment to see requests to and from elasticsearch
+      # - ES_HTTP_LOGGING=BODY
+    deploy: *devtool-deploy
+    networks: *devtool-network
+    extra_hosts: *devtool-addhost
+    logging: *devtool-logging
+
+  zipkinDependencies:
+    image: openzipkin/zipkin-dependencies
+    entrypoint: crond -f
+    environment:
+      - STORAGE_TYPE=elasticsearch
+      - "ES_HOSTS=192.168.25.46:9300"
+      - "ES_NODES_WAN_ONLY=true"
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    deploy: *devtool-deploy
+    networks: *devtool-network
+    extra_hosts: *devtool-addhost
+    logging: *devtool-logging
 
   jrebel:
     image: 313devgrp/jrebel:2018.07.12
     ports:
       - "31301:8888"
-    deploy: *default-deploy
-    networks: *default-network
-    extra_hosts: *default-addhost
-    logging: *default-logging
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    deploy: *devtool-deploy
+    networks: *devtool-network
+    extra_hosts: *devtool-addhost
+    logging: *devtool-logging
 
 volumes:
   jenkinsHome:

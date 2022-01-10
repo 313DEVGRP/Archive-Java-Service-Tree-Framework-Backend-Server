@@ -9,11 +9,11 @@
     <!-- 기본적인 pom Setting -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>313devgrp</groupId>
-    <artifactId>arms-project</artifactId>
-    <version>21.10.11</version>
+    <artifactId>java-service-tree-framework-backend-server</artifactId>
+    <version>22.01.11</version>
     <packaging>pom</packaging>
 
-    <name>standard-project</name>
+    <name>java-service-tree-framework</name>
     <description>개발자 포탈 프로젝트 with TSF. by 313 DEV GRP</description>
     <url>http://www.313.co.kr</url>
     <inceptionYear>2011</inceptionYear>
@@ -119,9 +119,10 @@
     <!-- repository Server Setting -->
     <repositories>
         <repository>
-            <id>StandardProject</id>
+            <id>StandardProject-Public</id>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
@@ -129,14 +130,15 @@
             <url>http://www.313.co.kr/nexus/content/groups/public</url>
         </repository>
         <repository>
-            <id>StandardProject-Snapshot</id>
+            <id>StandardProject-Private</id>
             <releases>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </releases>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
-            <url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
+            <url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
         </repository>
         <repository>
             <id>atlassian</id>
@@ -148,14 +150,26 @@
                 <enabled>true</enabled>
             </releases>
             <url>https://m2proxy.atlassian.com/repository/public</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>StandardProject</id>
+            <id>StandardProject-Public</id>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
@@ -163,15 +177,15 @@
             <url>http://www.313.co.kr/nexus/content/groups/public</url>
         </pluginRepository>
         <pluginRepository>
-            <id>StandardProject-Snapshot</id>
+            <id>StandardProject-Private</id>
             <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
             </snapshots>
-            <url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
+            <url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
         </pluginRepository>
         <pluginRepository>
             <id>atlassian</id>
@@ -183,6 +197,17 @@
                 <enabled>true</enabled>
             </releases>
             <url>https://m2proxy.atlassian.com/repository/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>https://repo.maven.apache.org/maven2</url>
         </pluginRepository>
     </pluginRepositories>
 
@@ -197,7 +222,7 @@
         </snapshotRepository>
         <site>
             <id>StandardProject-Site-Public</id>
-            <url>ftp://www.313.co.kr/web/DeveloperPortal/analysis</url>
+            <url>ftp://www.313.co.kr/web/313devgrp/analysis</url>
         </site>
     </distributionManagement>
 

@@ -1,9 +1,5 @@
 package egovframework.com.ext.jstree.support.util;
 
-import egovframework.api.arms.util.PropertiesReader;
-import egovframework.api.arms.dashboardlist.batch.DashboardListConst;
-import egovframework.api.arms.datasourcelist.batch.DataSourceListConst;
-import egovframework.api.arms.devicelist.vo.DeviceListDTO;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -193,75 +189,6 @@ public class Java8LambdaTest {
         System.out.println(filtered);
     }
 
-    @Test
-    public void getJsonObjectFromELKTest() throws ParseException {
-        String orgStr = "{\n" +
-                "    \"took\": 3590,\n" +
-                "    \"timed_out\": false,\n" +
-                "    \"_shards\": {\n" +
-                "        \"total\": 13,\n" +
-                "        \"successful\": 13,\n" +
-                "        \"skipped\": 0,\n" +
-                "        \"failed\": 0\n" +
-                "    },\n" +
-                "    \"hits\": {\n" +
-                "        \"total\": {\n" +
-                "            \"value\": 10000,\n" +
-                "            \"relation\": \"gte\"\n" +
-                "        },\n" +
-                "        \"max_score\": null,\n" +
-                "        \"hits\": []\n" +
-                "    },\n" +
-                "    \"aggregations\": {\n" +
-                "        \"2\": {\n" +
-                "            \"doc_count_error_upper_bound\": 0,\n" +
-                "            \"sum_other_doc_count\": 16619,\n" +
-                "            \"buckets\": [\n" +
-                "                {\n" +
-                "                    \"key\": \"jstree-backend-654b68476c-jrtpg\",\n" +
-                "                    \"doc_count\": 593514\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"key\": \"jstree-backend-68ff5f655c-chckb\",\n" +
-                "                    \"doc_count\": 354578\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"key\": \"5d6951d245a1\",\n" +
-                "                    \"doc_count\": 336206\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"key\": \"jstree-backend-5b5746d7cc-9npd2\",\n" +
-                "                    \"doc_count\": 109625\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"key\": \"1dc3be21a15d\",\n" +
-                "                    \"doc_count\": 7436\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        }\n" +
-                "    }\n" +
-                "}";
-        JSONParser jsonParser = new JSONParser();
-        Object jsonObj = jsonParser.parse( orgStr );
-        JSONObject resultJsonObj = (JSONObject) jsonObj;
-
-        JSONObject filtedJsonObj = (JSONObject) jsonParser.parse( resultJsonObj.get("aggregations").toString() );
-        JSONObject hostJsonObj = (JSONObject) jsonParser.parse( filtedJsonObj.get("2").toString() );
-        JSONArray bucketJsonObjs = (JSONArray) jsonParser.parse( hostJsonObj.get("buckets").toString() );
-
-        ArrayList<DeviceListDTO> deviceListDTOs = new ArrayList<DeviceListDTO>();
-        for (Object bucketJsonObj: bucketJsonObjs) {
-            JSONObject bucketJson = (JSONObject) bucketJsonObj;
-            logger.info(bucketJson.get("key").toString());
-
-            DeviceListDTO deviceListDTO = new DeviceListDTO();
-            deviceListDTO.setC_monitor_device_hostname(bucketJson.get("key").toString());
-            deviceListDTOs.add(deviceListDTO);
-        }
-
-        logger.info("list size = " + deviceListDTOs.size());
-
-    }
 
     @Test
     public void getJsonObjectFromInfluxDBTest() throws ParseException {
@@ -467,86 +394,6 @@ public class Java8LambdaTest {
         }
     }
 
-    //@Test
-    public void putDashboardDataTest() throws ParseException {
-
-        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setReadTimeout(5000); // 읽기시간초과, ms
-        factory.setConnectTimeout(3000); // 연결시간초과, ms
-        HttpClient httpClient = HttpClientBuilder.create()
-                .setMaxConnTotal(100) // connection pool 적용
-                .setMaxConnPerRoute(5) // connection pool 적용
-                .build();
-        factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
-
-        RestTemplate restTemplate = new RestTemplate(factory);
-
-        HttpHeaders headers = createHttpHeaders("admin","qwe123");
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        String postdata = DashboardListConst.DASHBOARD_TEMPLATE;
-
-        HttpEntity<String> request = new HttpEntity<String>(postdata, headers);
-
-        String influxdbBaseUrl = "http://192.168.25.46:3000/api/dashboards/db";
-        String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
-
-        logger.info(returnResultStr);
-
-    }
-
-    //@Test
-    public void putDashboardListTest() throws ParseException, IOException {
-        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
-        String influxdbUrl = propertiesReader.getProperty("allinone.monitoring.influxdb.url");
-        String theUrl = influxdbUrl + "/api/datasources/name/";
-
-        HttpHeaders headers = createHttpHeaders("admin","qwe123");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        String datasourceList = propertiesReader.getProperty("allinone.monitoring.influxdb.datasource");
-        String[] datasourceArray = datasourceList.split(",");
-
-        for (int i = 0; i < datasourceArray.length; i++) {
-            String datasourceUrl = theUrl + datasourceArray[i];
-            logger.info(datasourceUrl);
-            try {
-                ResponseEntity<String> response = restTemplate.exchange(datasourceUrl, HttpMethod.GET, entity, String.class);
-                System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.hasBody());
-
-                logger.info(response.getBody().toString());
-            }
-            catch (Exception eek) {
-                System.out.println("** Exception: "+ eek.getMessage());
-
-                HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-                factory.setReadTimeout(5000); // 읽기시간초과, ms
-                factory.setConnectTimeout(3000); // 연결시간초과, ms
-                HttpClient httpClient = HttpClientBuilder.create()
-                        .setMaxConnTotal(100) // connection pool 적용
-                        .setMaxConnPerRoute(5) // connection pool 적용
-                        .build();
-                factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
-
-                RestTemplate addRestTemplate = new RestTemplate(factory);
-
-                HttpHeaders addHeaders = createHttpHeaders("admin","qwe123");
-                addHeaders.setContentType(MediaType.APPLICATION_JSON);
-
-                String postdata = DataSourceListConst.getDatasourceJson(datasourceArray[i]);
-
-                HttpEntity<String> request = new HttpEntity<String>(postdata, addHeaders);
-
-                String influxdbBaseUrl = influxdbUrl + "/api/datasources";
-                String returnResultStr = addRestTemplate.postForObject( influxdbBaseUrl, request, String.class);
-
-                logger.info(returnResultStr);
-
-            }
-        }
-    }
 
     @Test
     public void containStringTest() throws ParseException {

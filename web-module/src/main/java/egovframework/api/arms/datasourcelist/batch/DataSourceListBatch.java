@@ -18,7 +18,7 @@ public class DataSourceListBatch {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Scheduled(fixedDelay=60000*5, initialDelay =20000)
+    //@Scheduled(fixedDelay=60000*5, initialDelay =20000)
     public void updateDataSourceList() throws Exception {
 
         Integer updateCount = dataSourceListService.updateDatasourceListToGrafana();
