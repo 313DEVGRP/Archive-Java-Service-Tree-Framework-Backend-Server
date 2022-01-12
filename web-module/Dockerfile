@@ -28,14 +28,10 @@ RUN wget http://www.313.co.kr/nexus/content/repositories/StandardProject/313devg
 RUN tar zxvf filebeat-7.4.2-linux-x86_64.tar.gz
 ADD script/yml/monitoring/client/filebeat.yml ./filebeat-7.4.2-linux-x86_64/filebeat.yml
 
-RUN wget http://www.313.co.kr/nexus/content/repositories/StandardProject/313devgrp/scouter/2.8.1/scouter-2.8.1.jar
-RUN mv scouter-2.8.1.jar /usr/local/tomcat/lib/scouter.agent.jar
-ADD script/yml/monitoring/client/scouter-2.8.1.conf /usr/local/tomcat/conf/scouter.conf
-
 RUN wget http://www.313.co.kr/nexus/content/repositories/StandardProject/313devgrp/elastic-apm-agent/1.18.1/elastic-apm-agent-1.18.1.jar
 RUN mv elastic-apm-agent-1.18.1.jar /usr/local/tomcat/lib/elastic-apm-agent.jar
 
-ENV JAVA_OPTS="-Xmx4g -Xms4g -Dspring.profiles.active=live -javaagent:/usr/local/tomcat/lib/scouter.agent.jar -Dscouter.config=/usr/local/tomcat/conf/scouter.conf -Dobj_name=www313cokr -javaagent:/usr/local/tomcat/lib/elastic-apm-agent.jar -Delastic.apm.service_name=www313cokr -Delastic.apm.application_packages=egovframework.api,egovframework.com -Delastic.apm.server_urls=http://192.168.25.46:8200"
+ENV JAVA_OPTS="-Xmx2g -Xms2g -Dspring.profiles.active=live -javaagent:/usr/local/tomcat/lib/elastic-apm-agent.jar -Delastic.apm.service_name=www313cokr -Delastic.apm.application_packages=egovframework -Delastic.apm.server_urls=http://192.168.25.46:8200"
 
 ADD docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
