@@ -141,17 +141,6 @@
             <url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
         </repository>
         <repository>
-            <id>atlassian</id>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://m2proxy.atlassian.com/repository/public</url>
-        </repository>
-        <repository>
             <id>central</id>
             <snapshots>
                 <enabled>true</enabled>
@@ -186,17 +175,6 @@
                 <enabled>false</enabled>
             </snapshots>
             <url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>atlassian</id>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://m2proxy.atlassian.com/repository/public</url>
         </pluginRepository>
         <pluginRepository>
             <id>central</id>
