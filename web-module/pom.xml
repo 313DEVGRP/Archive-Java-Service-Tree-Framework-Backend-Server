@@ -106,6 +106,14 @@
             <artifactId>fugue</artifactId>
             <version>4.7.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.atlassian.util.concurrent/atlassian-util-concurrent -->
+        <dependency>
+            <groupId>io.atlassian.util.concurrent</groupId>
+            <artifactId>atlassian-util-concurrent</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 
