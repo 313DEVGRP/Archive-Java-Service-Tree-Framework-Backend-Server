@@ -20,13 +20,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,6 +41,7 @@ import egovframework.api.arms.module_pdservice.service.PdService;
 
 @Slf4j
 @Controller
+@CrossOrigin(origins = "http://localhost:9999")
 @RequestMapping(value = {"/auth-user/api/arms/pdservice"})
 public class UserPdServiceController extends SHVAbstractController<PdService, PdServiceDTO> {
 
@@ -119,6 +123,28 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         }
 
         return "egovframework/com/utl/wed/EgovInsertImage";
+    }
+
+    @RequestMapping(value="/updateContentsToNode.do", method=RequestMethod.POST)
+    public ModelAndView updateContentsToNode(PdServiceDTO pdServiceDTO,
+                                       BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors())
+            throw new RuntimeException();
+
+// 나중에 jstree core lib 에 넣어서 자동으로 필드 돌아다니며 업데이트 하게하는 업데이트 메소드 구성
+//        for (Field field : pdServiceDTO.getClass().getDeclaredFields()) {
+//            field.setAccessible(true);
+//            Object value = field.get(pdServiceDTO);
+//
+//            if (!ObjectUtils.isEmpty(value)) {
+//                logger.info(field.getName() + "->" + value);
+//            }
+//        }
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", pdService.updateContentsNode(pdServiceDTO));
+
+        return modelAndView;
     }
 
 }
