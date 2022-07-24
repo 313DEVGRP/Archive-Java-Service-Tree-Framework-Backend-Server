@@ -29,8 +29,6 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_ARMS_PDSERVICE", allocationSize = 1)
 public class PdServiceDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
     public PdServiceDTO() {
         super();
     }

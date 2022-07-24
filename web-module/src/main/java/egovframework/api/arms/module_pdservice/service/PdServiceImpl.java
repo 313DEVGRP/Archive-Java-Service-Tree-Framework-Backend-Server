@@ -20,8 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Field;
 
 @Service("pdService")
 public class PdServiceImpl extends JsTreeHibernateServiceImpl implements PdService{
@@ -38,9 +40,24 @@ public class PdServiceImpl extends JsTreeHibernateServiceImpl implements PdServi
 
         jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
         T alterTargetNode = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
-        alterTargetNode.setC_contents(jsTreeHibernateDTO.getC_contents());
+
+        for (Field field : jsTreeHibernateDTO.getClass().getDeclaredFields()) {
+
+            field.setAccessible(true);
+
+            Object value = field.get(jsTreeHibernateDTO);
+
+            if (!ObjectUtils.isEmpty(value)) {
+                field.setAccessible(true);
+                field.set(alterTargetNode, value);
+            }
+
+        }
         jsTreeHibernateDao.update(alterTargetNode);
+
+
         return 1;
+
     }
 
 }
