@@ -131,15 +131,6 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-// 나중에 jstree core lib 에 넣어서 자동으로 필드 돌아다니며 업데이트 하게하는 업데이트 메소드 구성
-//        for (Field field : pdServiceDTO.getClass().getDeclaredFields()) {
-//            field.setAccessible(true);
-//            Object value = field.get(pdServiceDTO);
-//
-//            if (!ObjectUtils.isEmpty(value)) {
-//                logger.info(field.getName() + "->" + value);
-//            }
-//        }
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", pdService.updateContentsNode(pdServiceDTO));
