@@ -52,6 +52,18 @@ public class PdVersionDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_pdservice_link = c_pdservice_link;
     }
 
+    private String c_contents;
+
+    @Lob
+    @Column(name="C_CONTENTS")
+    public String getC_contents() {
+        return c_contents;
+    }
+
+    public void setC_contents(String c_contents) {
+        this.c_contents = c_contents;
+    }
+
     /*
      * Extend Bean Field
      */

@@ -11,6 +11,7 @@
  */
 package egovframework.api.arms.module_pdversion.controller;
 
+import egovframework.api.arms.devicelist.service.DeviceListService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -49,5 +49,17 @@ public class UserPdVersionController extends SHVAbstractController<PdVersion, Pd
     }
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @RequestMapping(value="/getVersion.do",method= RequestMethod.GET)
+    public ModelAndView getNode(PdVersionDTO pdVersionDTO, ModelMap model,
+                                HttpServletRequest request) throws Exception {
+
+        List<PdVersionDTO> pdVersionDTOS = pdVersion.getVersion(pdVersionDTO);
+        logger.info("DeviceList update Count = " + pdVersionDTOS.size());
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", pdVersionDTOS);
+        return modelAndView;
+    }
 
 }
