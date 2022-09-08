@@ -41,9 +41,31 @@ public class PdVersionDTO extends JsTreeHibernateSearchDTO implements Serializab
     }
 
     //@Getter @Setter
-    @Column(name = "c_pdservice_link")
+    private String c_start_date;
+
+    @Column(name = "c_start_date")
+    public String getC_start_date() {
+        return c_start_date;
+    }
+
+    public void setC_start_date(String c_start_date) {
+        this.c_start_date = c_start_date;
+    }
+
+    private String c_end_date;
+
+    @Column(name = "c_end_date")
+    public String getC_end_date() {
+        return c_end_date;
+    }
+
+    public void setC_end_date(String c_end_date) {
+        this.c_end_date = c_end_date;
+    }
+
     private String c_pdservice_link;
 
+    @Column(name = "c_pdservice_link")
     public String getC_pdservice_link() {
         return c_pdservice_link;
     }
