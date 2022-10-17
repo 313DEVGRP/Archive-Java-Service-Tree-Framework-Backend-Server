@@ -248,14 +248,14 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.3.7</version>
                 <executions>
                     <execution>
                         <id>default</id>
-                        <!--<phase>deploy</phase>-->
+                        <phase>release</phase>
                         <goals>
                             <goal>build</goal>
                             <goal>push</goal>
@@ -270,7 +270,7 @@
                         <JAR_FILE>web.war</JAR_FILE>
                     </buildArgs>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
         <pluginManagement>
             <plugins>
