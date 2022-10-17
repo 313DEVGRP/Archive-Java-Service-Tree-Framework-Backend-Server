@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>java-service-tree-framework-backend-server</artifactId>
-        <version>22.07.26</version>
+        <version>22.10.17</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -17,7 +17,7 @@
     <description>Web Project by 313 DEV GRP</description>
 
     <properties>
-        <version.jstree.service.framework>22.07.25</version.jstree.service.framework>
+        <version.jstree.service.framework>22.10.15</version.jstree.service.framework>
     </properties>
 
     <dependencies>
@@ -255,7 +255,7 @@
                 <executions>
                     <execution>
                         <id>default</id>
-                        <phase>deploy</phase>
+                        <!--<phase>deploy</phase>-->
                         <goals>
                             <goal>build</goal>
                             <goal>push</goal>
@@ -266,7 +266,6 @@
                     <noCache>true</noCache>
                     <repository>313devgrp/java-service-tree-framework-backend-server</repository>
                     <tag>${project.version}</tag>
-                    <!--tag>latest</tag-->
                     <buildArgs>
                         <JAR_FILE>web.war</JAR_FILE>
                     </buildArgs>
