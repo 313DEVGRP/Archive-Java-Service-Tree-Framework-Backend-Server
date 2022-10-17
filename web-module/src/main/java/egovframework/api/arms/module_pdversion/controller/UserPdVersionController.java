@@ -12,6 +12,7 @@
 package egovframework.api.arms.module_pdversion.controller;
 
 import egovframework.api.arms.devicelist.service.DeviceListService;
+import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +60,19 @@ public class UserPdVersionController extends SHVAbstractController<PdVersion, Pd
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", pdVersionDTOS);
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/updateVersionNode.do", method=RequestMethod.POST)
+    public ModelAndView updateVersionNode(PdVersionDTO pdVersionDTO,
+                                             BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors())
+            throw new RuntimeException();
+
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", pdVersion.updateVersionNode(pdVersionDTO));
+
         return modelAndView;
     }
 
