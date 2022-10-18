@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>java-service-tree-framework-backend-server</artifactId>
-        <version>22.10.17</version>
+        <version>22.10.18</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -17,7 +17,7 @@
     <description>Web Project by 313 DEV GRP</description>
 
     <properties>
-        <version.jstree.service.framework>22.10.15</version.jstree.service.framework>
+        <version.jstree.service.framework>22.10.17</version.jstree.service.framework>
     </properties>
 
     <dependencies>
