@@ -12,6 +12,7 @@
 package egovframework.api.arms.module_pdservice.service;
 
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
+import egovframework.api.arms.module_pdversion.model.PdVersionDTO;
 import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDao;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+import org.unitils.util.ReflectionUtils;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
@@ -59,5 +61,29 @@ public class PdServiceImpl extends JsTreeHibernateServiceImpl implements PdServi
         return 1;
 
     }
+
+    @Override
+    @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
+    public <T extends PdServiceDTO> int updatePdServiceNode(T jsTreeHibernateDTO) throws Exception {
+        jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
+        T alterTargetNode = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
+
+        for (Field field : ReflectionUtils.getAllFields(jsTreeHibernateDTO.getClass())) {
+
+            field.setAccessible(true);
+
+            Object value = field.get(jsTreeHibernateDTO);
+
+            if (!ObjectUtils.isEmpty(value)) {
+                field.setAccessible(true);
+                field.set(alterTargetNode, value);
+            }
+
+        }
+        jsTreeHibernateDao.update(alterTargetNode);
+
+        return 1;
+    }
+
 
 }

@@ -11,6 +11,7 @@
  */
 package egovframework.api.arms.module_pdservice.controller;
 
+import egovframework.api.arms.module_pdversion.model.PdVersionDTO;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -102,20 +104,20 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/uploadFileToNode.do", method=RequestMethod.POST)
-    public String uploadFileToNode(HttpServletRequest request, Model model) throws Exception {
+    @RequestMapping(value="/uploadFileToNode.do")
+    public String uploadFileToNode(final MultipartHttpServletRequest multiRequest, Model model) throws Exception {
         // Spring multipartResolver 미사용 시 (commons-fileupload 활용)
         //List<EgovFormBasedFileVo> list = EgovFormBasedFileUtil.uploadFiles(request, uploadDir, maxFileSize);
 
         // Spring multipartResolver 사용시
         String uploadDir = "";
         long maxFileSize = new Long(313);
-        List<EgovFormBasedFileVo> list = EgovFileUploadUtil.uploadFiles(request, uploadDir, maxFileSize);
+        List<EgovFormBasedFileVo> list = EgovFileUploadUtil.uploadFiles(multiRequest, uploadDir, maxFileSize);
 
         if (list.size() > 0) {
             EgovFormBasedFileVo vo = list.get(0);    // 첫번째 이미지
 
-            String url = request.getContextPath()
+            String url = multiRequest.getContextPath()
                     + "/utl/web/imageSrc.do?"
                     + "path=" + vo.getServerSubPath()
                     + "&physical=" + vo.getPhysicalName()
@@ -137,6 +139,19 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", pdService.updateContentsNode(pdServiceDTO));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/updatePdServiceNode.do", method=RequestMethod.POST)
+    public ModelAndView updatePdServiceNode(PdServiceDTO pdServiceDTO,
+                                          BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors())
+            throw new RuntimeException();
+
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", pdService.updatePdServiceNode(pdServiceDTO));
 
         return modelAndView;
     }
