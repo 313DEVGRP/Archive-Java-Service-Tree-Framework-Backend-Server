@@ -36,6 +36,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -99,13 +100,14 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     /**
      * 이미지 Upload를 처리한다.
      *
-     * @param request
+     * @param multiRequest
      * @param model
      * @return
      * @throws Exception
      */
+    @ResponseBody
     @RequestMapping(value="/uploadFileToNode.do")
-    public String uploadFileToNode(final MultipartHttpServletRequest multiRequest, Model model) throws Exception {
+    public ModelAndView uploadFileToNode(final MultipartHttpServletRequest multiRequest, Model model) throws Exception {
         // Spring multipartResolver 미사용 시 (commons-fileupload 활용)
         //List<EgovFormBasedFileVo> list = EgovFormBasedFileUtil.uploadFiles(request, uploadDir, maxFileSize);
 
@@ -117,17 +119,21 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         if (list.size() > 0) {
             EgovFormBasedFileVo vo = list.get(0);    // 첫번째 이미지
 
-            String url = multiRequest.getContextPath()
-                    + "/utl/web/imageSrc.do?"
-                    + "path=" + vo.getServerSubPath()
-                    + "&physical=" + vo.getPhysicalName()
-                    + "&contentType=" + vo.getContentType();
+//            String url = multiRequest.getContextPath()
+//                    + "/utl/web/imageSrc.do?"
+//                    + "path=" + vo.getServerSubPath()
+//                    + "&physical=" + vo.getPhysicalName()
+//                    + "&contentType=" + vo.getContentType();
 
             //model.addAttribute("CKEditorFuncNum", request.getParameter("CKEditorFuncNum"));
-            model.addAttribute("url", url);
+            //model.addAttribute("url", url);
         }
+        HashMap<String, List<EgovFormBasedFileVo>> map = new HashMap<String, List<EgovFormBasedFileVo>>();
+        map.put("files", list);
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", map);
 
-        return "egovframework/com/utl/wed/EgovInsertImage";
+        return modelAndView;
     }
 
     @RequestMapping(value="/updateContentsToNode.do", method=RequestMethod.POST)
