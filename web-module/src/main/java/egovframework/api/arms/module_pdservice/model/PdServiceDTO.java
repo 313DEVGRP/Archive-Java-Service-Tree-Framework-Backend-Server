@@ -172,126 +172,17 @@ public class PdServiceDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_writer_date = c_writer_date;
     }
 
-    private String c_filepath;
+    private Long c_fileid_link;
 
-    @Column(name="C_FILEPATH")
-    public String getC_filepath() {
-        return c_filepath;
+    @Column(name="C_FILEID_LINK")
+    public Long getC_fileid_link() {
+        return c_fileid_link;
     }
 
-    public void setC_filepath(String c_filepath) {
-        this.c_filepath = c_filepath;
+    public void setC_fileid_link(Long c_fileid_link) {
+        this.c_fileid_link = c_fileid_link;
     }
 
-    private String c_filename01;
-
-    @Column(name="C_FILENAME01")
-    public String getC_filename01() {
-        return c_filename01;
-    }
-
-    public void setC_filename01(String c_filename01) {
-        this.c_filename01 = c_filename01;
-    }
-
-    private String c_filename02;
-
-    @Column(name="C_FILENAME02")
-    public String getC_filename02() {
-        return c_filename02;
-    }
-
-    public void setC_filename02(String c_filename02) {
-        this.c_filename02 = c_filename02;
-    }
-
-    private String c_filename03;
-
-    @Column(name="C_FILENAME03")
-    public String getC_filename03() {
-        return c_filename03;
-    }
-
-    public void setC_filename03(String c_filename03) {
-        this.c_filename03 = c_filename03;
-    }
-
-    private String c_filename04;
-
-    @Column(name="C_FILENAME04")
-    public String getC_filename04() {
-        return c_filename04;
-    }
-
-    public void setC_filename04(String c_filename04) {
-        this.c_filename04 = c_filename04;
-    }
-
-    private String c_filename05;
-
-    @Column(name="C_FILENAME05")
-    public String getC_filename05() {
-        return c_filename05;
-    }
-
-    public void setC_filename05(String c_filename05) {
-        this.c_filename05 = c_filename05;
-    }
-
-    private String c_filename06;
-
-    @Column(name="C_FILENAME06")
-    public String getC_filename06() {
-        return c_filename06;
-    }
-
-    public void setC_filename06(String c_filename06) {
-        this.c_filename06 = c_filename06;
-    }
-
-    private String c_filename07;
-
-    @Column(name="C_FILENAME07")
-    public String getC_filename07() {
-        return c_filename07;
-    }
-
-    public void setC_filename07(String c_filename07) {
-        this.c_filename07 = c_filename07;
-    }
-
-    private String c_filename08;
-
-    @Column(name="C_FILENAME08")
-    public String getC_filename08() {
-        return c_filename08;
-    }
-
-    public void setC_filename08(String c_filename08) {
-        this.c_filename08 = c_filename08;
-    }
-
-    private String c_filename09;
-
-    @Column(name="C_FILENAME09")
-    public String getC_filename09() {
-        return c_filename09;
-    }
-
-    public void setC_filename09(String c_filename09) {
-        this.c_filename09 = c_filename09;
-    }
-
-    private String c_filename10;
-
-    @Column(name="C_FILENAME10")
-    public String getC_filename10() {
-        return c_filename10;
-    }
-
-    public void setC_filename10(String c_filename10) {
-        this.c_filename10 = c_filename10;
-    }
 
     /*
      * Extend Bean Field

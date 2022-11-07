@@ -127,7 +127,7 @@
 
     <!-- 1hour -->
     <session-config>
-        <session-timeout>60</session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 
     <!--  웹 취약성 대응(PUT, DELETE, TRACE, OPTIONS 메소드 제한) -->

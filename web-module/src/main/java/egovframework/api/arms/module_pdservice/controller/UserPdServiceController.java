@@ -11,8 +11,13 @@
  */
 package egovframework.api.arms.module_pdservice.controller;
 
-import egovframework.api.arms.module_pdversion.model.PdVersionDTO;
-import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
+import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
+import egovframework.api.arms.module_filerepository.service.FileRepository;
+import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
+import egovframework.api.arms.module_pdservice.service.PdService;
+import egovframework.api.arms.util.PropertiesReader;
+import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
+import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
@@ -22,28 +27,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
-
-import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
-import egovframework.api.arms.module_pdservice.service.PdService;
 
 @Slf4j
 @Controller
@@ -54,6 +48,10 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     @Autowired
     @Qualifier("pdService")
     private PdService pdService;
+
+    @Autowired
+    @Qualifier("fileRepository")
+    private FileRepository fileRepository;
 
     @PostConstruct
     public void initialize() {
@@ -107,15 +105,54 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
      */
     @ResponseBody
     @RequestMapping(value="/uploadFileToNode.do")
-    public ModelAndView uploadFileToNode(final MultipartHttpServletRequest multiRequest, Model model) throws Exception {
+    public ModelAndView uploadFileToNode(final MultipartHttpServletRequest multiRequest, @RequestParam("fileIdLink") Long fileIdLink, Model model) throws Exception {
+
+        logger.info("fileIdLink -> " + fileIdLink);
+
         // Spring multipartResolver 미사용 시 (commons-fileupload 활용)
         //List<EgovFormBasedFileVo> list = EgovFormBasedFileUtil.uploadFiles(request, uploadDir, maxFileSize);
 
         // Spring multipartResolver 사용시
-        String uploadDir = "";
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String uploadDir = propertiesReader.getProperty("Globals.fileStorePath");
         long maxFileSize = new Long(313);
         List<EgovFormBasedFileVo> list = EgovFileUploadUtil.uploadFiles(multiRequest, uploadDir, maxFileSize);
 
+        for ( EgovFormBasedFileVo egovFormBasedFileVo : list) {
+
+            FileRepositoryDTO fileRepositoryDTO = new FileRepositoryDTO();
+            fileRepositoryDTO.setFileName(egovFormBasedFileVo.getFileName());
+            fileRepositoryDTO.setContentType(egovFormBasedFileVo.getContentType());
+            fileRepositoryDTO.setServerSubPath(egovFormBasedFileVo.getServerSubPath());
+            fileRepositoryDTO.setPhysicalName(egovFormBasedFileVo.getPhysicalName());
+            fileRepositoryDTO.setSize(egovFormBasedFileVo.getSize());
+            fileRepositoryDTO.setName(egovFormBasedFileVo.getName());
+
+            fileRepositoryDTO.setUrl(egovFormBasedFileVo.getUrl());
+            //TODO: 썸네일 개발 필요
+            fileRepositoryDTO.setThumbnailUrl(egovFormBasedFileVo.getThumbnailUrl());
+
+            fileRepositoryDTO.setDelete_url(egovFormBasedFileVo.getDelete_url());
+            fileRepositoryDTO.setDelete_type(egovFormBasedFileVo.getDelete_type());
+            fileRepositoryDTO.setFileIdLink(fileIdLink);
+
+            fileRepositoryDTO.setRef(new Long(1));
+            fileRepositoryDTO.setC_title("pdService");
+            fileRepositoryDTO.setC_type("default");
+
+            FileRepositoryDTO returnFileRepositoryDTO = fileRepository.addNode(fileRepositoryDTO);
+            //delete 파라미터인 id 값을 업데이트 치기 위해서.
+            fileRepositoryDTO.setUrl("/auth-user/api/arms/fileRepository" + "/downloadFileByNode/" + returnFileRepositoryDTO.getId());
+            fileRepositoryDTO.setThumbnailUrl("/auth-user/api/arms/fileRepository" + "/thumbnailUrlFileToNode/" + returnFileRepositoryDTO.getId());
+            fileRepositoryDTO.setDelete_url("/auth-user/api/arms/fileRepository" + "/deleteFileByNode/" + returnFileRepositoryDTO.getId());
+
+            fileRepository.updateNode(fileRepositoryDTO);
+
+            egovFormBasedFileVo.setUrl("/auth-user/api/arms/fileRepository" + "/downloadFileByNode/" + returnFileRepositoryDTO.getId());
+            egovFormBasedFileVo.setThumbnailUrl("/auth-user/api/arms/fileRepository" + "/thumbnailUrlFileToNode/" + returnFileRepositoryDTO.getId());
+            egovFormBasedFileVo.setDelete_url("/auth-user/api/arms/fileRepository" + "/deleteFileByNode/" + returnFileRepositoryDTO.getId());
+
+        }
         if (list.size() > 0) {
             EgovFormBasedFileVo vo = list.get(0);    // 첫번째 이미지
 
@@ -128,7 +165,7 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
             //model.addAttribute("CKEditorFuncNum", request.getParameter("CKEditorFuncNum"));
             //model.addAttribute("url", url);
         }
-        HashMap<String, List<EgovFormBasedFileVo>> map = new HashMap<String, List<EgovFormBasedFileVo>>();
+        HashMap<String, List<EgovFormBasedFileVo>> map = new HashMap();
         map.put("files", list);
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", map);
@@ -162,4 +199,17 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         return modelAndView;
     }
 
+    // 신규 제품(서비스) 등록시
+    // 1. addNode 하고
+    // 2. 화면에서 받아서 처리 한 후에
+    // 3. 등록된 파일 리스트 등록
+
+    // 제품(서비스) 업데이트 시
+    // 1. alterNode 하고
+    // 2. 화면에서 ok 받으면
+    // 3. 등록된 파일 리스트 등록
+
+    // 제품(서비스) 선택 시
+    // 1. getNode 하고
+    // 2. getFiles 하고
 }
