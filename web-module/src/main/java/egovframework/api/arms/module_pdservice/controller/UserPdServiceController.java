@@ -17,16 +17,18 @@ import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.api.arms.module_pdservice.service.PdService;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
-import egovframework.com.ext.jstree.support.util.ParameterParser;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -199,17 +201,19 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         return modelAndView;
     }
 
-    // 신규 제품(서비스) 등록시
-    // 1. addNode 하고
-    // 2. 화면에서 받아서 처리 한 후에
-    // 3. 등록된 파일 리스트 등록
-
-    // 제품(서비스) 업데이트 시
-    // 1. alterNode 하고
-    // 2. 화면에서 ok 받으면
-    // 3. 등록된 파일 리스트 등록
-
-    // 제품(서비스) 선택 시
-    // 1. getNode 하고
-    // 2. getFiles 하고
+    @ResponseBody
+    @RequestMapping(
+            value = {"/getPdServiceMonitor.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView getPdServiceMonitor(PdServiceDTO pdServiceDTO, ModelMap model, HttpServletRequest request) throws Exception {
+        pdServiceDTO.setOrder(Order.asc("c_id"));
+        List<PdServiceDTO> list = this.pdService.getChildNode(pdServiceDTO);
+        for (PdServiceDTO dto: list) {
+            dto.setC_contents("force empty");
+        }
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
 }
