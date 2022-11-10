@@ -15,9 +15,17 @@ import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.api.arms.module_pdservice.service.PdService;
+import egovframework.api.arms.module_pdversion.model.PdVersionDTO;
+import egovframework.api.arms.module_pdversion.service.PdVersion;
+import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
+import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
+import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
+import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +38,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -55,6 +65,13 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     @Qualifier("fileRepository")
     private FileRepository fileRepository;
 
+    @Autowired
+    @Qualifier("pdVersion")
+    private PdVersion pdVersion;
+
+    @Resource(name = "reqAddSqlMapper")
+    ReqAddSqlMapper reqAddSqlMapper;
+
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(pdService);
@@ -62,9 +79,62 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
     private static final Long ROOT_NODE_ID = new Long(2);
     private static final String NODE_TYPE = new String("default");
+    private static final String REQ_PREFIX_TABLENAME_BY_PDSERVICE = new String("T_ARMS_REQADD_");
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/addPdServiceNode.do"},
+            method = {RequestMethod.POST}
+    )
+    public ModelAndView addNode(@Validated({AddNode.class}) PdServiceDTO pdServiceDTO,
+                                BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException();
+        } else {
+            pdServiceDTO.setC_title(Util_TitleChecker.StringReplace(pdServiceDTO.getC_title()));
+
+            PdServiceDTO addedNode = pdService.addNode(pdServiceDTO);
+
+            //제품(서비스) 생성시 - 요구사항 TABLE 생성
+            ReqAddSqlMaaperDTO reqAddSqlMaaperDTO = new ReqAddSqlMaaperDTO();
+            reqAddSqlMaaperDTO.setC_title(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
+            if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
+                logger.error("already exist JSTF table : " + reqAddSqlMaaperDTO.getC_title());
+            }else{
+                reqAddSqlMapper.ddlExecuteToReqAdd(reqAddSqlMaaperDTO);
+                reqAddSqlMapper.ddlSequenceExecuteToReqAdd(reqAddSqlMaaperDTO);
+                reqAddSqlMapper.dmlExecuteToReqAdd(reqAddSqlMaaperDTO);
+            }
+
+            String C_title_org = reqAddSqlMaaperDTO.getC_title();
+            reqAddSqlMaaperDTO.setC_title(reqAddSqlMaaperDTO.getC_title() + "_LOG");
+            if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
+                logger.error("already exist log table : " + reqAddSqlMaaperDTO.getC_title());
+            }else{
+                reqAddSqlMaaperDTO.setC_title(C_title_org);
+                reqAddSqlMapper.ddlLogExecuteToReqAdd(reqAddSqlMaaperDTO);
+                //reqAddSqlMapper.ddlTriggerLogSqlExecuteToReqAdd(reqAddSqlMaaperDTO);
+            }
+
+            //C_ETC 컬럼에 요구사항 테이블 이름 기입
+            addedNode.setC_etc(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
+            pdService.updateNode(addedNode);
+
+            //Default Version 생성
+            PdVersionDTO pdVersionDTO = new PdVersionDTO();
+            pdVersionDTO.setRef(2L);
+            pdVersionDTO.setC_title("BaseVersion");
+            pdVersionDTO.setC_type("default");
+            pdVersionDTO.setC_pdservice_link(addedNode.getC_id().toString());
+            pdVersion.addNode(pdVersionDTO);
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", addedNode);
+            return modelAndView;
+        }
+    }
 
     @ResponseBody
     @RequestMapping(value = "/addEndNodeByRoot.do", method = RequestMethod.POST)
