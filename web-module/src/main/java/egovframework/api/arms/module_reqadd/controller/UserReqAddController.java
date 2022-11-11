@@ -11,14 +11,13 @@
  */
 package egovframework.api.arms.module_reqadd.controller;
 
-import egovframework.api.arms.module_reqadd.dao.ReqAddSqlMapperDao;
+import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -26,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -53,6 +54,32 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
     }
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"{changeReqTableName}/getChildNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public <V extends ReqAddDTO> ModelAndView
+    getChildNode(@PathVariable(value ="changeReqTableName") String changeReqTableName,
+                 V reqAddDTO, HttpServletRequest request) throws Exception {
+        ParameterParser parser = new ParameterParser(request);
+        if (parser.getInt("c_id") <= 0) {
+            throw new RuntimeException();
+        } else {
+
+            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+
+            reqAddDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
+            List<ReqAddDTO> list = reqAdd.getChildNode(reqAddDTO);
+
+            SessionUtil.removeAttribute("replaceTableName");
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", list);
+            return modelAndView;
+        }
+    }
 
     @ResponseBody
     @RequestMapping(
