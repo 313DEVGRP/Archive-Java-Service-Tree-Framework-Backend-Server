@@ -18,6 +18,9 @@ import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
+import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
+import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -25,6 +28,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,6 +83,32 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", list);
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"{changeReqTableName}/addNode.do"},
+            method = {RequestMethod.POST}
+    )
+    public <V extends JsTreeHibernateSearchDTO> ModelAndView addNode(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
+            @Validated({AddNode.class}) ReqAddDTO reqAddDTO,
+            BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException();
+        } else {
+
+            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+
+            reqAddDTO.setC_title(Util_TitleChecker.StringReplace(reqAddDTO.getC_title()));
+            ReqAddDTO returnNode = reqAdd.addNode(reqAddDTO);
+
+            SessionUtil.removeAttribute("replaceTableName");
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", returnNode);
             return modelAndView;
         }
     }
