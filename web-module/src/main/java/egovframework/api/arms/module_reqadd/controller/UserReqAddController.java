@@ -92,7 +92,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             value = {"{changeReqTableName}/addNode.do"},
             method = {RequestMethod.POST}
     )
-    public <V extends JsTreeHibernateSearchDTO> ModelAndView addNode(
+    public ModelAndView addNode(
             @PathVariable(value ="changeReqTableName") String changeReqTableName,
             @Validated({AddNode.class}) ReqAddDTO reqAddDTO,
             BindingResult bindingResult, ModelMap model) throws Exception {
@@ -118,7 +118,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             value = {"/getTest.do"},
             method = {RequestMethod.GET}
     )
-    public <V extends ReqAddSqlMaaperDTO> ModelAndView getTest(V reqAddSqlMaaperDTO, HttpServletRequest request) throws Exception {
+    public ModelAndView getTest(ReqAddSqlMaaperDTO reqAddSqlMaaperDTO, HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
 
