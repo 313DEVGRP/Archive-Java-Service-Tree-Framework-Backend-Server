@@ -11,11 +11,14 @@
  */
 package egovframework.api.arms.module_reqadd.controller;
 
+import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
+import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
@@ -23,24 +26,26 @@ import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNod
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
+import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -54,6 +59,10 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
     @Resource(name = "reqAddSqlMapper")
     ReqAddSqlMapper reqAddSqlMapper;
+
+    @Autowired
+    @Qualifier("fileRepository")
+    private FileRepository fileRepository;
 
     @PostConstruct
     public void initialize() {
@@ -167,6 +176,74 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             modelAndView.addObject("result", reqAddDTO);
             return modelAndView;
         }
+    }
+
+    /**
+     * 이미지 Upload를 처리한다.
+     *
+     * @param multiRequest
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value="/uploadFileToNode.do")
+    public ModelAndView uploadFileToNode(final MultipartHttpServletRequest multiRequest,
+                                         @RequestParam("fileIdLink") Long fileIdLink,
+                                         @RequestParam("c_title") String c_title,Model model) throws Exception {
+
+        logger.info("fileIdLink -> " + fileIdLink);
+
+        // Spring multipartResolver 미사용 시 (commons-fileupload 활용)
+        //List<EgovFormBasedFileVo> list = EgovFormBasedFileUtil.uploadFiles(request, uploadDir, maxFileSize);
+
+        // Spring multipartResolver 사용시
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String uploadDir = propertiesReader.getProperty("Globals.fileStorePath");
+        long maxFileSize = new Long(313);
+        List<EgovFormBasedFileVo> list = EgovFileUploadUtil.uploadFiles(multiRequest, uploadDir, maxFileSize);
+
+        for ( EgovFormBasedFileVo egovFormBasedFileVo : list) {
+
+            FileRepositoryDTO fileRepositoryDTO = new FileRepositoryDTO();
+            fileRepositoryDTO.setFileName(egovFormBasedFileVo.getFileName());
+            fileRepositoryDTO.setContentType(egovFormBasedFileVo.getContentType());
+            fileRepositoryDTO.setServerSubPath(egovFormBasedFileVo.getServerSubPath());
+            fileRepositoryDTO.setPhysicalName(egovFormBasedFileVo.getPhysicalName());
+            fileRepositoryDTO.setSize(egovFormBasedFileVo.getSize());
+            fileRepositoryDTO.setName(egovFormBasedFileVo.getName());
+
+            fileRepositoryDTO.setUrl(egovFormBasedFileVo.getUrl());
+            //TODO: 썸네일 개발 필요
+            fileRepositoryDTO.setThumbnailUrl(egovFormBasedFileVo.getThumbnailUrl());
+
+            fileRepositoryDTO.setDelete_url(egovFormBasedFileVo.getDelete_url());
+            fileRepositoryDTO.setDelete_type(egovFormBasedFileVo.getDelete_type());
+            fileRepositoryDTO.setFileIdLink(fileIdLink);
+
+            fileRepositoryDTO.setRef(new Long(1));
+            fileRepositoryDTO.setC_title(c_title);
+            fileRepositoryDTO.setC_type("default");
+
+            FileRepositoryDTO returnFileRepositoryDTO = fileRepository.addNode(fileRepositoryDTO);
+            //delete 파라미터인 id 값을 업데이트 치기 위해서.
+            fileRepositoryDTO.setUrl("/auth-user/api/arms/fileRepository" + "/downloadFileByNode/" + returnFileRepositoryDTO.getId());
+            fileRepositoryDTO.setThumbnailUrl("/auth-user/api/arms/fileRepository" + "/thumbnailUrlFileToNode/" + returnFileRepositoryDTO.getId());
+            fileRepositoryDTO.setDelete_url("/auth-user/api/arms/fileRepository" + "/deleteFileByNode/" + returnFileRepositoryDTO.getId());
+
+            fileRepository.updateNode(fileRepositoryDTO);
+
+            egovFormBasedFileVo.setUrl("/auth-user/api/arms/fileRepository" + "/downloadFileByNode/" + returnFileRepositoryDTO.getId());
+            egovFormBasedFileVo.setThumbnailUrl("/auth-user/api/arms/fileRepository" + "/thumbnailUrlFileToNode/" + returnFileRepositoryDTO.getId());
+            egovFormBasedFileVo.setDelete_url("/auth-user/api/arms/fileRepository" + "/deleteFileByNode/" + returnFileRepositoryDTO.getId());
+
+        }
+        HashMap<String, List<EgovFormBasedFileVo>> map = new HashMap();
+        map.put("files", list);
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", map);
+
+        return modelAndView;
     }
 
     @ResponseBody
