@@ -277,48 +277,34 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
     @ResponseBody
     @RequestMapping(
-            value = {"/getTest.do"},
+            value = {"/makeDB.do"},
             method = {RequestMethod.GET}
     )
-    public ModelAndView getSwitchDBTest(ReqAddSqlMaaperDTO reqAddSqlMaaperDTO, HttpServletRequest request) throws Exception {
-
-        ParameterParser parser = new ParameterParser(request);
+    public ModelAndView makeDefaultDB(ReqAddSqlMaaperDTO reqAddSqlMaaperDTO, HttpServletRequest request) throws Exception {
 
         logger.info("UserReqAddController :: getTest :: tableName = " + reqAddSqlMaaperDTO.getC_title());
 
-//        if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
-//            logger.error("already exist JSTF table : " + reqAddSqlMaaperDTO.getC_title());
-//        }else{
-//            reqAddSqlMapper.ddlExecuteToReqAdd(reqAddSqlMaaperDTO);
-//            reqAddSqlMapper.ddlSequenceExecuteToReqAdd(reqAddSqlMaaperDTO);
-//            reqAddSqlMapper.dmlExecuteToReqAdd(reqAddSqlMaaperDTO);
-//        }
-//
-//        String C_title_org = reqAddSqlMaaperDTO.getC_title();
-//        reqAddSqlMaaperDTO.setC_title(reqAddSqlMaaperDTO.getC_title() + "_LOG");
-//        if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
-//            logger.error("already exist log table : " + reqAddSqlMaaperDTO.getC_title());
-//        }else{
-//            reqAddSqlMaaperDTO.setC_title(C_title_org);
-//            reqAddSqlMapper.ddlLogExecuteToReqAdd(reqAddSqlMaaperDTO);
-            //reqAddSqlMapper.ddlTriggerLogSqlExecuteToReqAdd(reqAddSqlMaaperDTO);
-//        }
+        if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
+            logger.error("already exist JSTF table : " + reqAddSqlMaaperDTO.getC_title());
+        }else{
+            reqAddSqlMapper.ddlExecuteToReqAdd(reqAddSqlMaaperDTO);
+            reqAddSqlMapper.ddlSequenceExecuteToReqAdd(reqAddSqlMaaperDTO);
+            reqAddSqlMapper.dmlExecuteToReqAdd(reqAddSqlMaaperDTO);
+        }
 
-        makeTrigger(reqAddSqlMaaperDTO);
+        String C_title_org = reqAddSqlMaaperDTO.getC_title();
+        reqAddSqlMaaperDTO.setC_title(reqAddSqlMaaperDTO.getC_title() + "_LOG");
+        if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
+            logger.error("already exist log table : " + reqAddSqlMaaperDTO.getC_title());
+        }else{
+            reqAddSqlMaaperDTO.setC_title(C_title_org);
+            reqAddSqlMapper.ddlLogExecuteToReqAdd(reqAddSqlMaaperDTO);
+            makeTrigger(reqAddSqlMaaperDTO);
+        }
 
         ModelAndView modelAndView =  new ModelAndView("jsonView");
         modelAndView.addObject("result", "good");
         return modelAndView;
-//        if (parser.getInt("c_id") <= 0) {
-//            throw new RuntimeException();
-//        } else {
-//            SessionUtil.setAttribute("replaceTableName",reqAddDTO.getC_title());
-//            V returnVO = this.reqAdd.getNode(reqAddDTO);
-//            SessionUtil.removeAttribute("replaceTableName");
-//            ModelAndView modelAndView = new ModelAndView("jsonView");
-//            modelAndView.addObject("result", returnVO);
-//            return modelAndView;
-//        }
     }
 
     private void makeTrigger(ReqAddSqlMaaperDTO reqAddSqlMaaperDTO) throws SQLException {
