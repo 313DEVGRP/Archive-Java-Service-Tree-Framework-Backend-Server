@@ -64,12 +64,39 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
     @ResponseBody
     @RequestMapping(
-            value = {"{changeReqTableName}/getChildNode.do"},
+            value = {"/{changeReqTableName}/getNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public <V extends ReqAddDTO> ModelAndView getSwitchDBNode(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName
+            ,V reqAddDTO, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+
+        if (parser.getInt("c_id") <= 0) {
+            throw new RuntimeException();
+        } else {
+
+            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+
+            V returnVO = reqAdd.getNode(reqAddDTO);
+
+            SessionUtil.removeAttribute("replaceTableName");
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", returnVO);
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getChildNode.do"},
             method = {RequestMethod.GET}
     )
     public <V extends ReqAddDTO> ModelAndView
-    getChildNode(@PathVariable(value ="changeReqTableName") String changeReqTableName,
-                 V reqAddDTO, HttpServletRequest request) throws Exception {
+        getSwitchDBChildNode(@PathVariable(value ="changeReqTableName") String changeReqTableName,
+                             ReqAddDTO reqAddDTO, HttpServletRequest request) throws Exception {
         ParameterParser parser = new ParameterParser(request);
         if (parser.getInt("c_id") <= 0) {
             throw new RuntimeException();
@@ -90,10 +117,10 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
     @ResponseBody
     @RequestMapping(
-            value = {"{changeReqTableName}/addNode.do"},
+            value = {"/{changeReqTableName}/addNode.do"},
             method = {RequestMethod.POST}
     )
-    public ModelAndView addNode(
+    public ModelAndView addSwitchDBNode(
             @PathVariable(value ="changeReqTableName") String changeReqTableName,
             @Validated({AddNode.class}) ReqAddDTO reqAddDTO,
             BindingResult bindingResult, ModelMap model) throws Exception {
@@ -117,10 +144,10 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
     @ResponseBody
     @RequestMapping(
-            value = {"{changeReqTableName}/moveNode.do"},
+            value = {"/{changeReqTableName}/moveNode.do"},
             method = {RequestMethod.POST}
     )
-    public ModelAndView moveNode(
+    public ModelAndView moveSwitchDBNode(
             @PathVariable(value ="changeReqTableName") String changeReqTableName,
             @Validated({MoveNode.class}) ReqAddDTO reqAddDTO,
             BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
@@ -147,7 +174,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             value = {"/getTest.do"},
             method = {RequestMethod.GET}
     )
-    public ModelAndView getTest(ReqAddSqlMaaperDTO reqAddSqlMaaperDTO, HttpServletRequest request) throws Exception {
+    public ModelAndView getSwitchDBTest(ReqAddSqlMaaperDTO reqAddSqlMaaperDTO, HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
 
