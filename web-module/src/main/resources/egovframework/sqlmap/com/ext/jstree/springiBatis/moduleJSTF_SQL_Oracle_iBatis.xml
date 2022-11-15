@@ -163,7 +163,7 @@
       COMMENT ON COLUMN $c_title$_LOG.C_DATE IS '노드 변경 시'
     </statement>
 
-    <statement id="ddlTriggerLogSqlExecute" parameterClass="ExtendComprehensiveTree">
+    <update id="ddlTriggerLogSqlExecute" parameterClass="ExtendComprehensiveTree">
         <![CDATA[
             CREATE OR REPLACE TRIGGER "TRIG_$c_title$"
             BEFORE DELETE OR INSERT OR UPDATE
@@ -190,7 +190,7 @@
             END TRIG_$c_title$;
             /
         ]]>
-    </statement>
+    </update>
 
     <select id="isExistTable" parameterClass="ExtendComprehensiveTree" resultClass="int">
         /* getChildCountByParentId */
