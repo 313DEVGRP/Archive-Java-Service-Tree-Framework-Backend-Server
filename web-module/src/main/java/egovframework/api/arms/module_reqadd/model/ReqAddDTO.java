@@ -160,6 +160,17 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_priority = c_priority;
     }
 
+    private String c_req_status;
+
+    @Column(name="C_REQ_STATUS")
+    public String getC_req_status() {
+        return c_req_status;
+    }
+
+    public void setC_req_status(String c_req_status) {
+        this.c_req_status = c_req_status;
+    }
+
     // 요구사항 제목은 c_title 로.
 
     private String c_contents;

@@ -20,6 +20,7 @@ import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractC
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import lombok.extern.slf4j.Slf4j;
@@ -96,6 +97,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             @PathVariable(value ="changeReqTableName") String changeReqTableName,
             @Validated({AddNode.class}) ReqAddDTO reqAddDTO,
             BindingResult bindingResult, ModelMap model) throws Exception {
+
         if (bindingResult.hasErrors()) {
             throw new RuntimeException();
         } else {
@@ -109,6 +111,33 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", returnNode);
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"{changeReqTableName}/moveNode.do"},
+            method = {RequestMethod.POST}
+    )
+    public ModelAndView moveNode(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
+            @Validated({MoveNode.class}) ReqAddDTO reqAddDTO,
+            BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException();
+        } else {
+
+            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+
+            this.reqAdd.moveNode(reqAddDTO, request);
+            super.setJsonDefaultSetting(reqAddDTO);
+
+            SessionUtil.removeAttribute("replaceTableName");
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", reqAddDTO);
             return modelAndView;
         }
     }
