@@ -29,6 +29,7 @@ import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,27 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
     }
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getMonitor.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView getMonitor(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
+            ReqAddDTO reqAddDTO, ModelMap model, HttpServletRequest request) throws Exception {
+
+        SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+
+        reqAddDTO.setOrder(Order.asc("c_left"));
+        List<ReqAddDTO> list = this.reqAdd.getChildNode(reqAddDTO);
+
+        SessionUtil.removeAttribute("replaceTableName");
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
 
     @ResponseBody
     @RequestMapping(
