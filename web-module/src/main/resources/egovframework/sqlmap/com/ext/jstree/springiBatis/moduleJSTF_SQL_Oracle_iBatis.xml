@@ -27,7 +27,8 @@
             C_WRITER_DATE VARCHAR2(4000 BYTE),
             C_PRIORITY NUMBER,
             C_CONTENTS CLOB,
-        CONSTRAINT $c_title$_PK PRIMARY KEY (C_ID)
+            C_REQ_STATUS VARCHAR2(4000 BYTE),
+            CONSTRAINT $c_title$_PK PRIMARY KEY (C_ID)
         /*
         * CONSTRAINT T_ARMS_REQADD_FK1 FOREIGN KEY (OTHER_ID) REFERENCES OTHER T_ARMS_REQADD(C_ID) ON DELETE CASCADE
         */)
@@ -121,7 +122,8 @@
             C_WRITER_CN VARCHAR2(4000 BYTE),
             C_WRITER_DATE VARCHAR2(4000 BYTE),
             C_PRIORITY NUMBER,
-            C_CONTENTS CLOB
+            C_CONTENTS CLOB,
+            C_REQ_STATUS VARCHAR2(4000 BYTE)
         )
     </statement>
     <statement id="ddlLogSqlExecute_comment_1" parameterClass="ExtendComprehensiveTree">
