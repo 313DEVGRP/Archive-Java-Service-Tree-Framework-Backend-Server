@@ -13,7 +13,6 @@ package egovframework.api.arms.module_reqadd.controller;
 
 import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
-import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
@@ -24,12 +23,13 @@ import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil
 import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +142,38 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             reqAddDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
             List<ReqAddDTO> list = reqAdd.getChildNode(reqAddDTO);
 
+            SessionUtil.removeAttribute("replaceTableName");
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", list);
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getChildNodeWithParent.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView
+    getSwitchDBChildNodeWithParent(@PathVariable(value ="changeReqTableName") String changeReqTableName,
+                                   ReqAddDTO reqAddDTO, HttpServletRequest request) throws Exception {
+        ParameterParser parser = new ParameterParser(request);
+        if (parser.getInt("c_id") <= 0) {
+            throw new RuntimeException();
+        } else {
+
+            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+
+            //쿼리
+            Criterion criterion1 = Restrictions.ge("c_left", reqAddDTO.getC_left());
+            Criterion criterion2 = Restrictions.and(Restrictions.le("c_right", reqAddDTO.getC_right()));
+            reqAddDTO.getCriterions().add(criterion1);
+            reqAddDTO.getCriterions().add(criterion2);
+            reqAddDTO.setOrder(Order.asc("c_left"));
+            reqAddDTO.setC_id(null);
+
+            List<ReqAddDTO> list = reqAdd.getChildNode(reqAddDTO);
             SessionUtil.removeAttribute("replaceTableName");
 
             ModelAndView modelAndView = new ModelAndView("jsonView");

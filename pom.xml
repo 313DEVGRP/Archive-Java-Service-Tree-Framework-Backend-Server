@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>313devgrp</groupId>
     <artifactId>java-service-tree-framework-backend-server</artifactId>
-    <version>22.11.15</version>
+    <version>22.11.17</version>
     <packaging>pom</packaging>
 
     <name>java-service-tree-framework</name>
