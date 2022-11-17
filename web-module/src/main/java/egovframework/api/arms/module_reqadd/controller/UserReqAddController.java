@@ -13,6 +13,7 @@ package egovframework.api.arms.module_reqadd.controller;
 
 import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
+import egovframework.api.arms.module_pdserviceconnect.model.PdServiceConnectDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
@@ -23,7 +24,9 @@ import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil
 import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
+import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
@@ -115,6 +118,11 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             SessionUtil.setAttribute("replaceTableName",changeReqTableName);
 
             V returnVO = reqAdd.getNode(reqAddDTO);
+            if(StringUtils.isNotEmpty(returnVO.getC_version_Link())) {
+                String replaceTxt = returnVO.getC_version_Link().replaceAll("\\[", "").replaceAll("\\]", "");
+                replaceTxt = replaceTxt.replaceAll("\"", "");
+                returnVO.setC_version_Link(replaceTxt);
+            }
 
             SessionUtil.removeAttribute("replaceTableName");
 
@@ -205,6 +213,27 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", returnNode);
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping({"/{changeReqTableName}/updateNode.do"})
+    public ModelAndView updateNode(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
+            @Validated({UpdateNode.class}) ReqAddDTO reqAddDTO,
+            BindingResult bindingResult, HttpServletRequest request, ModelMap model) throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException();
+        } else {
+            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", this.reqAdd.updateNode(reqAddDTO));
+
+            SessionUtil.removeAttribute("replaceTableName");
+
             return modelAndView;
         }
     }
