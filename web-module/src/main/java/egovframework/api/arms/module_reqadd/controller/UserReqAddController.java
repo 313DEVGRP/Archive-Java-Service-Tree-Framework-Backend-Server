@@ -400,18 +400,18 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                 "BEGIN\n" +
                 "  tmpVar := 0;\n" +
                 "   IF UPDATING  THEN    \n" +
-                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        \n" +
-                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   \n" +
+                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
+                "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate,old.C_PDSERVICE_LINK,old.C_VERSION_LINK,old.C_REVIEWER01,old.C_REVIEWER02,old.C_REVIEWER03,old.C_REVIEWER04,old.C_REVIEWER05,old.C_WRITER_NAME,old.C_WRITER_CN,old.C_WRITER_DATE,old.C_PRIORITY,old.C_CONTENTS,old.C_REQ_STATUS);\n" +
+                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
+                "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate,new.C_PDSERVICE_LINK,new.C_VERSION_LINK,new.C_REVIEWER01,new.C_REVIEWER02,new.C_REVIEWER03,new.C_REVIEWER04,new.C_REVIEWER05,new.C_WRITER_NAME,new.C_WRITER_CN,new.C_WRITER_DATE,new.C_PRIORITY,new.C_CONTENTS,new.C_REQ_STATUS);\n" +
                 "    END IF;\n" +
                 "   IF DELETING THEN\n" +
-                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);\n" +
+                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
+                "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate,old.C_PDSERVICE_LINK,old.C_VERSION_LINK,old.C_REVIEWER01,old.C_REVIEWER02,old.C_REVIEWER03,old.C_REVIEWER04,old.C_REVIEWER05,old.C_WRITER_NAME,old.C_WRITER_CN,old.C_WRITER_DATE,old.C_PRIORITY,old.C_CONTENTS,old.C_REQ_STATUS);\n" +
                 "   END IF;   \n" +
                 "   IF INSERTING  THEN\n" +
-                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);\n" +
+                "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
+                "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate,new.C_PDSERVICE_LINK,new.C_VERSION_LINK,new.C_REVIEWER01,new.C_REVIEWER02,new.C_REVIEWER03,new.C_REVIEWER04,new.C_REVIEWER05,new.C_WRITER_NAME,new.C_WRITER_CN,new.C_WRITER_DATE,new.C_PRIORITY,new.C_CONTENTS,new.C_REQ_STATUS);\n" +
                 "   END IF;\n" +
                 " \n" +
                 "  EXCEPTION\n" +
