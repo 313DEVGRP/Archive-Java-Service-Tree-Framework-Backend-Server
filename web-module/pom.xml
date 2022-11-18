@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>java-service-tree-framework-backend-server</artifactId>
-        <version>22.11.17</version>
+        <version>22.11.18</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -265,8 +265,7 @@
                 <configuration>
                     <noCache>true</noCache>
                     <repository>313devgrp/java-service-tree-framework-backend-server</repository>
-                    <tag>latest</tag>
-                    <!--<tag>${project.version}</tag>-->
+                    <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>web.war</JAR_FILE>
                     </buildArgs>
