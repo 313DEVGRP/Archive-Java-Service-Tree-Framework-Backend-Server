@@ -50,11 +50,6 @@ public class ReqAddSqlMapperDaoImpl extends CoreDaoImpl implements ReqAddSqlMapp
         update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogSqlExecute_comment_9", comprehensiveTree);
     }
 
-    @Override
-    public <T extends ComprehensiveTree> void ddlTriggerLogExecute(T comprehensiveTree) throws Exception {
-        update(comprehensiveTree.getSqlMapSelector() + "." + "ddlTriggerLogSqlExecute", comprehensiveTree);
-    }
-
     public <T extends ComprehensiveTree> int isExistTable( T comprehensiveTree ) throws Exception{
         return (int) getSqlMapClientTemplate().queryForObject(
                 comprehensiveTree.getSqlMapSelector() + ".isExistTable", comprehensiveTree);

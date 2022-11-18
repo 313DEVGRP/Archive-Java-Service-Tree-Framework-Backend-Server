@@ -43,11 +43,6 @@ public class ReqAddSqlMapperImpl extends CoreServiceImpl implements ReqAddSqlMap
     }
 
     @Override
-    public <T extends ComprehensiveTree> void ddlTriggerLogSqlExecuteToReqAdd(T comprehensiveTree) throws Exception {
-        reqAddSqlMapperDao.ddlTriggerLogExecute(comprehensiveTree);
-    }
-
-    @Override
     public <T extends ComprehensiveTree> int isExistTable(T comprehensiveTree) throws Exception {
         return reqAddSqlMapperDao.isExistTable(comprehensiveTree);
     }

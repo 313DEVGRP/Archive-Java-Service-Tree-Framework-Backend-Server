@@ -163,35 +163,6 @@
       COMMENT ON COLUMN $c_title$_LOG.C_DATE IS '노드 변경 시'
     </statement>
 
-    <update id="ddlTriggerLogSqlExecute" parameterClass="ExtendComprehensiveTree">
-        <![CDATA[
-            CREATE OR REPLACE TRIGGER "TRIG_$c_title$"
-            BEFORE DELETE OR INSERT OR UPDATE
-            ON $c_title$ REFERENCING NEW AS NEW OLD AS OLD
-            FOR EACH ROW
-            DECLARE
-            tmpVar NUMBER;
-            BEGIN
-            tmpVar := 0;
-            IF UPDATING THEN
-            insert into $c_title$_LOG values (:OLD.C_ID,:OLD.C_PARENTID,:OLD.C_POSITION,:OLD.C_LEFT,:OLD.C_RIGHT,:OLD.C_LEVEL,:OLD.C_TITLE,:OLD.C_TYPE,'update','before',sysdate);
-            insert into $c_title$_LOG values (:NEW.C_ID,:NEW.C_PARENTID,:NEW.C_POSITION,:NEW.C_LEFT,:NEW.C_RIGHT,:NEW.C_LEVEL,:NEW.C_TITLE,:NEW.C_TYPE,'update','after',sysdate);
-            END IF;
-            IF DELETING THEN
-            insert into $c_title$_LOG values (:OLD.C_ID,:OLD.C_PARENTID,:OLD.C_POSITION,:OLD.C_LEFT,:OLD.C_RIGHT,:OLD.C_LEVEL,:OLD.C_TITLE,:OLD.C_TYPE,'delete','deletedData',sysdate);
-            END IF;
-            IF INSERTING THEN
-            insert into $c_title$_LOG values (:NEW.C_ID,:NEW.C_PARENTID,:NEW.C_POSITION,:NEW.C_LEFT,:NEW.C_RIGHT,:NEW.C_LEVEL,:NEW.C_TITLE,:NEW.C_TYPE,'insert','insertedData',sysdate);
-            END IF;
-
-            EXCEPTION
-            WHEN OTHERS THEN
-            RAISE;
-            END TRIG_$c_title$;
-            /
-        ]]>
-    </update>
-
     <select id="isExistTable" parameterClass="ExtendComprehensiveTree" resultClass="int">
         /* getChildCountByParentId */
         select count(*) from all_tables where table_name = #c_title#

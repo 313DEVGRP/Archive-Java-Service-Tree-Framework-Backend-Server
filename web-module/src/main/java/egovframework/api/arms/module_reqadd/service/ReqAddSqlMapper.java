@@ -13,7 +13,5 @@ public interface ReqAddSqlMapper extends CoreService {
 
     public <T extends ComprehensiveTree> void ddlLogExecuteToReqAdd(T comprehensiveTree) throws Exception;
 
-    public <T extends ComprehensiveTree> void ddlTriggerLogSqlExecuteToReqAdd(T comprehensiveTree) throws Exception;
-
     public <T extends ComprehensiveTree> int isExistTable(T comprehensiveTree) throws Exception;
 }
