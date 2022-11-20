@@ -12,9 +12,14 @@
 package egovframework.api.arms.module_reqadd.service;
 
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
+
+import javax.servlet.http.HttpServletRequest;
 
 public interface ReqAdd extends JsTreeHibernateService {
 
+    public <T extends JsTreeHibernateSearchDTO> T addNodeToSwitchTable(T jsTreeHibernateDTO, T refNode) throws Exception;
 
+    public <T extends JsTreeHibernateSearchDTO> T moveNodeToSwitchTable(T jsTreeHibernateDTO, T refNode , HttpServletRequest request) throws Exception;
 
 }

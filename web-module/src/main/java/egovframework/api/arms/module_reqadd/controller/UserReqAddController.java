@@ -88,12 +88,12 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             @PathVariable(value ="changeReqTableName") String changeReqTableName,
             ReqAddDTO reqAddDTO, ModelMap model, HttpServletRequest request) throws Exception {
 
-        SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+        SessionUtil.setAttribute("getMonitor",changeReqTableName);
 
         reqAddDTO.setOrder(Order.asc("c_left"));
         List<ReqAddDTO> list = this.reqAdd.getChildNode(reqAddDTO);
 
-        SessionUtil.removeAttribute("replaceTableName");
+        SessionUtil.removeAttribute("getMonitor");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
@@ -115,7 +115,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             throw new RuntimeException();
         } else {
 
-            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+            SessionUtil.setAttribute("getNode",changeReqTableName);
 
             V returnVO = reqAdd.getNode(reqAddDTO);
             if(StringUtils.isNotEmpty(returnVO.getC_version_Link())) {
@@ -124,7 +124,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                 returnVO.setC_version_Link(replaceTxt);
             }
 
-            SessionUtil.removeAttribute("replaceTableName");
+            SessionUtil.removeAttribute("getNode");
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", returnVO);
@@ -145,12 +145,12 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             throw new RuntimeException();
         } else {
 
-            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+            SessionUtil.setAttribute("getChildNode",changeReqTableName);
 
             reqAddDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
             List<ReqAddDTO> list = reqAdd.getChildNode(reqAddDTO);
 
-            SessionUtil.removeAttribute("replaceTableName");
+            SessionUtil.removeAttribute("getChildNode");
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", list);
@@ -171,7 +171,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             throw new RuntimeException();
         } else {
 
-            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+            SessionUtil.setAttribute("getChildNodeWithParent",changeReqTableName);
 
             //쿼리
             Criterion criterion1 = Restrictions.ge("c_left", reqAddDTO.getC_left());
@@ -182,7 +182,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             reqAddDTO.setC_id(null);
 
             List<ReqAddDTO> list = reqAdd.getChildNode(reqAddDTO);
-            SessionUtil.removeAttribute("replaceTableName");
+            SessionUtil.removeAttribute("getChildNodeWithParent");
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", list);
@@ -204,12 +204,15 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             throw new RuntimeException();
         } else {
 
-            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+            SessionUtil.setAttribute("addNode",changeReqTableName);
 
-            reqAddDTO.setC_title(Util_TitleChecker.StringReplace(reqAddDTO.getC_title()));
-            ReqAddDTO returnNode = reqAdd.addNode(reqAddDTO);
+            ReqAddDTO refReqAddDTO = new ReqAddDTO();
+            refReqAddDTO.setC_id(reqAddDTO.getRef());
+            ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
 
-            SessionUtil.removeAttribute("replaceTableName");
+            ReqAddDTO returnNode = reqAdd.addNodeToSwitchTable(reqAddDTO, nodeByRef);
+
+            SessionUtil.removeAttribute("addNode");
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", returnNode);
@@ -227,12 +230,12 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         if (bindingResult.hasErrors()) {
             throw new RuntimeException();
         } else {
-            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+            SessionUtil.setAttribute("updateNode",changeReqTableName);
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", this.reqAdd.updateNode(reqAddDTO));
 
-            SessionUtil.removeAttribute("replaceTableName");
+            SessionUtil.removeAttribute("updateNode");
 
             return modelAndView;
         }
@@ -252,12 +255,16 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             throw new RuntimeException();
         } else {
 
-            SessionUtil.setAttribute("replaceTableName",changeReqTableName);
+            SessionUtil.setAttribute("moveNode",changeReqTableName);
 
-            this.reqAdd.moveNode(reqAddDTO, request);
+            ReqAddDTO refReqAddDTO = new ReqAddDTO();
+            refReqAddDTO.setC_id(reqAddDTO.getRef());
+            ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
+
+            this.reqAdd.moveNodeToSwitchTable(reqAddDTO, nodeByRef, request);
             super.setJsonDefaultSetting(reqAddDTO);
 
-            SessionUtil.removeAttribute("replaceTableName");
+            SessionUtil.removeAttribute("moveNode");
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", reqAddDTO);
