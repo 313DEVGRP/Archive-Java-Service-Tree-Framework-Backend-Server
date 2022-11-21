@@ -193,7 +193,7 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
             fileRepositoryDTO.setDelete_type(egovFormBasedFileVo.getDelete_type());
             fileRepositoryDTO.setFileIdLink(fileIdLink);
 
-            fileRepositoryDTO.setRef(new Long(1));
+            fileRepositoryDTO.setRef(new Long(2));
             fileRepositoryDTO.setC_title("pdService");
             fileRepositoryDTO.setC_type("default");
 
