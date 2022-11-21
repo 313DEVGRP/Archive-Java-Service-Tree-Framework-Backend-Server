@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_ARMS_PDSERVICECONNECT", allocationSize = 1)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDSERVICECONNECT", allocationSize = 1)
 public class PdServiceConnectDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
     public PdServiceConnectDTO() {
@@ -39,10 +39,19 @@ public class PdServiceConnectDTO extends JsTreeHibernateSearchDTO implements Ser
     }
 
     //@Getter @Setter
+    @Lob
+    @Column(name="c_contents")
     private String c_contents;
 
-    @Lob
-    @Column(name="C_CONTENTS")
+    @Column(name="c_pdservice_id")
+    private String c_pdservice_id;
+
+    @Column(name="c_pdservice_version_id")
+    private String c_pdservice_version_id;
+
+    @Column(name="c_pdservice_jira_ids")
+    private String c_pdservice_jira_ids;
+
     public String getC_contents() {
         return c_contents;
     }
@@ -51,11 +60,6 @@ public class PdServiceConnectDTO extends JsTreeHibernateSearchDTO implements Ser
         this.c_contents = c_contents;
     }
 
-    private String c_pdservice_id;
-    private String c_pdservice_version_id;
-    private String c_pdservice_jira_ids;
-
-    @Column(name="C_PDSERVICE_ID")
     public String getC_pdservice_id() {
         return c_pdservice_id;
     }
@@ -64,7 +68,6 @@ public class PdServiceConnectDTO extends JsTreeHibernateSearchDTO implements Ser
         this.c_pdservice_id = c_pdservice_id;
     }
 
-    @Column(name="C_PDSERVICE_VERSION_ID")
     public String getC_pdservice_version_id() {
         return c_pdservice_version_id;
     }
@@ -73,7 +76,6 @@ public class PdServiceConnectDTO extends JsTreeHibernateSearchDTO implements Ser
         this.c_pdservice_version_id = c_pdservice_version_id;
     }
 
-    @Column(name="C_PDSERVICE_JIRA_IDS")
     public String getC_pdservice_jira_ids() {
         return c_pdservice_jira_ids;
     }

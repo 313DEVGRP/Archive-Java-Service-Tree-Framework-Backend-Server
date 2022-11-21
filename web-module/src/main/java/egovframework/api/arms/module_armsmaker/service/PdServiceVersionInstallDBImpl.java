@@ -1,8 +1,6 @@
 package egovframework.api.arms.module_armsmaker.service;
 
 import egovframework.api.arms.module_armsmaker.dao.ArmsInstallSqlMapperDao;
-import egovframework.api.arms.module_armsmaker.model.ArmsInstallDB_SqlMaaperDTO;
-import egovframework.api.arms.module_reqadd.dao.ReqAddSqlMapperDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreServiceImpl;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import org.slf4j.Logger;
@@ -28,12 +26,7 @@ public class PdServiceVersionInstallDBImpl extends CoreServiceImpl implements Ar
     @Resource(name = "armsInstallSqlMapperDao")
     ArmsInstallSqlMapperDao armsInstallSqlMapperDao;
 
-    public void sqlMapExecute() throws Exception {
-
-        ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
-
-        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_PDSERVICEVERSION");
-        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-pdserviceversion");
+    public void sqlMapExecute(ComprehensiveTree armsInstallDB_sqlMaaperDTO) throws Exception {
 
         if(this.isExist_aRMS_DB(armsInstallDB_sqlMaaperDTO) == 1){
             logger.error("already exist JSTF table : " + armsInstallDB_sqlMaaperDTO.getC_title());
@@ -55,6 +48,11 @@ public class PdServiceVersionInstallDBImpl extends CoreServiceImpl implements Ar
     }
 
     private void makeTrigger(ComprehensiveTree comprehensiveTree) throws SQLException {
+
+        String addColums =",c_start_date,c_end_date,c_pdservice_link,c_contents";
+        String addOldColums =",:old.c_start_date,:old.c_end_date,:old.c_pdservice_link,:old.c_contents";
+        String addNewColums =",:new.c_start_date,:new.c_end_date,:new.c_pdservice_link,:new.c_contents";
+
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         String sql =
@@ -86,18 +84,18 @@ public class PdServiceVersionInstallDBImpl extends CoreServiceImpl implements Ar
                         "BEGIN\n" +
                         "  tmpVar := 0;\n" +
                         "   IF UPDATING  THEN    \n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_CONTENTS,C_START_DATE,C_END_DATE)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate,:old.C_PDSERVICE_LINK,:old.C_CONTENTS,:old.C_START_DATE,:old.C_END_DATE)\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_CONTENTS,C_START_DATE,C_END_DATE)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate,:new.C_PDSERVICE_LINK,:new.C_CONTENTS,:new.C_START_DATE,:new.C_END_DATE)\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate" + addOldColums + ");\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate" + addNewColums + ");\n" +
                         "    END IF;\n" +
                         "   IF DELETING THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_CONTENTS,C_START_DATE ,C_END_DATE)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate,:old.C_PDSERVICE_LINK,:old.C_CONTENTS,:old.C_START_DATE,:old.C_END_DATE)\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate" + addOldColums + ");\n" +
                         "   END IF;   \n" +
                         "   IF INSERTING  THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_CONTENTS,C_START_DATE ,C_END_DATE)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate,:new.C_PDSERVICE_LINK,:new.C_CONTENTS,:new.C_START_DATE,:new.C_END_DATE)\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate" + addNewColums + ");\n" +
                         "   END IF;\n" +
                         " \n" +
                         "  EXCEPTION\n" +

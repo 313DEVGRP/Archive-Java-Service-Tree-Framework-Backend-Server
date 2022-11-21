@@ -41,10 +41,56 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
     }
 
     //@Getter @Setter
-
+    @Column(name="c_method")
     private String c_method;
 
-    @Column(name="C_METHOD")
+    @Column(name="c_state")
+    private String c_state;
+
+    @Column(name="c_date")
+    private Date c_date;
+
+    @Column(name="c_pdService_Link")
+    private Long c_pdService_Link;
+
+    @Column(name="C_VERSION_LINK")
+    private String c_version_Link;
+
+    @Column(name="C_REVIEWER01")
+    private String c_reviewer01;
+
+    @Column(name="C_REVIEWER02")
+    private String c_reviewer02;
+
+    @Column(name="C_REVIEWER03")
+    private String c_reviewer03;
+
+    @Column(name="C_REVIEWER04")
+    private String c_reviewer04;
+
+    @Column(name="C_REVIEWER05")
+    private String c_reviewer05;
+
+    @Column(name="C_WRITER_NAME")
+    private String c_writer_name;
+
+    @Column(name="C_WRITER_CN")
+    private String c_writer_cn;
+
+    @Column(name="C_WRITER_DATE")
+    private String c_writer_date;
+
+    @Column(name="C_PRIORITY")
+    private Long c_priority;
+
+    @Column(name="C_REQ_STATUS")
+    private String c_req_status;
+
+    // 요구사항 제목은 c_title 로.
+    @Lob
+    @Column(name="c_contents")
+    private String c_contents;
+
     public String getC_method() {
         return c_method;
     }
@@ -53,9 +99,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_method = c_method;
     }
 
-    private String c_state;
-
-    @Column(name="C_STATE")
     public String getC_state() {
         return c_state;
     }
@@ -64,9 +107,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_state = c_state;
     }
 
-    private Date c_date;
-
-    @Column(name="C_DATE")
     public Date getC_date() {
         return c_date;
     }
@@ -75,9 +115,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_date = c_date;
     }
 
-    private Long c_pdService_Link;
-
-    @Column(name="C_PDSERVICE_LINK")
     public Long getC_pdService_Link() {
         return c_pdService_Link;
     }
@@ -86,9 +123,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_pdService_Link = c_pdService_Link;
     }
 
-    private String c_version_Link;
-
-    @Column(name="C_VERSION_LINK")
     public String getC_version_Link() {
         return c_version_Link;
     }
@@ -97,9 +131,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_version_Link = c_version_Link;
     }
 
-    private String c_reviewer01;
-
-    @Column(name="C_REVIEWER01")
     public String getC_reviewer01() {
         return c_reviewer01;
     }
@@ -108,9 +139,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_reviewer01 = c_reviewer01;
     }
 
-    private String c_reviewer02;
-
-    @Column(name="C_REVIEWER02")
     public String getC_reviewer02() {
         return c_reviewer02;
     }
@@ -119,9 +147,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_reviewer02 = c_reviewer02;
     }
 
-    private String c_reviewer03;
-
-    @Column(name="C_REVIEWER03")
     public String getC_reviewer03() {
         return c_reviewer03;
     }
@@ -130,9 +155,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_reviewer03 = c_reviewer03;
     }
 
-    private String c_reviewer04;
-
-    @Column(name="C_REVIEWER04")
     public String getC_reviewer04() {
         return c_reviewer04;
     }
@@ -141,9 +163,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_reviewer04 = c_reviewer04;
     }
 
-    private String c_reviewer05;
-
-    @Column(name="C_REVIEWER05")
     public String getC_reviewer05() {
         return c_reviewer05;
     }
@@ -152,9 +171,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_reviewer05 = c_reviewer05;
     }
 
-    private String c_writer_name;
-
-    @Column(name="C_WRITER_NAME")
     public String getC_writer_name() {
         return c_writer_name;
     }
@@ -163,9 +179,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_writer_name = c_writer_name;
     }
 
-    private String c_writer_cn;
-
-    @Column(name="C_WRITER_CN")
     public String getC_writer_cn() {
         return c_writer_cn;
     }
@@ -174,9 +187,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_writer_cn = c_writer_cn;
     }
 
-    private String c_writer_date;
-
-    @Column(name="C_WRITER_DATE")
     public String getC_writer_date() {
         return c_writer_date;
     }
@@ -185,9 +195,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_writer_date = c_writer_date;
     }
 
-    private Long c_priority;
-
-    @Column(name="C_PRIORITY")
     public Long getC_priority() {
         return c_priority;
     }
@@ -196,9 +203,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_priority = c_priority;
     }
 
-    private String c_req_status;
-
-    @Column(name="C_REQ_STATUS")
     public String getC_req_status() {
         return c_req_status;
     }
@@ -207,12 +211,6 @@ public class ReqAddLogDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_req_status = c_req_status;
     }
 
-    // 요구사항 제목은 c_title 로.
-
-    private String c_contents;
-
-    @Lob
-    @Column(name="C_CONTENTS")
     public String getC_contents() {
         return c_contents;
     }

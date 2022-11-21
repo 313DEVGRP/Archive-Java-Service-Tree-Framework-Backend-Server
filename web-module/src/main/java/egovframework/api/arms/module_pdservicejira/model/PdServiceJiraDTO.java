@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_ARMS_PDSERVICEJIRA", allocationSize = 1)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDSERVICEJIRA", allocationSize = 1)
 public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
     public PdServiceJiraDTO() {
@@ -39,10 +39,61 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
     }
 
     //@Getter @Setter
+    @Lob
+    @Column(name="c_contents")
     private String c_contents;
 
-    @Lob
-    @Column(name="C_CONTENTS")
+    @Column(name="c_jira_link")
+    private String c_jira_link;
+
+    @Column(name="c_jira_id")
+    private String c_jira_id;
+
+    @Column(name="c_jira_key")
+    private String c_jira_key;
+
+    @Column(name="c_jira_name")
+    private String c_jira_name;
+
+    @Column(name="c_jira_avatar_48")
+    private String c_jira_avatar_48;
+
+    @Column(name="c_jira_avatar_32")
+    private String c_jira_avatar_32;
+
+    @Column(name="c_jira_avatar_24")
+    private String c_jira_avatar_24;
+
+    @Column(name="c_jira_avatar_16")
+    private String c_jira_avatar_16;
+
+    @Column(name="c_jira_category_link")
+    private String c_jira_category_link;
+
+    @Column(name="c_jira_category_id")
+    private String c_jira_category_id;
+
+    @Column(name="c_jira_category_name")
+    private String c_jira_category_name;
+
+    @Column(name="c_jira_category_desc")
+    private String c_jira_category_desc;
+
+    @Column(name="c_jira_con_user")
+    private String c_jira_con_user;
+
+    @Column(name="c_jira_con_pass")
+    private String c_jira_con_pass;
+
+    @Column(name="c_jira_con_token")
+    private String c_jira_con_token;
+
+    @Column(name="c_jira_con_jql")
+    private String c_jira_con_jql;
+
+    @Column(name="c_jira_con_passmode")
+    private String c_jira_con_passmode;
+
     public String getC_contents() {
         return c_contents;
     }
@@ -51,22 +102,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_contents = c_contents;
     }
 
-    private String c_jira_link;
-    private String c_jira_id;
-    private String c_jira_key;
-    private String c_jira_name;
-
-    private String c_jira_avatar_48;
-    private String c_jira_avatar_32;
-    private String c_jira_avatar_24;
-    private String c_jira_avatar_16;
-
-    private String c_jira_category_link;
-    private String c_jira_category_id;
-    private String c_jira_category_name;
-    private String c_jira_category_desc;
-
-    @Column(name="C_JIRA_LINK")
     public String getC_jira_link() {
         return c_jira_link;
     }
@@ -75,7 +110,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_link = c_jira_link;
     }
 
-    @Column(name="C_JIRA_ID")
     public String getC_jira_id() {
         return c_jira_id;
     }
@@ -84,7 +118,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_id = c_jira_id;
     }
 
-    @Column(name="C_JIRA_KEY")
     public String getC_jira_key() {
         return c_jira_key;
     }
@@ -93,7 +126,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_key = c_jira_key;
     }
 
-    @Column(name="C_JIRA_NAME")
     public String getC_jira_name() {
         return c_jira_name;
     }
@@ -102,7 +134,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_name = c_jira_name;
     }
 
-    @Column(name="C_JIRA_AVATAR_48")
     public String getC_jira_avatar_48() {
         return c_jira_avatar_48;
     }
@@ -111,7 +142,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_avatar_48 = c_jira_avatar_48;
     }
 
-    @Column(name="C_JIRA_AVATAR_32")
     public String getC_jira_avatar_32() {
         return c_jira_avatar_32;
     }
@@ -120,7 +150,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_avatar_32 = c_jira_avatar_32;
     }
 
-    @Column(name="C_JIRA_AVATAR_24")
     public String getC_jira_avatar_24() {
         return c_jira_avatar_24;
     }
@@ -129,7 +158,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_avatar_24 = c_jira_avatar_24;
     }
 
-    @Column(name="C_JIRA_AVATAR_16")
     public String getC_jira_avatar_16() {
         return c_jira_avatar_16;
     }
@@ -138,7 +166,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_avatar_16 = c_jira_avatar_16;
     }
 
-    @Column(name="C_JIRA_CATEGORY_LINK")
     public String getC_jira_category_link() {
         return c_jira_category_link;
     }
@@ -147,7 +174,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_category_link = c_jira_category_link;
     }
 
-    @Column(name="C_JIRA_CATEGORY_ID")
     public String getC_jira_category_id() {
         return c_jira_category_id;
     }
@@ -156,7 +182,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_category_id = c_jira_category_id;
     }
 
-    @Column(name="C_JIRA_CATEGORY_NAME")
     public String getC_jira_category_name() {
         return c_jira_category_name;
     }
@@ -165,7 +190,6 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_category_name = c_jira_category_name;
     }
 
-    @Column(name="C_JIRA_CATEGORY_DESC")
     public String getC_jira_category_desc() {
         return c_jira_category_desc;
     }
@@ -174,60 +198,46 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_category_desc = c_jira_category_desc;
     }
 
-//    @Column(name = "c_pdjira_con_user")
-//    private String c_pdjira_con_user;
-//
-//    @Column(name = "c_pdjira_con_pass")
-//    private String c_pdjira_con_pass;
-//
-//    @Column(name = "c_pdjira_con_token")
-//    private String c_pdjira_con_token;
-//
-//    @Column(name = "c_pdjira_con_jql")
-//    private String c_pdjira_con_jql;
-//
-//    @Column(name = "jiraConPassMode")
-//    private String jiraConPassMode;
-//
-//    public String getC_pdjira_con_user() {
-//        return c_pdjira_con_user;
-//    }
-//
-//    public void setC_pdjira_con_user(String c_pdjira_con_user) {
-//        this.c_pdjira_con_user = c_pdjira_con_user;
-//    }
-//
-//    public String getC_pdjira_con_pass() {
-//        return c_pdjira_con_pass;
-//    }
-//
-//    public void setC_pdjira_con_pass(String c_pdjira_con_pass) {
-//        this.c_pdjira_con_pass = c_pdjira_con_pass;
-//    }
-//
-//    public String getC_pdjira_con_token() {
-//        return c_pdjira_con_token;
-//    }
-//
-//    public void setC_pdjira_con_token(String c_pdjira_con_token) {
-//        this.c_pdjira_con_token = c_pdjira_con_token;
-//    }
-//
-//    public String getC_pdjira_con_jql() {
-//        return c_pdjira_con_jql;
-//    }
-//
-//    public void setC_pdjira_con_jql(String c_pdjira_con_jql) {
-//        this.c_pdjira_con_jql = c_pdjira_con_jql;
-//    }
-//
-//    public String getJiraConPassMode() {
-//        return jiraConPassMode;
-//    }
-//
-//    public void setJiraConPassMode(String jiraConPassMode) {
-//        this.jiraConPassMode = jiraConPassMode;
-//    }
+    public String getC_jira_con_user() {
+        return c_jira_con_user;
+    }
+
+    public void setC_jira_con_user(String c_jira_con_user) {
+        this.c_jira_con_user = c_jira_con_user;
+    }
+
+    public String getC_jira_con_pass() {
+        return c_jira_con_pass;
+    }
+
+    public void setC_jira_con_pass(String c_jira_con_pass) {
+        this.c_jira_con_pass = c_jira_con_pass;
+    }
+
+    public String getC_jira_con_token() {
+        return c_jira_con_token;
+    }
+
+    public void setC_jira_con_token(String c_jira_con_token) {
+        this.c_jira_con_token = c_jira_con_token;
+    }
+
+    public String getC_jira_con_jql() {
+        return c_jira_con_jql;
+    }
+
+    public void setC_jira_con_jql(String c_jira_con_jql) {
+        this.c_jira_con_jql = c_jira_con_jql;
+    }
+
+    public String getC_jira_con_passmode() {
+        return c_jira_con_passmode;
+    }
+
+    public void setC_jira_con_passmode(String c_jira_con_passmode) {
+        this.c_jira_con_passmode = c_jira_con_passmode;
+    }
+
     /*
      * Extend Bean Field
      */

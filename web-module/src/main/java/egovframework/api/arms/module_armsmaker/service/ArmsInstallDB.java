@@ -5,7 +5,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 public interface ArmsInstallDB extends CoreService {
 
-    public void sqlMapExecute() throws Exception;
+    public <T extends ComprehensiveTree> void sqlMapExecute(T comprehensiveTree) throws Exception;
 
     public <T extends ComprehensiveTree> void set_aRMS_DDL_Table(T comprehensiveTree) throws Exception;
 

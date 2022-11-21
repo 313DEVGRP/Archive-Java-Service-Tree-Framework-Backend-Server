@@ -17,6 +17,8 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
+
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
@@ -39,6 +41,159 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
     }
 
     //@Getter @Setter
+    @Column(name="C_METHOD")
+    private String c_method;
+
+    @Column(name="C_STATE")
+    private String c_state;
+
+    @Column(name="C_DATE")
+    private Date c_date;
+
+    @Column(name="C_FILE_ID_LINK")
+    private Long fileIdLink;
+
+    @Column(name="C_FILE_NAME")
+    private String fileName;
+
+    @Column(name="C_CONTENT_TYPE")
+    private String contentType;
+
+    @Column(name="C_SERVER_SUB_PATH")
+    private String serverSubPath;
+
+    @Column(name="C_PHYSICAL_NAME")
+    private String physicalName;
+
+    @Column(name="C_SIZE")
+    private Long size;
+
+    @Column(name="C_NAME")
+    private String name;
+
+    @Column(name="C_URL")
+    private String url;
+
+    @Column(name="C_THUMBNAIL_URL")
+    private String thumbnailUrl;
+
+    @Column(name="C_DELETE_URL")
+    private String delete_url;
+
+    @Column(name="C_DELETE_TYPE")
+    private String delete_type;
+
+    public String getC_method() {
+        return c_method;
+    }
+
+    public void setC_method(String c_method) {
+        this.c_method = c_method;
+    }
+
+    public String getC_state() {
+        return c_state;
+    }
+
+    public void setC_state(String c_state) {
+        this.c_state = c_state;
+    }
+
+    public Date getC_date() {
+        return c_date;
+    }
+
+    public void setC_date(Date c_date) {
+        this.c_date = c_date;
+    }
+
+    public Long getFileIdLink() {
+        return fileIdLink;
+    }
+
+    public void setFileIdLink(Long fileIdLink) {
+        this.fileIdLink = fileIdLink;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getServerSubPath() {
+        return serverSubPath;
+    }
+
+    public void setServerSubPath(String serverSubPath) {
+        this.serverSubPath = serverSubPath;
+    }
+
+    public String getPhysicalName() {
+        return physicalName;
+    }
+
+    public void setPhysicalName(String physicalName) {
+        this.physicalName = physicalName;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public String getDelete_url() {
+        return delete_url;
+    }
+
+    public void setDelete_url(String delete_url) {
+        this.delete_url = delete_url;
+    }
+
+    public String getDelete_type() {
+        return delete_type;
+    }
+
+    public void setDelete_type(String delete_type) {
+        this.delete_type = delete_type;
+    }
 
     /*
      * Extend Bean Field

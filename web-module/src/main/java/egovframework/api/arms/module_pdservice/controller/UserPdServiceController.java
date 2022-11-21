@@ -11,14 +11,14 @@
  */
 package egovframework.api.arms.module_pdservice.controller;
 
+import egovframework.api.arms.module_armsmaker.model.ArmsInstallDB_SqlMaaperDTO;
+import egovframework.api.arms.module_armsmaker.service.ArmsInstallDB;
 import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.api.arms.module_pdservice.service.PdService;
 import egovframework.api.arms.module_pdserviceversion.model.PdServiceVersionDTO;
 import egovframework.api.arms.module_pdserviceversion.service.PdServiceVersion;
-import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
-import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
@@ -44,9 +44,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -70,8 +67,8 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     @Qualifier("pdServiceVersion")
     private PdServiceVersion pdServiceVersion;
 
-    @Resource(name = "reqAddSqlMapper")
-    ReqAddSqlMapper reqAddSqlMapper;
+    @Resource(name = "reqAddTemplateInstallDB")
+    ArmsInstallDB reqAddTemplateInstallDB;
 
     @Resource(name = "egov.dataSource")
     DataSource dataSource;
@@ -102,97 +99,28 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
             PdServiceDTO addedNode = pdService.addNode(pdServiceDTO);
 
             //제품(서비스) 생성시 - 요구사항 TABLE 생성
-            ReqAddSqlMaaperDTO reqAddSqlMaaperDTO = new ReqAddSqlMaaperDTO();
-            reqAddSqlMaaperDTO.setSqlMapSelector("arms-reqadd-template");
-            reqAddSqlMaaperDTO.setC_title(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
-            if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
-                logger.error("already exist JSTF table : " + reqAddSqlMaaperDTO.getC_title());
-            }else{
-                reqAddSqlMapper.ddlExecuteToReqAdd(reqAddSqlMaaperDTO);
-                reqAddSqlMapper.ddlSequenceExecuteToReqAdd(reqAddSqlMaaperDTO);
-                reqAddSqlMapper.dmlExecuteToReqAdd(reqAddSqlMaaperDTO);
-            }
+            ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
+            armsInstallDB_sqlMaaperDTO.setC_title(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
+            armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-reqadd-template");
 
-            String C_title_org = reqAddSqlMaaperDTO.getC_title();
-            reqAddSqlMaaperDTO.setC_title(reqAddSqlMaaperDTO.getC_title() + "_LOG");
-            if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
-                logger.error("already exist log table : " + reqAddSqlMaaperDTO.getC_title());
-            }else{
-                reqAddSqlMaaperDTO.setC_title(C_title_org);
-                reqAddSqlMapper.ddlLogExecuteToReqAdd(reqAddSqlMaaperDTO);
-                makeTrigger(reqAddSqlMaaperDTO);
-            }
+            reqAddTemplateInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
 
             //C_ETC 컬럼에 요구사항 테이블 이름 기입
             addedNode.setC_etc(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
             pdService.updateNode(addedNode);
 
             //Default Version 생성
-            PdServiceVersionDTO pdVersionDTO = new PdServiceVersionDTO();
-            pdVersionDTO.setRef(2L);
-            pdVersionDTO.setC_title("BaseVersion");
-            pdVersionDTO.setC_type("default");
-            pdVersionDTO.setC_pdservice_link(addedNode.getC_id().toString());
-            pdServiceVersion.addNode(pdVersionDTO);
+            PdServiceVersionDTO pdServiceVersionDTO = new PdServiceVersionDTO();
+            pdServiceVersionDTO.setRef(2L);
+            pdServiceVersionDTO.setC_title("BaseVersion");
+            pdServiceVersionDTO.setC_type("default");
+            pdServiceVersionDTO.setC_pdservice_link(addedNode.getC_id().toString());
+            pdServiceVersion.addNode(pdServiceVersionDTO);
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", addedNode);
             return modelAndView;
         }
-    }
-
-    private void makeTrigger(ReqAddSqlMaaperDTO reqAddSqlMaaperDTO) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        Statement statement = connection.createStatement();
-        String sql =
-            "CREATE OR REPLACE TRIGGER \"TRIG_" + reqAddSqlMaaperDTO.getC_title() + "\"\n" +
-            "BEFORE DELETE OR INSERT OR UPDATE\n" +
-            "ON " + reqAddSqlMaaperDTO.getC_title() + " REFERENCING NEW AS NEW OLD AS OLD\n" +
-            "FOR EACH ROW\n" +
-            "DECLARE\n" +
-            "tmpVar NUMBER;\n" +
-            "/******************************************************************************\n" +
-            "   NAME:       TRIGGER_COMPREHENSIVETREE\n" +
-            "   PURPOSE:    \n" +
-            " \n" +
-            "   REVISIONS:\n" +
-            "   Ver        Date        Author           Description\n" +
-            "   ---------  ----------  ---------------  ------------------------------------\n" +
-            "   1.0        2012-08-29             1. Created this trigger.\n" +
-            " \n" +
-            "   NOTES:\n" +
-            " \n" +
-            "   Automatically available Auto Replace Keywords:\n" +
-            "      Object Name:     TRIGGER_COMPREHENSIVETREE\n" +
-            "      Sysdate:         2012-08-29\n" +
-            "      Date and Time:   2012-08-29, 오후 5:26:44, and 2012-08-29 오후 5:26:44\n" +
-            "      Username:         (set in TOAD Options, Proc Templates)\n" +
-            "      Table Name:      T_ARMS_REQADD (set in the \"New PL/SQL Object\" dialog)\n" +
-            "      Trigger Options:  (set in the \"New PL/SQL Object\" dialog)\n" +
-            "******************************************************************************/\n" +
-            "BEGIN\n" +
-            "  tmpVar := 0;\n" +
-            "   IF UPDATING  THEN    \n" +
-            "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
-            "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate,:old.C_PDSERVICE_LINK,:old.C_VERSION_LINK,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_DATE,:old.C_PRIORITY,:old.C_CONTENTS,:old.C_REQ_STATUS);\n" +
-            "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
-            "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate,:new.C_PDSERVICE_LINK,:new.C_VERSION_LINK,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_DATE,:new.C_PRIORITY,:new.C_CONTENTS,:new.C_REQ_STATUS);\n" +
-            "    END IF;\n" +
-            "   IF DELETING THEN\n" +
-            "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
-            "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate,:old.C_PDSERVICE_LINK,:old.C_VERSION_LINK,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_DATE,:old.C_PRIORITY,:old.C_CONTENTS,:old.C_REQ_STATUS);\n" +
-            "   END IF;   \n" +
-            "   IF INSERTING  THEN\n" +
-            "       insert into " + reqAddSqlMaaperDTO.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_CONTENTS,C_REQ_STATUS)\n" +
-            "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate,:new.C_PDSERVICE_LINK,:new.C_VERSION_LINK,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_DATE,:new.C_PRIORITY,:new.C_CONTENTS,:new.C_REQ_STATUS);\n" +
-            "   END IF;\n" +
-            " \n" +
-            "  EXCEPTION\n" +
-            "    WHEN OTHERS THEN\n" +
-            "      -- Consider logging the error and then re-raise\n" +
-            "      RAISE;\n" +
-            "END TRIG_" + reqAddSqlMaaperDTO.getC_title() + ";";
-        statement.execute(sql);
     }
 
     @ResponseBody
@@ -212,8 +140,6 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
                 .stream()
                 .max(Comparator.comparing(PdServiceDTO::getC_position))
                 .orElseThrow(NoSuchElementException::new);
-
-        logger.info("=======" + maxPositionPdServiceDTO);
 
         //노드 값 셋팅
         pdServiceDTO.setRef(ROOT_NODE_ID);
@@ -283,18 +209,6 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
             egovFormBasedFileVo.setThumbnailUrl("/auth-user/api/arms/fileRepository" + "/thumbnailUrlFileToNode/" + returnFileRepositoryDTO.getId());
             egovFormBasedFileVo.setDelete_url("/auth-user/api/arms/fileRepository" + "/deleteFileByNode/" + returnFileRepositoryDTO.getId());
 
-        }
-        if (list.size() > 0) {
-            EgovFormBasedFileVo vo = list.get(0);    // 첫번째 이미지
-
-//            String url = multiRequest.getContextPath()
-//                    + "/utl/web/imageSrc.do?"
-//                    + "path=" + vo.getServerSubPath()
-//                    + "&physical=" + vo.getPhysicalName()
-//                    + "&contentType=" + vo.getContentType();
-
-            //model.addAttribute("CKEditorFuncNum", request.getParameter("CKEditorFuncNum"));
-            //model.addAttribute("url", url);
         }
         HashMap<String, List<EgovFormBasedFileVo>> map = new HashMap();
         map.put("files", list);

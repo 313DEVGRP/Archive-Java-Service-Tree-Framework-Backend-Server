@@ -13,15 +13,11 @@ package egovframework.api.arms.module_reqadd.controller;
 
 import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
-import egovframework.api.arms.module_pdserviceconnect.model.PdServiceConnectDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
-import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
-import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
-import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
@@ -47,12 +43,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,9 +55,6 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
     @Autowired
     @Qualifier("reqAdd")
     private ReqAdd reqAdd;
-
-    @Resource(name = "reqAddSqlMapper")
-    ReqAddSqlMapper reqAddSqlMapper;
 
     @Autowired
     @Qualifier("fileRepository")
@@ -118,10 +106,10 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             SessionUtil.setAttribute("getNode",changeReqTableName);
 
             V returnVO = reqAdd.getNode(reqAddDTO);
-            if(StringUtils.isNotEmpty(returnVO.getC_version_Link())) {
-                String replaceTxt = returnVO.getC_version_Link().replaceAll("\\[", "").replaceAll("\\]", "");
+            if(StringUtils.isNotEmpty(returnVO.getC_version_link())) {
+                String replaceTxt = returnVO.getC_version_link().replaceAll("\\[", "").replaceAll("\\]", "");
                 replaceTxt = replaceTxt.replaceAll("\"", "");
-                returnVO.setC_version_Link(replaceTxt);
+                returnVO.setC_version_link(replaceTxt);
             }
 
             SessionUtil.removeAttribute("getNode");

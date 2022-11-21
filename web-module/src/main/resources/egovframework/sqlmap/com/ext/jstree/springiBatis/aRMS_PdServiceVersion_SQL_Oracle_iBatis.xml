@@ -73,11 +73,11 @@
 
     <statement id="dmlExecute_1" parameterClass="ComprehensiveTree">
         Insert into $c_title$ (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-        Values (1, 0, 0, 1, 8, 0, 'PDSERVICEVERSION', 'root')
+        Values (1, 0, 0, 1, 4, 0, 'PDSERVICEVERSION', 'root')
     </statement>
     <statement id="dmlExecute_2" parameterClass="ComprehensiveTree">
         Insert into $c_title$ (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-        Values (2, 1, 0, 2, 7, 1, '제품(서비스) 버전', 'drive')
+        Values (2, 1, 0, 2, 3, 1, '제품(서비스) 버전', 'drive')
     </statement>
 
     <statement id="ddlLogExecute" parameterClass="ComprehensiveTree">

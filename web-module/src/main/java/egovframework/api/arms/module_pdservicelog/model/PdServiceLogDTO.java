@@ -17,6 +17,8 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
+
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
@@ -39,6 +41,182 @@ public class PdServiceLogDTO extends JsTreeHibernateSearchDTO implements Seriali
     }
 
     //@Getter @Setter
+    @Column(name="c_method")
+    private String c_method;
+
+    @Column(name="c_state")
+    private String c_state;
+
+    @Column(name="c_date")
+    private Date c_date;
+
+    @Lob
+    @Column(name="c_contents")
+    private String c_contents;
+
+    @Column(name="c_etc")
+    private String c_etc;
+
+    @Column(name="c_owner")
+    private String c_owner;
+
+    @Column(name="c_reviewer01")
+    private String c_reviewer01;
+
+    @Column(name="c_reviewer02")
+    private String c_reviewer02;
+
+    @Column(name="c_reviewer03")
+    private String c_reviewer03;
+
+    @Column(name="c_reviewer04")
+    private String c_reviewer04;
+
+    @Column(name="c_reviewer05")
+    private String c_reviewer05;
+
+    @Column(name="c_writer_name")
+    private String c_writer_name;
+
+    @Column(name="c_writer_cn")
+    private String c_writer_cn;
+
+    @Column(name="c_writer_mail")
+    private String c_writer_mail;
+
+    @Column(name="c_writer_date")
+    private String c_writer_date;
+
+    @Column(name="c_fileid_link")
+    private Long c_fileid_link;
+
+    public String getC_method() {
+        return c_method;
+    }
+
+    public void setC_method(String c_method) {
+        this.c_method = c_method;
+    }
+
+    public String getC_state() {
+        return c_state;
+    }
+
+    public void setC_state(String c_state) {
+        this.c_state = c_state;
+    }
+
+    public Date getC_date() {
+        return c_date;
+    }
+
+    public void setC_date(Date c_date) {
+        this.c_date = c_date;
+    }
+
+    public String getC_contents() {
+        return c_contents;
+    }
+
+    public void setC_contents(String c_contents) {
+        this.c_contents = c_contents;
+    }
+
+    public String getC_etc() {
+        return c_etc;
+    }
+
+    public void setC_etc(String c_etc) {
+        this.c_etc = c_etc;
+    }
+
+    public String getC_owner() {
+        return c_owner;
+    }
+
+    public void setC_owner(String c_owner) {
+        this.c_owner = c_owner;
+    }
+
+    public String getC_reviewer01() {
+        return c_reviewer01;
+    }
+
+    public void setC_reviewer01(String c_reviewer01) {
+        this.c_reviewer01 = c_reviewer01;
+    }
+
+    public String getC_reviewer02() {
+        return c_reviewer02;
+    }
+
+    public void setC_reviewer02(String c_reviewer02) {
+        this.c_reviewer02 = c_reviewer02;
+    }
+
+    public String getC_reviewer03() {
+        return c_reviewer03;
+    }
+
+    public void setC_reviewer03(String c_reviewer03) {
+        this.c_reviewer03 = c_reviewer03;
+    }
+
+    public String getC_reviewer04() {
+        return c_reviewer04;
+    }
+
+    public void setC_reviewer04(String c_reviewer04) {
+        this.c_reviewer04 = c_reviewer04;
+    }
+
+    public String getC_reviewer05() {
+        return c_reviewer05;
+    }
+
+    public void setC_reviewer05(String c_reviewer05) {
+        this.c_reviewer05 = c_reviewer05;
+    }
+
+    public String getC_writer_name() {
+        return c_writer_name;
+    }
+
+    public void setC_writer_name(String c_writer_name) {
+        this.c_writer_name = c_writer_name;
+    }
+
+    public String getC_writer_cn() {
+        return c_writer_cn;
+    }
+
+    public void setC_writer_cn(String c_writer_cn) {
+        this.c_writer_cn = c_writer_cn;
+    }
+
+    public String getC_writer_mail() {
+        return c_writer_mail;
+    }
+
+    public void setC_writer_mail(String c_writer_mail) {
+        this.c_writer_mail = c_writer_mail;
+    }
+
+    public String getC_writer_date() {
+        return c_writer_date;
+    }
+
+    public void setC_writer_date(String c_writer_date) {
+        this.c_writer_date = c_writer_date;
+    }
+
+    public Long getC_fileid_link() {
+        return c_fileid_link;
+    }
+
+    public void setC_fileid_link(Long c_fileid_link) {
+        this.c_fileid_link = c_fileid_link;
+    }
 
     /*
      * Extend Bean Field

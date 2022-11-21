@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="arms-reqadd-template">
-    <typeAlias alias="ExtendComprehensiveTree"
-        type="egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO" />
+    <typeAlias alias="ComprehensiveTree"
+               type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree" />
 
-    <statement id="ddlSqlExecute" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute" parameterClass="ComprehensiveTree">
         CREATE TABLE $c_title$(
             C_ID NUMBER NOT NULL,
             C_PARENTID NUMBER NOT NULL,
@@ -34,7 +34,7 @@
         */)
     </statement >
 
-    <statement id="ddlSequenceExecute" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlSequenceExecute" parameterClass="ComprehensiveTree">
         /*
         * 인덱스는 되도록 걸지 말것.
         * CREATE UNIQUE INDEX I_COMPREHENSIVETREE ON T_ARMS_REQADD
@@ -52,52 +52,44 @@
         NOORDER
     </statement >
 
-    <statement id="ddlSqlExecute_comment_1" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_1" parameterClass="ComprehensiveTree">
         COMMENT ON TABLE $c_title$ IS '기본 트리 스키마'
     </statement >
-    <statement id="ddlSqlExecute_comment_2" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_2" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_ID IS '노드 아이디'
     </statement >
-    <statement id="ddlSqlExecute_comment_3" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_3" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_PARENTID IS '부모 노드 아이디'
     </statement >
-    <statement id="ddlSqlExecute_comment_4" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_4" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_POSITION IS '노드 포지션'
     </statement >
-    <statement id="ddlSqlExecute_comment_5" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_5" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_LEFT IS '노드 좌측 끝 포인트'
     </statement >
-    <statement id="ddlSqlExecute_comment_6" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_6" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_RIGHT IS '노드 우측 끝 포인트'
     </statement >
-    <statement id="ddlSqlExecute_comment_7" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_7" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_LEVEL IS '노드 DEPTH'
     </statement >
-    <statement id="ddlSqlExecute_comment_8" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_8" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_TITLE IS '노드 명'
     </statement >
-    <statement id="ddlSqlExecute_comment_9" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlExecute_comment_9" parameterClass="ComprehensiveTree">
         COMMENT ON COLUMN $c_title$.C_TYPE IS '노드 타입'
     </statement >
 
-    <statement id="dmlSqlExecute_1" parameterClass="ExtendComprehensiveTree">
+    <statement id="dmlExecute_1" parameterClass="ComprehensiveTree">
         Insert into $c_title$ (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-        Values (1, 0, 0, 1, 8, 0, 'Root Node', 'root')
+        Values (1, 0, 0, 1, 4, 0, 'REQADD', 'root')
     </statement>
-    <statement id="dmlSqlExecute_2" parameterClass="ExtendComprehensiveTree">
+    <statement id="dmlExecute_2" parameterClass="ComprehensiveTree">
         Insert into $c_title$ (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-        Values (2, 1, 0, 2, 7, 1, 'First Child', 'drive')
-    </statement>
-    <statement id="dmlSqlExecute_3" parameterClass="ExtendComprehensiveTree">
-        Insert into $c_title$ (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-        Values (3, 2, 0, 3, 4, 2, 'Leaf Node', 'default')
-    </statement>
-    <statement id="dmlSqlExecute_4" parameterClass="ExtendComprehensiveTree">
-        Insert into $c_title$ (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-        Values (4, 2, 1, 5, 6, 2, 'Branch Node', 'folder')
+        Values (2, 1, 0, 2, 3, 1, '요구사항', 'drive')
     </statement>
 
-    <statement id="ddlLogSqlExecute" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute" parameterClass="ComprehensiveTree">
         CREATE TABLE $c_title$_LOG(
             C_ID NUMBER NOT NULL,
             C_PARENTID NUMBER NOT NULL,
@@ -126,44 +118,44 @@
             C_REQ_STATUS VARCHAR2(4000 BYTE)
         )
     </statement>
-    <statement id="ddlLogSqlExecute_comment_1" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_1" parameterClass="ComprehensiveTree">
       COMMENT ON TABLE $c_title$_LOG IS '기본 트리 스키마 트리거 로그'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_2" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_2" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_ID IS '노드 아이디'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_3" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_3" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_PARENTID IS '부모 노드 아이디'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_4" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_4" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_POSITION IS '노드 포지션'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_5" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_5" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_LEFT IS '노드 좌측 끝 포인트'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_6" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_6" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_RIGHT IS '노드 우측 끝 포인트'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_7" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_7" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_LEVEL IS '노드 DEPTH '
     </statement>
-    <statement id="ddlLogSqlExecute_comment_8" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_8" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_TITLE IS '노드 명'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_9" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_9" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_TYPE IS '노드 타입'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_10" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_10" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_METHOD IS '노드 변경 행위'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_11" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_11" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)'
     </statement>
-    <statement id="ddlLogSqlExecute_comment_12" parameterClass="ExtendComprehensiveTree">
+    <statement id="ddlLogExecute_comment_12" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_DATE IS '노드 변경 시'
     </statement>
 
-    <select id="isExistTable" parameterClass="ExtendComprehensiveTree" resultClass="int">
+    <select id="isExistTable" parameterClass="ComprehensiveTree" resultClass="int">
         /* getChildCountByParentId */
         select count(*) from all_tables where table_name = #c_title#
     </select>

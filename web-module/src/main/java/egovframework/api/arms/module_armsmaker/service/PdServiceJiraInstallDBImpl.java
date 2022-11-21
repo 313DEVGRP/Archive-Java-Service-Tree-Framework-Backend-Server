@@ -1,6 +1,7 @@
 package egovframework.api.arms.module_armsmaker.service;
 
 import egovframework.api.arms.module_armsmaker.dao.ArmsInstallSqlMapperDao;
+import egovframework.api.arms.module_armsmaker.model.ArmsInstallDB_SqlMaaperDTO;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreServiceImpl;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import org.slf4j.Logger;
@@ -15,8 +16,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Service("pdServiceInstallDB")
-public class PdServiceInstallDBImpl extends CoreServiceImpl implements ArmsInstallDB{
+@Service("pdServiceJiraInstallDB")
+public class PdServiceJiraInstallDBImpl extends CoreServiceImpl implements ArmsInstallDB{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -48,6 +49,11 @@ public class PdServiceInstallDBImpl extends CoreServiceImpl implements ArmsInsta
     }
 
     private void makeTrigger(ComprehensiveTree comprehensiveTree) throws SQLException {
+
+        String addColums =",c_contents,c_jira_link,c_jira_id,c_jira_key,c_jira_name,c_jira_avatar_48,c_jira_avatar_32,c_jira_avatar_24,c_jira_avatar_16,c_jira_category_link,c_jira_category_id,c_jira_category_name,c_jira_category_desc,c_jira_con_user,c_jira_con_pass,c_jira_con_token,c_jira_con_jql,c_jira_con_passmode";
+        String addOldColums =",:old.c_contents,:old.c_jira_link,:old.c_jira_id,:old.c_jira_key,:old.c_jira_name,:old.c_jira_avatar_48,:old.c_jira_avatar_32,:old.c_jira_avatar_24,:old.c_jira_avatar_16,:old.c_jira_category_link,:old.c_jira_category_id,:old.c_jira_category_name,:old.c_jira_category_desc,:old.c_jira_con_user,:old.c_jira_con_pass,:old.c_jira_con_token,:old.c_jira_con_jql,:old.c_jira_con_passmode";
+        String addNewColums =",:new.c_contents,:new.c_jira_link,:new.c_jira_id,:new.c_jira_key,:new.c_jira_name,:new.c_jira_avatar_48,:new.c_jira_avatar_32,:new.c_jira_avatar_24,:new.c_jira_avatar_16,:new.c_jira_category_link,:new.c_jira_category_id,:new.c_jira_category_name,:new.c_jira_category_desc,:new.c_jira_con_user,:new.c_jira_con_pass,:new.c_jira_con_token,:new.c_jira_con_jql,:new.c_jira_con_passmode";
+
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         String sql =
@@ -79,18 +85,18 @@ public class PdServiceInstallDBImpl extends CoreServiceImpl implements ArmsInsta
                         "BEGIN\n" +
                         "  tmpVar := 0;\n" +
                         "   IF UPDATING  THEN    \n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate,:old.C_PDSERVICE_DETAIL,:old.C_CONTENTS,:old.C_OWNER,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_MAIL,:old.C_WRITER_DATE,:old.C_ETC,:old.C_FILEID_LINK);\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate,:new.C_PDSERVICE_DETAIL,:new.C_CONTENTS,:new.C_OWNER,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_MAIL,:new.C_WRITER_DATE,:new.C_ETC,:new.C_FILEID_LINK);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate" + addOldColums + ");\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate" + addNewColums + ");\n" +
                         "    END IF;\n" +
                         "   IF DELETING THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate,:old.C_PDSERVICE_DETAIL,:old.C_CONTENTS,:old.C_OWNER,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_MAIL,:old.C_WRITER_DATE,:old.C_ETC,:old.C_FILEID_LINK);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate" + addOldColums + ");\n" +
                         "   END IF;   \n" +
                         "   IF INSERTING  THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate,:new.C_PDSERVICE_DETAIL,:new.C_CONTENTS,:new.C_OWNER,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_MAIL,:new.C_WRITER_DATE,:new.C_ETC,:new.C_FILEID_LINK);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate" + addNewColums + ");\n" +
                         "   END IF;\n" +
                         " \n" +
                         "  EXCEPTION\n" +

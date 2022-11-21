@@ -17,6 +17,8 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
+
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
@@ -39,7 +41,26 @@ public class PdServiceConnectLogDTO extends JsTreeHibernateSearchDTO implements 
     }
 
     //@Getter @Setter
+    @Column(name="c_method")
+    private String c_method;
 
+    @Column(name="c_state")
+    private String c_state;
+
+    @Column(name="c_date")
+    private Date c_date;
+
+    @Column(name="c_contents")
+    private String c_contents;
+
+    @Column(name="c_pdservice_id")
+    private String c_pdservice_id;
+
+    @Column(name="c_pdservice_version_id")
+    private String c_pdservice_version_id;
+
+    @Column(name="c_pdservice_jira_ids")
+    private String c_pdservice_jira_ids;
     /*
      * Extend Bean Field
      */

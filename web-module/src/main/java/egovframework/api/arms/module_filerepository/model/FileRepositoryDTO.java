@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_ARMS_FILEREPOSITORY", allocationSize = 1)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_FILEREPOSITORY", allocationSize = 1)
 public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
     public FileRepositoryDTO() {
@@ -39,19 +39,39 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
     }
 
     //@Getter @Setter
+    @Column(name="C_FILE_ID_LINK")
     private Long fileIdLink;
+
+    @Column(name="C_FILE_NAME")
     private String fileName;
+
+    @Column(name="C_CONTENT_TYPE")
     private String contentType;
+
+    @Column(name="C_SERVER_SUB_PATH")
     private String serverSubPath;
+
+    @Column(name="C_PHYSICAL_NAME")
     private String physicalName;
+
+    @Column(name="C_SIZE")
     private Long size;
+
+    @Column(name="C_NAME")
     private String name;
+
+    @Column(name="C_URL")
     private String url;
+
+    @Column(name="C_THUMBNAIL_URL")
     private String thumbnailUrl;
+
+    @Column(name="C_DELETE_URL")
     private String delete_url;
+
+    @Column(name="C_DELETE_TYPE")
     private String delete_type;
 
-    @Column(name="C_FILE_ID_LINK")
     public Long getFileIdLink() {
         return fileIdLink;
     }
@@ -60,8 +80,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.fileIdLink = fileIdLink;
     }
 
-
-    @Column(name="C_FILE_NAME")
     public String getFileName() {
         return fileName;
     }
@@ -70,7 +88,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.fileName = fileName;
     }
 
-    @Column(name="C_CONTENT_TYPE")
     public String getContentType() {
         return contentType;
     }
@@ -79,7 +96,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.contentType = contentType;
     }
 
-    @Column(name="C_SERVER_SUB_PATH")
     public String getServerSubPath() {
         return serverSubPath;
     }
@@ -88,7 +104,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.serverSubPath = serverSubPath;
     }
 
-    @Column(name="C_PHYSICAL_NAME")
     public String getPhysicalName() {
         return physicalName;
     }
@@ -97,7 +112,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.physicalName = physicalName;
     }
 
-    @Column(name="C_SIZE")
     public Long getSize() {
         return size;
     }
@@ -106,7 +120,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.size = size;
     }
 
-    @Column(name="C_NAME")
     public String getName() {
         return name;
     }
@@ -115,7 +128,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.name = name;
     }
 
-    @Column(name="C_URL")
     public String getUrl() {
         return url;
     }
@@ -124,7 +136,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.url = url;
     }
 
-    @Column(name="C_THUMBNAIL_URL")
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
@@ -133,7 +144,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    @Column(name="C_DELETE_URL")
     public String getDelete_url() {
         return delete_url;
     }
@@ -142,7 +152,6 @@ public class FileRepositoryDTO extends JsTreeHibernateSearchDTO implements Seria
         this.delete_url = delete_url;
     }
 
-    @Column(name="C_DELETE_TYPE")
     public String getDelete_type() {
         return delete_type;
     }

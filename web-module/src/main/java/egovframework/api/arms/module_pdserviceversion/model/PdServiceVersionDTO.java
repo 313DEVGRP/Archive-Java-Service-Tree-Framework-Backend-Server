@@ -39,9 +39,19 @@ public class PdServiceVersionDTO extends JsTreeHibernateSearchDTO implements Ser
     }
 
     //@Getter @Setter
+    @Column(name = "c_start_date")
     private String c_start_date;
 
-    @Column(name = "c_start_date")
+    @Column(name = "c_end_date")
+    private String c_end_date;
+
+    @Column(name = "c_pdservice_link")
+    private String c_pdservice_link;
+
+    @Lob
+    @Column(name="C_CONTENTS")
+    private String c_contents;
+
     public String getC_start_date() {
         return c_start_date;
     }
@@ -50,9 +60,6 @@ public class PdServiceVersionDTO extends JsTreeHibernateSearchDTO implements Ser
         this.c_start_date = c_start_date;
     }
 
-    private String c_end_date;
-
-    @Column(name = "c_end_date")
     public String getC_end_date() {
         return c_end_date;
     }
@@ -61,9 +68,6 @@ public class PdServiceVersionDTO extends JsTreeHibernateSearchDTO implements Ser
         this.c_end_date = c_end_date;
     }
 
-    private String c_pdservice_link;
-
-    @Column(name = "c_pdservice_link")
     public String getC_pdservice_link() {
         return c_pdservice_link;
     }
@@ -72,10 +76,6 @@ public class PdServiceVersionDTO extends JsTreeHibernateSearchDTO implements Ser
         this.c_pdservice_link = c_pdservice_link;
     }
 
-    private String c_contents;
-
-    @Lob
-    @Column(name="C_CONTENTS")
     public String getC_contents() {
         return c_contents;
     }
@@ -83,6 +83,7 @@ public class PdServiceVersionDTO extends JsTreeHibernateSearchDTO implements Ser
     public void setC_contents(String c_contents) {
         this.c_contents = c_contents;
     }
+
     /*
      * Extend Bean Field
      */

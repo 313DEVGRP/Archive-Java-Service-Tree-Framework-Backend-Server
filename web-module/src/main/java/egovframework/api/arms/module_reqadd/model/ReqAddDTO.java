@@ -39,31 +39,62 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
     }
 
     //@Getter @Setter
-    private Long c_pdService_Link;
+    @Column(name = "c_pdservice_link")
+    private Long c_pdservice_link;
 
-    @Column(name="C_PDSERVICE_LINK")
-    public Long getC_pdService_Link() {
-        return c_pdService_Link;
-    }
+    @Column(name = "c_version_link")
+    private String c_version_link;
 
-    public void setC_pdService_Link(Long c_pdService_Link) {
-        this.c_pdService_Link = c_pdService_Link;
-    }
-
-    private String c_version_Link;
-
-    @Column(name="C_VERSION_LINK")
-    public String getC_version_Link() {
-        return c_version_Link;
-    }
-
-    public void setC_version_Link(String c_version_Link) {
-        this.c_version_Link = c_version_Link;
-    }
-
+    @Column(name = "c_reviewer01")
     private String c_reviewer01;
 
-    @Column(name="C_REVIEWER01")
+    @Column(name = "c_reviewer02")
+    private String c_reviewer02;
+
+    @Column(name = "c_reviewer03")
+    private String c_reviewer03;
+
+    @Column(name = "c_reviewer04")
+    private String c_reviewer04;
+
+    @Column(name = "c_reviewer05")
+    private String c_reviewer05;
+
+    @Column(name = "c_writer_name")
+    private String c_writer_name;
+
+    @Column(name = "c_writer_cn")
+    private String c_writer_cn;
+
+    @Column(name = "c_writer_date")
+    private String c_writer_date;
+
+    @Column(name = "c_priority")
+    private Long c_priority;
+
+    @Column(name = "c_req_status")
+    private String c_req_status;
+
+    @Lob
+    @Column(name = "c_contents")
+    private String c_contents;
+
+    public Long getC_pdservice_link() {
+        return c_pdservice_link;
+    }
+
+    public void setC_pdservice_link(Long c_pdservice_link) {
+        this.c_pdservice_link = c_pdservice_link;
+    }
+
+    public String getC_version_link() {
+        return c_version_link;
+    }
+
+    public void setC_version_link(String c_version_link) {
+        this.c_version_link = c_version_link;
+    }
+
     public String getC_reviewer01() {
         return c_reviewer01;
     }
@@ -72,9 +103,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_reviewer01 = c_reviewer01;
     }
 
-    private String c_reviewer02;
-
-    @Column(name="C_REVIEWER02")
     public String getC_reviewer02() {
         return c_reviewer02;
     }
@@ -83,9 +111,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_reviewer02 = c_reviewer02;
     }
 
-    private String c_reviewer03;
-
-    @Column(name="C_REVIEWER03")
     public String getC_reviewer03() {
         return c_reviewer03;
     }
@@ -94,9 +119,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_reviewer03 = c_reviewer03;
     }
 
-    private String c_reviewer04;
-
-    @Column(name="C_REVIEWER04")
     public String getC_reviewer04() {
         return c_reviewer04;
     }
@@ -105,9 +127,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_reviewer04 = c_reviewer04;
     }
 
-    private String c_reviewer05;
-
-    @Column(name="C_REVIEWER05")
     public String getC_reviewer05() {
         return c_reviewer05;
     }
@@ -116,9 +135,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_reviewer05 = c_reviewer05;
     }
 
-    private String c_writer_name;
-
-    @Column(name="C_WRITER_NAME")
     public String getC_writer_name() {
         return c_writer_name;
     }
@@ -127,9 +143,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_writer_name = c_writer_name;
     }
 
-    private String c_writer_cn;
-
-    @Column(name="C_WRITER_CN")
     public String getC_writer_cn() {
         return c_writer_cn;
     }
@@ -138,9 +151,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_writer_cn = c_writer_cn;
     }
 
-    private String c_writer_date;
-
-    @Column(name="C_WRITER_DATE")
     public String getC_writer_date() {
         return c_writer_date;
     }
@@ -149,9 +159,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_writer_date = c_writer_date;
     }
 
-    private Long c_priority;
-
-    @Column(name="C_PRIORITY")
     public Long getC_priority() {
         return c_priority;
     }
@@ -160,9 +167,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_priority = c_priority;
     }
 
-    private String c_req_status;
-
-    @Column(name="C_REQ_STATUS")
     public String getC_req_status() {
         return c_req_status;
     }
@@ -171,12 +175,6 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_req_status = c_req_status;
     }
 
-    // 요구사항 제목은 c_title 로.
-
-    private String c_contents;
-
-    @Lob
-    @Column(name="C_CONTENTS")
     public String getC_contents() {
         return c_contents;
     }

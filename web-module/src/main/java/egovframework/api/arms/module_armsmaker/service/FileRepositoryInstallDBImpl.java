@@ -1,12 +1,13 @@
 package egovframework.api.arms.module_armsmaker.service;
 
-import egovframework.api.arms.module_armsmaker.model.ArmsInstallDB_SqlMaaperDTO;
-import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
+import egovframework.api.arms.module_armsmaker.dao.ArmsInstallSqlMapperDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreServiceImpl;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -22,10 +23,10 @@ public class FileRepositoryInstallDBImpl extends CoreServiceImpl implements Arms
     @Resource(name = "egov.dataSource")
     DataSource dataSource;
 
-    public void sqlMapExecute() throws Exception {
-        ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
-        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-fileRepository");
-        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_FILEREPOSITORY");
+    @Resource(name = "armsInstallSqlMapperDao")
+    ArmsInstallSqlMapperDao armsInstallSqlMapperDao;
+
+    public void sqlMapExecute(ComprehensiveTree armsInstallDB_sqlMaaperDTO) throws Exception {
 
         if(this.isExist_aRMS_DB(armsInstallDB_sqlMaaperDTO) == 1){
             logger.error("already exist JSTF table : " + armsInstallDB_sqlMaaperDTO.getC_title());
@@ -47,6 +48,11 @@ public class FileRepositoryInstallDBImpl extends CoreServiceImpl implements Arms
     }
 
     private void makeTrigger(ComprehensiveTree comprehensiveTree) throws SQLException {
+
+        String addColums =",C_FILE_NAME,C_CONTENT_TYPE,C_SERVER_SUB_PATH,C_PHYSICAL_NAME,C_SIZE,C_NAME,C_URL,C_THUMBNAIL_URL,C_DELETE_URL,C_DELETE_TYPE,C_FILE_ID_LINK";
+        String addOldColums =",:old.C_FILE_NAME,:old.C_CONTENT_TYPE,:old.C_SERVER_SUB_PATH,:old.C_PHYSICAL_NAME,:old.C_SIZE,:old.C_NAME,:old.C_URL,:old.C_THUMBNAIL_URL,:old.C_DELETE_URL,:old.C_DELETE_TYPE,:old.C_FILE_ID_LINK";
+        String addNewColums =",:new.C_FILE_NAME,:new.C_CONTENT_TYPE,:new.C_SERVER_SUB_PATH,:new.C_PHYSICAL_NAME,:new.C_SIZE,:new.C_NAME,:new.C_URL,:new.C_THUMBNAIL_URL,:new.C_DELETE_URL,:new.C_DELETE_TYPE,:new.C_FILE_ID_LINK";
+
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         String sql =
@@ -78,18 +84,18 @@ public class FileRepositoryInstallDBImpl extends CoreServiceImpl implements Arms
                         "BEGIN\n" +
                         "  tmpVar := 0;\n" +
                         "   IF UPDATING  THEN    \n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate" + addOldColums + ");\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate" + addNewColums + ");\n" +
                         "    END IF;\n" +
                         "   IF DELETING THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate" + addOldColums + ");\n" +
                         "   END IF;   \n" +
                         "   IF INSERTING  THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate" + addNewColums + ");\n" +
                         "   END IF;\n" +
                         " \n" +
                         "  EXCEPTION\n" +
@@ -101,27 +107,32 @@ public class FileRepositoryInstallDBImpl extends CoreServiceImpl implements Arms
     }
 
     @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> void set_aRMS_DDL_Table(T comprehensiveTree) throws Exception {
-
+        armsInstallSqlMapperDao.ddlExecute(comprehensiveTree);
     }
 
     @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> void set_aRMS_DDL_Sequence(T comprehensiveTree) throws Exception {
-
+        armsInstallSqlMapperDao.ddlSequenceExecute(comprehensiveTree);
     }
 
     @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> void set_aRMS_DML_Table(T comprehensiveTree) throws Exception {
-
+        armsInstallSqlMapperDao.dmlExecute(comprehensiveTree);
     }
 
     @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> void set_aRMSLog_DDL_Table(T comprehensiveTree) throws Exception {
-
+        armsInstallSqlMapperDao.ddlLogExecute(comprehensiveTree);
     }
 
     @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> int isExist_aRMS_DB(T comprehensiveTree) throws Exception {
-        return 0;
+        return armsInstallSqlMapperDao.isExistTable(comprehensiveTree);
     }
 }

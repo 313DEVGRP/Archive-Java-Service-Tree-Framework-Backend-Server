@@ -17,6 +17,8 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
+
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
@@ -39,6 +41,83 @@ public class PdServiceVersionLogDTO extends JsTreeHibernateSearchDTO implements 
     }
 
     //@Getter @Setter
+    @Column(name="c_method")
+    private String c_method;
+
+    @Column(name="c_state")
+    private String c_state;
+
+    @Column(name="c_date")
+    private Date c_date;
+
+    @Column(name = "c_start_date")
+    private String c_start_date;
+
+    @Column(name = "c_end_date")
+    private String c_end_date;
+
+    @Column(name = "c_pdservice_link")
+    private String c_pdservice_link;
+
+    @Lob
+    @Column(name="c_contents")
+    private String c_contents;
+
+    public String getC_method() {
+        return c_method;
+    }
+
+    public void setC_method(String c_method) {
+        this.c_method = c_method;
+    }
+
+    public String getC_state() {
+        return c_state;
+    }
+
+    public void setC_state(String c_state) {
+        this.c_state = c_state;
+    }
+
+    public Date getC_date() {
+        return c_date;
+    }
+
+    public void setC_date(Date c_date) {
+        this.c_date = c_date;
+    }
+
+    public String getC_start_date() {
+        return c_start_date;
+    }
+
+    public void setC_start_date(String c_start_date) {
+        this.c_start_date = c_start_date;
+    }
+
+    public String getC_end_date() {
+        return c_end_date;
+    }
+
+    public void setC_end_date(String c_end_date) {
+        this.c_end_date = c_end_date;
+    }
+
+    public String getC_pdservice_link() {
+        return c_pdservice_link;
+    }
+
+    public void setC_pdservice_link(String c_pdservice_link) {
+        this.c_pdservice_link = c_pdservice_link;
+    }
+
+    public String getC_contents() {
+        return c_contents;
+    }
+
+    public void setC_contents(String c_contents) {
+        this.c_contents = c_contents;
+    }
 
     /*
      * Extend Bean Field
