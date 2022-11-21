@@ -36,7 +36,7 @@ import egovframework.api.arms.module_pdservice.service.PdService;
 
 @Slf4j
 @Controller
-@RequestMapping(value = {"/auth-anon/api/arms/pdservice"})
+@RequestMapping(value = {"/auth-anon/api/arms/pdService"})
 public class AnonPdServiceController extends SHVAbstractController<PdService, PdServiceDTO> {
 
     @Autowired

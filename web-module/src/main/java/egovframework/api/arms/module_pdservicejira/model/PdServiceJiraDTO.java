@@ -174,6 +174,60 @@ public class PdServiceJiraDTO extends JsTreeHibernateSearchDTO implements Serial
         this.c_jira_category_desc = c_jira_category_desc;
     }
 
+//    @Column(name = "c_pdjira_con_user")
+//    private String c_pdjira_con_user;
+//
+//    @Column(name = "c_pdjira_con_pass")
+//    private String c_pdjira_con_pass;
+//
+//    @Column(name = "c_pdjira_con_token")
+//    private String c_pdjira_con_token;
+//
+//    @Column(name = "c_pdjira_con_jql")
+//    private String c_pdjira_con_jql;
+//
+//    @Column(name = "jiraConPassMode")
+//    private String jiraConPassMode;
+//
+//    public String getC_pdjira_con_user() {
+//        return c_pdjira_con_user;
+//    }
+//
+//    public void setC_pdjira_con_user(String c_pdjira_con_user) {
+//        this.c_pdjira_con_user = c_pdjira_con_user;
+//    }
+//
+//    public String getC_pdjira_con_pass() {
+//        return c_pdjira_con_pass;
+//    }
+//
+//    public void setC_pdjira_con_pass(String c_pdjira_con_pass) {
+//        this.c_pdjira_con_pass = c_pdjira_con_pass;
+//    }
+//
+//    public String getC_pdjira_con_token() {
+//        return c_pdjira_con_token;
+//    }
+//
+//    public void setC_pdjira_con_token(String c_pdjira_con_token) {
+//        this.c_pdjira_con_token = c_pdjira_con_token;
+//    }
+//
+//    public String getC_pdjira_con_jql() {
+//        return c_pdjira_con_jql;
+//    }
+//
+//    public void setC_pdjira_con_jql(String c_pdjira_con_jql) {
+//        this.c_pdjira_con_jql = c_pdjira_con_jql;
+//    }
+//
+//    public String getJiraConPassMode() {
+//        return jiraConPassMode;
+//    }
+//
+//    public void setJiraConPassMode(String jiraConPassMode) {
+//        this.jiraConPassMode = jiraConPassMode;
+//    }
     /*
      * Extend Bean Field
      */

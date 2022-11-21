@@ -9,9 +9,9 @@
  *  Written by 313 developer group <313@313.co.kr>, December 2010
  * </pre>
  */
-package egovframework.api.arms.module_pdservicelog.controller;
+package egovframework.api.arms.module_pdserviceversionlog.controller;
 
-import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
+import egovframework.api.arms.module_pdservicelog.model.PdServiceLogDTO;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Order;
@@ -36,21 +36,21 @@ import java.util.NoSuchElementException;
 
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 
-import egovframework.api.arms.module_pdservicelog.model.PdServiceLogDTO;
-import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
+import egovframework.api.arms.module_pdserviceversionlog.model.PdServiceVersionLogDTO;
+import egovframework.api.arms.module_pdserviceversionlog.service.PdServiceVersionLog;
 
 @Slf4j
 @Controller
-@RequestMapping(value = {"/auth-user/api/arms/pdServiceLog"})
-public class UserPdServiceLogController extends SHVAbstractController<PdServiceLog, PdServiceLogDTO> {
+@RequestMapping(value = {"/auth-user/api/arms/pdServiceVersionLog"})
+public class UserPdServiceVersionLogController extends SHVAbstractController<PdServiceVersionLog, PdServiceVersionLogDTO> {
 
     @Autowired
-    @Qualifier("pdServiceLog")
-    private PdServiceLog pdServiceLog;
+    @Qualifier("pdServiceVersionLog")
+    private PdServiceVersionLog pdServiceVersionLog;
 
     @PostConstruct
     public void initialize() {
-        setJsTreeHibernateService(pdServiceLog);
+        setJsTreeHibernateService(pdServiceVersionLog);
     }
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -61,10 +61,10 @@ public class UserPdServiceLogController extends SHVAbstractController<PdServiceL
             method = {RequestMethod.GET}
     )
     public ModelAndView getMonitor(
-            PdServiceLogDTO pdServiceLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
+            PdServiceVersionLogDTO pdServiceVersionLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
 
-        pdServiceLogDTO.setOrder(Order.asc("c_left"));
-        List<PdServiceLogDTO> list = this.pdServiceLog.getChildNode(pdServiceLogDTO);
+        pdServiceVersionLogDTO.setOrder(Order.asc("c_left"));
+        List<PdServiceVersionLogDTO> list = this.pdServiceVersionLog.getChildNode(pdServiceVersionLogDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);

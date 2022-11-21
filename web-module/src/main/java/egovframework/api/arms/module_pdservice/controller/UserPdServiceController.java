@@ -15,17 +15,14 @@ import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.api.arms.module_pdservice.service.PdService;
-import egovframework.api.arms.module_pdversion.model.PdVersionDTO;
-import egovframework.api.arms.module_pdversion.service.PdVersion;
+import egovframework.api.arms.module_pdserviceversion.model.PdServiceVersionDTO;
+import egovframework.api.arms.module_pdserviceversion.service.PdServiceVersion;
 import egovframework.api.arms.module_reqadd.model.ReqAddSqlMaaperDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAddSqlMapper;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +55,7 @@ import java.util.NoSuchElementException;
 @Slf4j
 @Controller
 @CrossOrigin(origins = "http://localhost:9999")
-@RequestMapping(value = {"/auth-user/api/arms/pdservice"})
+@RequestMapping(value = {"/auth-user/api/arms/pdService"})
 public class UserPdServiceController extends SHVAbstractController<PdService, PdServiceDTO> {
 
     @Autowired
@@ -70,8 +67,8 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     private FileRepository fileRepository;
 
     @Autowired
-    @Qualifier("pdVersion")
-    private PdVersion pdVersion;
+    @Qualifier("pdServiceVersion")
+    private PdServiceVersion pdServiceVersion;
 
     @Resource(name = "reqAddSqlMapper")
     ReqAddSqlMapper reqAddSqlMapper;
@@ -106,6 +103,7 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
 
             //제품(서비스) 생성시 - 요구사항 TABLE 생성
             ReqAddSqlMaaperDTO reqAddSqlMaaperDTO = new ReqAddSqlMaaperDTO();
+            reqAddSqlMaaperDTO.setSqlMapSelector("arms-reqadd-template");
             reqAddSqlMaaperDTO.setC_title(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
             if(reqAddSqlMapper.isExistTable(reqAddSqlMaaperDTO) == 1){
                 logger.error("already exist JSTF table : " + reqAddSqlMaaperDTO.getC_title());
@@ -130,12 +128,12 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
             pdService.updateNode(addedNode);
 
             //Default Version 생성
-            PdVersionDTO pdVersionDTO = new PdVersionDTO();
+            PdServiceVersionDTO pdVersionDTO = new PdServiceVersionDTO();
             pdVersionDTO.setRef(2L);
             pdVersionDTO.setC_title("BaseVersion");
             pdVersionDTO.setC_type("default");
             pdVersionDTO.setC_pdservice_link(addedNode.getC_id().toString());
-            pdVersion.addNode(pdVersionDTO);
+            pdServiceVersion.addNode(pdVersionDTO);
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", addedNode);

@@ -12,9 +12,7 @@
 package egovframework.api.arms.module_pdservice.service;
 
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
-import egovframework.api.arms.module_pdversion.model.PdVersionDTO;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 public interface PdService extends JsTreeHibernateService {
 

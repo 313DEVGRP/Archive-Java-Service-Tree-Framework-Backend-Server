@@ -1,7 +1,7 @@
 /*
  * @author Dongmin.lee
- * @since 2022-06-17
- * @version 22.06.17
+ * @since 2022-11-20
+ * @version 22.11.20
  * @see <pre>
  *  Copyright (C) 2007 by 313 DEV GRP, Inc - All Rights Reserved
  *  Unauthorized copying of this file, via any medium is strictly prohibited
@@ -9,7 +9,7 @@
  *  Written by 313 developer group <313@313.co.kr>, December 2010
  * </pre>
  */
-package egovframework.api.arms.module_pdservice.controller;
+package egovframework.api.arms.module_pdservicejiralog.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -31,21 +31,21 @@ import java.util.NoSuchElementException;
 
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 
-import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
-import egovframework.api.arms.module_pdservice.service.PdService;
+import egovframework.api.arms.module_pdservicejiralog.model.PdServiceJiraLogDTO;
+import egovframework.api.arms.module_pdservicejiralog.service.PdServiceJiraLog;
 
 @Slf4j
 @Controller
-@RequestMapping(value = {"/auth-admin/api/arms/pdService"})
-public class AdminPdServiceController extends SHVAbstractController<PdService, PdServiceDTO> {
+@RequestMapping(value = {"/auth-anon/api/arms/pdServiceJiraLog"})
+public class AnonPdServiceJiraLogController extends SHVAbstractController<PdServiceJiraLog, PdServiceJiraLogDTO> {
 
     @Autowired
-    @Qualifier("pdService")
-    private PdService pdService;
+    @Qualifier("pdServiceJiraLog")
+    private PdServiceJiraLog pdServiceJiraLog;
 
     @PostConstruct
     public void initialize() {
-        setJsTreeHibernateService(pdService);
+        setJsTreeHibernateService(pdServiceJiraLog);
     }
 
 }

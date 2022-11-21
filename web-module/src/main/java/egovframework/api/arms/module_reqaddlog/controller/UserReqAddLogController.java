@@ -57,19 +57,14 @@ public class UserReqAddLogController extends SHVAbstractController<ReqAddLog, Re
 
     @ResponseBody
     @RequestMapping(
-            value = {"/{changeReqTableName}/getMonitor.do"},
+            value = {"/getMonitor.do"},
             method = {RequestMethod.GET}
     )
     public ModelAndView getMonitor(
-            @PathVariable(value ="changeReqTableName") String changeReqTableName,
-            ReqAddDTO reqAddDTO, ModelMap model, HttpServletRequest request) throws Exception {
+            ReqAddLogDTO reqAddLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
 
-        SessionUtil.setAttribute("replaceTableName",changeReqTableName);
-
-        reqAddDTO.setOrder(Order.asc("c_left"));
-        List<ReqAddDTO> list = this.reqAddLog.getChildNode(reqAddDTO);
-
-        SessionUtil.removeAttribute("replaceTableName");
+        reqAddLogDTO.setOrder(Order.asc("c_left"));
+        List<ReqAddLogDTO> list = this.reqAddLog.getChildNode(reqAddLogDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);

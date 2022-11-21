@@ -9,9 +9,9 @@
  *  Written by 313 developer group <313@313.co.kr>, December 2010
  * </pre>
  */
-package egovframework.api.arms.module_pdservicelog.controller;
+package egovframework.api.arms.module_pdserviceconnectlog.controller;
 
-import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
+import egovframework.api.arms.module_reqaddlog.model.ReqAddLogDTO;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Order;
@@ -36,21 +36,21 @@ import java.util.NoSuchElementException;
 
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 
-import egovframework.api.arms.module_pdservicelog.model.PdServiceLogDTO;
-import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
+import egovframework.api.arms.module_pdserviceconnectlog.model.PdServiceConnectLogDTO;
+import egovframework.api.arms.module_pdserviceconnectlog.service.PdServiceConnectLog;
 
 @Slf4j
 @Controller
-@RequestMapping(value = {"/auth-user/api/arms/pdServiceLog"})
-public class UserPdServiceLogController extends SHVAbstractController<PdServiceLog, PdServiceLogDTO> {
+@RequestMapping(value = {"/auth-user/api/arms/pdServiceConnectLog"})
+public class UserPdServiceConnectLogController extends SHVAbstractController<PdServiceConnectLog, PdServiceConnectLogDTO> {
 
     @Autowired
-    @Qualifier("pdServiceLog")
-    private PdServiceLog pdServiceLog;
+    @Qualifier("pdServiceConnectLog")
+    private PdServiceConnectLog pdServiceConnectLog;
 
     @PostConstruct
     public void initialize() {
-        setJsTreeHibernateService(pdServiceLog);
+        setJsTreeHibernateService(pdServiceConnectLog);
     }
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -61,14 +61,13 @@ public class UserPdServiceLogController extends SHVAbstractController<PdServiceL
             method = {RequestMethod.GET}
     )
     public ModelAndView getMonitor(
-            PdServiceLogDTO pdServiceLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
+            PdServiceConnectLogDTO pdServiceConnectLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
 
-        pdServiceLogDTO.setOrder(Order.asc("c_left"));
-        List<PdServiceLogDTO> list = this.pdServiceLog.getChildNode(pdServiceLogDTO);
+        pdServiceConnectLogDTO.setOrder(Order.asc("c_left"));
+        List<PdServiceConnectLogDTO> list = this.pdServiceConnectLog.getChildNode(pdServiceConnectLogDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
         return modelAndView;
     }
-
 }
