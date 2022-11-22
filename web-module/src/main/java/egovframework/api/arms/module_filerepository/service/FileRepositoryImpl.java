@@ -34,7 +34,7 @@ public class FileRepositoryImpl extends JsTreeHibernateServiceImpl implements Fi
 
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional(rollbackFor = { Exception.class }, isolation = Isolation.SERIALIZABLE)
+    @Transactional(rollbackFor = { Exception.class }, isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     public <T extends JsTreeHibernateSearchDTO> T addNodeWithRef(T jsTreeHibernateDTO) throws Exception {
 
         jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
