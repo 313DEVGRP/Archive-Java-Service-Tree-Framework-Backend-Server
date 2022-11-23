@@ -393,14 +393,14 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
          */
 
         ParameterParser parser = new ParameterParser(request);
-        logger.info("PageIndex = " + parser.getInt("PageIndex"));
-        logger.info("PageUnit = " + parser.getLong("PageUnit"));
-        logger.info("PageSize = " + parser.getLong("PageSize"));
+//        logger.info("PageIndex = " + parser.getInt("PageIndex"));
+//        logger.info("PageUnit = " + parser.getLong("PageUnit"));
+//        logger.info("PageSize = " + parser.getLong("PageSize"));
 
         // 문자열
-        String startDateStr = "2022년 11월 23일 17시 00분 00초";
+        String startDateStr = parser.get("startDate");
         // 포맷터
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         // 문자열 -> Date
         Date startDate = formatter.parse(startDateStr);
 
@@ -408,15 +408,12 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         logger.info("startTimestamp === " + startTimestamp); // format을 사용해 출력
 
         // 문자열
-        String endDateStr = "2022년 11월 24일 23시 00분 00초";
+        String endDateStr = parser.get("endDate");
         // 문자열 -> Date
         Date endDate = formatter.parse(endDateStr);
 
         Timestamp endTimestamp = new Timestamp(endDate.getTime());
         logger.info("endTimestamp === " + endTimestamp); // format을 사용해 출력
-
-
-
 
         FileRepositoryLogDTO fileRepositoryLogDTO = new FileRepositoryLogDTO();
         fileRepositoryLogDTO.setWhereBetween("c_date", startDate, endDate);
