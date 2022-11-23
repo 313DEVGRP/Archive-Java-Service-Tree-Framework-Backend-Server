@@ -64,8 +64,8 @@ public class UserPdServiceConnectLogController extends SHVAbstractController<PdS
             PdServiceConnectLogDTO pdServiceConnectLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
 
         pdServiceConnectLogDTO.setOrder(Order.asc("c_left"));
+        pdServiceConnectLogDTO.setWhere("c_id", pdServiceConnectLogDTO.getC_id());
         List<PdServiceConnectLogDTO> list = this.pdServiceConnectLog.getChildNode(pdServiceConnectLogDTO);
-
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);
         return modelAndView;

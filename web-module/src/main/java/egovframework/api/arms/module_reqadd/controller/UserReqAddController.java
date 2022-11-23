@@ -13,6 +13,10 @@ package egovframework.api.arms.module_reqadd.controller;
 
 import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
+import egovframework.api.arms.module_filerepositorylog.model.FileRepositoryLogDTO;
+import egovframework.api.arms.module_filerepositorylog.service.FileRepositoryLog;
+import egovframework.api.arms.module_pdservicelog.model.PdServiceLogDTO;
+import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.util.PropertiesReader;
@@ -21,11 +25,13 @@ import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.SetUtils;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -36,16 +42,21 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.unitils.util.ReflectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -196,9 +207,10 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             ReqAddDTO refReqAddDTO = new ReqAddDTO();
             refReqAddDTO.setC_id(reqAddDTO.getRef());
-            ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
+            //ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
 
-            ReqAddDTO returnNode = reqAdd.addNodeToSwitchTable(reqAddDTO, nodeByRef);
+            //ReqAddDTO returnNode = reqAdd.addNodeToSwitchTable(reqAddDTO, nodeByRef);
+            ReqAddDTO returnNode = reqAdd.addNode(reqAddDTO);
 
             SessionUtil.removeAttribute("addNode");
 
@@ -245,12 +257,14 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             SessionUtil.setAttribute("moveNode",changeReqTableName);
 
-            ReqAddDTO refReqAddDTO = new ReqAddDTO();
-            refReqAddDTO.setC_id(reqAddDTO.getRef());
-            ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
+//            ReqAddDTO refReqAddDTO = new ReqAddDTO();
+//            refReqAddDTO.setC_id(reqAddDTO.getRef());
+//            ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
 
-            this.reqAdd.moveNodeToSwitchTable(reqAddDTO, nodeByRef, request);
+            //this.reqAdd.moveNodeToSwitchTable(reqAddDTO, nodeByRef, request);
+            this.reqAdd.moveNode(reqAddDTO, request);
             super.setJsonDefaultSetting(reqAddDTO);
+
 
             SessionUtil.removeAttribute("moveNode");
 
@@ -325,6 +339,44 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", map);
 
+        return modelAndView;
+    }
+
+    @Autowired
+    @Qualifier("fileRepositoryLog")
+    private FileRepositoryLog fileRepositoryLog;
+
+    @Autowired
+    @Qualifier("pdServiceLog")
+    private PdServiceLog pdServiceLog;
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/getHistory.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView getHistory(
+            ModelMap model, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+
+        FileRepositoryLogDTO fileRepositoryLogDTO = new FileRepositoryLogDTO();
+        fileRepositoryLogDTO.setOrder(Order.asc("c_left"));
+        fileRepositoryLogDTO.setWhere("c_title", "pdService");
+        fileRepositoryLogDTO.setWhere("fileIdLink", parser.getLong("fileIdLink"));
+        List<FileRepositoryLogDTO> fileRepositoryLogList = fileRepositoryLog.getChildNode(fileRepositoryLogDTO);
+        Set<FileRepositoryLogDTO> fileRepositoryLogSet = new HashSet<>(fileRepositoryLogList);
+
+        PdServiceLogDTO pdServiceLogDTO = new PdServiceLogDTO();
+        pdServiceLogDTO.setOrder(Order.asc("c_left"));
+        pdServiceLogDTO.setWhere("c_id", parser.getLong("c_id"));
+        List<PdServiceLogDTO> pdServiceLogDTOList = this.pdServiceLog.getChildNode(pdServiceLogDTO);
+        Set<PdServiceLogDTO> pdServiceLogDTOSet = new HashSet<>(pdServiceLogDTOList);
+
+        SetUtils.SetView<JsTreeHibernateSearchDTO> list = SetUtils.union(fileRepositoryLogSet, pdServiceLogDTOSet);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
         return modelAndView;
     }
 

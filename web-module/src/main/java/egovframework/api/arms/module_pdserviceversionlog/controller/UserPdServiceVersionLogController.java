@@ -61,9 +61,11 @@ public class UserPdServiceVersionLogController extends SHVAbstractController<PdS
             method = {RequestMethod.GET}
     )
     public ModelAndView getMonitor(
-            PdServiceVersionLogDTO pdServiceVersionLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
+            PdServiceVersionLogDTO pdServiceVersionLogDTO,
+            ModelMap model, HttpServletRequest request) throws Exception {
 
-        pdServiceVersionLogDTO.setOrder(Order.asc("c_left"));
+        pdServiceVersionLogDTO.setWhere("c_pdservice_link", pdServiceVersionLogDTO.getC_pdservice_link());
+        pdServiceVersionLogDTO.setOrder(Order.asc("c_date"));
         List<PdServiceVersionLogDTO> list = this.pdServiceVersionLog.getChildNode(pdServiceVersionLogDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");

@@ -50,39 +50,6 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
     @Column(name="C_DATE")
     private Date c_date;
 
-    @Column(name="C_FILE_ID_LINK")
-    private Long fileIdLink;
-
-    @Column(name="C_FILE_NAME")
-    private String fileName;
-
-    @Column(name="C_CONTENT_TYPE")
-    private String contentType;
-
-    @Column(name="C_SERVER_SUB_PATH")
-    private String serverSubPath;
-
-    @Column(name="C_PHYSICAL_NAME")
-    private String physicalName;
-
-    @Column(name="C_SIZE")
-    private Long size;
-
-    @Column(name="C_NAME")
-    private String name;
-
-    @Column(name="C_URL")
-    private String url;
-
-    @Column(name="C_THUMBNAIL_URL")
-    private String thumbnailUrl;
-
-    @Column(name="C_DELETE_URL")
-    private String delete_url;
-
-    @Column(name="C_DELETE_TYPE")
-    private String delete_type;
-
     public String getC_method() {
         return c_method;
     }
@@ -107,6 +74,20 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.c_date = c_date;
     }
 
+    //필드명과 컬럼명이 다를 경우는 하기와 같이 처리.
+    private Long fileIdLink;
+    private String fileName;
+    private String contentType;
+    private String serverSubPath;
+    private String physicalName;
+    private Long size;
+    private String name;
+    private String url;
+    private String thumbnailUrl;
+    private String delete_url;
+    private String delete_type;
+
+    @Column(name="C_FILE_ID_LINK")
     public Long getFileIdLink() {
         return fileIdLink;
     }
@@ -115,6 +96,8 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.fileIdLink = fileIdLink;
     }
 
+
+    @Column(name="C_FILE_NAME")
     public String getFileName() {
         return fileName;
     }
@@ -123,6 +106,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.fileName = fileName;
     }
 
+    @Column(name="C_CONTENT_TYPE")
     public String getContentType() {
         return contentType;
     }
@@ -131,6 +115,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.contentType = contentType;
     }
 
+    @Column(name="C_SERVER_SUB_PATH")
     public String getServerSubPath() {
         return serverSubPath;
     }
@@ -139,6 +124,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.serverSubPath = serverSubPath;
     }
 
+    @Column(name="C_PHYSICAL_NAME")
     public String getPhysicalName() {
         return physicalName;
     }
@@ -147,6 +133,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.physicalName = physicalName;
     }
 
+    @Column(name="C_SIZE")
     public Long getSize() {
         return size;
     }
@@ -155,6 +142,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.size = size;
     }
 
+    @Column(name="C_NAME")
     public String getName() {
         return name;
     }
@@ -163,6 +151,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.name = name;
     }
 
+    @Column(name="C_URL")
     public String getUrl() {
         return url;
     }
@@ -171,6 +160,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.url = url;
     }
 
+    @Column(name="C_THUMBNAIL_URL")
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
@@ -179,6 +169,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    @Column(name="C_DELETE_URL")
     public String getDelete_url() {
         return delete_url;
     }
@@ -187,6 +178,7 @@ public class FileRepositoryLogDTO extends JsTreeHibernateSearchDTO implements Se
         this.delete_url = delete_url;
     }
 
+    @Column(name="C_DELETE_TYPE")
     public String getDelete_type() {
         return delete_type;
     }

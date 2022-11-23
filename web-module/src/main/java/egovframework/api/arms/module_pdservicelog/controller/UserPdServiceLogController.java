@@ -64,6 +64,7 @@ public class UserPdServiceLogController extends SHVAbstractController<PdServiceL
             PdServiceLogDTO pdServiceLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
 
         pdServiceLogDTO.setOrder(Order.asc("c_left"));
+        pdServiceLogDTO.setWhere("c_id", pdServiceLogDTO.getC_id());
         List<PdServiceLogDTO> list = this.pdServiceLog.getChildNode(pdServiceLogDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");

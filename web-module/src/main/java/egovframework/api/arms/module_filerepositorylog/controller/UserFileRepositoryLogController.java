@@ -11,13 +11,16 @@
  */
 package egovframework.api.arms.module_filerepositorylog.controller;
 
+import egovframework.api.arms.module_pdserviceconnectlog.model.PdServiceConnectLogDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,4 +53,20 @@ public class UserFileRepositoryLogController extends SHVAbstractController<FileR
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @ResponseBody
+    @RequestMapping(
+            value = {"/getMonitor.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView getMonitor(
+            FileRepositoryLogDTO fileRepositoryLogDTO, ModelMap model, HttpServletRequest request) throws Exception {
+
+        fileRepositoryLogDTO.setOrder(Order.asc("c_left"));
+        fileRepositoryLogDTO.setWhere("c_title", "pdService");
+        fileRepositoryLogDTO.setWhere("C_FILE_ID_LINK", fileRepositoryLogDTO.getFileIdLink());
+        List<FileRepositoryLogDTO> list = this.fileRepositoryLog.getChildNode(fileRepositoryLogDTO);
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
 }
