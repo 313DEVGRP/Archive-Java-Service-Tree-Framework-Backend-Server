@@ -15,23 +15,28 @@ import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_filerepositorylog.model.FileRepositoryLogDTO;
 import egovframework.api.arms.module_filerepositorylog.service.FileRepositoryLog;
+import egovframework.api.arms.module_pdserviceconnectlog.model.PdServiceConnectLogDTO;
+import egovframework.api.arms.module_pdserviceconnectlog.service.PdServiceConnectLog;
+import egovframework.api.arms.module_pdservicejiralog.service.PdServiceJiraLog;
 import egovframework.api.arms.module_pdservicelog.model.PdServiceLogDTO;
 import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
+import egovframework.api.arms.module_pdserviceversionlog.model.PdServiceVersionLogDTO;
+import egovframework.api.arms.module_pdserviceversionlog.service.PdServiceVersionLog;
+import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
+import egovframework.api.arms.module_reqaddlog.service.ReqAddLog;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.SetUtils;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -42,21 +47,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.unitils.util.ReflectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -347,8 +349,25 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
     private FileRepositoryLog fileRepositoryLog;
 
     @Autowired
+    @Qualifier("pdServiceConnectLog")
+    private PdServiceConnectLog pdServiceConnectLog;
+
+    @Autowired
+    @Qualifier("pdServiceJiraLog")
+    private PdServiceJiraLog pdServiceJiraLog;
+
+    @Autowired
+    @Qualifier("pdServiceVersionLog")
+    private PdServiceVersionLog pdServiceVersionLog;
+
+    @Autowired
     @Qualifier("pdServiceLog")
     private PdServiceLog pdServiceLog;
+
+    @Autowired
+    @Qualifier("reqAddLog")
+    private ReqAddLog reqAddLog;
+
 
     @ResponseBody
     @RequestMapping(
@@ -358,25 +377,90 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
     public ModelAndView getHistory(
             ModelMap model, HttpServletRequest request) throws Exception {
 
+        /**
+         * Required Fields
+         * - 이 필드들은 페이징 계산을 위해 반드시 입력되어야 하는 필드 값들이다.
+         *
+         * currentPageNo : 현재 페이지 번호
+         * recordCountPerPage : 한 페이지당 게시되는 게시물 건 수
+         * pageSize : 페이지 리스트에 게시되는 페이지 건수,
+         * totalRecordCount : 전체 게시물 건 수.
+         *
+         * PaginationInfo paginationInfo = jsTreeHibernateDTO.getPaginationInfo();
+         * paginationInfo.setCurrentPageNo(jsTreeHibernateDTO.getPageIndex());
+         * paginationInfo.setRecordCountPerPage(jsTreeHibernateDTO.getPageUnit());
+         * paginationInfo.setPageSize(jsTreeHibernateDTO.getPageSize());
+         */
+
         ParameterParser parser = new ParameterParser(request);
+        logger.info("PageIndex = " + parser.getInt("PageIndex"));
+        logger.info("PageUnit = " + parser.getLong("PageUnit"));
+        logger.info("PageSize = " + parser.getLong("PageSize"));
+
+        // 문자열
+        String startDateStr = "2022년 11월 23일 17시 00분 00초";
+        // 포맷터
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+        // 문자열 -> Date
+        Date startDate = formatter.parse(startDateStr);
+
+        Timestamp startTimestamp = new Timestamp(startDate.getTime());
+        logger.info("startTimestamp === " + startTimestamp); // format을 사용해 출력
+
+        // 문자열
+        String endDateStr = "2022년 11월 24일 23시 00분 00초";
+        // 문자열 -> Date
+        Date endDate = formatter.parse(endDateStr);
+
+        Timestamp endTimestamp = new Timestamp(endDate.getTime());
+        logger.info("endTimestamp === " + endTimestamp); // format을 사용해 출력
+
+
+
 
         FileRepositoryLogDTO fileRepositoryLogDTO = new FileRepositoryLogDTO();
+        fileRepositoryLogDTO.setWhereBetween("c_date", startDate, endDate);
         fileRepositoryLogDTO.setOrder(Order.asc("c_left"));
         fileRepositoryLogDTO.setWhere("c_title", "pdService");
         fileRepositoryLogDTO.setWhere("fileIdLink", parser.getLong("fileIdLink"));
         List<FileRepositoryLogDTO> fileRepositoryLogList = fileRepositoryLog.getChildNode(fileRepositoryLogDTO);
-        Set<FileRepositoryLogDTO> fileRepositoryLogSet = new HashSet<>(fileRepositoryLogList);
+
+        PdServiceConnectLogDTO pdServiceConnectLogDTO = new PdServiceConnectLogDTO();
+        fileRepositoryLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+        pdServiceConnectLogDTO.setOrder(Order.asc("c_left"));
+        pdServiceConnectLogDTO.setWhere("c_pdservice_id", parser.get("c_id"));
+        List<PdServiceConnectLogDTO> pdServiceConnectLogDTOList = this.pdServiceConnectLog.getChildNode(pdServiceConnectLogDTO);
+
+        PdServiceVersionLogDTO pdServiceVersionLogDTO = new PdServiceVersionLogDTO();
+        fileRepositoryLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+        pdServiceVersionLogDTO.setOrder(Order.asc("c_left"));
+        pdServiceVersionLogDTO.setWhere("c_pdservice_link", parser.get("c_id"));
+        List<PdServiceVersionLogDTO> pdServiceVersionLogDTOList = this.pdServiceVersionLog.getChildNode(pdServiceVersionLogDTO);
 
         PdServiceLogDTO pdServiceLogDTO = new PdServiceLogDTO();
+        fileRepositoryLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
         pdServiceLogDTO.setOrder(Order.asc("c_left"));
         pdServiceLogDTO.setWhere("c_id", parser.getLong("c_id"));
         List<PdServiceLogDTO> pdServiceLogDTOList = this.pdServiceLog.getChildNode(pdServiceLogDTO);
-        Set<PdServiceLogDTO> pdServiceLogDTOSet = new HashSet<>(pdServiceLogDTOList);
 
-        SetUtils.SetView<JsTreeHibernateSearchDTO> list = SetUtils.union(fileRepositoryLogSet, pdServiceLogDTOSet);
+        List<JsTreeHibernateLogDTO> mergeList = new ArrayList<>();
+        mergeList.addAll(fileRepositoryLogList);
+        mergeList.addAll(pdServiceLogDTOList);
+        mergeList.addAll(pdServiceConnectLogDTOList);
+        mergeList.addAll(pdServiceVersionLogDTOList);
+
+
+//        int currentBlock = parser.getInt("PageIndex")/parser.getInt("PageSize");
+//        int pageBlock = parser.getInt("PageUnit");
+//        int startNum =  currentBlock*pageBlock+1;
+//        int endNum = currentBlock*pageBlock+pageBlock+1;
+        List<JsTreeHibernateLogDTO> ascTD = mergeList.stream() // Sort Order By asc - Comparator의 comparing 사용, ::를 활용한 참조 방식 사용, stream을 활용한 List의 sorted사용 및 collect를 활용한 Collectors.toList() 사용
+                .sorted(Comparator.comparing(JsTreeHibernateLogDTO::getC_date))
+                .collect(Collectors.toList());
+
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", list);
+        modelAndView.addObject("result", ascTD);
         return modelAndView;
     }
 

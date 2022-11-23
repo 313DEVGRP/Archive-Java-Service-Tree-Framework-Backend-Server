@@ -11,6 +11,7 @@
  */
 package egovframework.api.arms.module_pdserviceversionlog.model;
 
+import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -23,13 +24,13 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
-@Table(name = "T_ARMS_PDVERSION_LOG")
+@Table(name = "T_ARMS_PDSERVICEVERSION_LOG")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDVERSION_LOG", allocationSize = 1)
-public class PdServiceVersionLogDTO extends JsTreeHibernateSearchDTO implements Serializable {
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDSERVICEVERSION_LOG", allocationSize = 1)
+public class PdServiceVersionLogDTO extends JsTreeHibernateLogDTO implements Serializable {
 
     public PdServiceVersionLogDTO() {
         super();
@@ -41,15 +42,6 @@ public class PdServiceVersionLogDTO extends JsTreeHibernateSearchDTO implements 
     }
 
     //@Getter @Setter
-    @Column(name="c_method")
-    private String c_method;
-
-    @Column(name="c_state")
-    private String c_state;
-
-    @Column(name="c_date")
-    private Date c_date;
-
     @Column(name = "c_start_date")
     private String c_start_date;
 
@@ -62,30 +54,6 @@ public class PdServiceVersionLogDTO extends JsTreeHibernateSearchDTO implements 
     @Lob
     @Column(name="c_contents")
     private String c_contents;
-
-    public String getC_method() {
-        return c_method;
-    }
-
-    public void setC_method(String c_method) {
-        this.c_method = c_method;
-    }
-
-    public String getC_state() {
-        return c_state;
-    }
-
-    public void setC_state(String c_state) {
-        this.c_state = c_state;
-    }
-
-    public Date getC_date() {
-        return c_date;
-    }
-
-    public void setC_date(Date c_date) {
-        this.c_date = c_date;
-    }
 
     public String getC_start_date() {
         return c_start_date;

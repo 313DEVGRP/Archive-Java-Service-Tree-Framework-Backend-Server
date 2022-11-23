@@ -11,6 +11,7 @@
  */
 package egovframework.api.arms.module_pdserviceconnectlog.model;
 
+import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -29,7 +30,7 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDSERVICECONNECT_LOG", allocationSize = 1)
-public class PdServiceConnectLogDTO extends JsTreeHibernateSearchDTO implements Serializable {
+public class PdServiceConnectLogDTO extends JsTreeHibernateLogDTO implements Serializable {
 
     public PdServiceConnectLogDTO() {
         super();
@@ -41,15 +42,6 @@ public class PdServiceConnectLogDTO extends JsTreeHibernateSearchDTO implements 
     }
 
     //@Getter @Setter
-    @Column(name="c_method")
-    private String c_method;
-
-    @Column(name="c_state")
-    private String c_state;
-
-    @Column(name="c_date")
-    private Date c_date;
-
     @Column(name="c_contents")
     private String c_contents;
 
@@ -61,6 +53,39 @@ public class PdServiceConnectLogDTO extends JsTreeHibernateSearchDTO implements 
 
     @Column(name="c_pdservice_jira_ids")
     private String c_pdservice_jira_ids;
+
+    public String getC_contents() {
+        return c_contents;
+    }
+
+    public void setC_contents(String c_contents) {
+        this.c_contents = c_contents;
+    }
+
+    public String getC_pdservice_id() {
+        return c_pdservice_id;
+    }
+
+    public void setC_pdservice_id(String c_pdservice_id) {
+        this.c_pdservice_id = c_pdservice_id;
+    }
+
+    public String getC_pdservice_version_id() {
+        return c_pdservice_version_id;
+    }
+
+    public void setC_pdservice_version_id(String c_pdservice_version_id) {
+        this.c_pdservice_version_id = c_pdservice_version_id;
+    }
+
+    public String getC_pdservice_jira_ids() {
+        return c_pdservice_jira_ids;
+    }
+
+    public void setC_pdservice_jira_ids(String c_pdservice_jira_ids) {
+        this.c_pdservice_jira_ids = c_pdservice_jira_ids;
+    }
+
     /*
      * Extend Bean Field
      */
