@@ -11,7 +11,6 @@
  */
 package egovframework.api.arms.module_reqadd.controller;
 
-import egovframework.api.arms.module_filerepository.model.FileRepositoryDTO;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_filerepositorylog.model.FileRepositoryLogDTO;
 import egovframework.api.arms.module_filerepositorylog.service.FileRepositoryLog;
@@ -25,9 +24,9 @@ import egovframework.api.arms.module_pdserviceversionlog.service.PdServiceVersio
 import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
+import egovframework.api.arms.module_reqaddlog.model.ReqAddLogDTO;
 import egovframework.api.arms.module_reqaddlog.service.ReqAddLog;
 import egovframework.api.arms.util.FileHandler;
-import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
@@ -35,7 +34,6 @@ import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNo
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.ext.jstree.support.util.StringUtils;
-import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Criterion;
@@ -50,7 +48,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -168,6 +169,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
     public ModelAndView
     getSwitchDBChildNodeWithParent(@PathVariable(value ="changeReqTableName") String changeReqTableName,
                                    ReqAddDTO reqAddDTO, HttpServletRequest request) throws Exception {
+
         ParameterParser parser = new ParameterParser(request);
         if (parser.getInt("c_id") <= 0) {
             throw new RuntimeException();
@@ -260,14 +262,8 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             SessionUtil.setAttribute("moveNode",changeReqTableName);
 
-//            ReqAddDTO refReqAddDTO = new ReqAddDTO();
-//            refReqAddDTO.setC_id(reqAddDTO.getRef());
-//            ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
-
-            //this.reqAdd.moveNodeToSwitchTable(reqAddDTO, nodeByRef, request);
             this.reqAdd.moveNode(reqAddDTO, request);
             super.setJsonDefaultSetting(reqAddDTO);
-
 
             SessionUtil.removeAttribute("moveNode");
 
@@ -329,41 +325,23 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
     @ResponseBody
     @RequestMapping(
-            value = {"/getHistory.do"},
+            value = {"/{changeReqTableName}/getHistory.do"},
             method = {RequestMethod.GET}
     )
     public ModelAndView getHistory(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
             ModelMap model, HttpServletRequest request) throws Exception {
 
-        /**
-         * Required Fields
-         * - 이 필드들은 페이징 계산을 위해 반드시 입력되어야 하는 필드 값들이다.
-         *
-         * currentPageNo : 현재 페이지 번호
-         * recordCountPerPage : 한 페이지당 게시되는 게시물 건 수
-         * pageSize : 페이지 리스트에 게시되는 페이지 건수,
-         * totalRecordCount : 전체 게시물 건 수.
-         *
-         * PaginationInfo paginationInfo = jsTreeHibernateDTO.getPaginationInfo();
-         * paginationInfo.setCurrentPageNo(jsTreeHibernateDTO.getPageIndex());
-         * paginationInfo.setRecordCountPerPage(jsTreeHibernateDTO.getPageUnit());
-         * paginationInfo.setPageSize(jsTreeHibernateDTO.getPageSize());
-         */
-
         ParameterParser parser = new ParameterParser(request);
-//        logger.info("PageIndex = " + parser.getInt("PageIndex"));
-//        logger.info("PageUnit = " + parser.getLong("PageUnit"));
-//        logger.info("PageSize = " + parser.getLong("PageSize"));
 
         // 문자열
         String startDateStr = parser.get("startDate");
         // 포맷터
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         // 문자열 -> Date
         Date startDate = formatter.parse(startDateStr);
 
         Timestamp startTimestamp = new Timestamp(startDate.getTime());
-        logger.info("startTimestamp === " + startTimestamp); // format을 사용해 출력
 
         // 문자열
         String endDateStr = parser.get("endDate");
@@ -371,48 +349,60 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         Date endDate = formatter.parse(endDateStr);
 
         Timestamp endTimestamp = new Timestamp(endDate.getTime());
-        logger.info("endTimestamp === " + endTimestamp); // format을 사용해 출력
+
+
+        Criterion criterion = Restrictions.not(
+                // replace "id" below with property name, depending on what you're filtering against
+                Restrictions.in("c_id", new Object[] {1L, 2L})
+        );
 
         FileRepositoryLogDTO fileRepositoryLogDTO = new FileRepositoryLogDTO();
         fileRepositoryLogDTO.setWhereBetween("c_date", startDate, endDate);
         fileRepositoryLogDTO.setOrder(Order.asc("c_left"));
         fileRepositoryLogDTO.setWhere("c_title", "pdService");
         fileRepositoryLogDTO.setWhere("fileIdLink", parser.getLong("fileIdLink"));
+        fileRepositoryLogDTO.getCriterions().add(criterion);
         List<FileRepositoryLogDTO> fileRepositoryLogList = fileRepositoryLog.getChildNode(fileRepositoryLogDTO);
 
         PdServiceConnectLogDTO pdServiceConnectLogDTO = new PdServiceConnectLogDTO();
-        fileRepositoryLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+        pdServiceConnectLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
         pdServiceConnectLogDTO.setOrder(Order.asc("c_left"));
         pdServiceConnectLogDTO.setWhere("c_pdservice_id", parser.get("c_id"));
+        pdServiceConnectLogDTO.getCriterions().add(criterion);
         List<PdServiceConnectLogDTO> pdServiceConnectLogDTOList = this.pdServiceConnectLog.getChildNode(pdServiceConnectLogDTO);
 
         PdServiceVersionLogDTO pdServiceVersionLogDTO = new PdServiceVersionLogDTO();
-        fileRepositoryLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+        pdServiceVersionLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
         pdServiceVersionLogDTO.setOrder(Order.asc("c_left"));
         pdServiceVersionLogDTO.setWhere("c_pdservice_link", parser.get("c_id"));
+        pdServiceVersionLogDTO.getCriterions().add(criterion);
         List<PdServiceVersionLogDTO> pdServiceVersionLogDTOList = this.pdServiceVersionLog.getChildNode(pdServiceVersionLogDTO);
 
         PdServiceLogDTO pdServiceLogDTO = new PdServiceLogDTO();
-        fileRepositoryLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+        pdServiceLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
         pdServiceLogDTO.setOrder(Order.asc("c_left"));
         pdServiceLogDTO.setWhere("c_id", parser.getLong("c_id"));
+        pdServiceLogDTO.getCriterions().add(criterion);
         List<PdServiceLogDTO> pdServiceLogDTOList = this.pdServiceLog.getChildNode(pdServiceLogDTO);
+
+        SessionUtil.setAttribute("getHistory",changeReqTableName);
+        ReqAddLogDTO reqAddLogDTO = new ReqAddLogDTO();
+        reqAddLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+        reqAddLogDTO.setOrder(Order.asc("c_left"));
+        reqAddLogDTO.getCriterions().add(criterion);
+        List<ReqAddLogDTO> reqAddLogDTOList = this.reqAddLog.getChildNode(reqAddLogDTO);
+        SessionUtil.removeAttribute("getHistory");
 
         List<JsTreeHibernateLogDTO> mergeList = new ArrayList<>();
         mergeList.addAll(fileRepositoryLogList);
         mergeList.addAll(pdServiceLogDTOList);
         mergeList.addAll(pdServiceConnectLogDTOList);
         mergeList.addAll(pdServiceVersionLogDTOList);
+        mergeList.addAll(reqAddLogDTOList);
 
-
-//        int currentBlock = parser.getInt("PageIndex")/parser.getInt("PageSize");
-//        int pageBlock = parser.getInt("PageUnit");
-//        int startNum =  currentBlock*pageBlock+1;
-//        int endNum = currentBlock*pageBlock+pageBlock+1;
         List<JsTreeHibernateLogDTO> ascTD = mergeList.stream() // Sort Order By asc - Comparator의 comparing 사용, ::를 활용한 참조 방식 사용, stream을 활용한 List의 sorted사용 및 collect를 활용한 Collectors.toList() 사용
                 .sorted(Comparator.comparing(JsTreeHibernateLogDTO::getC_date))
                 .collect(Collectors.toList());
-
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", ascTD);
