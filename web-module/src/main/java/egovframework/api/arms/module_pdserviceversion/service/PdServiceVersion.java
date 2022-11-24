@@ -11,15 +11,8 @@
  */
 package egovframework.api.arms.module_pdserviceversion.service;
 
-import egovframework.api.arms.module_pdserviceversion.model.PdServiceVersionDTO;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
-
-import java.util.List;
 
 public interface PdServiceVersion extends JsTreeHibernateService {
-
-    public <T extends JsTreeHibernateSearchDTO> List<T> getVersion(T jsTreeHibernateDTO) throws Exception;
-    public <T extends PdServiceVersionDTO> int updateVersionNode(T jsTreeHibernateDTO) throws Exception;
 
 }

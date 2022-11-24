@@ -26,6 +26,7 @@ import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.module_reqaddlog.service.ReqAddLog;
+import egovframework.api.arms.util.FileHandler;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
@@ -287,57 +288,14 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
     @ResponseBody
     @RequestMapping(value="/uploadFileToNode.do")
     public ModelAndView uploadFileToNode(final MultipartHttpServletRequest multiRequest,
-                                         @RequestParam("fileIdLink") Long fileIdLink,
-                                         @RequestParam("c_title") String c_title,Model model) throws Exception {
+        HttpServletRequest request, Model model) throws Exception {
 
-        logger.info("fileIdLink -> " + fileIdLink);
+        ParameterParser parser = new ParameterParser(request);
+        long fileIdLink = parser.getLong("fileIdLink");
+        String c_title = parser.get("c_title");
 
-        // Spring multipartResolver 미사용 시 (commons-fileupload 활용)
-        //List<EgovFormBasedFileVo> list = EgovFormBasedFileUtil.uploadFiles(request, uploadDir, maxFileSize);
+        HashMap<String, List<EgovFormBasedFileVo>> map = FileHandler.upload(multiRequest, fileIdLink, c_title, fileRepository, logger);
 
-        // Spring multipartResolver 사용시
-        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
-        String uploadDir = propertiesReader.getProperty("Globals.fileStorePath");
-        long maxFileSize = new Long(313);
-        List<EgovFormBasedFileVo> list = EgovFileUploadUtil.uploadFiles(multiRequest, uploadDir, maxFileSize);
-
-        for ( EgovFormBasedFileVo egovFormBasedFileVo : list) {
-
-            FileRepositoryDTO fileRepositoryDTO = new FileRepositoryDTO();
-            fileRepositoryDTO.setFileName(egovFormBasedFileVo.getFileName());
-            fileRepositoryDTO.setContentType(egovFormBasedFileVo.getContentType());
-            fileRepositoryDTO.setServerSubPath(egovFormBasedFileVo.getServerSubPath());
-            fileRepositoryDTO.setPhysicalName(egovFormBasedFileVo.getPhysicalName());
-            fileRepositoryDTO.setSize(egovFormBasedFileVo.getSize());
-            fileRepositoryDTO.setName(egovFormBasedFileVo.getName());
-
-            fileRepositoryDTO.setUrl(egovFormBasedFileVo.getUrl());
-            //TODO: 썸네일 개발 필요
-            fileRepositoryDTO.setThumbnailUrl(egovFormBasedFileVo.getThumbnailUrl());
-
-            fileRepositoryDTO.setDelete_url(egovFormBasedFileVo.getDelete_url());
-            fileRepositoryDTO.setDelete_type(egovFormBasedFileVo.getDelete_type());
-            fileRepositoryDTO.setFileIdLink(fileIdLink);
-
-            fileRepositoryDTO.setRef(new Long(1));
-            fileRepositoryDTO.setC_title(c_title);
-            fileRepositoryDTO.setC_type("default");
-
-            FileRepositoryDTO returnFileRepositoryDTO = fileRepository.addNode(fileRepositoryDTO);
-            //delete 파라미터인 id 값을 업데이트 치기 위해서.
-            fileRepositoryDTO.setUrl("/auth-user/api/arms/fileRepository" + "/downloadFileByNode/" + returnFileRepositoryDTO.getId());
-            fileRepositoryDTO.setThumbnailUrl("/auth-user/api/arms/fileRepository" + "/thumbnailUrlFileToNode/" + returnFileRepositoryDTO.getId());
-            fileRepositoryDTO.setDelete_url("/auth-user/api/arms/fileRepository" + "/deleteFileByNode/" + returnFileRepositoryDTO.getId());
-
-            fileRepository.updateNode(fileRepositoryDTO);
-
-            egovFormBasedFileVo.setUrl("/auth-user/api/arms/fileRepository" + "/downloadFileByNode/" + returnFileRepositoryDTO.getId());
-            egovFormBasedFileVo.setThumbnailUrl("/auth-user/api/arms/fileRepository" + "/thumbnailUrlFileToNode/" + returnFileRepositoryDTO.getId());
-            egovFormBasedFileVo.setDelete_url("/auth-user/api/arms/fileRepository" + "/deleteFileByNode/" + returnFileRepositoryDTO.getId());
-
-        }
-        HashMap<String, List<EgovFormBasedFileVo>> map = new HashMap();
-        map.put("files", list);
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", map);
 

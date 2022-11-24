@@ -12,9 +12,7 @@
 package egovframework.api.arms.module_filerepository.service;
 
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 public interface FileRepository extends JsTreeHibernateService {
 
-    public <T extends JsTreeHibernateSearchDTO> T addNodeWithRef(T jsTreeHibernateDTO) throws Exception;
 }

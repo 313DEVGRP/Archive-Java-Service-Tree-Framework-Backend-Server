@@ -15,6 +15,7 @@ import egovframework.api.arms.module_pdserviceversion.model.PdServiceVersionDTO;
 import egovframework.api.arms.module_pdserviceversion.service.PdServiceVersion;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,9 @@ public class UserPdServiceVersionController extends SHVAbstractController<PdServ
     public ModelAndView getVersion(PdServiceVersionDTO pdServiceVersionDTO, ModelMap model,
                                 HttpServletRequest request) throws Exception {
 
-        List<PdServiceVersionDTO> pdServiceVersionDTOS = pdServiceVersion.getVersion(pdServiceVersionDTO);
+        pdServiceVersionDTO.setOrder(Order.asc("c_left"));
+        pdServiceVersionDTO.setWhere("c_pdservice_link", pdServiceVersionDTO.getC_id().toString());
+        List<PdServiceVersionDTO> pdServiceVersionDTOS = pdServiceVersion.getChildNode(pdServiceVersionDTO);
         logger.info("UserPdServiceVersionController ::  getVersion :: pdServiceVersionDTOS = " + pdServiceVersionDTOS.size());
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
@@ -67,7 +70,7 @@ public class UserPdServiceVersionController extends SHVAbstractController<PdServ
 
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", pdServiceVersion.updateVersionNode(pdServiceVersionDTO));
+        modelAndView.addObject("result", pdServiceVersion.updateNode(pdServiceVersionDTO));
 
         return modelAndView;
     }

@@ -33,44 +33,4 @@ public class PdServiceVersionImpl extends JsTreeHibernateServiceImpl implements 
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @SuppressWarnings("rawtypes")
-    @Resource(name = "jsTreeHibernateDao")
-    private JsTreeHibernateDao jsTreeHibernateDao;
-
-    @Override
-    public <T extends JsTreeHibernateSearchDTO> List<T> getVersion(T jsTreeHibernateDTO) throws Exception {
-        jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
-        jsTreeHibernateDTO.setOrder(Order.asc("c_left"));
-        jsTreeHibernateDTO.setWhere("c_pdservice_link", jsTreeHibernateDTO.getC_id().toString());
-        List<T> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
-        return list;
-    }
-
-
-    @SuppressWarnings("unchecked")
-    @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
-    public <T extends PdServiceVersionDTO> int updateVersionNode(T jsTreeHibernateDTO) throws Exception {
-
-        jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
-        T alterTargetNode = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
-
-        for (Field field : ReflectionUtils.getAllFields(jsTreeHibernateDTO.getClass())) {
-
-            field.setAccessible(true);
-
-            Object value = field.get(jsTreeHibernateDTO);
-
-            if (!ObjectUtils.isEmpty(value)) {
-                field.setAccessible(true);
-                field.set(alterTargetNode, value);
-            }
-
-        }
-        jsTreeHibernateDao.update(alterTargetNode);
-
-
-        return 1;
-
-    }
-
 }
