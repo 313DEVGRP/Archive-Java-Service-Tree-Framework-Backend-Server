@@ -41,40 +41,40 @@ public class ReqAddLogDTO extends JsTreeHibernateLogDTO implements Serializable 
     }
 
     //@Getter @Setter
-    @Column(name="c_pdService_Link")
-    private Long c_pdService_Link;
+    @Column(name="c_pdservice_link")
+    private Long c_pdservice_link;
 
-    @Column(name="C_VERSION_LINK")
-    private String c_version_Link;
+    @Column(name="c_version_link")
+    private String c_version_link;
 
-    @Column(name="C_REVIEWER01")
+    @Column(name="c_jira_link")
+    private String c_jira_link;
+
+    @Column(name="c_reviewer01")
     private String c_reviewer01;
 
-    @Column(name="C_REVIEWER02")
+    @Column(name="c_reviewer02")
     private String c_reviewer02;
 
-    @Column(name="C_REVIEWER03")
+    @Column(name="c_reviewer03")
     private String c_reviewer03;
 
-    @Column(name="C_REVIEWER04")
+    @Column(name="c_reviewer04")
     private String c_reviewer04;
 
-    @Column(name="C_REVIEWER05")
+    @Column(name="c_reviewer05")
     private String c_reviewer05;
 
-    @Column(name="C_WRITER_NAME")
-    private String c_writer_name;
+    @Column(name="c_writer")
+    private String c_writer;
 
-    @Column(name="C_WRITER_CN")
-    private String c_writer_cn;
-
-    @Column(name="C_WRITER_DATE")
+    @Column(name="c_writer_date")
     private String c_writer_date;
 
-    @Column(name="C_PRIORITY")
+    @Column(name="c_priority")
     private Long c_priority;
 
-    @Column(name="C_REQ_STATUS")
+    @Column(name="c_req_status")
     private String c_req_status;
 
     // 요구사항 제목은 c_title 로.
@@ -82,20 +82,28 @@ public class ReqAddLogDTO extends JsTreeHibernateLogDTO implements Serializable 
     @Column(name="c_contents")
     private String c_contents;
 
-    public Long getC_pdService_Link() {
-        return c_pdService_Link;
+    public Long getC_pdservice_link() {
+        return c_pdservice_link;
     }
 
-    public void setC_pdService_Link(Long c_pdService_Link) {
-        this.c_pdService_Link = c_pdService_Link;
+    public void setC_pdservice_link(Long c_pdservice_link) {
+        this.c_pdservice_link = c_pdservice_link;
     }
 
-    public String getC_version_Link() {
-        return c_version_Link;
+    public String getC_version_link() {
+        return c_version_link;
     }
 
-    public void setC_version_Link(String c_version_Link) {
-        this.c_version_Link = c_version_Link;
+    public void setC_version_link(String c_version_link) {
+        this.c_version_link = c_version_link;
+    }
+
+    public String getC_jira_link() {
+        return c_jira_link;
+    }
+
+    public void setC_jira_link(String c_jira_link) {
+        this.c_jira_link = c_jira_link;
     }
 
     public String getC_reviewer01() {
@@ -138,20 +146,12 @@ public class ReqAddLogDTO extends JsTreeHibernateLogDTO implements Serializable 
         this.c_reviewer05 = c_reviewer05;
     }
 
-    public String getC_writer_name() {
-        return c_writer_name;
+    public String getC_writer() {
+        return c_writer;
     }
 
-    public void setC_writer_name(String c_writer_name) {
-        this.c_writer_name = c_writer_name;
-    }
-
-    public String getC_writer_cn() {
-        return c_writer_cn;
-    }
-
-    public void setC_writer_cn(String c_writer_cn) {
-        this.c_writer_cn = c_writer_cn;
+    public void setC_writer(String c_writer) {
+        this.c_writer = c_writer;
     }
 
     public String getC_writer_date() {
