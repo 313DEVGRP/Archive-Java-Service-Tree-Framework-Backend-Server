@@ -6,7 +6,6 @@ import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import org.slf4j.Logger;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import sun.util.logging.PlatformLogger;
 
 import java.util.HashMap;
 import java.util.List;
