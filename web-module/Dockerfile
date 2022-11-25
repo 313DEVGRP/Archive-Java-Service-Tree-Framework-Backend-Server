@@ -5,6 +5,9 @@ RUN rm -rf /usr/local/tomcat/webapps/ROOT
 ARG JAR_FILE
 ADD target/${JAR_FILE} /usr/local/tomcat/webapps/ROOT.war
 
+#RUN apt-get update && apt-get install -y apt-transport-https
+RUN apt-get -y -q install libpcap0.8 wget procps
+
 RUN wget http://www.313.co.kr/nexus/content/repositories/StandardProject/313devgrp/packetbeat/7.4.2-linux/packetbeat-7.4.2-linux-x86_64.tar.gz
 RUN tar zxvf packetbeat-7.4.2-linux-x86_64.tar.gz
 ADD src/main/resources/script/yml/elfk/client/packetbeat.yml ./packetbeat-7.4.2-linux-x86_64/packetbeat.yml
