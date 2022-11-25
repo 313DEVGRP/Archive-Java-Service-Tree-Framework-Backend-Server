@@ -50,6 +50,9 @@ public class ReqAddLogDTO extends JsTreeHibernateLogDTO implements Serializable 
     @Column(name="c_jira_link")
     private String c_jira_link;
 
+    @Column(name="c_issue_link")
+    private String c_issue_link;
+
     @Column(name="c_reviewer01")
     private String c_reviewer01;
 
@@ -64,6 +67,21 @@ public class ReqAddLogDTO extends JsTreeHibernateLogDTO implements Serializable 
 
     @Column(name="c_reviewer05")
     private String c_reviewer05;
+
+    @Column(name="c_reviewer01_status")
+    private String c_reviewer01_status;
+
+    @Column(name="c_reviewer02_status")
+    private String c_reviewer02_status;
+
+    @Column(name="c_reviewer03_status")
+    private String c_reviewer03_status;
+
+    @Column(name="c_reviewer04_status")
+    private String c_reviewer04_status;
+
+    @Column(name="c_reviewer05_status")
+    private String c_reviewer05_status;
 
     @Column(name="c_writer")
     private String c_writer;
@@ -106,6 +124,14 @@ public class ReqAddLogDTO extends JsTreeHibernateLogDTO implements Serializable 
         this.c_jira_link = c_jira_link;
     }
 
+    public String getC_issue_link() {
+        return c_issue_link;
+    }
+
+    public void setC_issue_link(String c_issue_link) {
+        this.c_issue_link = c_issue_link;
+    }
+
     public String getC_reviewer01() {
         return c_reviewer01;
     }
@@ -144,6 +170,46 @@ public class ReqAddLogDTO extends JsTreeHibernateLogDTO implements Serializable 
 
     public void setC_reviewer05(String c_reviewer05) {
         this.c_reviewer05 = c_reviewer05;
+    }
+
+    public String getC_reviewer01_status() {
+        return c_reviewer01_status;
+    }
+
+    public void setC_reviewer01_status(String c_reviewer01_status) {
+        this.c_reviewer01_status = c_reviewer01_status;
+    }
+
+    public String getC_reviewer02_status() {
+        return c_reviewer02_status;
+    }
+
+    public void setC_reviewer02_status(String c_reviewer02_status) {
+        this.c_reviewer02_status = c_reviewer02_status;
+    }
+
+    public String getC_reviewer03_status() {
+        return c_reviewer03_status;
+    }
+
+    public void setC_reviewer03_status(String c_reviewer03_status) {
+        this.c_reviewer03_status = c_reviewer03_status;
+    }
+
+    public String getC_reviewer04_status() {
+        return c_reviewer04_status;
+    }
+
+    public void setC_reviewer04_status(String c_reviewer04_status) {
+        this.c_reviewer04_status = c_reviewer04_status;
+    }
+
+    public String getC_reviewer05_status() {
+        return c_reviewer05_status;
+    }
+
+    public void setC_reviewer05_status(String c_reviewer05_status) {
+        this.c_reviewer05_status = c_reviewer05_status;
     }
 
     public String getC_writer() {
