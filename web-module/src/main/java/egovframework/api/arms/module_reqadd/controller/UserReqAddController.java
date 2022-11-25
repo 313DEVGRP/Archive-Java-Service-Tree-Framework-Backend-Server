@@ -350,9 +350,9 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
         FileRepositoryLogDTO fileRepositoryLogDTO = new FileRepositoryLogDTO();
         fileRepositoryLogDTO.setWhereBetween("c_date", startDate, endDate);
-        fileRepositoryLogDTO.setOrder(Order.asc("c_left"));
+        //fileRepositoryLogDTO.setOrder(Order.desc("c_date"));
         fileRepositoryLogDTO.setWhere("c_title", changeReqTableName);
-        fileRepositoryLogDTO.setWhere("fileIdLink", parser.getLong("fileIdLink"));
+        //fileRepositoryLogDTO.setWhere("fileIdLink", parser.getLong("fileIdLink"));
         fileRepositoryLogDTO.getCriterions().add(criterion);
         List<FileRepositoryLogDTO> fileRepositoryLogList = fileRepositoryLog.getChildNode(fileRepositoryLogDTO);
 
@@ -380,7 +380,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         SessionUtil.setAttribute("getHistory",changeReqTableName);
         ReqAddLogDTO reqAddLogDTO = new ReqAddLogDTO();
         reqAddLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
-        reqAddLogDTO.setOrder(Order.asc("c_left"));
+        //reqAddLogDTO.setOrder(Order.desc("c_date"));
         reqAddLogDTO.getCriterions().add(criterion);
         List<ReqAddLogDTO> reqAddLogDTOList = this.reqAddLog.getChildNode(reqAddLogDTO);
         SessionUtil.removeAttribute("getHistory");
@@ -393,7 +393,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         mergeList.addAll(reqAddLogDTOList);
 
         List<JsTreeHibernateLogDTO> ascTD = mergeList.stream() // Sort Order By asc - Comparator의 comparing 사용, ::를 활용한 참조 방식 사용, stream을 활용한 List의 sorted사용 및 collect를 활용한 Collectors.toList() 사용
-                .sorted(Comparator.comparing(JsTreeHibernateLogDTO::getC_date))
+                .sorted(Comparator.comparing(JsTreeHibernateLogDTO::getC_date).reversed())
                 .collect(Collectors.toList());
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
