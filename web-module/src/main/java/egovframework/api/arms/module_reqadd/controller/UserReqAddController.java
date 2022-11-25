@@ -14,12 +14,9 @@ package egovframework.api.arms.module_reqadd.controller;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_filerepositorylog.model.FileRepositoryLogDTO;
 import egovframework.api.arms.module_filerepositorylog.service.FileRepositoryLog;
-import egovframework.api.arms.module_pdserviceconnectlog.model.PdServiceConnectLogDTO;
 import egovframework.api.arms.module_pdserviceconnectlog.service.PdServiceConnectLog;
 import egovframework.api.arms.module_pdservicejiralog.service.PdServiceJiraLog;
-import egovframework.api.arms.module_pdservicelog.model.PdServiceLogDTO;
 import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
-import egovframework.api.arms.module_pdserviceversionlog.model.PdServiceVersionLogDTO;
 import egovframework.api.arms.module_pdserviceversionlog.service.PdServiceVersionLog;
 import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
@@ -210,11 +207,6 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             SessionUtil.setAttribute("addNode",changeReqTableName);
 
-            ReqAddDTO refReqAddDTO = new ReqAddDTO();
-            refReqAddDTO.setC_id(reqAddDTO.getRef());
-            //ReqAddDTO nodeByRef = reqAdd.getNode(refReqAddDTO);
-
-            //ReqAddDTO returnNode = reqAdd.addNodeToSwitchTable(reqAddDTO, nodeByRef);
             ReqAddDTO returnNode = reqAdd.addNode(reqAddDTO);
 
             SessionUtil.removeAttribute("addNode");
@@ -359,31 +351,31 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         FileRepositoryLogDTO fileRepositoryLogDTO = new FileRepositoryLogDTO();
         fileRepositoryLogDTO.setWhereBetween("c_date", startDate, endDate);
         fileRepositoryLogDTO.setOrder(Order.asc("c_left"));
-        fileRepositoryLogDTO.setWhere("c_title", "pdService");
+        fileRepositoryLogDTO.setWhere("c_title", changeReqTableName);
         fileRepositoryLogDTO.setWhere("fileIdLink", parser.getLong("fileIdLink"));
         fileRepositoryLogDTO.getCriterions().add(criterion);
         List<FileRepositoryLogDTO> fileRepositoryLogList = fileRepositoryLog.getChildNode(fileRepositoryLogDTO);
 
-        PdServiceConnectLogDTO pdServiceConnectLogDTO = new PdServiceConnectLogDTO();
-        pdServiceConnectLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
-        pdServiceConnectLogDTO.setOrder(Order.asc("c_left"));
-        pdServiceConnectLogDTO.setWhere("c_pdservice_id", parser.get("c_id"));
-        pdServiceConnectLogDTO.getCriterions().add(criterion);
-        List<PdServiceConnectLogDTO> pdServiceConnectLogDTOList = this.pdServiceConnectLog.getChildNode(pdServiceConnectLogDTO);
-
-        PdServiceVersionLogDTO pdServiceVersionLogDTO = new PdServiceVersionLogDTO();
-        pdServiceVersionLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
-        pdServiceVersionLogDTO.setOrder(Order.asc("c_left"));
-        pdServiceVersionLogDTO.setWhere("c_pdservice_link", parser.get("c_id"));
-        pdServiceVersionLogDTO.getCriterions().add(criterion);
-        List<PdServiceVersionLogDTO> pdServiceVersionLogDTOList = this.pdServiceVersionLog.getChildNode(pdServiceVersionLogDTO);
-
-        PdServiceLogDTO pdServiceLogDTO = new PdServiceLogDTO();
-        pdServiceLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
-        pdServiceLogDTO.setOrder(Order.asc("c_left"));
-        pdServiceLogDTO.setWhere("c_id", parser.getLong("c_id"));
-        pdServiceLogDTO.getCriterions().add(criterion);
-        List<PdServiceLogDTO> pdServiceLogDTOList = this.pdServiceLog.getChildNode(pdServiceLogDTO);
+//        PdServiceConnectLogDTO pdServiceConnectLogDTO = new PdServiceConnectLogDTO();
+//        pdServiceConnectLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+//        pdServiceConnectLogDTO.setOrder(Order.asc("c_left"));
+//        pdServiceConnectLogDTO.setWhere("c_pdservice_id", parser.get("c_id"));
+//        pdServiceConnectLogDTO.getCriterions().add(criterion);
+//        List<PdServiceConnectLogDTO> pdServiceConnectLogDTOList = this.pdServiceConnectLog.getChildNode(pdServiceConnectLogDTO);
+//
+//        PdServiceVersionLogDTO pdServiceVersionLogDTO = new PdServiceVersionLogDTO();
+//        pdServiceVersionLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+//        pdServiceVersionLogDTO.setOrder(Order.asc("c_left"));
+//        pdServiceVersionLogDTO.setWhere("c_pdservice_link", parser.get("c_id"));
+//        pdServiceVersionLogDTO.getCriterions().add(criterion);
+//        List<PdServiceVersionLogDTO> pdServiceVersionLogDTOList = this.pdServiceVersionLog.getChildNode(pdServiceVersionLogDTO);
+//
+//        PdServiceLogDTO pdServiceLogDTO = new PdServiceLogDTO();
+//        pdServiceLogDTO.setWhereBetween("c_date", startTimestamp, endTimestamp);
+//        pdServiceLogDTO.setOrder(Order.asc("c_left"));
+//        pdServiceLogDTO.setWhere("c_id", parser.getLong("c_id"));
+//        pdServiceLogDTO.getCriterions().add(criterion);
+//        List<PdServiceLogDTO> pdServiceLogDTOList = this.pdServiceLog.getChildNode(pdServiceLogDTO);
 
         SessionUtil.setAttribute("getHistory",changeReqTableName);
         ReqAddLogDTO reqAddLogDTO = new ReqAddLogDTO();
@@ -395,9 +387,9 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
         List<JsTreeHibernateLogDTO> mergeList = new ArrayList<>();
         mergeList.addAll(fileRepositoryLogList);
-        mergeList.addAll(pdServiceLogDTOList);
-        mergeList.addAll(pdServiceConnectLogDTOList);
-        mergeList.addAll(pdServiceVersionLogDTOList);
+//        mergeList.addAll(pdServiceLogDTOList);
+//        mergeList.addAll(pdServiceConnectLogDTOList);
+//        mergeList.addAll(pdServiceVersionLogDTOList);
         mergeList.addAll(reqAddLogDTOList);
 
         List<JsTreeHibernateLogDTO> ascTD = mergeList.stream() // Sort Order By asc - Comparator의 comparing 사용, ::를 활용한 참조 방식 사용, stream을 활용한 List의 sorted사용 및 collect를 활용한 Collectors.toList() 사용
