@@ -45,6 +45,9 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
     @Column(name = "c_version_link")
     private String c_version_link;
 
+    @Column(name = "c_jira_link")
+    private String c_jira_link;
+
     @Column(name = "c_reviewer01")
     private String c_reviewer01;
 
@@ -60,11 +63,8 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
     @Column(name = "c_reviewer05")
     private String c_reviewer05;
 
-    @Column(name = "c_writer_name")
-    private String c_writer_name;
-
-    @Column(name = "c_writer_cn")
-    private String c_writer_cn;
+    @Column(name = "c_writer")
+    private String c_writer;
 
     @Column(name = "c_writer_date")
     private String c_writer_date;
@@ -93,6 +93,14 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
 
     public void setC_version_link(String c_version_link) {
         this.c_version_link = c_version_link;
+    }
+
+    public String getC_jira_link() {
+        return c_jira_link;
+    }
+
+    public void setC_jira_link(String c_jira_link) {
+        this.c_jira_link = c_jira_link;
     }
 
     public String getC_reviewer01() {
@@ -135,20 +143,12 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
         this.c_reviewer05 = c_reviewer05;
     }
 
-    public String getC_writer_name() {
-        return c_writer_name;
+    public String getC_writer() {
+        return c_writer;
     }
 
-    public void setC_writer_name(String c_writer_name) {
-        this.c_writer_name = c_writer_name;
-    }
-
-    public String getC_writer_cn() {
-        return c_writer_cn;
-    }
-
-    public void setC_writer_cn(String c_writer_cn) {
-        this.c_writer_cn = c_writer_cn;
+    public void setC_writer(String c_writer) {
+        this.c_writer = c_writer;
     }
 
     public String getC_writer_date() {

@@ -49,9 +49,9 @@ public class ReqAddTemplateInstallDBImpl extends CoreServiceImpl implements Arms
 
     private void makeTrigger(ComprehensiveTree comprehensiveTree) throws SQLException {
 
-        String addColums =",C_PDSERVICE_LINK,C_VERSION_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_DATE,C_PRIORITY,C_REQ_STATUS,C_CONTENTS";
-        String addOldColums =",:old.C_PDSERVICE_LINK,:old.C_VERSION_LINK,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_DATE,:old.C_PRIORITY,:old.C_REQ_STATUS,:old.C_CONTENTS";
-        String addNewColums =",:new.C_PDSERVICE_LINK,:new.C_VERSION_LINK,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_DATE,:new.C_PRIORITY,:new.C_REQ_STATUS,:new.C_CONTENTS";
+        String addColums =",C_PDSERVICE_LINK,C_VERSION_LINK,C_JIRA_LINK,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER,C_WRITER_DATE,C_PRIORITY,C_REQ_STATUS,C_CONTENTS";
+        String addOldColums =",:old.C_PDSERVICE_LINK,:old.C_VERSION_LINK,:old.C_JIRA_LINK,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER,:old.C_WRITER_DATE,:old.C_PRIORITY,:old.C_REQ_STATUS,:old.C_CONTENTS";
+        String addNewColums =",:new.C_PDSERVICE_LINK,:new.C_VERSION_LINK,:new.C_JIRA_LINK,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER,:new.C_WRITER_DATE,:new.C_PRIORITY,:new.C_REQ_STATUS,:new.C_CONTENTS";
 
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();

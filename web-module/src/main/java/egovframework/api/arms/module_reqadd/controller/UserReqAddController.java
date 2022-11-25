@@ -18,7 +18,6 @@ import egovframework.api.arms.module_pdserviceconnectlog.service.PdServiceConnec
 import egovframework.api.arms.module_pdservicejiralog.service.PdServiceJiraLog;
 import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
 import egovframework.api.arms.module_pdserviceversionlog.service.PdServiceVersionLog;
-import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.module_reqaddlog.model.ReqAddLogDTO;
@@ -29,6 +28,7 @@ import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateLogDTO;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;

@@ -11,17 +11,16 @@
  */
 package egovframework.api.arms.module_pdservicelog.model;
 
-import egovframework.api.arms.module_reqadd.model.JsTreeHibernateLogDTO;
-import org.hibernate.annotations.*;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateLogDTO;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 import org.hibernate.annotations.Cache;
-import javax.persistence.*;
+import org.hibernate.annotations.*;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
 @Table(name = "T_ARMS_PDSERVICE_LOG")
