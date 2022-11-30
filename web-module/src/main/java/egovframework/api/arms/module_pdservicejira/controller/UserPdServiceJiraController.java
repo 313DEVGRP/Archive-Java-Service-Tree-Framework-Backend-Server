@@ -11,28 +11,26 @@
  */
 package egovframework.api.arms.module_pdservicejira.controller;
 
+import com.atlassian.jira.rest.client.api.JiraRestClient;
+import com.atlassian.jira.rest.client.api.domain.BasicProject;
+import com.atlassian.jira.rest.client.api.domain.Issue;
+import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
+import egovframework.api.arms.module_pdservicejira.model.PdServiceJiraDTO;
+import egovframework.api.arms.module_pdservicejira.service.PdServiceJira;
+import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Comparator;
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
-
-import egovframework.api.arms.module_pdservicejira.model.PdServiceJiraDTO;
-import egovframework.api.arms.module_pdservicejira.service.PdServiceJira;
+import java.net.URI;
 
 @Slf4j
 @Controller
@@ -49,5 +47,44 @@ public class UserPdServiceJiraController extends SHVAbstractController<PdService
     }
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @ResponseBody
+    @RequestMapping(value = "/getProjectList.do", method = RequestMethod.GET)
+    public ModelAndView getProjectList() throws Exception {
+
+
+//        JiraRestClientFactory factory = new AsynchronousJiraRestClientFactory();
+//        URI uri = new URI("http://www.313.co.kr/jira");
+//        JiraRestClient jiraRestClient = factory.createWithBasicHttpAuthentication(uri, "admin", "flexjava");
+//
+//        Promise<Iterable<IssueType>> promise = jiraRestClient.getMetadataClient().getIssueTypes();
+//        Iterable<IssueType> issueTypes = promise.claim();
+//        for (IssueType it : issueTypes) {
+//            System.out.println("Type ID = " + it.getId() + ", Name = " + it.getName());
+//        }
+        final AsynchronousJiraRestClientFactory factory = new AsynchronousJiraRestClientFactory();
+        final URI jiraServerUri = new URI("http://www.313.co.kr/jira");
+        final JiraRestClient restClient = factory.createWithBasicHttpAuthentication(jiraServerUri, "admin", "flexjava");
+        final Issue issue = restClient.getIssueClient().getIssue("SP-689").claim();
+        logger.debug(issue.toString());
+
+        Iterable<BasicProject> test = restClient.getProjectClient().getAllProjects().claim();
+        getTransitionByName(test, "name");
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", test);
+
+        return modelAndView;
+    }
+
+    private BasicProject getTransitionByName(Iterable<BasicProject> transitions, String transitionName) {
+        for (BasicProject transition : transitions) {
+            logger.debug(transition.toString());
+            if (transition.getName().equals(transitionName)) {
+                return transition;
+            }
+        }
+        return null;
+    }
 
 }
