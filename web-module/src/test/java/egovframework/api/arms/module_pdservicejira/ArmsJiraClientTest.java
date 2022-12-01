@@ -1,9 +1,7 @@
 package egovframework.api.arms.module_pdservicejira;
 
-import com.atlassian.jira.rest.client.api.GetCreateIssueMetadataOptions;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.domain.*;
-import com.atlassian.jira.rest.client.api.domain.input.FieldInput;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInput;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
 import com.atlassian.jira.rest.client.api.domain.input.VersionInput;
@@ -17,10 +15,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class ArmsJiraClientTest {
 
@@ -68,7 +64,7 @@ public class ArmsJiraClientTest {
     }
 
     @Test
-    public void getSingle_JiraProject() throws URISyntaxException {
+    public void get_JiraProject() throws URISyntaxException {
         final JiraRestClient restClient = getJiraRestClient();
         String jira_Project_KEY = "SP";
         Promise<Project> promise = restClient.getProjectClient().getProject(jira_Project_KEY);
@@ -92,7 +88,8 @@ public class ArmsJiraClientTest {
     public void set_JiraVersion_ToProject() throws URISyntaxException {
         final JiraRestClient restClient = getJiraRestClient();
         String projectKey = "JSTFFW";
-        String name = "a-RMS_제품(서비스)_버전";
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String name = "a-RMS_제품(서비스)_버전" + timestamp.toString();
         String description = "a-RMS 요구사항 관리 버전";
         DateTime releaseDate = new DateTime("2022-12-31");
         boolean isArchived = false;
@@ -118,7 +115,6 @@ public class ArmsJiraClientTest {
         logger.info("serverInfo = " + serverInfo.getBaseUri());
         logger.info("serverInfo = " + serverInfo.getBuildDate());
         logger.info("serverInfo = " + serverInfo.getBuildNumber());
-        logger.info("serverInfo = " + serverInfo.getBaseUri());
     }
 
     //a-RMS :: 7 이상의 버전이면, 요구사항 이슈 타입이 없으면 생성해 준다.
@@ -143,7 +139,7 @@ public class ArmsJiraClientTest {
     }
 
     @Test
-    public void getSingle_IssueType() throws URISyntaxException {
+    public void get_IssueType() throws URISyntaxException {
         final JiraRestClient restClient = getJiraRestClient();
         Promise<IssueType> promise = restClient.getMetadataClient().getIssueType(new URI("http://www.313.co.kr/jira/rest/api/latest/issuetype/10"));
         IssueType issueType = promise.claim();
