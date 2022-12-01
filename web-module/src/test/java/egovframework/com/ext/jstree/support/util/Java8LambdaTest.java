@@ -2,7 +2,6 @@ package egovframework.com.ext.jstree.support.util;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -331,34 +330,34 @@ public class Java8LambdaTest {
     //@Test
     public void putJsonObjectFromInfluxDBapiTest() throws ParseException {
 
-        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setReadTimeout(5000); // 읽기시간초과, ms
-        factory.setConnectTimeout(3000); // 연결시간초과, ms
-        HttpClient httpClient = HttpClientBuilder.create()
-                .setMaxConnTotal(100) // connection pool 적용
-                .setMaxConnPerRoute(5) // connection pool 적용
-                .build();
-        factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
-
-        RestTemplate restTemplate = new RestTemplate(factory);
-
-        HttpHeaders headers = createHttpHeaders("admin","qwe123");
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        String postdata =   "{\n" +
-                "  \"name\":\"test_datasource\",\n" +
-                "  \"type\":\"influxdb\",\n" +
-                "  \"url\":\"http://influxdb:8086313\",\n" +
-                "  \"access\":\"proxy\",\n" +
-                "  \"basicAuth\":false\n" +
-                "}";
-
-        HttpEntity<String> request = new HttpEntity<String>(postdata, headers);
-
-        String influxdbBaseUrl = "http://192.168.25.46:3000/api/datasources";
-        String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
-
-        logger.info(returnResultStr);
+//        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+//        factory.setReadTimeout(5000); // 읽기시간초과, ms
+//        factory.setConnectTimeout(3000); // 연결시간초과, ms
+//        HttpClient httpClient = HttpClientBuilder.create()
+//                .setMaxConnTotal(100) // connection pool 적용
+//                .setMaxConnPerRoute(5) // connection pool 적용
+//                .build();
+//        factory.setHttpClient(httpClient); // 동기실행에 사용될 HttpClient 세팅
+//
+//        RestTemplate restTemplate = new RestTemplate(factory);
+//
+//        HttpHeaders headers = createHttpHeaders("admin","qwe123");
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//        String postdata =   "{\n" +
+//                "  \"name\":\"test_datasource\",\n" +
+//                "  \"type\":\"influxdb\",\n" +
+//                "  \"url\":\"http://influxdb:8086313\",\n" +
+//                "  \"access\":\"proxy\",\n" +
+//                "  \"basicAuth\":false\n" +
+//                "}";
+//
+//        HttpEntity<String> request = new HttpEntity<String>(postdata, headers);
+//
+//        String influxdbBaseUrl = "http://192.168.25.46:3000/api/datasources";
+//        String returnResultStr = restTemplate.postForObject( influxdbBaseUrl, request, String.class);
+//
+//        logger.info(returnResultStr);
 
     }
 

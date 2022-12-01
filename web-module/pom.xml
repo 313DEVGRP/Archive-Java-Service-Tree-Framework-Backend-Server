@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>java-service-tree-framework-backend-server</artifactId>
-        <version>22.11.30</version>
+        <version>22.12.01</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -19,8 +19,8 @@
     <properties>
         <version.jstree.service.framework>23.01.12</version.jstree.service.framework>
     </properties>
-
     <dependencies>
+
 
         <!-- 실행환경 라이브러리 -->
         <dependency>
@@ -97,14 +97,14 @@
             <version>2.0.0-m15</version>
         </dependency>
         <dependency>
-            <groupId>com.mashape.unirest</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>1.4.9</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.1-atlassian-2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore-nio</artifactId>
-            <version>4.4.3</version>
+            <artifactId>httpasyncclient</artifactId>
+            <version>4.0-beta3-atlassian-1</version>
         </dependency>
 
     </dependencies>
