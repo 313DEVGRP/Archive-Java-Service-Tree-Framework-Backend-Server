@@ -41,9 +41,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Spliterator;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.StreamSupport;
 
 @Service("armsScheduler")
 public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements ArmsScheduler{
@@ -116,8 +113,10 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
 
     @Override
     public void set_PdServiceVersion_toJiraProjectVersion() throws Exception {
+
         final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
 
+        // 연결정보 리스트를 가져온다.
         PdServiceConnectDTO pdServiceConnectDTOList = new PdServiceConnectDTO();
         pdServiceConnectDTOList.setOrder(Order.asc("c_id"));
         Criterion criterion = Restrictions.not(
@@ -126,10 +125,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
         );
         pdServiceConnectDTOList.getCriterions().add(criterion);
         List<PdServiceConnectDTO> list = pdServiceConnect.getChildNode(pdServiceConnectDTOList);
-
-        PdServiceJiraVerDTO pdServiceJiraVerDTOList = new PdServiceJiraVerDTO();
-        pdServiceJiraVerDTOList.setOrder(Order.asc("c_id"));
-        List<PdServiceJiraVerDTO> checkJiraVerList = pdServiceJiraVer.getChildNode(pdServiceJiraVerDTOList);
 
         for( PdServiceConnectDTO pdServiceConnectDTO : list){
             String pdServiceId = pdServiceConnectDTO.getC_pdservice_id();
@@ -171,6 +166,7 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
             if(StringUtils.isNotEmpty(pdServiceJiraList)){
                 String[] pdServiceJiraArr = StringUtils.split(pdServiceJiraList, ",");
 
+                logger.info("================pdServiceJiraArr=================" + pdServiceJiraArr);
                 //지라 연결 정보를 분리해서
                 for (String pdServiceJiraID :pdServiceJiraArr) {
 
@@ -180,7 +176,7 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                     //지라 정보를 찾고
                     PdServiceJiraDTO returnPdServiceJiraDTO = pdServiceJira.getNode(pdServiceJiraDTO);
 
-                    //찾은 정보를 기반으로 지라프로젝트에 버전정보를 등록한다.
+                    //찾은 정보를 기반으로 지라프로젝트에 버전정보를 셋팅한다.
                     String projectKey = returnPdServiceJiraDTO.getC_jira_key();
                     String versionStr = "[a-RMS]_" + StringUtility.replace(pdServiceName, " ", "_") + "_" + StringUtility.deleteWhitespace(pdServiceVersionName);
                     String description = "[a-RMS] 에서 관리하는 버전 정보 :: " + pdServiceVersionStart + "~" + pdServiceVersionEnd;
@@ -189,24 +185,61 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                     boolean isArchived = false;
                     boolean isReleased = false;
 
-                    AtomicBoolean checker = new AtomicBoolean(false);
+                    //지라 프로젝트 하위의 버전을 가져온다. ( 중복으로 등록 방지 차원 )
+                    boolean checker = false;
+                    String already_JiraVersion_Name = "";
+                    String already_JiraVersion_Desc = "";
+                    String already_JiraVersion_ID = "";
+                    String already_JiraVersion_RelDate = "";
+                    String already_JiraVersion_Link = "";
                     Iterable<Version> iterable = restClient.getProjectClient().getProject(projectKey).get().getVersions();
-                    Spliterator<Version> spliterator = iterable.spliterator();
-                    StreamSupport.stream(spliterator, false)
-                            .forEach(version -> {
-                                if ( StringUtility.equals(versionStr, version.getName())){
-                                    logger.info("project version getName = " + version.getName());
-                                    logger.info("project version getDescription = " + version.getDescription());
-                                    logger.info("project version getId = " + version.getId());
-                                    logger.info("project version getReleaseDate = " + version.getReleaseDate());
-                                    logger.info("project version getSelf = " + version.getSelf());
-                                    checker.set(true);
-                                }
-                            });
+                    for( Version version : iterable){
+                        if(StringUtility.equals(versionStr, version.getName())){
+                            logger.info("project version getName = " + version.getName());
+                            logger.info("project version getDescription = " + version.getDescription());
+                            logger.info("project version getId = " + version.getId());
+                            logger.info("project version getReleaseDate = " + version.getReleaseDate());
+                            logger.info("project version getSelf = " + version.getSelf());
 
-                    if (checker.get()) {
+                            already_JiraVersion_Name = version.getName();
+                            already_JiraVersion_Desc = version.getDescription();
+                            already_JiraVersion_ID = version.getId().toString();
+                            already_JiraVersion_RelDate = version.getReleaseDate().toString();
+                            already_JiraVersion_Link = version.getSelf().toString();
+
+                            checker = true;
+                        }
+                    }
+
+                    //이미 지라에 등록되어 있다고 한다.
+                    if (checker) {
                         logger.info("이미 존재하는 버전 -> " + projectKey + "::" + versionStr);
+                        //a-RMS에 등록되어 있는지는 모른다. 체크하자
+                        PdServiceJiraVerDTO checkDTO = checkPdServiceJiraVerDTO(pdServiceId, pdServiceVersionStr, pdServiceJiraID, versionStr);
+
+                        logger.info("============checkDTO=============== " + checkDTO);
+
+                        if(checkDTO == null){
+                            //없다면 만들어야 한다.
+                            PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
+                            pdServiceJiraVerDTO.setRef(2L);
+                            pdServiceJiraVerDTO.setC_type("default");
+
+                            alreadyDataSetting(pdServiceId, pdServiceVersionStr, pdServiceJiraID, already_JiraVersion_Name, already_JiraVersion_Desc, already_JiraVersion_ID, already_JiraVersion_RelDate, already_JiraVersion_Link, pdServiceJiraVerDTO);
+
+                            pdServiceJiraVer.addNode(pdServiceJiraVerDTO);
+                        }else{
+                            //이미 등록되 있다고 한다. 업데이트 될 수도 있으니까
+                            logger.info("already registerd jira version = " + versionStr);
+
+                            alreadyDataSetting(pdServiceId, pdServiceVersionStr, pdServiceJiraID, already_JiraVersion_Name, already_JiraVersion_Desc, already_JiraVersion_ID, already_JiraVersion_RelDate, already_JiraVersion_Link, checkDTO);
+
+                            pdServiceJiraVer.updateNode(checkDTO);
+                        }
+
+                    //지라에 등록된게 없을 때. ( 지라에 등록시켜야 한다 )
                     }else{
+                        //지라 등록
                         VersionInput createVersionTest = new VersionInput(projectKey, versionStr, description, releaseDate, isArchived, isReleased);
                         Version version = restClient.getVersionRestClient().createVersion(createVersionTest).claim();
                         logger.info("version getName = " + version.getName());
@@ -215,42 +248,55 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                         logger.info("version getReleaseDate = " + version.getReleaseDate());
                         logger.info("version getSelf = " + version.getSelf());
 
+                        //근데 a-RMS에는 등록되어 있을 수도 있으니까. ( 지라는 등록해야 하지만 말이야 )
+                        PdServiceJiraVerDTO checkDTO = checkPdServiceJiraVerDTO(pdServiceId, pdServiceVersionStr, pdServiceJiraID, versionStr);
 
-                        boolean anyMatch = checkJiraVerList.stream().anyMatch(dto ->
-                                StringUtils.equals(dto.getC_jiraversion_link(), version.getSelf().toString())
-                        );
+                        //정상적으로 지라에 버전을 등록을 했고, a-RMS에는 없는 ( 아주 정상적인 케이스 )
+                        if(checkDTO == null){
 
-                        if(anyMatch){
-                            logger.info("already registerd jira version = " + version.getSelf().toString());
+                            PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
+                            pdServiceJiraVerDTO.setRef(2L);
+                            pdServiceJiraVerDTO.setC_type("default");
+
+                            setData(pdServiceId, pdServiceVersionStr, pdServiceJiraID, version, pdServiceJiraVerDTO);
+
+                            pdServiceJiraVer.addNode(pdServiceJiraVerDTO);
+
+                        //정상적으로 지라에 버전을 등록을 했지만 a-RMS에 버전이 있다는거잖아 말이 안되지만 업데이트 해주자
                         }else{
-                            PdServiceJiraVerDTO searchDTO = new PdServiceJiraVerDTO();
-                            searchDTO.setWhere("c_jiraversion_name", version.getName());
-                            PdServiceJiraVerDTO checkDTO = pdServiceJiraVer.getNode(searchDTO);
 
-                            if(StringUtility.isEmpty(checkDTO.getC_jiraversion_name())){
+                            logger.info("already registerd jira version = " + version.getSelf().toString());
 
-                                PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
-                                pdServiceJiraVerDTO.setRef(2L);
-                                pdServiceJiraVerDTO.setC_type("default");
+                            setData(pdServiceId, pdServiceVersionStr, pdServiceJiraID, version, checkDTO);
 
-                                setData(pdServiceId, pdServiceVersionStr, pdServiceJiraID, version, pdServiceJiraVerDTO);
+                            pdServiceJiraVer.updateNode(checkDTO);
 
-
-                                pdServiceJiraVer.addNode(pdServiceJiraVerDTO);
-
-                            }else{
-
-                                setData(pdServiceId, pdServiceVersionStr, pdServiceJiraID, version, checkDTO);
-
-                                pdServiceJiraVer.updateNode(checkDTO);
-
-                            }
                         }
                     }
                 }
             }
 
         }
+    }
+
+    public PdServiceJiraVerDTO checkPdServiceJiraVerDTO(String pdServiceId, String pdServiceVersionStr, String pdServiceJiraID, String versionStr) throws Exception {
+        PdServiceJiraVerDTO searchDTO = new PdServiceJiraVerDTO();
+        searchDTO.setWhere("c_pdservice_id", pdServiceId);
+        searchDTO.setWhere("c_pdservice_version_id", pdServiceVersionStr);
+        searchDTO.setWhere("c_pdservice_jira_id", pdServiceJiraID);
+        searchDTO.setWhere("c_jiraversion_name", versionStr);
+        return pdServiceJiraVer.getNode(searchDTO);
+    }
+
+    public void alreadyDataSetting(String pdServiceId, String pdServiceVersionStr, String pdServiceJiraID, String already_JiraVersion_Name, String already_JiraVersion_Desc, String already_JiraVersion_ID, String already_JiraVersion_RelDate, String already_JiraVersion_Link, PdServiceJiraVerDTO checkDTO) {
+        checkDTO.setC_pdservice_id(pdServiceId);
+        checkDTO.setC_pdservice_version_id(pdServiceVersionStr);
+        checkDTO.setC_pdservice_jira_id(pdServiceJiraID);
+        checkDTO.setC_jiraversion_name(already_JiraVersion_Name);
+        checkDTO.setC_jiraversion_desc(already_JiraVersion_Desc);
+        checkDTO.setC_jiraversion_id(already_JiraVersion_ID);
+        checkDTO.setC_jiraversion_releasedate(already_JiraVersion_RelDate);
+        checkDTO.setC_jiraversion_link(already_JiraVersion_Link);
     }
 
     public void setData(String pdServiceId, String pdServiceVersionStr, String pdServiceJiraID, Version version, PdServiceJiraVerDTO checkDTO) {
