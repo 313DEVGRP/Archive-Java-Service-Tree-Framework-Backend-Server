@@ -135,8 +135,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
             pdServiceJiraList = StringUtils.remove(pdServiceJiraList, "]");
             pdServiceJiraList = StringUtils.remove(pdServiceJiraList, "[");
 
-            logger.info("pdServiceJiraList => " + pdServiceJiraList);
-
             //제품(서비스) 정보를 가져온다
             String pdServiceName = "";
             if(StringUtils.isNotEmpty(pdServiceId)){
@@ -166,7 +164,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
             if(StringUtils.isNotEmpty(pdServiceJiraList)){
                 String[] pdServiceJiraArr = StringUtils.split(pdServiceJiraList, ",");
 
-                logger.info("================pdServiceJiraArr=================" + pdServiceJiraArr);
                 //지라 연결 정보를 분리해서
                 for (String pdServiceJiraID :pdServiceJiraArr) {
 
@@ -195,11 +192,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                     Iterable<Version> iterable = restClient.getProjectClient().getProject(projectKey).get().getVersions();
                     for( Version version : iterable){
                         if(StringUtility.equals(versionStr, version.getName())){
-                            logger.info("project version getName = " + version.getName());
-                            logger.info("project version getDescription = " + version.getDescription());
-                            logger.info("project version getId = " + version.getId());
-                            logger.info("project version getReleaseDate = " + version.getReleaseDate());
-                            logger.info("project version getSelf = " + version.getSelf());
 
                             already_JiraVersion_Name = version.getName();
                             already_JiraVersion_Desc = version.getDescription();
@@ -213,11 +205,8 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
 
                     //이미 지라에 등록되어 있다고 한다.
                     if (checker) {
-                        logger.info("이미 존재하는 버전 -> " + projectKey + "::" + versionStr);
                         //a-RMS에 등록되어 있는지는 모른다. 체크하자
                         PdServiceJiraVerDTO checkDTO = checkPdServiceJiraVerDTO(pdServiceId, pdServiceVersionStr, pdServiceJiraID, versionStr);
-
-                        logger.info("============checkDTO=============== " + checkDTO);
 
                         if(checkDTO == null){
                             //없다면 만들어야 한다.
@@ -230,7 +219,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                             pdServiceJiraVer.addNode(pdServiceJiraVerDTO);
                         }else{
                             //이미 등록되 있다고 한다. 업데이트 될 수도 있으니까
-                            logger.info("already registerd jira version = " + versionStr);
 
                             alreadyDataSetting(pdServiceId, pdServiceVersionStr, pdServiceJiraID, already_JiraVersion_Name, already_JiraVersion_Desc, already_JiraVersion_ID, already_JiraVersion_RelDate, already_JiraVersion_Link, checkDTO);
 
@@ -242,11 +230,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                         //지라 등록
                         VersionInput createVersionTest = new VersionInput(projectKey, versionStr, description, releaseDate, isArchived, isReleased);
                         Version version = restClient.getVersionRestClient().createVersion(createVersionTest).claim();
-                        logger.info("version getName = " + version.getName());
-                        logger.info("version getDescription = " + version.getDescription());
-                        logger.info("version getId = " + version.getId());
-                        logger.info("version getReleaseDate = " + version.getReleaseDate());
-                        logger.info("version getSelf = " + version.getSelf());
 
                         //근데 a-RMS에는 등록되어 있을 수도 있으니까. ( 지라는 등록해야 하지만 말이야 )
                         PdServiceJiraVerDTO checkDTO = checkPdServiceJiraVerDTO(pdServiceId, pdServiceVersionStr, pdServiceJiraID, versionStr);
@@ -264,8 +247,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
 
                         //정상적으로 지라에 버전을 등록을 했지만 a-RMS에 버전이 있다는거잖아 말이 안되지만 업데이트 해주자
                         }else{
-
-                            logger.info("already registerd jira version = " + version.getSelf().toString());
 
                             setData(pdServiceId, pdServiceVersionStr, pdServiceJiraID, version, checkDTO);
 
