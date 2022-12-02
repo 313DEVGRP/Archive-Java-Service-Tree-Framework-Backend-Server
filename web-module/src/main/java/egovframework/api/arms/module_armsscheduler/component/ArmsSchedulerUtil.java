@@ -39,7 +39,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @Component
-public class ArmsScheduler {
+public class ArmsSchedulerUtil {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -56,6 +56,7 @@ public class ArmsScheduler {
 
     }
 
+    @Scheduled(initialDelay = 10 * 60 * 1000, fixedDelay = 10 * 60 * 100) //10m 딜레이, 5m 단위
     public void set_jiraServerInfo_toStatic() {
         System.out.println(
                 "Fixed delay task - " + System.currentTimeMillis() / 1000);

@@ -7,7 +7,7 @@
     <parent>
         <groupId>313devgrp</groupId>
         <artifactId>java-service-tree-framework-backend-server</artifactId>
-        <version>22.12.01</version>
+        <version>22.12.02</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,7 +20,6 @@
         <version.jstree.service.framework>23.01.12</version.jstree.service.framework>
     </properties>
     <dependencies>
-
 
         <!-- 실행환경 라이브러리 -->
         <dependency>

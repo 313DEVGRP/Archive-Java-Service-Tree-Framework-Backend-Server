@@ -57,6 +57,9 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
     @Resource(name = "pdServiceJiraInstallDB")
     ArmsInstallDB pdServiceJiraInstallDB;
 
+    @Resource(name = "pdServiceJiraVersionInstallDB")
+    ArmsInstallDB pdServiceJiraVersionInstallDB;
+
     @Resource(name = "reqAddTemplateInstallDB")
     ArmsInstallDB reqAddTemplateInstallDB;
 
@@ -149,6 +152,23 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
 
         ModelAndView modelAndView =  new ModelAndView("jsonView");
         modelAndView.addObject("result", "module_pdservicejira");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/module_pdservicejiraver.do"},method = {RequestMethod.GET})
+    public ModelAndView module_pdservicejiraver(
+            ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request) throws Exception {
+
+        logger.info("UserArmsMakerController :: module_pdservicejira :: tableName = T_ARMS_PDSERVICEJIRAVER");
+
+        ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
+        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_PDSERVICEJIRAVER");
+        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-pdservicejiraver");
+        pdServiceJiraVersionInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
+
+        ModelAndView modelAndView =  new ModelAndView("jsonView");
+        modelAndView.addObject("result", "module_pdservicejiraver");
         return modelAndView;
     }
 
