@@ -13,6 +13,7 @@ package egovframework.api.arms.module_armsscheduler.service;
 
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.domain.BasicProject;
+import com.atlassian.jira.rest.client.api.domain.Priority;
 import com.atlassian.jira.rest.client.api.domain.Project;
 import com.atlassian.jira.rest.client.api.domain.Version;
 import com.atlassian.jira.rest.client.api.domain.input.VersionInput;
@@ -23,6 +24,8 @@ import egovframework.api.arms.module_pdserviceconnect.model.PdServiceConnectDTO;
 import egovframework.api.arms.module_pdserviceconnect.service.PdServiceConnect;
 import egovframework.api.arms.module_pdservicejira.model.PdServiceJiraDTO;
 import egovframework.api.arms.module_pdservicejira.service.PdServiceJira;
+import egovframework.api.arms.module_pdservicejirapri.model.PdServiceJiraPriDTO;
+import egovframework.api.arms.module_pdservicejirapri.service.PdServiceJiraPri;
 import egovframework.api.arms.module_pdservicejiraver.model.PdServiceJiraVerDTO;
 import egovframework.api.arms.module_pdservicejiraver.service.PdServiceJiraVer;
 import egovframework.api.arms.module_pdserviceversion.model.PdServiceVersionDTO;
@@ -66,6 +69,10 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
     @Autowired
     @Qualifier("pdServiceJiraVer")
     private PdServiceJiraVer pdServiceJiraVer;
+
+    @Autowired
+    @Qualifier("pdServiceJiraPri")
+    private PdServiceJiraPri pdServiceJiraPri;
 
     @Override
     public void set_jiraProject_toPdServiceJira() throws Exception {
@@ -257,6 +264,42 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                 }
             }
 
+        }
+    }
+
+    @Override
+    public void set_jiraPriority_toPdServiceJiraPriority() throws Exception {
+
+        final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
+        Iterable<Priority> priorities = restClient.getMetadataClient().getPriorities().claim();
+
+        for ( Priority priority : priorities ){
+            logger.info( "priority = " + priority.getSelf());
+            logger.info( "priority = " + priority.getId());
+            logger.info( "priority = " + priority.getName());
+            logger.info( "priority = " + priority.getDescription());
+
+            PdServiceJiraPriDTO pdServiceJiraPriDTO = new PdServiceJiraPriDTO();
+            pdServiceJiraPriDTO.setWhere("c_jirapriority_link", priority.getSelf().toString());
+            PdServiceJiraPriDTO checkNode = pdServiceJiraPri.getNode(pdServiceJiraPriDTO);
+            //링크가 없다면 추가.
+            if( checkNode == null ){
+                PdServiceJiraPriDTO addTargetNode = new PdServiceJiraPriDTO();
+                addTargetNode.setRef(2L);
+                addTargetNode.setC_type("default");
+                addTargetNode.setC_jirapriority_desc(priority.getDescription());
+                addTargetNode.setC_jirapriority_id(priority.getId().toString());
+                addTargetNode.setC_jirapriority_name(priority.getName());
+                addTargetNode.setC_jirapriority_link(priority.getSelf().toString());
+                pdServiceJiraPri.addNode(addTargetNode);
+            }else{
+                //있어도 변경 가능하니까 업데이트
+                checkNode.setC_jirapriority_desc(priority.getDescription());
+                checkNode.setC_jirapriority_id(priority.getId().toString());
+                checkNode.setC_jirapriority_name(priority.getName());
+                checkNode.setC_jirapriority_link(priority.getSelf().toString());
+                pdServiceJiraPri.updateNode(checkNode);
+            }
         }
     }
 

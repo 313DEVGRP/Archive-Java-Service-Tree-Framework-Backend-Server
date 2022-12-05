@@ -69,4 +69,16 @@ public class AnonArmsSchedulerController extends SHVAbstractController<ArmsSched
         return modelAndView;
     }
 
+    @ResponseBody
+    @RequestMapping(
+            value = {"/set_jiraPriority_toPdServiceJiraPriority.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView set_jiraPriority_toPdServiceJiraPriority(ModelMap model, HttpServletRequest request) throws Exception {
+        armsScheduler.set_jiraPriority_toPdServiceJiraPriority();
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", "set_jiraPriority_toPdServiceJiraPriority");
+        return modelAndView;
+    }
+
 }

@@ -17,7 +17,6 @@ public interface ArmsScheduler extends JsTreeHibernateService {
 
     public void set_jiraProject_toPdServiceJira() throws Exception;
     public void set_PdServiceVersion_toJiraProjectVersion() throws Exception;
-
-
+    public void set_jiraPriority_toPdServiceJiraPriority() throws Exception;
 
 }

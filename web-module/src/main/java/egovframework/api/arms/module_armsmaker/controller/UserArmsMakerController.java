@@ -63,6 +63,9 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
     @Resource(name = "reqAddTemplateInstallDB")
     ArmsInstallDB reqAddTemplateInstallDB;
 
+    @Resource(name = "pdServiceJiraPriorityInstallDB")
+    ArmsInstallDB pdServiceJiraPriorityInstallDB;
+
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(armsMaker);
@@ -169,6 +172,23 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
 
         ModelAndView modelAndView =  new ModelAndView("jsonView");
         modelAndView.addObject("result", "module_pdservicejiraver");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/module_pdservicejirapri.do"},method = {RequestMethod.GET})
+    public ModelAndView module_pdservicejirapri(
+            ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request) throws Exception {
+
+        logger.info("UserArmsMakerController :: module_pdservicejira :: tableName = T_ARMS_PDSERVICEJIRAPRI");
+
+        ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
+        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_PDSERVICEJIRAPRI");
+        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-pdservicejirapri");
+        pdServiceJiraPriorityInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
+
+        ModelAndView modelAndView =  new ModelAndView("jsonView");
+        modelAndView.addObject("result", "module_pdservicejirapri");
         return modelAndView;
     }
 
