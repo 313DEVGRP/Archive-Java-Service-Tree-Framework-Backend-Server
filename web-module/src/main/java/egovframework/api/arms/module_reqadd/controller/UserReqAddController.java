@@ -259,7 +259,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
                 SessionUtil.setAttribute("addNode",changeReqTableName);
 
-                returnNode.setC_issue_link(updater.getC_id().toString());
+                //returnNode.setC_issue_link(updater.getC_id().toString());
                 reqAdd.updateNode(returnNode);
 
                 SessionUtil.removeAttribute("addNode");
@@ -314,8 +314,8 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
                     SessionUtil.setAttribute("addNode",changeReqTableName);
 
-                    returnNode.setC_issue_link(reqStatusIDs.stream()
-                            .collect(Collectors.joining(",")));
+                    //returnNode.setC_issue_link(reqStatusIDs.stream()
+                    //        .collect(Collectors.joining(",")));
                     reqAdd.updateNode(returnNode);
 
                     SessionUtil.removeAttribute("addNode");

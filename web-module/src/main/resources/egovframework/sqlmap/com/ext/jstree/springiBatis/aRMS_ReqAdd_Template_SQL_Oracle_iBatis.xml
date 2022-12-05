@@ -15,25 +15,42 @@
             C_TITLE VARCHAR2(4000 BYTE),
             C_TYPE VARCHAR2(4000 BYTE),
 
-            C_PDSERVICE_LINK NUMBER,
-            C_VERSION_LINK VARCHAR2(4000 BYTE),
-            C_JIRA_LINK VARCHAR2(4000 BYTE),
-            C_ISSUE_LINK VARCHAR2(4000 BYTE),
-            C_REVIEWER01 VARCHAR2(4000 BYTE),
-            C_REVIEWER01_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER02 VARCHAR2(4000 BYTE),
-            C_REVIEWER02_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER03 VARCHAR2(4000 BYTE),
-            C_REVIEWER03_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER04 VARCHAR2(4000 BYTE),
-            C_REVIEWER04_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER05 VARCHAR2(4000 BYTE),
-            C_REVIEWER05_STATUS VARCHAR2(4000 BYTE),
-            C_WRITER VARCHAR2(4000 BYTE),
-            C_WRITER_DATE VARCHAR2(4000 BYTE),
-            C_PRIORITY NUMBER,
-            C_CONTENTS CLOB,
-            C_REQ_STATUS VARCHAR2(4000 BYTE),
+            c_pdservice_link NUMBER,
+            c_pdservice_name VARCHAR2(4000 BYTE),
+            c_version_link VARCHAR2(4000 BYTE),
+            c_version_name VARCHAR2(4000 BYTE),
+
+            c_jira_project_link VARCHAR2(4000 BYTE),
+            c_jira_project_name VARCHAR2(4000 BYTE),
+            c_jira_version_link VARCHAR2(4000 BYTE),
+            c_jira_version_name VARCHAR2(4000 BYTE),
+
+            c_jira_req_issue_link VARCHAR2(4000 BYTE),
+            c_jira_req_issue_key VARCHAR2(4000 BYTE),
+            c_jira_req_priority_link VARCHAR2(4000 BYTE),
+            c_jira_req_priority_name VARCHAR2(4000 BYTE),
+
+            c_jira_req_status_link VARCHAR2(4000 BYTE),
+            c_jira_req_status_name VARCHAR2(4000 BYTE),
+            c_jira_req_linkingissue VARCHAR2(4000 BYTE),
+            c_jira_req_subtaskissue VARCHAR2(4000 BYTE),
+
+            c_reviewer01 VARCHAR2(4000 BYTE),
+            c_reviewer02 VARCHAR2(4000 BYTE),
+            c_reviewer03 VARCHAR2(4000 BYTE),
+            c_reviewer04 VARCHAR2(4000 BYTE),
+            c_reviewer05 VARCHAR2(4000 BYTE),
+
+            c_reviewer01_status VARCHAR2(4000 BYTE),
+            c_reviewer02_status VARCHAR2(4000 BYTE),
+            c_reviewer03_status VARCHAR2(4000 BYTE),
+            c_reviewer04_status VARCHAR2(4000 BYTE),
+            c_reviewer05_status VARCHAR2(4000 BYTE),
+
+            c_writer VARCHAR2(4000 BYTE),
+            c_writer_date VARCHAR2(4000 BYTE),
+
+            c_contents CLOB,
             CONSTRAINT $c_title$_PK PRIMARY KEY (C_ID)
         /*
         * CONSTRAINT T_ARMS_REQADD_FK1 FOREIGN KEY (OTHER_ID) REFERENCES OTHER T_ARMS_REQADD(C_ID) ON DELETE CASCADE
@@ -109,25 +126,42 @@
             C_STATE VARCHAR2(4000 BYTE),
             C_DATE DATE NOT NULL,
 
-            C_PDSERVICE_LINK NUMBER,
-            C_VERSION_LINK VARCHAR2(4000 BYTE),
-            C_JIRA_LINK VARCHAR2(4000 BYTE),
-            C_ISSUE_LINK VARCHAR2(4000 BYTE),
-            C_REVIEWER01 VARCHAR2(4000 BYTE),
-            C_REVIEWER01_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER02 VARCHAR2(4000 BYTE),
-            C_REVIEWER02_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER03 VARCHAR2(4000 BYTE),
-            C_REVIEWER03_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER04 VARCHAR2(4000 BYTE),
-            C_REVIEWER04_STATUS VARCHAR2(4000 BYTE),
-            C_REVIEWER05 VARCHAR2(4000 BYTE),
-            C_REVIEWER05_STATUS VARCHAR2(4000 BYTE),
-            C_WRITER VARCHAR2(4000 BYTE),
-            C_WRITER_DATE VARCHAR2(4000 BYTE),
-            C_PRIORITY NUMBER,
-            C_CONTENTS CLOB,
-            C_REQ_STATUS VARCHAR2(4000 BYTE)
+            c_pdservice_link NUMBER,
+            c_pdservice_name VARCHAR2(4000 BYTE),
+            c_version_link VARCHAR2(4000 BYTE),
+            c_version_name VARCHAR2(4000 BYTE),
+
+            c_jira_project_link VARCHAR2(4000 BYTE),
+            c_jira_project_name VARCHAR2(4000 BYTE),
+            c_jira_version_link VARCHAR2(4000 BYTE),
+            c_jira_version_name VARCHAR2(4000 BYTE),
+
+            c_jira_req_issue_link VARCHAR2(4000 BYTE),
+            c_jira_req_issue_key VARCHAR2(4000 BYTE),
+            c_jira_req_priority_link VARCHAR2(4000 BYTE),
+            c_jira_req_priority_name VARCHAR2(4000 BYTE),
+
+            c_jira_req_status_link VARCHAR2(4000 BYTE),
+            c_jira_req_status_name VARCHAR2(4000 BYTE),
+            c_jira_req_linkingissue VARCHAR2(4000 BYTE),
+            c_jira_req_subtaskissue VARCHAR2(4000 BYTE),
+
+            c_reviewer01 VARCHAR2(4000 BYTE),
+            c_reviewer02 VARCHAR2(4000 BYTE),
+            c_reviewer03 VARCHAR2(4000 BYTE),
+            c_reviewer04 VARCHAR2(4000 BYTE),
+            c_reviewer05 VARCHAR2(4000 BYTE),
+
+            c_reviewer01_status VARCHAR2(4000 BYTE),
+            c_reviewer02_status VARCHAR2(4000 BYTE),
+            c_reviewer03_status VARCHAR2(4000 BYTE),
+            c_reviewer04_status VARCHAR2(4000 BYTE),
+            c_reviewer05_status VARCHAR2(4000 BYTE),
+
+            c_writer VARCHAR2(4000 BYTE),
+            c_writer_date VARCHAR2(4000 BYTE),
+
+            c_contents CLOB
         )
     </statement>
     <statement id="ddlLogExecute_comment_1" parameterClass="ComprehensiveTree">
