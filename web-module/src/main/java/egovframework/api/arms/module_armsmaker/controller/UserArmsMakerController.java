@@ -66,6 +66,9 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
     @Resource(name = "pdServiceJiraPriorityInstallDB")
     ArmsInstallDB pdServiceJiraPriorityInstallDB;
 
+    @Resource(name = "reqStatusTemplateInstallDB")
+    ArmsInstallDB reqStatusTemplateInstallDB;
+
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(armsMaker);
@@ -180,7 +183,7 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
     public ModelAndView module_pdservicejirapri(
             ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request) throws Exception {
 
-        logger.info("UserArmsMakerController :: module_pdservicejira :: tableName = T_ARMS_PDSERVICEJIRAPRI");
+        logger.info("UserArmsMakerController :: module_pdservicejirapri :: tableName = T_ARMS_PDSERVICEJIRAPRI");
 
         ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
         armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_PDSERVICEJIRAPRI");
@@ -206,6 +209,23 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
 
         ModelAndView modelAndView =  new ModelAndView("jsonView");
         modelAndView.addObject("result", "module_reqadd");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/module_reqstatus.do"},method = {RequestMethod.GET})
+    public ModelAndView module_reqstatus(
+            ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request) throws Exception {
+
+        logger.info("UserArmsMakerController :: module_reqstatus :: tableName = T_ARMS_REQSTATUS");
+
+        ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
+        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_REQSTATUS");
+        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-reqstatus");
+        reqStatusTemplateInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
+
+        ModelAndView modelAndView =  new ModelAndView("jsonView");
+        modelAndView.addObject("result", "module_reqstatus");
         return modelAndView;
     }
 

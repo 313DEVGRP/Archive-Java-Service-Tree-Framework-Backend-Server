@@ -12,10 +12,7 @@
 package egovframework.api.arms.module_armsscheduler.component;
 
 import com.atlassian.jira.rest.client.api.JiraRestClient;
-import com.atlassian.jira.rest.client.api.domain.BasicProject;
-import com.atlassian.jira.rest.client.api.domain.IssueType;
-import com.atlassian.jira.rest.client.api.domain.Project;
-import com.atlassian.jira.rest.client.api.domain.ServerInfo;
+import com.atlassian.jira.rest.client.api.domain.*;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
 import com.atlassian.util.concurrent.Promise;
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
@@ -99,9 +96,25 @@ public class ArmsSchedulerUtil {
         logger.info("===============[ End 요구사항 이슈 타입 셋팅 ]===============");
     }
 
-    public void set_ReqAdd_toJiraReqIssue() {
-        System.out.println(
-                "Fixed delay task - " + System.currentTimeMillis() / 1000);
+    public void set_ReqAdd_toJiraReqIssue() throws IOException, URISyntaxException {
+        final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
+        Issue test = restClient.getIssueClient().getIssue("test").claim();
+        test.getIssueLinks();
+        test.getSubtasks();
+        test.getAssignee();
+        test.getAffectedVersions();
+        test.getChangelog();
+        test.getComments();
+        test.getCommentsUri();
+        test.getCreationDate();
+        test.getDescription();
+        test.getDueDate();
+        test.getIssueType();
+        test.getResolution();
+        test.getIssueLinks();
+        test.getStatus();
+        test.getUpdateDate();
+
     }
 
 

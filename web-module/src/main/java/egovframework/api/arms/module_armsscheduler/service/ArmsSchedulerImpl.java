@@ -182,7 +182,7 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
 
                     //찾은 정보를 기반으로 지라프로젝트에 버전정보를 셋팅한다.
                     String projectKey = returnPdServiceJiraDTO.getC_jira_key();
-                    String versionStr = "[a-RMS]_" + StringUtility.replace(pdServiceName, " ", "_") + "_" + StringUtility.deleteWhitespace(pdServiceVersionName);
+                    String versionStr = "[a-RMS]_" + StringUtility.replace(pdServiceName, " ", "_") + "_" + projectKey + "_" + StringUtility.deleteWhitespace(pdServiceVersionName);
                     String description = "[a-RMS] 에서 관리하는 버전 정보 :: " + pdServiceVersionStart + "~" + pdServiceVersionEnd;
                     //DateTime releaseDate = new DateTime(pdServiceVersionEnd);
                     DateTime releaseDate = new DateTime("2022-12-31");

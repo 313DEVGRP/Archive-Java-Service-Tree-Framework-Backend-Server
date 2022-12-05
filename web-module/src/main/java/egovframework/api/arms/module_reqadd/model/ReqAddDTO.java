@@ -48,6 +48,7 @@ public class ReqAddDTO extends JsTreeHibernateSearchDTO implements Serializable 
     @Column(name = "c_jira_link")
     private String c_jira_link;
 
+    //ReqStatus Issue Link
     @Column(name = "c_issue_link")
     private String c_issue_link;
 

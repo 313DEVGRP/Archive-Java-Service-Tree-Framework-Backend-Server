@@ -14,15 +14,23 @@ package egovframework.api.arms.module_reqadd.controller;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_filerepositorylog.model.FileRepositoryLogDTO;
 import egovframework.api.arms.module_filerepositorylog.service.FileRepositoryLog;
+import egovframework.api.arms.module_pdserviceconnect.model.PdServiceConnectDTO;
+import egovframework.api.arms.module_pdserviceconnect.service.PdServiceConnect;
 import egovframework.api.arms.module_pdserviceconnectlog.service.PdServiceConnectLog;
+import egovframework.api.arms.module_pdservicejira.model.PdServiceJiraDTO;
+import egovframework.api.arms.module_pdservicejira.service.PdServiceJira;
 import egovframework.api.arms.module_pdservicejiralog.service.PdServiceJiraLog;
+import egovframework.api.arms.module_pdservicejiraver.model.PdServiceJiraVerDTO;
 import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
 import egovframework.api.arms.module_pdserviceversionlog.service.PdServiceVersionLog;
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.module_reqaddlog.model.ReqAddLogDTO;
 import egovframework.api.arms.module_reqaddlog.service.ReqAddLog;
+import egovframework.api.arms.module_reqstatus.model.ReqStatusDTO;
+import egovframework.api.arms.module_reqstatus.service.ReqStatus;
 import egovframework.api.arms.util.FileHandler;
+import egovframework.api.arms.util.StringUtility;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
@@ -33,6 +41,7 @@ import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -191,6 +200,18 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         }
     }
 
+    @Autowired
+    @Qualifier("pdServiceConnect")
+    private PdServiceConnect pdServiceConnect;
+
+    @Autowired
+    @Qualifier("reqStatus")
+    private ReqStatus reqStatus;
+
+    @Autowired
+    @Qualifier("pdServiceJira")
+    private PdServiceJira pdServiceJira;
+
     @ResponseBody
     @RequestMapping(
             value = {"/{changeReqTableName}/addNode.do"},
@@ -211,6 +232,99 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             SessionUtil.removeAttribute("addNode");
 
+            // REQ-STATUS
+            String verStr = returnNode.getC_version_link();
+            verStr = StringUtils.remove(verStr, "\"");
+            verStr = StringUtils.remove(verStr, "]");
+            verStr = StringUtils.remove(verStr, "[");
+
+            String[] verStrArr = StringUtils.split(verStr, ",");
+
+            logger.info("verStrArr = " + verStrArr);
+
+            if(verStrArr.length == 0){
+                // 버전 스트링이 없다는건.
+                // 개별 jira-version 을 개별로 선택하겠다는 것.
+                ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
+                reqStatusDTO.setRef(2L);
+                reqStatusDTO.setC_type("default");
+                reqStatusDTO.setC_pdservice_link(
+                        StringUtility.toLong(StringUtility.remove(changeReqTableName,"T_ARMS_REQADD_")));
+                reqStatusDTO.setC_version_link("independent");
+                reqStatusDTO.setC_jira_link(""); //pdservicejiraver 링크 정보 :: 향후 업데이트 하게 두자
+                reqStatusDTO.setC_req_link(returnNode.getC_id().toString());
+                reqStatusDTO.setC_jira_version_link(""); //당연히 처음엔 없겠지.
+
+                ReqStatusDTO updater = reqStatus.addNode(reqStatusDTO);
+
+                SessionUtil.setAttribute("addNode",changeReqTableName);
+
+                returnNode.setC_issue_link(updater.getC_id().toString());
+                reqAdd.updateNode(returnNode);
+
+                SessionUtil.removeAttribute("addNode");
+
+
+            }else{
+                // 버전 스트링이 있다는건.
+                // 정규 표현으로 제품(서비스)-버전-JIRA 프로젝트 셋팅을 따라가겠다는 것.
+                for ( String ver : verStrArr){
+
+                    //설정한 버전의 지라 정보를 가져와야 하고
+                    PdServiceConnectDTO pdServiceConnectDTO = new PdServiceConnectDTO();
+                    pdServiceConnectDTO.setWhere("c_pdservice_id", StringUtility.remove(changeReqTableName,"T_ARMS_REQADD_"));
+                    pdServiceConnectDTO.setWhere("c_pdservice_version_id", ver);
+                    PdServiceConnectDTO connectInfo = pdServiceConnect.getNode(pdServiceConnectDTO);
+
+                    String jiraIds = connectInfo.getC_pdservice_jira_ids();
+                    jiraIds = StringUtils.remove(jiraIds, "\"");
+                    jiraIds = StringUtils.remove(jiraIds, "]");
+                    jiraIds = StringUtils.remove(jiraIds, "[");
+
+                    String[] jiraIdsArr = StringUtils.split(jiraIds, ",");
+
+                    List<String> reqStatusIDs = new ArrayList<>();
+                    for ( String jiraId : jiraIdsArr ){
+
+                        //지라 아이디를 가져왔으니
+                        PdServiceJiraDTO pdServiceJiraDTO = new PdServiceJiraDTO();
+                        pdServiceJiraDTO.setC_id(StringUtility.toLong(jiraId));
+                        PdServiceJiraDTO jiraInfo = pdServiceJira.getNode(pdServiceJiraDTO);
+
+                        //지라 버전 정보를 가져오자
+                        PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
+                        pdServiceJiraVerDTO.setWhere("c_pdservice_id", StringUtility.remove(changeReqTableName,"T_ARMS_REQADD_"));
+                        pdServiceJiraVerDTO.setWhere("c_pdservice_version_id", ver);
+                        pdServiceJiraVerDTO.setWhere("c_pdservice_jira_id", jiraId);
+                        PdServiceJiraVerDTO jiraVerInfo = pdServiceConnect.getNode(pdServiceJiraVerDTO);
+
+                        ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
+                        reqStatusDTO.setRef(2L);
+                        reqStatusDTO.setC_type("default");
+                        reqStatusDTO.setC_pdservice_link(
+                                StringUtility.toLong(StringUtility.remove(changeReqTableName,"T_ARMS_REQADD_")));
+                        reqStatusDTO.setC_version_link(ver);
+                        reqStatusDTO.setC_jira_link(jiraInfo.getC_jira_link()); //pdservicejiraver 링크 정보 :: 향후 업데이트 하게 두자
+                        reqStatusDTO.setC_jira_version_link(jiraVerInfo.getC_jiraversion_link());
+                        reqStatusDTO.setC_req_link(returnNode.getC_id().toString());
+
+                        ReqStatusDTO updater = reqStatus.addNode(reqStatusDTO);
+                        reqStatusIDs.add(updater.getC_id().toString());
+                    }
+
+                    SessionUtil.setAttribute("addNode",changeReqTableName);
+
+                    returnNode.setC_issue_link(reqStatusIDs.stream()
+                            .collect(Collectors.joining(",")));
+                    reqAdd.updateNode(returnNode);
+
+                    SessionUtil.removeAttribute("addNode");
+
+                }
+            }
+
+
+
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", returnNode);
             return modelAndView;
@@ -230,9 +344,22 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             SessionUtil.setAttribute("updateNode",changeReqTableName);
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
-            modelAndView.addObject("result", this.reqAdd.updateNode(reqAddDTO));
+            modelAndView.addObject("result", reqAdd.updateNode(reqAddDTO));
 
             SessionUtil.removeAttribute("updateNode");
+
+//            ReqStatusDTO checkReqStatusDTO = new ReqStatusDTO();
+//            checkReqStatusDTO.setWhere("c_pdservice_link", StringUtility.toLong(changeReqTableName));
+//            checkReqStatusDTO.setWhere("c_version_link", "independent");
+//            checkReqStatusDTO.setWhere("c_jira_link", returnNode.getC_jira_link());
+//            checkReqStatusDTO.setWhere("c_req_link", returnNode.getC_id().toString());
+//            ReqStatusDTO checkReturn = reqStatus.getNode(checkReqStatusDTO);
+//
+//            if(checkReturn == null){
+//                //db에 없으니까.
+//            }else{
+//                //db에 있다고????
+//            }
 
             return modelAndView;
         }
