@@ -69,6 +69,9 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     @Resource(name = "reqAddTemplateInstallDB")
     ArmsInstallDB reqAddTemplateInstallDB;
 
+    @Resource(name = "reqStatusTemplateInstallDB")
+    ArmsInstallDB reqStatusTemplateInstallDB;
+
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(pdService);
@@ -79,6 +82,7 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     private static final Long ROOT_NODE_ID = new Long(2);
     private static final String NODE_TYPE = new String("default");
     private static final String REQ_PREFIX_TABLENAME_BY_PDSERVICE = new String("T_ARMS_REQADD_");
+    private static final String REQ_PREFIX_TABLENAME_BY_PDSERVICE_STATUS = new String("T_ARMS_REQADD_STATUS_");
 
     @ResponseBody
     @RequestMapping(
@@ -104,6 +108,13 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
             //C_ETC 컬럼에 요구사항 테이블 이름 기입
             addedNode.setC_etc(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
             pdService.updateNode(addedNode);
+
+            //제품(서비스) 생성시 - 요구사항 STATUS TABLE 생성
+            ArmsInstallDB_SqlMaaperDTO armsInstall_statusDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
+            armsInstall_statusDB_sqlMaaperDTO.setC_title(REQ_PREFIX_TABLENAME_BY_PDSERVICE_STATUS + addedNode.getC_id().toString());
+            armsInstall_statusDB_sqlMaaperDTO.setSqlMapSelector("arms-reqadd-status-template");
+
+            reqStatusTemplateInstallDB.sqlMapExecute(armsInstall_statusDB_sqlMaaperDTO);
 
             //Default Version 생성
             PdServiceVersionDTO pdServiceVersionDTO = new PdServiceVersionDTO();

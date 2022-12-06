@@ -408,9 +408,7 @@ public class StringUtility extends egovframework.com.ext.jstree.support.util.Str
 	}
 
 	/**
-	 * 특수문자를 웹 브라우저에서 정상적으로 보이기 위해 특수문자를 처리('<' -> & lT)하는 기능이다
-	 * @param str
-	 * @return
+	 * 특수문자를 웹 브라우저에서 정상적으로 보이기 위해 특수문자를 처리 하는 기능이다
 	 */
 	public static String replaceString(String str)	{
 		String returnValue = "";
