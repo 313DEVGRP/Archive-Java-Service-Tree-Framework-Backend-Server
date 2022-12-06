@@ -49,9 +49,9 @@ public class PdServiceJiraVersionInstallDBImpl extends CoreServiceImpl implement
 
     private void makeTrigger(ComprehensiveTree comprehensiveTree) throws SQLException {
 
-        String addColums =",c_pdservice_id ,c_pdservice_version_id ,c_pdservice_jira_id ,c_jiraversion_name ,c_jiraversion_id ,c_jiraversion_desc ,c_jiraversion_releasedate ,c_jiraversion_link";
-        String addOldColums =",:old.c_pdservice_id ,:old.c_pdservice_version_id ,:old.c_pdservice_jira_id ,:old.c_jiraversion_name ,:old.c_jiraversion_id ,:old.c_jiraversion_desc ,:old.c_jiraversion_releasedate ,:old.c_jiraversion_link";
-        String addNewColums =",:new.c_pdservice_id ,:new.c_pdservice_version_id ,:new.c_pdservice_jira_id ,:new.c_jiraversion_name ,:new.c_jiraversion_id ,:new.c_jiraversion_desc ,:new.c_jiraversion_releasedate ,:new.c_jiraversion_link";
+        String addColums =",c_pdservice_id,c_pdservice_name,c_pdservice_version_id,c_pdservice_version_name,c_pdservice_jira_id,c_pdservice_jira_name,c_pdservice_jira_key,c_pdservice_jira_link,c_jiraversion_name,c_jiraversion_id,c_jiraversion_desc,c_jiraversion_releasedate,c_jiraversion_link";
+        String addOldColums =",:old.c_pdservice_id,:old.c_pdservice_name,:old.c_pdservice_version_id,:old.c_pdservice_version_name,:old.c_pdservice_jira_id,:old.c_pdservice_jira_name,:old.c_pdservice_jira_key,:old.c_pdservice_jira_link,:old.c_jiraversion_name,:old.c_jiraversion_id,:old.c_jiraversion_desc,:old.c_jiraversion_releasedate,:old.c_jiraversion_link";
+        String addNewColums =",:new.c_pdservice_id,:new.c_pdservice_name,:new.c_pdservice_version_id,:new.c_pdservice_version_name,:new.c_pdservice_jira_id,:new.c_pdservice_jira_name,:new.c_pdservice_jira_key,:new.c_pdservice_jira_link,:new.c_jiraversion_name,:new.c_jiraversion_id,:new.c_jiraversion_desc,:new.c_jiraversion_releasedate,:new.c_jiraversion_link";
 
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();

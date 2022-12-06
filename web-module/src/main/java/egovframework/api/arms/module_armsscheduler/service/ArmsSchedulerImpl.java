@@ -182,6 +182,9 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
 
                     //찾은 정보를 기반으로 지라프로젝트에 버전정보를 셋팅한다.
                     String projectKey = returnPdServiceJiraDTO.getC_jira_key();
+                    String projectLink = returnPdServiceJiraDTO.getC_jira_link();
+                    String projectName = returnPdServiceJiraDTO.getC_jira_name();
+
                     String versionStr = "[a-RMS]_" + StringUtility.replace(pdServiceName, " ", "_") + "_" + projectKey + "_" + StringUtility.deleteWhitespace(pdServiceVersionName);
                     String description = "[a-RMS] 에서 관리하는 버전 정보 :: " + pdServiceVersionStart + "~" + pdServiceVersionEnd;
                     //DateTime releaseDate = new DateTime(pdServiceVersionEnd);
@@ -220,14 +223,24 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                             PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
                             pdServiceJiraVerDTO.setRef(2L);
                             pdServiceJiraVerDTO.setC_type("default");
+                            pdServiceJiraVerDTO.setC_title(pdServiceId + "-" + pdServiceVersionStr + "-" + pdServiceJiraID);
 
-                            alreadyDataSetting(pdServiceId, pdServiceVersionStr, pdServiceJiraID, already_JiraVersion_Name, already_JiraVersion_Desc, already_JiraVersion_ID, already_JiraVersion_RelDate, already_JiraVersion_Link, pdServiceJiraVerDTO);
+                            alreadyDataSetting(pdServiceId, pdServiceName,
+                                    pdServiceVersionStr, pdServiceVersionName,
+                                    pdServiceJiraID, projectName, projectKey, projectLink,
+                                    already_JiraVersion_Name, already_JiraVersion_Desc, already_JiraVersion_ID,
+                                    already_JiraVersion_RelDate, already_JiraVersion_Link, pdServiceJiraVerDTO);
 
                             pdServiceJiraVer.addNode(pdServiceJiraVerDTO);
                         }else{
                             //이미 등록되 있다고 한다. 업데이트 될 수도 있으니까
 
-                            alreadyDataSetting(pdServiceId, pdServiceVersionStr, pdServiceJiraID, already_JiraVersion_Name, already_JiraVersion_Desc, already_JiraVersion_ID, already_JiraVersion_RelDate, already_JiraVersion_Link, checkDTO);
+                            checkDTO.setC_title(pdServiceId + "-" + pdServiceVersionStr + "-" + pdServiceJiraID);
+                            alreadyDataSetting(pdServiceId, pdServiceName,
+                                    pdServiceVersionStr, pdServiceVersionName,
+                                    pdServiceJiraID, projectName, projectKey, projectLink,
+                                    already_JiraVersion_Name, already_JiraVersion_Desc, already_JiraVersion_ID,
+                                    already_JiraVersion_RelDate, already_JiraVersion_Link, checkDTO);
 
                             pdServiceJiraVer.updateNode(checkDTO);
                         }
@@ -247,15 +260,23 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                             PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
                             pdServiceJiraVerDTO.setRef(2L);
                             pdServiceJiraVerDTO.setC_type("default");
+                            pdServiceJiraVerDTO.setC_title(pdServiceId + "-" + pdServiceVersionStr + "-" + pdServiceJiraID);
 
-                            setData(pdServiceId, pdServiceVersionStr, pdServiceJiraID, version, pdServiceJiraVerDTO);
+                            setData(pdServiceId, pdServiceName,
+                                    pdServiceVersionStr, pdServiceVersionName,
+                                    pdServiceJiraID, projectName, projectKey, projectLink,
+                                    version, pdServiceJiraVerDTO);
 
                             pdServiceJiraVer.addNode(pdServiceJiraVerDTO);
 
                         //정상적으로 지라에 버전을 등록을 했지만 a-RMS에 버전이 있다는거잖아 말이 안되지만 업데이트 해주자
                         }else{
 
-                            setData(pdServiceId, pdServiceVersionStr, pdServiceJiraID, version, checkDTO);
+                            checkDTO.setC_title(pdServiceId + "-" + pdServiceVersionStr + "-" + pdServiceJiraID);
+                            setData(pdServiceId, pdServiceName,
+                                    pdServiceVersionStr, pdServiceVersionName,
+                                    pdServiceJiraID, projectName, projectKey, projectLink,
+                                    version, checkDTO);
 
                             pdServiceJiraVer.updateNode(checkDTO);
 
@@ -305,17 +326,31 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
 
     public PdServiceJiraVerDTO checkPdServiceJiraVerDTO(String pdServiceId, String pdServiceVersionStr, String pdServiceJiraID, String versionStr) throws Exception {
         PdServiceJiraVerDTO searchDTO = new PdServiceJiraVerDTO();
-        searchDTO.setWhere("c_pdservice_id", pdServiceId);
-        searchDTO.setWhere("c_pdservice_version_id", pdServiceVersionStr);
-        searchDTO.setWhere("c_pdservice_jira_id", pdServiceJiraID);
+        searchDTO.setWhere("c_pdservice_id", StringUtility.toLong(pdServiceId));
+        searchDTO.setWhere("c_pdservice_version_id", StringUtility.toLong(pdServiceVersionStr));
+        searchDTO.setWhere("c_pdservice_jira_id", StringUtility.toLong(pdServiceJiraID));
         searchDTO.setWhere("c_jiraversion_name", versionStr);
         return pdServiceJiraVer.getNode(searchDTO);
     }
 
-    public void alreadyDataSetting(String pdServiceId, String pdServiceVersionStr, String pdServiceJiraID, String already_JiraVersion_Name, String already_JiraVersion_Desc, String already_JiraVersion_ID, String already_JiraVersion_RelDate, String already_JiraVersion_Link, PdServiceJiraVerDTO checkDTO) {
-        checkDTO.setC_pdservice_id(pdServiceId);
-        checkDTO.setC_pdservice_version_id(pdServiceVersionStr);
-        checkDTO.setC_pdservice_jira_id(pdServiceJiraID);
+    public void alreadyDataSetting(String pdServiceId, String pdServiceName,
+                                   String pdServiceVersionStr, String pdServiceVersionName,
+                                   String pdServiceJiraID, String projectName, String projectKey, String projectLink,
+                                   String already_JiraVersion_Name, String already_JiraVersion_Desc,
+                                   String already_JiraVersion_ID, String already_JiraVersion_RelDate,
+                                   String already_JiraVersion_Link, PdServiceJiraVerDTO checkDTO) {
+
+        checkDTO.setC_pdservice_id(StringUtility.toLong(pdServiceId));
+        checkDTO.setC_pdservice_name(pdServiceName);
+
+        checkDTO.setC_pdservice_version_id(StringUtility.toLong(pdServiceVersionStr));
+        checkDTO.setC_pdservice_version_name(pdServiceVersionName);
+
+        checkDTO.setC_pdservice_jira_id(StringUtility.toLong(pdServiceJiraID));
+        checkDTO.setC_pdservice_jira_name(projectName);
+        checkDTO.setC_pdservice_jira_key(projectKey);
+        checkDTO.setC_pdservice_jira_link(projectLink);
+
         checkDTO.setC_jiraversion_name(already_JiraVersion_Name);
         checkDTO.setC_jiraversion_desc(already_JiraVersion_Desc);
         checkDTO.setC_jiraversion_id(already_JiraVersion_ID);
@@ -323,10 +358,22 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
         checkDTO.setC_jiraversion_link(already_JiraVersion_Link);
     }
 
-    public void setData(String pdServiceId, String pdServiceVersionStr, String pdServiceJiraID, Version version, PdServiceJiraVerDTO checkDTO) {
-        checkDTO.setC_pdservice_id(pdServiceId);
-        checkDTO.setC_pdservice_version_id(pdServiceVersionStr);
-        checkDTO.setC_pdservice_jira_id(pdServiceJiraID);
+    public void setData(String pdServiceId, String pdServiceName,
+                        String pdServiceVersionStr, String pdServiceVersionName,
+                        String pdServiceJiraID, String projectName, String projectKey, String projectLink,
+                        Version version, PdServiceJiraVerDTO checkDTO) {
+
+        checkDTO.setC_pdservice_id(StringUtility.toLong(pdServiceId));
+        checkDTO.setC_pdservice_name(pdServiceName);
+
+        checkDTO.setC_pdservice_version_id(StringUtility.toLong(pdServiceVersionStr));
+        checkDTO.setC_pdservice_version_name(pdServiceVersionName);
+
+        checkDTO.setC_pdservice_jira_id(StringUtility.toLong(pdServiceJiraID));
+        checkDTO.setC_pdservice_jira_name(projectName);
+        checkDTO.setC_pdservice_jira_key(projectKey);
+        checkDTO.setC_pdservice_jira_link(projectLink);
+
         checkDTO.setC_jiraversion_name(version.getName());
         checkDTO.setC_jiraversion_desc(version.getDescription());
         checkDTO.setC_jiraversion_id(version.getId().toString());

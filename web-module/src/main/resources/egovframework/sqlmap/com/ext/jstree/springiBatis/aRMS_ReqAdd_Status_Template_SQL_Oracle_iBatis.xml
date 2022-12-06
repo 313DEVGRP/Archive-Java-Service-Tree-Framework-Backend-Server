@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="arms-reqadd">
+<sqlMap namespace="arms-reqadd-status-template">
     <typeAlias alias="ComprehensiveTree"
                type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree" />
 
@@ -17,40 +17,29 @@
 
             c_pdservice_link NUMBER,
             c_pdservice_name VARCHAR2(4000 BYTE),
-            c_version_link VARCHAR2(4000 BYTE),
+            c_version_link NUMBER,
             c_version_name VARCHAR2(4000 BYTE),
-
-            c_jira_project_link VARCHAR2(4000 BYTE),
+            c_jira_project_link NUMBER,
             c_jira_project_name VARCHAR2(4000 BYTE),
-            c_jira_version_link VARCHAR2(4000 BYTE),
+            c_jira_project_url VARCHAR2(4000 BYTE),
+
+            c_jira_version_link NUMBER,
             c_jira_version_name VARCHAR2(4000 BYTE),
+            c_jira_version_url VARCHAR2(4000 BYTE),
+
+            c_req_link NUMBER,
+            c_req_name VARCHAR2(4000 BYTE),
 
             c_jira_req_issue_link VARCHAR2(4000 BYTE),
             c_jira_req_issue_key VARCHAR2(4000 BYTE),
-            c_jira_req_priority_link VARCHAR2(4000 BYTE),
+            c_jira_req_priority_link NUMBER,
             c_jira_req_priority_name VARCHAR2(4000 BYTE),
 
-            c_jira_req_status_link VARCHAR2(4000 BYTE),
+            c_jira_req_status_link NUMBER,
             c_jira_req_status_name VARCHAR2(4000 BYTE),
             c_jira_req_linkingissue VARCHAR2(4000 BYTE),
             c_jira_req_subtaskissue VARCHAR2(4000 BYTE),
 
-            c_reviewer01 VARCHAR2(4000 BYTE),
-            c_reviewer02 VARCHAR2(4000 BYTE),
-            c_reviewer03 VARCHAR2(4000 BYTE),
-            c_reviewer04 VARCHAR2(4000 BYTE),
-            c_reviewer05 VARCHAR2(4000 BYTE),
-
-            c_reviewer01_status VARCHAR2(4000 BYTE),
-            c_reviewer02_status VARCHAR2(4000 BYTE),
-            c_reviewer03_status VARCHAR2(4000 BYTE),
-            c_reviewer04_status VARCHAR2(4000 BYTE),
-            c_reviewer05_status VARCHAR2(4000 BYTE),
-
-            c_writer VARCHAR2(4000 BYTE),
-            c_writer_date VARCHAR2(4000 BYTE),
-
-            c_contents CLOB,
             CONSTRAINT $c_title$_PK PRIMARY KEY (C_ID)
         /*
         * CONSTRAINT T_ARMS_REQADD_FK1 FOREIGN KEY (OTHER_ID) REFERENCES OTHER T_ARMS_REQADD(C_ID) ON DELETE CASCADE
@@ -130,11 +119,16 @@
             c_pdservice_name VARCHAR2(4000 BYTE),
             c_version_link NUMBER,
             c_version_name VARCHAR2(4000 BYTE),
-
             c_jira_project_link NUMBER,
             c_jira_project_name VARCHAR2(4000 BYTE),
+            c_jira_project_url VARCHAR2(4000 BYTE),
+
             c_jira_version_link NUMBER,
             c_jira_version_name VARCHAR2(4000 BYTE),
+            c_jira_version_url VARCHAR2(4000 BYTE),
+
+            c_req_link NUMBER,
+            c_req_name VARCHAR2(4000 BYTE),
 
             c_jira_req_issue_link VARCHAR2(4000 BYTE),
             c_jira_req_issue_key VARCHAR2(4000 BYTE),
@@ -144,24 +138,8 @@
             c_jira_req_status_link NUMBER,
             c_jira_req_status_name VARCHAR2(4000 BYTE),
             c_jira_req_linkingissue VARCHAR2(4000 BYTE),
-            c_jira_req_subtaskissue VARCHAR2(4000 BYTE),
+            c_jira_req_subtaskissue VARCHAR2(4000 BYTE)
 
-            c_reviewer01 VARCHAR2(4000 BYTE),
-            c_reviewer02 VARCHAR2(4000 BYTE),
-            c_reviewer03 VARCHAR2(4000 BYTE),
-            c_reviewer04 VARCHAR2(4000 BYTE),
-            c_reviewer05 VARCHAR2(4000 BYTE),
-
-            c_reviewer01_status VARCHAR2(4000 BYTE),
-            c_reviewer02_status VARCHAR2(4000 BYTE),
-            c_reviewer03_status VARCHAR2(4000 BYTE),
-            c_reviewer04_status VARCHAR2(4000 BYTE),
-            c_reviewer05_status VARCHAR2(4000 BYTE),
-
-            c_writer VARCHAR2(4000 BYTE),
-            c_writer_date VARCHAR2(4000 BYTE),
-
-            c_contents CLOB
         )
     </statement>
     <statement id="ddlLogExecute_comment_1" parameterClass="ComprehensiveTree">

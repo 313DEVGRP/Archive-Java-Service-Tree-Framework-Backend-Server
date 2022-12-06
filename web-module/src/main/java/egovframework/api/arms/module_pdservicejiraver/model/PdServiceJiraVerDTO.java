@@ -40,13 +40,29 @@ public class PdServiceJiraVerDTO extends JsTreeHibernateSearchDTO implements Ser
 
     //@Getter @Setter
     @Column(name="c_pdservice_id")
-    private String c_pdservice_id;
+    private Long c_pdservice_id;
+
+    @Column(name="c_pdservice_name")
+    private String c_pdservice_name;
 
     @Column(name="c_pdservice_version_id")
-    private String c_pdservice_version_id;
+    private Long c_pdservice_version_id;
+
+    @Column(name="c_pdservice_version_name")
+    private String c_pdservice_version_name;
 
     @Column(name="c_pdservice_jira_id")
-    private String c_pdservice_jira_id;
+    private Long c_pdservice_jira_id;
+
+    @Column(name="c_pdservice_jira_name")
+    private String c_pdservice_jira_name;
+
+    @Column(name="c_pdservice_jira_key")
+    private String c_pdservice_jira_key;
+
+    @Column(name="c_pdservice_jira_link")
+    private String c_pdservice_jira_link;
+
 
     @Column(name="c_jiraversion_name")
     private String c_jiraversion_name;
@@ -63,28 +79,68 @@ public class PdServiceJiraVerDTO extends JsTreeHibernateSearchDTO implements Ser
     @Column(name="c_jiraversion_link")
     private String c_jiraversion_link;
 
-    public String getC_pdservice_id() {
+    public Long getC_pdservice_id() {
         return c_pdservice_id;
     }
 
-    public void setC_pdservice_id(String c_pdservice_id) {
+    public void setC_pdservice_id(Long c_pdservice_id) {
         this.c_pdservice_id = c_pdservice_id;
     }
 
-    public String getC_pdservice_version_id() {
+    public String getC_pdservice_name() {
+        return c_pdservice_name;
+    }
+
+    public void setC_pdservice_name(String c_pdservice_name) {
+        this.c_pdservice_name = c_pdservice_name;
+    }
+
+    public Long getC_pdservice_version_id() {
         return c_pdservice_version_id;
     }
 
-    public void setC_pdservice_version_id(String c_pdservice_version_id) {
+    public void setC_pdservice_version_id(Long c_pdservice_version_id) {
         this.c_pdservice_version_id = c_pdservice_version_id;
     }
 
-    public String getC_pdservice_jira_id() {
+    public String getC_pdservice_version_name() {
+        return c_pdservice_version_name;
+    }
+
+    public void setC_pdservice_version_name(String c_pdservice_version_name) {
+        this.c_pdservice_version_name = c_pdservice_version_name;
+    }
+
+    public Long getC_pdservice_jira_id() {
         return c_pdservice_jira_id;
     }
 
-    public void setC_pdservice_jira_id(String c_pdservice_jira_id) {
+    public void setC_pdservice_jira_id(Long c_pdservice_jira_id) {
         this.c_pdservice_jira_id = c_pdservice_jira_id;
+    }
+
+    public String getC_pdservice_jira_name() {
+        return c_pdservice_jira_name;
+    }
+
+    public void setC_pdservice_jira_name(String c_pdservice_jira_name) {
+        this.c_pdservice_jira_name = c_pdservice_jira_name;
+    }
+
+    public String getC_pdservice_jira_key() {
+        return c_pdservice_jira_key;
+    }
+
+    public void setC_pdservice_jira_key(String c_pdservice_jira_key) {
+        this.c_pdservice_jira_key = c_pdservice_jira_key;
+    }
+
+    public String getC_pdservice_jira_link() {
+        return c_pdservice_jira_link;
+    }
+
+    public void setC_pdservice_jira_link(String c_pdservice_jira_link) {
+        this.c_pdservice_jira_link = c_pdservice_jira_link;
     }
 
     public String getC_jiraversion_name() {
