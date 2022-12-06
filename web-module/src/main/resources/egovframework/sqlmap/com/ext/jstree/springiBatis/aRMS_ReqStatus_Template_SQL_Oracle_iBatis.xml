@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="arms-reqadd-status-template">
+<sqlMap namespace="arms-reqstatus-template">
     <typeAlias alias="ComprehensiveTree"
                type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree" />
 
@@ -23,10 +23,12 @@
 
             c_jira_project_link NUMBER,
             c_jira_project_name VARCHAR2(4000 BYTE),
+            c_jira_project_key VARCHAR2(4000 BYTE),
             c_jira_project_url VARCHAR2(4000 BYTE),
 
             c_jira_version_link NUMBER,
             c_jira_version_name VARCHAR2(4000 BYTE),
+            c_jira_version_title VARCHAR2(4000 BYTE),
             c_jira_version_url VARCHAR2(4000 BYTE),
 
             c_req_link NUMBER,
@@ -130,10 +132,12 @@
 
             c_jira_project_link NUMBER,
             c_jira_project_name VARCHAR2(4000 BYTE),
+            c_jira_project_key VARCHAR2(4000 BYTE),
             c_jira_project_url VARCHAR2(4000 BYTE),
 
             c_jira_version_link NUMBER,
             c_jira_version_name VARCHAR2(4000 BYTE),
+            c_jira_version_title VARCHAR2(4000 BYTE),
             c_jira_version_url VARCHAR2(4000 BYTE),
 
             c_req_link NUMBER,

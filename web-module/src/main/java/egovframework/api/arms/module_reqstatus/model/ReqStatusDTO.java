@@ -39,33 +39,88 @@ public class ReqStatusDTO extends JsTreeHibernateSearchDTO implements Serializab
     }
 
     //@Getter @Setter
-    //a-RMS의 제품 서비스 아이디
     @Column(name = "c_pdservice_link")
     private Long c_pdservice_link;
 
-    //a-RMS의 버전 ( 사용자가 인지하는 버전 )
+    @Column(name = "c_pdservice_name")
+    private String c_pdservice_name;
+
+
     @Column(name = "c_version_link")
-    private String c_version_link;
+    private Long c_version_link;
 
-    //a-RMS의 지라 프로젝트 연결 정보 ( 사용자가 인지하는 지라 프로젝트 정보 )
-    @Column(name = "c_jira_link")
-    private String c_jira_link;
+    @Column(name = "c_version_name")
+    private String c_version_name;
 
-    //a-RMS의 요구사항 아이디 ( 테이블은 스위칭이니까 제품서비스 아이디 참조 )
+
+    @Column(name = "c_jira_project_link")
+    private Long c_jira_project_link;
+
+    @Column(name = "c_jira_project_name")
+    private String c_jira_project_name;
+
+    @Column(name = "c_jira_project_key")
+    private String c_jira_project_key;
+
+    @Column(name = "c_jira_project_url")
+    private String c_jira_project_url;
+
+
+    @Column(name = "c_jira_version_link")
+    private Long c_jira_version_link;
+
+    @Column(name = "c_jira_version_name")
+    private String c_jira_version_name;
+
+    @Column(name = "c_jira_version_title")
+    private String c_jira_version_title;
+
+    @Column(name = "c_jira_version_url")
+    private String c_jira_version_url;
+
+
     @Column(name = "c_req_link")
     private String c_req_link;
 
-    //연결하는 프로젝트의 버전 링크 ( !!! 비어있는건 독립적인 요구사항 전달 - 추후개발 )
-    @Column(name = "c_jira_version_link")
-    private String c_jira_version_link;
+    @Column(name = "c_req_name")
+    private String c_req_name;
 
-    //연결하는 요구사항 이슈 정보
-    @Column(name = "c_jira_req_link")
-    private String c_jira_req_link;
 
+    @Column(name = "c_jira_req_issue_link")
+    private String c_jira_req_issue_link;
+
+    @Column(name = "c_jira_req_issue_key")
+    private String c_jira_req_issue_key;
+
+    @Column(name = "c_jira_req_issue_id")
+    private String c_jira_req_issue_id;
+
+
+    @Column(name = "c_jira_req_priority_link")
+    private Long c_jira_req_priority_link;
+
+    @Column(name = "c_jira_req_priority_url")
+    private String c_jira_req_priority_url;
+
+    @Column(name = "c_jira_req_priority_name")
+    private String c_jira_req_priority_name;
+
+
+    @Column(name = "c_jira_req_status_link")
+    private Long c_jira_req_status_link;
+
+    @Column(name = "c_jira_req_status_url")
+    private String c_jira_req_status_url;
+
+    @Column(name = "c_jira_req_status_name")
+    private String c_jira_req_status_name;
+
+
+    @Lob
     @Column(name = "c_jira_req_linkingissue")
     private String c_jira_req_linkingissue;
 
+    @Lob
     @Column(name = "c_jira_req_subtaskissue")
     private String c_jira_req_subtaskissue;
 
@@ -77,20 +132,84 @@ public class ReqStatusDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_pdservice_link = c_pdservice_link;
     }
 
-    public String getC_version_link() {
+    public String getC_pdservice_name() {
+        return c_pdservice_name;
+    }
+
+    public void setC_pdservice_name(String c_pdservice_name) {
+        this.c_pdservice_name = c_pdservice_name;
+    }
+
+    public Long getC_version_link() {
         return c_version_link;
     }
 
-    public void setC_version_link(String c_version_link) {
+    public void setC_version_link(Long c_version_link) {
         this.c_version_link = c_version_link;
     }
 
-    public String getC_jira_link() {
-        return c_jira_link;
+    public String getC_version_name() {
+        return c_version_name;
     }
 
-    public void setC_jira_link(String c_jira_link) {
-        this.c_jira_link = c_jira_link;
+    public void setC_version_name(String c_version_name) {
+        this.c_version_name = c_version_name;
+    }
+
+    public Long getC_jira_project_link() {
+        return c_jira_project_link;
+    }
+
+    public void setC_jira_project_link(Long c_jira_project_link) {
+        this.c_jira_project_link = c_jira_project_link;
+    }
+
+    public String getC_jira_project_name() {
+        return c_jira_project_name;
+    }
+
+    public void setC_jira_project_name(String c_jira_project_name) {
+        this.c_jira_project_name = c_jira_project_name;
+    }
+
+    public String getC_jira_project_key() {
+        return c_jira_project_key;
+    }
+
+    public void setC_jira_project_key(String c_jira_project_key) {
+        this.c_jira_project_key = c_jira_project_key;
+    }
+
+    public String getC_jira_project_url() {
+        return c_jira_project_url;
+    }
+
+    public void setC_jira_project_url(String c_jira_project_url) {
+        this.c_jira_project_url = c_jira_project_url;
+    }
+
+    public Long getC_jira_version_link() {
+        return c_jira_version_link;
+    }
+
+    public void setC_jira_version_link(Long c_jira_version_link) {
+        this.c_jira_version_link = c_jira_version_link;
+    }
+
+    public String getC_jira_version_name() {
+        return c_jira_version_name;
+    }
+
+    public void setC_jira_version_name(String c_jira_version_name) {
+        this.c_jira_version_name = c_jira_version_name;
+    }
+
+    public String getC_jira_version_url() {
+        return c_jira_version_url;
+    }
+
+    public void setC_jira_version_url(String c_jira_version_url) {
+        this.c_jira_version_url = c_jira_version_url;
     }
 
     public String getC_req_link() {
@@ -101,20 +220,84 @@ public class ReqStatusDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_req_link = c_req_link;
     }
 
-    public String getC_jira_version_link() {
-        return c_jira_version_link;
+    public String getC_req_name() {
+        return c_req_name;
     }
 
-    public void setC_jira_version_link(String c_jira_version_link) {
-        this.c_jira_version_link = c_jira_version_link;
+    public void setC_req_name(String c_req_name) {
+        this.c_req_name = c_req_name;
     }
 
-    public String getC_jira_req_link() {
-        return c_jira_req_link;
+    public String getC_jira_req_issue_link() {
+        return c_jira_req_issue_link;
     }
 
-    public void setC_jira_req_link(String c_jira_req_link) {
-        this.c_jira_req_link = c_jira_req_link;
+    public void setC_jira_req_issue_link(String c_jira_req_issue_link) {
+        this.c_jira_req_issue_link = c_jira_req_issue_link;
+    }
+
+    public String getC_jira_req_issue_key() {
+        return c_jira_req_issue_key;
+    }
+
+    public void setC_jira_req_issue_key(String c_jira_req_issue_key) {
+        this.c_jira_req_issue_key = c_jira_req_issue_key;
+    }
+
+    public String getC_jira_req_issue_id() {
+        return c_jira_req_issue_id;
+    }
+
+    public void setC_jira_req_issue_id(String c_jira_req_issue_id) {
+        this.c_jira_req_issue_id = c_jira_req_issue_id;
+    }
+
+    public Long getC_jira_req_priority_link() {
+        return c_jira_req_priority_link;
+    }
+
+    public void setC_jira_req_priority_link(Long c_jira_req_priority_link) {
+        this.c_jira_req_priority_link = c_jira_req_priority_link;
+    }
+
+    public String getC_jira_req_priority_url() {
+        return c_jira_req_priority_url;
+    }
+
+    public void setC_jira_req_priority_url(String c_jira_req_priority_url) {
+        this.c_jira_req_priority_url = c_jira_req_priority_url;
+    }
+
+    public String getC_jira_req_priority_name() {
+        return c_jira_req_priority_name;
+    }
+
+    public void setC_jira_req_priority_name(String c_jira_req_priority_name) {
+        this.c_jira_req_priority_name = c_jira_req_priority_name;
+    }
+
+    public Long getC_jira_req_status_link() {
+        return c_jira_req_status_link;
+    }
+
+    public void setC_jira_req_status_link(Long c_jira_req_status_link) {
+        this.c_jira_req_status_link = c_jira_req_status_link;
+    }
+
+    public String getC_jira_req_status_url() {
+        return c_jira_req_status_url;
+    }
+
+    public void setC_jira_req_status_url(String c_jira_req_status_url) {
+        this.c_jira_req_status_url = c_jira_req_status_url;
+    }
+
+    public String getC_jira_req_status_name() {
+        return c_jira_req_status_name;
+    }
+
+    public void setC_jira_req_status_name(String c_jira_req_status_name) {
+        this.c_jira_req_status_name = c_jira_req_status_name;
     }
 
     public String getC_jira_req_linkingissue() {

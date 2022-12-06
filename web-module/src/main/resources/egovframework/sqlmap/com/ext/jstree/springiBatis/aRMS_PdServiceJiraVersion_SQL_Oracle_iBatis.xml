@@ -17,8 +17,10 @@
 
             c_pdservice_id NUMBER,
             c_pdservice_name VARCHAR2(4000 BYTE),
+
             c_pdservice_version_id NUMBER,
             c_pdservice_version_name VARCHAR2(4000 BYTE),
+
             c_pdservice_jira_id NUMBER,
             c_pdservice_jira_name VARCHAR2(4000 BYTE),
             c_pdservice_jira_key VARCHAR2(4000 BYTE),

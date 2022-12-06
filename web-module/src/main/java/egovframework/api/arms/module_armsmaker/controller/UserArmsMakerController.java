@@ -213,19 +213,19 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
     }
 
     @ResponseBody
-    @RequestMapping(value = {"/module_reqadd_status.do"},method = {RequestMethod.GET})
-    public ModelAndView module_reqadd_status(
+    @RequestMapping(value = {"/module_reqstatus.do"},method = {RequestMethod.GET})
+    public ModelAndView module_reqstatus(
             ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request) throws Exception {
 
-        logger.info("UserArmsMakerController :: module_reqadd_status :: tableName = T_ARMS_REQADD_STATUS");
+        logger.info("UserArmsMakerController :: module_reqstatus :: tableName = T_ARMS_REQSTATUS");
 
         ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
-        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_REQADD_STATUS");
-        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-reqadd-status-template");
+        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_REQSTATUS");
+        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-reqstatus-template");
         reqStatusTemplateInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
 
         ModelAndView modelAndView =  new ModelAndView("jsonView");
-        modelAndView.addObject("result", "module_reqadd_status");
+        modelAndView.addObject("result", "module_reqstatus");
         return modelAndView;
     }
 
