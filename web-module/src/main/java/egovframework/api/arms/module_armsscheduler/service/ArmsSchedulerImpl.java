@@ -89,7 +89,7 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
             logger.info("project -> " + project.getSelf());
 
             boolean anyMatch = list.stream().anyMatch(dto ->
-                    StringUtils.equals(dto.getC_jira_link(), project.getSelf().toString())
+                    StringUtils.equals(dto.getC_jira_key(), project.getKey())
             );
 
             if(anyMatch){
@@ -106,10 +106,6 @@ public class ArmsSchedulerImpl extends JsTreeHibernateServiceImpl implements Arm
                 pdServiceJiraDTO.setC_jira_name(projectDetail.getName());
                 pdServiceJiraDTO.setC_jira_link(projectDetail.getSelf().toString());
                 pdServiceJiraDTO.setC_contents(projectDetail.getDescription());
-                pdServiceJiraDTO.setC_jira_avatar_16(projectDetail.getComponents().toString());
-                pdServiceJiraDTO.setC_jira_avatar_24(projectDetail.getIssueTypes().toString());
-                pdServiceJiraDTO.setC_jira_avatar_32(projectDetail.getProjectRoles().toString());
-                pdServiceJiraDTO.setC_jira_avatar_48(projectDetail.getVersions().toString());
                 pdServiceJiraDTO.setRef(2L);
                 pdServiceJiraDTO.setC_type("default");
 
