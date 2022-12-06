@@ -17,6 +17,5 @@
 
 	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/springiBatis/aRMS_ReqAdd_Template_SQL_Oracle_iBatis.xml"/>
 	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/springiBatis/aRMS_ReqAdd_Status_Template_SQL_Oracle_iBatis.xml"/>
-	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/springiBatis/aRMS_ReqStatus_SQL_Oracle_iBatis.xml"/>
 
 </sqlMapConfig>

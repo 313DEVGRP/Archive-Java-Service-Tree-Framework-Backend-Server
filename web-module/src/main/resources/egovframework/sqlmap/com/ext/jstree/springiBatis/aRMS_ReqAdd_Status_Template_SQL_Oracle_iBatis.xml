@@ -17,8 +17,10 @@
 
             c_pdservice_link NUMBER,
             c_pdservice_name VARCHAR2(4000 BYTE),
+
             c_version_link NUMBER,
             c_version_name VARCHAR2(4000 BYTE),
+
             c_jira_project_link NUMBER,
             c_jira_project_name VARCHAR2(4000 BYTE),
             c_jira_project_url VARCHAR2(4000 BYTE),
@@ -32,13 +34,18 @@
 
             c_jira_req_issue_link VARCHAR2(4000 BYTE),
             c_jira_req_issue_key VARCHAR2(4000 BYTE),
+            c_jira_req_issue_id VARCHAR2(4000 BYTE),
+
             c_jira_req_priority_link NUMBER,
             c_jira_req_priority_name VARCHAR2(4000 BYTE),
+            c_jira_req_priority_url VARCHAR2(4000 BYTE),
 
             c_jira_req_status_link NUMBER,
             c_jira_req_status_name VARCHAR2(4000 BYTE),
-            c_jira_req_linkingissue VARCHAR2(4000 BYTE),
-            c_jira_req_subtaskissue VARCHAR2(4000 BYTE),
+            c_jira_req_status_url VARCHAR2(4000 BYTE),
+
+            c_jira_req_linkingissue CLOB,
+            c_jira_req_subtaskissue CLOB,
 
             CONSTRAINT $c_title$_PK PRIMARY KEY (C_ID)
         /*
@@ -117,8 +124,10 @@
 
             c_pdservice_link NUMBER,
             c_pdservice_name VARCHAR2(4000 BYTE),
+
             c_version_link NUMBER,
             c_version_name VARCHAR2(4000 BYTE),
+
             c_jira_project_link NUMBER,
             c_jira_project_name VARCHAR2(4000 BYTE),
             c_jira_project_url VARCHAR2(4000 BYTE),
@@ -132,13 +141,18 @@
 
             c_jira_req_issue_link VARCHAR2(4000 BYTE),
             c_jira_req_issue_key VARCHAR2(4000 BYTE),
+            c_jira_req_issue_id VARCHAR2(4000 BYTE),
+
             c_jira_req_priority_link NUMBER,
             c_jira_req_priority_name VARCHAR2(4000 BYTE),
+            c_jira_req_priority_url VARCHAR2(4000 BYTE),
 
             c_jira_req_status_link NUMBER,
             c_jira_req_status_name VARCHAR2(4000 BYTE),
-            c_jira_req_linkingissue VARCHAR2(4000 BYTE),
-            c_jira_req_subtaskissue VARCHAR2(4000 BYTE)
+            c_jira_req_status_url VARCHAR2(4000 BYTE),
+
+            c_jira_req_linkingissue CLOB,
+            c_jira_req_subtaskissue CLOB
 
         )
     </statement>
