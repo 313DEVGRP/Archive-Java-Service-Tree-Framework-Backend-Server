@@ -262,6 +262,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             String jiraVerInfo = returnNode.getC_jira_ver_link(); // 버전 정보가 없다면, 개별 처리이다.
 
             List<String> updateReqStatusIDs = new ArrayList<>(); //최종 C_ISSUE_LINK 업데이트 목적
+            List<String> updateJiraVerIDs = new ArrayList<>(); //최종 C_JIRA_VER_LINK 업데이트 목적
 
             if(versionInfoArr.length == 0){
                 //버전 정보가 없다는 뜻. -> 개별 처리를 하겠다는 뜻.
@@ -330,9 +331,12 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                             PdServiceJiraVerDTO jiraVerDTOInfo = pdServiceJira.getNode(pdServiceJiraVerDTO);
 
                             if( jiraVerDTOInfo == null ){
-                                //없다는 건.? - 버전 정보 입력도 안하고 요구사항 부터 입력한거니까
-                                //개별 설정하겠다는 의도가 강하거나, 한거다.
-                                //설정 정보 없음 알림.
+                                //없다는 건.? -
+                                //여기까지 왔다는건. 커넥션 정보는 있지만,
+                                //Jira Project - Jira Version 이 생성되지 않았다는 건데.
+                                //버전 생성 시 바로 resttemplate 로 jira version sync를 맞추기 때문에
+                                //여기로 들어올 수는 없다.
+                                throw new RuntimeException("커넥션 정보는 있지만, JIRA Version 이 생성이 안된 케이스.");
                             }else{
                                 //있다는건. 매우 정상
                                 ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
@@ -369,7 +373,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
                                 ReqStatusDTO statusDTO = reqStatus.addNode(reqStatusDTO);
                                 updateReqStatusIDs.add(statusDTO.getC_id().toString());
-
+                                updateJiraVerIDs.add(jiraVerDTOInfo.getC_id().toString());
                                 SessionUtil.removeAttribute("addNode");
 
                             }
@@ -381,8 +385,10 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             }
 
-            String result = updateReqStatusIDs.stream().collect(Collectors.joining(","));
-            returnNode.setC_issue_link(result);
+            String issueLinkResult = updateReqStatusIDs.stream().collect(Collectors.joining(","));
+            String jiraVerResult = updateJiraVerIDs.stream().collect(Collectors.joining(","));
+            returnNode.setC_issue_link(issueLinkResult);
+            returnNode.setC_jira_ver_link(jiraVerResult);
 
             SessionUtil.setAttribute("addNode",changeReqTableName);
 
