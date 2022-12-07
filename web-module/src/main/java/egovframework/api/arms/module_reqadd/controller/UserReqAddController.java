@@ -11,6 +11,12 @@
  */
 package egovframework.api.arms.module_reqadd.controller;
 
+import com.atlassian.jira.rest.client.api.JiraRestClient;
+import com.atlassian.jira.rest.client.api.domain.*;
+import com.atlassian.jira.rest.client.api.domain.input.IssueInput;
+import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
+import com.atlassian.util.concurrent.Promise;
+import egovframework.api.arms.module_armsscheduler.component.ArmsSchedulerUtil;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_filerepositorylog.model.FileRepositoryLogDTO;
 import egovframework.api.arms.module_filerepositorylog.service.FileRepositoryLog;
@@ -48,6 +54,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +73,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -299,7 +307,9 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                             PdServiceJiraVerDTO jiraVerDTOInfo = pdServiceJira.getNode(pdServiceJiraVerDTO);
 
                             if( jiraVerDTOInfo == null ){
-                                //없다는 건.?
+                                //없다는 건.? - 버전 정보 입력도 안하고 요구사항 부터 입력한거니까
+                                //개별 설정하겠다는 의도가 강하거나, 한거다.
+                                //설정 정보 없음 알림.
                             }else{
                                 //있다는건. 매우 정상
                                 ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
@@ -314,13 +324,17 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                                 reqStatusDTO.setC_version_name(versionDTO.getC_title());
 
                                 reqStatusDTO.setC_jira_project_link(jiraDTOInfo.getC_id());
-                                reqStatusDTO.setC_jira_project_name(jiraDTOInfo.getC_jira_key());
+                                reqStatusDTO.setC_jira_project_name(jiraDTOInfo.getC_jira_name());
                                 reqStatusDTO.setC_jira_project_key(jiraDTOInfo.getC_jira_key());
                                 reqStatusDTO.setC_jira_project_url(jiraDTOInfo.getC_jira_link());
 
                                 reqStatusDTO.setC_jira_version_link(jiraVerDTOInfo.getC_id());
                                 reqStatusDTO.setC_jira_version_name(jiraVerDTOInfo.getC_jiraversion_name());
                                 reqStatusDTO.setC_jira_version_url(jiraVerDTOInfo.getC_jiraversion_link());
+
+                                //REQADD 의 요구사항 아이디, 타이틀
+                                reqStatusDTO.setC_req_link(returnNode.getC_id().toString());
+                                reqStatusDTO.setC_req_name(returnNode.getC_title());
 
 
                                 String changeReqStatusTableName = changeReqTableName;
@@ -329,55 +343,9 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                                         "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
                                 SessionUtil.setAttribute("addNode",changeReqStatusTableName);
 
-                                ReqStatusDTO returnStatusNode = reqStatus.addNode(reqStatusDTO);
+                                reqStatus.addNode(reqStatusDTO);
 
                                 SessionUtil.removeAttribute("addNode");
-
-//
-//                                @Column(name = "c_req_link")
-//                                private String c_req_link;
-//
-//                                @Column(name = "c_req_name")
-//                                private String c_req_name;
-//
-//
-//                                @Column(name = "c_jira_req_issue_link")
-//                                private String c_jira_req_issue_link;
-//
-//                                @Column(name = "c_jira_req_issue_key")
-//                                private String c_jira_req_issue_key;
-//
-//                                @Column(name = "c_jira_req_issue_id")
-//                                private String c_jira_req_issue_id;
-//
-//
-//                                @Column(name = "c_jira_req_priority_link")
-//                                private Long c_jira_req_priority_link;
-//
-//                                @Column(name = "c_jira_req_priority_url")
-//                                private String c_jira_req_priority_url;
-//
-//                                @Column(name = "c_jira_req_priority_name")
-//                                private String c_jira_req_priority_name;
-//
-//
-//                                @Column(name = "c_jira_req_status_link")
-//                                private Long c_jira_req_status_link;
-//
-//                                @Column(name = "c_jira_req_status_url")
-//                                private String c_jira_req_status_url;
-//
-//                                @Column(name = "c_jira_req_status_name")
-//                                private String c_jira_req_status_name;
-//
-//
-//                                @Lob
-//                                @Column(name = "c_jira_req_linkingissue")
-//                                private String c_jira_req_linkingissue;
-//
-//                                @Lob
-//                                @Column(name = "c_jira_req_subtaskissue")
-//                                private String c_jira_req_subtaskissue;
 
                             }
 

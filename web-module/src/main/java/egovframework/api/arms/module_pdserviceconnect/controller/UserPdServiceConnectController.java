@@ -13,20 +13,29 @@ package egovframework.api.arms.module_pdserviceconnect.controller;
 
 import egovframework.api.arms.module_pdserviceconnect.model.PdServiceConnectDTO;
 import egovframework.api.arms.module_pdserviceconnect.service.PdServiceConnect;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
+import egovframework.com.ext.jstree.springHibernate.core.util.Util_TitleChecker;
+import egovframework.com.ext.jstree.springHibernate.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -69,5 +78,58 @@ public class UserPdServiceConnectController extends SHVAbstractController<PdServ
 
         return modelAndView;
     }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/addNode.do"},
+            method = {RequestMethod.POST}
+    )
+    public ModelAndView addNode(@Validated({AddNode.class}) PdServiceConnectDTO jsTreeHibernateSearchDTO,
+                                BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException();
+        } else {
+            jsTreeHibernateSearchDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateSearchDTO.getC_title()));
+
+            PdServiceConnectDTO returnVO = pdServiceConnect.addNode(jsTreeHibernateSearchDTO);
+
+            PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+            String armsUrl = "http://127.0.0.1:13131";
+            String targetUrl = "/callback/api/arms/armsScheduler/forceExec/set_PdServiceVersion_toJiraProjectVersion.do";
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(armsUrl + targetUrl, String.class);
+            logger.info("response = " + response);
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", returnVO);
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateNode.do")
+    public ModelAndView updateNode(@Validated(value = UpdateNode.class) PdServiceConnectDTO jsTreeHibernateSearchDTO,
+                                   BindingResult bindingResult, HttpServletRequest request, ModelMap model) throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException();
+        }
+
+        pdServiceConnect.updateNode(jsTreeHibernateSearchDTO);
+
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String armsUrl = "http://127.0.0.1:13131";
+        String targetUrl = "/callback/api/arms/armsScheduler/forceExec/set_PdServiceVersion_toJiraProjectVersion.do";
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(armsUrl + targetUrl, String.class);
+        logger.info("response = " + response);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", "UserPdServiceConnectController :: updateNode");
+        return modelAndView;
+    }
+
 
 }

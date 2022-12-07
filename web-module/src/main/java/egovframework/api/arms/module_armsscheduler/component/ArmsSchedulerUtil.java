@@ -96,25 +96,8 @@ public class ArmsSchedulerUtil {
         logger.info("===============[ End 요구사항 이슈 타입 셋팅 ]===============");
     }
 
-    public void set_ReqAdd_toJiraReqIssue() throws IOException, URISyntaxException {
+    public void set_jiraIssueStatus_toStatic() throws IOException, URISyntaxException {
         final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
-        Issue test = restClient.getIssueClient().getIssue("test").claim();
-        test.getIssueLinks();
-        test.getSubtasks();
-        test.getAssignee();
-        test.getAffectedVersions();
-        test.getChangelog();
-        test.getComments();
-        test.getCommentsUri();
-        test.getCreationDate();
-        test.getDescription();
-        test.getDueDate();
-        test.getIssueType();
-        test.getResolution();
-        test.getIssueLinks();
-        test.getStatus();
-        test.getUpdateDate();
-
     }
 
 
