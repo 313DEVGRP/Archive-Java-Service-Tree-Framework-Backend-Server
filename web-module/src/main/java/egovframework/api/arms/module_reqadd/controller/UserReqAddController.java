@@ -258,9 +258,19 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             String jiraInfo = returnNode.getC_jira_link(); //버전 정보가 있으면, JIRA 링크는 무조건 inherit 이다.
             String jiraVerInfo = returnNode.getC_jira_ver_link(); // 버전 정보가 없다면, 개별 처리이다.
 
+            List<String> updateReqStatusIDs = new ArrayList<>(); //최종 C_ISSUE_LINK 업데이트 목적
+
             if(versionInfoArr.length == 0){
                 //버전 정보가 없다는 뜻. -> 개별 처리를 하겠다는 뜻.
 
+                returnNode.setC_version_link("[]");
+                returnNode.setC_jira_link("independent");
+
+                SessionUtil.setAttribute("addNode",changeReqTableName);
+
+                reqAdd.updateNode(returnNode);
+
+                SessionUtil.removeAttribute("addNode");
 
             }else{
                 //버전 정보가 있다는 뜻. -> 버전 - JIRA 연결 정보를 기반으로 처리하겠다는 뜻.
@@ -268,6 +278,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                 PdServiceDTO pdServiceDTO = new PdServiceDTO();
                 pdServiceDTO.setWhere("c_id", pdServiceInfo);
                 PdServiceDTO pdServiceDTOInfo = pdService.getNode(pdServiceDTO);
+
 
                 for ( String verStr : versionInfoArr ) {
 
@@ -281,15 +292,24 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                     pdServiceConnectDTO.setWhere("c_pdservice_version_id", verStr);
                     PdServiceConnectDTO connectInfo = pdServiceConnect.getNode(pdServiceConnectDTO);
 
-                    String jiraIDs = connectInfo.getC_pdservice_jira_ids();
-                    String[] jiraIDsArr = jsonStringifyConvert(jiraIDs);
-
                     //중첩 IF - LOOP
-                    if(jiraIDsArr.length == 0){
+                    if(connectInfo == null){
                         //이건 말이 안되지만, 설정 정보가 없어버리면... 어떻게 해야 하지?
                         //개별 정보로 빼자.
 
+                        returnNode.setC_jira_link("independent");
+
+                        SessionUtil.setAttribute("addNode",changeReqTableName);
+
+                        reqAdd.updateNode(returnNode);
+
+                        SessionUtil.removeAttribute("addNode");
+
                     }else{
+
+                        String jiraIDs = connectInfo.getC_pdservice_jira_ids();
+                        String[] jiraIDsArr = jsonStringifyConvert(jiraIDs);
+
                         //설정된 JIRA ID가 있다면.
                         for ( String jiraID: jiraIDsArr ) {
                             PdServiceJiraDTO pdServiceJiraDTO = new PdServiceJiraDTO();
@@ -343,19 +363,28 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                                         "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
                                 SessionUtil.setAttribute("addNode",changeReqStatusTableName);
 
-                                reqStatus.addNode(reqStatusDTO);
+                                ReqStatusDTO statusDTO = reqStatus.addNode(reqStatusDTO);
+                                updateReqStatusIDs.add(statusDTO.getC_id().toString());
 
                                 SessionUtil.removeAttribute("addNode");
 
                             }
 
                         }
+
                     }
                 }
 
-
-
             }
+
+            String result = updateReqStatusIDs.stream().collect(Collectors.joining(","));
+            returnNode.setC_issue_link(result);
+
+            SessionUtil.setAttribute("addNode",changeReqTableName);
+
+            reqAdd.updateNode(returnNode);
+
+            SessionUtil.removeAttribute("addNode");
             // REQADD-STATUS
             // 1. 테이블 네임을 T_ARMS_REQADD_145 -> T_ARMS_REQADD_STATUS_145 로 변경하고
             // 2. returnNode의 Version Data 가 있으면, 정형적인 케이스니까 처리해 주고
