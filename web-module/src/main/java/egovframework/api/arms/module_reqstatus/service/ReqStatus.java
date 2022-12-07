@@ -15,6 +15,7 @@ import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernate
 
 public interface ReqStatus extends JsTreeHibernateService {
 
-
+    public void putJiraIssue(String reqStatusTableName) throws Exception;
+    public void updateJiraIssueCrawl(String reqStatusTableName) throws Exception;
 
 }

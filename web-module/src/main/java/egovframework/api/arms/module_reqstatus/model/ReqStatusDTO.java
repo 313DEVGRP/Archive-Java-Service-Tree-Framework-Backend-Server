@@ -204,6 +204,14 @@ public class ReqStatusDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_jira_version_name = c_jira_version_name;
     }
 
+    public String getC_jira_version_title() {
+        return c_jira_version_title;
+    }
+
+    public void setC_jira_version_title(String c_jira_version_title) {
+        this.c_jira_version_title = c_jira_version_title;
+    }
+
     public String getC_jira_version_url() {
         return c_jira_version_url;
     }

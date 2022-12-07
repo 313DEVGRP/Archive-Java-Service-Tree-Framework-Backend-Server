@@ -11,14 +11,19 @@
  */
 package egovframework.api.arms.module_reqstatus.controller;
 
+import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
+import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,6 +51,40 @@ public class AnonReqStatusController extends SHVAbstractController<ReqStatus, Re
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(reqStatus);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{reqStatusTableName}/updateStatusNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView putJiraIssue(
+            @PathVariable(value ="reqStatusTableName") String reqStatusTableName,
+            ModelMap model, HttpServletRequest request) throws Exception {
+
+        SessionUtil.setAttribute("updateStatusNode",reqStatusTableName);
+        reqStatus.putJiraIssue(reqStatusTableName);
+        SessionUtil.removeAttribute("updateStatusNode");
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", "AnonReqStatusController :: putJiraIssue");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{reqStatusTableName}/issueCrawler/updateStatusNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView updateJiraIssueCrawler(
+            @PathVariable(value ="reqStatusTableName") String reqStatusTableName,
+            ModelMap model, HttpServletRequest request) throws Exception {
+
+        SessionUtil.setAttribute("updateStatusNode",reqStatusTableName);
+        reqStatus.updateJiraIssueCrawl(reqStatusTableName);
+        SessionUtil.removeAttribute("updateStatusNode");
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", "AnonReqStatusController :: updateJiraIssueCrawler");
+        return modelAndView;
     }
 
 }

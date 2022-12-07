@@ -351,6 +351,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                                 reqStatusDTO.setC_jira_version_link(jiraVerDTOInfo.getC_id());
                                 reqStatusDTO.setC_jira_version_name(jiraVerDTOInfo.getC_jiraversion_name());
                                 reqStatusDTO.setC_jira_version_url(jiraVerDTOInfo.getC_jiraversion_link());
+                                reqStatusDTO.setC_jira_version_title(jiraVerDTOInfo.getC_title());
 
                                 //REQADD 의 요구사항 아이디, 타이틀
                                 reqStatusDTO.setC_req_link(returnNode.getC_id().toString());
