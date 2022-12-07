@@ -12,6 +12,7 @@
 package egovframework.api.arms.module_reqstatus.controller;
 
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Order;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +68,14 @@ public class AnonReqStatusController extends SHVAbstractController<ReqStatus, Re
         SessionUtil.setAttribute("updateStatusNode",reqStatusTableName);
         reqStatus.putJiraIssue(reqStatusTableName);
         SessionUtil.removeAttribute("updateStatusNode");
+
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String armsUrl = "http://127.0.0.1:13131";
+        String targetUrl = "/callback/api/arms/reqStatus/" + reqStatusTableName + "/issueCrawler/updateStatusNode.do";
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(armsUrl + targetUrl, String.class);
+
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", "AnonReqStatusController :: putJiraIssue");
         return modelAndView;

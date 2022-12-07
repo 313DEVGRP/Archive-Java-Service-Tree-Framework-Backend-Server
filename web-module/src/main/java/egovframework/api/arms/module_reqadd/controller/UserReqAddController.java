@@ -40,6 +40,7 @@ import egovframework.api.arms.module_reqaddlog.service.ReqAddLog;
 import egovframework.api.arms.module_reqstatus.model.ReqStatusDTO;
 import egovframework.api.arms.module_reqstatus.service.ReqStatus;
 import egovframework.api.arms.util.FileHandler;
+import egovframework.api.arms.util.PropertiesReader;
 import egovframework.api.arms.util.StringUtility;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
@@ -59,6 +60,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -68,6 +70,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -396,7 +399,16 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             // 마지막으로 , REQADD_STATUS에 이슈 추가 했으면,
             // REQADD 테이블에 C_ISSUE_LINK 에 ARR String 으로 값 추가해 줄것.
 
+            String reqTableName = StringUtility.replace(changeReqTableName,
+                    "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
 
+            PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+            String armsUrl = "http://127.0.0.1:13131";
+            String targetUrl = "/callback/api/arms/reqStatus/" + reqTableName + "/updateStatusNode.do";
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(armsUrl + targetUrl, String.class);
+            logger.info("response = " + response);
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", returnNode);
