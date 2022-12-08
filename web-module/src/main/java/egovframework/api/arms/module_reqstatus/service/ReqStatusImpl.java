@@ -49,6 +49,7 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
                 // replace "id" below with property name, depending on what you're filtering against
                 Restrictions.in("c_id", new Object[] {1L, 2L})
         );
+        searchStatusDTO.setWhere("c_title","enable");
         searchStatusDTO.getCriterions().add(criterion);
 
         List<ReqStatusDTO> allList = this.getChildNode(searchStatusDTO);
@@ -147,5 +148,35 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
             }
         }
 
+    }
+
+    @Override
+    public void disableJiraIssue(String reqStatusTableName) throws Exception {
+        ReqStatusDTO searchStatusDTO = new ReqStatusDTO();
+        searchStatusDTO.setOrder(Order.asc("c_id"));
+        Criterion criterion = Restrictions.not(
+                // replace "id" below with property name, depending on what you're filtering against
+                Restrictions.in("c_id", new Object[] {1L, 2L})
+        );
+        searchStatusDTO.setWhere("c_title","disable");
+        searchStatusDTO.getCriterions().add(criterion);
+
+        List<ReqStatusDTO> disableList = this.getChildNode(searchStatusDTO);
+
+        for ( ReqStatusDTO statusDTO: disableList ) {
+            logger.info("statusDTO = " + statusDTO.getC_id());
+            logger.info("statusDTO = " + statusDTO.getC_req_name());
+
+            String jiraIssueLink = statusDTO.getC_jira_req_issue_link();
+            if(StringUtility.isNotEmpty(jiraIssueLink)){
+                //이슈가 없다는 뜻이니까.
+                //이슈 업데이트
+                final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
+                URI issueLink = new URI(jiraIssueLink);
+                Comment comment = Comment.valueOf("본 이슈는 더이상 관리되지 않습니다.");
+                restClient.getIssueClient().addComment(issueLink, comment);
+
+            }
+        }
     }
 }

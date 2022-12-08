@@ -83,6 +83,24 @@ public class AnonReqStatusController extends SHVAbstractController<ReqStatus, Re
 
     @ResponseBody
     @RequestMapping(
+            value = {"/{reqStatusTableName}/reqIssueDisable/updateStatusNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView disableJiraIssue(
+            @PathVariable(value ="reqStatusTableName") String reqStatusTableName,
+            ModelMap model, HttpServletRequest request) throws Exception {
+
+        SessionUtil.setAttribute("updateStatusNode",reqStatusTableName);
+        reqStatus.disableJiraIssue(reqStatusTableName);
+        SessionUtil.removeAttribute("updateStatusNode");
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", "AnonReqStatusController :: disableJiraIssue");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(
             value = {"/{reqStatusTableName}/issueCrawler/updateStatusNode.do"},
             method = {RequestMethod.GET}
     )

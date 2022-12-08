@@ -29,6 +29,7 @@ import egovframework.api.arms.module_pdservicejira.model.PdServiceJiraDTO;
 import egovframework.api.arms.module_pdservicejira.service.PdServiceJira;
 import egovframework.api.arms.module_pdservicejiralog.service.PdServiceJiraLog;
 import egovframework.api.arms.module_pdservicejiraver.model.PdServiceJiraVerDTO;
+import egovframework.api.arms.module_pdservicejiraver.service.PdServiceJiraVer;
 import egovframework.api.arms.module_pdservicelog.service.PdServiceLog;
 import egovframework.api.arms.module_pdserviceversion.model.PdServiceVersionDTO;
 import egovframework.api.arms.module_pdserviceversion.service.PdServiceVersion;
@@ -146,6 +147,40 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                 replaceTxt = replaceTxt.replaceAll("\"", "");
                 returnVO.setC_version_link(replaceTxt);
             }
+
+            SessionUtil.removeAttribute("getNode");
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", returnVO);
+            return modelAndView;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getJiraVersion/getNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public <V extends ReqAddDTO> ModelAndView getJiraVersionListByNode(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName
+            ,V reqAddDTO, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+
+        if (parser.getInt("c_id") <= 0) {
+            throw new RuntimeException();
+        } else {
+
+            SessionUtil.setAttribute("getNode",changeReqTableName);
+
+            //1. 노드를 가져와서.
+            //
+            V returnVO = reqAdd.getNode(reqAddDTO);
+//            if(StringUtils.isNotEmpty(returnVO.getC_version_link())) {
+//                String replaceTxt = returnVO.getC_version_link().replaceAll("\\[", "").replaceAll("\\]", "");
+//                replaceTxt = replaceTxt.replaceAll("\"", "");
+//                returnVO.setC_version_link(replaceTxt);
+//            }
 
             SessionUtil.removeAttribute("getNode");
 
@@ -343,6 +378,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
                                 reqStatusDTO.setRef(2L);
                                 reqStatusDTO.setC_type("default");
+                                reqStatusDTO.setC_title("enable");
 
                                 reqStatusDTO.setC_pdservice_link(pdServiceInfo);
                                 reqStatusDTO.setC_pdservice_name(pdServiceDTOInfo.getC_title());
@@ -429,6 +465,10 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         return StringUtils.split(versionInfo, ",");
     }
 
+    @Autowired
+    @Qualifier("pdServiceJiraVer")
+    private PdServiceJiraVer pdServiceJiraVer;
+
     @ResponseBody
     @RequestMapping({"/{changeReqTableName}/updateNode.do"})
     public ModelAndView updateNode(
@@ -441,23 +481,189 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         } else {
             SessionUtil.setAttribute("updateNode",changeReqTableName);
 
-            ModelAndView modelAndView = new ModelAndView("jsonView");
-            modelAndView.addObject("result", reqAdd.updateNode(reqAddDTO));
+            reqAdd.updateNode(reqAddDTO);
+            reqAddDTO.setWhere("c_id", reqAddDTO.getC_id());
+            ReqAddDTO addDTO = reqAdd.getNode(reqAddDTO);
 
             SessionUtil.removeAttribute("updateNode");
 
-//            ReqStatusDTO checkReqStatusDTO = new ReqStatusDTO();
-//            checkReqStatusDTO.setWhere("c_pdservice_link", StringUtility.toLong(changeReqTableName));
-//            checkReqStatusDTO.setWhere("c_version_link", "independent");
-//            checkReqStatusDTO.setWhere("c_jira_link", returnNode.getC_jira_link());
-//            checkReqStatusDTO.setWhere("c_req_link", returnNode.getC_id().toString());
-//            ReqStatusDTO checkReturn = reqStatus.getNode(checkReqStatusDTO);
-//
-//            if(checkReturn == null){
-//                //db에 없으니까.
-//            }else{
-//                //db에 있다고????
-//            }
+            String versionInfo = addDTO.getC_version_link(); // 버전 정보
+            String[] versionInfoArr = jsonStringifyConvert(versionInfo);
+
+            String jiraVerInfo = addDTO.getC_jira_ver_link(); // 지라 버전 정보
+            String[] jiraVerInfoArr = jsonStringifyConvert(jiraVerInfo);
+
+            String issueInfo = addDTO.getC_issue_link(); //이미 등록된 이슈가 있는지
+            String[] issueInfoArr = jsonStringifyConvert(issueInfo);
+
+            List<String> updateReqStatusIDs = new ArrayList<>(); //최종 C_ISSUE_LINK 업데이트 목적
+            List<String> updateJiraVerIDs = new ArrayList<>(); //최종 C_JIRA_VER_LINK 업데이트 목적
+
+            if(versionInfoArr.length == 0){
+                //버전 정보가 없다는 뜻.
+                //이건 개별 처리에 대한 업데이트 니까.
+
+                //곧바로, jiraVersion 정보를 가져와서 조회하고
+                //그대로 업데이트 하면 된다.
+                if(jiraVerInfoArr.length == 0) {
+                    //버전 정보도 없고, 지라 버전 정보도 없이 업데이트를 치는 경우
+                    //이슈가 있으면 전부 disable 처리 할 것.
+                    if(issueInfoArr.length == 0){
+                        //버전 정보도 없고, 지라 버전 정보도 없이 업데이트를 치는 경우
+                        //근데 이슈도 없어. - 할게 없네
+                    }else{
+                        for ( String issueID : issueInfoArr ) {
+                            ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
+                            reqStatusDTO.setC_id(StringUtility.toLong(issueID));
+                            reqStatusDTO.setC_title("disable");
+                            SessionUtil.setAttribute("updateNode",changeReqTableName);
+
+                            reqStatus.updateNode(reqStatusDTO);
+                            SessionUtil.removeAttribute("updateNode");
+                        }
+                    }
+
+                }else{
+                    //버전 정보가 없는데, 지라 버전 정보는 있다는 건. 개별 처리를 한다는 거고
+                    //이슈가 없으니까, 지라 버전만큼 이슈를 생성하자.
+                    if(issueInfoArr.length == 0){
+                        for ( String jiraVerID : jiraVerInfoArr ) {
+
+                            PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
+                            pdServiceJiraVerDTO.setC_id(StringUtility.toLong(jiraVerID));
+                            PdServiceJiraVerDTO jiraVerDTO = pdServiceJiraVer.getNode(pdServiceJiraVerDTO);
+
+                            ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
+
+                            reqStatusDTO.setRef(2L);
+                            reqStatusDTO.setC_type("default");
+                            reqStatusDTO.setC_title("enable");
+
+                            reqStatusDTO.setC_pdservice_link(jiraVerDTO.getC_pdservice_id());
+                            reqStatusDTO.setC_pdservice_name(jiraVerDTO.getC_pdservice_name());
+
+                            reqStatusDTO.setC_version_link(jiraVerDTO.getC_pdservice_version_id());
+                            reqStatusDTO.setC_version_name(jiraVerDTO.getC_pdservice_version_name());
+
+                            reqStatusDTO.setC_jira_project_link(jiraVerDTO.getC_pdservice_jira_id());
+                            reqStatusDTO.setC_jira_project_name(jiraVerDTO.getC_pdservice_jira_name());
+                            reqStatusDTO.setC_jira_project_key(jiraVerDTO.getC_pdservice_jira_key());
+                            reqStatusDTO.setC_jira_project_url(jiraVerDTO.getC_pdservice_jira_link());
+
+                            reqStatusDTO.setC_jira_version_link(jiraVerDTO.getC_id());
+                            reqStatusDTO.setC_jira_version_name(jiraVerDTO.getC_jiraversion_name());
+                            reqStatusDTO.setC_jira_version_url(jiraVerDTO.getC_jiraversion_link());
+                            reqStatusDTO.setC_jira_version_title(jiraVerDTO.getC_title());
+
+                            //REQADD 의 요구사항 아이디, 타이틀
+                            reqStatusDTO.setC_req_link(addDTO.getC_id().toString());
+                            reqStatusDTO.setC_req_name(addDTO.getC_title());
+
+
+                            String changeReqStatusTableName = changeReqTableName;
+                            //T_ARMS_REQADD_145 -> T_ARMS_REQSTATUS_145
+                            changeReqStatusTableName = StringUtility.replace(changeReqStatusTableName,
+                                    "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
+                            SessionUtil.setAttribute("updateNode",changeReqStatusTableName);
+                            ReqStatusDTO statusDTO = reqStatus.addNode(reqStatusDTO);
+                            SessionUtil.removeAttribute("updateNode");
+
+                        }
+
+                    }else {
+                        //이슈가 있으니까 비교해서 disable 처리 또는 생성하자
+                        //등록된 이슈는 전부 disable 처리 한다.
+                        for ( String issueID : issueInfoArr ) {
+                            String changeReqStatusTableName = changeReqTableName;
+                            //T_ARMS_REQADD_145 -> T_ARMS_REQSTATUS_145
+                            changeReqStatusTableName = StringUtility.replace(changeReqStatusTableName,
+                                    "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
+                            SessionUtil.setAttribute("updateNode",changeReqStatusTableName);
+
+                            ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
+                            reqStatusDTO.setC_id(StringUtility.toLong(issueID));
+                            reqStatusDTO.setC_title("disable");
+
+                            reqStatus.updateNode(reqStatusDTO);
+
+                            SessionUtil.removeAttribute("updateNode");
+                        }
+
+                        for ( String jiraVerID : jiraVerInfoArr ) {
+
+                            PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
+                            pdServiceJiraVerDTO.setC_id(StringUtility.toLong(jiraVerID));
+                            PdServiceJiraVerDTO jiraVerDTO = pdServiceJiraVer.getNode(pdServiceJiraVerDTO);
+
+                            String changeReqStatusTableName = changeReqTableName;
+                            //T_ARMS_REQADD_145 -> T_ARMS_REQSTATUS_145
+                            changeReqStatusTableName = StringUtility.replace(changeReqStatusTableName,
+                                    "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
+                            SessionUtil.setAttribute("updateNode",changeReqStatusTableName);
+                            ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
+                            reqStatusDTO.setWhere("c_pdservice_link",jiraVerDTO.getC_pdservice_id());
+                            reqStatusDTO.setWhere("c_version_link",jiraVerDTO.getC_pdservice_version_id());
+                            reqStatusDTO.setWhere("c_jira_project_link",jiraVerDTO.getC_pdservice_jira_id());
+                            reqStatusDTO.setWhere("c_jira_version_link",jiraVerDTO.getC_id());
+                            reqStatusDTO.setWhere("c_req_link",addDTO.getC_id().toString());
+                            ReqStatusDTO statusDTO = reqStatus.getNode(reqStatusDTO);
+
+                            if(statusDTO == null){
+                                //없으면 생성
+                                ReqStatusDTO reqStatusAddDTO = new ReqStatusDTO();
+
+                                reqStatusAddDTO.setRef(2L);
+                                reqStatusAddDTO.setC_type("default");
+                                reqStatusAddDTO.setC_title("enable");
+
+                                reqStatusAddDTO.setC_pdservice_link(jiraVerDTO.getC_pdservice_id());
+                                reqStatusAddDTO.setC_pdservice_name(jiraVerDTO.getC_pdservice_name());
+
+                                reqStatusAddDTO.setC_version_link(jiraVerDTO.getC_pdservice_version_id());
+                                reqStatusAddDTO.setC_version_name(jiraVerDTO.getC_pdservice_version_name());
+
+                                reqStatusAddDTO.setC_jira_project_link(jiraVerDTO.getC_pdservice_jira_id());
+                                reqStatusAddDTO.setC_jira_project_name(jiraVerDTO.getC_pdservice_jira_name());
+                                reqStatusAddDTO.setC_jira_project_key(jiraVerDTO.getC_pdservice_jira_key());
+                                reqStatusAddDTO.setC_jira_project_url(jiraVerDTO.getC_pdservice_jira_link());
+
+                                reqStatusAddDTO.setC_jira_version_link(jiraVerDTO.getC_id());
+                                reqStatusAddDTO.setC_jira_version_name(jiraVerDTO.getC_jiraversion_name());
+                                reqStatusAddDTO.setC_jira_version_url(jiraVerDTO.getC_jiraversion_link());
+                                reqStatusAddDTO.setC_jira_version_title(jiraVerDTO.getC_title());
+
+                                //REQADD 의 요구사항 아이디, 타이틀
+                                reqStatusAddDTO.setC_req_link(addDTO.getC_id().toString());
+                                reqStatusAddDTO.setC_req_name(addDTO.getC_title());
+
+
+                                ReqStatusDTO checkAddDTO = reqStatus.addNode(reqStatusAddDTO);
+
+
+                            }else{
+                                //있으면 enable
+                                statusDTO.setC_title("enable");
+                                reqStatus.updateNode(statusDTO);
+                            }
+                            SessionUtil.removeAttribute("updateNode");
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }else{
+                //버전 정보가 있다는 뜻. -> 버전 처리를 할 수 있는 방법이 UI 상에 없음.
+
+
+            }
+
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", "god");
 
             return modelAndView;
         }

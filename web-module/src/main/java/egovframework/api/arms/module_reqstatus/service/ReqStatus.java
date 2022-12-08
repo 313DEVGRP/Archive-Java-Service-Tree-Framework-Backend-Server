@@ -18,4 +18,6 @@ public interface ReqStatus extends JsTreeHibernateService {
     public void putJiraIssue(String reqStatusTableName) throws Exception;
     public void updateJiraIssueCrawl(String reqStatusTableName) throws Exception;
 
+    public void disableJiraIssue(String reqStatusTableName) throws Exception;
+
 }
