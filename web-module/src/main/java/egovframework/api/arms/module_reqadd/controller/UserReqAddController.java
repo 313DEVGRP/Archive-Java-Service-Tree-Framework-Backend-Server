@@ -11,12 +11,6 @@
  */
 package egovframework.api.arms.module_reqadd.controller;
 
-import com.atlassian.jira.rest.client.api.JiraRestClient;
-import com.atlassian.jira.rest.client.api.domain.*;
-import com.atlassian.jira.rest.client.api.domain.input.IssueInput;
-import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
-import com.atlassian.util.concurrent.Promise;
-import egovframework.api.arms.module_armsscheduler.component.ArmsSchedulerUtil;
 import egovframework.api.arms.module_filerepository.service.FileRepository;
 import egovframework.api.arms.module_filerepositorylog.model.FileRepositoryLogDTO;
 import egovframework.api.arms.module_filerepositorylog.service.FileRepositoryLog;
@@ -56,7 +50,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +70,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -568,6 +560,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                             ReqStatusDTO statusDTO = reqStatus.addNode(reqStatusDTO);
                             SessionUtil.removeAttribute("updateNode");
 
+                            updateReqStatusIDs.add(statusDTO.getC_id().toString());
                         }
 
                     }else {
@@ -638,12 +631,13 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
 
                                 ReqStatusDTO checkAddDTO = reqStatus.addNode(reqStatusAddDTO);
-
+                                updateReqStatusIDs.add(checkAddDTO.getC_id().toString());
 
                             }else{
                                 //있으면 enable
                                 statusDTO.setC_title("enable");
                                 reqStatus.updateNode(statusDTO);
+                                updateReqStatusIDs.add(statusDTO.getC_id().toString());
                             }
                             SessionUtil.removeAttribute("updateNode");
 
@@ -661,6 +655,14 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
             }
 
+            String issueLinkResult = updateReqStatusIDs.stream().collect(Collectors.joining(","));
+            addDTO.setC_issue_link(issueLinkResult);
+
+            SessionUtil.setAttribute("updateNode",changeReqTableName);
+
+            reqAdd.updateNode(addDTO);
+
+            SessionUtil.removeAttribute("updateNode");
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", "god");
