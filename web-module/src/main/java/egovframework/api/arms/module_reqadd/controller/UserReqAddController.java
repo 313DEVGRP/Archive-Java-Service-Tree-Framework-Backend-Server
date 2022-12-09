@@ -564,7 +564,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                         }
 
                     }else {
-                        //이슈가 있으니까 비교해서 disable 처리 또는 생성하자
+                        //이슈가 있으니까 비교해서 disable 처리 이후 생성하자
                         //등록된 이슈는 전부 disable 처리 한다.
                         for ( String issueID : issueInfoArr ) {
                             String changeReqStatusTableName = changeReqTableName;
@@ -598,7 +598,6 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                             reqStatusDTO.setWhere("c_version_link",jiraVerDTO.getC_pdservice_version_id());
                             reqStatusDTO.setWhere("c_jira_project_link",jiraVerDTO.getC_pdservice_jira_id());
                             reqStatusDTO.setWhere("c_jira_version_link",jiraVerDTO.getC_id());
-                            reqStatusDTO.setWhere("c_req_link",addDTO.getC_id().toString());
                             ReqStatusDTO statusDTO = reqStatus.getNode(reqStatusDTO);
 
                             if(statusDTO == null){
@@ -636,6 +635,9 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                             }else{
                                 //있으면 enable
                                 statusDTO.setC_title("enable");
+                                statusDTO.setC_req_link(addDTO.getC_id());
+                                statusDTO.setC_req_name(addDTO.getC_title());
+
                                 reqStatus.updateNode(statusDTO);
                                 updateReqStatusIDs.add(statusDTO.getC_id().toString());
                             }

@@ -110,7 +110,13 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
                 this.updateNode(statusDTO);
 
             }else{
-                //이슈가 있으면?
+                //이슈 정보가 있다는건
+                //enable 인데 이슈 정보가 있어
+                //그리고 req_id 가 0 이고, req_name 이 disable 이면
+                //이건 지워진 요구사항 이슈를 다시 되살리는 거야
+                //그러니까 이슈 업데이트 해주고 다시
+                //REQ_ID를 복구해 줘
+                //REQ ADD 에도 추가해 줘야겠지
             }
         }
 
@@ -126,6 +132,7 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
                 Restrictions.in("c_id", new Object[]{1L, 2L})
         );
         searchStatusDTO.getCriterions().add(criterion);
+        searchStatusDTO.setWhere("c_title", "enable");
 
         List<ReqStatusDTO> allList = this.getChildNode(searchStatusDTO);
 
