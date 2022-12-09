@@ -175,33 +175,31 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
                 //이슈가 있다는 뜻이니까.
                 //이슈 업데이트
 
-//                final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
-//
-//                IssueInput input = new IssueInputBuilder()
-//                        .setDescription("본 요구사항 이슈는 더이상 관리되지 않습니다.")
-//                        .setFieldValue(IssueFieldId.LABELS_FIELD.id, Collections.singleton(new String("DISABLE 된 요구사항")))
-//                        .build();
-//                restClient.getIssueClient()
-//                        .updateIssue(statusDTO.getC_jira_req_issue_key(), input)
-//                        .claim();
+                //disable 되었다는 것은.
+                //Status : Closed -- 완료
+                //Label : 삭제 혹은 관리되지 않은 요구사항 이라고 적어주고
+                //comment : 더이상 연관된 이슈를 업데이트 하여 반영하지 않는다고 이야기 해줘야 한다.
+                //resolution 처리도 해야 한다.
+
+                final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
 
                 Issue issue = getIssue(statusDTO.getC_jira_req_issue_key());
-                Iterable<Transition> transitions = ArmsSchedulerUtil.getJiraRestClient().getIssueClient().getTransitions(issue).claim();
-                logger.info("============" + issue.getStatus().getName());
 
-
-                String status = "Close Issue";
+                String status = "Reopen Issue";
                 updateIssueStatus(issue, status);
 
-//
-//                Issue issue = restClient.getIssueClient().getIssue(statusDTO.getC_jira_req_issue_key()).claim();
-//                Iterable<Transition> transitions = restClient.getIssueClient().getTransitions(issue.getTransitionsUri()).get();
-//                final Transition closedTransition = getTransitionByName(transitions, "Resolve Issue");
-//
-//                Collection<FieldInput> fieldInputs = Arrays.asList(new FieldInput("resolution", "Incomplete"));
-//                final TransitionInput transitionInput = new TransitionInput(closedTransition.getId(), fieldInputs, Comment.valueOf("My comment"));
-//
-//                restClient.getIssueClient().transition(issue.getTransitionsUri(), transitionInput);
+                IssueInput input = new IssueInputBuilder()
+                        .setDescription("본 요구사항 이슈는 더이상 관리되지 않습니다.")
+                        .setFieldValue(IssueFieldId.LABELS_FIELD.id, Collections.singleton(new String("DISABLED_요구사항")))
+                        .build();
+                restClient.getIssueClient()
+                        .updateIssue(statusDTO.getC_jira_req_issue_key(), input)
+                        .claim();
+
+                Collection<FieldInput> fieldInputs = Collections.EMPTY_LIST;
+
+                updateIssueStatus(issue, "Close Issue", fieldInputs, Comment.valueOf("본 이슈는 더이상 수집되어 성과에 반영되지 않는다."));
+
             }
         }
     }
@@ -213,8 +211,28 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
         Iterable<Transition> transitions = issueClient.getTransitions(issue).claim();
 
         for(Transition t : transitions){
+            logger.info(t.getName() + "===" + t.getId() + "===" + t.getFields().toString());
             if(t.getName().equals(status)) {
+                logger.info(t.getName() + "---" + t.getId() + "---" + t.getFields().toString());
                 TransitionInput input = new TransitionInput(t.getId());
+                issueClient.transition(issue, input).claim();
+
+                return;
+            }
+        }
+    }
+
+    public void updateIssueStatus(Issue issue, String status, Collection<FieldInput> fieldInputs, Comment comment) throws IOException, URISyntaxException {
+        IssueRestClient issueClient = ArmsSchedulerUtil.getJiraRestClient().getIssueClient();
+
+
+        Iterable<Transition> transitions = issueClient.getTransitions(issue).claim();
+
+        for(Transition t : transitions){
+            logger.info(t.getName() + "~~~" + t.getId() + "~~~" + t.getFields().toString());
+            if(t.getName().equals(status)) {
+                logger.info(t.getName() + "___" + t.getId() + "___" + t.getFields().toString());
+                TransitionInput input = new TransitionInput(t.getId(), fieldInputs, comment);
                 issueClient.transition(issue, input).claim();
 
                 return;
@@ -227,11 +245,15 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
         return client.getIssue(issueKey).claim();
     }
 
-    private static Transition getTransitionByName(Iterable<Transition> transitions, String transitionName) {
+    private Transition getTransitionByName(Iterable<Transition> transitions, String transitionName) {
         for (Transition transition : transitions) {
-            if (transition.getName().equals(transitionName)) {
-                return transition;
-            }
+
+            logger.info(transition.getName() + "===" + transition.getId() + "===" + transition.getFields().toString());
+
+//            if (transition.getName().equals(transitionName)) {
+//                logger.info(transition.getName() + "---" + transition.getId() + "---" + transition.getFields().toString());
+//                return transition;
+//            }
         }
         return null;
     }
