@@ -389,7 +389,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                                 reqStatusDTO.setC_jira_version_title(jiraVerDTOInfo.getC_title());
 
                                 //REQADD 의 요구사항 아이디, 타이틀
-                                reqStatusDTO.setC_req_link(returnNode.getC_id().toString());
+                                reqStatusDTO.setC_req_link(returnNode.getC_id());
                                 reqStatusDTO.setC_req_name(returnNode.getC_title());
 
 
@@ -548,7 +548,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                             reqStatusDTO.setC_jira_version_title(jiraVerDTO.getC_title());
 
                             //REQADD 의 요구사항 아이디, 타이틀
-                            reqStatusDTO.setC_req_link(addDTO.getC_id().toString());
+                            reqStatusDTO.setC_req_link(addDTO.getC_id());
                             reqStatusDTO.setC_req_name(addDTO.getC_title());
 
 
@@ -626,7 +626,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                                 reqStatusAddDTO.setC_jira_version_title(jiraVerDTO.getC_title());
 
                                 //REQADD 의 요구사항 아이디, 타이틀
-                                reqStatusAddDTO.setC_req_link(addDTO.getC_id().toString());
+                                reqStatusAddDTO.setC_req_link(addDTO.getC_id());
                                 reqStatusAddDTO.setC_req_name(addDTO.getC_title());
 
 

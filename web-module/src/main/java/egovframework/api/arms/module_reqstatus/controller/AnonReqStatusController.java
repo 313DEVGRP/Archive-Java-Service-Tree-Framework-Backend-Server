@@ -91,7 +91,15 @@ public class AnonReqStatusController extends SHVAbstractController<ReqStatus, Re
             ModelMap model, HttpServletRequest request) throws Exception {
 
         SessionUtil.setAttribute("updateStatusNode",reqStatusTableName);
-        reqStatus.disableJiraIssue(reqStatusTableName);
+        List<Long> disableIDs = reqStatus.disableJiraIssue(reqStatusTableName);
+
+        for ( Long c_id : disableIDs ){
+            ReqStatusDTO reqStatusDTO = new ReqStatusDTO();
+            reqStatusDTO.setC_id(c_id);
+            reqStatusDTO.setC_req_link(0L);
+            reqStatusDTO.setC_req_name("deleted");
+            reqStatus.updateNode(reqStatusDTO);
+        }
         SessionUtil.removeAttribute("updateStatusNode");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");

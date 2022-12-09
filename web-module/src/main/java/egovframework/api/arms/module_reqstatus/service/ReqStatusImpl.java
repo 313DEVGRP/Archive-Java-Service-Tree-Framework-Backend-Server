@@ -109,6 +109,8 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
                 statusDTO.setC_jira_req_issue_link(issue.getSelf().toString());
                 this.updateNode(statusDTO);
 
+            }else{
+                //이슈가 있으면?
             }
         }
 
@@ -154,7 +156,7 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
     }
 
     @Override
-    public void disableJiraIssue(String reqStatusTableName) throws Exception {
+    public List<Long> disableJiraIssue(String reqStatusTableName) throws Exception {
         ReqStatusDTO searchStatusDTO = new ReqStatusDTO();
         searchStatusDTO.setOrder(Order.asc("c_id"));
         Criterion criterion = Restrictions.not(
@@ -165,6 +167,7 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
         searchStatusDTO.getCriterions().add(criterion);
 
         List<ReqStatusDTO> disableList = this.getChildNode(searchStatusDTO);
+        List<Long> disableIDs = new ArrayList<>();
 
         for (ReqStatusDTO statusDTO : disableList) {
             logger.info("statusDTO = " + statusDTO.getC_id());
@@ -200,8 +203,18 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
 
                 updateIssueStatus(issue, "Close Issue", fieldInputs, Comment.valueOf("본 이슈는 더이상 수집되어 성과에 반영되지 않는다."));
 
+                //이슈를 disable 처리 하였는데,
+                //요구사항에서는 이 이슈를 지웠겠지 ( 아이디에서 )
+                //그럼 이 이슈의 링크도 지워줘야 해
+                //다시 이으려고 했을 때, 구분자로 처리 해야 하니까
+                //이슈를 만들려고 보니까 이미 제품(서비스)-버전-지라-지라버전의 정보가 있는 이슈가 있다?
+                //요구사항 아이디랑 타이틀이 없네? STATUS 업데이트 하고
+                //요구사항 REQ ADD 도 업데이트 해줘야 한다.
+                disableIDs.add(statusDTO.getC_id());
             }
         }
+
+        return disableIDs;
     }
 
     public void updateIssueStatus(Issue issue, String status) throws IOException, URISyntaxException {

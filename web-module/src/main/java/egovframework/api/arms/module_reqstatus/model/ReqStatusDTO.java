@@ -80,7 +80,7 @@ public class ReqStatusDTO extends JsTreeHibernateSearchDTO implements Serializab
 
 
     @Column(name = "c_req_link")
-    private String c_req_link;
+    private Long c_req_link;
 
     @Column(name = "c_req_name")
     private String c_req_name;
@@ -220,11 +220,11 @@ public class ReqStatusDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_jira_version_url = c_jira_version_url;
     }
 
-    public String getC_req_link() {
+    public Long getC_req_link() {
         return c_req_link;
     }
 
-    public void setC_req_link(String c_req_link) {
+    public void setC_req_link(Long c_req_link) {
         this.c_req_link = c_req_link;
     }
 

@@ -13,11 +13,13 @@ package egovframework.api.arms.module_reqstatus.service;
 
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
 
+import java.util.List;
+
 public interface ReqStatus extends JsTreeHibernateService {
 
     public void putJiraIssue(String reqStatusTableName) throws Exception;
     public void updateJiraIssueCrawl(String reqStatusTableName) throws Exception;
 
-    public void disableJiraIssue(String reqStatusTableName) throws Exception;
+    public List<Long> disableJiraIssue(String reqStatusTableName) throws Exception;
 
 }
