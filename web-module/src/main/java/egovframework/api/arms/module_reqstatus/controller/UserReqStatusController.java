@@ -11,14 +11,21 @@
  */
 package egovframework.api.arms.module_reqstatus.controller;
 
+import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
+import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,5 +56,30 @@ public class UserReqStatusController extends SHVAbstractController<ReqStatus, Re
     }
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getStatusMonitor.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView getStatusMonitor(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
+            ReqStatusDTO reqStatusDTO, ModelMap model, HttpServletRequest request) throws Exception {
+
+        SessionUtil.setAttribute("getStatusMonitor",changeReqTableName);
+
+        Criterion criterion = Restrictions.not(
+                // replace "id" below with property name, depending on what you're filtering against
+                Restrictions.in("c_id", new Object[] {1L, 2L})
+        );
+        reqStatusDTO.getCriterions().add(criterion);
+        List<ReqStatusDTO> list = reqStatus.getChildNode(reqStatusDTO);
+
+        SessionUtil.removeAttribute("getStatusMonitor");
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
 
 }

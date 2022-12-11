@@ -112,6 +112,56 @@ public class ReqStatusImpl extends JsTreeHibernateServiceImpl implements ReqStat
             }else{
                 //이슈 정보가 있다는건
                 //enable 인데 이슈 정보가 있어
+                //req_id 가 0이 아니야, 이름도 있다면 되살려진 이슈인거야
+
+                if(statusDTO.getC_req_link() == 0L || StringUtility.equals(statusDTO.getC_req_name(),"deleted")){
+                    logger.error("enable 된 이슈인데, 요구사항이랑 연결이 안된 케이스");
+                }else{
+
+                    final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
+
+                    Issue issue = getIssue(statusDTO.getC_jira_req_issue_key());
+
+                    if(issue == null){
+                        logger.error("not found issue -> " + statusDTO.getC_jira_req_issue_key());
+                    }else{
+
+                        if(StringUtility.equals(issue.getStatus().getName(),"Closed")){
+
+                            //이슈가 closed 되어 있다면
+                            //되살려야 한다.
+                            String status = "Reopen Issue";
+                            updateIssueStatus(issue, status);
+
+                            IssueInput input = new IssueInputBuilder()
+                                    .setDescription("==== 주의 : 확인이 필요한 a-RMS 요구사항과 재 연결된 이슈 입니다. ===\n" +
+                                            "a-RMS 에서 제공하는 요구사항 이슈 타입입니다.\n" +
+                                            "자동으로 관리되므로 이슈를 강제로 삭제하지 마세요\n" +
+                                            "아래 링크에서 요구사항을 확인 할 수 있습니다.\n" +
+                                            "=========================================\n" +
+                                            //BaseURL + /auth-anon/api/arms/reqAdd/테이블명/요구사항아이디
+                                            "http://www.a-rms.net/auth-user/api/arms/reqSearch/" + reqaddTableName + "/" + statusDTO.getC_req_link() + "\n" +
+                                            "=========================================\n" +
+                                            "본 이슈 하위로 Sub-Task를 만들어서 개발을 하시거나\n" +
+                                            "관련한 이슈를 연결 하세요")
+                                    .setFieldValue(IssueFieldId.LABELS_FIELD.id, Collections.singleton(new String("a-RMS_재연결_요구사항")))
+                                    .build();
+                            restClient.getIssueClient()
+                                    .updateIssue(statusDTO.getC_jira_req_issue_key(), input)
+                                    .claim();
+
+                            Collection<FieldInput> fieldInputs = Collections.EMPTY_LIST;
+
+                            updateIssueStatus(issue, "Start Progress", fieldInputs, Comment.valueOf("본 이슈는 관리대상에서 삭제되었다가 재 연결한 경우입니다. 주의가 필요합니다."));
+
+                        }
+
+                    }
+
+
+
+                }
+
                 //그리고 req_id 가 0 이고, req_name 이 disable 이면
                 //이건 지워진 요구사항 이슈를 다시 되살리는 거야
                 //그러니까 이슈 업데이트 해주고 다시
