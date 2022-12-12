@@ -12,7 +12,10 @@
 package egovframework.api.arms.module_reqstatus.controller;
 
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
+import egovframework.api.arms.util.StringUtility;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
+import egovframework.com.ext.jstree.support.util.ParameterParser;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -32,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -65,6 +69,23 @@ public class UserReqStatusController extends SHVAbstractController<ReqStatus, Re
     public ModelAndView getStatusMonitor(
             @PathVariable(value ="changeReqTableName") String changeReqTableName,
             ReqStatusDTO reqStatusDTO, ModelMap model, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+        boolean disableChecker = parser.getBoolean("disable");
+        if(disableChecker){
+            reqStatusDTO.setWhere("c_title", "enable");
+        }
+
+        String[] versionTagArr = StringUtility.split(parser.get("versionTag"), ",");
+        if( versionTagArr != null){
+            List<Long> longList = new ArrayList<>();
+            for (String versionTag : versionTagArr ) {
+                longList.add(StringUtility.toLong(versionTag));
+            }
+            Criterion criterion = Restrictions.in("c_version_link", longList);
+            reqStatusDTO.getCriterions().add(criterion);
+        }
+
 
         SessionUtil.setAttribute("getStatusMonitor",changeReqTableName);
 
