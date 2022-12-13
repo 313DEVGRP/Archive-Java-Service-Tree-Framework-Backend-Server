@@ -69,6 +69,9 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
     @Resource(name = "reqStatusTemplateInstallDB")
     ArmsInstallDB reqStatusTemplateInstallDB;
 
+    @Resource(name = "reqReviewInstallDB")
+    ArmsInstallDB reqReviewInstallDB;
+
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(armsMaker);
@@ -209,6 +212,23 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
 
         ModelAndView modelAndView =  new ModelAndView("jsonView");
         modelAndView.addObject("result", "module_reqadd");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/module_reqreview.do"},method = {RequestMethod.GET})
+    public ModelAndView module_reqreview(
+            ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request) throws Exception {
+
+        logger.info("UserArmsMakerController :: module_reqreview :: tableName = T_ARMS_REQREVIEW");
+
+        ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
+        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_REQREVIEW");
+        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-reqreview");
+        reqReviewInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
+
+        ModelAndView modelAndView =  new ModelAndView("jsonView");
+        modelAndView.addObject("result", "module_reqreview");
         return modelAndView;
     }
 

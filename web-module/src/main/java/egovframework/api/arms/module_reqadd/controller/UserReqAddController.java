@@ -32,6 +32,8 @@ import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
 import egovframework.api.arms.module_reqadd.service.ReqAdd;
 import egovframework.api.arms.module_reqaddlog.model.ReqAddLogDTO;
 import egovframework.api.arms.module_reqaddlog.service.ReqAddLog;
+import egovframework.api.arms.module_reqreview.model.ReqReviewDTO;
+import egovframework.api.arms.module_reqreview.service.ReqReview;
 import egovframework.api.arms.module_reqstatus.model.ReqStatusDTO;
 import egovframework.api.arms.module_reqstatus.service.ReqStatus;
 import egovframework.api.arms.util.FileHandler;
@@ -433,6 +435,21 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             // 마지막으로 , REQADD_STATUS에 이슈 추가 했으면,
             // REQADD 테이블에 C_ISSUE_LINK 에 ARR String 으로 값 추가해 줄것.
 
+            String reviewer01 = returnNode.getC_reviewer01();
+            reqReviewAddNode(returnNode, pdServiceInfo, reviewer01);
+
+            String reviewer02 = returnNode.getC_reviewer02();
+            reqReviewAddNode(returnNode, pdServiceInfo, reviewer02);
+
+            String reviewer03 = returnNode.getC_reviewer03();
+            reqReviewAddNode(returnNode, pdServiceInfo, reviewer03);
+
+            String reviewer04 = returnNode.getC_reviewer04();
+            reqReviewAddNode(returnNode, pdServiceInfo, reviewer04);
+
+            String reviewer05 = returnNode.getC_reviewer05();
+            reqReviewAddNode(returnNode, pdServiceInfo, reviewer05);
+
             String reqTableName = StringUtility.replace(changeReqTableName,
                     "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
 
@@ -449,6 +466,42 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             return modelAndView;
         }
     }
+
+    public void reqReviewAddNode(ReqAddDTO returnNode, Long pdServiceInfo, String reviewer) throws Exception {
+        if (StringUtility.equals(reviewer, "none")) {
+            logger.info("reviewer01 is none");
+        } else {
+
+            PdServiceDTO pdServiceDTO = new PdServiceDTO();
+            pdServiceDTO.setC_id(pdServiceInfo);
+            PdServiceDTO pdServiceCheckInfo = pdService.getNode(pdServiceDTO);
+
+            ReqReviewDTO reqReviewDTO = new ReqReviewDTO();
+            reqReviewDTO.setRef(2L);
+            reqReviewDTO.setC_type("default");
+            reqReviewDTO.setC_review_pdservice_link(pdServiceInfo);
+            reqReviewDTO.setC_review_pdservice_name(pdServiceCheckInfo.getC_title());
+
+            reqReviewDTO.setC_review_version_link(0L);
+            reqReviewDTO.setC_review_version_name("Individual Version");
+
+            reqReviewDTO.setC_review_jira_link(0L);
+            reqReviewDTO.setC_review_jira_name("Individual Jira");
+
+            reqReviewDTO.setC_review_req_link(returnNode.getC_id());
+            reqReviewDTO.setC_review_req_name(returnNode.getC_title());
+
+            reqReviewDTO.setC_review_sender(returnNode.getC_writer());
+            reqReviewDTO.setC_review_responder(reviewer);
+            reqReviewDTO.setC_review_creat_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
+            reqReview.addNode(reqReviewDTO);
+        }
+    }
+
+    @Autowired
+    @Qualifier("reqReview")
+    private ReqReview reqReview;
 
     public String[] jsonStringifyConvert(String versionInfo) {
         versionInfo = StringUtils.remove(versionInfo, "\"");
@@ -474,7 +527,6 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             SessionUtil.setAttribute("updateNode",changeReqTableName);
 
             reqAdd.updateNode(reqAddDTO);
-            reqAddDTO.setWhere("c_id", reqAddDTO.getC_id());
             ReqAddDTO addDTO = reqAdd.getNode(reqAddDTO);
 
             SessionUtil.removeAttribute("updateNode");
@@ -497,7 +549,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
                 //곧바로, jiraVersion 정보를 가져와서 조회하고
                 //그대로 업데이트 하면 된다.
-                if(jiraVerInfoArr.length == 0) {
+                if(jiraVerInfoArr == null || jiraVerInfoArr.length == 0) {
                     //버전 정보도 없고, 지라 버전 정보도 없이 업데이트를 치는 경우
                     //이슈가 있으면 전부 disable 처리 할 것.
                     if(issueInfoArr.length == 0){
