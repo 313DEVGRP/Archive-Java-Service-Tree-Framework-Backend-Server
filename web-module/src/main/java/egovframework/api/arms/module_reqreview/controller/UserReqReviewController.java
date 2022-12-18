@@ -75,11 +75,24 @@ public class UserReqReviewController extends SHVAbstractController<ReqReview, Re
          * totalRecordCount : 전체 게시물 건 수.
          */
 
+        ReqReviewDTO reqReviewDTO = new ReqReviewDTO();
 
+        int recordCountPerPage = parser.getInt("length");
+        int start = parser.getInt("start");
+        int currentPageNo = Math.floorDiv(start,recordCountPerPage) + 1;
+
+        reqReviewDTO.setPageIndex(currentPageNo);
+        reqReviewDTO.setPageUnit(recordCountPerPage);
+
+        String searchStr = parser.get("search[value]");
+        if( StringUtility.isNotEmpty(searchStr) ){
+
+            Criterion filter_criterion = Restrictions.like("c_review_req_name", "%" + searchStr +"%");
+            reqReviewDTO.getCriterions().add(filter_criterion);
+        }
 
         String searchReviewer = parser.get("reviewer");
 
-        ReqReviewDTO reqReviewDTO = new ReqReviewDTO();
         Criterion criterion = Restrictions.not(
                 // replace "id" below with property name, depending on what you're filtering against
                 Restrictions.in("c_id", new Object[] {1L, 2L})
@@ -117,10 +130,18 @@ public class UserReqReviewController extends SHVAbstractController<ReqReview, Re
 
 
         reqReviewDTO.setOrder(Order.desc("c_review_creat_date"));
-        List<ReqReviewDTO> list = reqReview.getChildNode(reqReviewDTO);
+        List<ReqReviewDTO> list = reqReview.getPaginatedChildNode(reqReviewDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         HashMap<String, Object> resultMap = Maps.newHashMap();
+//        "draw": 1,
+//                "recordsTotal": 57,
+//                "recordsFiltered": 57,
+        resultMap.put("draw", parser.getInt("draw"));
+        resultMap.put("recordsTotal", list.get(0).getPaginationInfo().getTotalRecordCount());
+        resultMap.put("recordsFiltered", list.get(0).getPaginationInfo().getTotalRecordCount());
+        resultMap.put("pagesize", list.get(0).getPaginationInfo().getPageSize());
+
         resultMap.put("paginationInfo", list.get(0).getPaginationInfo());
         resultMap.put("result", list);
         modelAndView.addObject("result", resultMap);
