@@ -11,7 +11,9 @@
  */
 package egovframework.api.arms.module_reqreview.controller;
 
+import com.google.common.collect.Maps;
 import egovframework.api.arms.module_pdservicejiraver.model.PdServiceJiraVerDTO;
+import egovframework.api.arms.util.StringUtility;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Criterion;
@@ -31,10 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 
@@ -65,7 +64,20 @@ public class UserReqReviewController extends SHVAbstractController<ReqReview, Re
     public ModelAndView getMonitor_Without_Root(ModelMap model, HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
-        String searchReviewer = parser.get("searchReviewer");
+
+        /**
+         * Required Fields
+         * - 이 필드들은 페이징 계산을 위해 반드시 입력되어야 하는 필드 값들이다.
+         *
+         * currentPageNo : 현재 페이지 번호
+         * recordCountPerPage : 한 페이지당 게시되는 게시물 건 수
+         * pageSize : 페이지 리스트에 게시되는 페이지 건수,
+         * totalRecordCount : 전체 게시물 건 수.
+         */
+
+
+
+        String searchReviewer = parser.get("reviewer");
 
         ReqReviewDTO reqReviewDTO = new ReqReviewDTO();
         Criterion criterion = Restrictions.not(
@@ -75,18 +87,44 @@ public class UserReqReviewController extends SHVAbstractController<ReqReview, Re
 
         reqReviewDTO.getCriterions().add(criterion);
 
-        Criterion sender_criterion = Restrictions.or(
-                // replace "id" below with property name, depending on what you're filtering against
-                Restrictions.in("c_review_sender", Collections.singleton(searchReviewer)),
-                Restrictions.in("c_review_responder", Collections.singleton(searchReviewer))
-        );
-        reqReviewDTO.getCriterions().add(sender_criterion);
+        String filter = parser.get("filter");
+        if(StringUtility.equals(filter, "All")){
+            Criterion filter_criterion = Restrictions.or(
+                    // replace "id" below with property name, depending on what you're filtering against
+                    Restrictions.in("c_review_sender", Collections.singleton(searchReviewer)),
+                    Restrictions.in("c_review_responder", Collections.singleton(searchReviewer))
+            );
+            reqReviewDTO.getCriterions().add(filter_criterion);
+        }else if(StringUtility.equals(filter, "In-Review")){
+            Criterion filter_criterion = Restrictions.or(
+                    // replace "id" below with property name, depending on what you're filtering against
+                    Restrictions.in("c_review_responder", Collections.singleton(searchReviewer))
+            );
+            reqReviewDTO.getCriterions().add(filter_criterion);
+        }else if(StringUtility.equals(filter, "Out-Review")){
+            Criterion filter_criterion = Restrictions.or(
+                    // replace "id" below with property name, depending on what you're filtering against
+                    Restrictions.in("c_review_sender", Collections.singleton(searchReviewer))
+            );
+            reqReviewDTO.getCriterions().add(filter_criterion);
+        }else if(StringUtility.equals(filter, "Complete")){
+            Criterion filter_criterion = Restrictions.or(
+                    // replace "id" below with property name, depending on what you're filtering against
+                    Restrictions.in("c_review_result_state", Collections.singleton("Complete"))
+            );
+            reqReviewDTO.getCriterions().add(filter_criterion);
+        }
+
 
         reqReviewDTO.setOrder(Order.desc("c_review_creat_date"));
         List<ReqReviewDTO> list = reqReview.getChildNode(reqReviewDTO);
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", list);
+        HashMap<String, Object> resultMap = Maps.newHashMap();
+        resultMap.put("paginationInfo", list.get(0).getPaginationInfo());
+        resultMap.put("result", list);
+        modelAndView.addObject("result", resultMap);
+
         return modelAndView;
     }
 
