@@ -13,6 +13,8 @@ public interface ArmsInstallDB extends CoreService {
 
     public <T extends ComprehensiveTree> void set_aRMS_DML_Table(T comprehensiveTree) throws Exception;
 
+    public <T extends ComprehensiveTree> void set_aRMSLog_DDL_Sequence(T comprehensiveTree) throws Exception;
+
     public <T extends ComprehensiveTree> void set_aRMSLog_DDL_Table(T comprehensiveTree) throws Exception;
 
     public <T extends ComprehensiveTree> int isExist_aRMS_DB(T comprehensiveTree) throws Exception;

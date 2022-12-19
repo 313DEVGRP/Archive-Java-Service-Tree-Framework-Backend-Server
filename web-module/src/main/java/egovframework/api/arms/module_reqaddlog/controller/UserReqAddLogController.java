@@ -12,9 +12,14 @@
 package egovframework.api.arms.module_reqaddlog.controller;
 
 import egovframework.api.arms.module_reqadd.model.ReqAddDTO;
+import egovframework.api.arms.module_reqreviewlog.model.ReqReviewLogDTO;
+import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDao;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
+import egovframework.com.ext.jstree.support.util.ParameterParser;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
 import java.util.List;
@@ -65,6 +71,34 @@ public class UserReqAddLogController extends SHVAbstractController<ReqAddLog, Re
 
         reqAddLogDTO.setOrder(Order.asc("c_left"));
         List<ReqAddLogDTO> list = this.reqAddLog.getChildNode(reqAddLogDTO);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", list);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getHistory.do"},
+            method = {RequestMethod.GET}
+    )
+    public ModelAndView getHistory(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
+            ModelMap model, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+        long reqID = parser.getLong("c_id");
+
+        ReqAddLogDTO reqAddLogDTO = new ReqAddLogDTO();
+        Criterion criterion = Restrictions.eq("c_id", reqID);
+        reqAddLogDTO.getCriterions().add(criterion);
+
+        reqAddLogDTO.setOrder(Order.desc("c_date"));
+        SessionUtil.setAttribute("getHistory",changeReqTableName);
+
+        List<ReqAddLogDTO> list = reqAddLog.getChildNode(reqAddLogDTO);
+
+        SessionUtil.removeAttribute("getHistory");
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);

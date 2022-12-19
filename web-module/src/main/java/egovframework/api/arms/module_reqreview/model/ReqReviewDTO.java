@@ -48,21 +48,17 @@ public class ReqReviewDTO extends JsTreeHibernateSearchDTO implements Serializab
     @Column(name = "c_review_pdservice_name")
     private String c_review_pdservice_name;
 
-    //리뷰 - 요구사항의 제품(서비스) 버전 링크 ( 아이디 )
+    //리뷰 - 요구사항의 제품(서비스) 버전 링크
     @Column(name = "c_review_version_link")
-    private Long c_review_version_link;
+    private String c_review_version_link;
 
-    //리뷰 - 요구사항의 제품(서비스) 버전 네임
-    @Column(name = "c_review_version_name")
-    private String c_review_version_name;
-
-    //리뷰 - 요구사항의 지라 프로젝트 링크 ( 아이디 )
+    //리뷰 - 요구사항의 지라 프로젝트 링크
     @Column(name = "c_review_jira_link")
-    private Long c_review_jira_link;
+    private String c_review_jira_link;
 
-    //리뷰 - 요구사항의 지라 프로젝트 네임
-    @Column(name = "c_review_jira_name")
-    private String c_review_jira_name;
+    //리뷰 - 요구사항의 지라 프로젝트 버전 링크
+    @Column(name = "c_review_jira_ver_link")
+    private String c_review_jira_ver_link;
 
     //리뷰 - 요구사항 링크 ( 아이디 )
     @Column(name = "c_review_req_link")
@@ -112,36 +108,28 @@ public class ReqReviewDTO extends JsTreeHibernateSearchDTO implements Serializab
         this.c_review_pdservice_name = c_review_pdservice_name;
     }
 
-    public Long getC_review_version_link() {
+    public String getC_review_version_link() {
         return c_review_version_link;
     }
 
-    public void setC_review_version_link(Long c_review_version_link) {
+    public void setC_review_version_link(String c_review_version_link) {
         this.c_review_version_link = c_review_version_link;
     }
 
-    public String getC_review_version_name() {
-        return c_review_version_name;
-    }
-
-    public void setC_review_version_name(String c_review_version_name) {
-        this.c_review_version_name = c_review_version_name;
-    }
-
-    public Long getC_review_jira_link() {
+    public String getC_review_jira_link() {
         return c_review_jira_link;
     }
 
-    public void setC_review_jira_link(Long c_review_jira_link) {
+    public void setC_review_jira_link(String c_review_jira_link) {
         this.c_review_jira_link = c_review_jira_link;
     }
 
-    public String getC_review_jira_name() {
-        return c_review_jira_name;
+    public String getC_review_jira_ver_link() {
+        return c_review_jira_ver_link;
     }
 
-    public void setC_review_jira_name(String c_review_jira_name) {
-        this.c_review_jira_name = c_review_jira_name;
+    public void setC_review_jira_ver_link(String c_review_jira_ver_link) {
+        this.c_review_jira_ver_link = c_review_jira_ver_link;
     }
 
     public Long getC_review_req_link() {

@@ -41,6 +41,8 @@ public class ReqReviewLogDTO extends JsTreeHibernateLogDTO implements Serializab
 
     //@Getter @Setter
 
+
+
     //리뷰 - 요구사항의 제품(서비스) 링크 ( 아이디 )
     @Column(name = "c_review_pdservice_link")
     private Long c_review_pdservice_link;
@@ -48,6 +50,18 @@ public class ReqReviewLogDTO extends JsTreeHibernateLogDTO implements Serializab
     //리뷰 - 요구사항의 제품(서비스) 네임
     @Column(name = "c_review_pdservice_name")
     private String c_review_pdservice_name;
+
+    //리뷰 - 요구사항의 제품(서비스) 버전 링크
+    @Column(name = "c_review_version_link")
+    private String c_review_version_link;
+
+    //리뷰 - 요구사항의 지라 프로젝트 링크
+    @Column(name = "c_review_jira_link")
+    private String c_review_jira_link;
+
+    //리뷰 - 요구사항의 지라 프로젝트 버전 링크
+    @Column(name = "c_review_jira_ver_link")
+    private String c_review_jira_ver_link;
 
     //리뷰 - 요구사항 링크 ( 아이디 )
     @Column(name = "c_review_req_link")
@@ -73,9 +87,117 @@ public class ReqReviewLogDTO extends JsTreeHibernateLogDTO implements Serializab
     @Column(name = "c_review_result_state")
     private String c_review_result_state;
 
+    //리뷰 커멘트
+    @Column(name = "c_review_comment")
+    private String c_review_comment;
+
     //리뷰 일자
     @Column(name = "c_review_result_date")
     private String c_review_result_date;
+
+    public Long getC_review_pdservice_link() {
+        return c_review_pdservice_link;
+    }
+
+    public void setC_review_pdservice_link(Long c_review_pdservice_link) {
+        this.c_review_pdservice_link = c_review_pdservice_link;
+    }
+
+    public String getC_review_pdservice_name() {
+        return c_review_pdservice_name;
+    }
+
+    public void setC_review_pdservice_name(String c_review_pdservice_name) {
+        this.c_review_pdservice_name = c_review_pdservice_name;
+    }
+
+    public String getC_review_version_link() {
+        return c_review_version_link;
+    }
+
+    public void setC_review_version_link(String c_review_version_link) {
+        this.c_review_version_link = c_review_version_link;
+    }
+
+    public String getC_review_jira_link() {
+        return c_review_jira_link;
+    }
+
+    public void setC_review_jira_link(String c_review_jira_link) {
+        this.c_review_jira_link = c_review_jira_link;
+    }
+
+    public String getC_review_jira_ver_link() {
+        return c_review_jira_ver_link;
+    }
+
+    public void setC_review_jira_ver_link(String c_review_jira_ver_link) {
+        this.c_review_jira_ver_link = c_review_jira_ver_link;
+    }
+
+    public Long getC_review_req_link() {
+        return c_review_req_link;
+    }
+
+    public void setC_review_req_link(Long c_review_req_link) {
+        this.c_review_req_link = c_review_req_link;
+    }
+
+    public String getC_review_req_name() {
+        return c_review_req_name;
+    }
+
+    public void setC_review_req_name(String c_review_req_name) {
+        this.c_review_req_name = c_review_req_name;
+    }
+
+    public String getC_review_sender() {
+        return c_review_sender;
+    }
+
+    public void setC_review_sender(String c_review_sender) {
+        this.c_review_sender = c_review_sender;
+    }
+
+    public String getC_review_responder() {
+        return c_review_responder;
+    }
+
+    public void setC_review_responder(String c_review_responder) {
+        this.c_review_responder = c_review_responder;
+    }
+
+    public String getC_review_creat_date() {
+        return c_review_creat_date;
+    }
+
+    public void setC_review_creat_date(String c_review_creat_date) {
+        this.c_review_creat_date = c_review_creat_date;
+    }
+
+    public String getC_review_result_state() {
+        return c_review_result_state;
+    }
+
+    public void setC_review_result_state(String c_review_result_state) {
+        this.c_review_result_state = c_review_result_state;
+    }
+
+    public String getC_review_comment() {
+        return c_review_comment;
+    }
+
+    public void setC_review_comment(String c_review_comment) {
+        this.c_review_comment = c_review_comment;
+    }
+
+    public String getC_review_result_date() {
+        return c_review_result_date;
+    }
+
+    public void setC_review_result_date(String c_review_result_date) {
+        this.c_review_result_date = c_review_result_date;
+    }
 
     /*
      * Extend Bean Field
@@ -97,9 +219,8 @@ public class ReqReviewLogDTO extends JsTreeHibernateLogDTO implements Serializab
         this.copyBooleanValue = copyBooleanValue;
     }
 
-    @Override
-    public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
-        if( paramInstance instanceof JsTreeHibernateDTO){
+    public <T extends JsTreeHibernateLogDTO> void setFieldFromNewInstance(T paramInstance) {
+        if( paramInstance instanceof JsTreeHibernateLogDTO){
             if(paramInstance.isCopied()) {
                 this.setC_title("copy_" + this.getC_title());
             }

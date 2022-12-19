@@ -42,6 +42,7 @@ public class PdServiceInstallDBImpl extends CoreServiceImpl implements ArmsInsta
             logger.error("already exist log table : " + armsInstallDB_sqlMaaperDTO.getC_title());
         }else{
             armsInstallDB_sqlMaaperDTO.setC_title(C_title_org);
+            this.set_aRMSLog_DDL_Sequence(armsInstallDB_sqlMaaperDTO);
             this.set_aRMSLog_DDL_Table(armsInstallDB_sqlMaaperDTO);
             makeTrigger(armsInstallDB_sqlMaaperDTO);
         }
@@ -79,18 +80,18 @@ public class PdServiceInstallDBImpl extends CoreServiceImpl implements ArmsInsta
                         "BEGIN\n" +
                         "  tmpVar := 0;\n" +
                         "   IF UPDATING  THEN    \n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate,:old.C_PDSERVICE_DETAIL,:old.C_CONTENTS,:old.C_OWNER,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_MAIL,:old.C_WRITER_DATE,:old.C_ETC,:old.C_FILEID_LINK);\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate,:new.C_PDSERVICE_DETAIL,:new.C_CONTENTS,:new.C_OWNER,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_MAIL,:new.C_WRITER_DATE,:new.C_ETC,:new.C_FILEID_LINK);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate,:old.C_PDSERVICE_DETAIL,:old.C_CONTENTS,:old.C_OWNER,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_MAIL,:old.C_WRITER_DATE,:old.C_ETC,:old.C_FILEID_LINK);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate,:new.C_PDSERVICE_DETAIL,:new.C_CONTENTS,:new.C_OWNER,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_MAIL,:new.C_WRITER_DATE,:new.C_ETC,:new.C_FILEID_LINK);\n" +
                         "    END IF;\n" +
                         "   IF DELETING THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate,:old.C_PDSERVICE_DETAIL,:old.C_CONTENTS,:old.C_OWNER,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_MAIL,:old.C_WRITER_DATE,:old.C_ETC,:old.C_FILEID_LINK);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate,:old.C_PDSERVICE_DETAIL,:old.C_CONTENTS,:old.C_OWNER,:old.C_REVIEWER01,:old.C_REVIEWER02,:old.C_REVIEWER03,:old.C_REVIEWER04,:old.C_REVIEWER05,:old.C_WRITER_NAME,:old.C_WRITER_CN,:old.C_WRITER_MAIL,:old.C_WRITER_DATE,:old.C_ETC,:old.C_FILEID_LINK);\n" +
                         "   END IF;   \n" +
                         "   IF INSERTING  THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate,:new.C_PDSERVICE_DETAIL,:new.C_CONTENTS,:new.C_OWNER,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_MAIL,:new.C_WRITER_DATE,:new.C_ETC,:new.C_FILEID_LINK);\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE,C_PDSERVICE_DETAIL,C_CONTENTS,C_OWNER,C_REVIEWER01,C_REVIEWER02,C_REVIEWER03,C_REVIEWER04,C_REVIEWER05,C_WRITER_NAME,C_WRITER_CN,C_WRITER_MAIL,C_WRITER_DATE,C_ETC,C_FILEID_LINK)\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate,:new.C_PDSERVICE_DETAIL,:new.C_CONTENTS,:new.C_OWNER,:new.C_REVIEWER01,:new.C_REVIEWER02,:new.C_REVIEWER03,:new.C_REVIEWER04,:new.C_REVIEWER05,:new.C_WRITER_NAME,:new.C_WRITER_CN,:new.C_WRITER_MAIL,:new.C_WRITER_DATE,:new.C_ETC,:new.C_FILEID_LINK);\n" +
                         "   END IF;\n" +
                         " \n" +
                         "  EXCEPTION\n" +
@@ -117,6 +118,12 @@ public class PdServiceInstallDBImpl extends CoreServiceImpl implements ArmsInsta
     @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> void set_aRMS_DML_Table(T comprehensiveTree) throws Exception {
         armsInstallSqlMapperDao.dmlExecute(comprehensiveTree);
+    }
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
+    public <T extends ComprehensiveTree> void set_aRMSLog_DDL_Sequence(T comprehensiveTree) throws Exception {
+        armsInstallSqlMapperDao.ddlLogSequenceExecute(comprehensiveTree);
     }
 
     @Override

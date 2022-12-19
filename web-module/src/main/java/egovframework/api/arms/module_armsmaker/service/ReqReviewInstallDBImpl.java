@@ -42,6 +42,7 @@ public class ReqReviewInstallDBImpl extends CoreServiceImpl implements ArmsInsta
             logger.error("already exist log table : " + armsInstallDB_sqlMaaperDTO.getC_title());
         }else{
             armsInstallDB_sqlMaaperDTO.setC_title(C_title_org);
+            this.set_aRMSLog_DDL_Sequence(armsInstallDB_sqlMaaperDTO);
             this.set_aRMSLog_DDL_Table(armsInstallDB_sqlMaaperDTO);
             makeTrigger(armsInstallDB_sqlMaaperDTO);
         }
@@ -49,9 +50,9 @@ public class ReqReviewInstallDBImpl extends CoreServiceImpl implements ArmsInsta
 
     private void makeTrigger(ComprehensiveTree comprehensiveTree) throws SQLException {
 
-        String addColums =",c_review_pdservice_link,c_review_pdservice_name,c_review_version_link,c_review_version_name,c_review_jira_link,c_review_jira_name,c_review_req_link,c_review_req_name,c_review_sender,c_review_responder,c_review_creat_date,c_review_comment,c_review_result_state,c_review_result_date";
-        String addOldColums =",:old.c_review_pdservice_link,:old.c_review_pdservice_name,:old.c_review_version_link,:old.c_review_version_name,:old.c_review_jira_link,:old.c_review_jira_name,:old.c_review_req_link,:old.c_review_req_name,:old.c_review_sender,:old.c_review_responder,:old.c_review_creat_date,:old.c_review_comment,:old.c_review_result_state,:old.c_review_result_date";
-        String addNewColums =",:new.c_review_pdservice_link,:new.c_review_pdservice_name,:new.c_review_version_link,:new.c_review_version_name,:new.c_review_jira_link,:new.c_review_jira_name,:new.c_review_req_link,:new.c_review_req_name,:new.c_review_sender,:new.c_review_responder,:new.c_review_creat_date,:new.c_review_comment,:new.c_review_result_state,:new.c_review_result_date";
+        String addColums =",c_review_pdservice_link,c_review_pdservice_name,c_review_version_link,c_review_jira_link,c_review_jira_ver_link,c_review_req_link,c_review_req_name,c_review_sender,c_review_responder,c_review_creat_date,c_review_result_state,c_review_comment,c_review_result_date";
+        String addOldColums =",:old.c_review_pdservice_link,:old.c_review_pdservice_name,:old.c_review_version_link,:old.c_review_jira_link,:old.c_review_jira_ver_link,:old.c_review_req_link,:old.c_review_req_name,:old.c_review_sender,:old.c_review_responder,:old.c_review_creat_date,:old.c_review_result_state,:old.c_review_comment,:old.c_review_result_date";
+        String addNewColums =",:new.c_review_pdservice_link,:new.c_review_pdservice_name,:new.c_review_version_link,:new.c_review_jira_link,:new.c_review_jira_ver_link,:new.c_review_req_link,:new.c_review_req_name,:new.c_review_sender,:new.c_review_responder,:new.c_review_creat_date,:new.c_review_result_state,:new.c_review_comment,:new.c_review_result_date";
 
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
@@ -84,18 +85,18 @@ public class ReqReviewInstallDBImpl extends CoreServiceImpl implements ArmsInsta
                         "BEGIN\n" +
                         "  tmpVar := 0;\n" +
                         "   IF UPDATING  THEN    \n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate" + addOldColums + ");\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate" + addNewColums + ");\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate" + addOldColums + ");\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate" + addNewColums + ");\n" +
                         "    END IF;\n" +
                         "   IF DELETING THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
-                        "       values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate" + addOldColums + ");\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate" + addOldColums + ");\n" +
                         "   END IF;   \n" +
                         "   IF INSERTING  THEN\n" +
-                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
-                        "       values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate" + addNewColums + ");\n" +
+                        "       insert into " + comprehensiveTree.getC_title() + "_LOG (C_ID,C_DATAID,C_PARENTID,C_POSITION,C_LEFT,C_RIGHT,C_LEVEL,C_TITLE,C_TYPE,C_METHOD,C_STATE,C_DATE" + addColums + ")\n" +
+                        "       values (S_" + comprehensiveTree.getC_title() + "_LOG.NEXTVAL,:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate" + addNewColums + ");\n" +
                         "   END IF;\n" +
                         " \n" +
                         "  EXCEPTION\n" +
@@ -122,6 +123,12 @@ public class ReqReviewInstallDBImpl extends CoreServiceImpl implements ArmsInsta
     @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> void set_aRMS_DML_Table(T comprehensiveTree) throws Exception {
         armsInstallSqlMapperDao.dmlExecute(comprehensiveTree);
+    }
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
+    public <T extends ComprehensiveTree> void set_aRMSLog_DDL_Sequence(T comprehensiveTree) throws Exception {
+        armsInstallSqlMapperDao.ddlLogSequenceExecute(comprehensiveTree);
     }
 
     @Override

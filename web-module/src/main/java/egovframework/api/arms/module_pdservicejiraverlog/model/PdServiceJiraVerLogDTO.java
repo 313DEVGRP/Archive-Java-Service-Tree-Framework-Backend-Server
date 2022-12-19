@@ -22,12 +22,12 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
-@Table(name = "T_ARMS_PDSERVICEJIRAVERLOG")
+@Table(name = "T_ARMS_PDSERVICEJIRAVER_LOG")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDSERVICEJIRAVERLOG", allocationSize = 1)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDSERVICEJIRAVER_LOG", allocationSize = 1)
 public class PdServiceJiraVerLogDTO extends JsTreeHibernateLogDTO implements Serializable {
 
     public PdServiceJiraVerLogDTO() {

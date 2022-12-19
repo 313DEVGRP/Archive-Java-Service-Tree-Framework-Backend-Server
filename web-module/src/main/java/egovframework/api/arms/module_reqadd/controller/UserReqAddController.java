@@ -467,6 +467,35 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         }
     }
 
+    public void reqReviewDataClean(ReqAddDTO returnNode, Long pdServiceInfo, String reviewer01, String reviewer02, String reviewer03, String reviewer04, String reviewer05) throws Exception {
+
+        ReqReviewDTO searchReqReviewDTO = new ReqReviewDTO();
+        searchReqReviewDTO.setWhere("c_review_pdservice_link", pdServiceInfo);
+        searchReqReviewDTO.setWhere("c_review_req_link", returnNode.getC_id());
+        List<ReqReviewDTO> searchList = reqReview.getChildNode(searchReqReviewDTO);
+        for ( ReqReviewDTO reqReviewDTO : searchList ) {
+            if( StringUtility.equals(reqReviewDTO.getC_review_responder() , reviewer01) ||
+                    StringUtility.equals(reqReviewDTO.getC_review_responder() , reviewer02) ||
+                    StringUtility.equals(reqReviewDTO.getC_review_responder() , reviewer03) ||
+                    StringUtility.equals(reqReviewDTO.getC_review_responder() , reviewer04) ||
+                    StringUtility.equals(reqReviewDTO.getC_review_responder() , reviewer05) ){
+                logger.info("reqReviewDataClean hit = " + reqReviewDTO.getC_review_responder());
+
+                if( StringUtility.contains(reqReviewDTO.getC_review_result_state(), "Disable" )){
+                    reqReviewDTO.setC_review_result_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                    reqReviewDTO.setC_review_result_state("Update-Enable");
+                    reqReview.updateNode(reqReviewDTO);
+                }
+
+            }else{
+                reqReviewDTO.setC_review_result_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                reqReviewDTO.setC_review_result_state("Update-Disable");
+                reqReview.updateNode(reqReviewDTO);
+            }
+        }
+
+    }
+
     public void reqReviewAddNode(ReqAddDTO returnNode, Long pdServiceInfo, String reviewer) throws Exception {
         if (StringUtility.equals(reviewer, "none")) {
             logger.info("reviewer01 is none");
@@ -476,26 +505,52 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             pdServiceDTO.setC_id(pdServiceInfo);
             PdServiceDTO pdServiceCheckInfo = pdService.getNode(pdServiceDTO);
 
-            ReqReviewDTO reqReviewDTO = new ReqReviewDTO();
-            reqReviewDTO.setRef(2L);
-            reqReviewDTO.setC_type("default");
-            reqReviewDTO.setC_review_pdservice_link(pdServiceInfo);
-            reqReviewDTO.setC_review_pdservice_name(pdServiceCheckInfo.getC_title());
+            ReqReviewDTO searchReqReviewDTO = new ReqReviewDTO();
+            searchReqReviewDTO.setWhere("c_review_pdservice_link", pdServiceInfo);
+            searchReqReviewDTO.setWhere("c_review_req_link", returnNode.getC_id());
+            searchReqReviewDTO.setWhere("c_review_sender", returnNode.getC_writer());
+            searchReqReviewDTO.setWhere("c_review_responder", reviewer);
+            ReqReviewDTO searchResult = reqReview.getNode(searchReqReviewDTO);
 
-            reqReviewDTO.setC_review_version_link(0L);
-            reqReviewDTO.setC_review_version_name("Individual Version");
+            if( searchResult == null ){
+                ReqReviewDTO reqReviewDTO = new ReqReviewDTO();
+                reqReviewDTO.setRef(2L);
+                reqReviewDTO.setC_type("default");
+                reqReviewDTO.setC_review_pdservice_link(pdServiceInfo);
+                reqReviewDTO.setC_review_pdservice_name(pdServiceCheckInfo.getC_title());
 
-            reqReviewDTO.setC_review_jira_link(0L);
-            reqReviewDTO.setC_review_jira_name("Individual Jira");
+                reqReviewDTO.setC_review_version_link(returnNode.getC_version_link());
 
-            reqReviewDTO.setC_review_req_link(returnNode.getC_id());
-            reqReviewDTO.setC_review_req_name(returnNode.getC_title());
+                reqReviewDTO.setC_review_jira_link(returnNode.getC_jira_link());
 
-            reqReviewDTO.setC_review_sender(returnNode.getC_writer());
-            reqReviewDTO.setC_review_responder(reviewer);
-            reqReviewDTO.setC_review_creat_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                reqReviewDTO.setC_review_jira_ver_link(returnNode.getC_jira_ver_link());
 
-            reqReview.addNode(reqReviewDTO);
+                reqReviewDTO.setC_review_req_link(returnNode.getC_id());
+                reqReviewDTO.setC_review_req_name(returnNode.getC_title());
+
+                reqReviewDTO.setC_review_sender(returnNode.getC_writer());
+                reqReviewDTO.setC_review_responder(reviewer);
+                reqReviewDTO.setC_review_result_state("Enable");
+                reqReviewDTO.setC_review_creat_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
+                reqReview.addNode(reqReviewDTO);
+            } else {
+                searchResult.setC_review_pdservice_name(pdServiceCheckInfo.getC_title());
+
+                searchResult.setC_review_version_link(returnNode.getC_version_link());
+
+                searchResult.setC_review_jira_link(returnNode.getC_jira_link());
+
+                searchResult.setC_review_jira_ver_link(returnNode.getC_jira_ver_link());
+
+                searchResult.setC_review_req_name(returnNode.getC_title());
+
+                searchResult.setC_review_result_state("Update-Enable");
+                searchResult.setC_review_creat_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                reqReview.updateNode(searchResult);
+
+            }
+
         }
     }
 
@@ -708,6 +763,23 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
 
             }
+
+            String reviewer01 = addDTO.getC_reviewer01();
+            reqReviewAddNode(addDTO, addDTO.getC_pdservice_link(), reviewer01);
+
+            String reviewer02 = addDTO.getC_reviewer02();
+            reqReviewAddNode(addDTO, addDTO.getC_pdservice_link(), reviewer02);
+
+            String reviewer03 = addDTO.getC_reviewer03();
+            reqReviewAddNode(addDTO, addDTO.getC_pdservice_link(), reviewer03);
+
+            String reviewer04 = addDTO.getC_reviewer04();
+            reqReviewAddNode(addDTO, addDTO.getC_pdservice_link(), reviewer04);
+
+            String reviewer05 = addDTO.getC_reviewer05();
+            reqReviewAddNode(addDTO, addDTO.getC_pdservice_link(), reviewer05);
+
+            reqReviewDataClean(addDTO, addDTO.getC_pdservice_link(), reviewer01, reviewer02, reviewer03, reviewer04, reviewer05);
 
             String issueLinkResult = updateReqStatusIDs.stream().collect(Collectors.joining(","));
             addDTO.setC_issue_link(issueLinkResult);

@@ -103,4 +103,32 @@ public class UserReqStatusController extends SHVAbstractController<ReqStatus, Re
         return modelAndView;
     }
 
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getStatusNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public <V extends ReqStatusDTO> ModelAndView getStatusNode(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName
+            ,V reqStatusDTO, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+
+        if (parser.getInt("c_id") <= 0) {
+            throw new RuntimeException();
+        } else {
+
+            SessionUtil.setAttribute("getStatusNode",changeReqTableName);
+
+            V returnVO = reqStatus.getNode(reqStatusDTO);
+
+            SessionUtil.removeAttribute("getStatusNode");
+
+            ModelAndView modelAndView = new ModelAndView("jsonView");
+            modelAndView.addObject("result", returnVO);
+            return modelAndView;
+        }
+    }
+
+
 }

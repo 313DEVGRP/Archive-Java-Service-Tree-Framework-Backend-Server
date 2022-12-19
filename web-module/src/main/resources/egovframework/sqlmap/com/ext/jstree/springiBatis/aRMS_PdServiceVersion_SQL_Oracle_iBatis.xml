@@ -43,6 +43,24 @@
         NOORDER
     </statement >
 
+    <statement id="ddlLogSequenceExecute" parameterClass="ComprehensiveTree">
+        /*
+        * 인덱스는 되도록 걸지 말것.
+        * CREATE UNIQUE INDEX I_COMPREHENSIVETREE ON T_ARMS_REQADD
+        * ("C_ID" ASC)
+        */
+        /*
+        * DROP SEQUENCE S_ARMS_REQADD;
+        */
+        CREATE SEQUENCE S_$c_title$_LOG
+        START WITH 10
+        MAXVALUE 999999999999999999999999999
+        MINVALUE 0
+        NOCYCLE
+        CACHE 20
+        NOORDER
+    </statement >
+
     <statement id="ddlExecute_comment_1" parameterClass="ComprehensiveTree">
         COMMENT ON TABLE $c_title$ IS '기본 트리 스키마'
     </statement >
@@ -83,6 +101,7 @@
     <statement id="ddlLogExecute" parameterClass="ComprehensiveTree">
         CREATE TABLE $c_title$_LOG(
             C_ID NUMBER NOT NULL,
+            C_DATAID NUMBER NOT NULL,
             C_PARENTID NUMBER NOT NULL,
             C_POSITION NUMBER NOT NULL,
             C_LEFT NUMBER NOT NULL,
@@ -104,7 +123,10 @@
       COMMENT ON TABLE $c_title$_LOG IS '기본 트리 스키마 트리거 로그'
     </statement>
     <statement id="ddlLogExecute_comment_2" parameterClass="ComprehensiveTree">
-      COMMENT ON COLUMN $c_title$_LOG.C_ID IS '노드 아이디'
+      COMMENT ON COLUMN $c_title$_LOG.C_ID IS '노드 시퀀스아이디'
+    </statement>
+    <statement id="ddlLogExecute_comment_13" parameterClass="ComprehensiveTree">
+      COMMENT ON COLUMN $c_title$_LOG.C_DATAID IS '노드 아이디'
     </statement>
     <statement id="ddlLogExecute_comment_3" parameterClass="ComprehensiveTree">
       COMMENT ON COLUMN $c_title$_LOG.C_PARENTID IS '부모 노드 아이디'

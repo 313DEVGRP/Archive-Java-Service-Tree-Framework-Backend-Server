@@ -35,6 +35,11 @@ public class ArmsInstallSqlMapperDaoImpl extends CoreDaoImpl implements ArmsInst
     }
 
     @Override
+    public <T extends ComprehensiveTree> void ddlLogSequenceExecute(T comprehensiveTree) throws Exception {
+        update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogSequenceExecute", comprehensiveTree);
+    }
+
+    @Override
     public <T extends ComprehensiveTree> void ddlLogExecute(T comprehensiveTree) throws Exception {
         update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute", comprehensiveTree);
         update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_1", comprehensiveTree);
@@ -46,6 +51,10 @@ public class ArmsInstallSqlMapperDaoImpl extends CoreDaoImpl implements ArmsInst
         update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_7", comprehensiveTree);
         update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_8", comprehensiveTree);
         update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_9", comprehensiveTree);
+        update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_10", comprehensiveTree);
+        update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_11", comprehensiveTree);
+        update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_12", comprehensiveTree);
+        update(comprehensiveTree.getSqlMapSelector() + "." + "ddlLogExecute_comment_13", comprehensiveTree);
     }
 
     public <T extends ComprehensiveTree> int isExistTable( T comprehensiveTree ) throws Exception{

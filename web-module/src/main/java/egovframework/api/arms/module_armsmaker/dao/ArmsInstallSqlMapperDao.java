@@ -11,6 +11,8 @@ public interface ArmsInstallSqlMapperDao extends CoreDao {
 
     public <T extends ComprehensiveTree> void dmlExecute(T comprehensiveTree) throws Exception;
 
+    public <T extends ComprehensiveTree> void ddlLogSequenceExecute(T comprehensiveTree) throws Exception;
+
     public <T extends ComprehensiveTree> void ddlLogExecute(T comprehensiveTree) throws Exception;
 
     public <T extends ComprehensiveTree> int isExistTable(T comprehensiveTree) throws Exception;
