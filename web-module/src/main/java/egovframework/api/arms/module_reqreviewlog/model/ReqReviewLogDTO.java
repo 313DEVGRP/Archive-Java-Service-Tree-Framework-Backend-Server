@@ -11,6 +11,7 @@
  */
 package egovframework.api.arms.module_reqreviewlog.model;
 
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateLogDTO;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -27,7 +28,7 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_REQREVIEW_LOG", allocationSize = 1)
-public class ReqReviewLogDTO extends JsTreeHibernateSearchDTO implements Serializable {
+public class ReqReviewLogDTO extends JsTreeHibernateLogDTO implements Serializable {
 
     public ReqReviewLogDTO() {
         super();

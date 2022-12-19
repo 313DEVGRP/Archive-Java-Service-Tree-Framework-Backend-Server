@@ -11,6 +11,7 @@
  */
 package egovframework.api.arms.module_pdservicejiraprilog.model;
 
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateLogDTO;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -27,7 +28,7 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "S_T_ARMS_PDSERVICEJIRAPRILOG", allocationSize = 1)
-public class PdServiceJiraPriLogDTO extends JsTreeHibernateSearchDTO implements Serializable {
+public class PdServiceJiraPriLogDTO extends JsTreeHibernateLogDTO implements Serializable {
 
     public PdServiceJiraPriLogDTO() {
         super();
