@@ -130,5 +130,36 @@ public class UserReqStatusController extends SHVAbstractController<ReqStatus, Re
         }
     }
 
+    @ResponseBody
+    @RequestMapping(
+            value = {"/{changeReqTableName}/getStatusChildNode.do"},
+            method = {RequestMethod.GET}
+    )
+    public <V extends ReqStatusDTO> ModelAndView getStatusChildNode(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName
+            ,V reqStatusDTO, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+
+        String[] c_ids = StringUtility.split(parser.get("c_ids"), ",");
+        if( c_ids != null){
+            List<Long> longList = new ArrayList<>();
+            for (String c_id : c_ids ) {
+                longList.add(StringUtility.toLong(c_id));
+            }
+            Criterion criterion = Restrictions.in("c_id", longList);
+            reqStatusDTO.getCriterions().add(criterion);
+        }
+
+        SessionUtil.setAttribute("getStatusChildNode",changeReqTableName);
+
+        List<V> resultVO_List = reqStatus.getChildNode(reqStatusDTO);
+
+        SessionUtil.removeAttribute("getStatusChildNode");
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", resultVO_List);
+        return modelAndView;
+    }
 
 }
