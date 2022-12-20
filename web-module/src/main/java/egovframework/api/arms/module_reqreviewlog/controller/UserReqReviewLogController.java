@@ -74,7 +74,7 @@ public class UserReqReviewLogController extends SHVAbstractController<ReqReviewL
         ReqReviewLogDTO reviewLogDTO = new ReqReviewLogDTO();
         reviewLogDTO.setWhere("c_review_pdservice_link", c_review_pdservice_link);
         reviewLogDTO.setWhere("c_review_req_link", c_review_req_link);
-        reviewLogDTO.setOrder(Order.desc("c_review_creat_date"));
+        reviewLogDTO.setOrder(Order.desc("c_id"));
 
         List<ReqReviewLogDTO> list = reqReviewLog.getChildNodeWithoutPaging(reviewLogDTO);
         list.stream().forEach(data -> {

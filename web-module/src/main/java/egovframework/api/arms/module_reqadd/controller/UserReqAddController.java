@@ -960,4 +960,58 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
         return modelAndView;
     }
 
+    @ResponseBody
+    @RequestMapping({"/{changeReqTableName}/withReqReview/updateNode.do"})
+    public ModelAndView updateNode_WithReqReview(
+            @PathVariable(value ="changeReqTableName") String changeReqTableName,
+            @Validated({UpdateNode.class}) ReqAddDTO reqAddDTO,
+            BindingResult bindingResult, HttpServletRequest request, ModelMap model) throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException();
+        } else {
+
+            ParameterParser parser = new ParameterParser(request);
+            long c_id = parser.getLong("c_id");
+            long c_review_pdservice_link = parser.getLong("c_review_pdservice_link");
+            long c_review_req_link = parser.getLong("c_review_req_link");
+            String c_review_result_state = parser.get("c_review_result_state");
+
+            ReqReviewDTO searchReviewDTO = new ReqReviewDTO();
+            searchReviewDTO.setC_id(c_id);
+            ReqReviewDTO resultNode = reqReview.getNode(searchReviewDTO);
+            resultNode.setC_review_result_state(c_review_result_state);
+            resultNode.setC_review_result_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            reqReview.updateNode(resultNode);
+
+            resultNode.getC_review_responder();
+
+            SessionUtil.setAttribute("updateNode",changeReqTableName);
+
+            ReqAddDTO searchReqAddDTO = new ReqAddDTO();
+            searchReqAddDTO.setC_id(c_review_req_link);
+            ReqAddDTO resultReqAddNode = reqAdd.getNode(searchReqAddDTO);
+
+            if(StringUtility.equals(resultNode.getC_review_responder(), resultReqAddNode.getC_reviewer01())){
+                resultReqAddNode.setC_reviewer01_status(c_review_result_state);
+            }else if(StringUtility.equals(resultNode.getC_review_responder(), resultReqAddNode.getC_reviewer02())){
+                resultReqAddNode.setC_reviewer02_status(c_review_result_state);
+            }else if(StringUtility.equals(resultNode.getC_review_responder(), resultReqAddNode.getC_reviewer03())){
+                resultReqAddNode.setC_reviewer03_status(c_review_result_state);
+            }else if(StringUtility.equals(resultNode.getC_review_responder(), resultReqAddNode.getC_reviewer04())){
+                resultReqAddNode.setC_reviewer04_status(c_review_result_state);
+            }else if(StringUtility.equals(resultNode.getC_review_responder(), resultReqAddNode.getC_reviewer05())){
+                resultReqAddNode.setC_reviewer05_status(c_review_result_state);
+            }
+
+            reqAdd.updateNode(resultReqAddNode);
+
+            SessionUtil.removeAttribute("updateNode");
+        }
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", "done");
+
+        return modelAndView;
+    }
 }
