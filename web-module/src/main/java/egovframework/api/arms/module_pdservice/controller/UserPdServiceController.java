@@ -28,7 +28,9 @@ import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.utl.fcc.service.EgovFileUploadUtil;
 import egovframework.com.utl.fcc.service.EgovFormBasedFileVo;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -216,6 +218,11 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     )
     public ModelAndView getPdServiceMonitor(PdServiceDTO pdServiceDTO, ModelMap model, HttpServletRequest request) throws Exception {
         pdServiceDTO.setOrder(Order.asc("c_id"));
+        Criterion criterion = Restrictions.not(
+                // replace "id" below with property name, depending on what you're filtering against
+                Restrictions.in("c_id", new Object[] {1L, 2L})
+        );
+        pdServiceDTO.getCriterions().add(criterion);
         List<PdServiceDTO> list = this.pdService.getChildNode(pdServiceDTO);
         for (PdServiceDTO dto: list) {
             dto.setC_contents("force empty");

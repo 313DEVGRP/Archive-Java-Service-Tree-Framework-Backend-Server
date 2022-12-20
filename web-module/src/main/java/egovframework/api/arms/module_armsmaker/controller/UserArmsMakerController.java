@@ -72,6 +72,9 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
     @Resource(name = "reqReviewInstallDB")
     ArmsInstallDB reqReviewInstallDB;
 
+    @Resource(name = "reqCommentInstallDB")
+    ArmsInstallDB reqCommentInstallDB;
+
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(armsMaker);
@@ -246,6 +249,23 @@ public class UserArmsMakerController extends SHVAbstractController<ArmsMaker, Ar
 
         ModelAndView modelAndView =  new ModelAndView("jsonView");
         modelAndView.addObject("result", "module_reqstatus");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/module_reqcomment.do"},method = {RequestMethod.GET})
+    public ModelAndView module_reqcomment(
+            ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request) throws Exception {
+
+        logger.info("UserArmsMakerController :: module_reqcomment :: tableName = T_ARMS_REQCOMMENT");
+
+        ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
+        armsInstallDB_sqlMaaperDTO.setC_title("T_ARMS_REQCOMMENT");
+        armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-reqcomment");
+        reqCommentInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
+
+        ModelAndView modelAndView =  new ModelAndView("jsonView");
+        modelAndView.addObject("result", "module_reqcomment");
         return modelAndView;
     }
 

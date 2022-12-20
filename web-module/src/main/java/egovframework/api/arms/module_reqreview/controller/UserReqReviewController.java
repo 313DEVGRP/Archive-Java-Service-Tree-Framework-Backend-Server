@@ -14,6 +14,9 @@ package egovframework.api.arms.module_reqreview.controller;
 import com.google.common.collect.Maps;
 import egovframework.api.arms.module_pdserviceconnect.model.PdServiceConnectDTO;
 import egovframework.api.arms.module_pdservicejiraver.model.PdServiceJiraVerDTO;
+import egovframework.api.arms.module_reqcomment.model.ReqCommentDTO;
+import egovframework.api.arms.module_reqcomment.service.ReqComment;
+import egovframework.api.arms.module_reqreviewlog.model.ReqReviewLogDTO;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.api.arms.util.StringUtility;
 import egovframework.com.ext.jstree.springHibernate.core.validation.group.UpdateNode;
@@ -153,6 +156,50 @@ public class UserReqReviewController extends SHVAbstractController<ReqReview, Re
         resultMap.put("result", list);
         modelAndView.addObject("result", resultMap);
 
+        return modelAndView;
+    }
+
+    @Autowired
+    @Qualifier("reqComment")
+    private ReqComment reqComment;
+
+    @ResponseBody
+    @RequestMapping(
+            value = {"/setComment.do"},
+            method = {RequestMethod.POST}
+    )
+    public ModelAndView setComment(ModelMap model, HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+        long c_review_link = parser.getLong("c_id");
+        long c_pdservice_link = parser.getLong("c_review_pdservice_link");
+        long c_req_link = parser.getLong("c_review_req_link");
+        String reviewer = parser.get("reviewer");
+        String comment = parser.get("comment");
+
+        ReqCommentDTO reqCommentDTO = new ReqCommentDTO();
+        reqCommentDTO.setRef(2L);
+        reqCommentDTO.setC_type("deafult");
+        reqCommentDTO.setC_pdservice_link(c_pdservice_link);
+        reqCommentDTO.setC_req_link(c_req_link);
+        reqCommentDTO.setC_review_link(c_review_link);
+        reqCommentDTO.setC_sender(reviewer);
+        reqCommentDTO.setC_comment(comment);
+        reqCommentDTO.setC_comment_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
+        ReqCommentDTO resultNode = reqComment.addNode(reqCommentDTO);
+
+        ReqReviewDTO reqReviewDTO = new ReqReviewDTO();
+        reqReviewDTO.setWhere("c_id", c_review_link);
+        ReqReviewDTO returnNode = reqReview.getNode(reqReviewDTO);
+
+        returnNode.setC_title(reviewer);
+        returnNode.setC_review_comment(comment);
+
+        reqReview.updateNode(resultNode);
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", resultNode);
         return modelAndView;
     }
 }

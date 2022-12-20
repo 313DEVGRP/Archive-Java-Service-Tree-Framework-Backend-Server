@@ -12,6 +12,7 @@
 package egovframework.api.arms.module_reqreviewlog.controller;
 
 import egovframework.api.arms.module_reqaddlog.model.ReqAddLogDTO;
+import egovframework.api.arms.module_reqreview.model.ReqReviewDTO;
 import egovframework.api.arms.module_reqstatus.model.ReqStatusDTO;
 import egovframework.api.arms.module_reqstatuslog.model.ReqStatusLogDTO;
 import egovframework.api.arms.util.StringUtility;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -81,9 +83,9 @@ public class UserReqReviewLogController extends SHVAbstractController<ReqReviewL
             if(StringUtility.contains(data.getC_state(), "삽입된데이터")){
                 data.setC_state("요구사항 리뷰 등록");
             }else if(StringUtility.contains(data.getC_state(), "변경이전데이터")){
-                data.setC_state("요구사항 리뷰 수정");
+                data.setC_state("요구사항 리뷰 수정 (이전)");
             }else if(StringUtility.contains(data.getC_state(), "변경이후데이터")){
-                data.setC_state("요구사항 리뷰 수정");
+                data.setC_state("요구사항 리뷰 수정 (이후)");
             }else if(StringUtility.contains(data.getC_state(), "삭제된데이터")){
                 data.setC_state("요구사항 리뷰 삭제");
             }
