@@ -14,6 +14,7 @@ package egovframework.api.arms.module_reqreviewlog.controller;
 import egovframework.api.arms.module_reqaddlog.model.ReqAddLogDTO;
 import egovframework.api.arms.module_reqstatus.model.ReqStatusDTO;
 import egovframework.api.arms.module_reqstatuslog.model.ReqStatusLogDTO;
+import egovframework.api.arms.util.StringUtility;
 import egovframework.com.ext.jstree.springHibernate.core.interceptor.SessionUtil;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import lombok.extern.slf4j.Slf4j;
@@ -67,14 +68,26 @@ public class UserReqReviewLogController extends SHVAbstractController<ReqReviewL
     public ModelAndView getHistory(ModelMap model, HttpServletRequest request) throws Exception {
 
         ParameterParser parser = new ParameterParser(request);
-        long reqID = parser.getLong("reqID");
+        long c_review_pdservice_link = parser.getLong("c_review_pdservice_link");
+        long c_review_req_link = parser.getLong("c_review_req_link");
 
         ReqReviewLogDTO reviewLogDTO = new ReqReviewLogDTO();
-        reviewLogDTO.setWhere("c_review_pdservice_link", 10L);
-        reviewLogDTO.setWhere("c_review_req_link", reqID);
-        reviewLogDTO.setOrder(Order.desc("c_date"));
+        reviewLogDTO.setWhere("c_review_pdservice_link", c_review_pdservice_link);
+        reviewLogDTO.setWhere("c_review_req_link", c_review_req_link);
+        reviewLogDTO.setOrder(Order.desc("c_review_creat_date"));
 
         List<ReqReviewLogDTO> list = reqReviewLog.getChildNodeWithoutPaging(reviewLogDTO);
+        list.stream().forEach(data -> {
+            if(StringUtility.contains(data.getC_state(), "삽입된데이터")){
+                data.setC_state("요구사항 리뷰 등록");
+            }else if(StringUtility.contains(data.getC_state(), "변경이전데이터")){
+                data.setC_state("요구사항 리뷰 수정");
+            }else if(StringUtility.contains(data.getC_state(), "변경이후데이터")){
+                data.setC_state("요구사항 리뷰 수정");
+            }else if(StringUtility.contains(data.getC_state(), "삭제된데이터")){
+                data.setC_state("요구사항 리뷰 삭제");
+            }
+        });
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", list);

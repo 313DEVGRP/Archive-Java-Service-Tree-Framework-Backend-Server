@@ -481,15 +481,15 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                     StringUtility.equals(reqReviewDTO.getC_review_responder() , reviewer05) ){
                 logger.info("reqReviewDataClean hit = " + reqReviewDTO.getC_review_responder());
 
-                if( StringUtility.contains(reqReviewDTO.getC_review_result_state(), "Disable" )){
+                if( StringUtility.contains(reqReviewDTO.getC_review_result_state(), "AutoClose" )){
                     reqReviewDTO.setC_review_result_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-                    reqReviewDTO.setC_review_result_state("Update-Enable");
+                    reqReviewDTO.setC_review_result_state("ReOpen");
                     reqReview.updateNode(reqReviewDTO);
                 }
 
             }else{
                 reqReviewDTO.setC_review_result_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-                reqReviewDTO.setC_review_result_state("Update-Disable");
+                reqReviewDTO.setC_review_result_state("AutoClose");
                 reqReview.updateNode(reqReviewDTO);
             }
         }
@@ -530,7 +530,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
                 reqReviewDTO.setC_review_sender(returnNode.getC_writer());
                 reqReviewDTO.setC_review_responder(reviewer);
-                reqReviewDTO.setC_review_result_state("Enable");
+                reqReviewDTO.setC_review_result_state("Open");
                 reqReviewDTO.setC_review_creat_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
                 reqReview.addNode(reqReviewDTO);
@@ -545,7 +545,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
 
                 searchResult.setC_review_req_name(returnNode.getC_title());
 
-                searchResult.setC_review_result_state("Update-Enable");
+                searchResult.setC_review_result_state("Update");
                 searchResult.setC_review_creat_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 reqReview.updateNode(searchResult);
 
