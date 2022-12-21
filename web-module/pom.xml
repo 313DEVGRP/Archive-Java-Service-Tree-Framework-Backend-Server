@@ -17,7 +17,7 @@
     <description>Web Project by 313 DEV GRP</description>
 
     <properties>
-        <version.jstree.service.framework>23.02.03</version.jstree.service.framework>
+        <version.jstree.service.framework>23.02.06</version.jstree.service.framework>
     </properties>
     <dependencies>
 

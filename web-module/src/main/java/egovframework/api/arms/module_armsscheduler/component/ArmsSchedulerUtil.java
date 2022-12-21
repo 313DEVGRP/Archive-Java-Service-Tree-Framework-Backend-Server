@@ -16,21 +16,26 @@ import com.atlassian.jira.rest.client.api.domain.*;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
 import com.atlassian.util.concurrent.Promise;
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
+import egovframework.api.arms.module_pdservice.service.PdService;
 import egovframework.api.arms.module_pdservicejira.model.PdServiceJiraDTO;
 import egovframework.api.arms.module_pdservicejira.service.PdServiceJira;
 import egovframework.api.arms.util.PropertiesReader;
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceImpl;
 import egovframework.com.ext.jstree.support.util.StringUtils;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
@@ -100,5 +105,56 @@ public class ArmsSchedulerUtil {
         final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
     }
 
+    @Autowired
+    @Qualifier("pdService")
+    private PdService pdService;
+
+    @Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 5 * 60 * 1000) //10m 딜레이, 5m 단위
+    public void callback_toMid_test() throws Exception {
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String armsUrl = "http://127.0.0.1:13131";
+
+        PdServiceDTO pdServiceDTO = new PdServiceDTO();
+        pdServiceDTO.setOrder(Order.asc("c_id"));
+        Criterion criterion = Restrictions.not(
+                Restrictions.in("c_id", new Object[] {1L, 2L})
+        );
+        pdServiceDTO.getCriterions().add(criterion);
+        List<PdServiceDTO> list = pdService.getChildNode(pdServiceDTO);
+
+        for ( PdServiceDTO dto: list ) {
+            String reqTableName = "T_ARMS_REQSTATUS_" + dto.getC_id();
+            String targetUrl = "/callback/api/arms/reqStatus/" + reqTableName + "/updateStatusNode.do";
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(armsUrl + targetUrl, String.class);
+            logger.info("response = " + response);
+        }
+
+    }
+
+    @Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 5 * 60 * 1000) //10m 딜레이, 5m 단위
+    public void callback_toMid_ReqIssueDisable() throws Exception {
+        PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+        String armsUrl = "http://127.0.0.1:13131";
+
+        PdServiceDTO pdServiceDTO = new PdServiceDTO();
+        pdServiceDTO.setOrder(Order.asc("c_id"));
+        Criterion criterion = Restrictions.not(
+                Restrictions.in("c_id", new Object[] {1L, 2L})
+        );
+        pdServiceDTO.getCriterions().add(criterion);
+        List<PdServiceDTO> list = pdService.getChildNode(pdServiceDTO);
+
+        for ( PdServiceDTO dto: list ) {
+            String reqTableName = "T_ARMS_REQSTATUS_" + dto.getC_id();
+            String targetUrl = "/callback/api/arms/reqStatus/" + reqTableName + "/reqIssueDisable/updateStatusNode.do";
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(armsUrl + targetUrl, String.class);
+            logger.info("response = " + response);
+        }
+
+    }
 
 }

@@ -607,7 +607,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                 if(jiraVerInfoArr == null || jiraVerInfoArr.length == 0) {
                     //버전 정보도 없고, 지라 버전 정보도 없이 업데이트를 치는 경우
                     //이슈가 있으면 전부 disable 처리 할 것.
-                    if(issueInfoArr.length == 0){
+                    if(issueInfoArr == null || issueInfoArr.length == 0){
                         //버전 정보도 없고, 지라 버전 정보도 없이 업데이트를 치는 경우
                         //근데 이슈도 없어. - 할게 없네
                     }else{
@@ -625,7 +625,7 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
                 }else{
                     //버전 정보가 없는데, 지라 버전 정보는 있다는 건. 개별 처리를 한다는 거고
                     //이슈가 없으니까, 지라 버전만큼 이슈를 생성하자.
-                    if(issueInfoArr.length == 0){
+                    if(issueInfoArr ==null || issueInfoArr.length == 0){
                         for ( String jiraVerID : jiraVerInfoArr ) {
 
                             PdServiceJiraVerDTO pdServiceJiraVerDTO = new PdServiceJiraVerDTO();
@@ -789,6 +789,17 @@ public class UserReqAddController extends SHVAbstractController<ReqAdd, ReqAddDT
             reqAdd.updateNode(addDTO);
 
             SessionUtil.removeAttribute("updateNode");
+
+            String reqTableName = StringUtility.replace(changeReqTableName,
+                    "T_ARMS_REQADD_", "T_ARMS_REQSTATUS_");
+
+            PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
+            String armsUrl = "http://127.0.0.1:13131";
+            String targetUrl = "/callback/api/arms/reqStatus/" + reqTableName + "/updateStatusNode.do";
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(armsUrl + targetUrl, String.class);
+            logger.info("response = " + response);
 
             ModelAndView modelAndView = new ModelAndView("jsonView");
             modelAndView.addObject("result", "god");
