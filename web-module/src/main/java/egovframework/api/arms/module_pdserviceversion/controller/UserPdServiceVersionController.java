@@ -13,9 +13,14 @@ package egovframework.api.arms.module_pdserviceversion.controller;
 
 import egovframework.api.arms.module_pdserviceversion.model.PdServiceVersionDTO;
 import egovframework.api.arms.module_pdserviceversion.service.PdServiceVersion;
+import egovframework.api.arms.util.StringUtility;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
+import egovframework.com.ext.jstree.support.util.ParameterParser;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +34,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -56,6 +64,38 @@ public class UserPdServiceVersionController extends SHVAbstractController<PdServ
         pdServiceVersionDTO.setWhere("c_pdservice_link", pdServiceVersionDTO.getC_id().toString());
         List<PdServiceVersionDTO> pdServiceVersionDTOS = pdServiceVersion.getChildNode(pdServiceVersionDTO);
         logger.info("UserPdServiceVersionController ::  getVersion :: pdServiceVersionDTOS = " + pdServiceVersionDTOS.size());
+
+        ModelAndView modelAndView = new ModelAndView("jsonView");
+        modelAndView.addObject("result", pdServiceVersionDTOS);
+        return modelAndView;
+    }
+
+    public String[] jsonStringifyConvert(String versionInfo) {
+        versionInfo = StringUtils.remove(versionInfo, "\"");
+        versionInfo = StringUtils.remove(versionInfo, "]");
+        versionInfo = StringUtils.remove(versionInfo, "[");
+        return StringUtils.split(versionInfo, ",");
+    }
+
+    @RequestMapping(value="/getVersions.do",method= RequestMethod.GET)
+    public ModelAndView getVersions(PdServiceVersionDTO pdServiceVersionDTO, ModelMap model,
+                                   HttpServletRequest request) throws Exception {
+
+        ParameterParser parser = new ParameterParser(request);
+        String parse_c_ids = parser.get("c_ids");
+        String[] convert_c_ids = jsonStringifyConvert(parse_c_ids);
+        List<Long> longList = new ArrayList<>();
+        for (String c_id : convert_c_ids ) {
+            longList.add(StringUtility.toLong(c_id));
+        }
+
+        PdServiceVersionDTO versionDTO = new PdServiceVersionDTO();
+        Criterion criterion = Restrictions.in("c_id", longList);
+
+        versionDTO.getCriterions().add(criterion);
+
+        List<PdServiceVersionDTO> pdServiceVersionDTOS = pdServiceVersion.getChildNode(versionDTO);
+        logger.info("UserPdServiceVersionController ::  getVersions :: pdServiceVersionDTOS = " + pdServiceVersionDTOS.size());
 
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", pdServiceVersionDTOS);
