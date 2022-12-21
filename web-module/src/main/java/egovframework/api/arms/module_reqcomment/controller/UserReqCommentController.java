@@ -16,6 +16,7 @@ import egovframework.api.arms.module_reqcomment.service.ReqComment;
 import egovframework.com.ext.jstree.springHibernate.core.controller.SHVAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +64,8 @@ public class UserReqCommentController extends SHVAbstractController<ReqComment, 
         searchReqCommentDTO.setWhere("c_pdservice_link", c_pdservice_link);
         searchReqCommentDTO.setWhere("c_req_link", c_req_link);
         searchReqCommentDTO.setWhere("c_review_link", c_review_link);
+        searchReqCommentDTO.setOrder(Order.desc("c_id"));
         List<ReqCommentDTO> resultList = reqComment.getChildNode(searchReqCommentDTO);
-
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", resultList);
         return modelAndView;
