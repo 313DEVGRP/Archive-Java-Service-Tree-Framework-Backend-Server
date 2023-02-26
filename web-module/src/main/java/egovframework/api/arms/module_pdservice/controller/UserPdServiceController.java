@@ -93,6 +93,7 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     )
     public ModelAndView addNode(@Validated({AddNode.class}) PdServiceDTO pdServiceDTO,
                                 BindingResult bindingResult, ModelMap model) throws Exception {
+
         if (bindingResult.hasErrors()) {
             throw new RuntimeException();
         } else {
@@ -181,32 +182,6 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         HashMap<String, List<EgovFormBasedFileVo>> map = FileHandler.upload(multiRequest, fileIdLink, c_title, fileRepository, logger);
         ModelAndView modelAndView = new ModelAndView("jsonView");
         modelAndView.addObject("result", map);
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value="/updateContentsToNode.do", method=RequestMethod.POST)
-    public ModelAndView updateContentsToNode(PdServiceDTO pdServiceDTO,
-                                       BindingResult bindingResult) throws Exception {
-        if (bindingResult.hasErrors())
-            throw new RuntimeException();
-
-
-        ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", pdService.updateContentsNode(pdServiceDTO));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value="/updatePdServiceNode.do", method=RequestMethod.POST)
-    public ModelAndView updatePdServiceNode(PdServiceDTO pdServiceDTO,
-                                          BindingResult bindingResult) throws Exception {
-        if (bindingResult.hasErrors())
-            throw new RuntimeException();
-
-
-        ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", pdService.updatePdServiceNode(pdServiceDTO));
 
         return modelAndView;
     }

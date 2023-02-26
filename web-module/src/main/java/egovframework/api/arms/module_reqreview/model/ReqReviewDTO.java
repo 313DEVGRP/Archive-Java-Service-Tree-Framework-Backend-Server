@@ -11,6 +11,8 @@
  */
 package egovframework.api.arms.module_reqreview.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -21,6 +23,8 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "T_ARMS_REQREVIEW")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
@@ -92,109 +96,6 @@ public class ReqReviewDTO extends JsTreeHibernateSearchDTO implements Serializab
     @Column(name = "c_review_result_date")
     private String c_review_result_date;
 
-    public Long getC_review_pdservice_link() {
-        return c_review_pdservice_link;
-    }
-
-    public void setC_review_pdservice_link(Long c_review_pdservice_link) {
-        this.c_review_pdservice_link = c_review_pdservice_link;
-    }
-
-    public String getC_review_pdservice_name() {
-        return c_review_pdservice_name;
-    }
-
-    public void setC_review_pdservice_name(String c_review_pdservice_name) {
-        this.c_review_pdservice_name = c_review_pdservice_name;
-    }
-
-    public String getC_review_version_link() {
-        return c_review_version_link;
-    }
-
-    public void setC_review_version_link(String c_review_version_link) {
-        this.c_review_version_link = c_review_version_link;
-    }
-
-    public String getC_review_jira_link() {
-        return c_review_jira_link;
-    }
-
-    public void setC_review_jira_link(String c_review_jira_link) {
-        this.c_review_jira_link = c_review_jira_link;
-    }
-
-    public String getC_review_jira_ver_link() {
-        return c_review_jira_ver_link;
-    }
-
-    public void setC_review_jira_ver_link(String c_review_jira_ver_link) {
-        this.c_review_jira_ver_link = c_review_jira_ver_link;
-    }
-
-    public Long getC_review_req_link() {
-        return c_review_req_link;
-    }
-
-    public void setC_review_req_link(Long c_review_req_link) {
-        this.c_review_req_link = c_review_req_link;
-    }
-
-    public String getC_review_req_name() {
-        return c_review_req_name;
-    }
-
-    public void setC_review_req_name(String c_review_req_name) {
-        this.c_review_req_name = c_review_req_name;
-    }
-
-    public String getC_review_sender() {
-        return c_review_sender;
-    }
-
-    public void setC_review_sender(String c_review_sender) {
-        this.c_review_sender = c_review_sender;
-    }
-
-    public String getC_review_responder() {
-        return c_review_responder;
-    }
-
-    public void setC_review_responder(String c_review_responder) {
-        this.c_review_responder = c_review_responder;
-    }
-
-    public String getC_review_creat_date() {
-        return c_review_creat_date;
-    }
-
-    public void setC_review_creat_date(String c_review_creat_date) {
-        this.c_review_creat_date = c_review_creat_date;
-    }
-
-    public String getC_review_result_state() {
-        return c_review_result_state;
-    }
-
-    public void setC_review_result_state(String c_review_result_state) {
-        this.c_review_result_state = c_review_result_state;
-    }
-
-    public String getC_review_comment() {
-        return c_review_comment;
-    }
-
-    public void setC_review_comment(String c_review_comment) {
-        this.c_review_comment = c_review_comment;
-    }
-
-    public String getC_review_result_date() {
-        return c_review_result_date;
-    }
-
-    public void setC_review_result_date(String c_review_result_date) {
-        this.c_review_result_date = c_review_result_date;
-    }
 
     /*
      * Extend Bean Field

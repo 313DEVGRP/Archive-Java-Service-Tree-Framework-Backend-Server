@@ -16,6 +16,4 @@ import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernate
 
 public interface PdService extends JsTreeHibernateService {
 
-    public <T extends PdServiceDTO> int updateContentsNode(T jsTreeHibernateDTO) throws Exception;
-    public <T extends PdServiceDTO> int updatePdServiceNode(T jsTreeHibernateDTO) throws Exception;
 }

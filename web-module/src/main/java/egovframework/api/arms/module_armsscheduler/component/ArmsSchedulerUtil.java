@@ -68,7 +68,7 @@ public class ArmsSchedulerUtil {
 
     }
 
-    @Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 60 * 60 * 1000) //10m 딜레이, 60m 단위
+    //@Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 60 * 60 * 1000) //10m 딜레이, 60m 단위
     public void set_jiraServerInfo_toStatic() throws IOException, URISyntaxException {
         final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
         ServerInfo serverInfo = restClient.getMetadataClient().getServerInfo().claim();
@@ -80,7 +80,7 @@ public class ArmsSchedulerUtil {
         ArmsSchedulerUtil.serverInfo_BaseURI = serverInfo.getBaseUri().toString();
     }
 
-    @Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 60 * 60 * 1000) //10m 딜레이, 5m 단위
+    //@Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 60 * 60 * 1000) //10m 딜레이, 5m 단위
     public void set_jiraIssueType_toStatic() throws IOException, URISyntaxException {
         final JiraRestClient restClient = ArmsSchedulerUtil.getJiraRestClient();
         Iterable<IssueType> issueTypes = restClient.getMetadataClient().getIssueTypes().claim();
@@ -109,7 +109,7 @@ public class ArmsSchedulerUtil {
     @Qualifier("pdService")
     private PdService pdService;
 
-    @Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 5 * 60 * 1000) //10m 딜레이, 5m 단위
+    //@Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 5 * 60 * 1000) //10m 딜레이, 5m 단위
     public void callback_toMid_test() throws Exception {
         PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
         String armsUrl = "http://127.0.0.1:13131";
@@ -133,7 +133,7 @@ public class ArmsSchedulerUtil {
 
     }
 
-    @Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 5 * 60 * 1000) //10m 딜레이, 5m 단위
+    //@Scheduled(initialDelay = 1 * 60 * 1000, fixedDelay = 5 * 60 * 1000) //10m 딜레이, 5m 단위
     public void callback_toMid_ReqIssueDisable() throws Exception {
         PropertiesReader propertiesReader = new PropertiesReader("egovframework/egovProps/globals.properties");
         String armsUrl = "http://127.0.0.1:13131";

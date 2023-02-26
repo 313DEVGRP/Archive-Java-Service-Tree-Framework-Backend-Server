@@ -11,6 +11,8 @@
  */
 package egovframework.api.arms.module_reqcomment.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -21,6 +23,8 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "T_ARMS_REQCOMMENT")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
@@ -66,77 +70,6 @@ public class ReqCommentDTO extends JsTreeHibernateSearchDTO implements Serializa
     @Column(name = "c_comment")
     private String c_comment;
 
-    public Long getC_pdservice_link() {
-        return c_pdservice_link;
-    }
-
-    public void setC_pdservice_link(Long c_pdservice_link) {
-        this.c_pdservice_link = c_pdservice_link;
-    }
-
-    public String getC_version_link() {
-        return c_version_link;
-    }
-
-    public void setC_version_link(String c_version_link) {
-        this.c_version_link = c_version_link;
-    }
-
-    public String getC_jira_link() {
-        return c_jira_link;
-    }
-
-    public void setC_jira_link(String c_jira_link) {
-        this.c_jira_link = c_jira_link;
-    }
-
-    public String getC_jira_ver_link() {
-        return c_jira_ver_link;
-    }
-
-    public void setC_jira_ver_link(String c_jira_ver_link) {
-        this.c_jira_ver_link = c_jira_ver_link;
-    }
-
-    public Long getC_req_link() {
-        return c_req_link;
-    }
-
-    public void setC_req_link(Long c_req_link) {
-        this.c_req_link = c_req_link;
-    }
-
-    public Long getC_review_link() {
-        return c_review_link;
-    }
-
-    public void setC_review_link(Long c_review_link) {
-        this.c_review_link = c_review_link;
-    }
-
-    public String getC_sender() {
-        return c_sender;
-    }
-
-    public void setC_sender(String c_sender) {
-        this.c_sender = c_sender;
-    }
-
-    public String getC_comment_date() {
-        return c_comment_date;
-    }
-
-    public void setC_comment_date(String c_comment_date) {
-        this.c_comment_date = c_comment_date;
-    }
-
-    public String getC_comment() {
-        return c_comment;
-    }
-
-    public void setC_comment(String c_comment) {
-        this.c_comment = c_comment;
-    }
 
     /*
      * Extend Bean Field

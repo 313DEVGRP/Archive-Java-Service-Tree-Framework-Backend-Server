@@ -11,6 +11,8 @@
  */
 package egovframework.api.arms.module_pdserviceversion.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -21,6 +23,8 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "T_ARMS_PDSERVICEVERSION")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
@@ -51,38 +55,6 @@ public class PdServiceVersionDTO extends JsTreeHibernateSearchDTO implements Ser
     @Lob
     @Column(name="C_CONTENTS")
     private String c_contents;
-
-    public String getC_start_date() {
-        return c_start_date;
-    }
-
-    public void setC_start_date(String c_start_date) {
-        this.c_start_date = c_start_date;
-    }
-
-    public String getC_end_date() {
-        return c_end_date;
-    }
-
-    public void setC_end_date(String c_end_date) {
-        this.c_end_date = c_end_date;
-    }
-
-    public String getC_pdservice_link() {
-        return c_pdservice_link;
-    }
-
-    public void setC_pdservice_link(String c_pdservice_link) {
-        this.c_pdservice_link = c_pdservice_link;
-    }
-
-    public String getC_contents() {
-        return c_contents;
-    }
-
-    public void setC_contents(String c_contents) {
-        this.c_contents = c_contents;
-    }
 
     /*
      * Extend Bean Field

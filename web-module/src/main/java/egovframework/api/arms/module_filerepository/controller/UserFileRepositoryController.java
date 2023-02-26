@@ -62,7 +62,7 @@ public class UserFileRepositoryController extends SHVAbstractController<FileRepo
 
         ParameterParser parser = new ParameterParser(request);
 
-        fileRepositoryDTO.setWhere("fileIdLink", fileRepositoryDTO.getFileIdLink());
+        fileRepositoryDTO.setWhere("fileIdLink", parser.getLong("fileIdlink"));
         fileRepositoryDTO.setWhere("c_title", fileRepositoryDTO.getC_title());
         List<FileRepositoryDTO> list = fileRepository.getChildNode(fileRepositoryDTO);
 

@@ -14,6 +14,8 @@ package egovframework.api.arms.module_pdserviceconnectlog.model;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateLogDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 
@@ -23,6 +25,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "T_ARMS_PDSERVICECONNECT_LOG")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
@@ -52,38 +56,6 @@ public class PdServiceConnectLogDTO extends JsTreeHibernateLogDTO implements Ser
 
     @Column(name="c_pdservice_jira_ids")
     private String c_pdservice_jira_ids;
-
-    public String getC_contents() {
-        return c_contents;
-    }
-
-    public void setC_contents(String c_contents) {
-        this.c_contents = c_contents;
-    }
-
-    public String getC_pdservice_id() {
-        return c_pdservice_id;
-    }
-
-    public void setC_pdservice_id(String c_pdservice_id) {
-        this.c_pdservice_id = c_pdservice_id;
-    }
-
-    public String getC_pdservice_version_id() {
-        return c_pdservice_version_id;
-    }
-
-    public void setC_pdservice_version_id(String c_pdservice_version_id) {
-        this.c_pdservice_version_id = c_pdservice_version_id;
-    }
-
-    public String getC_pdservice_jira_ids() {
-        return c_pdservice_jira_ids;
-    }
-
-    public void setC_pdservice_jira_ids(String c_pdservice_jira_ids) {
-        this.c_pdservice_jira_ids = c_pdservice_jira_ids;
-    }
 
     /*
      * Extend Bean Field

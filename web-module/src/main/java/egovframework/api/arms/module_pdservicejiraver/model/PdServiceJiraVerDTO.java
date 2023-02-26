@@ -11,6 +11,8 @@
  */
 package egovframework.api.arms.module_pdservicejiraver.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -21,6 +23,8 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "T_ARMS_PDSERVICEJIRAVER")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)

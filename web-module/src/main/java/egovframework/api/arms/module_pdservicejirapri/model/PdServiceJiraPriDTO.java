@@ -11,6 +11,8 @@
  */
 package egovframework.api.arms.module_pdservicejirapri.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import javax.persistence.*;
@@ -21,6 +23,8 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "T_ARMS_PDSERVICEJIRAPRI")
 @SelectBeforeUpdate(value=true)
 @DynamicInsert(value=true)
@@ -50,38 +54,6 @@ public class PdServiceJiraPriDTO extends JsTreeHibernateSearchDTO implements Ser
 
     @Column(name="c_jirapriority_link")
     private String c_jirapriority_link;
-
-    public String getC_jirapriority_id() {
-        return c_jirapriority_id;
-    }
-
-    public void setC_jirapriority_id(String c_jirapriority_id) {
-        this.c_jirapriority_id = c_jirapriority_id;
-    }
-
-    public String getC_jirapriority_desc() {
-        return c_jirapriority_desc;
-    }
-
-    public void setC_jirapriority_desc(String c_jirapriority_desc) {
-        this.c_jirapriority_desc = c_jirapriority_desc;
-    }
-
-    public String getC_jirapriority_name() {
-        return c_jirapriority_name;
-    }
-
-    public void setC_jirapriority_name(String c_jirapriority_name) {
-        this.c_jirapriority_name = c_jirapriority_name;
-    }
-
-    public String getC_jirapriority_link() {
-        return c_jirapriority_link;
-    }
-
-    public void setC_jirapriority_link(String c_jirapriority_link) {
-        this.c_jirapriority_link = c_jirapriority_link;
-    }
 
     /*
      * Extend Bean Field
