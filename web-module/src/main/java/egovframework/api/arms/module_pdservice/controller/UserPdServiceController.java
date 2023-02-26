@@ -68,12 +68,6 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
     @Qualifier("pdServiceVersion")
     private PdServiceVersion pdServiceVersion;
 
-    @Resource(name = "reqAddTemplateInstallDB")
-    ArmsInstallDB reqAddTemplateInstallDB;
-
-    @Resource(name = "reqStatusTemplateInstallDB")
-    ArmsInstallDB reqStatusTemplateInstallDB;
-
     @PostConstruct
     public void initialize() {
         setJsTreeHibernateService(pdService);
@@ -81,17 +75,14 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private static final Long ROOT_NODE_ID = new Long(2);
-    private static final String NODE_TYPE = new String("default");
     private static final String REQ_PREFIX_TABLENAME_BY_PDSERVICE = new String("T_ARMS_REQADD_");
-    private static final String REQ_PREFIX_TABLENAME_BY_PDSERVICE_STATUS = new String("T_ARMS_REQSTATUS_");
 
     @ResponseBody
     @RequestMapping(
             value = {"/addPdServiceNode.do"},
             method = {RequestMethod.POST}
     )
-    public ModelAndView addNode(@Validated({AddNode.class}) PdServiceDTO pdServiceDTO,
+    public ModelAndView addPdServiceNode(@Validated({AddNode.class}) PdServiceDTO pdServiceDTO,
                                 BindingResult bindingResult, ModelMap model) throws Exception {
 
         if (bindingResult.hasErrors()) {
@@ -99,25 +90,18 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         } else {
             pdServiceDTO.setC_title(Util_TitleChecker.StringReplace(pdServiceDTO.getC_title()));
 
+            //제품(서비스) 데이터 등록
             PdServiceDTO addedNode = pdService.addNode(pdServiceDTO);
 
             //제품(서비스) 생성시 - 요구사항 TABLE 생성
-            ArmsInstallDB_SqlMaaperDTO armsInstallDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
-            armsInstallDB_sqlMaaperDTO.setC_title(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
-            armsInstallDB_sqlMaaperDTO.setSqlMapSelector("arms-reqadd-template");
-
-            reqAddTemplateInstallDB.sqlMapExecute(armsInstallDB_sqlMaaperDTO);
+            pdService.setDynamicReqAddDB(addedNode);
 
             //C_ETC 컬럼에 요구사항 테이블 이름 기입
             addedNode.setC_etc(REQ_PREFIX_TABLENAME_BY_PDSERVICE + addedNode.getC_id().toString());
             pdService.updateNode(addedNode);
 
             //제품(서비스) 생성시 - 요구사항 STATUS TABLE 생성
-            ArmsInstallDB_SqlMaaperDTO armsInstall_statusDB_sqlMaaperDTO = new ArmsInstallDB_SqlMaaperDTO();
-            armsInstall_statusDB_sqlMaaperDTO.setC_title(REQ_PREFIX_TABLENAME_BY_PDSERVICE_STATUS + addedNode.getC_id().toString());
-            armsInstall_statusDB_sqlMaaperDTO.setSqlMapSelector("arms-reqstatus-template");
-
-            reqStatusTemplateInstallDB.sqlMapExecute(armsInstall_statusDB_sqlMaaperDTO);
+            pdService.setDynamicReqStatusDB(addedNode);
 
             //Default Version 생성
             PdServiceVersionDTO pdServiceVersionDTO = new PdServiceVersionDTO();
@@ -140,24 +124,8 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
         if (bindingResult.hasErrors())
             throw new RuntimeException();
 
-        //루트 노드를 기준으로 리스트를 검색
-        PdServiceDTO paramPdServiceDTO = new PdServiceDTO();
-        paramPdServiceDTO.setWhere("c_parentid", ROOT_NODE_ID);
-        List<PdServiceDTO> list = pdService.getChildNode(paramPdServiceDTO);
-
-        //검색된 노드중 maxPosition을 찾는다.
-        PdServiceDTO maxPositionPdServiceDTO = list
-                .stream()
-                .max(Comparator.comparing(PdServiceDTO::getC_position))
-                .orElseThrow(NoSuchElementException::new);
-
-        //노드 값 셋팅
-        pdServiceDTO.setRef(ROOT_NODE_ID);
-        pdServiceDTO.setC_position(maxPositionPdServiceDTO.getC_position() + 1);
-        pdServiceDTO.setC_type(NODE_TYPE);
-
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", pdService.addNode(pdServiceDTO));
+        modelAndView.addObject("result", pdService.addNodeToEndPosition(pdServiceDTO));
 
         return modelAndView;
     }
@@ -192,18 +160,10 @@ public class UserPdServiceController extends SHVAbstractController<PdService, Pd
             method = {RequestMethod.GET}
     )
     public ModelAndView getPdServiceMonitor(PdServiceDTO pdServiceDTO, ModelMap model, HttpServletRequest request) throws Exception {
-        pdServiceDTO.setOrder(Order.asc("c_id"));
-        Criterion criterion = Restrictions.not(
-                // replace "id" below with property name, depending on what you're filtering against
-                Restrictions.in("c_id", new Object[] {1L, 2L})
-        );
-        pdServiceDTO.getCriterions().add(criterion);
-        List<PdServiceDTO> list = this.pdService.getChildNode(pdServiceDTO);
-        for (PdServiceDTO dto: list) {
-            dto.setC_contents("force empty");
-        }
+
         ModelAndView modelAndView = new ModelAndView("jsonView");
-        modelAndView.addObject("result", list);
+        modelAndView.addObject("result", pdService.getNodesWithoutRoot(pdServiceDTO));
         return modelAndView;
+
     }
 }

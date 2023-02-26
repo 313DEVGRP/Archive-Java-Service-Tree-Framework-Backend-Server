@@ -13,7 +13,18 @@ package egovframework.api.arms.module_pdservice.service;
 
 import egovframework.api.arms.module_pdservice.model.PdServiceDTO;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
+
+import java.util.List;
 
 public interface PdService extends JsTreeHibernateService {
+
+    public List<PdServiceDTO> getNodesWithoutRoot(PdServiceDTO pdServiceDTO) throws Exception;
+
+    public void setDynamicReqAddDB(PdServiceDTO addedPdServiceDTO) throws Exception;
+
+    public void setDynamicReqStatusDB(PdServiceDTO addedPdServiceDTO) throws Exception;
+
+    public PdServiceDTO addNodeToEndPosition(PdServiceDTO pdServiceDTO) throws Exception;
 
 }
